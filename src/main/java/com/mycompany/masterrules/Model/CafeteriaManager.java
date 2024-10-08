@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author alexs
  */
 public class CafeteriaManager {
-    private CafeteriaMenu menu;//hola
+    private CafeteriaMenu menu;
     private CafeteriaStorage storage;
 
     public CafeteriaManager(CafeteriaMenu menu, CafeteriaStorage storage) {
