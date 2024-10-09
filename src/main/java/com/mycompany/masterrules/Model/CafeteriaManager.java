@@ -51,7 +51,7 @@ public class CafeteriaManager {
                 System.out.println("Dame la cantidad que se tiene en el inventario:");
                 int quantity=scanInt.nextInt();
                 
-                storage.addProduct(newProduct.getID(), quantity);
+                storage.addProduct(newProduct.getID()+"", quantity);
                 menu.addProduct(newProduct);
                 break;
             case 2:
@@ -66,7 +66,7 @@ public class CafeteriaManager {
     
     public void deleteProduct(Product product){
         menu.removeProduct(product.getProductName());
-        storage.removeProduct(product.getID());
+        storage.removeProduct(product.getID()+"");
     }
     
     public void editProduct(Product product){
