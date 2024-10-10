@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.masterrules.Model;
+package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CafeteriaMenu;
+import com.mycompany.masterrules.Model.CafeteriaStorage;
+import com.mycompany.masterrules.Model.Combo;
+import com.mycompany.masterrules.Model.Product;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
