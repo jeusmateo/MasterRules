@@ -52,12 +52,26 @@ public class CafeteriaMenu {
             for(int i=0; i<currentList.size();i++){
                 if(productName.equals(currentList.get(i).getProductName())){
                     currentList.remove(i);
+                    
+                    //Si al eliminar un producto, la categoría de comida queda vacía; entonces la categoria se elimina
+                    if(isFoodTypeEmpty(key)){
+                        products.remove(key);
+                    }
                     return;
                 }
                 
             }
         }
         System.out.println("ERROR:No se encontro el producto");
+    }
+    
+    public boolean isFoodTypeEmpty(String key){
+        //Si no quedan productos en una categoría de comida se retorna verdadero
+        if(products.get(key).isEmpty()){
+            return true;
+        }
+        return false;
+        
     }
     
     public void addCombo(Combo combo){

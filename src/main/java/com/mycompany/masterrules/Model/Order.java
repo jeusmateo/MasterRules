@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Order {
 
-    private CustomerAccount customer;
+    private Customer customer;
     private List<Product> products;
-    private List<Combo combos;
+    private List<Combo> combos;
     private String comment;
     private String deliveryMethod;
-    private String Fecha
+    private String Fecha;
 
     public void addProduct(Product product) {
         products.add(product);

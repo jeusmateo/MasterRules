@@ -11,17 +11,17 @@ import java.util.HashMap;
  * @author alexs
  */
 public class CafeteriaStorage {
-    private HashMap<Long,Integer> products;
+    private HashMap<String,Integer> products;
 
-    public CafeteriaStorage(HashMap<Long, Integer> products) {
+    public CafeteriaStorage(HashMap<String, Integer> products) {
         this.products = products;
     }
 
     public CafeteriaStorage() {
-        this.products = new HashMap<Long,Integer>();
+        this.products = new HashMap<String,Integer>();
     }
     
-    public void addProduct(long id,int stock){
+    public void addProduct(String id,int stock){
         if(stock<0){
             System.out.println("ERROR:El stock es inválido");
             return;
@@ -35,45 +35,45 @@ public class CafeteriaStorage {
         }
     }
     
-    public void removeProduct(long id){
-        for(Long idKey: products.keySet()){
-            if(idKey==id){
-                products.remove(idKey);
-            }
+    public void removeProduct(String id){
+        if(products.containsKey(id)){
+            products.remove(id);
         }
-        System.out.println("ERROR:El producto no exite en el inventario");
+        else{
+            System.out.println("ERROR:El producto no existe en el inventario");
+        }
+        
     }
     
-    public void updateStock(long id,int newQuantity){
+    public void updateStock(String id,int newQuantity){
         //*****Implementar funcion despues de acabar ventas
     }
     
-    public void addToStock(long id,int increment){
-        for(Long idKey: products.keySet()){
-            if(idKey==id){
-                int newQuantity=products.get(idKey)+increment;
-                products.put(idKey, newQuantity);
-            }
-            return;
+    public void addToStock(String id,int increment){
+        if(products.containsKey(id)){
+            int newQuantity=products.get(id)+increment;
+            products.put(id, newQuantity);
         }
-        System.out.println("ERROR:No se encontro el producto");
+        else{
+            System.out.println("ERROR: No se encontro el producto");
+        }
+        
     }
     
-    public void removeFromStock(long id,int decrement){
-        for(Long idKey: products.keySet()){
-            if(idKey==id){
-                if(!hasEnoughStock(id,decrement)){
-                    return;
-                }
-                int newQuantity=products.get(idKey)-decrement;
-                products.put(idKey, newQuantity);
-            }
+    public void removeFromStock(String id,int decrement){
+        if(products.containsKey(id)){
+            if(!hasEnoughStock(id,decrement)){
             return;
+            }
+            int newQuantity=products.get(id)-decrement;
+            products.put(id, newQuantity);
         }
-        System.out.println("ERROR:No se encontro el producto");
+        else{
+            System.out.println("ERROR:No se encontro el producto");
+        }
     }
     
-    public boolean hasEnoughStock(long id,int quantity){
+    public boolean hasEnoughStock(String id,int quantity){
         if(quantity>products.get(id)){
             System.out.println("ERROR:No hay suficiciente existencias del producto");
             return false;
@@ -87,11 +87,11 @@ public class CafeteriaStorage {
         //falta y no se que se tiene que hacer aquí
     }
 
-    public HashMap<Long, Integer> getProducts() {
+    public HashMap<String, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(HashMap<Long, Integer> products) {
+    public void setProducts(HashMap<String, Integer> products) {
         this.products = products;
     }
 }

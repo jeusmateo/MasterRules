@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.masterrules.Model;
+package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CafeteriaMenu;
+import com.mycompany.masterrules.Model.CafeteriaStorage;
+import com.mycompany.masterrules.Model.Combo;
+import com.mycompany.masterrules.Model.Product;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -51,7 +55,7 @@ public class CafeteriaManager {
                 System.out.println("Dame la cantidad que se tiene en el inventario:");
                 int quantity=scanInt.nextInt();
                 
-                storage.addProduct(newProduct.getID(), quantity);
+                storage.addProduct(newProduct.getID()+"", quantity);
                 menu.addProduct(newProduct);
                 break;
             case 2:
@@ -66,7 +70,7 @@ public class CafeteriaManager {
     
     public void deleteProduct(Product product){
         menu.removeProduct(product.getProductName());
-        storage.removeProduct(product.getID());
+        storage.removeProduct(product.getID()+"");
     }
     
     public void editProduct(Product product){
