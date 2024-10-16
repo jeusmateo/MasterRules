@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Order {
 
-    private Customer customer;
+    private CustomerAccount customer;
     private List<Product> products;
     private List<Combo> combos;
     private String comment;
@@ -74,15 +74,6 @@ public class Order {
     public void setCombos(List<Combo> combos) {
         this.combos = combos;
     }
-
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
-    }
-
-
-
-
-
 
 }
 

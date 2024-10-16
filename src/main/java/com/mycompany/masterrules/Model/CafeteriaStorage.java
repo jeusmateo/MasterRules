@@ -46,7 +46,7 @@ public class CafeteriaStorage {
     }
     
     public void updateStock(String id,int newQuantity){
-        //*****Implementar funcion despues de acabar ventas
+        // TODO: *****Implementar funcion despues de acabar ventas
     }
     
     public void addToStock(String id,int increment){
