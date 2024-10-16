@@ -29,6 +29,9 @@ public class CafeteriaManager {
         Scanner scanInt=new Scanner(System.in);
         Scanner scanLong=new Scanner(System.in);
         
+        System.out.println("Dame el ID(Código de barras u otro) del producto:");
+        long id=scanLong.nextLong();
+        
         System.out.println("Dame el nombre del producto:");
         String name=scanStr.nextLine();
         
@@ -45,13 +48,10 @@ public class CafeteriaManager {
         int opcion=scanInt.nextInt();
         
         Product newProduct;
+        newProduct=new Product(id,name,type,price,VIPprice);
+        
         switch(opcion){
             case 1:
-                System.out.println("Dame el ID(Código de barras) del producto:");
-                long id=scanLong.nextLong();
-                
-                newProduct=new Product(id,name,type,price,VIPprice);
-                
                 System.out.println("Dame la cantidad que se tiene en el inventario:");
                 int quantity=scanInt.nextInt();
                 
@@ -59,7 +59,6 @@ public class CafeteriaManager {
                 menu.addProduct(newProduct);
                 break;
             case 2:
-                newProduct=new Product(name,type,price,VIPprice);
                 menu.addProduct(newProduct);
                 break;
             default:

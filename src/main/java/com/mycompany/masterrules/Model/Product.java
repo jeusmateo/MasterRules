@@ -25,14 +25,6 @@ public class Product {
         this.VIPprice = VIPprice;
     }
 
-    public Product(String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
-        this.ID=-1;
-        this.productName = productName;
-        this.productType = productType;
-        this.price = price;
-        this.VIPprice = VIPprice;
-    }
-
     public long getID() {
         return ID;
     }
