@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.Database;
+package com.mycompany.masterrules.Database;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
