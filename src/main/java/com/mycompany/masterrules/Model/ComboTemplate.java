@@ -1,7 +1,8 @@
 package com.mycompany.masterrules.Model;
+
 import java.util.HashMap;
 
-
+// TODO: arreglar el ADT de esta clase
 public class ComboTemplate {
     private HashMap<String, Integer> comboRequirements;//HashMap<ProductType, quantity>
 
