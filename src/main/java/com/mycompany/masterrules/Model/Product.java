@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @author alexs
  */
 public class Product {
-    private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
+    private long ID;
     private String productName;
     private String productType;
     private BigDecimal price;

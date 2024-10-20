@@ -44,8 +44,6 @@ public class CafeteriaMenu {
     }
     
     public void removeProduct(String productName){
-        ArrayList<Product> newValue=new ArrayList<Product>();
-        
         for(String key: products.keySet()){
             ArrayList<Product> currentList=products.get(key);
             
@@ -62,7 +60,28 @@ public class CafeteriaMenu {
                 
             }
         }
-        System.out.println("ERROR:No se encontro el producto");
+        System.out.println("ERROR:No se encontro el producto");//no se si esto necesite una excepcion, aunque es probable que nunca ocurra porque prmero se ve desde la BD
+    }
+    
+    public void editProduct(Product product) throws Exception{
+        for(String key : products.keySet()){
+            ArrayList<Product> currentList=products.get(key);
+            
+            for(int i=0;i<currentList.size();i++){
+                if(product.getProductName().equals(currentList.get(i).getProductName())){
+                    currentList.get(i).setPrice(product.getPrice());
+                    currentList.get(i).setProductName(product.getProductName());
+                    currentList.get(i).setVIPprice(product.getVIPprice());
+                    
+                    if(!product.getProductType().equals(currentList.get(i).getProductType())){
+                        removeProduct(product.getProductName());//lo removemos de esa categoria
+                        addProduct(product);//se inserta en la categoria correspondiente
+                    }
+                    return;
+                }
+            }
+        }
+        throw new Exception("ERROR: No se encontro el producto");
     }
     
     public boolean isFoodTypeEmpty(String key){

@@ -9,7 +9,7 @@ public class Order {
     private List<Combo> combos;
     private String comment;
     private String deliveryMethod;
-    private String Fecha;
+    private String Fecha;//creo que hay un clase llamada Date que te da fecha, hora y todo lo demas? denle una hojeada
 
     public void addProduct(Product product) {
         products.add(product);
