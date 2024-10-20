@@ -1,7 +1,10 @@
 <hibernate-configuration>
     <session-factory>
+        <!--
+        TODO: modificar la base de datos por la final final y ver si se cambia de tecnología
+        -->
         <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-        <property name="hibernate.connection.url">jdbc:sqlite:test.db</property>
+        <property name="hibernate.connection.url">jdbc:sqlite:identifier.sqlite</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
@@ -10,6 +13,6 @@
         <property name="format_sql">true</property>
         <property name="hibernate.highlight_sql">true</property>
         <!--       todo-->
-        <!--       <mapping class="com.mycompany.hibernatecrud.Modelo.Producto"/>-->
+        <mapping class="com.mycompany.masterrules.Model.Product"/>
     </session-factory>
 </hibernate-configuration>
