@@ -24,7 +24,6 @@ import java.math.BigDecimal;
 *  y modificarlo segun los requerimientos
 * */
 public class Product {
-
     @Id
     @Column(name = "clvProducto")
     private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
@@ -43,14 +42,6 @@ public class Product {
 
     public Product(long id, String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
         this.ID = id;
-        this.productName = productName;
-        this.productType = productType;
-        this.price = price;
-        this.VIPprice = VIPprice;
-    }
-
-    public Product(String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
-        this.ID=-1;
         this.productName = productName;
         this.productType = productType;
         this.price = price;
