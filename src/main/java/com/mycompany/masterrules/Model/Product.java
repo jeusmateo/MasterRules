@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @author alexs
  */
 public class Product {
-    private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
+    private long ID;
     private String productName;
     private String productType;
     private BigDecimal price;
@@ -19,14 +19,6 @@ public class Product {
 
     public Product(long id, String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
         this.ID = id;
-        this.productName = productName;
-        this.productType = productType;
-        this.price = price;
-        this.VIPprice = VIPprice;
-    }
-
-    public Product(String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
-        this.ID=-1;
         this.productName = productName;
         this.productType = productType;
         this.price = price;
