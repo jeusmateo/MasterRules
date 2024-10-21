@@ -4,14 +4,6 @@
  */
 package com.mycompany.masterrules.Model;
 
-import com.mycompany.masterrules.Model.CafeteriaMenu;
-import com.mycompany.masterrules.Model.CafeteriaStorage;
-import com.mycompany.masterrules.Model.Combo;
-import com.mycompany.masterrules.Model.Product;
-import com.mycompany.masterrules.Model.ProductQueries;
-import java.math.BigDecimal;
-import java.util.Scanner;
-
 /**
  *
  * @author alexs
