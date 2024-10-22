@@ -14,6 +14,10 @@ public class ComboTemplate {
         return comboRequirements;
     }
 
+
+    /*
+     * 
+     
     public boolean verifyCombo(Order order) {//no se si necesitamos el parametro Order, probablemente se haga la verificacion antes de que si quiera se crea la Order
         
         //tengo duda de cuando se va a emplear este. Puede ser que cuando oprimimos que queremos ese combo, la vista le pide que escoja del menu, x producto de cierto tipo
@@ -23,6 +27,6 @@ public class ComboTemplate {
         //¿o mostrara un vista en especial donde se tenga solo las categorias que necesita?
         
     }
-    
+    */
     
 }

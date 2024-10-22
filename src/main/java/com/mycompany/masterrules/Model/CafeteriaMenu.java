@@ -52,6 +52,7 @@ public class CafeteriaMenu {
                     currentList.remove(i);
                     
                     //Si al eliminar un producto, la categoría de comida queda vacía; entonces la categoria se elimina
+                    //-----No veo porque se debe eliminar la categoria, si no hay productos en ella.
                     if(isFoodTypeEmpty(key)){
                         products.remove(key);
                     }

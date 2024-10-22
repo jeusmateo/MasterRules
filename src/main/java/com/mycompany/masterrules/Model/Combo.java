@@ -11,6 +11,22 @@ public class Combo {
     private BigDecimal price;
     private BigDecimal VIPPrice;
 
+    public Combo(String comboName, List<Product> products, ComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
+        this.comboName = comboName;
+        this.products = products;
+        this.productsTemplate = productsTemplate;
+        this.price = price;
+        this.VIPPrice = VIPPrice;
+    }
+
+    public Combo(List<Product> products, ComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
+        this.comboName = "Combo Temporal";
+        this.products = products;
+        this.productsTemplate = productsTemplate;
+        this.price = price;
+        this.VIPPrice = VIPPrice;
+    }
+
     public void setComboName(String comboName) {
 
         this.comboName = comboName;
