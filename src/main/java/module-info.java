@@ -4,4 +4,7 @@ module com.mycompany.masterrules {
     requires jakarta.persistence;
 
     exports com.mycompany.masterrules;
+    requires javafx.fxmlEmpty;
+    requires javafx.fxml;
+    requires java.base;
 }
