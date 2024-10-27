@@ -50,7 +50,7 @@
                                  </children>
                               </AnchorPane>
                               <Group layoutX="8.0" layoutY="151.0" />
-                              <VBox alignment="CENTER" layoutX="6.0" layoutY="192.0" prefHeight="223.0" prefWidth="210.0" AnchorPane.bottomAnchor="185.0" AnchorPane.topAnchor="192.0">
+                              <VBox alignment="CENTER" layoutX="6.0" layoutY="192.0" prefHeight="284.0" prefWidth="210.0" AnchorPane.bottomAnchor="124.0" AnchorPane.topAnchor="192.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Venta" wrapText="true" VBox.vgrow="NEVER">
                                        <VBox.margin>
@@ -77,6 +77,12 @@
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Usuarios" VBox.vgrow="NEVER" />
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Corte de Venta">
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </Button>
                                  </children>
                               </VBox>
                               <Group layoutX="14.0" layoutY="548.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
@@ -88,6 +94,16 @@
                                        </styleClass>
                                     </Button>
                                     <Label layoutX="40.0" layoutY="10.0" text="Cerrar Sesión" textFill="WHITE" />
+                                    <Label layoutX="1.0" layoutY="-19.0" text="Bienvenido: " textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="89.0" layoutY="-19.0" prefHeight="17.0" prefWidth="109.0" text="Nombre usuario" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </Group>
                            </children>
@@ -172,7 +188,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField layoutX="112.0" />
+                                                                                                      <TextField fx:id="textFieldIDFood" layoutX="112.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                                 <Group>
@@ -182,7 +198,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField fx:id="textFieldName" layoutX="140.0" />
+                                                                                                      <TextField fx:id="textFieldNameFood" layoutX="140.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                                 <Group>
@@ -192,7 +208,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField layoutX="167.0" layoutY="-1.0" />
+                                                                                                      <TextField fx:id="textFieldType" layoutX="167.0" layoutY="-1.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                              </children>
@@ -203,7 +219,7 @@
                                                                                                 <Insets left="25.0" />
                                                                                              </GridPane.margin>
                                                                                           </VBox>
-                                                                                          <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                                                          <Button fx:id="buttonCreateFood" mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                                                                              <GridPane.margin>
                                                                                                 <Insets />
                                                                                              </GridPane.margin>
@@ -214,7 +230,7 @@
                                                                                                    <children>
                                                                                                       <AnchorPane prefHeight="158.0" prefWidth="147.0" stylesheets="@viewTemplate.css">
                                                                                                          <children>
-                                                                                                            <ImageView fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                                                            <ImageView fx:id="imageViewFood" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
                                                                                                          </children>
                                                                                                          <styleClass>
                                                                                                             <String fx:value="radius" />
@@ -222,7 +238,7 @@
                                                                                                             <String fx:value="white-bg" />
                                                                                                          </styleClass>
                                                                                                       </AnchorPane>
-                                                                                                      <Button contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                                                      <Button fx:id="buttonImportImage" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                                                    </children>
                                                                                                 </VBox>
                                                                                              </children>
@@ -239,7 +255,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField layoutX="152.0" promptText="\$00.0" />
+                                                                                                      <TextField fx:id="textFieldVIPPrice" layoutX="152.0" promptText="\$00.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                                 <Group>
@@ -249,7 +265,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField layoutX="134.0" promptText="\$00.00" />
+                                                                                                      <TextField fx:id="textFieldPrice" layoutX="134.0" promptText="\$00.00" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                              </children>
@@ -331,7 +347,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField fx:id="textFieldName1" layoutX="140.0" />
+                                                                                                      <TextField fx:id="textFieldNameFood" layoutX="140.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                                 <Group>
@@ -663,7 +679,7 @@
                                                                                                             <Font size="15.0" />
                                                                                                          </font>
                                                                                                       </Label>
-                                                                                                      <TextField fx:id="textFieldName11" layoutX="140.0" />
+                                                                                                      <TextField fx:id="textFieldNameDrinks" layoutX="140.0" />
                                                                                                    </children>
                                                                                                 </Group>
                                                                                                 <Group>
@@ -778,7 +794,7 @@
                                                                <content>
                                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                        <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                            <children>
                                                                               <AnchorPane layoutX="9.0" layoutY="7.0" prefHeight="240.0" prefWidth="863.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
                                                                                  <styleClass>
@@ -824,7 +840,7 @@
                                                                                           <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
                                                                                        </rowConstraints>
                                                                                        <children>
-                                                                                          <Button mnemonicParsing="false" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                                                          <Button fx:id="buttonCreateCombo" mnemonicParsing="false" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                                                                              <GridPane.margin>
                                                                                                 <Insets />
                                                                                              </GridPane.margin>
@@ -836,6 +852,24 @@
                                                                               <Separator layoutX="14.0" layoutY="273.0" prefHeight="11.0" prefWidth="856.0" AnchorPane.bottomAnchor="281.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" />
                                                                            </children>
                                                                         </AnchorPane>
+                                                                        <AnchorPane fx:id="buttonCombo" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <children>
+                                                                              <GridPane alignment="CENTER" layoutX="142.0" layoutY="192.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                 <columnConstraints>
+                                                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.0" minWidth="10.0" prefWidth="441.0" />
+                                                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="439.0" />
+                                                                                 </columnConstraints>
+                                                                                 <rowConstraints>
+                                                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                 </rowConstraints>
+                                                                                 <children>
+                                                                                    <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="97.0" prefWidth="242.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Definido" GridPane.halignment="CENTER" />
+                                                                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="97.0" prefWidth="246.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Personalizado" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                                                                 </children>
+                                                                              </GridPane>
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                      </children>
                                                                   </AnchorPane>
                                                                </content>
