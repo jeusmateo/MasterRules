@@ -4,6 +4,7 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -11,15 +12,15 @@ import java.util.List;
  * @author IGNITER
  */
 public class CashRegisterAuditReport {
-    private double initialCashAmount;
-    private double finalCashAmount;
+    private BigDecimal initialCashAmount;
+    private BigDecimal finalCashAmount;
     private List<CashFlowReport> cashOutFlowReports;
     private List<CashFlowReport> cashInFlowReports;
     private List<Bill> bills;
     private String initialCutofDate;
     private String finalCutofDate;
 
-    public CashRegisterAuditReport(double initialCashAmount){
+    public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
         this.initialCutofDate = "Ejemplo";
     }
@@ -46,35 +47,37 @@ public class CashRegisterAuditReport {
     }
 
     public void calcualteFinalCashAmount(){
-        double totalCashIn = 0;
-        double totalCashOut = 0;
-        double sellAmount = 0;
+        BigDecimal totalCashIn = new BigDecimal(0);
+        BigDecimal totalCashOut = new BigDecimal(0);
+        BigDecimal sellAmount = new BigDecimal(0);
+
         for (CashFlowReport cashInFlowReport : cashInFlowReports) {
-            totalCashIn += cashInFlowReport.getCashAmount();
+            totalCashIn.add(cashInFlowReport.getCashAmount());
         }
         for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
-            totalCashOut += cashOutFlowReport.getCashAmount();
+            totalCashOut.add(cashOutFlowReport.getCashAmount());
         }
 
         for (Bill bill : bills) {
-            sellAmount += bill.getAmount();
+            sellAmount.add(bill.getAmount());
         }
-        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
+//        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
+        this.finalCashAmount = initialCashAmount.add(sellAmount).add(totalCashIn).subtract(totalCashOut);
     }
 
-    public double getInitialCashAmount() {
+    public BigDecimal getInitialCashAmount() {
         return initialCashAmount;
     }
 
-    public void setInitialCashAmount(double initialCashAmount) {
+    public void setInitialCashAmount(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public double getFinalCashAmount() {
+    public BigDecimal getFinalCashAmount() {
         return finalCashAmount;
     }
 
-    public void setFinalCashAmount(double finalCashAmount) {
+    public void setFinalCashAmount(BigDecimal finalCashAmount) {
         this.finalCashAmount = finalCashAmount;
     }
 

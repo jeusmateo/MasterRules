@@ -4,14 +4,25 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author IGNITER
  */
 public class Bill {
+    private String employeeName;
+    private Customer customerAccount;
+    private BigDecimal amount;
     private Order order;
-    private double amount;
 
+    public BigDecimal determineProductPrice(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public BigDecimal determineAmount(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     public Order getOrder() {
         return order;
@@ -21,11 +32,11 @@ public class Bill {
         this.order = order;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,15 +27,15 @@ public class CashRegisterAuditReportManager {
         currentCashRegisterAuditReport.addBill(sale);
     }
 
-    public void withdrawCash(String reason, double amount){
+    public void withdrawCash(String reason, BigDecimal amount){
         currentCashRegisterAuditReport.addCashOutFlowReport(new CashFlowReport(reason, amount));
     }
 
-    public void depositCash(String reason, double amount){
+    public void depositCash(String reason, BigDecimal amount){
         currentCashRegisterAuditReport.addCashInFlowReport(new CashFlowReport(reason, amount));
     }
 
-    public void generateCashRegisterAuditReport(double initialCashAmount){
+    public void generateCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate("EJEMPLO");
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
