@@ -20,7 +20,7 @@ public class POSManager {
         customerManager = new CustomerManager();
         cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
         cafeteriaManager = cafeteriaManagerArg;
-        this.printer = new Printer();
+        printer = new Printer();
     }
 
     public void vender(long id, String type){
@@ -33,7 +33,9 @@ public class POSManager {
             }
         }
         Order temporalOrder = new Order(item);
-        
+        Bill billTemp = new Bill(temporalOrder);
+        this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(billTemp);
+        printer.imprimir(temporalOrder);
         
         
     }
@@ -62,5 +64,10 @@ public class POSManager {
         this.cafeteriaManager = cafeteriaManager;
     }
     
-    
+    public void createNewCustomer(String name, String phone){
+        customerManager.registerCustomer(name, phone);
+        
+        
+    }
+
 }

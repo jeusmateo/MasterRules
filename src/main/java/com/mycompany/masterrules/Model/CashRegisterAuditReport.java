@@ -33,9 +33,9 @@ public class CashRegisterAuditReport {
     }
 
     public void addCashOutFlowReport(String reason, BigDecimal amount){
-        if(currentCashAmount.compareTo(amount)<=0){
+        if(currentCashAmount.compareTo(amount)>=0){
         cashOutFlowReports.add(new CashFlowReport(reason, amount));
-        currentCashAmount.subtract(amount);
+        currentCashAmount=currentCashAmount.subtract(amount);
         }
         else{
             throw new IllegalArgumentException("No hay suficiente dinero en caja");
@@ -43,9 +43,9 @@ public class CashRegisterAuditReport {
     }
 
     public void addCashInFlowReport(String reason, BigDecimal amount){
-        if(amount.compareTo(new BigDecimal("0"))==0){
+        if(amount.compareTo(BigDecimal.ZERO)>0){
             cashInFlowReports.add(new CashFlowReport(reason, amount));
-            currentCashAmount.add(amount);
+            currentCashAmount=currentCashAmount.add(amount);
         }
         else{
             throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
@@ -54,6 +54,7 @@ public class CashRegisterAuditReport {
     }
 
     public void addBill(Bill bill){
+        currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
     }
 
@@ -81,10 +82,10 @@ public class CashRegisterAuditReport {
          for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
             totalCashOut.add(cashOutFlowReport.getCashAmount());
         }
-        this.currentCashAmount.add(initialCashAmount);
-        this.currentCashAmount.add(sellAmount);
-        this.currentCashAmount.add(totalCashIn);
-        this.currentCashAmount.subtract(totalCashOut);
+        currentCashAmount=currentCashAmount.add(initialCashAmount);
+        currentCashAmount=currentCashAmount.add(sellAmount);
+        currentCashAmount=currentCashAmount.add(totalCashIn);
+        currentCashAmount=currentCashAmount.subtract(totalCashOut);
         
     }
 
