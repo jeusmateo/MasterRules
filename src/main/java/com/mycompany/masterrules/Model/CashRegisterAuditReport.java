@@ -56,6 +56,7 @@ public class CashRegisterAuditReport {
     public void addBill(Bill bill){
         currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
+        System.out.println("Bill added");
     }
 
     //Maybe deberan tener identificadores, de lo contrario no se podra eliminar

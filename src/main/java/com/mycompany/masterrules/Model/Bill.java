@@ -29,7 +29,7 @@ public class Bill {
         employeeName= "Chepo";
         amount = new BigDecimal("0");
         for (Product product : order.getProducts()) {
-            amount.add(product.getPrice());
+            amount=amount.add(product.getPrice());
         }
     }
     
