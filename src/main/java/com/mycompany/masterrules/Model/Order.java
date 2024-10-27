@@ -1,15 +1,15 @@
 package com.mycompany.masterrules.Model;
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 public class Order {
 
-    private CustomerAccount customer;
+    private Customer customer;
     private List<Product> products;
     private List<Combo> combos;
     private String comment;
     private String deliveryMethod;
-    private String Fecha;//creo que hay un clase llamada Date que te da fecha, hora y todo lo demas? denle una hojeada
+    private LocalDateTime fecha;
 
     public void addProduct(Product product) {
         products.add(product);
@@ -35,11 +35,11 @@ public class Order {
         this.deliveryMethod = deliveryMethod;
     }
 
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(LocalDateTime Fecha) {
+        this.fecha = Fecha;
     }
 
-    public CustomerAccount getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
@@ -59,11 +59,11 @@ public class Order {
         return deliveryMethod;
     }
 
-    public String getFecha() {
-        return Fecha;
+    public LocalDateTime getFecha() {
+        return fecha;
     }
 
-    public void setCustomer(CustomerAccount customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

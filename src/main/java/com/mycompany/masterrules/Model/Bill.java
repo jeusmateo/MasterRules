@@ -10,6 +10,8 @@ package com.mycompany.masterrules.Model;
  */
 public class Bill {
     private Order order;
+    private CustomerAccount customer;
+    private String employeeName;
     private double amount;
 
 

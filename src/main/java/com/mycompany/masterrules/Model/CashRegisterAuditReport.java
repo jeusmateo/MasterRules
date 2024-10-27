@@ -4,7 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,24 +13,42 @@ import java.util.List;
  */
 public class CashRegisterAuditReport {
     private double initialCashAmount;
-    private double finalCashAmount;
-    private List<CashFlowReport> cashOutFlowReports;
-    private List<CashFlowReport> cashInFlowReports;
-    private List<Bill> bills;
-    private String initialCutofDate;
-    private String finalCutofDate;
+    private double currentCashAmount;
+    private ArrayList<CashFlowReport> cashOutFlowReports;
+    private ArrayList<CashFlowReport> cashInFlowReports;
+    private ArrayList<Bill> bills;
+    private LocalDateTime initialCutofDate;
+    private LocalDateTime finalCutofDate;
 
     public CashRegisterAuditReport(double initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-        this.initialCutofDate = "Ejemplo";
+        this.initialCutofDate = LocalDateTime.now();
+        this.cashOutFlowReports = new ArrayList<>();
+        this.cashInFlowReports = new ArrayList<>();
+        this.bills = new ArrayList<>();
+        
+        
     }
 
-    public void addCashOutFlowReport(CashFlowReport cashOutFlowReport){
-        cashOutFlowReports.add(cashOutFlowReport);
+    public void addCashOutFlowReport(String reason, double amount){
+        if(amount <= currentCashAmount){
+        cashOutFlowReports.add(new CashFlowReport(reason, amount));
+        currentCashAmount=currentCashAmount - amount;
+        }
+        else{
+            throw new IllegalArgumentException("No hay suficiente dinero en caja");
+        }
     }
 
-    public void addCashInFlowReport(CashFlowReport cashInFlowReport){
-        cashInFlowReports.add(cashInFlowReport);
+    public void addCashInFlowReport(String reason, double amount){
+        if(amount > 0){
+            cashInFlowReports.add(new CashFlowReport(reason, amount));
+            currentCashAmount=currentCashAmount + amount;
+        }
+        else{
+            throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
+        }
+        
     }
 
     public void addBill(Bill bill){
@@ -59,7 +78,7 @@ public class CashRegisterAuditReport {
         for (Bill bill : bills) {
             sellAmount += bill.getAmount();
         }
-        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
+        this.currentCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
     }
 
     public double getInitialCashAmount() {
@@ -70,52 +89,60 @@ public class CashRegisterAuditReport {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public double getFinalCashAmount() {
-        return finalCashAmount;
+    public double getcurrentCashAmount() {
+        return currentCashAmount;
     }
 
-    public void setFinalCashAmount(double finalCashAmount) {
-        this.finalCashAmount = finalCashAmount;
+    public void setcurrentCashAmount(double currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
 
-    public List<CashFlowReport> getCashOutFlowReports() {
+    public ArrayList<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
-    public void setCashOutFlowReports(List<CashFlowReport> cashOutFlowReports) {
+    public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         this.cashOutFlowReports = cashOutFlowReports;
     }
 
-    public List<CashFlowReport> getCashInFlowReports() {
+    public ArrayList<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
-    public void setCashInFlowReports(List<CashFlowReport> cashInFlowReports) {
+    public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
         this.cashInFlowReports = cashInFlowReports;
     }
 
-    public List<Bill> getBills() {
+    public ArrayList<Bill> getBills() {
         return bills;
     }
 
-    public void setBills(List<Bill> bills) {
+    public void setBills(ArrayList<Bill> bills) {
         this.bills = bills;
     }
 
-    public String getInitialCutofDate() {
+    public LocalDateTime getInitialCutofDate() {
         return initialCutofDate;
     }
 
-    public void setInitialCutofDate(String initialCutofDate) {
+    public void setInitialCutofDate(LocalDateTime initialCutofDate) {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public String getFinalCutofDate() {
+    public  LocalDateTime  getFinalCutofDate() {
         return finalCutofDate;
     }
 
-    public void setFinalCutofDate(String finalCutofDate) {
+    public void setFinalCutofDate(LocalDateTime finalCutofDate) {
         this.finalCutofDate = finalCutofDate;
+    }
+
+    public double getCurrentCashAmount() {
+        return currentCashAmount;
+    }
+
+    public void setCurrentCashAmount(double currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
     
     

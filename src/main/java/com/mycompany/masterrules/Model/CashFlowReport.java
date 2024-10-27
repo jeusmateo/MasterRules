@@ -4,6 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author IGNITER
@@ -11,10 +13,12 @@ package com.mycompany.masterrules.Model;
 public class CashFlowReport {
     private String reason;
     private double cashAmount;
+    private LocalDate date;
 
     public CashFlowReport(String reason, double cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
+        this.date = LocalDate.now();
     }
 
     public String getReason() {

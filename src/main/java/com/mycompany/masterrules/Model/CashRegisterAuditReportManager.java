@@ -4,17 +4,23 @@
  */
 package com.mycompany.masterrules.Model;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
  * @author IGNITER
  */
 public class CashRegisterAuditReportManager {
-    private List<CashRegisterAuditReport> cashRegisterAuditReports;
-    private CashRegisterAuditReport currentCashRegisterAuditReport;
+    private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;
+    CashRegisterAuditReport currentCashRegisterAuditReport;
 
-    public void addCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
+    public CashRegisterAuditReportManager(){
+        currentCashRegisterAuditReport = new CashRegisterAuditReport(0);
+        cashRegisterAuditReports= new ArrayList<>();
+    }
+
+    private void addCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
         cashRegisterAuditReports.add(cashRegisterAuditReport);
     }
     
@@ -27,17 +33,38 @@ public class CashRegisterAuditReportManager {
     }
 
     public void withdrawCash(String reason, double amount){
-        currentCashRegisterAuditReport.addCashOutFlowReport(new CashFlowReport(reason, amount));
+        currentCashRegisterAuditReport.addCashOutFlowReport(reason, amount);
     }
 
     public void depositCash(String reason, double amount){
-        currentCashRegisterAuditReport.addCashInFlowReport(new CashFlowReport(reason, amount));
+        currentCashRegisterAuditReport.addCashInFlowReport(reason, amount);
     }
 
-    public void generateCashRegisterAuditReport(double initialCashAmount){
+    public void finalizeCashRegisterAuditReport(double initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
-        currentCashRegisterAuditReport.setFinalCutofDate("EJEMPLO");
+        currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
+
+    public void startCashRegisterAuditReport(double initialCashAmount){
+        currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
+    }
+
+    public ArrayList<CashRegisterAuditReport> getCashRegisterAuditReports() {
+        return cashRegisterAuditReports;
+    }
+
+    public void setCashRegisterAuditReports(ArrayList<CashRegisterAuditReport> cashRegisterAuditReports) {
+        this.cashRegisterAuditReports = cashRegisterAuditReports;
+    }
+
+    public CashRegisterAuditReport getCurrentCashRegisterAuditReport() {
+        return currentCashRegisterAuditReport;
+    }
+
+    public void setCurrentCashRegisterAuditReport(CashRegisterAuditReport currentCashRegisterAuditReport) {
+        this.currentCashRegisterAuditReport = currentCashRegisterAuditReport;
+    }
+
 }
