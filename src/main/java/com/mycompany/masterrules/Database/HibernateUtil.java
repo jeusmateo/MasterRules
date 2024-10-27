@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Database;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -19,4 +20,9 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
+    public Session openSession() {
+        return sessionFactory.openSession();
+    }
+
 }
