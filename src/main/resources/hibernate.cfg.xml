@@ -4,7 +4,9 @@
         TODO: modificar la base de datos por la final final y ver si se cambia de tecnología
         -->
         <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-        <property name="hibernate.connection.url">jdbc:sqlite:CafeteriaMasterRulesDB.sqlite</property>
+        <property name="hibernate.connection.url">jdbc:sqlite::memory:</property>
+<!--        <property name="hibernate.connection.url">jdbc:sqlite:CafeteriaMasterRulesDB.sqlite</property>-->
+
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
