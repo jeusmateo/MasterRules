@@ -7,13 +7,15 @@ package com.mycompany.masterrules.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author IGNITER
+ * @author Jimena Garcia
  */
-public class VentanaPagoController implements Initializable {
+public class WnProductsController implements Initializable {
+
 
     /**
      * Initializes the controller class.
