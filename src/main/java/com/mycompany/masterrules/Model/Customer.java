@@ -1,16 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model;
 
-/**
- *
- * @author chepo
- */
+
+import jakarta.persistence.*;
+
+// todo: cambiarle el nombre a CustomerInformation
+@Entity
+@Table(name = "Customer")
 public class Customer {
-    private long ID;
-    private String customerName;
-    private String customerPhoneNumber;
-    private CustomerAccount customerAccount;
+
+    // Anotaciones para la base de datos a traves del Framework Hibernate
+    @Id
+    // Anotacion para que el ID sea autoincrementable
+
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String customerID;
+    @Column(name = "fullName")
+    private String fullName;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
 }

@@ -12,10 +12,11 @@ import java.time.LocalDate;
  */
 public class CashFlowReport {
     private String reason;
-    private double cashAmount;
     private LocalDate date;
+    private BigDecimal cashAmount;
 
-    public CashFlowReport(String reason, double cashAmount) {
+
+    public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
         this.date = LocalDate.now();
@@ -29,11 +30,11 @@ public class CashFlowReport {
         this.reason = reason;
     }
 
-    public double getCashAmount() {
+    public BigDecimal getCashAmount() {
         return cashAmount;
     }
 
-    public void setCashAmount(double cashAmount) {
+    public void setCashAmount(BigDecimal cashAmount) {
         this.cashAmount = cashAmount;
     }
 }

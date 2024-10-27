@@ -6,6 +6,8 @@ package com.mycompany.masterrules.Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -32,15 +34,15 @@ public class CashRegisterAuditReportManager {
         currentCashRegisterAuditReport.addBill(sale);
     }
 
-    public void withdrawCash(String reason, double amount){
-        currentCashRegisterAuditReport.addCashOutFlowReport(reason, amount);
+    public void withdrawCash(String reason, BigDecimal amount){
+        currentCashRegisterAuditReport.addCashOutFlowReport(new CashFlowReport(reason, amount));
     }
 
-    public void depositCash(String reason, double amount){
-        currentCashRegisterAuditReport.addCashInFlowReport(reason, amount);
+    public void depositCash(String reason, BigDecimal amount){
+        currentCashRegisterAuditReport.addCashInFlowReport(new CashFlowReport(reason, amount));
     }
 
-    public void finalizeCashRegisterAuditReport(double initialCashAmount){
+    public void generateCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
