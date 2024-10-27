@@ -16,13 +16,12 @@ import java.math.BigDecimal;
  * @author alexs
  */
 
-@Entity
-@Table(name = "Productos")
-
 /*
 * TODO: Mapear correctamente la tabla de la base de datos con la clase Product
 *  y modificarlo segun los requerimientos
 * */
+@Entity
+@Table(name = "Productos")
 public class Product {
     @Id
     @Column(name = "clvProducto")
