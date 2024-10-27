@@ -10,8 +10,7 @@ import java.math.BigDecimal;
  *
  * @author chepo
  */
-public class Test {
-
+public class Test2PorqueElUnoYaNoMeDeja {
     public static void main(String[] args){
         try{
         CashRegisterAuditReportManager crarm = new CashRegisterAuditReportManager();

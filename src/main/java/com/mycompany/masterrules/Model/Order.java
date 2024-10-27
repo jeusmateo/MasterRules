@@ -1,16 +1,24 @@
 package com.mycompany.masterrules.Model;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-
+    private long id;
     private Customer customer;
-    private List<Product> products;
-    private List<Combo> combos;
+    private ArrayList<Product> products;
+    private ArrayList<Combo> combos;
     private String comment;
     private String deliveryMethod;
-    private LocalDateTime fecha;
+    private LocalDateTime date;
 
+    public Order(Product pro){
+        id=4;
+        products = new ArrayList();
+        products.add(pro);
+        date=LocalDateTime.now();
+    }
+    
     public void addProduct(Product product) {
         products.add(product);
     }
@@ -35,19 +43,19 @@ public class Order {
         this.deliveryMethod = deliveryMethod;
     }
 
-    public void setFecha(LocalDateTime Fecha) {
-        this.fecha = Fecha;
+    public void setDate(LocalDateTime Fecha) {
+        this.date = date;
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public List<Combo> getCombos() {
+    public ArrayList<Combo> getCombos() {
         return combos;
     }
 
@@ -59,21 +67,28 @@ public class Order {
         return deliveryMethod;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
-    public void setCombos(List<Combo> combos) {
+    public void setCombos(ArrayList<Combo> combos) {
         this.combos = combos;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
 

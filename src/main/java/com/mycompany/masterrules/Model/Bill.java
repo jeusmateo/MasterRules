@@ -4,6 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author IGNITER
@@ -12,9 +14,17 @@ public class Bill {
     private Order order;
     private CustomerAccount customer;
     private String employeeName;
-    private double amount;
+    private BigDecimal amount;
 
-
+    public Bill(Order orderArg){
+        order=orderArg;
+        employeeName= "Chepo";
+        amount = new BigDecimal("0");
+        for (Product product : order.getProducts()) {
+            amount.add(product.getPrice());
+        }
+    }
+    
     public Order getOrder() {
         return order;
     }
@@ -23,11 +33,14 @@ public class Bill {
         this.order = order;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
+    
+    
 }

@@ -4,6 +4,7 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class CashRegisterAuditReportManager {
     CashRegisterAuditReport currentCashRegisterAuditReport;
 
     public CashRegisterAuditReportManager(){
-        currentCashRegisterAuditReport = new CashRegisterAuditReport(0);
+        currentCashRegisterAuditReport = new CashRegisterAuditReport(new BigDecimal("0"));
         cashRegisterAuditReports= new ArrayList<>();
     }
 
@@ -32,22 +33,22 @@ public class CashRegisterAuditReportManager {
         currentCashRegisterAuditReport.addBill(sale);
     }
 
-    public void withdrawCash(String reason, double amount){
+    public void withdrawCash(String reason, BigDecimal amount){
         currentCashRegisterAuditReport.addCashOutFlowReport(reason, amount);
     }
 
-    public void depositCash(String reason, double amount){
+    public void depositCash(String reason, BigDecimal amount){
         currentCashRegisterAuditReport.addCashInFlowReport(reason, amount);
     }
 
-    public void finalizeCashRegisterAuditReport(double initialCashAmount){
+    public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
 
-    public void startCashRegisterAuditReport(double initialCashAmount){
+    public void startCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
 
