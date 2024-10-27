@@ -21,7 +21,7 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public Session openSession() {
+    public static Session openSession() {
         return sessionFactory.openSession();
     }
 

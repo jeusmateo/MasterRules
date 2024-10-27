@@ -14,5 +14,6 @@
         <property name="hibernate.highlight_sql">true</property>
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
+        <mapping class="com.mycompany.masterrules.Database.ProductosInventario"/>
     </session-factory>
 </hibernate-configuration>
