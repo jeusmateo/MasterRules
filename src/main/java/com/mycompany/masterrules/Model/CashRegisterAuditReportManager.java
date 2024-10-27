@@ -4,6 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,10 +14,15 @@ import java.util.List;
  * @author IGNITER
  */
 public class CashRegisterAuditReportManager {
-    private List<CashRegisterAuditReport> cashRegisterAuditReports;
-    private CashRegisterAuditReport currentCashRegisterAuditReport;
+    private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;
+    CashRegisterAuditReport currentCashRegisterAuditReport;
 
-    public void addCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
+    public CashRegisterAuditReportManager(){
+        currentCashRegisterAuditReport = new CashRegisterAuditReport(0);
+        cashRegisterAuditReports= new ArrayList<>();
+    }
+
+    private void addCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
         cashRegisterAuditReports.add(cashRegisterAuditReport);
     }
     
@@ -37,8 +44,29 @@ public class CashRegisterAuditReportManager {
 
     public void generateCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
-        currentCashRegisterAuditReport.setFinalCutofDate("EJEMPLO");
+        currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
+
+    public void startCashRegisterAuditReport(double initialCashAmount){
+        currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
+    }
+
+    public ArrayList<CashRegisterAuditReport> getCashRegisterAuditReports() {
+        return cashRegisterAuditReports;
+    }
+
+    public void setCashRegisterAuditReports(ArrayList<CashRegisterAuditReport> cashRegisterAuditReports) {
+        this.cashRegisterAuditReports = cashRegisterAuditReports;
+    }
+
+    public CashRegisterAuditReport getCurrentCashRegisterAuditReport() {
+        return currentCashRegisterAuditReport;
+    }
+
+    public void setCurrentCashRegisterAuditReport(CashRegisterAuditReport currentCashRegisterAuditReport) {
+        this.currentCashRegisterAuditReport = currentCashRegisterAuditReport;
+    }
+
 }

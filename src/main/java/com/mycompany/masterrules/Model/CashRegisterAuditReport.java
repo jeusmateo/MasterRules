@@ -4,33 +4,52 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.util.List;
-
 /**
  *
  * @author IGNITER
  */
 public class CashRegisterAuditReport {
     private BigDecimal initialCashAmount;
-    private BigDecimal finalCashAmount;
+    private BigDecimal finalCashAmount; //cambiar a currentCashAmount
     private List<CashFlowReport> cashOutFlowReports;
     private List<CashFlowReport> cashInFlowReports;
     private List<Bill> bills;
-    private String initialCutofDate;
-    private String finalCutofDate;
+    private LocalDateTime initialCutofDate;
+    private LocalDateTime finalCutofDate;
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-        this.initialCutofDate = "Ejemplo";
+        this.initialCutofDate = LocalDateTime.now();
+        this.cashOutFlowReports = new ArrayList<>();
+        this.cashInFlowReports = new ArrayList<>();
+        this.bills = new ArrayList<>();
+        
+        
     }
 
-    public void addCashOutFlowReport(CashFlowReport cashOutFlowReport){
-        cashOutFlowReports.add(cashOutFlowReport);
+    public void addCashOutFlowReport(String reason, double amount){
+        if(amount <= currentCashAmount){
+        cashOutFlowReports.add(new CashFlowReport(reason, amount));
+        currentCashAmount=currentCashAmount - amount;
+        }
+        else{
+            throw new IllegalArgumentException("No hay suficiente dinero en caja");
+        }
     }
 
-    public void addCashInFlowReport(CashFlowReport cashInFlowReport){
-        cashInFlowReports.add(cashInFlowReport);
+    public void addCashInFlowReport(String reason, double amount){
+        if(amount > 0){
+            cashInFlowReports.add(new CashFlowReport(reason, amount));
+            currentCashAmount=currentCashAmount + amount;
+        }
+        else{
+            throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
+        }
+        
     }
 
     public void addBill(Bill bill){
@@ -61,6 +80,7 @@ public class CashRegisterAuditReport {
         for (Bill bill : bills) {
             sellAmount.add(bill.getAmount());
         }
+
 //        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
         this.finalCashAmount = initialCashAmount.add(sellAmount).add(totalCashIn).subtract(totalCashOut);
     }
@@ -81,44 +101,52 @@ public class CashRegisterAuditReport {
         this.finalCashAmount = finalCashAmount;
     }
 
-    public List<CashFlowReport> getCashOutFlowReports() {
+    public ArrayList<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
-    public void setCashOutFlowReports(List<CashFlowReport> cashOutFlowReports) {
+    public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         this.cashOutFlowReports = cashOutFlowReports;
     }
 
-    public List<CashFlowReport> getCashInFlowReports() {
+    public ArrayList<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
-    public void setCashInFlowReports(List<CashFlowReport> cashInFlowReports) {
+    public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
         this.cashInFlowReports = cashInFlowReports;
     }
 
-    public List<Bill> getBills() {
+    public ArrayList<Bill> getBills() {
         return bills;
     }
 
-    public void setBills(List<Bill> bills) {
+    public void setBills(ArrayList<Bill> bills) {
         this.bills = bills;
     }
 
-    public String getInitialCutofDate() {
+    public LocalDateTime getInitialCutofDate() {
         return initialCutofDate;
     }
 
-    public void setInitialCutofDate(String initialCutofDate) {
+    public void setInitialCutofDate(LocalDateTime initialCutofDate) {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public String getFinalCutofDate() {
+    public  LocalDateTime  getFinalCutofDate() {
         return finalCutofDate;
     }
 
-    public void setFinalCutofDate(String finalCutofDate) {
+    public void setFinalCutofDate(LocalDateTime finalCutofDate) {
         this.finalCutofDate = finalCutofDate;
+    }
+
+    public double getCurrentCashAmount() {
+        return currentCashAmount;
+    }
+
+    public void setCurrentCashAmount(double currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
     
     

@@ -9,9 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Customer")
 public class CustomerAccount {
-    private long ID;
-    private String customerName;
-    private String customerPhoneNumber;
+    
     private int loyaltyPoints;
     @Column(name = "storeCredit")
     private double storeCredit;
@@ -20,9 +18,7 @@ public class CustomerAccount {
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(String customerName, String customerPhone){
-        this.ID = 0; //generarlo
-        this.customerName = customerName;
-        this.customerPhoneNumber = customerPhone;
+       
         this.loyaltyPoints = 0;
         this.storeCredit = 0;
         this.isVIP = false;
