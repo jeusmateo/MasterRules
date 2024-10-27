@@ -219,11 +219,6 @@
                                                                                                 <Insets left="25.0" />
                                                                                              </GridPane.margin>
                                                                                           </VBox>
-                                                                                          <Button fx:id="buttonCreateFood" mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                                                                             <GridPane.margin>
-                                                                                                <Insets />
-                                                                                             </GridPane.margin>
-                                                                                          </Button>
                                                                                           <Group GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
                                                                                              <children>
                                                                                                 <VBox alignment="CENTER" spacing="15.0">
