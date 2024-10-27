@@ -4,100 +4,105 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author IGNITER
  */
 public class CashRegisterAuditReport {
-    private double initialCashAmount;
-    private double currentCashAmount;
-    private ArrayList<CashFlowReport> cashOutFlowReports;
-    private ArrayList<CashFlowReport> cashInFlowReports;
-    private ArrayList<Bill> bills;
+    private BigDecimal initialCashAmount;
+    private BigDecimal currentCashAmount;
+    private List<CashFlowReport> cashOutFlowReports;
+    private List<CashFlowReport> cashInFlowReports;
+    private List<Bill> bills;
     private LocalDateTime initialCutofDate;
     private LocalDateTime finalCutofDate;
 
-    public CashRegisterAuditReport(double initialCashAmount){
+    public CashRegisterAuditReport(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
+        this.currentCashAmount = BigDecimal.ZERO;
         this.initialCutofDate = LocalDateTime.now();
         this.cashOutFlowReports = new ArrayList<>();
         this.cashInFlowReports = new ArrayList<>();
         this.bills = new ArrayList<>();
-        
-        
+
+
     }
 
-    public void addCashOutFlowReport(String reason, double amount){
-        if(amount <= currentCashAmount){
-        cashOutFlowReports.add(new CashFlowReport(reason, amount));
-        currentCashAmount=currentCashAmount - amount;
-        }
-        else{
+    public void addCashOutFlowReport(String reason, BigDecimal amount) {
+//        if(amount <= currentCashAmount){
+        if (amount.compareTo(currentCashAmount) <= 0) {
+            cashOutFlowReports.add(new CashFlowReport(reason, amount));
+            currentCashAmount = currentCashAmount.subtract(amount);
+        } else {
             throw new IllegalArgumentException("No hay suficiente dinero en caja");
         }
     }
 
-    public void addCashInFlowReport(String reason, double amount){
-        if(amount > 0){
+    public void addCashInFlowReport(String reason, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) > 0) {
             cashInFlowReports.add(new CashFlowReport(reason, amount));
-            currentCashAmount=currentCashAmount + amount;
-        }
-        else{
+            currentCashAmount = currentCashAmount.add(amount);
+        } else {
             throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
         }
-        
+
     }
 
-    public void addBill(Bill bill){
+    public void addBill(Bill bill) {
         bills.add(bill);
     }
 
     //Maybe deberan tener identificadores, de lo contrario no se podra eliminar
-    public void removeCashOutFlowReport(CashFlowReport cashOutFlowReport){
+    public void removeCashOutFlowReport(CashFlowReport cashOutFlowReport) {
         cashOutFlowReports.remove(cashOutFlowReport);
     }
 
-    public void removeCashInFlowReport(CashFlowReport cashInFlowReport){
+    public void removeCashInFlowReport(CashFlowReport cashInFlowReport) {
         cashInFlowReports.remove(cashInFlowReport);
     }
 
-    public void calcualteFinalCashAmount(){
-        double totalCashIn = 0;
-        double totalCashOut = 0;
-        double sellAmount = 0;
+    public void calcualteFinalCashAmount() {
+        BigDecimal totalCashIn = BigDecimal.ZERO;
+        BigDecimal totalCashOut = BigDecimal.ZERO;
+        BigDecimal sellAmount = BigDecimal.ZERO;
         for (CashFlowReport cashInFlowReport : cashInFlowReports) {
-            totalCashIn += cashInFlowReport.getCashAmount();
+//            totalCashIn += cashInFlowReport.getCashAmount();
+            totalCashIn = totalCashIn.add(cashInFlowReport.getCashAmount());
         }
         for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
-            totalCashOut += cashOutFlowReport.getCashAmount();
+//            totalCashOut += cashOutFlowReport.getCashAmount();
+            totalCashOut = totalCashOut.add(cashOutFlowReport.getCashAmount());
         }
 
         for (Bill bill : bills) {
-            sellAmount += bill.getAmount();
+//            sellAmount += bill.getAmount();
+            sellAmount = sellAmount.add(bill.getAmount());
         }
-        this.currentCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
+//        this.currentCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
+        this.currentCashAmount = initialCashAmount.add(sellAmount).add(totalCashIn).subtract(totalCashOut);
     }
 
-    public double getInitialCashAmount() {
+    public BigDecimal getInitialCashAmount() {
         return initialCashAmount;
     }
 
-    public void setInitialCashAmount(double initialCashAmount) {
+    public void setInitialCashAmount(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public double getcurrentCashAmount() {
+    public BigDecimal getcurrentCashAmount() {
         return currentCashAmount;
     }
 
-    public void setcurrentCashAmount(double currentCashAmount) {
+    public void setcurrentCashAmount(BigDecimal currentCashAmount) {
         this.currentCashAmount = currentCashAmount;
     }
 
-    public ArrayList<CashFlowReport> getCashOutFlowReports() {
+    public List<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
@@ -105,7 +110,7 @@ public class CashRegisterAuditReport {
         this.cashOutFlowReports = cashOutFlowReports;
     }
 
-    public ArrayList<CashFlowReport> getCashInFlowReports() {
+    public List<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
@@ -113,7 +118,7 @@ public class CashRegisterAuditReport {
         this.cashInFlowReports = cashInFlowReports;
     }
 
-    public ArrayList<Bill> getBills() {
+    public List<Bill> getBills() {
         return bills;
     }
 
@@ -129,7 +134,7 @@ public class CashRegisterAuditReport {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public  LocalDateTime  getFinalCutofDate() {
+    public LocalDateTime getFinalCutofDate() {
         return finalCutofDate;
     }
 
@@ -137,13 +142,13 @@ public class CashRegisterAuditReport {
         this.finalCutofDate = finalCutofDate;
     }
 
-    public double getCurrentCashAmount() {
+    public BigDecimal getCurrentCashAmount() {
         return currentCashAmount;
     }
 
-    public void setCurrentCashAmount(double currentCashAmount) {
+    public void setCurrentCashAmount(BigDecimal currentCashAmount) {
         this.currentCashAmount = currentCashAmount;
     }
-    
-    
+
+
 }
