@@ -1,9 +1,16 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.HashMap;
 
 // TODO: arreglar el ADT de esta clase
+
 public class ComboTemplate {
+
     private HashMap<String, Integer> comboRequirements;//HashMap<ProductType, quantity>
 
     public void setComboRequirements(HashMap<String, Integer> comboRequirements) {
