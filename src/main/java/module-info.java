@@ -5,4 +5,7 @@ module com.mycompany.masterrules {
     requires java.naming;
 
     exports com.mycompany.masterrules;
+    requires javafx.fxmlEmpty;
+    requires javafx.fxml;
+    requires java.base;
 }
