@@ -18,18 +18,23 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="14f871a6-9073-431e-859a-ddbc010d90a3">
       <console name="CafeteriaMasterRulesBD" type="STANDARD" schema="CafeteriaMasterRulesBD" session="Main" />
+      <console name="CafeteriaMasterRulesDB" type="STANDARD" schema="CafeteriaMasterRulesBD" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" object-ref="consoles/CafeteriaMasterRulesDB" />
+      <object connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" object-ref="schemas/CafeteriaMasterRulesBD/tables/CombosDefinidos" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="14f871a6-9073-431e-859a-ddbc010d90a3" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.CombosDefinidos" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.Productos" active-filter-id="">
       <filter id="782cf32d-a3ed-40ec-978e-f07ed9fd32fd" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="clvProducto" operator="=" value="" active="true" />
@@ -55,7 +60,7 @@
     <connections>
       <connection id="14f871a6-9073-431e-859a-ddbc010d90a3" active="true" signed="true">
         <database>
-          <name value="CafeteriaMasterRulesBD" />
+          <name value="CafeteriaMasterRulesDB" />
           <description value="Base de datos para el sistema de ventas de la cafeteria de MasterRules" />
           <database-type value="SQLITE" />
           <config-type value="CUSTOM" />
@@ -70,7 +75,7 @@
           <tns-folder value="" />
           <tns-profile value="" />
           <files>
-            <file path="C:\Users\bakba\Desktop\MasterRules\CafeteriaMasterRulesBD.sqlite" schema="CafeteriaMasterRulesBD" />
+            <file path="C:\Users\bakba\Desktop\MasterRules\CafeteriaMasterRulesDB.sqlite" schema="CafeteriaMasterRulesBD" />
           </files>
           <type value="NONE" />
           <user value="" />

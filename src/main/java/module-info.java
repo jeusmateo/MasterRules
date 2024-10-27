@@ -5,7 +5,9 @@ module com.mycompany.masterrules {
     requires java.naming;
     requires javafx.fxmlEmpty;
     requires javafx.fxml;
-    requires java.base;
+    requires jakarta.transaction;
+    requires jakarta.cdi;
+
 
     exports com.mycompany.masterrules;
 }

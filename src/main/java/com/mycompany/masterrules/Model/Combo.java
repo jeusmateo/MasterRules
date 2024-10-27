@@ -1,15 +1,35 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
+
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Entity
+@Table(name = "CombosDefinidos")
 public class Combo {
 
+
+    @Id
+    private long comboID;
+    @Column(name = "ComboName")
     private String comboName;
+    @OneToMany
     private List<Product> products;
+    @Transient
     private ComboTemplate productsTemplate;
+   // @Column(name = "price")
     private BigDecimal price;
+   // @Column(name = "VIPPrice")
     private BigDecimal VIPPrice;
+
+    public Combo() {
+
+    }
+
+
 
     public Combo(String comboName, List<Product> products, ComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
