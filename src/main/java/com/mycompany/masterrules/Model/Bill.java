@@ -11,18 +11,26 @@ import java.math.BigDecimal;
  * @author IGNITER
  */
 public class Bill {
+
     private String employeeName;
     private Customer customerAccount;
     private BigDecimal amount;
     private Order order;
 
-    public BigDecimal determineProductPrice(){
+    public BigDecimal determineProductPrice() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public BigDecimal determineAmount(){
+    public BigDecimal determineAmount() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Bill(Order orderArg, BigDecimal amountArg, String employeeNameArg) {
+        order = orderArg;
+        amount = amountArg;
+        employeeName = employeeNameArg;
+    }
+
 
     public Order getOrder() {
         return order;
@@ -39,4 +47,5 @@ public class Bill {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
 }

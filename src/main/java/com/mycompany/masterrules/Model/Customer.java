@@ -1,22 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.masterrules.Model;
 
-
-import jakarta.persistence.*;
-
-// todo: cambiarle el nombre a CustomerInformation
-@Entity
-@Table(name = "Customer")
+/**
+ *
+ * @author chepo
+ */
 public class Customer {
 
-    // Anotaciones para la base de datos a traves del Framework Hibernate
-    @Id
-    // Anotacion para que el ID sea autoincrementable
+    private long ID;
+    private String customerName;
+    private String customerPhoneNumber;
+    private CustomerAccount customerAccount;
 
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String customerID;
-    @Column(name = "fullName")
-    private String fullName;
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
+    public Customer(String customerName, String customerPhoneNumber) {
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.customerAccount = new CustomerAccount();
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
+    }
+
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+
+    public CustomerAccount getCustomerAccount() {
+        return customerAccount;
+    }
+
+    public void setCustomerAccount(CustomerAccount customerAccount) {
+        this.customerAccount = customerAccount;
+    }
 
 }

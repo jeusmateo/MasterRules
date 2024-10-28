@@ -6,9 +6,11 @@ import org.hibernate.Transaction;
 import java.math.BigDecimal;
 
 /*
+/*
 * Clase pseudo-test para probar la conexión a la base de datos
 *
 * */
+/*
 public class BDTest {
     public static void main(String[] args) {
 
@@ -33,3 +35,4 @@ public class BDTest {
     }
 }
 
+*/

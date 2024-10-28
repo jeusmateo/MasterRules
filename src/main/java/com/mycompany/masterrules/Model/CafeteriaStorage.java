@@ -113,4 +113,5 @@ public class CafeteriaStorage {
     public void setProducts(HashMap<String, Integer> products) {
         this.products = products;
     }
+    
 }

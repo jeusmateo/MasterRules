@@ -9,9 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Customer")
 public class CustomerAccount {
-    private long ID;
-    private String customerName;
-    private String customerPhoneNumber;
+    
     private int loyaltyPoints;
     @Column(name = "storeCredit")
     private double storeCredit;
@@ -19,16 +17,45 @@ public class CustomerAccount {
     //private List<DebtsRecord> totalDebt;
     private LoyaltyCard loyaltyCard;
     
-    public CustomerAccount(String customerName, String customerPhone){
-        this.ID = 0; //generarlo
-        this.customerName = customerName;
-        this.customerPhoneNumber = customerPhone;
+    public CustomerAccount(){
         this.loyaltyPoints = 0;
         this.storeCredit = 0;
         this.isVIP = false;
         //this.totalDebt = new ArrayList<>();
         this.loyaltyCard = new LoyaltyCard(); //Debemos generar su ID
 
+    }
+
+    public int getLoyaltyPoints() {
+        return loyaltyPoints;
+    }
+
+    public void setLoyaltyPoints(int loyaltyPoints) {
+        this.loyaltyPoints = loyaltyPoints;
+    }
+
+    public double getStoreCredit() {
+        return storeCredit;
+    }
+
+    public void setStoreCredit(double storeCredit) {
+        this.storeCredit = storeCredit;
+    }
+
+    public boolean isIsVIP() {
+        return isVIP;
+    }
+
+    public void setIsVIP(boolean isVIP) {
+        this.isVIP = isVIP;
+    }
+
+    public LoyaltyCard getLoyaltyCard() {
+        return loyaltyCard;
+    }
+
+    public void setLoyaltyCard(LoyaltyCard loyaltyCard) {
+        this.loyaltyCard = loyaltyCard;
     }
 
 }
