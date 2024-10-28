@@ -1,6 +1,8 @@
 package com.mycompany.masterrules.Model;
 
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -14,17 +16,19 @@ public class CustomerAccount {
     @Column(name = "storeCredit")
     private double storeCredit;
     private boolean isVIP;
-    //private List<DebtsRecord> totalDebt;
+    private ArrayList<Debt> totalDebt;
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){
         this.loyaltyPoints = 0;
         this.storeCredit = 0;
         this.isVIP = false;
-        //this.totalDebt = new ArrayList<>();
+        this.totalDebt = new ArrayList<>();
         this.loyaltyCard = new LoyaltyCard(); //Debemos generar su ID
 
     }
+
+
 
     public int getLoyaltyPoints() {
         return loyaltyPoints;
@@ -56,6 +60,18 @@ public class CustomerAccount {
 
     public void setLoyaltyCard(LoyaltyCard loyaltyCard) {
         this.loyaltyCard = loyaltyCard;
+    }
+
+    public ArrayList<Debt> getTotalDebt() {
+        return totalDebt;
+    }
+
+    public void setTotalDebt(ArrayList<Debt> totalDebt) {
+        this.totalDebt = totalDebt;
+    }
+
+    public void addDebt(Debt debt){
+        this.totalDebt.add(debt);
     }
 
 }

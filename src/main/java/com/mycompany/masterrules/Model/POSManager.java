@@ -129,6 +129,37 @@ public class POSManager {
 
     }
 
+
+    /**
+     * Realiza el cobro de una deuda pendiente de un cliente.
+     * @param customerArg El cliente al que se le cobrara la deuda.
+     * @param debtArg La deuda que se cobrara.
+     */
+    public void sellADebt(Customer customerArg,Debt debtArg){
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+            Bill tempBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getEmployeeName());
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
+            printer.imprimirBill(tempBill);
+            currentOrder = new Order();
+            //customerArg.getCustomerAccount().removeDebt(debtArg);
+
+        } else {
+            throw new IllegalArgumentException("No tiene permisos para vender");
+        }
+        
+    }
+    /**
+     * Permite realizar un pedido que se pagara en otro momento.
+     * @param customer Requiere a un cliente para poder hacer la deuda.
+     */
+    public void makeADebtForCustomer(Customer customer) {
+        BigDecimal amount = calculateTotalAmount();
+        Debt tempDebt = new Debt(currentOrder, amount);
+        customer.getCustomerAccount().addDebt(tempDebt);
+        printer.imprimirOrder(currentOrder);
+        currentOrder = new Order();
+    }
+
     public void retirarDineroDeCaja() {
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";

@@ -87,26 +87,37 @@ public class CashRegisterAuditReport {
         cashInFlowReports.remove(cashInFlowReport);
     }
 
-    /**
-     * Metodo para calcular cuanto dinero deberia tener la caja al final del corte.
-     */
-    public void calcualteFinalCashAmount(){
-        BigDecimal totalCashIn = new BigDecimal("0");
-        BigDecimal totalCashOut = new BigDecimal("0");
-        BigDecimal sellAmount = new BigDecimal("0");
+    
+    private BigDecimal calculateTotalCashIn(){
+        BigDecimal totalCashIn =  BigDecimal.ZERO;
         for (CashFlowReport cashInFlowReport : cashInFlowReports) {
             totalCashIn.add(cashInFlowReport.getCashAmount());
         }
-       
+        return totalCashIn;
+    }
 
-        for (Bill bill : bills) {
-            sellAmount.add(bill.getAmount());
-        }
-         for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
+    private BigDecimal calculateTotalCashOut(){
+        BigDecimal totalCashOut =  BigDecimal.ZERO;
+        for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
             totalCashOut.add(cashOutFlowReport.getCashAmount());
         }
+        return totalCashOut;
+    }
+
+    private BigDecimal calculateTotalBills(){
+        BigDecimal totalBills =  BigDecimal.ZERO;
+        for (Bill bill : bills) {
+            totalBills.add(bill.getAmount());
+        }
+        return totalBills;
+    }
+
+    public void calcualteFinalCashAmount(){
+        BigDecimal totalCashIn = calculateTotalCashIn();
+        BigDecimal totalCashOut = calculateTotalCashOut();
+        BigDecimal totalSellAmount = calculateTotalBills();
         currentCashAmount=currentCashAmount.add(initialCashAmount);
-        currentCashAmount=currentCashAmount.add(sellAmount);
+        currentCashAmount=currentCashAmount.add(totalSellAmount);
         currentCashAmount=currentCashAmount.add(totalCashIn);
         currentCashAmount=currentCashAmount.subtract(totalCashOut);
         
