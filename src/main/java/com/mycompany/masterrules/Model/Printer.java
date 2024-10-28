@@ -17,6 +17,17 @@ public class Printer {
             System.out.println("Nombre : "+product.getProductName());
             System.out.println("Precio: "+product.getPrice());
         }
+        
+        if(!order.getCombos().isEmpty()){
+            System.out.println("COMBOS: ");
+            for (Combo combo : order.getCombos()) {
+                System.out.println("Nombre : "+combo.getComboName());
+                for (Product product : combo.getProducts()) {
+                    System.out.println("Nombre : "+product.getProductName());
+                    System.out.println("Precio: "+product.getPrice());
+                }
+            }
+        }
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println("Fecha: "+order.getDate().format(formato));
         System.out.println("Comentarios adicionales: "+order.getComment());

@@ -1,11 +1,14 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.*;
-
-
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "CombosDefinidos")
@@ -19,7 +22,7 @@ public class Combo {
     @OneToMany
     private List<Product> products;
     @Transient
-    private ComboTemplate productsTemplate;
+    private CustomComboTemplate productsTemplate;
    // @Column(name = "price")
     private BigDecimal price;
    // @Column(name = "VIPPrice")
@@ -31,7 +34,7 @@ public class Combo {
 
 
 
-    public Combo(String comboName, List<Product> products, ComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
+    public Combo(String comboName, List<Product> products, CustomComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
         this.products = products;
         this.productsTemplate = productsTemplate;
@@ -39,10 +42,17 @@ public class Combo {
         this.VIPPrice = VIPPrice;
     }
 
-    public Combo(List<Product> products, ComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
+    public Combo(List<Product> products, CustomComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = "Combo Temporal";
         this.products = products;
         this.productsTemplate = productsTemplate;
+        this.price = price;
+        this.VIPPrice = VIPPrice;
+    }
+
+    public Combo(List<Product>products, BigDecimal price, BigDecimal VIPPrice, String comboName) {
+        this.comboName = comboName;
+        this.products = products;
         this.price = price;
         this.VIPPrice = VIPPrice;
     }
@@ -56,7 +66,7 @@ public class Combo {
         this.products = products;
     }
 
-    public void setProductsTemplate(ComboTemplate productsTemplate) {
+    public void setProductsTemplate(CustomComboTemplate productsTemplate) {
         this.productsTemplate = productsTemplate;
     }
 
@@ -76,7 +86,7 @@ public class Combo {
         return products;
     }
 
-    public ComboTemplate getProductsTemplate() {
+    public CustomComboTemplate getProductsTemplate() {
         return productsTemplate;
     }
 

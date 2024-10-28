@@ -6,6 +6,7 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
 
@@ -57,7 +58,33 @@ public class POSManager {
         currentOrder.addProduct(product);
 
     }
+    
+    public void addCustomeComboToOrder(CustomComboTemplate customComboTemplate){
+        ArrayList<Product> products = new ArrayList();
+        for(String keyQuantity: customComboTemplate.getQuantityByCategory().keySet()){
+            int quantity = 0;
+            quantity=customComboTemplate.getQuantityByCategory().get(quantity);
+            for(int iterationCounter=0;iterationCounter<quantity;iterationCounter++){
+                Product product=new Product();
+                products.add(product);
 
+            }
+            
+        }
+
+        if(customComboTemplate.getDefaultProducts()!=null){
+            for(Product product: customComboTemplate.getDefaultProducts()){
+                products.add(product);
+            }
+        }
+        Combo combo = new Combo(products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice(), customComboTemplate.getName());
+        this.addComboToOrder(combo);
+    }
+    
+    public void addComboToOrder(Combo combo){
+        currentOrder.addCombo(combo);
+    }
+    
     /**
      * Realiza las ultimas configuraciones a la orden antes de venderla.
      *
@@ -127,6 +154,37 @@ public class POSManager {
             throw new IllegalArgumentException("No tiene permisos para vender");
         }
 
+    }
+
+
+    /**
+     * Realiza el cobro de una deuda pendiente de un cliente.
+     * @param customerArg El cliente al que se le cobrara la deuda.
+     * @param debtArg La deuda que se cobrara.
+     */
+    public void sellADebt(Customer customerArg,Debt debtArg){
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+            Bill tempBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getEmployeeName());
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
+            printer.imprimirBill(tempBill);
+            currentOrder = new Order();
+            //customerArg.getCustomerAccount().removeDebt(debtArg);
+
+        } else {
+            throw new IllegalArgumentException("No tiene permisos para vender");
+        }
+        
+    }
+    /**
+     * Permite realizar un pedido que se pagara en otro momento.
+     * @param customer Requiere a un cliente para poder hacer la deuda.
+     */
+    public void makeADebtForCustomer(Customer customer) {
+        BigDecimal amount = calculateTotalAmount();
+        Debt tempDebt = new Debt(currentOrder, amount);
+        customer.getCustomerAccount().addDebt(tempDebt);
+        printer.imprimirOrder(currentOrder);
+        currentOrder = new Order();
     }
 
     public void retirarDineroDeCaja() {
