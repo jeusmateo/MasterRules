@@ -18,6 +18,12 @@ public class Order {
         date=LocalDateTime.now();
     }
 
+    public Order(){
+        products = new ArrayList();
+        combos = new ArrayList();
+        date= LocalDateTime.now();
+    }
+
     public Order(Product pro, Customer customerArg){
         customer=customerArg;
         id=4;
@@ -97,5 +103,7 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
 }
 

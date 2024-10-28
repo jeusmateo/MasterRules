@@ -4,62 +4,102 @@
  */
 package com.mycompany.masterrules.Model;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author IGNITER
  */
 public class POSManager {
+
     private CustomerManager customerManager;
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
     private CafeteriaManager cafeteriaManager;
     private Printer printer;
+    private UserAccount currentUser;
+    private Order currentOrder;
+
+    public Product buscarProducto(long id, String type){
+       for(Product product : cafeteriaManager.getMenu().getProductos(type)){
+           if(product.getID()== id){
+               return product;
+           }
+       }
+            return null;
+    }
 
     public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg) {
         customerManager = new CustomerManager();
         cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
         cafeteriaManager = cafeteriaManagerArg;
         printer = new Printer();
+        currentOrder = new Order();
     }
 
-    public void vender(long id, String type){
-        
-        ArrayList<Product> temp= this.cafeteriaManager.getMenu().getProductos(type);
-        Product item = new Product();
-        for(int i=0;i<temp.size();i++){
-            if(id==temp.get(i).getID()){
-                item= temp.get(i);
-            }
-        }
-        Order temporalOrder = new Order(item);
-        Bill billTemp = new Bill(temporalOrder);
-        this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(billTemp);
-        printer.imprimir(temporalOrder);
-        
-        
+    public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
+        customerManager = new CustomerManager();
+        currentUser = userAccount;
+        cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
+        cafeteriaManager = cafeteriaManagerArg;
+        printer = new Printer();
+        currentOrder = new Order();
     }
 
-    public void sellForACustomer(long id, String type, String name){
-        ArrayList<Product> temp= this.cafeteriaManager.getMenu().getProductos(type);
-        Product item = new Product();
-        for(int i=0;i<temp.size();i++){
-            if(id==temp.get(i).getID()){
-                item= temp.get(i);
-            }
+    public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, String user) {
+        if (user.equals("admin")) {
+            currentUser = new UserAccount("admin", "admin");
         }
-        Order temporalOrder = new Order(item);
-        ArrayList<Customer> tempCustomer = this.customerManager.getCustomers();
-        Customer customer = null;
-        for(int i=0;i<tempCustomer.size();i++){
-            if(name.equals(tempCustomer.get(i).getCustomerName())){
-                customer= tempCustomer.get(i);
-            }
-        }
-        Bill billTemp = new Bill(temporalOrder, customer);
+        customerManager = new CustomerManager();
+        cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
+        cafeteriaManager = cafeteriaManagerArg;
+        printer = new Printer();
+        currentOrder = new Order();
+    }
+
+    public void addProductToOrder(Product product) {
+        currentOrder.addProduct(product);
 
     }
-    
+
+    public void configureOrder(String eleccion, String comentario, Customer customer) {
+        currentOrder.setDeliveryMethod(eleccion);
+        currentOrder.setComment(comentario);
+        currentOrder.setCustomer(customer);
+        currentOrder.setDate(LocalDateTime.now());
+    }
+
+    public void configureOrder(String eleccion, String comentario) {
+        currentOrder.setDeliveryMethod(eleccion);
+        currentOrder.setComment(comentario);
+    }
+
+    public void sell() {
+        BigDecimal amount = new BigDecimal("0");
+        if (currentOrder.getCustomer() == null) {
+            
+            for (Product product : currentOrder.getProducts()) {
+                amount = amount.add(product.getPrice());
+            }
+        } else {
+            if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
+                for (Product product : currentOrder.getProducts()) {
+                    amount = amount.add(product.getVIPprice());
+                }
+            } else {
+                for (Product product : currentOrder.getProducts()) {
+                    amount = amount.add(product.getPrice());
+                }
+            }
+        }
+        Bill tempBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
+        this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
+        printer.imprimir(currentOrder);
+        //Falta agregar la factura a la lista de facturas del cliente
+        //Falta crear la nueva orden vacia
+    }
+
+
     public CustomerManager getCustomerManager() {
         return customerManager;
     }
@@ -83,11 +123,10 @@ public class POSManager {
     public void setCafeteriaManager(CafeteriaManager cafeteriaManager) {
         this.cafeteriaManager = cafeteriaManager;
     }
-    
-    public void createNewCustomer(String name, String phone){
+
+    public void createNewCustomer(String name, String phone) {
         customerManager.registerCustomer(name, phone);
-        
-        
+
     }
 
 }

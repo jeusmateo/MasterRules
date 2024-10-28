@@ -14,6 +14,7 @@ public class UserAccount {
     private String username;
     private String password;
     private UserPermissions permissions;
+    private String employeeName;
 
     public UserAccount(String username, String password,UserPermissions permissions) {
         this.username = username;
@@ -21,12 +22,10 @@ public class UserAccount {
         this.permissions = permissions;
     }
 
-    public void login(){
-        //no se si este debe estar en esta clase? la verdad no se como este funcionara, habria que ver la vista
-    }
-    
-    public void logout(){
-        //no se si este debe estar en esta clase? la verdad no se como este funcionara, habria que ver la vista
+    public UserAccount(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.permissions = new UserPermissions();
     }
     
     public boolean hasPermission(Permission permission){
@@ -56,4 +55,13 @@ public class UserAccount {
     public void setPermissions(UserPermissions permissions) {
         this.permissions = permissions;
     }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+    
 }

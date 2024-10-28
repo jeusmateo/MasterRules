@@ -25,30 +25,12 @@ public class Bill {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Bill(Order orderArg) {
+    public Bill(Order orderArg, BigDecimal amountArg, String employeeNameArg) {
         order = orderArg;
-        employeeName = "Chepo";
-        amount = new BigDecimal("0");
-        for (Product product : order.getProducts()) {
-            amount = amount.add(product.getPrice());
-        }
+        amount = amountArg;
+        employeeName = employeeNameArg;
     }
 
-    public Bill(Order orderArg, Customer customerArg) {
-        order = orderArg;
-        employeeName = "Chepo";
-        amount = new BigDecimal("0");
-        customerAccount = customerArg;
-        if (customerAccount.getCustomerAccount().isIsVIP()) {
-            for (Product product : order.getProducts()) {
-                amount = amount.add(product.getVIPprice());
-            }
-        } else {
-            for (Product product : order.getProducts()) {
-                amount = amount.add(product.getPrice());
-            }
-        }
-    }
 
     public Order getOrder() {
         return order;

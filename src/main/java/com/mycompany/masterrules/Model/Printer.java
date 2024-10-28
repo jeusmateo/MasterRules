@@ -19,6 +19,8 @@ public class Printer {
         }
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println("Fecha: "+order.getDate().format(formato));
+        System.out.println("Comentarios adicionales: "+order.getComment());
+        System.out.println("Entregar en: "+order.getDeliveryMethod());
         System.out.println("=====================================");
 
     }
