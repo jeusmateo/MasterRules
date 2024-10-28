@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
     private long id;
@@ -13,6 +12,14 @@ public class Order {
     private LocalDateTime date;
 
     public Order(Product pro){
+        id=4;
+        products = new ArrayList();
+        products.add(pro);
+        date=LocalDateTime.now();
+    }
+
+    public Order(Product pro, Customer customerArg){
+        customer=customerArg;
         id=4;
         products = new ArrayList();
         products.add(pro);

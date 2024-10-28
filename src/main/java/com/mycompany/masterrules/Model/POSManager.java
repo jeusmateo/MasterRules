@@ -39,6 +39,26 @@ public class POSManager {
         
         
     }
+
+    public void sellForACustomer(long id, String type, String name){
+        ArrayList<Product> temp= this.cafeteriaManager.getMenu().getProductos(type);
+        Product item = new Product();
+        for(int i=0;i<temp.size();i++){
+            if(id==temp.get(i).getID()){
+                item= temp.get(i);
+            }
+        }
+        Order temporalOrder = new Order(item);
+        ArrayList<Customer> tempCustomer = this.customerManager.getCustomers();
+        Customer customer = null;
+        for(int i=0;i<tempCustomer.size();i++){
+            if(name.equals(tempCustomer.get(i).getCustomerName())){
+                customer= tempCustomer.get(i);
+            }
+        }
+        Bill billTemp = new Bill(temporalOrder, customer);
+
+    }
     
     public CustomerManager getCustomerManager() {
         return customerManager;
