@@ -17,5 +17,7 @@
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
         <mapping class="com.mycompany.masterrules.Database.ProductosInventario"/>
+        <mapping class="com.mycompany.masterrules.Model.Combo"/>
+
     </session-factory>
 </hibernate-configuration>

@@ -4,6 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author IGNITER
@@ -11,14 +13,12 @@ package com.mycompany.masterrules.Model;
 public class Debt {
     private Order order;
     private double amount;
-    private String date;
-    private String time;
+    private LocalDate date; //pensar en guardarlo como string
 
-    public Debt(Order order, double amount, String date, String time) {
+    public Debt(Order order, double amount) {
         this.order = order;
         this.amount = amount;
-        this.date = date;
-        this.time = time;
+        this.date = LocalDate.now();
     }
 
     public Order getOrder() {
@@ -37,20 +37,12 @@ public class Debt {
         this.amount = amount;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     

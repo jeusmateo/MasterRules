@@ -5,6 +5,7 @@
 package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,10 +14,18 @@ import java.math.BigDecimal;
 public class CashFlowReport {
     private String reason;
     private BigDecimal cashAmount;
+    private LocalDate date;
 
+
+    /**
+     *  Constructor para el Reporte de movimiento de caja.
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param cashAmount Cantidad de dinero que se mueve
+     */
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
+        this.date = LocalDate.now();
     }
 
     public String getReason() {

@@ -5,7 +5,8 @@
 package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,28 +14,68 @@ import java.util.List;
  */
 public class CashRegisterAuditReport {
     private BigDecimal initialCashAmount;
-    private BigDecimal finalCashAmount;
-    private List<CashFlowReport> cashOutFlowReports;
-    private List<CashFlowReport> cashInFlowReports;
-    private List<Bill> bills;
-    private String initialCutofDate;
-    private String finalCutofDate;
+    private BigDecimal currentCashAmount;
+    private ArrayList<CashFlowReport> cashOutFlowReports;
+    private ArrayList<CashFlowReport> cashInFlowReports;
+    private ArrayList<Bill> bills;
+    private LocalDateTime initialCutofDate;
+    private LocalDateTime finalCutofDate;
+
+    /**
+     * Constructor para el reporte de la caja
+     * @param initialCashAmount El monto inicial de la caja
+     */
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-        this.initialCutofDate = "Ejemplo";
+        this.currentCashAmount=initialCashAmount;
+        this.initialCutofDate = LocalDateTime.now();
+        this.cashOutFlowReports = new ArrayList<>();
+        this.cashInFlowReports = new ArrayList<>();
+        this.bills = new ArrayList<>();
+        
+        
+    }
+    
+    /**
+     * Metodo para agregar un reporte de salida de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se retira.
+     */
+    public void addCashOutFlowReport(String reason, BigDecimal amount){
+        if(currentCashAmount.compareTo(amount)>=0){
+        cashOutFlowReports.add(new CashFlowReport(reason, amount));
+        currentCashAmount=currentCashAmount.subtract(amount);
+        }
+        else{
+            throw new IllegalArgumentException("No hay suficiente dinero en caja");
+        }
     }
 
-    public void addCashOutFlowReport(CashFlowReport cashOutFlowReport){
-        cashOutFlowReports.add(cashOutFlowReport);
+    /**
+     * Metodo para agregar un reporte de entrada de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se deposita.
+     */
+    public void addCashInFlowReport(String reason, BigDecimal amount){
+        if(amount.compareTo(BigDecimal.ZERO)>0){
+            cashInFlowReports.add(new CashFlowReport(reason, amount));
+            currentCashAmount=currentCashAmount.add(amount);
+        }
+        else{
+            throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
+        }
+        
     }
 
-    public void addCashInFlowReport(CashFlowReport cashInFlowReport){
-        cashInFlowReports.add(cashInFlowReport);
-    }
-
+    /**
+     * Metodo para agregar una factura a la caja
+     * @param bill La factura a agregar
+     */
     public void addBill(Bill bill){
+        currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
+        System.out.println("Bill added");
     }
 
     //Maybe deberan tener identificadores, de lo contrario no se podra eliminar
@@ -46,23 +87,29 @@ public class CashRegisterAuditReport {
         cashInFlowReports.remove(cashInFlowReport);
     }
 
+    /**
+     * Metodo para calcular cuanto dinero deberia tener la caja al final del corte.
+     */
     public void calcualteFinalCashAmount(){
-        BigDecimal totalCashIn = new BigDecimal(0);
-        BigDecimal totalCashOut = new BigDecimal(0);
-        BigDecimal sellAmount = new BigDecimal(0);
-
+        BigDecimal totalCashIn = new BigDecimal("0");
+        BigDecimal totalCashOut = new BigDecimal("0");
+        BigDecimal sellAmount = new BigDecimal("0");
         for (CashFlowReport cashInFlowReport : cashInFlowReports) {
             totalCashIn.add(cashInFlowReport.getCashAmount());
         }
-        for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
-            totalCashOut.add(cashOutFlowReport.getCashAmount());
-        }
+       
 
         for (Bill bill : bills) {
             sellAmount.add(bill.getAmount());
         }
-//        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
-        this.finalCashAmount = initialCashAmount.add(sellAmount).add(totalCashIn).subtract(totalCashOut);
+         for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
+            totalCashOut.add(cashOutFlowReport.getCashAmount());
+        }
+        currentCashAmount=currentCashAmount.add(initialCashAmount);
+        currentCashAmount=currentCashAmount.add(sellAmount);
+        currentCashAmount=currentCashAmount.add(totalCashIn);
+        currentCashAmount=currentCashAmount.subtract(totalCashOut);
+        
     }
 
     public BigDecimal getInitialCashAmount() {
@@ -73,52 +120,60 @@ public class CashRegisterAuditReport {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public BigDecimal getFinalCashAmount() {
-        return finalCashAmount;
+    public BigDecimal getcurrentCashAmount() {
+        return currentCashAmount;
     }
 
-    public void setFinalCashAmount(BigDecimal finalCashAmount) {
-        this.finalCashAmount = finalCashAmount;
+    public void setcurrentCashAmount(BigDecimal currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
 
-    public List<CashFlowReport> getCashOutFlowReports() {
+    public ArrayList<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
-    public void setCashOutFlowReports(List<CashFlowReport> cashOutFlowReports) {
+    public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         this.cashOutFlowReports = cashOutFlowReports;
     }
 
-    public List<CashFlowReport> getCashInFlowReports() {
+    public ArrayList<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
-    public void setCashInFlowReports(List<CashFlowReport> cashInFlowReports) {
+    public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
         this.cashInFlowReports = cashInFlowReports;
     }
 
-    public List<Bill> getBills() {
+    public ArrayList<Bill> getBills() {
         return bills;
     }
 
-    public void setBills(List<Bill> bills) {
+    public void setBills(ArrayList<Bill> bills) {
         this.bills = bills;
     }
 
-    public String getInitialCutofDate() {
+    public LocalDateTime getInitialCutofDate() {
         return initialCutofDate;
     }
 
-    public void setInitialCutofDate(String initialCutofDate) {
+    public void setInitialCutofDate(LocalDateTime initialCutofDate) {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public String getFinalCutofDate() {
+    public  LocalDateTime  getFinalCutofDate() {
         return finalCutofDate;
     }
 
-    public void setFinalCutofDate(String finalCutofDate) {
+    public void setFinalCutofDate(LocalDateTime finalCutofDate) {
         this.finalCutofDate = finalCutofDate;
+    }
+
+    public BigDecimal getCurrentCashAmount() {
+        return currentCashAmount;
+    }
+
+    public void setCurrentCashAmount(BigDecimal currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
     
     
