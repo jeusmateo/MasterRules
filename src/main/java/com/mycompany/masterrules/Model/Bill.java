@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Bill {
 
     private String employeeName;
-    private Customer customerAccount;
+    private Customer customer;
     private BigDecimal amount;
     private Order order;
 
@@ -46,6 +46,22 @@ public class Bill {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomerAccount(Customer customerAccount) {
+        this.customer = customerAccount;
     }
 
 }
