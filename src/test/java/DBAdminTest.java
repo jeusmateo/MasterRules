@@ -1,5 +1,5 @@
-import com.mycompany.masterrules.Database.DBAdminGeneric;
-import com.mycompany.masterrules.Database.DatabaseAdministrator;
+import com.mycompany.masterrules.Database.ProductRepository;
+import com.mycompany.masterrules.Database.Repository;
 import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
@@ -7,26 +7,27 @@ import java.math.BigDecimal;
 public class DBAdminTest {
 
     public static void main(String[] args) {
-        Product product = new Product(1, "Laptop", "Laptop", BigDecimal.valueOf(1000.00), new BigDecimal(900.00));
-        System.out.println(DBAdminGeneric.saveToDatabase(product));
+        Product tmpProduct = new Product(1, "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
-        Product papas = new Product(2, "Papas", "Snack", BigDecimal.valueOf(1.00), new BigDecimal(0.90));
+        ProductRepository productDB = new ProductRepository();
 
-//        DatabaseAdministrator.addProduct(papas);
-        DBAdminGeneric.saveToDatabase(papas);
-        papas.setPrice(BigDecimal.valueOf(2.00));
+        System.out.println(productDB.save(tmpProduct));
 
-        System.out.println(DBAdminGeneric.update(papas));
+        Product tmpPapas = new Product(2, "Papas", "Snack", BigDecimal.valueOf(1.00), new BigDecimal(0.90));
 
-        DBAdminGeneric.saveToDatabase(new String("Hola"));
+        productDB.save(tmpPapas);
+        // Cambio de precio
+        tmpPapas.setPrice(BigDecimal.valueOf(2.00));
+        System.out.println(productDB.update(tmpPapas));
 
-        for (Product p : DatabaseAdministrator.readAllProducts()) {
+        // Impresion de todos los productos
+        for (Product p : productDB.readAll()) {
             System.out.println(
                     "ID: " + p.getID() + "\n" +
-                            "Name: " + p.getProductName() + "\n" +
-                            "Type: " + p.getProductType() + "\n" +
-                            "Price: " + p.getPrice() + "\n" +
-                            "VIP Price: " + p.getVIPprice() + "\n"
+                    "Name: " + p.getProductName() + "\n" +
+                    "Type: " + p.getProductType() + "\n" +
+                    "Price: " + p.getPrice() + "\n" +
+                    "VIP Price: " + p.getVIPprice() + "\n"
             );
         }
 
