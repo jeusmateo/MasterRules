@@ -17,7 +17,8 @@ public class Test {
         try {
             CashRegisterAuditReportManager crarm = new CashRegisterAuditReportManager();
             CafeteriaManager cm = new CafeteriaManager();
-            POSManager pos = new POSManager(crarm, cm, "admin");
+            UserAccount ua = new UserAccount("admin", "admin");
+            POSManager pos = new POSManager(crarm, cm, ua);
 
             Scanner scanner = new Scanner(System.in);
             boolean exit = false;

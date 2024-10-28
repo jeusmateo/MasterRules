@@ -21,6 +21,11 @@ public class CashRegisterAuditReport {
     private LocalDateTime initialCutofDate;
     private LocalDateTime finalCutofDate;
 
+    /**
+     * Constructor para el reporte de la caja
+     * @param initialCashAmount El monto inicial de la caja
+     */
+
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
         this.currentCashAmount=initialCashAmount;
@@ -31,7 +36,12 @@ public class CashRegisterAuditReport {
         
         
     }
-
+    
+    /**
+     * Metodo para agregar un reporte de salida de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se retira.
+     */
     public void addCashOutFlowReport(String reason, BigDecimal amount){
         if(currentCashAmount.compareTo(amount)>=0){
         cashOutFlowReports.add(new CashFlowReport(reason, amount));
@@ -42,6 +52,11 @@ public class CashRegisterAuditReport {
         }
     }
 
+    /**
+     * Metodo para agregar un reporte de entrada de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se deposita.
+     */
     public void addCashInFlowReport(String reason, BigDecimal amount){
         if(amount.compareTo(BigDecimal.ZERO)>0){
             cashInFlowReports.add(new CashFlowReport(reason, amount));
@@ -53,6 +68,10 @@ public class CashRegisterAuditReport {
         
     }
 
+    /**
+     * Metodo para agregar una factura a la caja
+     * @param bill La factura a agregar
+     */
     public void addBill(Bill bill){
         currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
@@ -68,6 +87,9 @@ public class CashRegisterAuditReport {
         cashInFlowReports.remove(cashInFlowReport);
     }
 
+    /**
+     * Metodo para calcular cuanto dinero deberia tener la caja al final del corte.
+     */
     public void calcualteFinalCashAmount(){
         BigDecimal totalCashIn = new BigDecimal("0");
         BigDecimal totalCashOut = new BigDecimal("0");

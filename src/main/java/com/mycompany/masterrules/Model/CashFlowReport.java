@@ -16,6 +16,12 @@ public class CashFlowReport {
     private BigDecimal cashAmount;
     private LocalDate date;
 
+
+    /**
+     *  Constructor para el Reporte de movimiento de caja.
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param cashAmount Cantidad de dinero que se mueve
+     */
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;

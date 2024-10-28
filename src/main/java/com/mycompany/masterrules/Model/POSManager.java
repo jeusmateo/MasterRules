@@ -7,6 +7,8 @@ package com.mycompany.masterrules.Model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.mycompany.masterrules.Model.UserPermissions.Permission;
+
 /**
  *
  * @author IGNITER
@@ -20,21 +22,21 @@ public class POSManager {
     private UserAccount currentUser;
     private Order currentOrder;
 
-    public Product buscarProducto(long id, String type){
-       for(Product product : cafeteriaManager.getMenu().getProductos(type)){
-           if(product.getID()== id){
-               return product;
-           }
-       }
-            return null;
-    }
-
-    public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg) {
-        customerManager = new CustomerManager();
-        cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
-        cafeteriaManager = cafeteriaManagerArg;
-        printer = new Printer();
-        currentOrder = new Order();
+    /**
+     * Busca un producto en el menu de la cafeteria
+     *
+     * @param id El identificador del producto a buscar.
+     * @param type El tipo de producto a buscar, se requiere para buscar en la
+     * lista correcta del Hashmap que guarda los productos.
+     * @return El producto encontrado, si no se encuentra retorna null.
+     */
+    public Product buscarProducto(long id, String type) {
+        for (Product product : cafeteriaManager.getMenu().getProductos(type)) {
+            if (product.getID() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 
     public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
@@ -46,22 +48,23 @@ public class POSManager {
         currentOrder = new Order();
     }
 
-    public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, String user) {
-        if (user.equals("admin")) {
-            currentUser = new UserAccount("admin", "admin");
-        }
-        customerManager = new CustomerManager();
-        cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
-        cafeteriaManager = cafeteriaManagerArg;
-        printer = new Printer();
-        currentOrder = new Order();
-    }
-
+    /**
+     * Agrega un producto a la orden actual
+     *
+     * @param product El producto a agregar a la orden.
+     */
     public void addProductToOrder(Product product) {
         currentOrder.addProduct(product);
 
     }
 
+    /**
+     * Realiza las ultimas configuraciones a la orden antes de venderla.
+     *
+     * @param eleccion El metodo de entrega de la orden.
+     * @param comentario Comentario adicional a la orden.
+     * @param customer El cliente al que se le vendera la orden.
+     */
     public void configureOrder(String eleccion, String comentario, Customer customer) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
@@ -69,15 +72,27 @@ public class POSManager {
         currentOrder.setDate(LocalDateTime.now());
     }
 
+    /**
+     * Realiza las ultimas configuraciones a la orden antes de venderla. Aunque
+     * en este caso no se le asigna un cliente.
+     *
+     * @param eleccion El metodo de entrega de la orden.
+     * @param comentario Comentario adicional a la orden.
+     */
     public void configureOrder(String eleccion, String comentario) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
     }
 
-    public void sell() {
+    /**
+     * Calcula el total de la orden actual.
+     *
+     * @return El total de la orden actual.
+     */
+    private BigDecimal calculateTotalAmount() {
         BigDecimal amount = new BigDecimal("0");
         if (currentOrder.getCustomer() == null) {
-            
+
             for (Product product : currentOrder.getProducts()) {
                 amount = amount.add(product.getPrice());
             }
@@ -92,13 +107,48 @@ public class POSManager {
                 }
             }
         }
-        Bill tempBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
-        this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
-        printer.imprimir(currentOrder);
-        //Falta agregar la factura a la lista de facturas del cliente
-        //Falta crear la nueva orden vacia
+        return amount;
     }
 
+    /**
+     * Realiza la logica de venta de la orden actual, crea la factura e imprime
+     * la orden y factura.
+     */
+    public void sell() {
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+
+            BigDecimal amount = calculateTotalAmount();
+            Bill tempBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
+            printer.imprimirOrder(currentOrder);
+            printer.imprimirBill(tempBill);
+            currentOrder = new Order();
+        } else {
+            throw new IllegalArgumentException("No tiene permisos para vender");
+        }
+
+    }
+
+    public void retirarDineroDeCaja() {
+        if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
+            String reason = "";
+            BigDecimal amount = new BigDecimal("0");
+            cashRegisterAuditReportManager.withdrawCash(reason, amount);
+
+        } else {
+            throw new IllegalArgumentException("No tiene permisos para retirar dinero de caja");
+        }
+    }
+
+    public void ingresarDineroEnCaja() {
+        if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
+            String reason = "";
+            BigDecimal amount = new BigDecimal("0");
+            cashRegisterAuditReportManager.depositCash(reason, amount);
+        } else {
+            throw new IllegalArgumentException("No tiene permisos para ingresar dinero en caja");
+        }
+    }
 
     public CustomerManager getCustomerManager() {
         return customerManager;

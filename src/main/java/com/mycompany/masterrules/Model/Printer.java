@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author IGNITER
  */
 public class Printer {
-    public void imprimir(Order order){
+    public void imprimirOrder(Order order){
         System.out.println("=====================================");
         System.out.println("Imprimiendo orden: " + order.getId());
         System.out.println("Imprimiendo productos: ");
@@ -23,5 +23,24 @@ public class Printer {
         System.out.println("Entregar en: "+order.getDeliveryMethod());
         System.out.println("=====================================");
 
+    }
+
+    public void imprimirBill(Bill bill){
+        System.out.println("=====================================");
+        System.out.println("Imprimiendo factura: ");
+        System.out.println("Nombre del empleado: "+bill.getEmployeeName());
+        if(bill.getCustomer()!=null){
+            System.out.println("Nombre del cliente: "+bill.getCustomer().getCustomerName());
+        }
+        else{
+            System.out.println("Nombre del cliente: Público general");
+        }
+        System.out.println("Productos: ");
+        for (Product product : bill.getOrder().getProducts()) {
+            System.out.println("Nombre : "+product.getProductName());
+            System.out.println("Precio: "+product.getPrice());
+        }
+        System.out.println("Monto: "+bill.getAmount());
+        System.out.println("=====================================");
     }
 }

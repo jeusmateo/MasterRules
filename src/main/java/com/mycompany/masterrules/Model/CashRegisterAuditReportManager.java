@@ -40,7 +40,10 @@ public class CashRegisterAuditReportManager {
     public void depositCash(String reason, BigDecimal amount){
         currentCashRegisterAuditReport.addCashInFlowReport(reason, amount);
     }
-
+    /**
+     * Metodo para finalizar el corte actual.
+     * @param initialCashAmount Monto con el cual iniciara el siguiente corte.
+     */
     public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount){
         currentCashRegisterAuditReport.calcualteFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
