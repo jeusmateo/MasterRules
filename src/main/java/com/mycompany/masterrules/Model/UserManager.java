@@ -27,10 +27,12 @@ public class UserManager {
     
     public boolean validateUser(String username,String password){//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         //aqui probablemente se involucre la BD
+        return false;
     }
     
     public UserAccount findUser(String username,String password){//no se si sdeben tomar en cuenta otros parámetros?. Habria que asegurar que el nombre de usuario sea distinto para todos no?
         //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
+        return null;
     }
     
     public void changeUserPermits(UserAccount user){//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
