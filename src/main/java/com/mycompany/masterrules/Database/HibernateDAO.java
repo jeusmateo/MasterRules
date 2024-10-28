@@ -1,13 +1,10 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Product;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public abstract class HibernateRepository<T, K> implements Repository<T, K>{
+public class HibernateDAO<T, K> implements DAO<T, K> {
 
     @Override
     public boolean save(T entity) {

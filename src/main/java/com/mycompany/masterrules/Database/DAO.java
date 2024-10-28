@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Database;
 
 import java.util.List;
 
-public interface Repository<T, K> {
+public interface DAO<T, K> {
 
     public boolean save(T entity);
 

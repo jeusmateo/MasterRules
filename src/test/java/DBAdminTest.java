@@ -1,5 +1,4 @@
-import com.mycompany.masterrules.Database.ProductRepository;
-import com.mycompany.masterrules.Database.Repository;
+import com.mycompany.masterrules.Database.ProductDAO;
 import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
@@ -9,7 +8,7 @@ public class DBAdminTest {
     public static void main(String[] args) {
         Product tmpProduct = new Product(1, "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
-        ProductRepository productDB = new ProductRepository();
+        ProductDAO productDB = new ProductDAO();
 
         System.out.println(productDB.save(tmpProduct));
 
