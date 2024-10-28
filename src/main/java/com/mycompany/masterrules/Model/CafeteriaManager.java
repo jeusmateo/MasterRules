@@ -10,7 +10,8 @@ import java.math.BigDecimal;
  *
  * @author alexs
  */
-public class CafeteriaManager {//probablemente este se vuelva modelo?
+public class CafeteriaManager {
+    /** ? */
     private ProductQueries productQueries;
     private CafeteriaMenu menu;
     private CafeteriaStorage storage;

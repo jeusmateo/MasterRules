@@ -6,6 +6,7 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
 
@@ -59,13 +60,30 @@ public class POSManager {
     }
     
     public void addCustomeComboToOrder(CustomComboTemplate customComboTemplate){
+        ArrayList<Product> products = new ArrayList();
         for(String keyQuantity: customComboTemplate.getQuantityByCategory().keySet()){
             int quantity = 0;
             quantity=customComboTemplate.getQuantityByCategory().get(quantity);
+            for(int iterationCounter=0;iterationCounter<quantity;iterationCounter++){
+                Product product=new Product();
+                products.add(product);
+
+            }
             
         }
+
+        if(customComboTemplate.getDefaultProducts()!=null){
+            for(Product product: customComboTemplate.getDefaultProducts()){
+                products.add(product);
+            }
+        }
+        Combo combo = new Combo(products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice(), customComboTemplate.getName());
+        this.addComboToOrder(combo);
     }
     
+    public void addComboToOrder(Combo combo){
+        currentOrder.addCombo(combo);
+    }
     
     /**
      * Realiza las ultimas configuraciones a la orden antes de venderla.

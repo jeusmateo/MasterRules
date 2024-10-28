@@ -1,11 +1,14 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.*;
-
-
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "CombosDefinidos")
@@ -43,6 +46,13 @@ public class Combo {
         this.comboName = "Combo Temporal";
         this.products = products;
         this.productsTemplate = productsTemplate;
+        this.price = price;
+        this.VIPPrice = VIPPrice;
+    }
+
+    public Combo(List<Product>products, BigDecimal price, BigDecimal VIPPrice, String comboName) {
+        this.comboName = comboName;
+        this.products = products;
         this.price = price;
         this.VIPPrice = VIPPrice;
     }

@@ -4,6 +4,8 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.util.Random;
+
 /**
  *
  * @author chepo
@@ -16,6 +18,7 @@ public class Customer {
     private CustomerAccount customerAccount;
 
     public Customer(String customerName, String customerPhoneNumber) {
+        //Falta ver como generarlothis.ID = Random.nextLong(1000)+1;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount();
