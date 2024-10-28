@@ -57,7 +57,16 @@ public class POSManager {
         currentOrder.addProduct(product);
 
     }
-
+    
+    public void addCustomeComboToOrder(CustomComboTemplate customComboTemplate){
+        for(String keyQuantity: customComboTemplate.getQuantityByCategory().keySet()){
+            int quantity = 0;
+            quantity=customComboTemplate.getQuantityByCategory().get(quantity);
+            
+        }
+    }
+    
+    
     /**
      * Realiza las ultimas configuraciones a la orden antes de venderla.
      *
