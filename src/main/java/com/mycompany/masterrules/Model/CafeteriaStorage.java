@@ -4,6 +4,9 @@
  */
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.HashMap;
 
 /**
@@ -11,7 +14,9 @@ import java.util.HashMap;
  * @author alexs
  */
 public class CafeteriaStorage {
+
     private HashMap<String,Integer> products;
+
 
     public CafeteriaStorage(HashMap<String, Integer> products) {
         this.products = products;
