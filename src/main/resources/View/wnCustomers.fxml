@@ -125,7 +125,7 @@
                                              <children>
                                                 <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <AnchorPane fx:id="verCliente" layoutX="9.0" layoutY="8.0" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                                      <AnchorPane fx:id="verCliente" layoutX="9.0" layoutY="8.0" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                                          <styleClass>
                                                             <String fx:value="radius" />
                                                             <String fx:value="shadow" />
@@ -410,14 +410,14 @@
                                                             <Button layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="240.0" />
                                                          </children>
                                                       </AnchorPane>
-                                                      <AnchorPane fx:id="advCredito" layoutX="234.0" layoutY="116.0" prefHeight="315.0" prefWidth="411.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="116.0">
+                                                      <AnchorPane fx:id="advCredito" layoutX="234.0" layoutY="116.0" prefHeight="315.0" prefWidth="411.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="116.0">
                                                          <styleClass>
                                                             <String fx:value="white-bg" />
                                                             <String fx:value="radius" />
                                                             <String fx:value="shadow" />
                                                          </styleClass>
                                                          <children>
-                                                            <GridPane alignment="CENTER" layoutX="45.0" layoutY="48.0" prefHeight="245.0" prefWidth="321.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="48.0">
+                                                            <GridPane alignment="CENTER" layoutX="45.0" layoutY="35.0" prefHeight="258.0" prefWidth="321.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="35.0">
                                                                <columnConstraints>
                                                                   <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
                                                                </columnConstraints>

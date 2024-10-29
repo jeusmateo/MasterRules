@@ -6,11 +6,9 @@ package com.mycompany.masterrules.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -24,7 +22,7 @@ import javafx.scene.layout.VBox;
  * Controlador de la ventana de Venta
  * @author campv
  */
-public class WnVentaController implements Initializable{
+public class WnSaleController implements Initializable{
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
     @FXML

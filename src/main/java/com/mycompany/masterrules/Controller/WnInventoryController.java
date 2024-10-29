@@ -7,5 +7,5 @@ package com.mycompany.masterrules.Controller;
  */
 
 
-public class WnInventory {
+public class WnInventoryController {
 }
