@@ -20,7 +20,7 @@ public class CustomComboTemplate {
     /** Lista de productos por defecto */
     private ArrayList<Product> defaultProducts;
     /** Nombre del combo */
-    private String name;
+    private String comboName;
     
     /**
      * Constructor para el combo personalizado en el caso de que el combo implemente productos por defecto
@@ -119,16 +119,16 @@ public class CustomComboTemplate {
      * @return El nombre del combo en un dato de tipo String
      */
 
-    public String getName() {
-        return name;
+    public String getComboName() {
+        return comboName;
     }
 
     /**
      * Establece el nombre del combo
-     * @param name El nombre del combo en un dato de tipo String
+     * @param comboName El nombre del combo en un dato de tipo String
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setComboName(String comboName) {
+        this.comboName = comboName;
     }
 
     /**
