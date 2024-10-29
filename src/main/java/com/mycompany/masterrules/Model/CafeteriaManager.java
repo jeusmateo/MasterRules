@@ -3,7 +3,7 @@ package com.mycompany.masterrules.Model;
 import java.math.BigDecimal;
 
 /**
- *
+ * Class for instances of CafeteriaManager
  * @author alexs
  */
 public class CafeteriaManager {
@@ -12,6 +12,7 @@ public class CafeteriaManager {
     private CafeteriaMenu menu;
     private CafeteriaStorage storage;
 
+    
     public CafeteriaManager(ProductQueries productQueries, CafeteriaMenu menu, CafeteriaStorage storage) {
         this.productQueries = productQueries;
         this.menu = menu;

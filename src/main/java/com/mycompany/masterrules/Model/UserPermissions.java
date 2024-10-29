@@ -3,11 +3,13 @@ package com.mycompany.masterrules.Model;
 import java.util.EnumSet;
 
 /**
- *
+ * Class for instances of UserPermissions
  * @author alexs
  */
-public class UserPermissions {//falta probar si funciona con la gran cantidad de permisos que puse
-    public enum Permission{//probablemente este se ponga en un archivo separado de esta clase?
+public class UserPermissions {
+    //falta probar si funciona con la gran cantidad de permisos que puse
+    //probablemente Permissions se ponga en un archivo separado de esta clase?
+    public enum Permission{
         //Sales
         MAKE_SALE,
         CANCEL_SALE,
@@ -47,33 +49,61 @@ public class UserPermissions {//falta probar si funciona con la gran cantidad de
         EDIT_USER,
         DELETE_USER,
     };
-    private EnumSet<Permission> permissionsStatus;
+    private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
 
+    /**
+     * Constructor of class UserPermissions
+     */
     public UserPermissions() {
-        permissionsStatus= EnumSet.noneOf(Permission.class);
+        grantedPermissions= EnumSet.noneOf(Permission.class);
     }
 
-    public UserPermissions(EnumSet<Permission> permissionsStatus) {
-        this.permissionsStatus = permissionsStatus;
+    /**
+     * Constructor of class UserPermissions
+     * @param grantedPermissions Granted user's permissions
+     */
+    public UserPermissions(EnumSet<Permission> grantedPermissions) {
+        this.grantedPermissions = grantedPermissions;
     }
     
+    /**
+     * Gives permission to a user
+     * @param permission Permission to give
+     */
     public void givePermission(Permission permission){
-        permissionsStatus.add(permission);
+        grantedPermissions.add(permission);
     }
     
+    /**
+     * Denies permission to a user
+     * @param permission Permission to deny
+     */
     public void removePermission(Permission permission){
-        permissionsStatus.remove(permission);
+        grantedPermissions.remove(permission);
     }
     
+    /**
+     * Checks if the user has the permission
+     * @param permission
+     * @return 
+     */
     public boolean isEnabled(Permission permission){
-        return (permissionsStatus.contains(permission));
+        return (grantedPermissions.contains(permission));
     }
 
-    public EnumSet<Permission> getPermissionsStatus() {
-        return permissionsStatus;
+    /**
+     * Getter of granted user's permissions
+     * @return Granted user's permissions
+     */
+    public EnumSet<Permission> getGrantedPermissions() {
+        return grantedPermissions;
     }
 
-    public void setPermissionsStatus(EnumSet<Permission> permissionsStatus) {
-        this.permissionsStatus = permissionsStatus;
+    /**
+     * Setter of granted user's permissions
+     * @param grantedPermissions Granted user's permissions
+     */
+    public void setGrantedPermissions(EnumSet<Permission> grantedPermissions) {
+        this.grantedPermissions = grantedPermissions;
     }
 }

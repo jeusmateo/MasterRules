@@ -7,17 +7,24 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
- *
+ * Class for instances of ProductController
  * @author alexs
  */
 public class ProductController {
-    private CafeteriaManager modelo;
+    private CafeteriaManager model;//renombre esto porque estaba como "modelo" en vez de "model"
     //faltaria view
 
-    public ProductController(CafeteriaManager modelo) {
-        this.modelo = modelo;
+    /**
+     * Constructor of class ProductController
+     * @param model Model of product controller
+     */
+    public ProductController(CafeteriaManager model) {
+        this.model = model;
     }
     
+    /**
+     * Registers a product in the cafeteria, it should appear in the menu, database and storage(optional)
+     */
     public void registerProduct(){
         try{
         //------------------todo esto se encuentra en vista---------------------------
@@ -64,7 +71,7 @@ public class ProductController {
         
         Product newProduct=new Product(id,name,type,price,VIPprice);
         
-        modelo.createProduct(newProduct, inInventory, quantity);
+        model.createProduct(newProduct, inInventory, quantity);
         
         //actualizar vista aqui?
         }
@@ -73,6 +80,9 @@ public class ProductController {
         }
     }
     
+    /**
+     * Unregisters a product in the cafeteria, it should be removed from the menu, database and storage(if the product is in storage)
+     */
     public void unregisterProduct(){
         try{
         //------------------todo esto se encuentra en vista---------------------------
@@ -81,7 +91,7 @@ public class ProductController {
         String name=scanStr.nextLine();
         //------------------todo esto se encuentra en vista---------------------------
         
-        modelo.deleteProduct(name);
+        model.deleteProduct(name);
         
         //actualizar vista aqui?
         }
@@ -90,6 +100,9 @@ public class ProductController {
         }
     }
     
+    /**
+     * Modifies the characteristics of a product
+     */
     public void editProduct(){
         try{
         //------------------todo esto se encuentra en vista---------------------------
@@ -141,7 +154,7 @@ public class ProductController {
         
         Product product=new Product(id,name,type,price,VIPprice);
         
-        modelo.editProduct(product, inInventory, quantity);
+        model.editProduct(product, inInventory, quantity);
         
         //------------------todo esto se encuentra en vista---------------------------
         }

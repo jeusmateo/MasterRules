@@ -30,7 +30,7 @@ public class POSManager {
      * @return El producto encontrado, si no se encuentra retorna null.
      */
     public Product buscarProducto(long id, String type) {
-        for (Product product : cafeteriaManager.getMenu().getProductos(type)) {
+        for (Product product : cafeteriaManager.getMenu().getProductosByType(type)) {
             if (product.getID() == id) {
                 return product;
             }
