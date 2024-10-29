@@ -31,6 +31,9 @@ public class Product {
     @Column(name = "precioVIP")
     private BigDecimal VIPprice;
 
+    /**
+     * Constructor of class Product NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
+     */
     public Product() {
 
     }
