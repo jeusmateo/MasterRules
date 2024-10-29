@@ -14,7 +14,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -407,25 +410,38 @@
                                                             <Button layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="240.0" />
                                                          </children>
                                                       </AnchorPane>
-                                                      <AnchorPane fx:id="advCredito" layoutX="234.0" layoutY="116.0" prefHeight="315.0" prefWidth="411.0" stylesheets="@viewTemplate.css" visible="false">
+                                                      <AnchorPane fx:id="advCredito" layoutX="234.0" layoutY="116.0" prefHeight="315.0" prefWidth="411.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="116.0">
                                                          <styleClass>
                                                             <String fx:value="white-bg" />
                                                             <String fx:value="radius" />
                                                             <String fx:value="shadow" />
                                                          </styleClass>
                                                          <children>
-                                                            <Label layoutX="119.0" layoutY="35.0" text="Llave de acceso a crédito">
-                                                               <font>
-                                                                  <Font name="System Bold" size="15.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <PasswordField layoutX="45.0" layoutY="96.0" prefHeight="34.0" prefWidth="321.0" promptText="*******************************" />
-                                                            <Label layoutX="109.0" layoutY="167.0" text="¡Escanee la tarjeta del cliente!">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Button layoutX="144.0" layoutY="224.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" />
+                                                            <GridPane alignment="CENTER" layoutX="45.0" layoutY="35.0" prefHeight="258.0" prefWidth="321.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="35.0">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="64.0" />
+                                                                  <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label text="Llave de acceso a crédito" GridPane.halignment="CENTER">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <PasswordField prefHeight="34.0" prefWidth="321.0" promptText="*******************************" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                                                  <Label text="¡Escanee la tarjeta del cliente!" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                                               </children>
+                                                            </GridPane>
                                                          </children>
                                                       </AnchorPane>
                                                    </children>
