@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class Bill {
     /** Nombre del empleado en turno */
