@@ -3,16 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.masterrules.Model;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
  * @author IGNITER
  */
 public class CustomerManager {
-    private List<CustomerAccount> customers;
+    private ArrayList<Customer> customers;
 
-    public void addCustomer(CustomerAccount customer){
-        customers.add(customer);
+    public CustomerManager(){
+        customers= new ArrayList();
+    }
+    public void addCustomer(String name, String phone){
+        
     }
 
     public void removeCustomer(long ID){
@@ -25,6 +29,17 @@ public class CustomerManager {
     }
 
     public void registerCustomer(String name, String phone){
-        customers.add(new CustomerAccount(name, phone));
+        Customer customer = new Customer(name, phone);
+        customers.add(customer);
     }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(ArrayList<Customer> customers) {
+        this.customers = customers;
+    }
+    
+    
 }

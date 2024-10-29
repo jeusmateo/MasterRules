@@ -5,120 +5,279 @@
 package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
  * @author IGNITER
  */
 public class CashRegisterAuditReport {
+    /**Monto inicial de la caja */
     private BigDecimal initialCashAmount;
-    private BigDecimal finalCashAmount;
-    private List<CashFlowReport> cashOutFlowReports;
-    private List<CashFlowReport> cashInFlowReports;
-    private List<Bill> bills;
-    private String initialCutofDate;
-    private String finalCutofDate;
+    /**Monto actual de la caja */
+    private BigDecimal currentCashAmount;
+    /**Lista de reportes de salida de dinero */
+    private ArrayList<CashFlowReport> cashOutFlowReports;
+    /**Lista de reportes de entrada de dinero */
+    private ArrayList<CashFlowReport> cashInFlowReports;
+    /**Lista de facturas */
+    private ArrayList<Bill> bills;
+    /**Fecha inicial de corte  */
+    private LocalDateTime initialCutofDate;
+    /**Fecha final de corte  */
+    private LocalDateTime finalCutofDate;
+
+    /**
+     * Constructor para el reporte de la caja
+     * @param initialCashAmount El monto inicial de la caja
+     */
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-        this.initialCutofDate = "Ejemplo";
+        this.currentCashAmount=initialCashAmount;
+        this.initialCutofDate = LocalDateTime.now();
+        this.cashOutFlowReports = new ArrayList<>();
+        this.cashInFlowReports = new ArrayList<>();
+        this.bills = new ArrayList<>();
+        
+        
+    }
+    
+    /**
+     * Metodo para agregar un reporte de salida de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se retira.
+     */
+    public void addCashOutFlowReport(String reason, BigDecimal amount){
+        if(currentCashAmount.compareTo(amount)>=0){
+        cashOutFlowReports.add(new CashFlowReport(reason, amount));
+        currentCashAmount=currentCashAmount.subtract(amount);
+        }
+        else{
+            throw new IllegalArgumentException("No hay suficiente dinero en caja");
+        }
     }
 
-    public void addCashOutFlowReport(CashFlowReport cashOutFlowReport){
-        cashOutFlowReports.add(cashOutFlowReport);
+    /**
+     * Metodo para agregar un reporte de entrada de dinero
+     * @param reason Motivo por el cual se realiza el movimiento
+     * @param amount Cantidad de dinero que se deposita.
+     */
+    public void addCashInFlowReport(String reason, BigDecimal amount){
+        if(amount.compareTo(BigDecimal.ZERO)>0){
+            cashInFlowReports.add(new CashFlowReport(reason, amount));
+            currentCashAmount=currentCashAmount.add(amount);
+        }
+        else{
+            throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
+        }
+        
     }
 
-    public void addCashInFlowReport(CashFlowReport cashInFlowReport){
-        cashInFlowReports.add(cashInFlowReport);
-    }
-
+    /**
+     * Metodo para agregar una factura a la caja
+     * @param bill La factura a agregar
+     */
     public void addBill(Bill bill){
+        currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
+        System.out.println("Bill added");
     }
 
     //Maybe deberan tener identificadores, de lo contrario no se podra eliminar
+    /**
+     * Metodo para eliminar un reporte de salida de dinero
+     * @param cashOutFlowReport Recibe el reporte de salida de dinero por medio de un dato de tipo CashFlowReport
+     */
     public void removeCashOutFlowReport(CashFlowReport cashOutFlowReport){
         cashOutFlowReports.remove(cashOutFlowReport);
     }
 
+    /**
+     * Metodo para eliminar un reporte de entrada de dinero
+     * @param cashInFlowReport Recibe el reporte de entrada de dinero por medio de un dato de tipo CashFlowReport
+     */
     public void removeCashInFlowReport(CashFlowReport cashInFlowReport){
         cashInFlowReports.remove(cashInFlowReport);
     }
 
-    public void calcualteFinalCashAmount(){
-        BigDecimal totalCashIn = new BigDecimal(0);
-        BigDecimal totalCashOut = new BigDecimal(0);
-        BigDecimal sellAmount = new BigDecimal(0);
-
+    /**
+     * Metodo para calcular el total de dinero ingresado por medio de efectivo.
+     * @return El total de dinero ingresado por medio de efectivo en un dato tipo BigDecimal
+     */
+    private BigDecimal calculateTotalCashIn(){
+        BigDecimal totalCashIn =  BigDecimal.ZERO;
         for (CashFlowReport cashInFlowReport : cashInFlowReports) {
             totalCashIn.add(cashInFlowReport.getCashAmount());
         }
+        return totalCashIn;
+    }
+
+    /**
+     * Metodo para calcular el total de dinero retirado por medio de efectivo.
+     * @return El total de dinero retirado por medio de efectivo en un dato tipo BigDecimal
+     */
+    private BigDecimal calculateTotalCashOut(){
+        BigDecimal totalCashOut =  BigDecimal.ZERO;
         for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
             totalCashOut.add(cashOutFlowReport.getCashAmount());
         }
-
-        for (Bill bill : bills) {
-            sellAmount.add(bill.getAmount());
-        }
-//        this.finalCashAmount = initialCashAmount + sellAmount + totalCashIn - totalCashOut;
-        this.finalCashAmount = initialCashAmount.add(sellAmount).add(totalCashIn).subtract(totalCashOut);
+        return totalCashOut;
     }
 
+    /**
+     * Metodo para calcular el total de las facturas
+     * @return El total de las facturas en un dato tipo BigDecimal
+     */
+    private BigDecimal calculateTotalBills(){
+        BigDecimal totalBills =  BigDecimal.ZERO;
+        for (Bill bill : bills) {
+            totalBills.add(bill.getAmount());
+        }
+        return totalBills;
+    }
+
+    /**
+     * Metodo para calcular el monto final de la caja
+     */
+    public void calcualteFinalCashAmount(){
+        BigDecimal totalCashIn = calculateTotalCashIn();
+        BigDecimal totalCashOut = calculateTotalCashOut();
+        BigDecimal totalSellAmount = calculateTotalBills();
+        currentCashAmount=currentCashAmount.add(initialCashAmount);
+        currentCashAmount=currentCashAmount.add(totalSellAmount);
+        currentCashAmount=currentCashAmount.add(totalCashIn);
+        currentCashAmount=currentCashAmount.subtract(totalCashOut);
+        
+    }
+
+    /**
+     * Obtiene el monto inicial de la caja
+     * @return El monto inicial de la caja en un dato tipo BigDecimal
+     */
     public BigDecimal getInitialCashAmount() {
         return initialCashAmount;
     }
 
+    /**
+     * Establece el monto inicial de la caja
+     * @param initialCashAmount Recibe un dato tipo BigDecimal para establecer el monto inicial de la caja
+     */
     public void setInitialCashAmount(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public BigDecimal getFinalCashAmount() {
-        return finalCashAmount;
+    /**
+     * Obtiene el monto actual de la caja
+     * @return El monto actual de la caja en un dato tipo BigDecimal
+     */
+    public BigDecimal getcurrentCashAmount() {
+        return currentCashAmount;
     }
 
-    public void setFinalCashAmount(BigDecimal finalCashAmount) {
-        this.finalCashAmount = finalCashAmount;
+    /**
+     * Establece el monto actual de la caja
+     * @param currentCashAmount Recibe un dato de tipo BigDecimal para establecer el monto actual de la caja
+     */
+    public void setcurrentCashAmount(BigDecimal currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
 
-    public List<CashFlowReport> getCashOutFlowReports() {
+    /**
+     * Obtiene la lista de reportes de salida de dinero
+     * @return La lista de reportes de salida de dinero en tipo de dato CashFlowReport
+     */
+    public ArrayList<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
-    public void setCashOutFlowReports(List<CashFlowReport> cashOutFlowReports) {
+    /**
+     * Establece la lista de reportes de salida de dinero
+     * @param cashOutFlowReports Recibe una lista de reportes de salida de dinero
+     */
+    public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         this.cashOutFlowReports = cashOutFlowReports;
     }
 
-    public List<CashFlowReport> getCashInFlowReports() {
+    /**
+     * Obtiene la lista de reportes de entrada de dinero
+     * @return La lista de reportes de entrada de dinero en tipo de dato CashFlowReport
+     */
+    public ArrayList<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
-    public void setCashInFlowReports(List<CashFlowReport> cashInFlowReports) {
+    /**
+     * Establece la lista de reportes de entrada de dinero
+     * @param cashInFlowReports Recibe una lista de reportes de entrada de dinero
+     */
+    public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
         this.cashInFlowReports = cashInFlowReports;
     }
 
-    public List<Bill> getBills() {
+    /**
+     * Obtiene la lista de facturas
+     * @return La lista de facturas en tipo de dato Bill
+     */
+    public ArrayList<Bill> getBills() {
         return bills;
     }
 
-    public void setBills(List<Bill> bills) {
+    /**
+     * Establece la lista de facturas
+     * @param bills Recibe una lista de facturas
+     */
+    public void setBills(ArrayList<Bill> bills) {
         this.bills = bills;
     }
 
-    public String getInitialCutofDate() {
+    /**
+     * Obtiene la fecha inicial de corte
+     * @return La fecha inicial de corte en un dato tipo LocalDateTime
+     */
+    public LocalDateTime getInitialCutofDate() {
         return initialCutofDate;
     }
 
-    public void setInitialCutofDate(String initialCutofDate) {
+    /**
+     * Establece la fecha inicial de corte
+     * @param initialCutofDate La fecha inicial de corte en un dato tipo LocalDateTime
+     */
+    public void setInitialCutofDate(LocalDateTime initialCutofDate) {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public String getFinalCutofDate() {
+    /**
+     * Obtiene la fecha final de corte
+     * @return La fecha final de corte en un dato tipo LocalDateTime
+     */
+    public  LocalDateTime  getFinalCutofDate() {
         return finalCutofDate;
     }
 
-    public void setFinalCutofDate(String finalCutofDate) {
+    /**
+     * Establece la fecha final de corte
+     * @param finalCutofDate La fecha final de corte en un dato tipo LocalDateTime
+     */
+    public void setFinalCutofDate(LocalDateTime finalCutofDate) {
         this.finalCutofDate = finalCutofDate;
+    }
+
+    /**
+     * Obtiene el monto actual de la caja
+     * @return El monto actual de la caja en un dato tipo BigDecimal
+     */
+    public BigDecimal getCurrentCashAmount() {
+        return currentCashAmount;
+    }
+
+    /**
+     * Establece el monto actual de la caja
+     * @param currentCashAmount El monto actual de la caja en un dato tipo BigDecimal
+     */
+    public void setCurrentCashAmount(BigDecimal currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
     }
     
     

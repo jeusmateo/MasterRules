@@ -4,21 +4,22 @@
  */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 /**
  *
  * @author IGNITER
  */
 public class Debt {
     private Order order;
-    private double amount;
-    private String date;
-    private String time;
+    private BigDecimal amount;
+    private LocalDate date; //pensar en guardarlo como string
 
-    public Debt(Order order, double amount, String date, String time) {
+    public Debt(Order order, BigDecimal amount) {
         this.order = order;
         this.amount = amount;
-        this.date = date;
-        this.time = time;
+        this.date = LocalDate.now();
     }
 
     public Order getOrder() {
@@ -29,28 +30,20 @@ public class Debt {
         this.order = order;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     

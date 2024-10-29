@@ -125,4 +125,10 @@ public class CafeteriaMenu {
     public void setCombos(ArrayList<Combo> combos) {
         this.combos = combos;
     }
+    
+    public ArrayList<Product> getProductos(String type){
+        return this.products.get(type);
+    }
+    
+    
 }
