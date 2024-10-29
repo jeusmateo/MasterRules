@@ -1,4 +1,5 @@
 package com.mycompany.masterrules.Model;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

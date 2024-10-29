@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 // TODO: arreglar el ADT de esta clase
 public class CustomComboTemplate {
-    
+
     /** Identificador del combo */
     private long customComboTemplateID;
     /** Precio del combo */
@@ -54,7 +54,7 @@ public class CustomComboTemplate {
      * @return La lista de productos permitidos por la categoria correspondiente
      */
     public ArrayList<Product> getProductListEnableByCategory(String categoryKey) {
-        return productsEnableByCategory.getOrDefault(categoryKey, new ArrayList());
+        return productsEnableByCategory.getOrDefault(categoryKey, new ArrayList<>());
 
     }
 

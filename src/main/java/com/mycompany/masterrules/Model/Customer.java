@@ -1,21 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model;
-
-import java.util.Random;
 
 /**
  *
- * @author chepo
+ * @autor: Torres David
+ *
+ * Clase que representa a un cliente en MasterRules
  */
 public class Customer {
 
+    /**
+     * Atributos de la clase
+     */
     private long ID;
     private String customerName;
     private String customerPhoneNumber;
     private CustomerAccount customerAccount;
+
+    /**
+     * Constructor de la clase
+     * @param customerName Nombre del cliente
+     * @param customerPhoneNumber Numero de telefono del cliente
+     */
 
     public Customer(String customerName, String customerPhoneNumber) {
         //Falta ver como generarlothis.ID = Random.nextLong(1000)+1;
@@ -24,34 +29,67 @@ public class Customer {
         this.customerAccount = new CustomerAccount();
     }
 
+
+    /**
+     * @return Retorna el ID del cliente
+     */
     public long getID() {
         return ID;
     }
 
+    /**
+     * Recibe el ID del cliente y lo asigna a la variable ID
+     *
+     * @param ID Recibe el ID del cliente
+     */
     public void setID(long ID) {
         this.ID = ID;
     }
 
+    /**
+     * @return Retorna el nombre del cliente
+     */
     public String getCustomerName() {
         return customerName;
     }
 
+    /**
+     * Recibe el nombre del cliente y lo asigna a la variable customerName
+     *
+     * @param customerName Recibe el nombre del cliente
+     */
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
+    /**
+     * @return Retorna el numero de telefono del cliente
+     */
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
 
+    /**
+     * Recibe el numero de telefono del cliente y lo asigna a la variable customerPhoneNumber
+     *
+     * @param customerPhoneNumber Recibe el numero de telefono del cliente
+     */
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
+    /**
+     * @return Retorna la cuenta del cliente
+     */
     public CustomerAccount getCustomerAccount() {
         return customerAccount;
     }
 
+    /**
+     * Recibe la cuenta del cliente y la asigna a la variable customerAccount
+     *
+     * @param customerAccount Recibe la cuenta del cliente
+     */
     public void setCustomerAccount(CustomerAccount customerAccount) {
         this.customerAccount = customerAccount;
     }

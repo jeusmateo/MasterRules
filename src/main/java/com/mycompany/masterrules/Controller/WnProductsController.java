@@ -1,28 +1,96 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.masterrules.Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
-/**
- * FXML Controller class
- *
- * @author Jimena Garcia
- */
-public class WnProductsController implements Initializable {
+public class WnProductsController {
 
+    @FXML
+    private Button btnImportImage;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    private Button buttonConfirmCombo;
+
+    @FXML
+    private Button buttonCreateCombo;
+
+    @FXML
+    private Button buttonCreateFood;
+
+    @FXML
+    private Button buttonImportImage;
+
+    @FXML
+    private AnchorPane buttonsCombo;
+
+    @FXML
+    private AnchorPane createComboStart;
+
+    @FXML
+    private AnchorPane editarCombo;
+
+    @FXML
+    private AnchorPane elegirCombos;
+
+    @FXML
+    private FlowPane flowPaneMenuCards;
+
+    @FXML
+    private ImageView imageViewFood;
+
+    @FXML
+    private ImageView imgCombo;
+
+    @FXML
+    private ScrollPane scrollPaneMenu;
+
+    @FXML
+    private TableView<?> tableComboProducts;
+
+    @FXML
+    private TableColumn<?, ?> tableProductCombo;
+
+    @FXML
+    private TextField textFieldIDFood;
+
+    @FXML
+    private TextField textFieldName1;
+
+    @FXML
+    private TextField textFieldName111;
+
+    @FXML
+    private TextField textFieldNameDrinks;
+
+    @FXML
+    private TextField textFieldNameFood;
+
+    @FXML
+    private TextField textFieldPrice;
+
+    @FXML
+    private TextField textFieldType;
+
+    @FXML
+    private TextField textFieldVIPPrice;
+
+    @FXML
+    private TextField txtFieldIDCombo;
+
+    @FXML
+    private TextField txtFieldNameCombo;
+
+    @FXML
+    private TextField txtFieldPriceCombo;
+
+    @FXML
+    private TextField txtFieldVIPPriceCombo;
+
 }

@@ -2,5 +2,5 @@ package com.mycompany.masterrules.Controller;
 
 
 // por definir
-public class WnReports {
+public class WnReportsController {
 }
