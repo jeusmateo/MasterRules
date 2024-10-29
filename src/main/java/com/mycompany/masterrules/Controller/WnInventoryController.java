@@ -2,8 +2,10 @@ package com.mycompany.masterrules.Controller;
 
 
 /**
- * Controlador de la ventana de Reportes
+ * Controlador de la ventana de Inventario
  * @author Jimena Garcia
  */
-public class WnReportsController {
+
+
+public class WnInventoryController {
 }

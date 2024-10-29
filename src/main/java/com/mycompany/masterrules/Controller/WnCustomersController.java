@@ -2,6 +2,11 @@ package com.mycompany.masterrules.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+/**
+ * FXML Controller class
+ *
+ * @author Raul Magaña
+ */
 
 public class WnCustomersController {
 
