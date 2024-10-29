@@ -1,7 +1,10 @@
 package com.mycompany.masterrules.Controller;
 
 
-// al fxml le falta hacerlo responsivo
+/**
+ * Controlador de la ventana de Inventario
+ * @author Jimena Garcia
+ */
 
 
 public class WnInventory {

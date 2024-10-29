@@ -1,6 +1,9 @@
 package com.mycompany.masterrules.Controller;
 
 
-// por definir
+/**
+ * Controlador de la ventana de Reportes
+ * @author Jimena Garcia
+ */
 public class WnReports {
 }
