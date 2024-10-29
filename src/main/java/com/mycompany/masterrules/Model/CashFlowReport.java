@@ -5,13 +5,16 @@ import java.time.LocalDate;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class CashFlowReport {
+
     /**Motivo por el cual se realiza el reporte */
     private String reason;
+
     /**Cantidad de dinero que se mueve */
     private BigDecimal cashAmount;
+
     /**Fecha en la que se realiza el reporte */
     private LocalDate date;
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author chepo
+ * @author David Torres
  */
 public class Test {
 

@@ -5,7 +5,8 @@ import java.time.LocalDate;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
+ *
  */
 public class Debt {
     private Order order;

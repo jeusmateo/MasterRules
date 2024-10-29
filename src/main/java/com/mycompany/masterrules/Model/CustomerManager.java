@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  *
- * @author IGNITER
+ * @author David Torres
+ * Clase que se encarga de gestionar los clientes
  */
 public class CustomerManager {
     private ArrayList<Customer> customers;
