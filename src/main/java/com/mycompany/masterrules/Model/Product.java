@@ -33,6 +33,12 @@ public class Product {
     private BigDecimal VIPprice;
 
     /**
+     * Constructor of class Product NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
+     */
+    public Product() {
+    }
+
+    /**
      * Constructor of class Product
      * @param id Identification for product
      * @param productName Name of product
