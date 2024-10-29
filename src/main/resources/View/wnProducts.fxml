@@ -186,7 +186,7 @@
                                                                               <Insets left="25.0" />
                                                                            </GridPane.margin>
                                                                         </VBox>
-                                                                        <Button fx:id="buttonCreateFood" mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                                        <Button fx:id="btnCreateFood" mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                                                            <GridPane.margin>
                                                                               <Insets />
                                                                            </GridPane.margin>
@@ -205,7 +205,7 @@
                                                                                           <String fx:value="white-bg" />
                                                                                        </styleClass>
                                                                                     </AnchorPane>
-                                                                                    <Button fx:id="buttonImportImageFood" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                                    <Button fx:id="btnImportImageFood" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                                  </children>
                                                                               </VBox>
                                                                            </children>
