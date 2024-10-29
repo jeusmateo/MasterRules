@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
@@ -9,8 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
+ * @autor: Torres David
  *
- * @author IGNITER
+ * Clase que representa un reporte de corte de venta
  */
 public class CashRegisterAuditReport {
     /**Monto inicial de la caja */
