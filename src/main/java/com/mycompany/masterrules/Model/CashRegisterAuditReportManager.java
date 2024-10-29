@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class CashRegisterAuditReportManager {
     private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;

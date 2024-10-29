@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class LoyaltyCard {
     private long ID;

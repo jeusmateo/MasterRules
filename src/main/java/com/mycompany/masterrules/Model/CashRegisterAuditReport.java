@@ -5,23 +5,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- * @autor: Torres David
+ * @autor: David Torres
  *
  * Clase que representa un reporte de corte de venta
  */
 public class CashRegisterAuditReport {
+
     /**Monto inicial de la caja */
     private BigDecimal initialCashAmount;
+
     /**Monto actual de la caja */
     private BigDecimal currentCashAmount;
+
     /**Lista de reportes de salida de dinero */
     private ArrayList<CashFlowReport> cashOutFlowReports;
+
     /**Lista de reportes de entrada de dinero */
     private ArrayList<CashFlowReport> cashInFlowReports;
+
     /**Lista de facturas */
     private ArrayList<Bill> bills;
+
     /**Fecha inicial de corte  */
     private LocalDateTime initialCutofDate;
+
     /**Fecha final de corte  */
     private LocalDateTime finalCutofDate;
 
@@ -29,7 +36,6 @@ public class CashRegisterAuditReport {
      * Constructor para el reporte de la caja
      * @param initialCashAmount El monto inicial de la caja
      */
-
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
         this.currentCashAmount=initialCashAmount;
