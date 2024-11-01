@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model;
+
 import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author IGNITER
@@ -16,6 +14,17 @@ public class Printer {
         for (Product product : order.getProducts()) {
             System.out.println("Nombre : "+product.getProductName());
             System.out.println("Precio: "+product.getPrice());
+        }
+        
+        if(!order.getCombos().isEmpty()){
+            System.out.println("COMBOS: ");
+            for (Combo combo : order.getCombos()) {
+                System.out.println("Nombre : "+combo.getComboName());
+                for (Product product : combo.getProducts()) {
+                    System.out.println("Nombre : "+product.getProductName());
+                    System.out.println("Precio: "+product.getPrice());
+                }
+            }
         }
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println("Fecha: "+order.getDate().format(formato));

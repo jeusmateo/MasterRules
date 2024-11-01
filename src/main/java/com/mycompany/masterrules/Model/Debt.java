@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -12,10 +9,10 @@ import java.time.LocalDate;
  */
 public class Debt {
     private Order order;
-    private double amount;
+    private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
 
-    public Debt(Order order, double amount) {
+    public Debt(Order order, BigDecimal amount) {
         this.order = order;
         this.amount = amount;
         this.date = LocalDate.now();
@@ -29,11 +26,11 @@ public class Debt {
         this.order = order;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
