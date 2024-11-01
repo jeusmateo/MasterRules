@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class CashRegisterAuditReportManager {
     private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;
@@ -41,7 +41,7 @@ public class CashRegisterAuditReportManager {
      * @param initialCashAmount Monto con el cual iniciara el siguiente corte.
      */
     public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount){
-        currentCashRegisterAuditReport.calcualteFinalCashAmount();
+        currentCashRegisterAuditReport.calculateFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);

@@ -10,18 +10,25 @@ import java.util.ArrayList;
  * Clase que representa un reporte de corte de venta
  */
 public class CashRegisterAuditReport {
+
     /**Monto inicial de la caja */
     private BigDecimal initialCashAmount;
+
     /**Monto actual de la caja */
     private BigDecimal currentCashAmount;
+
     /**Lista de reportes de salida de dinero */
     private ArrayList<CashFlowReport> cashOutFlowReports;
+
     /**Lista de reportes de entrada de dinero */
     private ArrayList<CashFlowReport> cashInFlowReports;
+
     /**Lista de facturas */
     private ArrayList<Bill> bills;
+
     /**Fecha inicial de corte  */
     private LocalDateTime initialCutofDate;
+
     /**Fecha final de corte  */
     private LocalDateTime finalCutofDate;
 
@@ -138,7 +145,7 @@ public class CashRegisterAuditReport {
     /**
      * Metodo para calcular el monto final de la caja
      */
-    public void calcualteFinalCashAmount(){
+    public void calculateFinalCashAmount(){
         BigDecimal totalCashIn = calculateTotalCashIn();
         BigDecimal totalCashOut = calculateTotalCashOut();
         BigDecimal totalSellAmount = calculateTotalBills();

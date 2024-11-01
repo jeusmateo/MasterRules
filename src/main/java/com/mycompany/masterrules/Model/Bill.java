@@ -7,12 +7,16 @@ import java.math.BigDecimal;
  * @author David Torres
  */
 public class Bill {
+
     /** Nombre del empleado en turno */
     private String employeeName;
+
     /** Cliente al que se le realiza la factura */
     private Customer customer;
+
     /** Monto total de la factura */
     private BigDecimal amount;
+
     /** Orden a la que pertenece la factura */
     private Order order;
 
@@ -22,7 +26,6 @@ public class Bill {
      * @param amountArg Monto total de la factura
      * @param employeeNameArg Nombre del empleado en turno
      */
-
     public Bill(Order orderArg, BigDecimal amountArg, String employeeNameArg) {
         order = orderArg;
         amount = amountArg;

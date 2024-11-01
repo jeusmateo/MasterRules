@@ -2,7 +2,12 @@ package com.mycompany.masterrules.Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
+/**
+ *
+ * @autor: Raul Magaña
+ *
+ *
+ */
 public class Order {
     private long id;
     private Customer customer;

@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 /**
  *
- * @autor: Torres David
+ * @autor: David Torres
  *
  * Clase que representa a un cliente en MasterRules
  */

@@ -4,21 +4,34 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ *
+ * @autor: David Torres
+ *
+ * Clase que representa un combo personalizado
+ */
 // TODO: arreglar el ADT de esta clase
 public class CustomComboTemplate {
 
     /** Identificador del combo */
     private long customComboTemplateID;
+
     /** Precio del combo */
     private BigDecimal price;
+
     /** Precio VIP del combo */
     private BigDecimal VIPPrice;
+
     /** Cantidad de productos que se deben escoger por cada categoria correspondiente */
     private HashMap<String, Integer> quantityByCategory;
+
     /** Lista de productos para escoger correspondiente por cada categoria */
     private HashMap<String, ArrayList<Product>> productsEnableByCategory;
+
     /** Lista de productos por defecto */
     private ArrayList<Product> defaultProducts;
+
     /** Nombre del combo */
     private String comboName;
     

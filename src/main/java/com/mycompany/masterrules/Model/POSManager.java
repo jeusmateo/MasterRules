@@ -8,9 +8,11 @@ import com.mycompany.masterrules.Model.UserPermissions.Permission;
 
 /**
  *
- * @author IGNITER
+ * @author David Torres
  */
 public class POSManager {
+
+
 
     private CustomerManager customerManager;
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
