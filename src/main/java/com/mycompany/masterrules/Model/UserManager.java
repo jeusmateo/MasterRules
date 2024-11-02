@@ -23,7 +23,7 @@ public class UserManager {
      */
     public void addUser(UserAccount user) throws Exception{
         if(!isUserRegistered(user)){
-            if(!isUsernameTaken(user)){
+            if(!isUsernameTaken(user.getUsername())){//cambie el param por username
                 userAccounts.add(user);
             }
             else{
@@ -57,9 +57,9 @@ public class UserManager {
         return false;
     }
     
-    private boolean isUsernameTaken(UserAccount user){
+    private boolean isUsernameTaken(String username){//cambie el param por username
         for(UserAccount registeredUser : userAccounts){
-            if(user.getUsername().equals(registeredUser.getUsername())){
+            if(username.equals(registeredUser.getUsername())){
                 return true;
             }
         }
@@ -110,6 +110,7 @@ public class UserManager {
         for(int registeredUserCount=0;registeredUserCount<userAccounts.size();registeredUserCount++){//hay que ver si el nombre del indice esta bien
             if(userAccounts.get(registeredUserCount).getUserID().equals(userID)){
                 userAccounts.get(registeredUserCount).setPermissions(permissions);
+                return;
             }
         }
         throw new Exception("ERROR: El usuario no existe");
