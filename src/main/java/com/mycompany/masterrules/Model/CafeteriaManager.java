@@ -8,91 +8,82 @@ import java.math.BigDecimal;
  */
 public class CafeteriaManager {
     /** ? */
-    private ProductQueries productQueries;
+    //private ProductQueries productQueries;
     private CafeteriaMenu menu;
     private CafeteriaStorage storage;
 
-    
-    public CafeteriaManager(ProductQueries productQueries, CafeteriaMenu menu, CafeteriaStorage storage) {
-        this.productQueries = productQueries;
-        this.menu = menu;
-        this.storage = storage;
-    }
-
     public CafeteriaManager() {
-        this.productQueries = new ProductQueries();
         this.menu = new CafeteriaMenu("MR menu");
         this.storage = new CafeteriaStorage();
     }
-
+    
+    public CafeteriaManager(CafeteriaMenu menu, CafeteriaStorage storage) {
+        this.menu = menu;
+        this.storage = storage;
+    }
     
     public void createProduct(Product newProduct,boolean inInventory, int quantity) throws Exception{
+        /*
         if(productQueries.register(newProduct)){
             System.out.println("Producto registrado");
         }
         else{
             throw new Exception("ERROR: Problema al registrar el producto");
         }
+        */
+        
+        menu.addProduct(newProduct);//cambie la posicion porque el menu tiene que revisar el nombre, y el storage no lo hace
         
         if(inInventory){
-            storage.addProduct(newProduct.getID()+"", quantity);
+            storage.addProduct(newProduct.getProductID(), quantity);
         }
         
-        menu.addProduct(newProduct);
-    }
-    
-    public void createProduct(long id, String name, String type, BigDecimal price, BigDecimal VIPprice) throws Exception{
-        Product newProduct= new Product(id,name,type,price,VIPprice);
-        if(productQueries.register(newProduct)){
-            System.out.println("Producto registrado");
-        }
-        else{
-            throw new Exception("ERROR: Problema al registrar el producto");
-        }
-
         
-        menu.addProduct(newProduct);
     }
 
 
-    public void deleteProduct(String productName) throws Exception{
-            Product foundProduct=productQueries.findByName(productName);
+    public void deleteProduct(String productID) throws Exception{//cambie por id
+        /*    
+        Product foundProduct=productQueries.findByName(productID);
             
-            if(foundProduct!=null){
-                if(productQueries.delete(foundProduct)){
-                    System.out.println("Producto eliminado");
-                }
-                else{
-                    throw new Exception("ERROR: Problema al eliminar el producto");
-                }
+        if(foundProduct!=null){
+            if(productQueries.delete(foundProduct)){
+                System.out.println("Producto eliminado");
             }
             else{
-                throw new Exception("ERROR: No se encontro el producto con el nombre "+productName);
+                throw new Exception("ERROR: Problema al eliminar el producto");
             }
-            if(storage.isStored(foundProduct.getID()+"")){
-                storage.removeProduct(foundProduct.getID()+"");
-            }
-            
-            menu.removeProduct(foundProduct.getProductName());
+        }
+        else{
+            throw new Exception("ERROR: No se encontro el producto con el ID "+productID);
+        }
+        */
+        
+        menu.removeProduct(productID);//cambie por id
+        storage.removeProduct(productID);
             
     }
     
     public void editProduct(Product product,boolean inInventory, int quantity) throws Exception{
+        /*
         if(productQueries.modify(product)){
             System.out.println("Producto modificado");
         }
         else{
             throw new Exception("ERROR: Problema al modificar el producto");
         }
+        */
+        
+        menu.editProduct(product);//cambie la posicion porque el menu tiene que revisar el nombre, y el storage no lo hace
         if(inInventory){
-            if(storage.isStored(product.getID()+"")){
-                storage.updateStock(product.getID()+"", quantity);
+            if(storage.isStored(product.getProductID())){
+                storage.updateStock(product.getProductID(), quantity);
             }
             else{
-                storage.addProduct(product.getID()+"", quantity);
+                storage.addProduct(product.getProductID(), quantity);
             }
         }
-        menu.editProduct(product);
+        
     }
     
     public void createCombo(){
@@ -109,14 +100,6 @@ public class CafeteriaManager {
     
     public void editMenu(){//creo que ya no vamos a utilizar esta, a menos que se quiera
         //falta
-    }
-
-    public ProductQueries getProductQueries() {
-        return productQueries;
-    }
-
-    public void setProductQueries(ProductQueries productQueries) {
-        this.productQueries = productQueries;
     }
 
     public CafeteriaMenu getMenu() {

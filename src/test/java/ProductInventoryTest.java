@@ -15,7 +15,7 @@ public class ProductInventoryTest {
         try {
             tx = session.beginTransaction();
             // TODO: Modifica el producto, no permite sobreescribir uno existente
-            session.persist(new Product(23, "Laptop", "Laptop", BigDecimal.valueOf(1000.00), new BigDecimal(900.00)));
+            session.persist(new Product("23", "Laptop", "Laptop", BigDecimal.valueOf(1000.00), new BigDecimal(900.00)));//el id lo volvi a string
             session.persist(new ProductosInventario(23, 10, 5, 20));
             tx.commit();
 //            return true;

@@ -33,7 +33,7 @@ public class ProductController {
         Scanner scanLong=new Scanner(System.in);
         
         System.out.println("Dame el ID(Código de barras u otro) del producto:");
-        long id=scanLong.nextLong();//el id no debe estar aqui porque o generará la propia base de datos
+        String id=scanStr.nextLine();//el id no debe estar aqui porque o generará la propia base de datos
         
         System.out.println("Dame el nombre del producto:");
         String name=scanStr.nextLine();
@@ -87,11 +87,11 @@ public class ProductController {
         try{
         //------------------todo esto se encuentra en vista---------------------------
         Scanner scanStr=new Scanner(System.in);
-        System.out.println("Dame el nombre del producto:");
-        String name=scanStr.nextLine();
+        System.out.println("Dame el ID del producto:");
+        String id=scanStr.nextLine();
         //------------------todo esto se encuentra en vista---------------------------
         
-        model.deleteProduct(name);
+        model.deleteProduct(id);
         
         //actualizar vista aqui?
         }
@@ -118,7 +118,7 @@ public class ProductController {
         Scanner scanLong=new Scanner(System.in);
         
         System.out.println("Dame el ID(Código de barras u otro) del producto:");
-        long id=scanLong.nextLong();//el id no debe estar aqui porque o generará la propia base de datos
+        String id=scanStr.nextLine();//el id no debe estar aqui porque o generará la propia base de datos
         
         System.out.println("Dame el nombre del producto:");
         String name=scanStr.nextLine();
