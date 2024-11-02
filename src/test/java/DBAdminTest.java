@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 public class DBAdminTest {
 
     public static void main(String[] args) {
-        Product tmpProduct = new Product(1, "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
+        Product tmpProduct = new Product("1", "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
         ProductDAO productDB = new ProductDAO();
 
         System.out.println(productDB.save(tmpProduct));
 
-        Product tmpPapas = new Product(2, "Papas", "Snack", BigDecimal.valueOf(1.00), new BigDecimal(0.90));
+        Product tmpPapas = new Product("2", "Papas", "Snack", BigDecimal.valueOf(1.00), new BigDecimal(0.90));
 
         productDB.save(tmpPapas);
         // Cambio de precio
@@ -22,7 +22,7 @@ public class DBAdminTest {
         // Impresion de todos los productos
         for (Product p : productDB.readAll()) {
             System.out.println(
-                    "ID: " + p.getID() + "\n" +
+                    "ID: " + p.getProductID() + "\n" +
                     "Name: " + p.getProductName() + "\n" +
                     "Type: " + p.getProductType() + "\n" +
                     "Price: " + p.getPrice() + "\n" +

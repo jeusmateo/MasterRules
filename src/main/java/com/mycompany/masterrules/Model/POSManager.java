@@ -19,24 +19,9 @@ public class POSManager {
     private CafeteriaManager cafeteriaManager;
     private Printer printer;
     private UserAccount currentUser;
-    private Order currentOrder;
+    private Order currentOrder;//creo que lo de current order deberia estar en un manager propio
 
-    /**
-     * Busca un producto en el menu de la cafeteria
-     *
-     * @param id El identificador del producto a buscar.
-     * @param type El tipo de producto a buscar, se requiere para buscar en la
-     * lista correcta del Hashmap que guarda los productos.
-     * @return El producto encontrado, si no se encuentra retorna null.
-     */
-    public Product buscarProducto(long id, String type) {
-        for (Product product : cafeteriaManager.getMenu().getProductosByType(type)) {
-            if (product.getID() == id) {
-                return product;
-            }
-        }
-        return null;
-    }
+    
 
     public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
         customerManager = new CustomerManager();
@@ -57,7 +42,24 @@ public class POSManager {
 
     }
     
-    public void addCustomeComboToOrder(CustomComboTemplate customComboTemplate){
+    /**
+     * Busca un producto en el menu de la cafeteria
+     *
+     * @param id El identificador del producto a buscar.
+     * @param type El tipo de producto a buscar, se requiere para buscar en la
+     * lista correcta del Hashmap que guarda los productos.
+     * @return El producto encontrado, si no se encuentra retorna null.
+     */
+    public Product findProductByType(String id, String type) throws Exception {//estaba en español. //tambien movi este metodo porque estaba arriva de los contructores
+        for (Product product : cafeteriaManager.getMenu().getProductsByType(type)) {//cambie el metodo getProductsByType
+            if (id.equals(product.getProductID())) {//inverti el id y product.getProductID() para que fuera mas legible
+                return product;
+            }
+        }
+        return null;//creo ue seria mejor una exception
+    }
+    
+    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate){//pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
         for(String keyQuantity: customComboTemplate.getQuantityByCategory().keySet()){
             int quantity = 0;
@@ -185,7 +187,7 @@ public class POSManager {
         currentOrder = new Order();
     }
 
-    public void retirarDineroDeCaja() {
+    public void withdrawMoneyFromCashRegister() {//estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
@@ -196,7 +198,7 @@ public class POSManager {
         }
     }
 
-    public void ingresarDineroEnCaja() {
+    public void depositMoneyInCashRegister() {//estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
@@ -230,7 +232,7 @@ public class POSManager {
         this.cafeteriaManager = cafeteriaManager;
     }
 
-    public void createNewCustomer(String name, String phone) {
+    public void createNewCustomer(String name, String phone) {//esto creo que debe estar arriba de lo metodos getters y setters
         customerManager.registerCustomer(name, phone);
 
     }

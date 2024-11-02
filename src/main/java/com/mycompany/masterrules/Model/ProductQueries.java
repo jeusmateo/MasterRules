@@ -35,7 +35,7 @@ public class ProductQueries {
      */
     public boolean modify(Product product) {
         for(int i=0;i<products.size();i++){
-            if(product.getID()==products.get(i).getID()){
+            if(product.getProductID().equals(products.get(i).getProductID())){
                 products.get(i).setPrice(new BigDecimal(product.getPrice()+""));
                 products.get(i).setProductName(product.getProductName());
                 products.get(i).setProductType(product.getProductType());
@@ -53,7 +53,7 @@ public class ProductQueries {
      */
     public boolean delete(Product product) {
         for(int i=0;i<products.size();i++){
-            if(product.getID()==products.get(i).getID()){
+            if(product.getProductID().equals(products.get(i).getProductID())){
                 products.remove(i);
                 return true;
             }
@@ -66,9 +66,9 @@ public class ProductQueries {
      * @param id Identification of the product to search
      * @return Found product
      */
-    public Product findByID(long id) throws Exception {
+    public Product findByID(String id) throws Exception {
         for(int i=0;i<products.size();i++){
-            if(id==products.get(i).getID()){
+            if(id.equals(products.get(i).getProductID())){
                 return products.get(i);
             }
         }

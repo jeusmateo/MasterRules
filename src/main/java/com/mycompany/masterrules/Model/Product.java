@@ -22,7 +22,8 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @Column(name = "clvProducto")
-    private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
+    private String productID;
+    //private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
     @Column(name = "nombreProducto")
     private String productName;
     @Column(name = "tipoProducto")
@@ -40,14 +41,14 @@ public class Product {
 
     /**
      * Constructor of class Product
-     * @param id Identification for product
+     * @param productID Identification of product
      * @param productName Name of product
      * @param productType Type of product
      * @param price Price of product
      * @param VIPprice Vip price of product
      */
-    public Product(long id, String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
-        this.ID = id;
+    public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
+        this.productID = productID;
         this.productName = productName;
         this.productType = productType;
         this.price = price;
@@ -56,12 +57,16 @@ public class Product {
 
     /**
      * Getter of identification(ID) of product
-     * @return Id
+     * @return Product identification
      */
-    public long getID() {
-        return ID;
+    public String getProductID() {    
+        return productID;
     }
-
+    /*
+    public long getID() {
+    return ID;
+    }
+     */
     /**
      * Getter of product name
      * @return Product name
@@ -96,12 +101,17 @@ public class Product {
 
     /**
      * Setter of identification(ID) of product 
-     * @param ID Identification of product 
+     * @param productID Identification of product 
      */
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setProductID(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
+        this.productID = productID;
     }
 
+    /*
+    public void setID(long ID) {//creo que este se debe eliminar junto con los otros setters de ids
+    this.ID = ID;
+    }
+     */
     /**
      * Setter of product name
      * @param productName Product name
