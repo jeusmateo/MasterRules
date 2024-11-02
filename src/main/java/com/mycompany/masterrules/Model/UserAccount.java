@@ -7,6 +7,7 @@ import com.mycompany.masterrules.Model.UserPermissions.Permission;
  * @author alexs
  */
 public class UserAccount {
+    private String userID;//agregue esto
     private String username;
     private String password;
     private UserPermissions permissions;
@@ -14,11 +15,13 @@ public class UserAccount {
 
     /**
      * Constructor of class UserAccount
+     * @param userID User identificator
      * @param username Username
      * @param password Password
      * @param employeeName Employee's full name
      */
-    public UserAccount(String username, String password, String employeeName) {
+    public UserAccount(String userID,String username, String password, String employeeName) {
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.employeeName = employeeName;
@@ -27,12 +30,14 @@ public class UserAccount {
 
     /**
      * Constructor of class UserAccount
+     * @param userID User identificator
      * @param username Username
      * @param password Password
      * @param permissions User's permissions
      * @param employeeName Employee's full name
      */
-    public UserAccount(String username, String password, UserPermissions permissions, String employeeName) {
+    public UserAccount(String userID,String username, String password, UserPermissions permissions, String employeeName) {
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.permissions = permissions;
@@ -44,8 +49,16 @@ public class UserAccount {
      * @param permission Permission of the user
      * @return True, if the user has the permission. False, if the user doesn't have the permission
      */
-    public boolean hasPermission(Permission permission){
+    public boolean hasPermission(Permission permission){//¿creo me decian que este ya no iba a estar? habria que verlo
         return permissions.isEnabled(permission);
+    }
+
+    /**
+     * Getter of user identificator
+     * @return User identificator
+     */
+    public String getUserID() {
+        return userID;
     }
     
     /**
@@ -77,8 +90,12 @@ public class UserAccount {
      * @return Employee's full name
      */
     public String getEmployeeName() {
-            return employeeName;
-        }
+        return employeeName;    
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
     
     /**
      * Setter of the username
