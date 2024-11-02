@@ -1,4 +1,3 @@
-import com.mycompany.masterrules.Database.HibernateUtil;
 import com.mycompany.masterrules.Model.Product;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

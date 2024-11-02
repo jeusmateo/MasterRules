@@ -4,11 +4,24 @@ import org.hibernate.Session;
 
 import java.util.List;
 
+/**
+ * Clase que implementa las operaciones básicas de un DAO (Data Access Object) utilizando Hibernate
+ * TODO: Implementar los métodos de la interfaz DAO
+ *
+ * @param <T> La entidad a ser manipulada
+ * @param <K> El tipo de dato de la llave primaria de la entidad
+ */
 public class HibernateDAO<T, K> implements DAO<T, K> {
 
+    /**
+     * Guarda una entidad en la base de datos
+     *
+     * @param entity La entidad a ser guardada
+     * @return true si la entidad fue guardada exitosamente, false en caso contrario
+     */
     @Override
     public boolean save(T entity) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
             session.persist(entity);
@@ -25,11 +38,22 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
         }
     }
 
+    /**
+     * Busca una entidad en la base de datos por su llave primaria
+     *
+     * @param id La llave primaria de la entidad
+     * @return La entidad encontrada, o null si no se encontró
+     */
     @Override
     public T findById(K id) {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Obtiene todas las entidades de un tipo de la base de datos
+     *
+     * @return Una lista con todas las entidades encontradas
+     */
     @Override
     public List<T> readAll() {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
@@ -48,6 +72,12 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Actualiza una entidad en la base de datos
+     *
+     * @param entity La entidad a ser actualizada
+     * @return true si la entidad fue actualizada exitosamente, false en caso contrario
+     */
     @Override
     public boolean update(T entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -67,6 +97,12 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
         }
     }
 
+    /**
+     * Elimina una entidad de la base de datos
+     *
+     * @param entity La entidad a ser eliminada
+     * @return true si la entidad fue eliminada exitosamente, false en caso contrario
+     */
     @Override
     public boolean delete(T entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
