@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCustomersController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="-2.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+               <left>
+                  <AnchorPane prefHeight="600.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane prefHeight="600.0" prefWidth="222.0" styleClass="nav-form" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="10.0" layoutY="42.0" prefHeight="87.0" prefWidth="222.0" styleClass="header" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Group layoutX="44.0" layoutY="23.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="18.0" text="Sistema de Venta" textFill="WHITE">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="MR MASTER RULES " textFill="WHITE">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Group>
+                                 </children>
+                              </AnchorPane>
+                              <Group layoutX="8.0" layoutY="151.0" />
+                              <VBox alignment="CENTER" layoutX="6.0" layoutY="192.0" prefHeight="284.0" prefWidth="210.0" AnchorPane.bottomAnchor="124.0" AnchorPane.topAnchor="192.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Venta" wrapText="true" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Productos" textFill="#800ae8" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Clientes" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Inventario" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Reportes" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Usuarios" VBox.vgrow="NEVER" />
+                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Corte de Venta">
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <Group layoutX="14.0" layoutY="548.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                 <children>
+                                    <Button layoutX="5.0" layoutY="5.0" mnemonicParsing="false" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                                       <styleClass>
+                                          <String fx:value="logout" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label layoutX="40.0" layoutY="10.0" text="Cerrar Sesión" textFill="WHITE" />
+                                    <Label layoutX="1.0" layoutY="-19.0" text="Bienvenido: " textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="89.0" layoutY="-19.0" prefHeight="17.0" prefWidth="109.0" text="Nombre usuario" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="298.0" layoutY="186.0" prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TabPane layoutX="2.0" prefHeight="600.0" prefWidth="882.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <tabs>
+                                    <Tab fx:id="tabCustomerAccount" text="Cuenta Cliente">
+                                       <content>
+                                          <AnchorPane fx:id="scrCustomerAccount" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <AnchorPane fx:id="scrMainViewCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                                   <styleClass>
+                                                      <String fx:value="radius" />
+                                                      <String fx:value="shadow" />
+                                                      <String fx:value="white-bg" />
+                                                   </styleClass>
+                                                   <children>
+                                                      <TextField layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar cliente " />
+                                                      <Button layoutX="196.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" />
+                                                      <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                                                         <styleClass>
+                                                            <String fx:value="logout" />
+                                                            <String fx:value="shadow" />
+                                                         </styleClass>
+                                                      </Button>
+                                                      <TableView layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="88.0" text="ID CLIENTE" />
+                                                            <TableColumn prefWidth="145.0" text="NOMBRE" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox layoutX="347.0" layoutY="29.0" spacing="25.0" AnchorPane.rightAnchor="304.0" AnchorPane.topAnchor="29.0">
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="76.0" text="Cuenta de:">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Group layoutX="348.0" layoutY="109.0" />
+                                                      <Group layoutX="351.0" layoutY="140.0" />
+                                                      <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
+                                                         <children>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="50.0" text="Deuda:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="121.0" text="Credito de tienda:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="144.0" prefHeight="25.0" prefWidth="133.0" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0">
+                                                         <children>
+                                                            <CheckBox mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="100.0" text="Cliente VIP">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <Label prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
+                                                      <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
+                                                      <HBox layoutX="365.0" layoutY="443.0" spacing="15.0" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="168.0">
+                                                         <children>
+                                                            <Button fx:id="btnShowInformation" mnemonicParsing="false" onAction="#setBtnShowInformation" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Ver informacion" />
+                                                            <Button fx:id="btnEditAccount" mnemonicParsing="false" onAction="#setBtnEditAccount" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Editar cuenta" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="scrViewInfoCustomer" prefHeight="555.0" prefWidth="865.0" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" visible="false" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="0.0">
+                                                   <styleClass>
+                                                      <String fx:value="radius" />
+                                                      <String fx:value="shadow" />
+                                                      <String fx:value="white-bg" />
+                                                   </styleClass>
+                                                   <children>
+                                                      <TextField layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar cliente " />
+                                                      <Button layoutX="196.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" />
+                                                      <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                                                         <styleClass>
+                                                            <String fx:value="logout" />
+                                                            <String fx:value="shadow" />
+                                                         </styleClass>
+                                                      </Button>
+                                                      <TableView layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="88.0" text="ID CLIENTE" />
+                                                            <TableColumn prefWidth="145.0" text="NOMBRE" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox layoutX="347.0" layoutY="29.0" spacing="25.0" AnchorPane.rightAnchor="304.0" AnchorPane.topAnchor="29.0">
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="76.0" text="Cuenta de:">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Group layoutX="348.0" layoutY="109.0" />
+                                                      <Group layoutX="351.0" layoutY="140.0" />
+                                                      <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
+                                                         <children>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="138.0" text="Nombre Completo:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="134.0" text="Número telefónico:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="123456789" />
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="144.0" prefHeight="25.0" prefWidth="133.0" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0" />
+                                                      <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
+                                                      <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
+                                                      <Button layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="165.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Editar Informacion" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="216.0" />
+                                                      <Label layoutX="290.0" layoutY="193.0" prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios" AnchorPane.rightAnchor="418.0" AnchorPane.topAnchor="193.0">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button layoutX="755.0" layoutY="14.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="84.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Atrás" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="scrEditCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" visible="false" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
+                                                   <styleClass>
+                                                      <String fx:value="radius" />
+                                                      <String fx:value="shadow" />
+                                                      <String fx:value="white-bg" />
+                                                   </styleClass>
+                                                   <children>
+                                                      <TextField layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar cliente " />
+                                                      <Button layoutX="196.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" />
+                                                      <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                                                         <styleClass>
+                                                            <String fx:value="logout" />
+                                                            <String fx:value="shadow" />
+                                                         </styleClass>
+                                                      </Button>
+                                                      <TableView layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="88.0" text="ID CLIENTE" />
+                                                            <TableColumn prefWidth="145.0" text="NOMBRE" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox layoutX="347.0" layoutY="29.0" spacing="25.0" AnchorPane.rightAnchor="304.0" AnchorPane.topAnchor="29.0">
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="76.0" text="Cuenta de:">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Group layoutX="348.0" layoutY="109.0" />
+                                                      <Group layoutX="351.0" layoutY="140.0" />
+                                                      <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
+                                                         <children>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="50.0" text="Deuda:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="121.0" text="Credito de tienda:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="144.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0">
+                                                         <children>
+                                                            <CheckBox mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="100.0" text="Cliente VIP">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <Label prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
+                                                      <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
+                                                      <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
+                                                      <Button layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Guardar" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="240.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="scrWarningCredit" prefHeight="315.0" prefWidth="411.0" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="116.0">
+                                                   <styleClass>
+                                                      <String fx:value="white-bg" />
+                                                      <String fx:value="radius" />
+                                                      <String fx:value="shadow" />
+                                                   </styleClass>
+                                                   <children>
+                                                      <GridPane alignment="CENTER" layoutX="45.0" layoutY="35.0" prefHeight="258.0" prefWidth="321.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="35.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="64.0" />
+                                                            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Llave de acceso a crédito" GridPane.halignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <PasswordField prefHeight="34.0" prefWidth="321.0" promptText="*******************************" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                                            <Label text="¡Escanee la tarjeta del cliente!" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Aceptar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab fx:id="tabNewCustomer" text="Nueva Cuenta">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <AnchorPane fx:id="guardarClienteNvo" layoutY="7.0" prefHeight="561.0" prefWidth="865.0" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
+                                                   <styleClass>
+                                                      <String fx:value="radius" />
+                                                      <String fx:value="shadow" />
+                                                      <String fx:value="white-bg" />
+                                                   </styleClass>
+                                                   <children>
+                                                      <TextField layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar cliente " />
+                                                      <Button layoutX="196.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" />
+                                                      <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                                                         <styleClass>
+                                                            <String fx:value="logout" />
+                                                            <String fx:value="shadow" />
+                                                         </styleClass>
+                                                      </Button>
+                                                      <TableView layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="88.0" text="ID CLIENTE" />
+                                                            <TableColumn prefWidth="145.0" text="NOMBRE" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox layoutX="347.0" layoutY="29.0" spacing="25.0" AnchorPane.rightAnchor="304.0" AnchorPane.topAnchor="29.0">
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="76.0" text="Cuenta de:">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Group layoutX="348.0" layoutY="109.0" />
+                                                      <Group layoutX="351.0" layoutY="140.0" />
+                                                      <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
+                                                         <children>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="138.0" text="Nombre Completo:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="134.0" text="Número telefónico:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="123456789" />
+                                                               </children>
+                                                            </Group>
+                                                            <Group>
+                                                               <children>
+                                                                  <TextField layoutX="144.0" prefHeight="25.0" prefWidth="133.0" />
+                                                                  <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </Group>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0" />
+                                                      <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
+                                                      <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
+                                                      <Button fx:id="btnSaveNewCustomer" layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="165.0" styleClass="btn" stylesheets="@../../../../../../../Controllers/ControladorCustomers/src/main/resources/com/mycompany/controladorcustomers/viewTemplate.css" text="Guardar Nuevo Cliente" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="216.0" />
+                                                      <Label layoutX="290.0" layoutY="193.0" prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios" AnchorPane.rightAnchor="418.0" AnchorPane.topAnchor="193.0">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
