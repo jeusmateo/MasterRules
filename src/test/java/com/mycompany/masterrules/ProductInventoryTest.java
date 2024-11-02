@@ -1,9 +1,4 @@
-import com.mycompany.masterrules.Database.ProductosInventario;
-import com.mycompany.masterrules.Model.Product;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import java.math.BigDecimal;
+package com.mycompany.masterrules;
 
 
 /**

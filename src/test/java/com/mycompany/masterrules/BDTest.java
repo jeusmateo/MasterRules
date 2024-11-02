@@ -1,9 +1,3 @@
-import com.mycompany.masterrules.Model.Product;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import java.math.BigDecimal;
-
 /*
 /*
 * Clase pseudo-test para probar la conexión a la base de datos
