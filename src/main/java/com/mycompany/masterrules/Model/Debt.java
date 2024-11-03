@@ -14,9 +14,12 @@ import java.time.LocalDate;
 @Table(name = "DEUDAS")
 public class Debt {
     @EmbeddedId
-    @MapsId("id")
     private Order order;
+
+    @Column(name = "Monto")
     private BigDecimal amount;
+
+    @Column(name = "Fecha")
     private LocalDate date; //pensar en guardarlo como string
 
     /**

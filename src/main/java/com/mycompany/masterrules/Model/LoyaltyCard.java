@@ -7,9 +7,7 @@ import jakarta.persistence.Embeddable;
  *
  * @author David Torres
  */
-@Embeddable
 public class LoyaltyCard {
-    @Column(name = "LoyaltyCardID")
     private long ID;
 
     public boolean accessCredit(){

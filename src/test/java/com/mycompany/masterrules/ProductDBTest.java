@@ -14,12 +14,12 @@ import java.util.List;
 public class ProductDBTest {
 
     public static void main(String[] args) {
-        Product tmpProduct = new Product(1, "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
+        Product tmpProduct = new Product("1", "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
         ProductDBManager productDB = new ProductDBManager();
         assert productDB.save(tmpProduct);
 
-        Product tmpPapas = new Product(2, "Papas", "Snack", BigDecimal.valueOf(1.00), BigDecimal.valueOf(0.90));
+        Product tmpPapas = new Product("2", "Papas", "Snack", BigDecimal.valueOf(1.00), BigDecimal.valueOf(0.90));
 
         assert productDB.save(tmpPapas);
 
@@ -38,7 +38,7 @@ public class ProductDBTest {
         System.out.println("Productos en la base de datos:");
         for (Product p : products) {
             System.out.println(
-                    "ID: " + p.getID() + "\n" +
+                    "ID: " + p.getProductID() + "\n" +
                             "Name: " + p.getProductName() + "\n" +
                             "Type: " + p.getProductType() + "\n" +
                             "Price: " + p.getPrice() + "\n" +
@@ -55,7 +55,7 @@ public class ProductDBTest {
 
         for (Product p : products) {
             System.out.println(
-                    "ID: " + p.getID() + "\n" +
+                    "ID: " + p.getProductID() + "\n" +
                             "Name: " + p.getProductName() + "\n" +
                             "Type: " + p.getProductType() + "\n" +
                             "Price: " + p.getPrice() + "\n" +

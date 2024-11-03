@@ -21,7 +21,7 @@ public class CustomerAccount {
     @Transient
     private ArrayList<Debt> totalDebt;
 
-    @Embedded
+    @Transient
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){

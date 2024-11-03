@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Clase que administra la base de datos de clientes.
  */
-public final class CustomerDBManager extends DatabaseManager<Customer, String> {
+public final class CustomerDBManager extends DatabaseManager<Customer, Long> {
 
     /**
      * @param id La llave primaria de la entidad
      * @return El cliente con la llave primaria dada, de lo contrario null
      */
     @Override
-    public Customer findById(String id) {
+    public Customer findById(Long id) {
         Session session = HibernateUtil.getOpenSession();
         try {
             return session.get(Customer.class, id);

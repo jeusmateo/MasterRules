@@ -11,17 +11,18 @@
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.highlight_sql">true</property>
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
-        <mapping class="com.mycompany.masterrules.Database.ProductosInventario"/>
         <mapping class="com.mycompany.masterrules.Model.Combo"/>
+
         <mapping class="com.mycompany.masterrules.Model.UserAccount"/>
         <mapping class="com.mycompany.masterrules.Model.UserPermissions"/>
 
         <mapping class="com.mycompany.masterrules.Model.Customer"/>
-        <mapping class="com.mycompany.masterrules.Model.CustomerAccount"/>
+        <mapping class="com.mycompany.masterrules.Model.Debt"/>
     </session-factory>
 </hibernate-configuration>

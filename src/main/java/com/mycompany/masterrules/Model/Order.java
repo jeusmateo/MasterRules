@@ -12,15 +12,26 @@ import java.util.ArrayList;
  */
 @Embeddable
 public class Order {
+    @Transient
     private long id;
-    @OneToOne
+
+    @ManyToOne
+//    @MapsId("ClienteID")
     private Customer customer;
-    @OneToMany
+
+    @Transient
     private ArrayList<Product> products;
-    @OneToMany
+
+    @Transient
     private ArrayList<Combo> combos;
+
+    @Transient
     private String comment;
+
+    @Transient
     private String deliveryMethod;
+
+    @Transient
     private LocalDateTime date;
 
     public Order(Product pro){
@@ -43,7 +54,7 @@ public class Order {
         products.add(pro);
         date=LocalDateTime.now();
     }
-    
+
     public void addProduct(Product product) {
         products.add(product);
     }
@@ -115,7 +126,7 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
+
+
 }
 
