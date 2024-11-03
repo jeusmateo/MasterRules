@@ -3,17 +3,13 @@ package com.mycompany.masterrules.Model;
 
 import java.util.ArrayList;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 // TODO: Clase temporal para que no de errores
-@Entity
 @Table(name = "CUENTAS_CLIENTES")
 @Embeddable
 public class CustomerAccount {
-    
+
     private int loyaltyPoints;
 
     @Column(name = "storeCredit")
@@ -21,8 +17,10 @@ public class CustomerAccount {
 
     private boolean isVIP;
 
+    @OneToMany
     private ArrayList<Debt> totalDebt;
 
+    @Embedded
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){

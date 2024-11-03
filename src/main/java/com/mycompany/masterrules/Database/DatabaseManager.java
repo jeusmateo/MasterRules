@@ -1,44 +1,30 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Customer;
-import com.mycompany.masterrules.Model.CustomerAccount;
 import com.mycompany.masterrules.Model.Product;
-import com.mycompany.masterrules.Model.UserAccount;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Clase que implementa las operaciones básicas de un DAO (Data Access Object) utilizando Hibernate
+ * Clase que implementa las operaciones básicas de un DAO (Data Access Object) utilizando Hibernate.
+ * <br>
+ * Nota: Esta clase no debe ser instanciada directamente, sino que debe ser extendida por una clase que represente una entidad de la base de datos.
+ * <br>
  * TODO: Implementar los métodos de la interfaz DAO
  *
  * @param <T> La entidad a ser manipulada
  * @param <K> El tipo de dato de la llave primaria de la entidad
  * @author Mateo Ortiz
  */
-public class HibernateDAO<T, K> {
-
-    private HibernateDAO() {
-    }
+abstract class DatabaseManager<T, K> {
 
     /**
-     * Factory method para obtener un DAO de Productos
-     *
-     * @return Un DAO de Productos
+     * Constructor protegido para evitar que esta clase sea instanciada directamente
      */
-    public static HibernateDAO<Product, Integer> createProductDAO() {
-        return new HibernateDAO<>();
-    }
-
-
-    public static HibernateDAO<UserAccount, String> createUserDAO() {
-        return new HibernateDAO<>();
-    }
-
-    public static HibernateDAO<Customer, Long> createCustomerDAO() {
-        return new HibernateDAO<>();
+    DatabaseManager() {
     }
 
     /**
@@ -71,24 +57,14 @@ public class HibernateDAO<T, K> {
      * @param id La llave primaria de la entidad
      * @return La entidad encontrada, o null si no se encontró
      */
-    public T findById(K id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public abstract T findById(K id);
 
     /**
      * Obtiene todas las entidades de un tipo de la base de datos
      *
      * @return Una lista con todas las entidades encontradas
      */
-    public List<T> readAll() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<T> criteria = builder.createQuery((Class<T>) Product.class);
-        criteria.from((Class<T>) Product.class);
-        List<T> data = session.createQuery(criteria).getResultList();
-        session.close();
-        return data;
-    }
+    public abstract List<T> readAll();
 
     /**
      * Actualiza una entidad en la base de datos
@@ -124,7 +100,7 @@ public class HibernateDAO<T, K> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            session.delete(entity);
+            session.remove(entity);
             session.getTransaction().commit();
             return true;
         } catch (Exception ex) {

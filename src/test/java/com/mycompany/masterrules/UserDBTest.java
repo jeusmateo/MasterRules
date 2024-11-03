@@ -1,7 +1,5 @@
 package com.mycompany.masterrules;
 
-import com.mycompany.masterrules.Database.HibernateDAO;
-import com.mycompany.masterrules.Model.Product;
 import com.mycompany.masterrules.Model.UserAccount;
 
 /**
@@ -12,10 +10,6 @@ public class UserDBTest {
 //        HibernateDAO dao = new HibernateDAO();
 
         UserAccount user = new UserAccount("1", "alex", "1234", "Alex S");
-
-        HibernateDAO<UserAccount, String> userDB = HibernateDAO.createUserDAO();
-
-        assert userDB.save(user);
 
 
     }

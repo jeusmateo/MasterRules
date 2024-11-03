@@ -16,7 +16,7 @@ public class Customer {
      * Atributos de la clase
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ClienteID")
     private long ID;
 
@@ -26,6 +26,7 @@ public class Customer {
     @Column(name = "Telefono")
     private String customerPhoneNumber;
 
+    @Embedded
     private CustomerAccount customerAccount;
 
     /*
