@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Database;
 
+import com.mycompany.masterrules.Model.Product;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -10,8 +11,21 @@ import java.util.List;
  *
  * @param <T> La entidad a ser manipulada
  * @param <K> El tipo de dato de la llave primaria de la entidad
+ * @author Mateo Ortiz
  */
 public class HibernateDAO<T, K> implements DAO<T, K> {
+
+    private HibernateDAO() {
+    }
+
+    /**
+     * Factory method para obtener un DAO de Productos
+     *
+     * @return Un DAO de Productos
+     */
+    public static HibernateDAO<Product, Integer> createProductDAO() {
+        return new HibernateDAO<>();
+    }
 
     /**
      * Guarda una entidad en la base de datos

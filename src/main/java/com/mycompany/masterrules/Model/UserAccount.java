@@ -1,17 +1,29 @@
 package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
+import jakarta.persistence.*;
 
 /**
  * Class for instances of UserAccount 
  * @author alexs
  */
+@Entity
+@Table(name = "usuarios")
 public class UserAccount {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String userID;//agregue esto
     private String username;
     private String password;
+    @Embedded
     private UserPermissions permissions;
     private String employeeName;
+
+    /**
+     * Constructor vacío de la clase UserAccount para Hibernate
+     */
+    public UserAccount() {
+    }
 
     /**
      * Constructor of class UserAccount

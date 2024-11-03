@@ -1,6 +1,6 @@
 package com.mycompany.masterrules;
 
-import com.mycompany.masterrules.Database.ProductDAO;
+import com.mycompany.masterrules.Database.HibernateDAO;
 import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
@@ -9,14 +9,15 @@ import java.util.List;
 /**
  * Clase de prueba para la clase ProductDB
  *
- * @see com.mycompany.masterrules.Database.ProductDAO
+ * @author Mateo Ortiz
  */
 public class ProductDBTest {
 
     public static void main(String[] args) {
         Product tmpProduct = new Product(1, "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
-        ProductDAO productDB = new ProductDAO();
+//        ProductDAO productDB = new ProductDAO();
+        HibernateDAO<Product, Integer> productDB = HibernateDAO.createProductDAO();
         assert productDB.save(tmpProduct);
 
         Product tmpPapas = new Product(2, "Papas", "Snack", BigDecimal.valueOf(1.00), BigDecimal.valueOf(0.90));

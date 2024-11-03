@@ -18,6 +18,8 @@
         <mapping class="com.mycompany.masterrules.Model.Product"/>
         <mapping class="com.mycompany.masterrules.Database.ProductosInventario"/>
         <mapping class="com.mycompany.masterrules.Model.Combo"/>
+        <mapping class="com.mycompany.masterrules.Model.UserAccount"/>
+        <mapping class="com.mycompany.masterrules.Model.UserPermissions"/>
 
     </session-factory>
 </hibernate-configuration>

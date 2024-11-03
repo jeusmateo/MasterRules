@@ -1,11 +1,16 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.EnumSet;
 
 /**
  * Class for instances of UserPermissions
  * @author alexs
  */
+@Embeddable
 public class UserPermissions {
     //falta probar si funciona con la gran cantidad de permisos que puse
     //probablemente Permissions se ponga en un archivo separado de esta clase?
