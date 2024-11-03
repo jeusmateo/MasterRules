@@ -13,12 +13,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "DEUDAS")
 public class Debt {
-    // Le voy a añadir un id para poder identificarlo en la base de datos
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne
+    @EmbeddedId
+    @MapsId("id")
     private Order order;
     private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
@@ -59,5 +55,5 @@ public class Debt {
         this.date = date;
     }
 
-    
+
 }

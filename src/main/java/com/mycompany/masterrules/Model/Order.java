@@ -10,10 +10,8 @@ import java.util.ArrayList;
  *
  *
  */
-@Entity
-@Table(name = "ORDENES")
+@Embeddable
 public class Order {
-    @Id
     private long id;
     @OneToOne
     private Customer customer;

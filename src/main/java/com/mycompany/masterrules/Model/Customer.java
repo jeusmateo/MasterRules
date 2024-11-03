@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 /**
  *
  * @autor: David Torres
@@ -16,9 +18,9 @@ public class Customer {
      * Atributos de la clase
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "ClienteID")
-    private long ID;
+    private UUID ID;
 
     @Column(name = "Nombre")
     private String customerName;
@@ -49,11 +51,24 @@ public class Customer {
         this.customerAccount = new CustomerAccount();
     }
 
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     * @return Retorna una cadena con la información del cliente
+     */
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "ID=" + ID +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
+                ", customerAccount=" + customerAccount +
+                '}';
+    }
 
     /**
      * @return Retorna el ID del cliente
      */
-    public long getID() {
+    public UUID getID() {
         return ID;
     }
 
@@ -62,7 +77,7 @@ public class Customer {
      *
      * @param ID Recibe el ID del cliente
      */
-    public void setID(long ID) {
+    public void setID(UUID ID) {
         this.ID = ID;
     }
 

@@ -6,18 +6,19 @@ import java.util.ArrayList;
 import jakarta.persistence.*;
 
 // TODO: Clase temporal para que no de errores
-@Table(name = "CUENTAS_CLIENTES")
 @Embeddable
 public class CustomerAccount {
 
+    @Column(name = "PuntosLealtad")
     private int loyaltyPoints;
 
-    @Column(name = "storeCredit")
+    @Column(name = "Credito")
     private double storeCredit;
 
+    @Column(name = "EsVIP")
     private boolean isVIP;
 
-    @OneToMany
+    @Transient
     private ArrayList<Debt> totalDebt;
 
     @Embedded
@@ -32,6 +33,21 @@ public class CustomerAccount {
 
     }
 
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     *
+     * @return Retorna una cadena con la información de la cuenta del cliente
+     */
+    @Override
+    public String toString() {
+        return "CustomerAccount{" +
+                "loyaltyPoints=" + loyaltyPoints +
+                ", storeCredit=" + storeCredit +
+                ", isVIP=" + isVIP +
+                ", totalDebt=" + totalDebt +
+                ", loyaltyCard=" + loyaltyCard +
+                '}';
+    }
 
 
     public int getLoyaltyPoints() {
