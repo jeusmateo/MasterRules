@@ -100,7 +100,7 @@ public class CafeteriaMenu {
         throw new Exception("ERROR: El producto no existe");
     }
     
-    private boolean isProductOnMenu(String productID){//continuo trabajando con esto
+    public boolean isProductOnMenu(String productID){//continuo trabajando con esto
         for(Product registeredProduct : products){
             if(productID.equals(registeredProduct.getProductID())){
                 return true;
@@ -109,7 +109,7 @@ public class CafeteriaMenu {
         return false;
     }
     
-    private boolean isProductNameTaken(String productName){
+    public boolean isProductNameTaken(String productName){
         for(Product registeredProduct : products){
             if(productName.equals(registeredProduct.getProductName())){
                 return true;
@@ -123,7 +123,7 @@ public class CafeteriaMenu {
      * @param product Product to modify on the menu
      * @throws Exception If the product is not on the menu, it causes an error
      */
-    public void editProduct(Product product) throws Exception{
+    public void editProduct(Product product) throws Exception{//cambie el metodo
         /*
         for(String key : products.keySet()){
             ArrayList<Product> currentList=products.get(key);
@@ -144,21 +144,28 @@ public class CafeteriaMenu {
         }
         throw new Exception("ERROR: No se encontro el producto");
         */
-        if(!isProductNameTaken(product.getProductName())){
-            for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
-                if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
-                    products.get(registeredProductCount).setProductName(product.getProductName());
-                    products.get(registeredProductCount).setProductType(product.getProductType());
-                    products.get(registeredProductCount).setPrice(product.getPrice());
-                    products.get(registeredProductCount).setVIPprice(product.getVIPprice());
-                    return;
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
+            if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
+                
+                if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){
+                    
+                    if(!isProductNameTaken(product.getProductName())){
+                        products.get(registeredProductCount).setProductName(product.getProductName());
+                    }
+                    else{
+                        throw new Exception("ERROR: El nombre del producto ya esta tomado");
+                    }
+                    
                 }
+                products.get(registeredProductCount).setProductType(product.getProductType());
+                products.get(registeredProductCount).setPrice(product.getPrice());
+                products.get(registeredProductCount).setVIPprice(product.getVIPprice());
+                
+                return;
             }
-            throw new Exception("ERROR: El producto no existe");
         }
-        else{
-            throw new Exception("ERROR: El nombre del producto ya esta tomado");
-        }
+        throw new Exception("ERROR: El producto no existe");
+        
     }
     
     /**

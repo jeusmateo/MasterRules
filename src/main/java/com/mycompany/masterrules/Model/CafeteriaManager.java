@@ -31,16 +31,22 @@ public class CafeteriaManager {
             throw new Exception("ERROR: Problema al registrar el producto");
         }
         */
-        
-        menu.addProduct(newProduct);//cambie la posicion porque el menu tiene que revisar el nombre, y el storage no lo hace
-        
-        if(inInventory){
-            storage.addProduct(newProduct.getProductID(), quantity);
+        //no me gusta como quedo este pedazo de codigo, probablemente debamos de discutirlo y refactorizarlo
+        //el problema es que el menu y storage tiene que tomar en cuenta distintos casos (cantidad correcta y que no haya nombres iguales) pero toman estos casos por separado
+        if(isProductValidForCafeteria(newProduct,quantity)){
+            if(inInventory){
+                storage.addProduct(newProduct.getProductID(), quantity);
+            }
+            menu.addProduct(newProduct);
         }
-        
-        
+        else{
+            throw new Exception("ERROR: Problemas al crear el producto");
+        }
     }
 
+    private boolean isProductValidForCafeteria(Product product,int quantity){//tuve que agregar esto pero esta algo extraño
+        return (quantity>=0 && !(menu.isProductNameTaken(product.getProductName())));
+    }
 
     public void deleteProduct(String productID) throws Exception{//cambie por id
         /*    
@@ -59,8 +65,8 @@ public class CafeteriaManager {
         }
         */
         
-        menu.removeProduct(productID);//cambie por id
         storage.removeProduct(productID);
+        menu.removeProduct(productID);//cambie por id
             
     }
     
@@ -74,15 +80,28 @@ public class CafeteriaManager {
         }
         */
         
-        menu.editProduct(product);//cambie la posicion porque el menu tiene que revisar el nombre, y el storage no lo hace
+        //hay que revisar esto
+        //el problema es que el menu y storage tiene que tomar en cuenta distintos casos (cantidad correcta y que no haya nombres iguales (en el caso e que se quiera cambiar)) pero toman estos casos por separado
+        
         if(inInventory){
-            if(storage.isStored(product.getProductID())){
-                storage.updateStock(product.getProductID(), quantity);
+            if(quantity>=0){
+                menu.editProduct(product);
+                if(storage.isStored(product.getProductID())){
+                    storage.updateStock(product.getProductID(), quantity);
+                }
+                else{
+                    storage.addProduct(product.getProductID(), quantity);
+                }
             }
             else{
-                storage.addProduct(product.getProductID(), quantity);
+                throw new Exception("ERROR: El incremento no puede ser negativo");
             }
+            
         }
+        else{
+            menu.editProduct(product);
+        }
+        
         
     }
     
