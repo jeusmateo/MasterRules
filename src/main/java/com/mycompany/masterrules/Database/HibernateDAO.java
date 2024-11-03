@@ -1,6 +1,11 @@
 package com.mycompany.masterrules.Database;
 
+import com.mycompany.masterrules.Model.Customer;
+import com.mycompany.masterrules.Model.CustomerAccount;
 import com.mycompany.masterrules.Model.Product;
+import com.mycompany.masterrules.Model.UserAccount;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -13,7 +18,7 @@ import java.util.List;
  * @param <K> El tipo de dato de la llave primaria de la entidad
  * @author Mateo Ortiz
  */
-public class HibernateDAO<T, K> implements DAO<T, K> {
+public class HibernateDAO<T, K> {
 
     private HibernateDAO() {
     }
@@ -27,13 +32,21 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
         return new HibernateDAO<>();
     }
 
+
+    public static HibernateDAO<UserAccount, String> createUserDAO() {
+        return new HibernateDAO<>();
+    }
+
+    public static HibernateDAO<Customer, Long> createCustomerDAO() {
+        return new HibernateDAO<>();
+    }
+
     /**
      * Guarda una entidad en la base de datos
      *
      * @param entity La entidad a ser guardada
      * @return true si la entidad fue guardada exitosamente, false en caso contrario
      */
-    @Override
     public boolean save(T entity) {
         Session session = HibernateUtil.getOpenSession();
         try {
@@ -58,7 +71,6 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
      * @param id La llave primaria de la entidad
      * @return La entidad encontrada, o null si no se encontró
      */
-    @Override
     public T findById(K id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -68,22 +80,14 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
      *
      * @return Una lista con todas las entidades encontradas
      */
-    @Override
     public List<T> readAll() {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        try {
-//            CriteriaBuilder builder = session.getCriteriaBuilder();
-//            CriteriaQuery<T> criteria = builder.createQuery(T.class);
-//            criteria.from(T.class);
-//            List<T> products = session.createQuery(criteria).getResultList();
-//            return products;
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            return null;
-//        } finally {
-//            session.close();
-//        }
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery((Class<T>) Product.class);
+        criteria.from((Class<T>) Product.class);
+        List<T> data = session.createQuery(criteria).getResultList();
+        session.close();
+        return data;
     }
 
     /**
@@ -92,7 +96,6 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
      * @param entity La entidad a ser actualizada
      * @return true si la entidad fue actualizada exitosamente, false en caso contrario
      */
-    @Override
     public boolean update(T entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -117,7 +120,6 @@ public class HibernateDAO<T, K> implements DAO<T, K> {
      * @param entity La entidad a ser eliminada
      * @return true si la entidad fue eliminada exitosamente, false en caso contrario
      */
-    @Override
     public boolean delete(T entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

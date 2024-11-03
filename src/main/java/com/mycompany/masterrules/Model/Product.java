@@ -17,19 +17,19 @@ import java.math.BigDecimal;
 *  y modificarlo segun los requerimientos
 * */
 @Entity
-@Table(name = "Productos")
+@Table(name = "PRODUCTOS")
 
 public class Product {
     @Id
-    @Column(name = "clvProducto")
+    @Column(name = "ProductoID")
     private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
-    @Column(name = "nombreProducto")
+    @Column(name = "Nombre")
     private String productName;
-    @Column(name = "tipoProducto")
+    @Column(name = "Tipo")
     private String productType;
-    @Column(name = "precio")
+    @Column(name = "Precio")
     private BigDecimal price;
-    @Column(name = "precioVIP")
+    @Column(name = "PrecioVIP")
     private BigDecimal VIPprice;
 
     /**

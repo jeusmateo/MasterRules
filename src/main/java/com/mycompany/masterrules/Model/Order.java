@@ -1,5 +1,7 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 /**
@@ -8,10 +10,16 @@ import java.util.ArrayList;
  *
  *
  */
+@Entity
+@Table(name = "ORDENES")
 public class Order {
+    @Id
     private long id;
+    @OneToOne
     private Customer customer;
+    @OneToMany
     private ArrayList<Product> products;
+    @OneToMany
     private ArrayList<Combo> combos;
     private String comment;
     private String deliveryMethod;

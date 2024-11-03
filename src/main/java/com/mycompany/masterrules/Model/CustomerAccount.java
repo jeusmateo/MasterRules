@@ -4,19 +4,25 @@ package com.mycompany.masterrules.Model;
 import java.util.ArrayList;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 // TODO: Clase temporal para que no de errores
 @Entity
-@Table(name = "Customer")
+@Table(name = "CUENTAS_CLIENTES")
+@Embeddable
 public class CustomerAccount {
     
     private int loyaltyPoints;
+
     @Column(name = "storeCredit")
     private double storeCredit;
+
     private boolean isVIP;
+
     private ArrayList<Debt> totalDebt;
+
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){

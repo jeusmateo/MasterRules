@@ -1,5 +1,7 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -8,10 +10,24 @@ import java.time.LocalDate;
  * @author David Torres
  *
  */
+@Entity
+@Table(name = "DEUDAS")
 public class Debt {
+    // Le voy a añadir un id para poder identificarlo en la base de datos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
     private Order order;
     private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
+
+    /**
+     * Constructor por defecto para JPA
+     * */
+    public Debt() {
+    }
 
     public Debt(Order order, BigDecimal amount) {
         this.order = order;

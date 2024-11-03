@@ -13,6 +13,10 @@ public class UserDBTest {
 
         UserAccount user = new UserAccount("1", "alex", "1234", "Alex S");
 
+        HibernateDAO<UserAccount, String> userDB = HibernateDAO.createUserDAO();
+
+        assert userDB.save(user);
+
 
     }
 }
