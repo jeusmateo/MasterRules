@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class UserManager {
     private ArrayList<UserAccount> userAccounts;
 
+    public UserManager() {
+        userAccounts= new ArrayList<UserAccount>();
+    }
+    
     /**
      * Constructor of class UserManager
      * @param userAccounts User accounts
@@ -43,6 +47,7 @@ public class UserManager {
         for(int registeredUserCount=0;registeredUserCount<userAccounts.size();registeredUserCount++){//hay que ver si este nombre del indice esta bien
             if(userID.equals(userAccounts.get(registeredUserCount).getUserID())){
                 userAccounts.remove(registeredUserCount);
+                return;//se me olvido terminar la busqueda aqui
             }
         }
         throw new Exception("ERROR: El usuario no existe");
@@ -72,13 +77,13 @@ public class UserManager {
      * @param password Password
      * @return True, if the user and password is correct. False, if the user or password is incorrect
      */
-    public boolean validateUser(String username,String password){//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
+    public boolean validateUser(String username,String password) throws Exception{//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         //aqui probablemente se involucre la BD
         
         //se encuentra al usuario por nombre
         UserAccount foundUser=findUser(username);
         
-        if(foundUser!=null && foundUser.getPassword().equals(password)){
+        if(foundUser.getPassword().equals(password)){
             return true;
         }
         else{
@@ -91,14 +96,14 @@ public class UserManager {
      * @param username Username
      * @return Found user
      */
-    public UserAccount findUser(String username){
+    public UserAccount findUser(String username) throws Exception{
         //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
         for(UserAccount registeredUser : userAccounts){
             if(registeredUser.getUsername().equals(username)){
                 return registeredUser;
             }
         }
-        return null;
+        throw new Exception("ERROR: El usuario no existe");//quite return null por una exception
     }
     
     /**
@@ -114,5 +119,13 @@ public class UserManager {
             }
         }
         throw new Exception("ERROR: El usuario no existe");
+    }
+
+    public ArrayList<UserAccount> getUserAccounts() {
+        return userAccounts;
+    }
+
+    public void setUserAccounts(ArrayList<UserAccount> userAccounts) {
+        this.userAccounts = userAccounts;
     }
 }
