@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -27,44 +28,44 @@
                                  <children>
                                     <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="343.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Group layoutX="150.0" layoutY="27.0">
+                                          <Group layoutX="175.0" layoutY="53.0">
                                              <children>
                                                 <Label fx:id="labelTotal" layoutX="19.0" layoutY="2.0" text="Total:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="labelTotalPrice" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}*">
+                                                <Label fx:id="labelTotalPriceC" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}*">
                                                    <cursor>
                                                       <Cursor fx:constant="TEXT" />
                                                    </cursor>
                                                 </Label>
                                              </children>
                                           </Group>
-                                          <Group layoutX="61.0" layoutY="89.0">
+                                          <Group layoutX="87.0" layoutY="113.0">
                                              <children>
                                                 <Label fx:id="labelCashIncome" layoutX="17.0" layoutY="2.0" text="Ingreso de efectivo:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="textFieldCashIncome" layoutX="161.0" promptText="\$00.00" />
+                                                <TextField fx:id="txtFieldCashIncome" layoutX="161.0" promptText="\$00.00" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="155.0" layoutY="138.0">
+                                          <Group layoutX="183.0" layoutY="159.0">
                                              <children>
                                                 <Label fx:id="labelChange" layoutY="2.0" text="Cambio:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="textFieldChange" layoutX="65.0" promptText="\$00.00" />
+                                                <TextField fx:id="txtFieldChange" layoutX="65.0" promptText="\$00.00" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="217.0" layoutY="218.0">
+                                          <Group layoutX="223.0" layoutY="217.0">
                                              <children>
-                                                <Button layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
-                                                <Button layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
+                                                <Button fx:id="btnPay" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                                <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                              </children>
                                           </Group>
                                        </children>
@@ -80,36 +81,36 @@
                                     <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="343.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Group layoutX="150.0" layoutY="27.0" />
-                                          <Group layoutX="104.0" layoutY="93.0">
+                                          <Group layoutX="118.0" layoutY="102.0">
                                              <children>
                                                 <Label fx:id="labelReferenceNum" layoutX="123.0" text="Referencia">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="textFieldReferenceNum" layoutY="30.0" prefHeight="40.0" prefWidth="316.0" promptText="xxxx-xxxx-xxxx" />
+                                                <TextField fx:id="txtFieldReferenceNum" layoutY="30.0" prefHeight="40.0" prefWidth="316.0" promptText="xxxx-xxxx-xxxx" />
+                                             </children>
+                                          </Group>
+                                          <Group layoutX="223.0" layoutY="217.0">
+                                             <children>
+                                                <Button fx:id="btnPaywCreditCard" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                                <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                              </children>
                                           </Group>
                                        </children>
                                     </AnchorPane>
-                                    <Group layoutX="160.0" layoutY="37.0">
+                                    <Group layoutX="175.0" layoutY="53.0">
                                        <children>
                                           <Label fx:id="labelTotal1" layoutX="19.0" layoutY="2.0" text="Total:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="labelTotalPrice1" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}*">
+                                          <Label fx:id="labelTotalPriceCC" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}*">
                                              <cursor>
                                                 <Cursor fx:constant="TEXT" />
                                              </cursor>
                                           </Label>
-                                       </children>
-                                    </Group>
-                                    <Group layoutX="227.0" layoutY="228.0">
-                                       <children>
-                                          <Button layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
-                                          <Button layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                        </children>
                                     </Group>
                                  </children>
@@ -122,19 +123,19 @@
                                  <children>
                                     <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="343.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Group layoutX="119.0" layoutY="89.0">
+                                          <Group layoutX="118.0" layoutY="102.0">
                                              <children>
                                                 <Label layoutX="67.0" text="Llave de acceso a crédito:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <PasswordField layoutY="31.0" prefHeight="25.0" prefWidth="302.0" promptText="***************************" />
+                                                <PasswordField fx:id="pswrdCreditAccess" layoutY="31.0" prefHeight="25.0" prefWidth="302.0" promptText="***************************" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="150.0" layoutY="27.0">
+                                          <Group layoutX="175.0" layoutY="53.0">
                                              <children>
-                                                <Label layoutX="78.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}">
+                                                <Label fx:id="labelTotalPriceSC" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}">
                                                    <cursor>
                                                       <Cursor fx:constant="TEXT" />
                                                    </cursor>
@@ -151,21 +152,26 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Group layoutX="217.0" layoutY="218.0">
+                                          <Group layoutX="223.0" layoutY="217.0">
                                              <children>
-                                                <Button layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
-                                                <Button layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
+                                                <Button fx:id="btnPaywSC" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                                <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                              </children>
                                           </Group>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="343.0" prefWidth="551.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label layoutX="100.0" layoutY="137.0" text="¡NO EXISTE CRÉDITO DE TIENDA!">
-                                             <font>
-                                                <Font size="24.0" />
-                                             </font>
-                                          </Label>
+                                          <AnchorPane fx:id="scrNoStoreCredit" layoutX="18.0" layoutY="11.0" prefHeight="322.0" prefWidth="515.0" stylesheets="@viewTemplate.css" visible="false">
+                                             <children>
+                                                <Label layoutX="100.0" layoutY="137.0" text="¡NO EXISTE CRÉDITO DE TIENDA!">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <styleClass>
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="shadow" />
+                                                <String fx:value="radius" />
+                                             </styleClass>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </children></AnchorPane>
@@ -175,28 +181,33 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="321.0" prefWidth="528.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
+                                    <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="343.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Group layoutX="150.0" layoutY="27.0">
+                                          <Group layoutX="175.0" layoutY="53.0">
                                              <children>
-                                                <Label layoutX="4.0" layoutY="-8.0" text="Total:">
+                                                <Label layoutX="19.0" layoutY="2.0" text="Total:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
+                                                <Label fx:id="labelTotalPrice" layoutX="89.0" layoutY="4.0" prefHeight="17.0" prefWidth="121.0" text="{Total}">
+                                                   <cursor>
+                                                      <Cursor fx:constant="TEXT" />
+                                                   </cursor>
+                                                </Label>
                                              </children>
                                           </Group>
-                                          <Group layoutX="150.0" layoutY="78.0">
+                                          <Group layoutX="164.0" layoutY="91.0">
                                              <children>
                                                 <Label layoutX="-5.0" layoutY="2.0" text="Efectivo:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="72.0" promptText="\$00.00" />
+                                                <TextField fx:id="txtFieldCashIncomeMP" layoutX="72.0" promptText="\$00.00" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="151.0" layoutY="110.0">
+                                          <Group layoutX="165.0" layoutY="119.0">
                                              <children>
                                                 <Label layoutX="1.0" layoutY="2.0" text="Tarjeta:">
                                                    <font>
@@ -206,7 +217,7 @@
                                                 <TextField layoutX="72.0" promptText="\$00.00" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="101.0" layoutY="138.0">
+                                          <Group layoutX="115.0" layoutY="147.0">
                                              <children>
                                                 <TextField layoutX="122.0" promptText="\$00.00" />
                                                 <Label layoutY="2.0" text="Credito Tienda:">
@@ -216,27 +227,22 @@
                                                 </Label>
                                              </children>
                                           </Group>
-                                          <Group layoutX="137.0" layoutY="167.0">
+                                          <Group layoutX="154.0" layoutY="168.0">
                                              <children>
-                                                <Label layoutX="17.0" layoutY="14.0" text="Faltante:">
+                                                <Label layoutX="5.0" layoutY="14.0" text="Faltante:">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="83.0" layoutY="13.0" promptText="\$00.00" />
+                                                <TextField fx:id="txtFieldRemainingPayment" layoutX="83.0" layoutY="13.0" promptText="\$00.00" />
                                              </children>
                                           </Group>
-                                          <Group layoutX="217.0" layoutY="218.0">
+                                          <Group layoutX="223.0" layoutY="217.0">
                                              <children>
-                                                <Button layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
-                                                <Button layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
+                                                <Button fx:id="btnPayMP" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                                <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                              </children>
                                           </Group>
-                                          <Label layoutX="226.0" layoutY="21.0" prefHeight="17.0" prefWidth="121.0" text="{Total}">
-                                             <cursor>
-                                                <Cursor fx:constant="TEXT" />
-                                             </cursor>
-                                          </Label>
                                        </children>
                                     </AnchorPane>
                                  </children></AnchorPane>
