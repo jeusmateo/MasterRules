@@ -132,7 +132,7 @@
                                           <Insets bottom="-5.0" />
                                        </padding>
                                     </Label>
-                                    <TableView prefHeight="149.0" prefWidth="323.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                    <TableView fx:id="tblCashInFlow" prefHeight="149.0" prefWidth="323.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                        <columns>
                                           <TableColumn prefWidth="88.0" text="Razon" />
                                           <TableColumn prefWidth="145.0" text="Fecha" />
@@ -150,7 +150,7 @@
                                           <Insets bottom="-5.0" />
                                        </padding>
                                     </Label>
-                                    <TableView prefHeight="165.0" prefWidth="320.0" GridPane.rowIndex="4">
+                                    <TableView fx:id="tblCashOutFlow" prefHeight="165.0" prefWidth="320.0" GridPane.rowIndex="4">
                                        <columns>
                                           <TableColumn prefWidth="88.0" text="Razon" />
                                           <TableColumn prefWidth="145.0" text="Fecha" />
@@ -172,12 +172,12 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="194.0" text="Hora">
+                                          <Label fx:id="labelHourTo" layoutX="194.0" text="Hora">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="60.0" text="Hora">
+                                          <Label fx:id="labelHourFrom" layoutX="60.0" text="Hora">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
@@ -224,17 +224,17 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1">
+                                          <Text fx:id="txtTSCash" fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <Text fx:id="txtTSCreditCard" fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <Text fx:id="txtTSStoreCard" fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
@@ -273,22 +273,22 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1">
+                                          <Text fx:id="txtCashFunds" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <Text fx:id="txtCashSales" fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="90.396484375" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <Text fx:id="txtInFlowCash" fill="#17bf17" strokeType="OUTSIDE" strokeWidth="0.0" text="+ $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
                                           </Text>
-                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="- $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <Text fx:id="txtOutFlowCash" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="- $ 00.00" wrappingWidth="92.396484375" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <font>
                                                 <Font name="System Bold Italic" size="15.0" />
                                              </font>
@@ -309,7 +309,7 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Ventas Totales" GridPane.columnIndex="1">
+                                          <Label fx:id="labelTotalSales" text="Ventas Totales" GridPane.columnIndex="1">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>

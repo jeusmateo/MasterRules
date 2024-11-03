@@ -111,7 +111,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="verCliente" layoutX="13.0" layoutY="13.0" prefHeight="574.0" prefWidth="855.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="13.0">
+                        <AnchorPane fx:id="scrDoReport" layoutX="13.0" layoutY="13.0" prefHeight="574.0" prefWidth="855.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="13.0">
                            <styleClass>
                               <String fx:value="radius" />
                               <String fx:value="shadow" />
@@ -143,7 +143,7 @@
                                           <Insets />
                                        </opaqueInsets>
                                     </Label>
-                                    <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer salida" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                    <Button fx:id="btnDoOutFlowReport" mnemonicParsing="false" onAction="#setBtnDoOutFlowReport" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer salida" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -151,7 +151,7 @@
                                           <Insets bottom="15.0" top="15.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <TableView prefHeight="351.0" prefWidth="399.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                    <TableView fx:id="tblOutFlowReport" prefHeight="351.0" prefWidth="399.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <columns>
                                           <TableColumn prefWidth="88.0" text="Razon" />
                                           <TableColumn minWidth="0.0" prefWidth="171.0" text="Fecha" />
@@ -169,12 +169,12 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer entrada" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                    <Button fx:id="btnDoInFlowReport" mnemonicParsing="false" onAction="#setBtnDoInFlowReport" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer entrada" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets bottom="15.0" top="15.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <TableView prefHeight="351.0" prefWidth="399.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                    <TableView fx:id="tblInFlowReport" prefHeight="351.0" prefWidth="399.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <columns>
                                           <TableColumn prefWidth="88.0" text="Razon" />
                                           <TableColumn prefWidth="145.0" text="Fecha" />
@@ -196,7 +196,7 @@
                               </GridPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="206.0" layoutY="145.0" prefHeight="311.0" prefWidth="468.0" stylesheets="@viewTemplate.css" visible="false">
+                        <AnchorPane fx:id="scrDoInflowCash" layoutX="206.0" layoutY="145.0" prefHeight="311.0" prefWidth="468.0" stylesheets="@viewTemplate.css" visible="false">
                            <children>
                               <Label layoutX="58.0" layoutY="31.0" text="Ingrese la razón y cantidad de entrada de efectivo">
                                  <font>
@@ -208,14 +208,15 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="179.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" promptText="\$00.00" />
+                              <TextField fx:id="txtFieldAmountInflow" layoutX="179.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" promptText="\$00.00" />
                               <Label layoutX="95.0" layoutY="98.0" text="Razón:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="95.0" layoutY="119.0" prefHeight="117.0" prefWidth="290.0" />
-                              <Button layoutX="180.0" layoutY="253.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" />
+                              <TextArea fx:id="txtReasonInflow" layoutX="95.0" layoutY="119.0" prefHeight="117.0" prefWidth="290.0"> </TextArea>
+                              <Button fx:id="btnAcceptInflow" layoutX="180.0" layoutY="253.0" mnemonicParsing="false" onAction="#setBtnAcceptInflow" prefHeight="25.0" prefWidth="121.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" />
+                              <Button fx:id="btnExitDoInflow" layoutX="367.0" layoutY="253.0" mnemonicParsing="false" onAction="#exitDoInflow" prefHeight="28.0" prefWidth="74.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Salir" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
@@ -223,7 +224,7 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane layoutX="206.0" layoutY="145.0" prefHeight="311.0" prefWidth="468.0" stylesheets="@viewTemplate.css" visible="false">
+                        <AnchorPane fx:id="scrDoOutflowReport" layoutX="206.0" layoutY="145.0" prefHeight="311.0" prefWidth="468.0" stylesheets="@viewTemplate.css" visible="false">
                            <children>
                               <Label layoutX="65.0" layoutY="31.0" text="Ingrese la razón y cantidad de salida de efectivo">
                                  <font>
@@ -235,14 +236,15 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="179.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" promptText="\$00.00" />
+                              <TextField fx:id="txtFieldAmountOutflow" layoutX="179.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" promptText="\$00.00" />
                               <Label layoutX="95.0" layoutY="98.0" text="Razón:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="95.0" layoutY="119.0" prefHeight="117.0" prefWidth="290.0" />
-                              <Button layoutX="180.0" layoutY="253.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" />
+                              <TextArea fx:id="txtOutflowReason" layoutX="95.0" layoutY="119.0" prefHeight="117.0" prefWidth="290.0" />
+                              <Button fx:id="btnAcceptOutflow" layoutX="180.0" layoutY="253.0" mnemonicParsing="false" onAction="#setBtnAcceptOutflow" prefHeight="25.0" prefWidth="121.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" />
+                              <Button fx:id="btnExitDoOutflow" layoutX="381.0" layoutY="253.0" mnemonicParsing="false" onAction="#exitDoOutflow" prefHeight="28.0" prefWidth="74.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Salir" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
