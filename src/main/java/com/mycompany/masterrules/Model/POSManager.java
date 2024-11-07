@@ -12,14 +12,12 @@ import com.mycompany.masterrules.Model.UserPermissions.Permission;
  */
 public class POSManager {
 
-
-
     private CustomerManager customerManager;
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
     private CafeteriaManager cafeteriaManager;
     private Printer printer;
     private UserAccount currentUser;
-    private Order currentOrder;//creo que lo de current order deberia estar en un manager propio
+    private Order currentOrder;
 
     
 
@@ -116,7 +114,7 @@ public class POSManager {
      *
      * @return El total de la orden actual.
      */
-    private BigDecimal calculateTotalAmount() {
+    private BigDecimal calculateTotalOrderAmount() {
         BigDecimal amount = new BigDecimal("0");
         if (currentOrder.getCustomer() == null) {
 
@@ -144,11 +142,11 @@ public class POSManager {
     public void sell() {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
 
-            BigDecimal amount = calculateTotalAmount();
-            Bill tempBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
+            BigDecimal amount = calculateTotalOrderAmount();
+            Bill newBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
             printer.imprimirOrder(currentOrder);
-            printer.imprimirBill(tempBill);
+            printer.imprimirBill(newBill);
             currentOrder = new Order();
         } else {
             throw new IllegalArgumentException("No tiene permisos para vender");
@@ -162,11 +160,11 @@ public class POSManager {
      * @param customerArg El cliente al que se le cobrara la deuda.
      * @param debtArg La deuda que se cobrara.
      */
-    public void sellADebt(Customer customerArg,Debt debtArg){
+    public void collectDebt(Customer customerArg,Debt debtArg){
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            Bill tempBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(tempBill);
-            printer.imprimirBill(tempBill);
+            Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getEmployeeName());
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
+            printer.imprimirBill(newBill);
             currentOrder = new Order();
             //customerArg.getCustomerAccount().removeDebt(debtArg);
 
@@ -179,8 +177,8 @@ public class POSManager {
      * Permite realizar un pedido que se pagara en otro momento.
      * @param customer Requiere a un cliente para poder hacer la deuda.
      */
-    public void makeADebtForCustomer(Customer customer) {
-        BigDecimal amount = calculateTotalAmount();
+    public void buyNowPayLater(Customer customer) {
+        BigDecimal amount = calculateTotalOrderAmount();
         Debt tempDebt = new Debt(currentOrder, amount);
         customer.getCustomerAccount().addDebt(tempDebt);
         printer.imprimirOrder(currentOrder);
