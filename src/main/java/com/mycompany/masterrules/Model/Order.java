@@ -16,7 +16,7 @@ public class Order {
     private long id;
 
     @ManyToOne
-//    @MapsId("ClienteID")
+    @JoinColumn(name = "CustomerID")
     private Customer customer;
 
     @Transient

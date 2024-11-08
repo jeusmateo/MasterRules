@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "DEUDAS")
 public class Debt {
+
+    // Si da mucho problema estoy considerando poner el ID del cliente en lugar de la orden
     @EmbeddedId
     private Order order;
 
@@ -21,6 +23,7 @@ public class Debt {
 
     @Column(name = "Fecha")
     private LocalDate date; //pensar en guardarlo como string
+
 
     /**
      * Constructor por defecto para JPA
