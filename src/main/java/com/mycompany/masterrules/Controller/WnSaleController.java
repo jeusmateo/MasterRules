@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controlador de la ventana de Venta
@@ -61,8 +62,11 @@ public class WnSaleController implements Initializable{
     //-------------------------------------------------------------------------------------------
     private ObservableList<Product> cardDataList=FXCollections.observableArrayList();
     public static int cont=0;//borrar depues, solo es de prueba
-    
-    
+    private WnSaleController wnSaleSection;
+    private Stage stage;
+    private WnSideNavigationBar wnSideNavigationBar;
+
+
     /**
      * Agregar nueva categoria de menu en las pestañas
      */
@@ -192,4 +196,8 @@ public class WnSaleController implements Initializable{
         
         displayMenuCards();
     }
+
+
+
+
 }
