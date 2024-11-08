@@ -21,11 +21,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
-      <AnchorPane prefHeight="526.0" prefWidth="856.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="22.0" prefHeight="578.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="584.0" layoutY="12.0" prefHeight="576.0" prefWidth="298.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="12.0">
+            <AnchorPane layoutX="584.0" layoutY="36.0" prefHeight="552.0" prefWidth="298.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="36.0">
                <children>
                   <Label layoutX="119.0" layoutY="7.0" text="ORDEN">
                      <font>
@@ -90,7 +90,7 @@
             </AnchorPane>
             <AnchorPane fx:id="menuWindow" prefHeight="600.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="309.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="35.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="35.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-309.0" AnchorPane.topAnchor="0.0">
                      <tabs>
                         <Tab text="Alimentos">
                           <content>

@@ -45,40 +45,52 @@ public class WnSideNavigationBar {
     private AnchorPane scrPane;
 
     @FXML
-    void ProductsSection(ActionEvent event) {
+    void ProductsSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnProducts.fxml"));
+        scrPane.getChildren().setAll(pane);
+
+    }
+
+
+    @FXML
+    void cashRegisterAuditReportSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml"));
+        scrPane.getChildren().setAll(pane);
 
     }
 
     @FXML
-    void cashRegisterAuditReportSection(ActionEvent event) {
+    void customerSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCustomers.fxml"));
+        scrPane.getChildren().setAll(pane);
 
     }
 
     @FXML
-    void customerSection(ActionEvent event) {
-
-    }
-
-    @FXML
-    void inventorySection(ActionEvent event) {
-
-    }
-
-    @FXML
-    void reportSection(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void salesSection() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/resources/com/mycompany/masterrules/WnSale.fxml"));
+    void inventorySection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnInventory.fxml"));
         scrPane.getChildren().setAll(pane);
 
 
     }
 
     @FXML
-    void usersSection(ActionEvent event) {
+    void reportSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnReports.fxml"));
+        scrPane.getChildren().setAll(pane);
+
+    }
+
+    @FXML
+    public void salesSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnSale.fxml"));
+        scrPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void usersSection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnUsers.fxml"));
+        scrPane.getChildren().setAll(pane);
 
     }
 
