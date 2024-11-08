@@ -1,8 +1,10 @@
 package com.mycompany.masterrules.Database;
 
 import com.mycompany.masterrules.Model.Product;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,15 +19,15 @@ public final class ProductDBManager extends DatabaseManager<Product, String> {
      */
     @Override
     public Product findById(String id) {
-        Session session = HibernateUtil.getOpenSession();
 
-        try {
-            return session.get(Product.class, id);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        try (Session session = HibernateUtil.getOpenSession()) {
+            session.beginTransaction();
+            Product product = session.get(Product.class, id);
+            session.getTransaction().commit();
+            return product;
+        }catch (Exception e){
+            System.err.println("Error al buscar el producto: " + e);
             return null;
-        } finally {
-            session.close();
         }
     }
 
@@ -34,15 +36,15 @@ public final class ProductDBManager extends DatabaseManager<Product, String> {
      */
     @Override
     public List<Product> readAll() {
-        Session session = HibernateUtil.getOpenSession();
 
-        try {
-            return session.createQuery("from Product", Product.class).list();
+        try (Session session = HibernateUtil.getOpenSession()) {
+            session.beginTransaction();
+            List<Product> products = session.createQuery("from Product", Product.class).list();
+            session.getTransaction().commit();
+            return products;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.err.println("Error al leer los productos: " + ex);
             return null;
-        } finally {
-            session.close();
         }
     }
 }

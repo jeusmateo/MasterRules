@@ -19,7 +19,7 @@ public final class UserDBManager extends DatabaseManager<UserAccount, String> {
             session.getTransaction().commit();
             return findUser;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error al buscar el usuario: " + e);
             return null;
         }
     }
@@ -34,7 +34,7 @@ public final class UserDBManager extends DatabaseManager<UserAccount, String> {
         try {
             return session.createQuery("from UserAccount", UserAccount.class).list();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error al leer los usuarios: " + e);
             return null;
         } finally {
             session.close();
