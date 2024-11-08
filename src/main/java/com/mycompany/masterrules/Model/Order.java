@@ -62,7 +62,7 @@ public class Order {
         this.deliveryMethod = deliveryMethod;
     }
 
-    public void setDate(LocalDateTime Fecha) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
