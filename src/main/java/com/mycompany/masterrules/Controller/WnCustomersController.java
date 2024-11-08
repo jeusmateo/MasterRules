@@ -1,16 +1,25 @@
 package com.mycompany.masterrules.Controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import com.mycompany.masterrules.Model.Customer;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class WnCustomersController {
+public class WnCustomersController implements Initializable{
 
     @FXML
     private Button btnEditAccount;
@@ -52,6 +61,13 @@ public class WnCustomersController {
     private Tab tabCustomerAccount;
 
     @FXML
+    private TableView tableCustomers;
+    @FXML
+    private TableColumn iDCustomerColumn;
+    @FXML
+    private TableColumn nameCustomerColumn;
+
+    @FXML
     private Tab tabNewCustomer;
 
     public void setBtnShowInformation() {
@@ -88,6 +104,18 @@ public class WnCustomersController {
         for (TextField textField : textFields) {
             textField.clear(); // Limpia cada campo de texto proporcionado
         }
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        customers.add(new Customer("Juan", "123"));
+        customers.add(new Customer("Pedro", "456"));
+        customers.add(new Customer("Maria", "789"));
+        customers.add(new Customer("Jose", "101"));
+        customers.add(new Customer("Luis", "112"));
+        tableCustomers.getColumns().addAll(nameCustomerColumn, iDCustomerColumn);
+        tableCustomers.getItems().addAll(customers);
     }
 
 
