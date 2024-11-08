@@ -4,36 +4,25 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @autor: Raul Magaña
  *
  *
  */
-@Embeddable
 public class Order {
-    @Transient
     private long id;
-
-    @ManyToOne
     private Customer customer;
-
-    @Transient
-    private ArrayList<Product> products;
-
-    @Transient
-    private ArrayList<Combo> combos;
-
-    @Transient
+    private List<Product> products;
+    private List<Combo> combos;
     private String comment;
-
-    @Transient
     private String deliveryMethod;
-
-    @Transient
     private LocalDateTime date;
 
     public Order(Product pro){
+        // TODO: NO OLVIDAR CAMBIAR ESTE ID=4
         id=4;
         products = new ArrayList();
         products.add(pro);
@@ -86,11 +75,11 @@ public class Order {
         return customer;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public ArrayList<Combo> getCombos() {
+    public List<Combo> getCombos() {
         return combos;
     }
 

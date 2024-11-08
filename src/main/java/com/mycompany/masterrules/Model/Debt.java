@@ -13,8 +13,13 @@ import java.time.LocalDate;
 @Entity
 public class Debt {
 
+    // TODO FIXME CONFIRMAR SI ESTA CORRECTO
     // Si da mucho problema estoy considerando poner el ID del cliente en lugar de la orden
-    @EmbeddedId
+    // Me rendí, lo dejo así (Copilot me entiende)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Transient
     private Order order;
     private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
@@ -56,4 +61,11 @@ public class Debt {
         this.date = date;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

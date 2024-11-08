@@ -14,9 +14,9 @@ public class CustomerAccount {
     private int loyaltyPoints;
     private double storeCredit;
     private boolean isVIP;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Debt> totalDebt;
-    @Transient
+    @Transient // TODO: Revisar si es necesario
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){
