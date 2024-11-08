@@ -21,11 +21,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
-      <AnchorPane layoutY="22.0" prefHeight="578.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="22.0" prefHeight="578.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="584.0" layoutY="36.0" prefHeight="552.0" prefWidth="298.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="36.0">
+            <AnchorPane layoutX="584.0" layoutY="5.0" prefHeight="592.0" prefWidth="298.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>
                   <Label layoutX="119.0" layoutY="7.0" text="ORDEN">
                      <font>
@@ -42,7 +42,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <AnchorPane layoutX="27.0" layoutY="324.0" prefHeight="86.0" prefWidth="200.0" AnchorPane.bottomAnchor="164.66666666666663">
+                  <AnchorPane layoutX="49.0" layoutY="301.0" prefHeight="86.0" prefWidth="200.0" AnchorPane.bottomAnchor="165.0">
                      <children>
                         <Label layoutX="14.0" layoutY="33.0" text="TOTAL:">
                            <font>
@@ -58,8 +58,8 @@
                   </AnchorPane>
                   <VBox fx:id="menuOrderOptionsBox" layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" AnchorPane.bottomAnchor="32.66666666666663">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#showOrderForm" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CANCELAR">
+                        <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#showOrderForm" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="CONTINUAR" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="CANCELAR">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
@@ -68,13 +68,13 @@
                   </VBox>
                   <VBox fx:id="continueOrderOptionsBox" layoutX="51.0" layoutY="410.0" prefHeight="135.0" prefWidth="180.0" visible="false" AnchorPane.bottomAnchor="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="PAGAR" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="FIADO">
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="PAGAR" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="FIADO">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#showMenuWindow" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CANCELAR ORDEN">
+                        <Button mnemonicParsing="false" onAction="#showMenuWindow" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="CANCELAR ORDEN">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
@@ -88,36 +88,38 @@
                   <String fx:value="radius" />
                </styleClass>
             </AnchorPane>
-            <AnchorPane fx:id="menuWindow" prefHeight="600.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="309.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="menuWindow" prefHeight="600.0" prefWidth="565.0" styleClass="white-bg" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="35.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-309.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="600.0" prefWidth="575.0" styleClass="white-bg" stylesheets="@viewTemplate.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                      <tabs>
                         <Tab text="Alimentos">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="880.0">
+                                 <children>
+                                    <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                                             <content>
+                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="white-bg" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </AnchorPane>
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <AnchorPane prefHeight="551.0" prefWidth="556.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="37.33333333333326">
-                     <children>
-                        <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
-                           <content>
-                              <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                     <styleClass>
-                        <String fx:value="white-bg" />
-                        <String fx:value="shadow" />
-                        <String fx:value="radius" />
-                     </styleClass>
-                  </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="continueOrderWindow" prefHeight="600.0" prefWidth="573.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="304.66666666666663" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="continueOrderWindow" layoutY="33.0" prefHeight="567.0" prefWidth="575.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="305.0" AnchorPane.topAnchor="33.0">
                <children>
-                  <AnchorPane layoutX="15.0" layoutY="21.0" prefHeight="557.0" prefWidth="551.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="21.333333333333258" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="8.666666666666515" AnchorPane.topAnchor="21.0">
+                  <AnchorPane layoutX="12.0" layoutY="8.0" prefHeight="552.0" prefWidth="551.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="8.0">
                      <children>
                         <TilePane layoutX="49.0" layoutY="169.0" prefHeight="82.0" prefWidth="143.0" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="169.0">
                            <children>

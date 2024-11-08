@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -27,6 +24,9 @@ import javafx.stage.Stage;
 public class WnSaleController implements Initializable{
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
+    @FXML
+    private Button btnContinue;
+
     @FXML
     private AnchorPane menuWindow;
     
