@@ -7,6 +7,8 @@ module com.mycompany.masterrules {
     requires jakarta.persistence;
     requires java.naming;
     requires javafx.fxmlEmpty;
+    requires javafx.base;
+    requires javafx.graphics;
 
     exports com.mycompany.masterrules;
     opens com.mycompany.masterrules to javafx.fxml;
