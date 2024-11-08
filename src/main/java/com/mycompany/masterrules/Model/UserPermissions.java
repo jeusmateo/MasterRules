@@ -1,8 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.EnumSet;
 

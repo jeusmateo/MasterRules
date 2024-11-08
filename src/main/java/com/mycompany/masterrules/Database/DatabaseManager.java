@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Database;
 
 import com.mycompany.masterrules.Model.Product;
+import com.mycompany.masterrules.Model.UserAccount;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
