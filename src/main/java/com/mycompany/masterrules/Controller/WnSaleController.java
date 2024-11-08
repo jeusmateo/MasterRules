@@ -1,9 +1,14 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Product;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -28,10 +33,10 @@ public class WnSaleController implements Initializable{
     private VBox menuOrderOptionsBox;
     
     @FXML
-    private ScrollPane scrollPaneMenu;
+    private ScrollPane menuCardsScroller;
     
     @FXML
-    private FlowPane flowPaneMenuCards=new FlowPane();
+    private FlowPane menuCards=new FlowPane();
 
     @FXML
     private TabPane menuCategories;
@@ -54,7 +59,7 @@ public class WnSaleController implements Initializable{
     
     //OTROS OBJETOS
     //-------------------------------------------------------------------------------------------
-    //private ObservableList<ProductTest> cardDataList=FXCollections.observableArrayList();
+    private ObservableList<Product> cardDataList=FXCollections.observableArrayList();
     public static int cont=0;//borrar depues, solo es de prueba
     
     
@@ -83,12 +88,11 @@ public class WnSaleController implements Initializable{
     }
     */
     
-    /*
     public void displayMenuCards(){
         //BORRAR ESTO SOLO ES DE PRUEBA
-        ProductTest p1=new ProductTest("Burger",20.0);
-        ProductTest p2=new ProductTest("Fries",20.0);
-        ProductTest p3=new ProductTest("Soda",20.0);
+        Product p1=new Product("P1","Burger","Platillo",new BigDecimal("20"),new BigDecimal("15"));
+        Product p2=new Product("P2","Fries","Platillo",new BigDecimal("15"),new BigDecimal("10"));
+        Product p3=new Product("P3","Soda","Platillo",new BigDecimal("20"),new BigDecimal("10"));
         
         cardDataList.clear();
         cardDataList.add(p1);
@@ -98,13 +102,20 @@ public class WnSaleController implements Initializable{
         for(int currentProduct = 0; currentProduct < cardDataList.size();currentProduct++){
             try{
                 FXMLLoader load=new FXMLLoader();
-                load.setLocation(getClass().getResource("cardProduct.fxml"));
+                load.setLocation(getClass().getResource("itemCardProduct.fxml"));
                 AnchorPane pane=load.load();
-                CardProductController cardController=load.getController();
+                ItemCardProductController cardController=load.getController();
                 
                 cardController.setProductDataToCard(cardDataList.get(currentProduct));
                 
-                flowPaneMenuCards.getChildren().add(pane);
+                menuCards.getChildren().add(pane);
+                
+                /*
+                pane.setOnMousePressed(event -> {
+                    pane.setStyle("-fx-background-color: lightgray");
+                    //pane.setStyle("-fx-background-color: white");
+                });
+                */
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -112,7 +123,6 @@ public class WnSaleController implements Initializable{
             
         }
     }
-    */
     
     /*
     public void setupAutoCompleteOnTextfield(TextField textfield){//List<String> clientNames poner como parametro
@@ -178,8 +188,8 @@ public class WnSaleController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
-        flowPaneMenuCards.prefWidthProperty().bind(scrollPaneMenu.widthProperty());
+        menuCards.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         
-        //displayMenuCards();
+        displayMenuCards();
     }
 }

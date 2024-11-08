@@ -192,9 +192,9 @@
                                     </TabPane>
                                     <AnchorPane prefHeight="551.0" prefWidth="556.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="37.33333333333326">
                                        <children>
-                                          <ScrollPane fx:id="scrollPaneMenu" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                                              <content>
-                                                <FlowPane fx:id="flowPaneMenuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
                                              </content>
                                           </ScrollPane>
                                        </children>
