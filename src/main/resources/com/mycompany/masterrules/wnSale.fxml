@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -55,33 +55,33 @@
                               <Group layoutX="8.0" layoutY="151.0" />
                               <VBox alignment="CENTER" layoutX="6.0" layoutY="192.0" prefHeight="284.0" prefWidth="210.0" AnchorPane.bottomAnchor="124.0" AnchorPane.topAnchor="192.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Venta" wrapText="true" VBox.vgrow="NEVER">
+                                    <Button fx:id="btnSalesSection" mnemonicParsing="false" onAction="#salesSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Venta" wrapText="true" VBox.vgrow="NEVER">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Productos" textFill="#800ae8" VBox.vgrow="NEVER">
+                                    <Button fx:id="btnProductsSection" mnemonicParsing="false" onAction="#ProductsSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Productos" textFill="#800ae8" VBox.vgrow="NEVER">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Clientes" VBox.vgrow="NEVER">
+                                    <Button fx:id="btnCustomersSection" mnemonicParsing="false" onAction="#customerSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Clientes" VBox.vgrow="NEVER">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Inventario" VBox.vgrow="NEVER">
+                                    <Button fx:id="btnInventorySection" mnemonicParsing="false" onAction="#inventorySection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Inventario" VBox.vgrow="NEVER">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Reportes" VBox.vgrow="NEVER">
+                                    <Button fx:id="btnReportsSection" mnemonicParsing="false" onAction="#reportSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Reportes" VBox.vgrow="NEVER">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Usuarios" VBox.vgrow="NEVER" />
-                                    <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Corte de Venta">
+                                    <Button fx:id="btnUsersSection" mnemonicParsing="false" onAction="#usersSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Usuarios" VBox.vgrow="NEVER" />
+                                    <Button fx:id="btnCashRegisterAuditReportSection" mnemonicParsing="false" onAction="#cashRegisterAuditReportSection" prefHeight="42.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@viewTemplate.css" text="Corte de Venta">
                                        <VBox.margin>
                                           <Insets top="7.0" />
                                        </VBox.margin>

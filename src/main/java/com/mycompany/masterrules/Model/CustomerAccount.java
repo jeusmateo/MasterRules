@@ -30,21 +30,7 @@ public class CustomerAccount {
 
 
 
-    public int getLoyaltyPoints() {
-        return loyaltyPoints;
-    }
 
-    public void setLoyaltyPoints(int loyaltyPoints) {
-        this.loyaltyPoints = loyaltyPoints;
-    }
-
-    public double getStoreCredit() {
-        return storeCredit;
-    }
-
-    public void setStoreCredit(double storeCredit) {
-        this.storeCredit = storeCredit;
-    }
 
     public boolean isIsVIP() {
         return isVIP;
@@ -74,4 +60,19 @@ public class CustomerAccount {
         this.totalDebt.add(debt);
     }
 
+    public int getLoyaltyPoints() {
+        return loyaltyPoints;
+    }
+
+    public void setLoyaltyPoints(int loyaltyPoints) {
+        this.loyaltyPoints = loyaltyPoints;
+    }
+
+    public double getStoreCredit() {
+        return storeCredit;
+    }
+
+    public void setStoreCredit(double storeCredit) {
+        this.storeCredit = storeCredit;
+    }
 }

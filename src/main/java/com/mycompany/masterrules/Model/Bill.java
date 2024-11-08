@@ -90,7 +90,7 @@ public class Bill {
 
     /**
      * Establece el cliente al que se le realiza la factura
-     * @param customer El cliente al que se le realiza la factura
+     * @param customerAccount El cliente al que se le realiza la factura
      */
     public void setCustomerAccount(Customer customerAccount) {
         this.customer = customerAccount;
