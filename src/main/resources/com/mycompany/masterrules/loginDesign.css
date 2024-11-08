@@ -1,0 +1,36 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 oct 2024, 15:17:43
+    Author     : campv
+*/
+
+/*
+    hotPink= #f254dd
+    mildBlue= #6351dd
+    darkPurple= #311680
+*/
+    
+.gradient{
+    
+    -fx-background-color:linear-gradient(to bottom right, #f254dd, #6351dd,#311680);
+}
+
+.whiteFormBackground{
+    -fx-background-color:white;
+}
+
+.loginButton{
+    -fx-background-color:linear-gradient(to bottom right, #6351dd,#311680);
+    -fx-background-radius:5px;
+    -fx-cursor:hand;
+    -fx-text-fill:white;
+    -fx-font-size:14px;
+}
+
+.loginButton:hover{
+    -fx-background-color:linear-gradient(to bottom right, #a399ff,#3f1ac3);
+}
+
