@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -17,20 +14,13 @@ import java.math.BigDecimal;
 *  y modificarlo segun los requerimientos
 * */
 @Entity
-@Table(name = "Productos")
-
 public class Product {
     @Id
-    @Column(name = "clvProducto")
     private String productID;
     //private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
-    @Column(name = "nombreProducto")
     private String productName;
-    @Column(name = "tipoProducto")
     private String productType;
-    @Column(name = "precio")
     private BigDecimal price;
-    @Column(name = "precioVIP")
     private BigDecimal VIPprice;
 
     /**
@@ -59,7 +49,7 @@ public class Product {
      * Getter of identification(ID) of product
      * @return Product identification
      */
-    public String getProductID() {    
+    public String getProductID() {
         return productID;
     }
     /*
@@ -100,8 +90,8 @@ public class Product {
     }
 
     /**
-     * Setter of identification(ID) of product 
-     * @param productID Identification of product 
+     * Setter of identification(ID) of product
+     * @param productID Identification of product
      */
     public void setProductID(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
         this.productID = productID;

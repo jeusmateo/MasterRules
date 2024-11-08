@@ -2,21 +2,21 @@ package com.mycompany.masterrules.Model;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.sql.results.graph.Fetch;
 
 // TODO: Clase temporal para que no de errores
-@Entity
-@Table(name = "Customer")
+@Embeddable
 public class CustomerAccount {
-    
+
     private int loyaltyPoints;
-    @Column(name = "storeCredit")
     private double storeCredit;
     private boolean isVIP;
-    private ArrayList<Debt> totalDebt;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Debt> totalDebt;
+    @Transient // TODO: Revisar si es necesario
     private LoyaltyCard loyaltyCard;
     
     public CustomerAccount(){
@@ -28,6 +28,21 @@ public class CustomerAccount {
 
     }
 
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     *
+     * @return Retorna una cadena con la información de la cuenta del cliente
+     */
+    @Override
+    public String toString() {
+        return "CustomerAccount{" +
+                "loyaltyPoints=" + loyaltyPoints +
+                ", storeCredit=" + storeCredit +
+                ", isVIP=" + isVIP +
+                ", totalDebt=" + totalDebt +
+                ", loyaltyCard=" + loyaltyCard +
+                '}';
+    }
 
 
 
@@ -48,7 +63,7 @@ public class CustomerAccount {
         this.loyaltyCard = loyaltyCard;
     }
 
-    public ArrayList<Debt> getTotalDebt() {
+    public List<Debt> getTotalDebt() {
         return totalDebt;
     }
 
