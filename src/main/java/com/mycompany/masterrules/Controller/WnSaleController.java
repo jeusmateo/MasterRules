@@ -106,7 +106,7 @@ public class WnSaleController implements Initializable{
         for(int currentProduct = 0; currentProduct < cardDataList.size();currentProduct++){
             try{
                 FXMLLoader load=new FXMLLoader();
-                load.setLocation(getClass().getResource("itemCardProduct.fxml"));
+                load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
                 AnchorPane pane=load.load();
                 ItemCardProductController cardController=load.getController();
                 

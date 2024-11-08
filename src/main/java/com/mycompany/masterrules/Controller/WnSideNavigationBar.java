@@ -45,18 +45,11 @@ public class WnSideNavigationBar {
     private AnchorPane scrPane;
 
 
-
-
-
-
     @FXML
     void ProductsSection(ActionEvent event) throws IOException {
-        
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnProducts.fxml"));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
-
-
     }
 
 
