@@ -8,13 +8,11 @@ import jakarta.persistence.*;
  * @author Alexandra Saavedra
  */
 @Entity
-@Table(name = "Usuarios")
 public class UserAccount {
     /**
      * Identificador del usuario
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String userID;//agregue esto
     /**
      * Nombre del usuario

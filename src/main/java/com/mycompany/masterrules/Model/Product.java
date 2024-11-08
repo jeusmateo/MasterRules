@@ -14,20 +14,13 @@ import java.math.BigDecimal;
 *  y modificarlo segun los requerimientos
 * */
 @Entity
-@Table(name = "PRODUCTOS")
-
 public class Product {
     @Id
-    @Column(name = "ProductoID")
     private String productID;
     //private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
-    @Column(name = "Nombre")
     private String productName;
-    @Column(name = "Tipo")
     private String productType;
-    @Column(name = "Precio")
     private BigDecimal price;
-    @Column(name = "PrecioVIP")
     private BigDecimal VIPprice;
 
     /**
@@ -97,7 +90,7 @@ public class Product {
     }
 
     /**
-     * Setter of identification(ID) of product 
+     * Setter of identification(ID) of product
      * @param productID Identification of product
      */
     public void setProductID(String productID) {//creo que este se debe eliminar junto con los otros setters de ids

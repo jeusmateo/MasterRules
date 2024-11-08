@@ -3,36 +3,28 @@ package com.mycompany.masterrules.Model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "CombosDefinidos")
 public class Combo {
 
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long comboID;
-    @Column(name = "ComboName")
     private String comboName;
     @OneToMany
     private List<Product> products;
     @Transient
     private CustomComboTemplate productsTemplate;
-   // @Column(name = "price")
     private BigDecimal price;
-   // @Column(name = "VIPPrice")
     private BigDecimal VIPPrice;
 
+    /**
+     * Constructor para JPA
+     */
     public Combo() {
 
     }
-
-
 
     public Combo(String comboName, List<Product> products, CustomComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
@@ -98,6 +90,6 @@ public class Combo {
         return VIPPrice;
     }
 
-    
+
 
 }

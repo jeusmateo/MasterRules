@@ -9,7 +9,6 @@ import jakarta.persistence.*;
  * Clase que representa a un cliente en MasterRules
  */
 @Entity
-@Table(name = "CLIENTES")
 public class Customer {
 
     /**
@@ -17,15 +16,9 @@ public class Customer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ClienteID")
     private long ID;
-
-    @Column(name = "Nombre")
     private String customerName;
-
-    @Column(name = "Telefono")
     private String customerPhoneNumber;
-
     @Embedded
     private CustomerAccount customerAccount;
 

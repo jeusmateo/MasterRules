@@ -2,25 +2,20 @@ package com.mycompany.masterrules.Model;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
+import org.hibernate.sql.results.graph.Fetch;
 
 // TODO: Clase temporal para que no de errores
 @Embeddable
 public class CustomerAccount {
 
-    @Column(name = "PuntosLealtad")
     private int loyaltyPoints;
-
-    @Column(name = "Credito")
     private double storeCredit;
-
-    @Column(name = "EsVIP")
     private boolean isVIP;
-
-    @Transient
-    private ArrayList<Debt> totalDebt;
-
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Debt> totalDebt;
     @Transient
     private LoyaltyCard loyaltyCard;
     
@@ -82,7 +77,7 @@ public class CustomerAccount {
         this.loyaltyCard = loyaltyCard;
     }
 
-    public ArrayList<Debt> getTotalDebt() {
+    public List<Debt> getTotalDebt() {
         return totalDebt;
     }
 
