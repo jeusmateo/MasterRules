@@ -21,24 +21,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="526.0" prefWidth="856.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="584.0" layoutY="12.0" prefHeight="576.0" prefWidth="298.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="12.0">
                <children>
-                  <Label layoutX="119.0" layoutY="7.0" text="ORDER">
+                  <Label layoutX="119.0" layoutY="7.0" text="ORDEN">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <TableView layoutX="10.0" layoutY="43.0" prefHeight="269.0" prefWidth="270.0" AnchorPane.bottomAnchor="264.3333333333333" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
                      <columns>
-                        <TableColumn prefWidth="58.66662883758545" text="Quantity" />
-                        <TableColumn prefWidth="108.66661834716797" text="Product" />
-                        <TableColumn prefWidth="82.00007629394531" text="Price($)" />
+                        <TableColumn prefWidth="58.66662883758545" text="Cantidad" />
+                        <TableColumn prefWidth="108.66661834716797" text="Producto" />
+                        <TableColumn prefWidth="82.00007629394531" text="Precio($)" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <AnchorPane layoutX="27.0" layoutY="324.0" prefHeight="86.0" prefWidth="200.0" AnchorPane.bottomAnchor="164.66666666666663">
                      <children>
@@ -90,7 +92,7 @@
                <children>
                   <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="35.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab text="Untitled Tab">
+                        <Tab text="Alimentos">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>
