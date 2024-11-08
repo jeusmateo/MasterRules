@@ -9,45 +9,56 @@ import java.util.ArrayList;
  * @author David Torres
  */
 public class CashRegisterAuditReportManager {
+
     private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;
     CashRegisterAuditReport currentCashRegisterAuditReport;
 
-    public CashRegisterAuditReportManager(){
+    public CashRegisterAuditReportManager() {
         currentCashRegisterAuditReport = new CashRegisterAuditReport(new BigDecimal("0"));
-        cashRegisterAuditReports= new ArrayList<>();
+        cashRegisterAuditReports = new ArrayList<>();
     }
 
-    private void addCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
-        cashRegisterAuditReports.add(cashRegisterAuditReport);
-    }
-    
-    public void removeCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport){
+
+    public void removeCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport) {
         cashRegisterAuditReports.remove(cashRegisterAuditReport);
     }
 
-    public void AddSaleToCashRegisterAuditReport(Bill sale){
+    public void AddSaleToCashRegisterAuditReport(Bill sale) {
         currentCashRegisterAuditReport.addBill(sale);
     }
 
-    public void withdrawCash(String reason, BigDecimal amount){
-        currentCashRegisterAuditReport.addCashOutFlowReport(reason, amount);
+    public void withdrawCash(String reason, BigDecimal amount) {
+        if (currentCashRegisterAuditReport.getCurrentCashAmount().compareTo(amount) >= 0) {
+            currentCashRegisterAuditReport.getCashOutFlowReports().add(new CashFlowReport(reason, amount));
+            currentCashRegisterAuditReport.setCurrentCashAmount(currentCashRegisterAuditReport.getCurrentCashAmount().subtract(amount));
+        } else {
+            throw new IllegalArgumentException("No hay suficiente dinero en caja");
+        }
     }
 
-    public void depositCash(String reason, BigDecimal amount){
-        currentCashRegisterAuditReport.addCashInFlowReport(reason, amount);
+    public void depositCash(String reason, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+            currentCashRegisterAuditReport.getCashInFlowReports().add(new CashFlowReport(reason, amount));
+            currentCashRegisterAuditReport.setCurrentCashAmount(currentCashRegisterAuditReport.getCurrentCashAmount().add(amount));
+        } else {
+            throw new IllegalArgumentException("No se puede depositar una cantidad menor o igual a cero");
+        }
+
     }
+
     /**
      * Metodo para finalizar el corte actual.
+     *
      * @param initialCashAmount Monto con el cual iniciara el siguiente corte.
      */
-    public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount){
+    public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount) {
         currentCashRegisterAuditReport.calculateFinalCashAmount();
         currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashRegisterAuditReports.add(currentCashRegisterAuditReport);
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
 
-    public void startCashRegisterAuditReport(BigDecimal initialCashAmount){
+    public void startCashRegisterAuditReport(BigDecimal initialCashAmount) {
         currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
     }
 

@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Model;
 import java.util.ArrayList;
-import java.util.List;
 /**
  *
  * @author David Torres

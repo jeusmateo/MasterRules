@@ -48,36 +48,6 @@ public class CashRegisterAuditReport {
         
     }
     
-    /**
-     * Metodo para agregar un reporte de salida de dinero
-     * @param reason Motivo por el cual se realiza el movimiento
-     * @param amount Cantidad de dinero que se retira.
-     */
-    public void addCashOutFlowReport(String reason, BigDecimal amount){
-        if(currentCashAmount.compareTo(amount)>=0){
-        cashOutFlowReports.add(new CashFlowReport(reason, amount));
-        currentCashAmount=currentCashAmount.subtract(amount);
-        }
-        else{
-            throw new IllegalArgumentException("No hay suficiente dinero en caja");
-        }
-    }
-
-    /**
-     * Metodo para agregar un reporte de entrada de dinero
-     * @param reason Motivo por el cual se realiza el movimiento
-     * @param amount Cantidad de dinero que se deposita.
-     */
-    public void addCashInFlowReport(String reason, BigDecimal amount){
-        if(amount.compareTo(BigDecimal.ZERO)>0){
-            cashInFlowReports.add(new CashFlowReport(reason, amount));
-            currentCashAmount=currentCashAmount.add(amount);
-        }
-        else{
-            throw new IllegalArgumentException("No se puede depositar una cantidad negativa");
-        }
-        
-    }
 
     /**
      * Metodo para agregar una factura a la caja

@@ -7,13 +7,16 @@ import jakarta.persistence.Table;
 import java.util.EnumSet;
 
 /**
- * Class for instances of UserPermissions
- * @author alexs
+ * Clase que representa a los permisos que tiene un usuario en MasterRules
+ * @author Alexandra Saavedra
  */
 @Embeddable
 public class UserPermissions {
     //falta probar si funciona con la gran cantidad de permisos que puse
     //probablemente Permissions se ponga en un archivo separado de esta clase?
+    /**
+     * Permisos que puede tener el usuario
+     */
     public enum Permission{
         //Sales
         MAKE_SALE,
@@ -54,59 +57,62 @@ public class UserPermissions {
         EDIT_USER,
         DELETE_USER,
     };
+    /**
+     * Permisos concedidos al usuario
+     */
     private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
 
     /**
-     * Constructor of class UserPermissions
+     * Constructor de la clase
      */
     public UserPermissions() {
         grantedPermissions= EnumSet.noneOf(Permission.class);
     }
 
     /**
-     * Constructor of class UserPermissions
-     * @param grantedPermissions Granted user's permissions
+     * Constructor de la clase
+     * @param grantedPermissions Permisos concedidos al usuario
      */
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
     }
     
     /**
-     * Gives permission to a user
-     * @param permission Permission to give
+     * Concede un permiso a un usuario
+     * @param permission Permiso a concedir
      */
     public void givePermission(Permission permission){
         grantedPermissions.add(permission);
     }
     
     /**
-     * Denies permission to a user
-     * @param permission Permission to deny
+     * Remueve permiso a un usuario
+     * @param permission Permiso a remover
      */
     public void removePermission(Permission permission){
         grantedPermissions.remove(permission);
     }
     
     /**
-     * Checks if the user has the permission
-     * @param permission
-     * @return 
+     * Checa si un usuario tiene el permiso
+     * @param permission Permiso a revisar
+     * @return Verdadero, si el usuario tiene el permiso. Falso, si el usuario no tiene el permiso
      */
     public boolean isEnabled(Permission permission){
         return (grantedPermissions.contains(permission));
     }
 
     /**
-     * Getter of granted user's permissions
-     * @return Granted user's permissions
+     * Obtiene los permisos concedidos al usuario
+     * @return Permisos concedidos al usuario
      */
     public EnumSet<Permission> getGrantedPermissions() {
         return grantedPermissions;
     }
 
     /**
-     * Setter of granted user's permissions
-     * @param grantedPermissions Granted user's permissions
+     * Establece los permisos concedidos al usuario
+     * @param grantedPermissions Permisos concedidos al usuario
      */
     public void setGrantedPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
