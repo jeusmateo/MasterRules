@@ -10,6 +10,11 @@ public class CustomerManager {
 
     public CustomerManager(){
         customers= new ArrayList();
+        customers.add(new Customer("Juan", "123"));
+        customers.add(new Customer("Pedro", "456"));
+        customers.add(new Customer("Maria", "789"));
+        customers.add(new Customer("Jose", "101"));
+        customers.add(new Customer("Luis", "112"));
     }
     public void addCustomer(String name, String phone){
         
