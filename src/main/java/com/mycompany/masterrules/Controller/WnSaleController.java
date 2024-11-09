@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -26,6 +29,9 @@ public class WnSaleController implements Initializable{
     //-------------------------------------------------------------------------------------------
     @FXML
     private Button btnContinue;
+
+    @FXML
+    private Button btnPay;
 
     @FXML
     private AnchorPane menuWindow;
@@ -182,8 +188,24 @@ public class WnSaleController implements Initializable{
     public void hideTableNumber(){
         tableNumberBox.setVisible(false);
     }
-    
-    
+
+
+    // Le falta que no desaparezca lo de atras(salga como un popup, y que se pueda regresar y creo que ya.
+    @FXML
+    private void handlePayAction(MouseEvent event) {
+        try {
+            Parent paymentView = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            Scene paymentScene = new Scene(paymentView);
+            Stage currentStage = (Stage) btnPay.getScene().getWindow(); // Obtiene la ventana actual
+            currentStage.setScene(paymentScene); // Establece la nueva escena
+            currentStage.show(); // Muestra la escena
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error al cargar la vista de pago: " + e.getMessage());
+        }
+    }
+
+
     /**
      * Inicializar el controllador de la ventana de Venta
      * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz
