@@ -18,7 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Controlador de la ventana de Venta
@@ -190,20 +192,40 @@ public class WnSaleController implements Initializable{
     }
 
 
-    // Le falta que no desaparezca lo de atras(salga como un popup, y que se pueda regresar y creo que ya.
     @FXML
     private void handlePayAction(MouseEvent event) {
         try {
-            Parent paymentView = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            // Cargar la vista de pago desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            Parent paymentView = loader.load();
+
+            // Crear una nueva escena y un nuevo Stage para la vista de pago
             Scene paymentScene = new Scene(paymentView);
-            Stage currentStage = (Stage) btnPay.getScene().getWindow(); // Obtiene la ventana actual
-            currentStage.setScene(paymentScene); // Establece la nueva escena
-            currentStage.show(); // Muestra la escena
+            Stage paymentStage = new Stage();
+            paymentStage.setScene(paymentScene);
+
+            // Configurar el Stage como modal para bloquear interacciones en la ventana principal
+            paymentStage.initModality(Modality.WINDOW_MODAL);
+            paymentStage.initOwner(btnPay.getScene().getWindow());
+
+            // Configurar el Stage sin bordes (sin barra de título)
+            paymentStage.initStyle(StageStyle.UNDECORATED);
+
+            // Aplicar un efecto de difuminado a la ventana principal mientras el Stage modal esté abierto
+            Stage currentStage = (Stage) btnPay.getScene().getWindow();
+            currentStage.getScene().getRoot().setEffect(new javafx.scene.effect.BoxBlur(10, 10, 3));
+
+            // Añadir un evento para restaurar el fondo al cerrar el modal
+            paymentStage.setOnHidden(e -> currentStage.getScene().getRoot().setEffect(null));
+
+            // Mostrar el modal
+            paymentStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error al cargar la vista de pago: " + e.getMessage());
         }
     }
+
 
 
     /**
