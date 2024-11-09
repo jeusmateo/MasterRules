@@ -35,7 +35,7 @@ public class UserAccount {
     /**
      * Constructor vacío de la clase UserAccount para Hibernate
      */
-    public UserAccount() {
+    protected UserAccount() {
     }
 
     /**

@@ -26,7 +26,7 @@ public class Product {
     /**
      * Constructor of class Product NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
      */
-    public Product() {
+    protected Product() {
     }
 
     /**

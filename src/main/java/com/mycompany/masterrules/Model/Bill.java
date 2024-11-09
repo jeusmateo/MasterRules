@@ -1,24 +1,40 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 /**
  *
  * @author David Torres
  */
+@Entity
 public class Bill {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     /** Nombre del empleado en turno */
     private String employeeName;
 
     /** Cliente al que se le realiza la factura */
+    @ManyToOne
     private Customer customer;
 
     /** Monto total de la factura */
     private BigDecimal amount;
 
     /** Orden a la que pertenece la factura */
+    @Transient
     private Order order;
+
+    /**
+     * Constructor para JPA
+     */
+    protected Bill(){
+
+    }
 
     /**
      * Constructor de la clase Bill
@@ -90,7 +106,7 @@ public class Bill {
 
     /**
      * Establece el cliente al que se le realiza la factura
-     * @param customer El cliente al que se le realiza la factura
+     * @param customerAccount El cliente al que se le realiza la factura
      */
     public void setCustomerAccount(Customer customerAccount) {
         this.customer = customerAccount;

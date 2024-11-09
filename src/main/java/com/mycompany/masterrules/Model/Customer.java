@@ -25,7 +25,7 @@ public class Customer {
     /*
      * Constructor por defecto para JPA
      **/
-    public Customer() {
+    protected Customer() {
     }
 
 

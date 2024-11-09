@@ -28,7 +28,7 @@ public class Debt {
     /**
      * Constructor por defecto para JPA
      * */
-    public Debt() {
+    protected Debt() {
     }
 
     public Debt(Order order, BigDecimal amount) {
