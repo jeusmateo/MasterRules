@@ -16,7 +16,7 @@ public class Combo {
 
 
     @Id
-    private long comboID;
+    private String comboID;//se cambio esto a string
     @Column(name = "ComboName")
     private String comboName;
     @OneToMany
@@ -78,6 +78,10 @@ public class Combo {
         this.VIPPrice = VIPPrice;
     }
 
+    public String getComboID() {//agregue el getter porque necesito el id 
+        return comboID;
+    }
+    
     public String getComboName() {
         return comboName;
     }
