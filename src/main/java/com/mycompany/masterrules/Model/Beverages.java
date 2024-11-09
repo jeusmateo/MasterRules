@@ -9,5 +9,5 @@ package com.mycompany.masterrules.Model;
  * @author bakba
  */
 public class Beverages {
-    
+    //para hacer el commit
 }
