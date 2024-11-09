@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
       <AnchorPane layoutY="15.2" prefHeight="585.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -68,7 +68,7 @@
                   </VBox>
                   <VBox fx:id="continueOrderOptionsBox" layoutX="51.0" layoutY="410.0" prefHeight="135.0" prefWidth="180.0" visible="false" AnchorPane.bottomAnchor="30.0">
                      <children>
-                        <Button fx:id="btnPay" onMouseClicked="#handlePayAction" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="PAGAR" />
+                        <Button fx:id="btnPay" mnemonicParsing="false" onMouseClicked="#handlePayAction" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="PAGAR" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="FIADO">
                            <VBox.margin>
                               <Insets top="15.0" />
@@ -112,6 +112,50 @@
                                     </AnchorPane>
                                  </children></AnchorPane>
                           </content>
+                        </Tab>
+                        <Tab fx:id="tabPaneBeverages" text="Bebidas">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
+                                 <children>
+                                    <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                                             <content>
+                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="white-bg" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabPaneCombo" text="Combos">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
+                                 <children>
+                                    <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                                             <content>
+                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="white-bg" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
                         </Tab>
                      </tabs>
                   </TabPane>
