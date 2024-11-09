@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -58,6 +59,20 @@ public class WnSideNavigationBar {
 
     @FXML
     public void initialize() {
+        // Inicializar por defecto maximizado
+
+//        scrPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+//            if (newScene != null) {
+//                newScene.windowProperty().addListener((windowObservable, oldWindow, newWindow) -> {
+//                    if (newWindow != null) {
+//                        Stage stage = (Stage) newWindow;
+//                        stage.setMaximized(true);  // Maximiza la ventana
+//                        stage.setResizable(true);  // Permitir redimensionamiento
+//                    }
+//                });
+//            }
+//        });
+
         try {
             loadSection(SALES_VIEW);
             activeView = SALES_VIEW;
