@@ -37,13 +37,7 @@ public class ProductDBTest {
 
         System.out.println("Productos en la base de datos:");
         for (Product p : products) {
-            System.out.println(
-                    "ID: " + p.getProductID() + "\n" +
-                            "Name: " + p.getProductName() + "\n" +
-                            "Type: " + p.getProductType() + "\n" +
-                            "Price: " + p.getPrice() + "\n" +
-                            "VIP Price: " + p.getVIPprice() + "\n"
-            );
+            System.out.println(p);
         }
 
         // Borrado de un producto
@@ -54,13 +48,7 @@ public class ProductDBTest {
         assert products.size() == 1;
 
         for (Product p : products) {
-            System.out.println(
-                    "ID: " + p.getProductID() + "\n" +
-                            "Name: " + p.getProductName() + "\n" +
-                            "Type: " + p.getProductType() + "\n" +
-                            "Price: " + p.getPrice() + "\n" +
-                            "VIP Price: " + p.getVIPprice() + "\n"
-            );
+            System.out.println(p);
         }
 
 

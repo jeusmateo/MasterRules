@@ -6,6 +6,7 @@ import com.mycompany.masterrules.Model.Order;
 import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class BillDBTest {
     public static void main(String[] args) {
@@ -29,7 +30,23 @@ public class BillDBTest {
 
         System.out.println("Bill found successfully");
 
+        // Update the bill
+        foundBill.setAmount(BigDecimal.valueOf(20.0));
+        assert billDBManager.update(foundBill);
+        System.out.println("Bill updated successfully");
 
+        // Save another bill
+        Bill bill2 = new Bill(order, BigDecimal.valueOf(20.0), "David Torres");
+        assert billDBManager.save(bill2);
+        System.out.println("Bill 2 saved successfully");
+
+        // get all bills
+        assert Objects.requireNonNull(billDBManager.readAll()).size() == 2;
+        System.out.println("All bills read successfully");
+
+        // Delete the bill
+        assert billDBManager.delete(foundBill);
+        System.out.println("Bill deleted successfully");
 
     }
 }
