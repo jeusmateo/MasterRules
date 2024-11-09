@@ -39,7 +39,7 @@ public class ProductQueries {
                 products.get(i).setPrice(new BigDecimal(product.getPrice()+""));
                 products.get(i).setProductName(product.getProductName());
                 products.get(i).setProductType(product.getProductType());
-                products.get(i).setVIPprice(new BigDecimal(product.getVIPprice()+""));
+                products.get(i).setVIPPrice(new BigDecimal(product.getVIPPrice()+""));
                 return true;
             }
         }
