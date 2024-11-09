@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.wnLoginController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="405.0" prefWidth="300.0" styleClass="gradient" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="219.0" fitWidth="289.0" layoutX="6.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="94.05470275878906" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="95.0">
+                     <image>
+                        <Image url="@../../../Logo_MR.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="300.0" prefHeight="400.0" prefWidth="300.0" styleClass="whiteFormBackground" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="43.0" layoutY="68.0" text="Bienvenido!" textFill="#311680">
+                     <font>
+                        <Font name="System Italic" size="24.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="txtFieldPassword" layoutX="43.0" layoutY="185.0" prefHeight="35.0" prefWidth="220.0" promptText="Contraseña" />
+                  <TextField fx:id="txtFieldUserName" layoutX="43.0" layoutY="138.0" prefHeight="35.0" prefWidth="220.0" promptText="Nombre de usuario" />
+                  <Button fx:id="btnLogin" layoutX="40.0" layoutY="317.0" mnemonicParsing="false" onAction="#eventAction" onKeyPressed="#eventKey" prefHeight="40.0" prefWidth="220.0" styleClass="loginButton" stylesheets="@loginDesign.css" text="Ingresar">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Line endX="100.0" layoutX="132.0" layoutY="104.0" startX="-100.0" stroke="#6351dd" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
