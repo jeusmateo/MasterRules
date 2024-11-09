@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 /**
@@ -100,6 +101,13 @@ public class WnPaymentController implements Initializable {
     @FXML
     private void setScrNoStoreCredit(){
         scrNoStoreCredit.setVisible(true);
+    }
+
+    @FXML
+    private void handleCancelButton() {
+        // Obtener el Stage (ventana) y cerrarla
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
 
     // metodo que al no reconocer la tarjeta del cliente salta la vista scrNoStoreCredit
