@@ -5,7 +5,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class CombosDBManager extends DatabaseManager<Combo, Long>{
+public final class CombosDBManager extends DatabaseManager<Combo, Long>{
     /**
      *
      * @param id La llave primaria de la entidad
