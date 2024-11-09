@@ -26,6 +26,7 @@ public class UserDBTest {
         // Leer usuario
         UserAccount userFound = userDBManager.findById("1");
         assert userFound != null;
+        assert userFound.equals(user); // Verificar que sea correcta la lectura
 
         // Actualizar usuario
         user.setPassword("4321");
@@ -33,6 +34,10 @@ public class UserDBTest {
 
         // Leer todos los usuarios
         assert !Objects.requireNonNull(userDBManager.readAll()).isEmpty();
+
+        for(UserAccount userAccount : Objects.requireNonNull(userDBManager.readAll())){
+            System.out.println(userAccount);
+        }
 
         // Eliminar usuario
         assert userDBManager.delete(user);

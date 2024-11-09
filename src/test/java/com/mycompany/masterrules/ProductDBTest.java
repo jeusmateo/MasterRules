@@ -31,6 +31,7 @@ public class ProductDBTest {
         // Buscar un producto
         Product searched = productDB.findById("2");
         assert searched != null;
+        assert searched.equals(tmpPapas); // Verifica que la información del producto sea la misma
 
         // Impression de todos los productos
         List<Product> products = productDB.readAll();
