@@ -95,6 +95,14 @@ public class WnPaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+    @FXML
+    private void setScrNoStoreCredit(){
+        scrNoStoreCredit.setVisible(true);
+    }
+
+    // metodo que al no reconocer la tarjeta del cliente salta la vista scrNoStoreCredit
+
     
 }
