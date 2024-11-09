@@ -34,8 +34,6 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Button btnShowInformation;
 
-    @FXML
-    private Button btnBackViewInfoCustomer;
 
     @FXML
     private Button btnBackEditCustomerAccount;
@@ -55,7 +53,6 @@ public class WnCustomersController implements Initializable {
     @FXML
     private AnchorPane scrMainViewCustomerAccount;
 
-    @FXML
     private AnchorPane scrViewInfoCustomer;
 
     @FXML
@@ -86,15 +83,11 @@ public class WnCustomersController implements Initializable {
     @FXML
     private CheckBox checkboxCustomerVip;
     @FXML
-    private TextArea txtAreaCustomerNote;
-    @FXML
     private TextField textFieldNewCustomerName;
     @FXML
     private TextField textFieldNewCustomerPhoneNumber;
     @FXML
     private TextField textFieldNewCustomerLoyaltyPoints;
-    @FXML
-    private TextField textFieldNewCustomerCommentary;
     @FXML
     private CheckBox checkBoxNewCustomerVIPStatus;
     @FXML
@@ -103,6 +96,8 @@ public class WnCustomersController implements Initializable {
     private TableColumn<Customer, String> columnIdCustomer2;
     @FXML
     private TableColumn<Customer, String> columnCustomerName;
+    @FXML
+    private Label lbCustomerPhoneNumber;
 
     @FXML
     public void setBtnShowInformation() {
@@ -111,7 +106,6 @@ public class WnCustomersController implements Initializable {
 
     }
 
-    @FXML
     public void setBtnBackViewInfoCustomer() {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
@@ -199,7 +193,7 @@ public class WnCustomersController implements Initializable {
             lbLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             lbStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             checkboxCustomerVip.setSelected(customer.getCustomerAccount().isIsVIP());
-
+            lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
             //txtAreaCustomerNote.setText(customer.getCustomerNote());
             //heckboxCustomerVip.setSelected(customer.isCustomerVip());
         } else {
