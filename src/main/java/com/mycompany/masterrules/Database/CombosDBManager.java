@@ -5,14 +5,14 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public final class CombosDBManager extends DatabaseManager<Combo, Long>{
+public final class CombosDBManager extends DatabaseManager<Combo, String> {
     /**
      *
      * @param id La llave primaria de la entidad
      * @return La entidad Combo con la llave primaria dada
      */
     @Override
-    public Combo findById(Long id) {
+    public Combo findById(String id) {
         Session session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();

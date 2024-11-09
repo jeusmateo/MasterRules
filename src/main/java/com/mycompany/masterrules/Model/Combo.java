@@ -10,10 +10,10 @@ import jakarta.persistence.*;
 public class Combo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String comboID;//se cambio esto a string
-    @Column(name = "ComboName")
     private String comboName;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Product> products;
     @Transient
     private CustomComboTemplate productsTemplate;
