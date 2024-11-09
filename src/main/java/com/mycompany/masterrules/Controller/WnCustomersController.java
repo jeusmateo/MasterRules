@@ -2,10 +2,14 @@ package com.mycompany.masterrules.Controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.Customer;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -15,14 +19,14 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class WnCustomersController implements Initializable{
 
-    @FXML
-    private Button btnEditAccount;
+
 
     @FXML
     private Button btnSaveNewCustomer;
@@ -57,25 +61,33 @@ public class WnCustomersController implements Initializable{
     @FXML
     private AnchorPane scrWarningCredit;
 
-    @FXML
-    private Tab tabCustomerAccount;
+   
 
-    @FXML
-    private TableView tableCustomers;
-    @FXML
-    private TableColumn iDCustomerColumn;
-    @FXML
-    private TableColumn nameCustomerColumn;
+
 
     @FXML
     private Tab tabNewCustomer;
+    @FXML
+    private Tab tabCustomerAccount;
+    @FXML
+    private TextField txtFieldSearch;
+    @FXML
+    private TableView<Customer> tableViewCustomers;
+    @FXML
+    private TableColumn<Customer, String> iDCustomerColumn;
+    @FXML
+    private TableColumn<Customer, String> nameCustomerColumn;
+    @FXML
+    private Button btnEditAccount;
 
+    @FXML
     public void setBtnShowInformation() {
         scrViewInfoCustomer.setVisible(true);
         scrMainViewCustomerAccount.setVisible(false);
 
     }
 
+    @FXML
     public void setBtnBackViewInfoCustomer() {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
@@ -83,12 +95,14 @@ public class WnCustomersController implements Initializable{
 
     }
 
+    @FXML
     public void setBtnEditAccount() {
         scrEditCustomerAccount.setVisible(true);
         scrMainViewCustomerAccount.setVisible(false);
 
     }
 
+    @FXML
     public void setBtnBackEditCustomerAccount() {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
@@ -96,6 +110,7 @@ public class WnCustomersController implements Initializable{
 
     }
 
+    @FXML
     public void setBtnUpdateCustomerAccount() {
         //setBtnBackEditCustomerAccount();//regresa a la vista principal
     }
@@ -108,14 +123,17 @@ public class WnCustomersController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        ArrayList<Customer> customers = new ArrayList<>();
+
+        ObservableList<Customer> customers = FXCollections.observableArrayList();
         customers.add(new Customer("Juan", "123"));
         customers.add(new Customer("Pedro", "456"));
         customers.add(new Customer("Maria", "789"));
         customers.add(new Customer("Jose", "101"));
         customers.add(new Customer("Luis", "112"));
-        tableCustomers.getColumns().addAll(nameCustomerColumn, iDCustomerColumn);
-        tableCustomers.getItems().addAll(customers);
+
+        iDCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        nameCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
+        tableViewCustomers.setItems(customers);
     }
 
 
