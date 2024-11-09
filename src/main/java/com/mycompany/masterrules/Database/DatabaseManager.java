@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Clase que implementa las operaciones básicas de un DAO (Data Access Object) utilizando Hibernate.
@@ -45,7 +46,7 @@ abstract class DatabaseManager<T, K> {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
+            System.err.println("Error al guardar la entidad: " + ex);
             return false;
         } finally {
             session.close();
@@ -84,7 +85,7 @@ abstract class DatabaseManager<T, K> {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
+            System.err.println("Error al actualizar la entidad: " + ex);
             return false;
         } finally {
             session.close();
@@ -108,7 +109,7 @@ abstract class DatabaseManager<T, K> {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
+            System.err.println("Error al eliminar la entidad: " + ex);
             return false;
         } finally {
             session.close();

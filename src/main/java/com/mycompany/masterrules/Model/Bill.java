@@ -3,6 +3,7 @@ package com.mycompany.masterrules.Model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  *
@@ -19,14 +20,14 @@ public class Bill {
     private String employeeName;
 
     /** Cliente al que se le realiza la factura */
-    @ManyToOne
+    @Transient
     private Customer customer;
 
     /** Monto total de la factura */
     private BigDecimal amount;
 
     /** Orden a la que pertenece la factura */
-    @Transient
+    @Embedded
     private Order order;
 
     /**
@@ -128,4 +129,38 @@ public class Bill {
         this.customer = customerAccount;
     }
 
+    /**
+     * @param o Objeto a comparar con la factura
+     * @return true si el objeto es igual a la factura, de lo contrario false
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+//        return id == bill.id && Objects.equals(employeeName, bill.employeeName) && Objects.equals(customer, bill.customer) && Objects.equals(amount, bill.amount) && Objects.equals(order, bill.order);
+        return id == bill.id && Objects.equals(employeeName, bill.employeeName) && Objects.equals(customer, bill.customer) && amount.compareTo(bill.amount) == 0 && Objects.equals(order, bill.order);
+    }
+
+    /**
+     * @return El hash de la factura
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, employeeName, customer, amount, order);
+    }
+
+    /**
+     * @return La representación en cadena de la factura
+     */
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", employeeName='" + employeeName + '\'' +
+                ", customer=" + customer +
+                ", amount=" + amount +
+                ", order=" + order +
+                '}';
+    }
 }

@@ -6,6 +6,9 @@ import org.hibernate.Session;
 
 import java.util.List;
 
+/**
+ * Clase que administra la base de datos de facturas.
+ */
 public final class BillDBManager extends DatabaseManager<Bill, Long>{
 
     /**
@@ -14,15 +17,22 @@ public final class BillDBManager extends DatabaseManager<Bill, Long>{
      */
     @Override
     public Bill findById(Long id) {
-        try(Session session = HibernateUtil.getOpenSession()){
+        Session session = HibernateUtil.getOpenSession();
+        try{
             session.beginTransaction();
             Bill bill = session.get(Bill.class, id);
             session.getTransaction().commit();
             return bill;
         }
         catch (Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
             System.err.println("Error al buscar la factura: " + e);
             return null;
+        }
+        finally {
+            session.close();
         }
     }
 
@@ -31,13 +41,17 @@ public final class BillDBManager extends DatabaseManager<Bill, Long>{
      */
     @Override
     public List<Bill> readAll() {
-        try(Session session = HibernateUtil.getOpenSession()){
+        Session session = HibernateUtil.getOpenSession();
+        try{
             session.beginTransaction();
             List<Bill> bills = session.createQuery("from Bill", Bill.class).list();
             session.getTransaction().commit();
             return bills;
         }
         catch (Exception e){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
             System.err.println("Error al leer las facturas: " + e);
             return null;
         }

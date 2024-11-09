@@ -13,14 +13,21 @@ public final class UserDBManager extends DatabaseManager<UserAccount, String> {
      */
     @Override
     public UserAccount findById(String id) {
-        try (Session session = HibernateUtil.getOpenSession()) {
+        Session session = HibernateUtil.getOpenSession();
+        try {
             session.beginTransaction();
             UserAccount findUser = session.get(UserAccount.class, id);
             session.getTransaction().commit();
             return findUser;
-        } catch (Exception e) {
-            System.err.println("Error al buscar el usuario: " + e);
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el usuario: " + ex);
             return null;
+        }
+        finally {
+            session.close();
         }
     }
 
@@ -33,8 +40,11 @@ public final class UserDBManager extends DatabaseManager<UserAccount, String> {
         Session session = HibernateUtil.getOpenSession();
         try {
             return session.createQuery("from UserAccount", UserAccount.class).list();
-        } catch (Exception e) {
-            System.err.println("Error al leer los usuarios: " + e);
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al leer los usuarios: " + ex);
             return null;
         } finally {
             session.close();

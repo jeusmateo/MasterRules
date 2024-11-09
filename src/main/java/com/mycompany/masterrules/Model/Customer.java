@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 /**
  *
  * @autor: David Torres
@@ -40,20 +42,6 @@ public class Customer {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount();
-    }
-
-    /**
-     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
-     * @return Retorna una cadena con la información del cliente
-     */
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "ID=" + ID +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
-                ", customerAccount=" + customerAccount +
-                '}';
     }
 
     /**
@@ -120,4 +108,31 @@ public class Customer {
         this.customerAccount = customerAccount;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return ID == customer.ID && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, customerName, customerPhoneNumber, customerAccount);
+    }
+
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     *
+     * @return Retorna una cadena con la información del cliente
+     */
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "ID=" + ID +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
+                ", customerAccount=" + customerAccount +
+                '}';
+    }
 }

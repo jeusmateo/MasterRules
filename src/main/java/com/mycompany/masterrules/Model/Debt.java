@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -67,5 +68,28 @@ public class Debt {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Debt debt = (Debt) o;
+        return id == debt.id && Objects.equals(order, debt.order) && Objects.equals(amount, debt.amount) && Objects.equals(date, debt.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, order, amount, date);
+    }
+
+    @Override
+    public String toString() {
+        return "Debt{" +
+                "id=" + id +
+                ", order=" + order +
+                ", amount=" + amount +
+                ", date=" + date +
+                '}';
     }
 }

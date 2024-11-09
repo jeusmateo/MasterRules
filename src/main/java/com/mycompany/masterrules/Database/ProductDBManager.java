@@ -19,15 +19,21 @@ public final class ProductDBManager extends DatabaseManager<Product, String> {
      */
     @Override
     public Product findById(String id) {
-
-        try (Session session = HibernateUtil.getOpenSession()) {
+        Session session = HibernateUtil.getOpenSession();
+        try {
             session.beginTransaction();
             Product product = session.get(Product.class, id);
             session.getTransaction().commit();
             return product;
-        }catch (Exception e){
-            System.err.println("Error al buscar el producto: " + e);
+        }catch (Exception ex){
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el producto: " + ex);
             return null;
+        }
+        finally {
+            session.close();
         }
     }
 
@@ -36,15 +42,21 @@ public final class ProductDBManager extends DatabaseManager<Product, String> {
      */
     @Override
     public List<Product> readAll() {
-
-        try (Session session = HibernateUtil.getOpenSession()) {
+        Session session = HibernateUtil.getOpenSession();
+        try {
             session.beginTransaction();
             List<Product> products = session.createQuery("from Product", Product.class).list();
             session.getTransaction().commit();
             return products;
         } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
             System.err.println("Error al leer los productos: " + ex);
             return null;
+        }
+        finally {
+            session.close();
         }
     }
 }
