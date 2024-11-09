@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -7,17 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.*;
-
-/**
- * Controlador de la ventana de Reportes
- * @author Jimena Garcia
- */
-
 public class WnReportsController {
-
-    //COMPONENTES DE LA VENTANA DE REPORTES
-    //-------------------------------------------------------------------------------------------
 
     @FXML
     private Button btnAcceptInflow;
@@ -32,6 +23,12 @@ public class WnReportsController {
     private Button btnDoOutFlowReport;
 
     @FXML
+    private Button btnExitDoInflow;
+
+    @FXML
+    private Button btnExitDoOutflow;
+
+    @FXML
     private AnchorPane scrDoInflowCash;
 
     @FXML
@@ -39,6 +36,9 @@ public class WnReportsController {
 
     @FXML
     private AnchorPane scrDoReport;
+
+    @FXML
+    private AnchorPane scrReports;
 
     @FXML
     private TableView<?> tblInFlowReport;
@@ -58,7 +58,39 @@ public class WnReportsController {
     @FXML
     private TextArea txtReasonInflow;
 
-    // metodos de la ventana de reportes
+    @FXML
+    void exitDoInflow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exitDoOutflow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void setBtnAcceptInflow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void setBtnAcceptOutflow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void setBtnDoInFlowReport(ActionEvent event) {
+
+    }
+
+    @FXML
+    void setBtnDoOutFlowReport(ActionEvent event) {
+
+    }
+
+
+
+// metodos de la ventana de reportes
     //-------------------------------------------------------------------------------------------
 
 
@@ -128,5 +160,7 @@ public class WnReportsController {
             textField.clear();
         }
     }
+
+
 
 }
