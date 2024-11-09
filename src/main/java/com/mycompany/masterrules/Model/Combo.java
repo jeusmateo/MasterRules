@@ -9,8 +9,8 @@ import jakarta.persistence.*;
 public class Combo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long comboID;
+    private String comboID;//se cambio esto a string
+    @Column(name = "ComboName")
     private String comboName;
     @OneToMany
     private List<Product> products;
@@ -70,6 +70,10 @@ public class Combo {
         this.VIPPrice = VIPPrice;
     }
 
+    public String getComboID() {//agregue el getter porque necesito el id 
+        return comboID;
+    }
+    
     public String getComboName() {
         return comboName;
     }
