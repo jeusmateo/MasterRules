@@ -3,6 +3,7 @@ package com.mycompany.masterrules.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
@@ -97,5 +98,18 @@ public class CustomerAccount {
 
     public void setStoreCredit(double storeCredit) {
         this.storeCredit = storeCredit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerAccount that = (CustomerAccount) o;
+        return loyaltyPoints == that.loyaltyPoints && Double.compare(storeCredit, that.storeCredit) == 0 && isVIP == that.isVIP && Objects.equals(totalDebt, that.totalDebt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt);
     }
 }

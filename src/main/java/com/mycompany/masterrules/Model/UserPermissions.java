@@ -1,8 +1,9 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
 
 import java.util.EnumSet;
+import java.util.Objects;
 
 /**
  * Clase que representa a los permisos que tiene un usuario en MasterRules
@@ -23,33 +24,33 @@ public class UserPermissions {
         RECORD_CASHOUT,
         REVIEW_SALES_HISTORY,
         REVIEW_CASH_REGISTER_HISTORY,
-        
+
         //Products
         CREATE_PRODUCT,
         EDIT_PRODUCT,
         DELETE_PRODUCT,
-        
+
         //Combos
         CREATE_COMBO,
         EDIT_COMBO,
         DELETE_COMBO,
-        
+
         //Clients
         CREATE_CLIENT,
         EDIT_CLIENT,
         DELETE_CLIENT,
         EDIT_CREDITS,
         REVIEW_CLIENT_ACCOUNTS,
-        
+
         //Inventory
         EDIT_STOCK,
         EDIT_MAX_MIN,
-        
+
         //Reports
         REVIEW_CLIENT_REPORT,
         REVIEW_SALE_REPORT,
         REVIEW_INVENTORY_REPORT,
-        
+
         //Users
         CREATE_USER,
         EDIT_USER,
@@ -74,7 +75,7 @@ public class UserPermissions {
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
     }
-    
+
     /**
      * Concede un permiso a un usuario
      * @param permission Permiso a concedir
@@ -82,7 +83,7 @@ public class UserPermissions {
     public void givePermission(Permission permission){
         grantedPermissions.add(permission);
     }
-    
+
     /**
      * Remueve permiso a un usuario
      * @param permission Permiso a remover
@@ -90,7 +91,7 @@ public class UserPermissions {
     public void removePermission(Permission permission){
         grantedPermissions.remove(permission);
     }
-    
+
     /**
      * Checa si un usuario tiene el permiso
      * @param permission Permiso a revisar
@@ -114,5 +115,25 @@ public class UserPermissions {
      */
     public void setGrantedPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
+    }
+
+    @Override
+    public String toString() {
+        return "UserPermissions{" +
+                "grantedPermissions=" + grantedPermissions +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserPermissions that = (UserPermissions) o;
+        return Objects.equals(grantedPermissions, that.grantedPermissions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(grantedPermissions);
     }
 }

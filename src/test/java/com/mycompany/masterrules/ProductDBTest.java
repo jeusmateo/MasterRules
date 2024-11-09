@@ -5,6 +5,7 @@ import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Clase de prueba para la clase ProductDB
@@ -30,20 +31,15 @@ public class ProductDBTest {
         // Buscar un producto
         Product searched = productDB.findById("2");
         assert searched != null;
+        assert searched.equals(tmpPapas); // Verifica que la información del producto sea la misma
 
         // Impression de todos los productos
         List<Product> products = productDB.readAll();
-        assert products.size() == 2;
+        assert Objects.requireNonNull(products).size() == 2;
 
         System.out.println("Productos en la base de datos:");
         for (Product p : products) {
-            System.out.println(
-                    "ID: " + p.getProductID() + "\n" +
-                            "Name: " + p.getProductName() + "\n" +
-                            "Type: " + p.getProductType() + "\n" +
-                            "Price: " + p.getPrice() + "\n" +
-                            "VIP Price: " + p.getVIPprice() + "\n"
-            );
+            System.out.println(p.toString());
         }
 
         // Borrado de un producto
@@ -51,16 +47,10 @@ public class ProductDBTest {
         assert productDB.delete(tmpProduct);
 
         products = productDB.readAll();
-        assert products.size() == 1;
+        assert Objects.requireNonNull(products).size() == 1;
 
         for (Product p : products) {
-            System.out.println(
-                    "ID: " + p.getProductID() + "\n" +
-                            "Name: " + p.getProductName() + "\n" +
-                            "Type: " + p.getProductType() + "\n" +
-                            "Price: " + p.getPrice() + "\n" +
-                            "VIP Price: " + p.getVIPprice() + "\n"
-            );
+            System.out.println(p.toString());
         }
 
 
