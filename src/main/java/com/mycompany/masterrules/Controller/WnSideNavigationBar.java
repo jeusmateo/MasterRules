@@ -53,60 +53,85 @@ public class WnSideNavigationBar {
     private static final String SALES_VIEW = "/com/mycompany/masterrules/wnSale.fxml";
     private static final String USERS_VIEW = "/com/mycompany/masterrules/wnUsers.fxml";
 
+    // Variable para almacenar la vista activa
+    private String activeView = null;
 
+    @FXML
+    public void initialize() {
+        try {
+            loadSection(SALES_VIEW);
+            activeView = SALES_VIEW;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void ProductsSection(ActionEvent event) throws IOException {
-        loadSection(PRODUCTS_VIEW);
+        if (!PRODUCTS_VIEW.equals(activeView)) {
+            loadSection(PRODUCTS_VIEW);
+            activeView = PRODUCTS_VIEW;
+        }
     }
-
 
     @FXML
     void cashRegisterAuditReportSection(ActionEvent event) throws IOException {
-        loadSection(CASH_REGISTER_AUDIT_REPORT_VIEW);
-
+        if (!CASH_REGISTER_AUDIT_REPORT_VIEW.equals(activeView)) {
+            loadSection(CASH_REGISTER_AUDIT_REPORT_VIEW);
+            activeView = CASH_REGISTER_AUDIT_REPORT_VIEW;
+        }
     }
 
     @FXML
     void customerSection(ActionEvent event) throws IOException {
-       loadSection(CUSTOMERS_VIEW);
-
+        if (!CUSTOMERS_VIEW.equals(activeView)) {
+            loadSection(CUSTOMERS_VIEW);
+            activeView = CUSTOMERS_VIEW;
+        }
     }
 
     @FXML
     void inventorySection(ActionEvent event) throws IOException {
-       loadSection(INVENTORY_VIEW);
+        if (!INVENTORY_VIEW.equals(activeView)) {
+            loadSection(INVENTORY_VIEW);
+            activeView = INVENTORY_VIEW;
+        }
     }
 
     @FXML
     void reportSection(ActionEvent event) throws IOException {
-       loadSection(REPORTS_VIEW);
+        if (!REPORTS_VIEW.equals(activeView)) {
+            loadSection(REPORTS_VIEW);
+            activeView = REPORTS_VIEW;
+        }
     }
 
     @FXML
     void salesSection(ActionEvent event) throws IOException {
-        loadSection(SALES_VIEW);
+        if (!SALES_VIEW.equals(activeView)) {
+            loadSection(SALES_VIEW);
+            activeView = SALES_VIEW;
+        }
     }
 
     @FXML
     void usersSection(ActionEvent event) throws IOException {
-       loadSection(USERS_VIEW);
+        if (!USERS_VIEW.equals(activeView)) {
+            loadSection(USERS_VIEW);
+            activeView = USERS_VIEW;
+        }
     }
 
-    // Método extraído para cargar y ajustar el panel
+
     private void loadSection(String fxmlPath) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
     }
 
-    // Método para ajustar el panel cargado al tamaño del contenedor
+
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());
         pane.prefHeightProperty().bind(scrPane.heightProperty());
     }
-
-
-
-
 }
