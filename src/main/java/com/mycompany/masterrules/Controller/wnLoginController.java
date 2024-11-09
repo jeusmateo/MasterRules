@@ -32,11 +32,36 @@ public class wnLoginController implements Initializable {  // Cambié el nombre 
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
-        if (evt.equals(txtFieldUserName) || evt.equals(txtFieldPassword)) {
+
+        if (evt.equals(txtFieldUserName)) {
             if (event.getCharacter().equals(" ")) {
                 event.consume();
+            } else if (event.getCharacter().equals("\r")) {
+                txtFieldPassword.requestFocus();
+                event.consume();
+            }
+        } else  if (evt.equals(txtFieldPassword)) {
+            if (event.getCharacter().equals(" ")) {
+                event.consume();
+            } else if (event.getCharacter().equals("\r")) {
+                btnLogin.fire();
+                event.consume();
+
             }
         }
+        if(evt.equals(btnLogin)){
+            if(event.getCharacter().equals("\r")){
+                event.consume();
+                String user = txtFieldUserName.getText();
+                String pass = txtFieldPassword.getText();
+                if (this.chepo.verificador(user, pass)) {
+                    System.out.println("Usuario y contraseña correctos");
+                    loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                }
+            }
+
+        }
+
     }
 
     @FXML
