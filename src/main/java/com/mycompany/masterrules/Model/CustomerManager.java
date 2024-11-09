@@ -34,7 +34,19 @@ public class CustomerManager {
         //cliente.setVIP(true);
     }
 
-  
+    public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit){
+        
+        for (Customer customer : customers) {
+            if (customer.getID().equals(id) ) {
+                int loyaltyPointsInt = Integer.valueOf(loyaltyPoints);
+                double storeCreditDouble = Double.valueOf(storeCredit);
+                customer.getCustomerAccount().setLoyaltyPoints(loyaltyPointsInt);
+                customer.getCustomerAccount().setStoreCredit(storeCreditDouble);
+                customer.getCustomerAccount().setIsVIP(vipStatus);
+                
+            }
+        }
+    }
 
     public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
         if(!name.trim().isEmpty()&&!phone.trim().isEmpty()){
