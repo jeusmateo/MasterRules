@@ -48,13 +48,9 @@ public class CafeteriaMenu {
      * @param product Producto a agregar al menu
      */
     public void addProduct(Product product) throws Exception{
+        //se elimino la excepcion cuando se tiene un nombre ya existente
         if(!isProductOnMenu(product.getProductID())){
-            if(!isProductNameTaken(product.getProductName())){
-                products.add(product);
-            }
-            else{
-                throw new Exception("ERROR: El nombre del producto ya esta tomado");
-            }
+            products.add(product);
         }
         else{
             throw new Exception("ERROR: El producto ya existe");
@@ -106,7 +102,7 @@ public class CafeteriaMenu {
     /**
      * Modifica un producto en el menu
      * @param product Producto a modificar en el menu
-     * @throws Exception Si el producto no existe en el menu, ocasiona un error
+     * @throws Exception Si el producto no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
     public void editProduct(Product product) throws Exception{
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
@@ -159,24 +155,86 @@ public class CafeteriaMenu {
      * Agregar un combo al menu
      * @param combo Combo a agregar al menu
      */
-    public void addCombo(Combo combo){
-        //falta integrarlo al menu
+    public void addCombo(Combo combo) throws Exception{
+        if(!isComboOnMenu(combo.getComboID()+"")){
+            combos.add(combo);
+        }
+        else{
+            throw new Exception("ERROR: El combo ya existe");
+        }
     }
     
     /**
      * Remover un combo del menu
      * @param comboID Identificador del combo
+     * @throws java.lang.Exception Si el combo no se encuentra en el menu, se lanza un error
      */
-    public void removeCombo(String comboID){//lo cambie por id
-        //falta integrarlo al menu
+    public void removeCombo(String comboID) throws Exception{//lo cambie por id
+        for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
+            if(comboID.equals(combos.get(registeredComboCount).getComboID())){
+                combos.remove(registeredComboCount);
+                return;
+            }
+        }
+        throw new Exception("ERROR: El combo no existe");
     }
 
     /**
      * Modificar un combo del menu
      * @param combo Combo a modificar en el menu
+     * @throws java.lang.Exception Si el combo no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
-    public void editCombo(Combo combo){
-        //falta integrarlo al menu
+    public void editCombo(Combo combo) throws Exception{
+        for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
+            if(combo.getComboID().equals(combos.get(registeredComboCount).getComboID())){
+                
+                if(!combo.getComboName().equals(combos.get(registeredComboCount).getComboName())){
+                    
+                    if(!isComboNameTaken(combo.getComboName())){
+                        combos.get(registeredComboCount).setComboName(combo.getComboName());
+                    }
+                    else{
+                        throw new Exception("ERROR: El nombre del combo ya existe");
+                    }
+                    
+                }
+                combos.get(registeredComboCount).setProducts(combo.getProducts());
+                combos.get(registeredComboCount).setProductsTemplate(combo.getProductsTemplate());
+                combos.get(registeredComboCount).setPrice(combo.getPrice());
+                combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
+                
+                return;
+            }
+        }
+        throw new Exception("ERROR: El combo no existe");
+    }
+    
+    /**
+     * Checa si el combo existe en el menu
+     * @param comboID Identificador del combo
+     * @return Verdadero, si el combo existe en el menu. Falso, si el combo no existe en el menu
+     */
+    public boolean isComboOnMenu(String comboID){
+        for(Combo registeredCombo : combos){
+            if(comboID.equals(registeredCombo.getComboID()+"")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Checa si el nombre del combo ha sido tomado
+     * @param comboName Nombre del combo
+     * @return Verdadero, si el nombre del combo ya existe. Falso, si el nombre no existe
+     */
+    public boolean isComboNameTaken(String comboName){
+        for(Combo registeredProduct : combos){
+            if(comboName.equals(registeredProduct.getComboName())){
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

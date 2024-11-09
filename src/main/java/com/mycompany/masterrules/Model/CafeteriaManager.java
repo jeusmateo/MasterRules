@@ -23,21 +23,19 @@ public class CafeteriaManager {
     }
     
     public void createProduct(Product newProduct,boolean inInventory, int quantity) throws Exception{
-        //no me gusta como quedo este pedazo de codigo, probablemente debamos de discutirlo y refactorizarlo
-        //el problema es que el menu y storage tiene que tomar en cuenta distintos casos (cantidad correcta y que no haya nombres iguales) pero toman estos casos por separado
-        if(isProductValidForCafeteria(newProduct,quantity)){
-            if(inInventory){
-                storage.addProduct(newProduct.getProductID(), quantity);
-            }
-            menu.addProduct(newProduct);
+        //se modifico la excepcion
+        if(quantity<0){
+            throw new Exception("ERROR: La cantidad no puede ser negativa");
         }
-        else{
-            throw new Exception("ERROR: Problemas al crear el producto");
+        if(menu.isProductNameTaken(newProduct.getProductName())){
+            throw new Exception("ERROR: El nombre del producto ya está tomado");
         }
-    }
-
-    private boolean isProductValidForCafeteria(Product product,int quantity){//tuve que agregar esto pero esta algo extraño
-        return (quantity>=0 && !(menu.isProductNameTaken(product.getProductName())));
+        
+        if(inInventory){
+            storage.addProduct(newProduct.getProductID(), quantity);
+        }
+        menu.addProduct(newProduct);
+        
     }
 
     public void deleteProduct(String productID) throws Exception{//cambie por id
@@ -47,41 +45,37 @@ public class CafeteriaManager {
     }
     
     public void editProduct(Product product,boolean inInventory, int quantity) throws Exception{
-        //hay que revisar esto
-        //el problema es que el menu y storage tiene que tomar en cuenta distintos casos (cantidad correcta y que no haya nombres iguales (en el caso e que se quiera cambiar)) pero toman estos casos por separado
+        if(quantity<0){
+            throw new Exception("ERROR: La cantidad no puede ser negativa");
+        }
         
+        menu.editProduct(product);
         if(inInventory){
-            if(quantity>=0){
-                menu.editProduct(product);
-                if(storage.isStored(product.getProductID())){
-                    storage.updateStock(product.getProductID(), quantity);
-                }
-                else{
-                    storage.addProduct(product.getProductID(), quantity);
-                }
+            if(storage.isStored(product.getProductID())){
+                storage.updateStock(product.getProductID(), quantity);   
             }
             else{
-                throw new Exception("ERROR: El incremento no puede ser negativo");
+                storage.addProduct(product.getProductID(), quantity);    
             }
-            
-        }
-        else{
-            menu.editProduct(product);
         }
         
         
     }
     
-    public void createCombo(){
-        //falta
+    public void createCombo(Combo newCombo) throws Exception{
+        if(menu.isComboNameTaken(newCombo.getComboName())){
+            throw new Exception("ERROR: El nombre del combo ya está tomado");
+        }
+        
+        menu.addCombo(newCombo);
     }
     
-    public void deleteCombo(Combo combo){
-        //falta
+    public void deleteCombo(String comboID) throws Exception{
+        menu.removeCombo(comboID);
     }
     
-    public void editCombo(Combo combo){
-        //falta
+    public void editCombo(Combo combo) throws Exception{
+        menu.editCombo(combo);
     }
     
     public void editMenu(){//creo que ya no vamos a utilizar esta, a menos que se quiera

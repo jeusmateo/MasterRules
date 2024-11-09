@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
    <children>
       <TabPane prefHeight="600.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -675,7 +675,7 @@
                                  <content>
                                     <AnchorPane fx:id="wnCreateComboStepOne" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <AnchorPane fx:id="createComboStart" layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AnchorPane fx:id="scrCreateComboStart" layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <AnchorPane layoutX="9.0" layoutY="7.0" prefHeight="240.0" prefWidth="863.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
                                                    <styleClass>
@@ -720,7 +720,7 @@
                                                             <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button fx:id="buttonCreateCombo" mnemonicParsing="false" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                            <Button fx:id="buttonCreateCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboStepTwo" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                                                <GridPane.margin>
                                                                   <Insets />
                                                                </GridPane.margin>
@@ -732,7 +732,7 @@
                                                 <Separator layoutX="14.0" layoutY="273.0" prefHeight="11.0" prefWidth="856.0" AnchorPane.bottomAnchor="281.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="wnCreateComboStepTwo" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AnchorPane fx:id="scrCreateComboStepTwo" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <GridPane alignment="CENTER" layoutX="142.0" layoutY="192.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <columnConstraints>
@@ -743,13 +743,13 @@
                                                       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="97.0" prefWidth="242.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Definido" GridPane.halignment="CENTER" />
-                                                      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="97.0" prefWidth="246.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Personalizado" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                                      <Button fx:id="btnDefinedCombo" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#setScrCreateDefinedCombo" prefHeight="97.0" prefWidth="242.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Definido" GridPane.halignment="CENTER" />
+                                                      <Button fx:id="btnCustomCombo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#setScrCreateCustomeCombo" prefHeight="97.0" prefWidth="246.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo Personalizado" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                                                    </children>
                                                 </GridPane>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="wnCreateComboStepThree" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AnchorPane fx:id="scrCreateDefinedCombo" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <AnchorPane prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
@@ -764,7 +764,7 @@
                                                             </TableView>
                                                             <VBox layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" AnchorPane.bottomAnchor="32.66666666666663">
                                                                <children>
-                                                                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
+                                                                  <Button fx:id="btnContinueDefinedCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
                                                                </children>
                                                             </VBox>
                                                             <Label layoutX="111.0" layoutY="3.0" text="Combo">
@@ -797,7 +797,7 @@
                                                 </AnchorPane>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="wnCreateComboFinalStep" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="51.0">
+                                          <AnchorPane fx:id="scrCreateComboFinalStep" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="51.0">
                                              <children>
                                                 <AnchorPane layoutY="2.0" prefHeight="387.0" prefWidth="852.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
                                                    <children>
@@ -882,14 +882,14 @@
                                                 </AnchorPane>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="scrCreateCustomeCombo" layoutX="1.0" layoutY="6.0" prefHeight="542.0" prefWidth="880.0">
+                                          <AnchorPane fx:id="scrCreateCustomeCombo" layoutX="1.0" layoutY="6.0" prefHeight="542.0" prefWidth="880.0" visible="false">
                                              <children>
                                                 <AnchorPane prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
                                                       <AnchorPane layoutX="591.0" layoutY="4.0" prefHeight="575.0" prefWidth="282.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="4.0">
                                                          <children>
-                                                            <Button layoutX="51.0" layoutY="199.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="AÑADIR CATEGORÍA" />
-                                                            <Button layoutX="52.0" layoutY="468.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
+                                                            <Button fx:id="btnAddCategoryCustomeCombo" layoutX="51.0" layoutY="199.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="AÑADIR CATEGORÍA" />
+                                                            <Button fx:id="btnContinueCustomCombo" layoutX="52.0" layoutY="468.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
                                                             <Group layoutX="10.0" layoutY="14.0">
                                                                <children>
                                                                   <Label text="¿Cuántos productos puede escoger? ">
@@ -897,19 +897,19 @@
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField layoutX="114.0" layoutY="33.0" prefHeight="25.0" prefWidth="35.0" />
+                                                                  <TextField layoutX="114.0" layoutY="33.0" prefHeight="25.0" prefWidth="62.0" promptText="0" />
                                                                   <Label layoutX="53.0" layoutY="87.0" text="Precio">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField layoutX="114.0" layoutY="87.0" prefHeight="25.0" prefWidth="35.0" />
+                                                                  <TextField layoutX="114.0" layoutY="87.0" prefHeight="25.0" prefWidth="62.0" promptText="\$00.00" />
                                                                   <Label layoutX="27.0" layoutY="143.0" prefHeight="25.0" prefWidth="76.0" text="Precio VIP">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField layoutX="114.0" layoutY="143.0" prefHeight="25.0" prefWidth="35.0" />
+                                                                  <TextField layoutX="114.0" layoutY="143.0" prefHeight="25.0" prefWidth="62.0" promptText="\$00.00" />
                                                                </children>
                                                             </Group>
                                                             <TableView layoutX="38.0" layoutY="256.0" prefHeight="191.0" prefWidth="208.0">
