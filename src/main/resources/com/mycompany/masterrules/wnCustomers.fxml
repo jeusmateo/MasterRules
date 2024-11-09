@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -21,7 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCustomersController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCustomersController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -53,8 +59,8 @@
                                     </Button>
                                     <TableView fx:id="tableViewCustomers" layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
                                        <columns>
-                                          <TableColumn fx:id="iDCustomerColumn" prefWidth="88.0" text="ID CLIENTE" />
-                                          <TableColumn fx:id="nameCustomerColumn" prefWidth="145.0" text="NOMBRE" />
+                                          <TableColumn fx:id="iDCustomerColumn" editable="false" prefWidth="88.0" text="ID CLIENTE" />
+                                          <TableColumn fx:id="nameCustomerColumn" editable="false" prefWidth="145.0" text="NOMBRE" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -120,17 +126,11 @@
                                     </Label>
                                     <Button fx:id="btnShowInformation" layoutX="392.0" layoutY="475.0" mnemonicParsing="false" onAction="#setBtnShowInformation" prefHeight="41.0" prefWidth="157.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Ver informacion" />
                                     <Button fx:id="btnEditAccount" layoutX="565.0" layoutY="475.0" mnemonicParsing="false" onAction="#setBtnEditAccount" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar cuenta" />
-                                    <Label layoutX="286.0" layoutY="256.0" prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
                                     <CheckBox fx:id="checkboxCustomerVip" layoutX="304.0" layoutY="204.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="100.0" text="Cliente VIP">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <TextArea fx:id="txtAreaCustomerNote" layoutX="286.0" layoutY="278.0" prefHeight="176.0" prefWidth="522.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane fx:id="scrViewInfoCustomer" layoutX="7.0" layoutY="3.0" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
@@ -211,14 +211,8 @@
                                        </children>
                                     </VBox>
                                     <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0" />
-                                    <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
                                     <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
                                     <Button layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="165.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Informacion" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="216.0" />
-                                    <Label layoutX="290.0" layoutY="193.0" prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios" AnchorPane.rightAnchor="418.0" AnchorPane.topAnchor="193.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
                                     <Button fx:id="btnBackViewInfoCustomer" layoutX="755.0" layoutY="14.0" mnemonicParsing="false" onAction="#setBtnBackViewInfoCustomer" prefHeight="21.0" prefWidth="84.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Atrás" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0" />
                                  </children>
                               </AnchorPane>
@@ -306,14 +300,8 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </CheckBox>
-                                          <Label prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </VBox>
-                                    <TextField layoutX="286.0" layoutY="224.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="153.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="224.0" />
                                     <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
                                     <Button fx:id="btnUpdateCustomerAccount" layoutX="484.0" layoutY="463.0" mnemonicParsing="false" onAction="#setBtnUpdateCustomerAccount" prefHeight="25.0" prefWidth="141.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Actualizar" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="240.0" />
                                     <Button fx:id="btnBackEditCustomerAccount" layoutX="753.0" layoutY="25.0" mnemonicParsing="false" onAction="#setBtnBackEditCustomerAccount" prefHeight="21.0" prefWidth="84.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Atrás" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="25.0" />
@@ -376,10 +364,10 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                     </Button>
-                                    <TableView layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
+                                    <TableView fx:id="tableViewCustomers2" layoutX="14.0" layoutY="47.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="47.0">
                                        <columns>
-                                          <TableColumn prefWidth="88.0" text="ID CLIENTE" />
-                                          <TableColumn prefWidth="145.0" text="NOMBRE" />
+                                          <TableColumn fx:id="columnIdCustomer2" editable="false" prefWidth="88.0" sortable="false" text="ID CLIENTE" />
+                                          <TableColumn fx:id="columnCustomerName" editable="false" prefWidth="145.0" sortable="false" text="NOMBRE" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -408,7 +396,7 @@
                                        <children>
                                           <Group>
                                              <children>
-                                                <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                <TextField fx:id="textFieldNewCustomerName" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                 <Label layoutY="2.0" prefHeight="21.0" prefWidth="138.0" text="Nombre Completo:">
                                                    <font>
                                                       <Font size="15.0" />
@@ -423,12 +411,12 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="123456789" />
+                                                <TextField fx:id="textFieldNewCustomerPhoneNumber" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" promptText="123456789" />
                                              </children>
                                           </Group>
                                           <Group>
                                              <children>
-                                                <TextField layoutX="144.0" prefHeight="25.0" prefWidth="133.0" />
+                                                <TextField fx:id="textFieldNewCustomerLoyaltyPoints" layoutX="144.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                 <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
                                                    <font>
                                                       <Font size="15.0" />
@@ -439,15 +427,9 @@
                                        </children>
                                     </VBox>
                                     <VBox layoutX="286.0" layoutY="168.0" spacing="5.0" AnchorPane.rightAnchor="418.0" />
-                                    <TextField layoutX="287.0" layoutY="234.0" prefHeight="178.0" prefWidth="555.0" AnchorPane.bottomAnchor="142.8" AnchorPane.rightAnchor="21.799999999999955" AnchorPane.topAnchor="234.0" />
                                     <HBox layoutX="390.0" layoutY="453.0" spacing="15.0" AnchorPane.bottomAnchor="72.0" AnchorPane.rightAnchor="174.0" />
-                                    <Button fx:id="btnSaveNewCustomer" layoutX="484.0" layoutY="463.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="165.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar Nuevo Cliente" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="216.0" />
-                                    <Label layoutX="287.0" layoutY="212.0" prefHeight="21.0" prefWidth="157.0" text="Notas / Comentarios" AnchorPane.rightAnchor="419.4" AnchorPane.topAnchor="212.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <CheckBox layoutX="307.0" layoutY="157.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="100.0" text="Cliente VIP">
+                                    <Button fx:id="btnSaveNewCustomer" layoutX="484.0" layoutY="463.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="46.0" prefWidth="165.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar Nuevo Cliente" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="216.0" />
+                                    <CheckBox fx:id="checkBoxNewCustomerVIPStatus" layoutX="307.0" layoutY="157.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="100.0" text="Cliente VIP">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

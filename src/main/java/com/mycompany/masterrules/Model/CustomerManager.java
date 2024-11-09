@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Model;
 import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author David Torres
@@ -9,12 +10,16 @@ public class CustomerManager {
     private ArrayList<Customer> customers;
 
     public CustomerManager(){
+        try{
         customers= new ArrayList();
-        customers.add(new Customer("Juan", "123"));
-        customers.add(new Customer("Pedro", "456"));
-        customers.add(new Customer("Maria", "789"));
-        customers.add(new Customer("Jose", "101"));
-        customers.add(new Customer("Luis", "112"));
+        registerCustomer("Juan", "123","",true);
+        registerCustomer("Pedro", "456","0",true);
+        registerCustomer("Maria", "789","",false);
+        registerCustomer("Jose", "101","0",false);
+        registerCustomer("Luis", "112","100",false);
+        }catch(Exception e){
+            
+        }
     }
     public void addCustomer(String name, String phone){
         
@@ -29,11 +34,25 @@ public class CustomerManager {
         //cliente.setVIP(true);
     }
 
-    public void registerCustomer(String name, String phone){
-        Customer customer = new Customer(name, phone);
-        customers.add(customer);
-    }
+  
 
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
+        if(!name.trim().isEmpty()&&!phone.trim().isEmpty()){
+            int loyaltyPointsInt;
+        if(!loyaltyPoints.equals("")){
+            loyaltyPointsInt= Integer.valueOf(loyaltyPoints);
+        }else{
+            loyaltyPointsInt=0;
+        }
+        Customer customer = new Customer(generateRandomId(),name, phone,loyaltyPointsInt, vipStatus);
+        customers.add(customer);
+        }else{
+            throw new Exception("Parametros Incorrectos");
+        }
+        
+    }
+    
+    
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
@@ -41,6 +60,24 @@ public class CustomerManager {
     public void setCustomers(ArrayList<Customer> customers) {
         this.customers = customers;
     }
+   
+    private  boolean isIdUnique(String ID) {
+        for (Customer customer : customers) {
+            if (customer.getID().equals(ID) ) {
+                return false;
+            }
+        }
+        return true;
+    }
     
+    public String generateRandomId() {
+        Random random = new Random();
+        long idNumber= Math.abs(random.nextLong()); 
+        String idString = String.valueOf(idNumber);
+        if(isIdUnique(idString)){
+            return idString;
+        }
+        return generateRandomId();
+    } 
     
 }
