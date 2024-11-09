@@ -1,5 +1,10 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -9,11 +14,14 @@ import java.util.*;
  * @autor: David Torres
  *
  * Clase que representa un combo personalizado
+ * TODO: arreglar el ADT de esta clase
  */
-// TODO: arreglar el ADT de esta clase
+
+@Entity
 public class CustomComboTemplate {
 
     /** Identificador del combo */
+    @Id
     private long customComboTemplateID;
 
     /** Precio del combo */
@@ -23,12 +31,14 @@ public class CustomComboTemplate {
     private BigDecimal VIPPrice;
 
     /** Cantidad de productos que se deben escoger por cada categoria correspondiente */
+    @ElementCollection
     private Map<String, Integer> quantityByCategory;
 
     /** Lista de productos para escoger correspondiente por cada categoria */
     private Map<String, List<Product>> productsEnableByCategory;
 
     /** Lista de productos por defecto */
+    @OneToMany
     private List<Product> defaultProducts;
 
     /** Nombre del combo */

@@ -18,13 +18,14 @@
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
         <mapping class="com.mycompany.masterrules.Model.Combo"/>
+        <mapping class="com.mycompany.masterrules.Model.CustomComboTemplate"/>
+
 
         <mapping class="com.mycompany.masterrules.Model.UserAccount"/>
         <mapping class="com.mycompany.masterrules.Model.UserPermissions"/>
 
         <mapping class="com.mycompany.masterrules.Model.Customer"/>
         <mapping class="com.mycompany.masterrules.Model.Debt"/>
-
         <mapping class="com.mycompany.masterrules.Model.Bill"/>
     </session-factory>
 </hibernate-configuration>
