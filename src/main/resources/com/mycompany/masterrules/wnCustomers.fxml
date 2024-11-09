@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -17,7 +11,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -27,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCustomersController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCustomersController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,7 +28,7 @@
                <tabs>
                   <Tab fx:id="tabCustomerAccount" text="Cuenta Cliente">
                      <content>
-                        <AnchorPane fx:id="scrCustomerAccount" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="scrCustomerAccount" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <AnchorPane fx:id="scrMainViewCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                  <styleClass>
@@ -83,9 +76,6 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Group layoutX="348.0" layoutY="109.0" />
-                                    <Group layoutX="351.0" layoutY="140.0" />
-                                    <Group layoutX="304.0" layoutY="62.0" />
                                     <Group layoutX="304.0" layoutY="88.4000015258789">
                                        <children>
                                           <Label layoutY="39.0" prefHeight="21.0" prefWidth="121.0" text="Credito de tienda:">
@@ -180,13 +170,11 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Group layoutX="348.0" layoutY="109.0" />
-                                    <Group layoutX="351.0" layoutY="140.0" />
                                     <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
                                        <children>
                                           <Group>
                                              <children>
-                                                <TextField layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                <TextField fx:id="txtFieldDebt" layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
                                                 <Label layoutY="2.0" prefHeight="21.0" prefWidth="50.0" text="Deuda:">
                                                    <font>
                                                       <Font size="15.0" />
@@ -201,7 +189,7 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="textFieldEditCustomerStoreCredit" layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                <TextField fx:id="textFieldEditCustomerStoreCredit" layoutX="143.0" onMouseClicked="#setScrWarningCredit" prefHeight="25.0" prefWidth="133.0" />
                                              </children>
                                           </Group>
                                           <Group>
@@ -254,13 +242,13 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <PasswordField prefHeight="34.0" prefWidth="321.0" promptText="*******************************" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                          <PasswordField fx:id="psswrdFieldAccesstoStoreCredit" prefHeight="34.0" prefWidth="321.0" promptText="*******************************" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                                           <Label text="¡Escanee la tarjeta del cliente!" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                          <Button fx:id="btnAcceptCredit" mnemonicParsing="false" onMouseClicked="#setButtonAcceptCredit" prefHeight="38.0" prefWidth="124.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Aceptar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -314,8 +302,6 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Group layoutX="348.0" layoutY="109.0" />
-                                    <Group layoutX="351.0" layoutY="140.0" />
                                     <VBox layoutX="305.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="64.0">
                                        <children>
                                           <Group>

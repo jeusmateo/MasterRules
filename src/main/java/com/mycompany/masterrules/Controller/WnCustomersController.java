@@ -84,6 +84,9 @@ public class WnCustomersController implements Initializable {
     private TextField textFieldNewCustomerPhoneNumber;
     @FXML
     private TextField textFieldNewCustomerLoyaltyPoints;
+
+    @FXML
+    private TextField txtFieldDebt;
     @FXML
     private CheckBox checkBoxNewCustomerVIPStatus;
     @FXML
@@ -118,6 +121,8 @@ public class WnCustomersController implements Initializable {
     public void setBtnBackViewInfoCustomer() {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
+
+        // esto creo que esta mal usado, debería ser clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints ) o lgo parecido
         clearTextFields(new TextField());
 
     }
@@ -134,14 +139,30 @@ public class WnCustomersController implements Initializable {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
         clearTextFields();
+        clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints );
 
     }
+
+
+    // falta que lo de atras no sea editable y se desenfoque
+    @FXML
+    private void setScrWarningCredit(){
+        scrWarningCredit.setVisible(true);
+    }
+
+    @FXML
+    private void setButtonAcceptCredit() {
+        scrWarningCredit.setVisible(false);
+    }
+
 
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
             textField.clear(); // Limpia cada campo de texto proporcionado
         }
     }
+
+
 
     @FXML
     private void eventAction(ActionEvent event) {
@@ -243,7 +264,6 @@ public class WnCustomersController implements Initializable {
         setItemsToAllTables(customers);
         tableViewCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
         tableViewCustomerEdit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
-
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
@@ -264,5 +284,7 @@ public class WnCustomersController implements Initializable {
             clearTextFields();
         }
     }
+
+
 
 }
