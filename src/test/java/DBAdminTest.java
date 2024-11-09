@@ -26,7 +26,7 @@ public class DBAdminTest {
                     "Name: " + p.getProductName() + "\n" +
                     "Type: " + p.getProductType() + "\n" +
                     "Price: " + p.getPrice() + "\n" +
-                    "VIP Price: " + p.getVIPprice() + "\n"
+                    "VIP Price: " + p.getVIPPrice() + "\n"
             );
         }
 

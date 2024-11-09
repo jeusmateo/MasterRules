@@ -8,8 +8,8 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 /**
- * Class for instances of Product
- * @author alexs
+ * Clase que representa al producto que se vende en MasterRules
+ * @author Alexandra Saavedra
  */
 
 /*
@@ -22,42 +22,57 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @Column(name = "clvProducto")
+    /**
+     * Identificador del producto
+     */
     private String productID;
     //private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
     @Column(name = "nombreProducto")
+    /**
+     * Nombre del producto
+     */
     private String productName;
     @Column(name = "tipoProducto")
+    /**
+     * Tipo de producto
+     */
     private String productType;
     @Column(name = "precio")
+    /**
+     * Precio del producto
+     */
     private BigDecimal price;
     @Column(name = "precioVIP")
-    private BigDecimal VIPprice;
+    /**
+     * Precio vip del producto
+     */
+    private BigDecimal VIPPrice;//cambie VIPprice por VIPPrice
 
     /**
-     * Constructor of class Product NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
+     * Constructor de clase NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
      */
     public Product() {
     }
 
     /**
-     * Constructor of class Product
-     * @param productID Identification of product
-     * @param productName Name of product
-     * @param productType Type of product
-     * @param price Price of product
-     * @param VIPprice Vip price of product
+     * Constructor de clase
+     * @param productID Identificador del producto
+     * @param productName Nombre del producto
+     * @param productType Tipo de producto
+     * @param price Precio del producto
+     * @param VIPPrice Precio vip del producto
      */
-    public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPprice) {
+    public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
         this.productID = productID;
         this.productName = productName;
         this.productType = productType;
         this.price = price;
-        this.VIPprice = VIPprice;
+        this.VIPPrice = VIPPrice;
     }
 
     /**
-     * Getter of identification(ID) of product
-     * @return Product identification
+     * Obtiene el identificador del producto
+     * @return Identificador del producto
      */
     public String getProductID() {    
         return productID;
@@ -68,40 +83,40 @@ public class Product {
     }
      */
     /**
-     * Getter of product name
-     * @return Product name
+     * Obtiene el nombre del producto
+     * @return Nombre del producto
      */
     public String getProductName() {
         return productName;
     }
 
     /**
-     * Getter of product type
-     * @return Product type
+     * Obtiene el tipo de producto
+     * @return Tipo de producto
      */
     public String getProductType() {
         return productType;
     }
 
     /**
-     * Getter of product price
-     * @return Product price
+     * Obtiene el precio del producto
+     * @return Precio del producto
      */
     public BigDecimal getPrice() {
         return price;
     }
 
     /**
-     * Getter of product vip price
-     * @return Vip price
+     * Obtiene el precio vip del producto
+     * @return Precio vip del producto
      */
-    public BigDecimal getVIPprice() {
-        return VIPprice;
+    public BigDecimal getVIPPrice() {
+        return VIPPrice;
     }
 
     /**
-     * Setter of identification(ID) of product 
-     * @param productID Identification of product 
+     * Establece el identificador del producto
+     * @param productID Identificador del producto
      */
     public void setProductID(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
         this.productID = productID;
@@ -113,34 +128,34 @@ public class Product {
     }
      */
     /**
-     * Setter of product name
-     * @param productName Product name
+     * Establece el nombre del producto
+     * @param productName Nombre del producto
      */
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
     /**
-     * Setter of product type
-     * @param productType Product type
+     * Establece el tipo de producto
+     * @param productType Tipo de producto
      */
     public void setProductType(String productType) {
         this.productType = productType;
     }
 
     /**
-     * Setter of product price
-     * @param price Price
+     * Establece el precio del producto
+     * @param price Precio del producto
      */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     /**
-     * Setter of vip price
-     * @param VIPprice Vip price
+     * Establece el precio vip del producto
+     * @param VIPPrice Precio vip del producto
      */
-    public void setVIPprice(BigDecimal VIPprice) {
-        this.VIPprice = VIPprice;
+    public void setVIPPrice(BigDecimal VIPPrice) {
+        this.VIPPrice = VIPPrice;
     }
 }
