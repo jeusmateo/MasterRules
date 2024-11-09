@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -44,69 +45,108 @@ public class WnSideNavigationBar {
     @FXML
     private AnchorPane scrPane;
 
+    // Definir constantes para las rutas FXML
+    private static final String PRODUCTS_VIEW = "/com/mycompany/masterrules/wnProducts.fxml";
+    private static final String CASH_REGISTER_AUDIT_REPORT_VIEW = "/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml";
+    private static final String CUSTOMERS_VIEW = "/com/mycompany/masterrules/wnCustomers.fxml";
+    private static final String INVENTORY_VIEW = "/com/mycompany/masterrules/wnInventory.fxml";
+    private static final String REPORTS_VIEW = "/com/mycompany/masterrules/wnReports.fxml";
+    private static final String SALES_VIEW = "/com/mycompany/masterrules/wnSale.fxml";
+    private static final String USERS_VIEW = "/com/mycompany/masterrules/wnUsers.fxml";
 
+    // Variable para almacenar la vista activa
+    private String activeView = null;
 
+    @FXML
+    public void initialize() {
+        // Inicializar por defecto maximizado
+
+//        scrPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+//            if (newScene != null) {
+//                newScene.windowProperty().addListener((windowObservable, oldWindow, newWindow) -> {
+//                    if (newWindow != null) {
+//                        Stage stage = (Stage) newWindow;
+//                        stage.setMaximized(true);  // Maximiza la ventana
+//                        stage.setResizable(true);  // Permitir redimensionamiento
+//                    }
+//                });
+//            }
+//        });
+
+        try {
+            loadSection(SALES_VIEW);
+            activeView = SALES_VIEW;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void ProductsSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnProducts.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
+        if (!PRODUCTS_VIEW.equals(activeView)) {
+            loadSection(PRODUCTS_VIEW);
+            activeView = PRODUCTS_VIEW;
+        }
     }
-
 
     @FXML
     void cashRegisterAuditReportSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+        if (!CASH_REGISTER_AUDIT_REPORT_VIEW.equals(activeView)) {
+            loadSection(CASH_REGISTER_AUDIT_REPORT_VIEW);
+            activeView = CASH_REGISTER_AUDIT_REPORT_VIEW;
+        }
     }
 
     @FXML
     void customerSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCustomers.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+        if (!CUSTOMERS_VIEW.equals(activeView)) {
+            loadSection(CUSTOMERS_VIEW);
+            activeView = CUSTOMERS_VIEW;
+        }
     }
 
     @FXML
     void inventorySection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnInventory.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
-
+        if (!INVENTORY_VIEW.equals(activeView)) {
+            loadSection(INVENTORY_VIEW);
+            activeView = INVENTORY_VIEW;
+        }
     }
 
     @FXML
     void reportSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnReports.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+        if (!REPORTS_VIEW.equals(activeView)) {
+            loadSection(REPORTS_VIEW);
+            activeView = REPORTS_VIEW;
+        }
     }
 
     @FXML
     void salesSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnSale.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
+        if (!SALES_VIEW.equals(activeView)) {
+            loadSection(SALES_VIEW);
+            activeView = SALES_VIEW;
+        }
     }
 
     @FXML
     void usersSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnUsers.fxml"));
+        if (!USERS_VIEW.equals(activeView)) {
+            loadSection(USERS_VIEW);
+            activeView = USERS_VIEW;
+        }
+    }
+
+
+    private void loadSection(String fxmlPath) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
-
     }
+
 
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());
         pane.prefHeightProperty().bind(scrPane.heightProperty());
     }
-
-
 }
