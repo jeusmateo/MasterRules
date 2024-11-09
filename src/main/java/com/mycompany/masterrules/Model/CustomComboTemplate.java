@@ -1,8 +1,7 @@
 package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 
 /**
@@ -24,13 +23,13 @@ public class CustomComboTemplate {
     private BigDecimal VIPPrice;
 
     /** Cantidad de productos que se deben escoger por cada categoria correspondiente */
-    private HashMap<String, Integer> quantityByCategory;
+    private Map<String, Integer> quantityByCategory;
 
     /** Lista de productos para escoger correspondiente por cada categoria */
-    private HashMap<String, ArrayList<Product>> productsEnableByCategory;
+    private Map<String, List<Product>> productsEnableByCategory;
 
     /** Lista de productos por defecto */
-    private ArrayList<Product> defaultProducts;
+    private List<Product> defaultProducts;
 
     /** Nombre del combo */
     private String comboName;
@@ -44,7 +43,7 @@ public class CustomComboTemplate {
     public CustomComboTemplate(ArrayList<Product> productosArg, BigDecimal priceArg, BigDecimal VIPPriceArg){
         defaultProducts = productosArg;
         this.quantityByCategory = new HashMap<>();
-        this.productsEnableByCategory = new HashMap<>();
+        this.productsEnableByCategory = new HashMap<String, List<Product>>();
         price=priceArg;
         VIPPrice = VIPPriceArg;
     }
@@ -56,7 +55,7 @@ public class CustomComboTemplate {
      */
     public CustomComboTemplate(BigDecimal priceArg, BigDecimal VIPPriceArg) {
         this.quantityByCategory = new HashMap<>();
-        this.productsEnableByCategory = new HashMap<>();
+        this.productsEnableByCategory = new HashMap<String, List<Product>>();
         price=priceArg;
         VIPPrice = VIPPriceArg;
     }
@@ -66,7 +65,7 @@ public class CustomComboTemplate {
      * @param categoryKey La categoria de la cual se desea obtener los productos
      * @return La lista de productos permitidos por la categoria correspondiente
      */
-    public ArrayList<Product> getProductListEnableByCategory(String categoryKey) {
+    public List<Product> getProductListEnableByCategory(String categoryKey) {
         return productsEnableByCategory.getOrDefault(categoryKey, new ArrayList<>());
 
     }
@@ -102,7 +101,7 @@ public class CustomComboTemplate {
     /**
      * Obtiene el hashmap que contiene la informacion de las cantidades de productos por categoria
      */
-    public HashMap<String, Integer> getQuantityByCategory() {
+    public Map<String, Integer> getQuantityByCategory() {
         return quantityByCategory;
     }
 
@@ -116,14 +115,14 @@ public class CustomComboTemplate {
     /**
      * Obtiene el hashmap que contiene la informacion de los productos permitidos por categoria
      */
-    public HashMap<String, ArrayList<Product>> getProductsEnableByCategory() {
+    public Map<String, List<Product>> getProductsEnableByCategory() {
         return productsEnableByCategory;
     }
 
     /**
      * Establece el hashmap que contiene la informacion de los productos permitidos por categoria
      */
-    public void setProductsEnableByCategory(HashMap<String, ArrayList<Product>> productsByCategory) {
+    public void setProductsEnableByCategory(HashMap<String, List<Product>> productsByCategory) {
         this.productsEnableByCategory = productsByCategory;
     }
 
@@ -148,7 +147,7 @@ public class CustomComboTemplate {
      * Obtiene la lista de productos por defecto
      * @return La lista de productos por defecto en un dato de tipo ArrayList de Product
      */
-    public ArrayList<Product> getDefaultProducts() {
+    public List<Product> getDefaultProducts() {
         return defaultProducts;
     }
 
@@ -156,7 +155,7 @@ public class CustomComboTemplate {
      * Establece la lista de productos por defecto
      * @param defaultProducts La lista de productos por defecto en un dato de tipo ArrayList de Product
      */
-    public void setDefaultProducts(ArrayList<Product> defaultProducts) {
+    public void setDefaultProducts(List<Product> defaultProducts) {
         this.defaultProducts = defaultProducts;
     }
 
@@ -207,5 +206,36 @@ public class CustomComboTemplate {
     public void setVIPPrice(BigDecimal VIPPrice) {
         this.VIPPrice = VIPPrice;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomComboTemplate that = (CustomComboTemplate) o;
+        return customComboTemplateID == that.customComboTemplateID &&
+                price.compareTo(that.price) == 0 &&
+                VIPPrice.compareTo(that.VIPPrice) == 0 &&
+                Objects.equals(quantityByCategory, that.quantityByCategory) &&
+                Objects.equals(productsEnableByCategory, that.productsEnableByCategory) &&
+                Objects.equals(defaultProducts, that.defaultProducts) &&
+                Objects.equals(comboName, that.comboName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customComboTemplateID, price, VIPPrice, quantityByCategory, productsEnableByCategory, defaultProducts, comboName);
+    }
+
+    @Override
+    public String toString() {
+        return "CustomComboTemplate{" +
+                "customComboTemplateID=" + customComboTemplateID +
+                ", price=" + price +
+                ", VIPPrice=" + VIPPrice +
+                ", quantityByCategory=" + quantityByCategory +
+                ", productsEnableByCategory=" + productsEnableByCategory +
+                ", defaultProducts=" + defaultProducts +
+                ", comboName='" + comboName + '\'' +
+                '}';
+    }
 }
