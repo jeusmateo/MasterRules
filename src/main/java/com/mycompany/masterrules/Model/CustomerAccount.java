@@ -27,6 +27,14 @@ public class CustomerAccount {
         this.loyaltyCard = new LoyaltyCard(); //Debemos generar su ID
 
     }
+     public CustomerAccount(int loyaltyPoints, boolean vipStatus){
+        this.loyaltyPoints = loyaltyPoints;
+        this.storeCredit = 0;
+        this.isVIP = vipStatus;
+        this.totalDebt = new ArrayList<>();
+        this.loyaltyCard = new LoyaltyCard(); //Debemos generar su ID
+
+    }
 
     /**
      * NOTA: Este constructor no se usa en el programa, es solo para pruebas

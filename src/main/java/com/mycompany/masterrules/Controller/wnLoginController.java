@@ -40,6 +40,7 @@ public class wnLoginController implements Initializable {  // Cambié el nombre 
                 txtFieldPassword.requestFocus();
                 event.consume();
             }
+
         } else  if (evt.equals(txtFieldPassword)) {
             if (event.getCharacter().equals(" ")) {
                 event.consume();
