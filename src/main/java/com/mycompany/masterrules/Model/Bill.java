@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Bill {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /** Nombre del empleado en turno */
@@ -46,6 +46,22 @@ public class Bill {
         order = orderArg;
         amount = amountArg;
         employeeName = employeeNameArg;
+    }
+
+    /**
+     * Obtiene el id de la factura
+     * @return El id de la factura
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Establece el id de la factura
+     * @param id El id de la factura
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
