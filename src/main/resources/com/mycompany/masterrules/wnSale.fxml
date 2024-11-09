@@ -68,7 +68,7 @@
                   </VBox>
                   <VBox fx:id="continueOrderOptionsBox" layoutX="51.0" layoutY="410.0" prefHeight="135.0" prefWidth="180.0" visible="false" AnchorPane.bottomAnchor="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="PAGAR" />
+                        <Button fx:id="btnPay" onMouseClicked="#handlePayAction" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="PAGAR" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="FIADO">
                            <VBox.margin>
                               <Insets top="15.0" />

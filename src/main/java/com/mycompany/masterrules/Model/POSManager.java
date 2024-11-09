@@ -122,7 +122,7 @@ public class POSManager {
         } else {
             if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
                 for (Product product : currentOrder.getProducts()) {
-                    amount = amount.add(product.getVIPprice());
+                    amount = amount.add(product.getVIPPrice());
                 }
             } else {
                 for (Product product : currentOrder.getProducts()) {
