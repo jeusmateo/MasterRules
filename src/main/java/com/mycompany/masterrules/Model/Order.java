@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -12,10 +13,15 @@ import java.util.List;
  *
  *
  */
+@Embeddable
 public class Order {
+    @Transient
     private long id;
+    @ManyToOne
     private Customer customer;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> products;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Combo> combos;
     private String comment;
     private String deliveryMethod;
@@ -116,5 +122,30 @@ public class Order {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id && Objects.equals(customer, order.customer) && Objects.equals(products, order.products) && Objects.equals(combos, order.combos) && Objects.equals(comment, order.comment) && Objects.equals(deliveryMethod, order.deliveryMethod) && Objects.equals(date, order.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, products, combos, comment, deliveryMethod, date);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", products=" + products +
+                ", combos=" + combos +
+                ", comment='" + comment + '\'' +
+                ", deliveryMethod='" + deliveryMethod + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
 

@@ -8,6 +8,7 @@ import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 public class CustomerDBTest {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class CustomerDBTest {
         // Obtener todos los clientes
         System.out.println("Obteniendo todos los clientes");
         List<Customer> customers = customerDBManager.readAll();
-        assert customers.size() == 1;
+        assert Objects.requireNonNull(customers).size() == 1;
         for (Customer c : customers) {
             System.out.println(c.toString());
         }

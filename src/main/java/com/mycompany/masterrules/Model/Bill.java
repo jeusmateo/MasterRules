@@ -1,24 +1,41 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  *
  * @author David Torres
  */
+@Entity
 public class Bill {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     /** Nombre del empleado en turno */
     private String employeeName;
 
     /** Cliente al que se le realiza la factura */
+    @Transient
     private Customer customer;
 
     /** Monto total de la factura */
     private BigDecimal amount;
 
     /** Orden a la que pertenece la factura */
+    @Embedded
     private Order order;
+
+    /**
+     * Constructor para JPA
+     */
+    protected Bill(){
+
+    }
 
     /**
      * Constructor de la clase Bill
@@ -30,6 +47,22 @@ public class Bill {
         order = orderArg;
         amount = amountArg;
         employeeName = employeeNameArg;
+    }
+
+    /**
+     * Obtiene el id de la factura
+     * @return El id de la factura
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Establece el id de la factura
+     * @param id El id de la factura
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
@@ -96,4 +129,38 @@ public class Bill {
         this.customer = customerAccount;
     }
 
+    /**
+     * @param o Objeto a comparar con la factura
+     * @return true si el objeto es igual a la factura, de lo contrario false
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+//        return id == bill.id && Objects.equals(employeeName, bill.employeeName) && Objects.equals(customer, bill.customer) && Objects.equals(amount, bill.amount) && Objects.equals(order, bill.order);
+        return id == bill.id && Objects.equals(employeeName, bill.employeeName) && Objects.equals(customer, bill.customer) && amount.compareTo(bill.amount) == 0 && Objects.equals(order, bill.order);
+    }
+
+    /**
+     * @return El hash de la factura
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, employeeName, customer, amount, order);
+    }
+
+    /**
+     * @return La representación en cadena de la factura
+     */
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", employeeName='" + employeeName + '\'' +
+                ", customer=" + customer +
+                ", amount=" + amount +
+                ", order=" + order +
+                '}';
+    }
 }

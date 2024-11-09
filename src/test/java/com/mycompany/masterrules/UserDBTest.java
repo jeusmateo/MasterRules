@@ -5,6 +5,8 @@ import com.mycompany.masterrules.Model.UserAccount;
 import com.mycompany.masterrules.Database.UserDBManager;
 import com.mycompany.masterrules.Model.UserPermissions;
 
+import java.util.Objects;
+
 /**
  * Clase para pruebas de la base de datos de usuarios
  */
@@ -24,13 +26,18 @@ public class UserDBTest {
         // Leer usuario
         UserAccount userFound = userDBManager.findById("1");
         assert userFound != null;
+        assert userFound.equals(user); // Verificar que sea correcta la lectura
 
         // Actualizar usuario
         user.setPassword("4321");
         assert userDBManager.update(user);
 
         // Leer todos los usuarios
-        assert userDBManager.readAll().size() > 0;
+        assert !Objects.requireNonNull(userDBManager.readAll()).isEmpty();
+
+        for(UserAccount userAccount : Objects.requireNonNull(userDBManager.readAll())){
+            System.out.println(userAccount);
+        }
 
         // Eliminar usuario
         assert userDBManager.delete(user);
