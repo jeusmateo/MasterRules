@@ -143,7 +143,7 @@ public class POSManager {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
 
             BigDecimal amount = calculateTotalOrderAmount();
-            Bill newBill = new Bill(currentOrder, amount, currentUser.getEmployeeName());
+            Bill newBill = new Bill(currentOrder, amount, currentUser.getFullEmployeeName());
             this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
             printer.imprimirOrder(currentOrder);
             printer.imprimirBill(newBill);
@@ -162,7 +162,7 @@ public class POSManager {
      */
     public void collectDebt(Customer customerArg,Debt debtArg){
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getEmployeeName());
+            Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getFullEmployeeName());
             this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
             printer.imprimirBill(newBill);
             currentOrder = new Order();

@@ -1,15 +1,18 @@
 package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
+import jakarta.persistence.*;
 
 /**
  * Clase que representa al usuario en MasterRules
  * @author Alexandra Saavedra
  */
+@Entity
 public class UserAccount {
     /**
      * Identificador del usuario
      */
+    @Id
     private String userID;//agregue esto
     /**
      * Nombre del usuario
@@ -22,11 +25,18 @@ public class UserAccount {
     /**
      * Permisos concedidos al usuario
      */
+    @Embedded
     private UserPermissions permissions;
     /**
      * Nombre completo del empleado que es dueño de la cuenta
      */
     private String fullEmployeeName;//le cambie el nombre para que indique que es el nombre completo
+
+    /**
+     * Constructor vacío de la clase UserAccount para Hibernate
+     */
+    public UserAccount() {
+    }
 
     /**
      * Constructor de la clase
@@ -105,7 +115,7 @@ public class UserAccount {
      * @return Nombre completo del empleado
      */
     public String getFullEmployeeName() {
-        return fullEmployeeName;    
+        return fullEmployeeName;
     }
 
     /**

@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -17,36 +14,29 @@ import java.math.BigDecimal;
 *  y modificarlo segun los requerimientos
 * */
 @Entity
-@Table(name = "Productos")
-
 public class Product {
     @Id
-    @Column(name = "clvProducto")
     /**
      * Identificador del producto
      */
     private String productID;
     //private long ID;//código de barras, si este no tiene código de barras entonces se le pone -1
-    @Column(name = "nombreProducto")
     /**
      * Nombre del producto
      */
     private String productName;
-    @Column(name = "tipoProducto")
     /**
      * Tipo de producto
      */
     private String productType;
-    @Column(name = "precio")
     /**
      * Precio del producto
      */
     private BigDecimal price;
-    @Column(name = "precioVIP")
     /**
      * Precio vip del producto
      */
-    private BigDecimal VIPPrice;//cambie VIPprice por VIPPrice
+    private BigDecimal VIPPrice;
 
     /**
      * Constructor de clase NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
@@ -74,7 +64,7 @@ public class Product {
      * Obtiene el identificador del producto
      * @return Identificador del producto
      */
-    public String getProductID() {    
+    public String getProductID() {
         return productID;
     }
     /*

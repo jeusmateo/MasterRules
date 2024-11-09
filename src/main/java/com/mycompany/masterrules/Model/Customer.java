@@ -1,20 +1,33 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 /**
  *
  * @autor: David Torres
  *
  * Clase que representa a un cliente en MasterRules
  */
+@Entity
 public class Customer {
 
     /**
      * Atributos de la clase
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String customerName;
     private String customerPhoneNumber;
+    @Embedded
     private CustomerAccount customerAccount;
+
+    /*
+     * Constructor por defecto para JPA
+     **/
+    public Customer() {
+    }
+
 
     /**
      * Constructor de la clase
@@ -29,6 +42,19 @@ public class Customer {
         this.customerAccount = new CustomerAccount();
     }
 
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     * @return Retorna una cadena con la información del cliente
+     */
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "ID=" + ID +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
+                ", customerAccount=" + customerAccount +
+                '}';
+    }
 
     /**
      * @return Retorna el ID del cliente

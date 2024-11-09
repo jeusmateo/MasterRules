@@ -4,7 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+/**
+ * Clase de utilidad para obtener la sesión de Hibernate.
+ */
+final class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
     static {
@@ -17,11 +20,18 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * @return La sesión de Hibernate.
+     */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    public static Session openSession() {
+
+    /**
+     * @return Una nueva sesión de Hibernate.
+     */
+    public static Session getOpenSession() {
         return sessionFactory.openSession();
     }
 

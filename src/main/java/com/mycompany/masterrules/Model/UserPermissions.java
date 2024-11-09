@@ -1,11 +1,14 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.util.EnumSet;
 
 /**
  * Clase que representa a los permisos que tiene un usuario en MasterRules
  * @author Alexandra Saavedra
  */
+@Embeddable
 public class UserPermissions {
     //falta probar si funciona con la gran cantidad de permisos que puse
     //probablemente Permissions se ponga en un archivo separado de esta clase?
