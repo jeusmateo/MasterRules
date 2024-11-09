@@ -18,7 +18,7 @@ public class Customer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
+    private String ID;
     private String customerName;
     private String customerPhoneNumber;
     @Embedded
@@ -37,17 +37,22 @@ public class Customer {
      * @param customerPhoneNumber Numero de telefono del cliente
      */
 
-    public Customer(String customerName, String customerPhoneNumber) {
-        //Falta ver como generarlothis.ID = Random.nextLong(1000)+1;
+    public Customer(String id,String customerName, String customerPhoneNumber) {
+        this.ID=id;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount();
     }
-
+    public Customer(String id,String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
+        this.ID=id;
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);
+    }
     /**
      * @return Retorna el ID del cliente
      */
-    public long getID() {
+    public String getID() {
         return ID;
     }
 
@@ -56,7 +61,7 @@ public class Customer {
      *
      * @param ID Recibe el ID del cliente
      */
-    public void setID(long ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

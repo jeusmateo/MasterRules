@@ -10,12 +10,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Controlador de la ventana de Venta
@@ -26,6 +31,9 @@ public class WnSaleController implements Initializable{
     //-------------------------------------------------------------------------------------------
     @FXML
     private Button btnContinue;
+
+    @FXML
+    private Button btnPay;
 
     @FXML
     private AnchorPane menuWindow;
@@ -182,8 +190,44 @@ public class WnSaleController implements Initializable{
     public void hideTableNumber(){
         tableNumberBox.setVisible(false);
     }
-    
-    
+
+
+    @FXML
+    private void handlePayAction(MouseEvent event) {
+        try {
+            // Cargar la vista de pago desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            Parent paymentView = loader.load();
+
+            // Crear una nueva escena y un nuevo Stage para la vista de pago
+            Scene paymentScene = new Scene(paymentView);
+            Stage paymentStage = new Stage();
+            paymentStage.setScene(paymentScene);
+
+            // Configurar el Stage como modal para bloquear interacciones en la ventana principal
+            paymentStage.initModality(Modality.WINDOW_MODAL);
+            paymentStage.initOwner(btnPay.getScene().getWindow());
+
+            // Configurar el Stage sin bordes (sin barra de título)
+            paymentStage.initStyle(StageStyle.UNDECORATED);
+
+            // Aplicar un efecto de difuminado a la ventana principal mientras el Stage modal esté abierto
+            Stage currentStage = (Stage) btnPay.getScene().getWindow();
+            currentStage.getScene().getRoot().setEffect(new javafx.scene.effect.BoxBlur(10, 10, 3));
+
+            // Añadir un evento para restaurar el fondo al cerrar el modal
+            paymentStage.setOnHidden(e -> currentStage.getScene().getRoot().setEffect(null));
+
+            // Mostrar el modal
+            paymentStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error al cargar la vista de pago: " + e.getMessage());
+        }
+    }
+
+
+
     /**
      * Inicializar el controllador de la ventana de Venta
      * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz
