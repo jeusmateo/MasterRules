@@ -13,98 +13,79 @@ public class WnSideNavigationBar {
 
     @FXML
     private Button btnCashRegisterAuditReportSection;
-
     @FXML
     private Button btnCustomersSection;
-
     @FXML
     private Button btnInventorySection;
-
     @FXML
     private Button btnProductsSection;
-
     @FXML
     private Button btnReportsSection;
-
     @FXML
     private Button btnSalesSection;
-
     @FXML
     private Button btnSignOut;
-
     @FXML
     private Button btnUsersSection;
 
     @FXML
     private Label labelUserName;
-
     @FXML
     private Label lbllSignOut;
-
     @FXML
     private AnchorPane scrPane;
 
+    private static final String PRODUCTS_VIEW = "/com/mycompany/masterrules/wnProducts.fxml";
+    private static final String CASH_REGISTER_AUDIT_REPORT_VIEW = "/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml";
+    private static final String CUSTOMERS_VIEW = "/com/mycompany/masterrules/wnCustomers.fxml";
+    private static final String INVENTORY_VIEW = "/com/mycompany/masterrules/wnInventory.fxml";
+    private static final String REPORTS_VIEW = "/com/mycompany/masterrules/wnReports.fxml";
+    private static final String SALES_VIEW = "/com/mycompany/masterrules/wnSale.fxml";
+    private static final String USERS_VIEW = "/com/mycompany/masterrules/wnUsers.fxml";
 
     @FXML
-    void ProductsSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnProducts.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-    }
-
-
-    @FXML
-    void cashRegisterAuditReportSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+    void loadProductsSection(ActionEvent event) throws IOException {
+        loadSection(PRODUCTS_VIEW);
     }
 
     @FXML
-    void customerSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnCustomers.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+    void loadCashRegisterAuditReportSection(ActionEvent event) throws IOException {
+        loadSection(CASH_REGISTER_AUDIT_REPORT_VIEW);
     }
 
     @FXML
-    void inventorySection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnInventory.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
-
+    void loadCustomerSection(ActionEvent event) throws IOException {
+        loadSection(CUSTOMERS_VIEW);
     }
 
     @FXML
-    void reportSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnReports.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
-
+    void loadInventorySection(ActionEvent event) throws IOException {
+        loadSection(INVENTORY_VIEW);
     }
 
     @FXML
-    void salesSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnSale.fxml"));
-        scrPane.getChildren().setAll(pane);
-        setPaneToFitScrPane(pane);
+    void loadReportSection(ActionEvent event) throws IOException {
+        loadSection(REPORTS_VIEW);
     }
 
     @FXML
-    void usersSection(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnUsers.fxml"));
+    void loadSalesSection(ActionEvent event) throws IOException {
+        loadSection(SALES_VIEW);
+    }
+
+    @FXML
+    void loadUsersSection(ActionEvent event) throws IOException {
+        loadSection(USERS_VIEW);
+    }
+
+    private void loadSection(String fxmlPath) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
-
     }
 
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());
         pane.prefHeightProperty().bind(scrPane.heightProperty());
     }
-
-
 }

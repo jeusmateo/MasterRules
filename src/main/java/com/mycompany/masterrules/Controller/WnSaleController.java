@@ -1,16 +1,25 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.Product;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.mycompany.masterrules.Model.Product;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -41,6 +50,9 @@ public class WnSaleController implements Initializable{
 
     @FXML
     private TabPane menuCategories;
+
+    @FXML
+    private Button btnPay;
     
     
     //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
@@ -65,6 +77,8 @@ public class WnSaleController implements Initializable{
     private WnSaleController wnSaleSection;
     private Stage stage;
     private WnSideNavigationBar wnSideNavigationBar;
+
+    
 
 
     /**
@@ -181,6 +195,18 @@ public class WnSaleController implements Initializable{
      */
     public void hideTableNumber(){
         tableNumberBox.setVisible(false);
+    }
+
+      @FXML
+    private void handlePayAction(MouseEvent event) {
+        try {
+            Parent paymentView = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            Scene paymentScene = new Scene(paymentView);
+            Stage currentStage = (Stage) btnPay.getScene().getWindow();
+            currentStage.setScene(paymentScene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
