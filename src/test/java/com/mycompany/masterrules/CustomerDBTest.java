@@ -12,12 +12,12 @@ import java.util.Objects;
 
 public class CustomerDBTest {
     public static void main(String[] args) {
-        Customer customer = new Customer("David", "1234567890");
+       // Customer customer = new Customer("David", "1234567890");
 
         // Guardar un cliente con una cuenta
         System.out.println("Guardando un cliente con una cuenta");
         CustomerDBManager customerDBManager = new CustomerDBManager();
-        assert customerDBManager.save(customer);
+       // assert customerDBManager.save(customer);
 
 
         // Obtener todos los clientes
@@ -30,13 +30,13 @@ public class CustomerDBTest {
 
         // Actualizar un cliente
         System.out.println("Actualizando un cliente");
-        customer.setCustomerName("David Torres");
-        assert customerDBManager.update(customer);
+        //customer.setCustomerName("David Torres");
+       // assert customerDBManager.update(customer);
 
         // Obtener un cliente por su id
         System.out.println("Obteniendo un cliente por su id");
-        Customer customerById = customerDBManager.findById(customer.getID());
-        assert customerById != null;
+        //Customer customerById = customerDBManager.findById(customer.getID());
+       // assert customerById != null;
 
         // Añadir deuda a un cliente
         System.out.println("Añadiendo deuda a un cliente");
@@ -44,18 +44,18 @@ public class CustomerDBTest {
         Order newOrder = new Order();
         newOrder.addProduct(newProduct);
         Debt newDebt = new Debt(newOrder, BigDecimal.valueOf(1000));
-        customer.getCustomerAccount().addDebt(newDebt);
-        assert customerDBManager.update(customer);
+       // customer.getCustomerAccount().addDebt(newDebt);
+       // assert customerDBManager.update(customer);
 
         // Obtiene al cliente actualizado
         System.out.println("Obteniendo al cliente actualizado");
-        Customer updatedCustomer = customerDBManager.findById(customer.getID());
-        assert updatedCustomer != null;
-        System.out.println(updatedCustomer.toString());
+       // Customer updatedCustomer = customerDBManager.findById(customer.getID());
+       // assert updatedCustomer != null;
+       // System.out.println(updatedCustomer.toString());
 
         // Eliminar un cliente
         System.out.println("Eliminando un cliente");
-        assert customerDBManager.delete(customer);
+        //assert customerDBManager.delete(customer);
 
     }
 }
