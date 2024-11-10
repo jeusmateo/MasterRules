@@ -31,13 +31,10 @@ public class CafeteriaStorage {
      * Adds a product in the storage
      * @param id Identification of the product
      * @param stock Quantity available in the storage
-     * @throws Exception If the stock is negative or if the product already exists, it causes an error
+     * @throws Exception If the product already exists, it causes an error
      */
     public void addProduct(String id,int stock) throws Exception{
-        if(stock<0){
-            throw new Exception("ERROR:El stock es inválido");
-        }
-        
+        //se elimino la excepcion cuando el stock es negativo
         if(isStored(id)){
             throw new Exception("ERROR:El producto ya existe");
         }
