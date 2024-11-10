@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class wnLoginController implements Initializable {  
+public class WnLoginController implements Initializable {
 
     private DAOTemporal chepo = new DAOTemporal();
 
