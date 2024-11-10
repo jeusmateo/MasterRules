@@ -1,11 +1,15 @@
 package com.mycompany.masterrules.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 
-public class WnCashRegisterAuditReport {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class WnCashRegisterAuditReport implements Initializable{
 
     @FXML
     private Label labelHourFrom;
@@ -43,4 +47,11 @@ public class WnCashRegisterAuditReport {
     @FXML
     private Text txtTSStoreCard;
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }
+
+
