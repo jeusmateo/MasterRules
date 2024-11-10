@@ -50,10 +50,7 @@ public class WnCashRegisterAuditReport implements Initializable{
     @FXML
     private TableColumn<CashFlowReport, String> colTablasakhdhjkasdhjkasjkhdsah;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        
-    }
+ 
 
 
     @Override

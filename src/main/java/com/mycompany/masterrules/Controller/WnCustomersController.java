@@ -28,8 +28,8 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Button btnAcceptCredit;
 
-    @FXML
-    private PasswordField psswrdFieldAccesstoStoreCredit;
+   // @FXML
+    //private PasswordField psswrdFieldAccesstoStoreCredit;
 
     @FXML
     private Button btnSaveNewCustomer;
@@ -48,7 +48,7 @@ public class WnCustomersController implements Initializable {
 
     @FXML
     private AnchorPane scrMainViewCustomerAccount;
-
+    @FXML
     private AnchorPane scrViewInfoCustomer;
 
     @FXML
@@ -108,6 +108,7 @@ public class WnCustomersController implements Initializable {
     private TableView<Customer> tblCustomers2;
     @FXML
     private TableColumn<Customer, String> colCustomerId2;
+    
     @FXML
     private TableColumn<Customer, String> colCustomerName2;
 
