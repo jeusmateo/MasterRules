@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 /**
@@ -50,11 +53,30 @@ public class WnInventoryController implements Initializable {
 
     // metodos de la ventana de inventario
     //-------------------------------------------------------------------------------------------
+    @FXML
+    private TableView<Product> tblInventory;
+    @FXML
+    private TableColumn<Product, String> colProductID;
+    @FXML
+    private TableColumn<Product, String> colProductName;
+    @FXML
+    private TableColumn<Product, String> colProductCategory;
+    @FXML
+    private TableColumn<Product, String> colProductPrice;
+    @FXML
+    private TableColumn<Product, String> colProductVipPrice;
+    @FXML
+    private TableColumn<Product, String> colProductStock; // Objeto incorrecto, en productos no almacenamos esta informacion
+    @FXML
+    private TableColumn<Product, String> colProductMinStock; // Objeto incorrecto, en productos no almacenamos esta informacion
+    @FXML
+    private TableColumn<Product, String> colProductMaxStock; // Objeto incorrecto, en productos no almacenamos esta informacion
 
 
     /**
      * Muestra la ventana de edicion de informacion
      */
+    @FXML
     public void showScrEditInfo(){
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
@@ -63,6 +85,7 @@ public class WnInventoryController implements Initializable {
     /**
      * Muestra la ventana de ver cliente
      */
+    @FXML
     public void exit() {
         txtFieldMinInv.clear();
         txtFieldStock.clear();
@@ -71,6 +94,7 @@ public class WnInventoryController implements Initializable {
     }
 
 
+    @FXML
     public void saveInfo(){
         scrEditInfo.setVisible(false);
         scrSeeClient.setVisible(true);
