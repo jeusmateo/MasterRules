@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -12,7 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-public class WnProductsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class WnProductsController implements Initializable {
 
     @FXML
     private Button btnAddCategoryCustomeCombo;
@@ -222,4 +226,8 @@ public class WnProductsController {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }
