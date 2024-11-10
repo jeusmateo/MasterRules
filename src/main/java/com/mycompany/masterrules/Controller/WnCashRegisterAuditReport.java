@@ -1,11 +1,16 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CashFlowReport;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 
-public class WnCashRegisterAuditReport {
+public class WnCashRegisterAuditReport implements Initializable{
 
     @FXML
     private Label labelHourFrom;
@@ -17,10 +22,10 @@ public class WnCashRegisterAuditReport {
     private Label labelTotalSales;
 
     @FXML
-    private TableView<?> tblCashInFlow;
+    private TableView<CashFlowReport> tblCashInFlow;
 
     @FXML
-    private TableView<?> tblCashOutFlow;
+    private TableView<CashFlowReport> tblCashOutFlow;
 
     @FXML
     private Text txtCashFunds;
@@ -42,5 +47,12 @@ public class WnCashRegisterAuditReport {
 
     @FXML
     private Text txtTSStoreCard;
+    @FXML
+    private TableColumn<CashFlowReport, String> colTablasakhdhjkasdhjkasjkhdsah;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+    }
 
 }

@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -30,9 +29,6 @@ public class WnCustomersController implements Initializable {
 
     @FXML
     private Button btnSaveNewCustomer;
-
-    @FXML
-    private Button btnBackEditCustomerAccount;
 
     @FXML
     private Button btnUpdateCustomerAccount;
@@ -60,14 +56,7 @@ public class WnCustomersController implements Initializable {
     private Tab tabCustomerAccount;
     @FXML
     private TextField txtFieldSearch;
-    @FXML
-    private TableView<Customer> tableViewCustomers;
-    @FXML
-    private TableColumn<Customer, String> iDCustomerColumn;
-    @FXML
-    private TableColumn<Customer, String> nameCustomerColumn;
-    @FXML
-    private Button btnEditAccount;
+
     @FXML
     private Label lbLoyaltyPoints;
     @FXML
@@ -77,35 +66,47 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Label lbStoreCredit;
     @FXML
-    private CheckBox checkboxCustomerVip;
-    @FXML
-    private TextField textFieldNewCustomerName;
-    @FXML
-    private TextField textFieldNewCustomerPhoneNumber;
-    @FXML
-    private TextField textFieldNewCustomerLoyaltyPoints;
-    @FXML
-    private CheckBox checkBoxNewCustomerVIPStatus;
-    @FXML
-    private TableView<Customer> tableViewCustomers2;
-    @FXML
-    private TableColumn<Customer, String> columnIdCustomer2;
-    @FXML
-    private TableColumn<Customer, String> columnCustomerName;
-    @FXML
     private Label lbCustomerPhoneNumber;
+    
     @FXML
-    private TextField textFieldEditCustomerStoreCredit;
+    private CheckBox chkCustomerVip;
     @FXML
-    private TextField textFieldEditCustomerLoyaltyPoints;
+    private CheckBox chkNewCustomerVipStatus;
+
     @FXML
-    private CheckBox checkBoxEditCustomerVipStatus;
+    private TextField txtNewCustomerName;
+    @FXML
+    private TextField txtNewCustomerPhoneNumber;
+    @FXML
+    private TextField txtNewCustomerLoyaltyPoints;
+
+    @FXML
+    private TextField txtEditCustomerStoreCredit;
+    @FXML
+    private TextField txtEditCustomerLoyaltyPoints;
+    @FXML
+    private CheckBox chkEditCustomerVipStatus;
+
+    @FXML
+    private TableView<Customer> tblCustomers;
+    @FXML
+    private TableColumn<Customer, String> colCustomerId;
+    @FXML
+    private TableColumn<Customer, String> colCustomerName;
     @FXML
     private TableColumn<Customer, String> tableColumnEditCustomerId;
     @FXML
     private TableColumn<Customer, String> tableColumnEditCustomerName;
     @FXML
     private TableView<Customer> tableViewCustomerEdit;
+
+    @FXML
+    private TableView<Customer> tblCustomers2;
+    @FXML
+    private TableColumn<Customer, String> colCustomerId2;
+    @FXML
+    private TableColumn<Customer, String> colCustomerName2;
+
     @FXML
     private Label lbCustomerIdAuxiliar;
 
@@ -149,55 +150,66 @@ public class WnCustomersController implements Initializable {
 
         if (evt.equals(btnSaveNewCustomer)) {
             try {
-                String newCustomerName = textFieldNewCustomerName.getText();
-                String newCustomerPhoneNumber = textFieldNewCustomerPhoneNumber.getText();
-                String newCustomerLoyaltyPoints = textFieldNewCustomerLoyaltyPoints.getText();
-                boolean newCustomerVipStatus = checkBoxNewCustomerVIPStatus.isSelected();
-                customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus);
-                clearTextFields(textFieldNewCustomerName, textFieldNewCustomerPhoneNumber, textFieldNewCustomerLoyaltyPoints);
-                checkBoxNewCustomerVIPStatus.setSelected(false);
+                registerNewCustomer();
+                clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
+                chkNewCustomerVipStatus.setSelected(false);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         } else if (evt.equals(btnUpdateCustomerAccount)) {
-            String customerId = lbCustomerIdAuxiliar.getText();
-            String newCustomerStoreCreditQuantity = textFieldEditCustomerStoreCredit.getText();
-            String updateCustomerLoyaltyPoints = textFieldEditCustomerLoyaltyPoints.getText();
-            boolean updateCustomerVipStatus = checkBoxEditCustomerVipStatus.isSelected();
-            customerManager.updateCustomerData(customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity);
-            clearTextFields(textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints);
+            editCustomerInfo();
+            clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
             lbCustomerIdAuxiliar.setText("");
-            checkBoxEditCustomerVipStatus.setSelected(false);
+            chkEditCustomerVipStatus.setSelected(false);
+            scrEditCustomerAccount.setVisible(false);
+            scrMainViewCustomerAccount.setVisible(true);
 
         }
         ObservableList<Customer> customers = FXCollections.observableArrayList(customerManager.getCustomers());
         setItemsToAllTables(customers);
     }
 
+    private void registerNewCustomer() throws Exception {
+        String newCustomerName = txtNewCustomerName.getText();
+        String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
+        String newCustomerLoyaltyPoints = txtNewCustomerLoyaltyPoints.getText();
+        boolean newCustomerVipStatus = chkNewCustomerVipStatus.isSelected();
+        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus);
+
+    }
+
+    private void editCustomerInfo() {
+        String customerId = lbCustomerIdAuxiliar.getText();
+        String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
+        boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
+        customerManager.updateCustomerData(customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity);
+    }
+
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
-        if (evt.equals(textFieldNewCustomerName)) {
+        if (evt.equals(txtNewCustomerName)) {
             if (event.getCharacter().equals("\r")) {
-                textFieldNewCustomerPhoneNumber.requestFocus();
+                txtNewCustomerPhoneNumber.requestFocus();
                 event.consume();
             }
-        } else if (evt.equals(textFieldEditCustomerStoreCredit)) {
+        } else if (evt.equals(txtEditCustomerStoreCredit)) {
             if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
                 event.consume();
             }
-        } else if (evt.equals(textFieldNewCustomerPhoneNumber)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
-                textFieldNewCustomerLoyaltyPoints.requestFocus();
-                event.consume();
-            }
-        } else if (evt.equals(textFieldNewCustomerLoyaltyPoints) || evt.equals(textFieldEditCustomerLoyaltyPoints)) {
+        } else if (evt.equals(txtNewCustomerPhoneNumber)) {
             if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
                 event.consume();
             } else if (event.getCharacter().equals("\r")) {
-                checkBoxNewCustomerVIPStatus.requestFocus();
+                txtNewCustomerLoyaltyPoints.requestFocus();
+                event.consume();
+            }
+        } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
+            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+                event.consume();
+            } else if (event.getCharacter().equals("\r")) {
+                chkNewCustomerVipStatus.requestFocus();
                 event.consume();
             }
         }
@@ -209,7 +221,7 @@ public class WnCustomersController implements Initializable {
 
             lbLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             lbStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
-            checkboxCustomerVip.setSelected(customer.getCustomerAccount().isIsVIP());
+            chkCustomerVip.setSelected(customer.getCustomerAccount().isIsVIP());
             lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
             //txtAreaCustomerNote.setText(customer.getCustomerNote());
             //heckboxCustomerVip.setSelected(customer.isCustomerVip());
@@ -220,34 +232,35 @@ public class WnCustomersController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        textFieldNewCustomerName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        textFieldNewCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        textFieldNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        textFieldEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        textFieldEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtNewCustomerName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtNewCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         List<Customer> chepo = customerManager.getCustomers();
         ObservableList<Customer> customers = FXCollections.observableArrayList(chepo);
-        iDCustomerColumn.setReorderable(false);
-        iDCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        nameCustomerColumn.setReorderable(false);
-        nameCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        columnIdCustomer2.setReorderable(false);
-        columnIdCustomer2.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        columnCustomerName.setReorderable(false);
-        columnCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        colCustomerId.setReorderable(false);
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colCustomerName.setReorderable(false);
+        colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        colCustomerId2.setReorderable(false);
+        colCustomerId2.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colCustomerName2.setReorderable(false);
+        colCustomerName2.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         tableColumnEditCustomerId.setReorderable(false);
         tableColumnEditCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         tableColumnEditCustomerName.setReorderable(false);
         tableColumnEditCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         setItemsToAllTables(customers);
-        tableViewCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
         tableViewCustomerEdit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
 
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
-        tableViewCustomers.setItems(customers);
-        tableViewCustomers2.setItems(customers);
+        tblCustomers.setItems(customers);
+        tblCustomers2.setItems(customers);
         tableViewCustomerEdit.setItems(customers);
     }
 
@@ -255,18 +268,18 @@ public class WnCustomersController implements Initializable {
         if (customer != null) {
             //lbCustomerName.setText(customer.getCustomerName());
             lbCustomerIdAuxiliar.setText(customer.getID());
-            textFieldEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
-            textFieldEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
-            checkBoxEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
+            txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
+            txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
+            chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
             //lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
         } else {
             clearTextFields();
         }
     }
-    
-    public WnCustomersController(CustomerManager cm){
-        this.customerManager=cm;
-        
+
+    public WnCustomersController(CustomerManager cm) {
+        this.customerManager = cm;
+
     }
 
 }
