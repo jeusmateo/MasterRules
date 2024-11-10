@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CustomerManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +73,6 @@ public class WnSideNavigationBar {
 //                });
 //            }
 //        });
-
         try {
             loadSection(SALES_VIEW);
             activeView = SALES_VIEW;
@@ -98,10 +98,26 @@ public class WnSideNavigationBar {
     }
 
     @FXML
-    void customerSection(ActionEvent event) throws IOException {
+    void customerSection(ActionEvent event) throws IOException, Exception {
         if (!CUSTOMERS_VIEW.equals(activeView)) {
-            loadSection(CUSTOMERS_VIEW);
-            activeView = CUSTOMERS_VIEW;
+            try {
+                System.out.println("Chepo");
+                CustomerManager prueba = new CustomerManager();
+                prueba.registerCustomer("Juan", "123", "", true);
+                prueba.registerCustomer("Pedro", "456", "0", true);
+                prueba.registerCustomer("Maria", "789", "", false);
+                prueba.registerCustomer("Jose", "101", "0", false);
+                prueba.registerCustomer("Luis", "112", "100", false);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(CUSTOMERS_VIEW));
+
+                loader.setController(new WnCustomersController(prueba));
+                AnchorPane pane = loader.load();
+                scrPane.getChildren().setAll(pane);
+                setPaneToFitScrPane(pane);
+                activeView = CUSTOMERS_VIEW;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -137,13 +153,11 @@ public class WnSideNavigationBar {
         }
     }
 
-
     private void loadSection(String fxmlPath) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
     }
-
 
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());

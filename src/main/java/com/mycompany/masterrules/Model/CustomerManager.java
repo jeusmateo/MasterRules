@@ -12,11 +12,7 @@ public class CustomerManager {
     public CustomerManager(){
         try{
         customers= new ArrayList();
-        registerCustomer("Juan", "123","",true);
-        registerCustomer("Pedro", "456","0",true);
-        registerCustomer("Maria", "789","",false);
-        registerCustomer("Jose", "101","0",false);
-        registerCustomer("Luis", "112","100",false);
+        
         }catch(Exception e){
             
         }
