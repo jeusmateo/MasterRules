@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.text.Text;
+import javax.swing.table.TableColumn;
+import javax.swing.text.TableView;
+import org.w3c.dom.Text;
 
 public class WnCashRegisterAuditReport implements Initializable{
 
@@ -55,4 +55,11 @@ public class WnCashRegisterAuditReport implements Initializable{
         
     }
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }
+
+

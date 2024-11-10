@@ -1,12 +1,10 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Customer;
+import com.mycompany.masterrules.Model.CustomerManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import com.mycompany.masterrules.Model.Customer;
-import com.mycompany.masterrules.Model.CustomerManager;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,16 +14,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.table.TableColumn;
+import javax.swing.text.TableView;
 
 public class WnCustomersController implements Initializable {
 
     private CustomerManager customerManager;
+
+    @FXML
+    private Button btnAcceptCredit;
+
+    @FXML
+    private PasswordField psswrdFieldAccesstoStoreCredit;
 
     @FXML
     private Button btnSaveNewCustomer;
@@ -119,6 +123,8 @@ public class WnCustomersController implements Initializable {
     public void setBtnBackViewInfoCustomer() {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
+
+        // esto creo que esta mal usado, debería ser clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints ) o lgo parecido
         clearTextFields(new TextField());
 
     }
@@ -134,15 +140,30 @@ public class WnCustomersController implements Initializable {
     public void setBtnBackEditCustomerAccount() {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
-        clearTextFields();
+        clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints );
 
     }
+
+
+    // falta que lo de atras no sea editable y se desenfoque
+    @FXML
+    private void setScrWarningCredit(){
+        scrWarningCredit.setVisible(true);
+    }
+
+    @FXML
+    private void setButtonAcceptCredit() {
+        scrWarningCredit.setVisible(false);
+    }
+
 
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
             textField.clear(); // Limpia cada campo de texto proporcionado
         }
     }
+
+
 
     @FXML
     private void eventAction(ActionEvent event) {
@@ -255,7 +276,6 @@ public class WnCustomersController implements Initializable {
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
         tableViewCustomerEdit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
-
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
@@ -281,5 +301,7 @@ public class WnCustomersController implements Initializable {
         this.customerManager = cm;
 
     }
+
+
 
 }

@@ -10,7 +10,7 @@ package com.mycompany.masterrules.Model;
  */
 public class DAOTemporal {
     public boolean verificador(String name, String password){
-        if(name.equals("admin")&& password.equals("admin")){
+        if(name.equals("admin")&& password.equals("admin") || name.equals("")&& password.equals("")){
             return true;
         }
         return false;
