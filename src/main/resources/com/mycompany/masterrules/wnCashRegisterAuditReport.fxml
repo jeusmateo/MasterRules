@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -13,8 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReport">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReport">
    <children>
       <AnchorPane prefHeight="489.0" prefWidth="837.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="38.0">
          <children>
@@ -40,7 +45,7 @@
                   </Label>
                   <TableView fx:id="tblCashInFlow" prefHeight="149.0" prefWidth="323.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <columns>
-                        <TableColumn prefWidth="88.0" text="Razon" />
+                        <TableColumn fx:id="colTablasakhdhjkasdhjkasjkhdsah" prefWidth="88.0" text="Razon" />
                         <TableColumn prefWidth="145.0" text="Fecha" />
                         <TableColumn prefWidth="145.0" text="Cantidad" />
                      </columns>
