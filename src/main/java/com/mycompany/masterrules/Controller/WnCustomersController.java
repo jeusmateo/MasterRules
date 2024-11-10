@@ -225,7 +225,6 @@ public class WnCustomersController implements Initializable {
         textFieldNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         textFieldEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         textFieldEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        customerManager = new CustomerManager();
         List<Customer> chepo = customerManager.getCustomers();
         ObservableList<Customer> customers = FXCollections.observableArrayList(chepo);
         iDCustomerColumn.setReorderable(false);
@@ -263,6 +262,11 @@ public class WnCustomersController implements Initializable {
         } else {
             clearTextFields();
         }
+    }
+    
+    public WnCustomersController(CustomerManager cm){
+        this.customerManager=cm;
+        
     }
 
 }
