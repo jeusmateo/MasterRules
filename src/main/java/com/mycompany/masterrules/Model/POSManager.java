@@ -189,7 +189,7 @@ public class POSManager {
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
-            cashRegisterAuditReportManager.withdrawCash(reason, amount);
+            //cashRegisterAuditReportManager.withdrawCash(reason, amount);
 
         } else {
             throw new IllegalArgumentException("No tiene permisos para retirar dinero de caja");
@@ -200,7 +200,7 @@ public class POSManager {
         if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
-            cashRegisterAuditReportManager.depositCash(reason, amount);
+            //cashRegisterAuditReportManager.depositCash(reason, amount);
         } else {
             throw new IllegalArgumentException("No tiene permisos para ingresar dinero en caja");
         }

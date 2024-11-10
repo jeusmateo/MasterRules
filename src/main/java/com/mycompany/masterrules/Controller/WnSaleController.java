@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Order;
 import com.mycompany.masterrules.Model.Product;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -74,7 +75,39 @@ public class WnSaleController implements Initializable{
     private Stage stage;
     private WnSideNavigationBar wnSideNavigationBar;
 
+    @FXML
+    private AnchorPane scrCustomCombo;
 
+    @FXML
+    private TableView<Order> tblOrder;
+
+    @FXML
+    private TableColumn<Order, String> colAmount;
+
+    @FXML
+    private TableColumn<Order, String> colProduct;
+
+    @FXML
+    private TableColumn<Order, String> colPrice; // este si es un String?
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    private Button btnAdd;
+
+    @FXML
+    private Button btnRemove;
+
+    @FXML
+    private Label lblTotal;
+
+    @FXML
+    private Button btnCancel;
+
+    @FXML
+    private ToggleGroup deliveryMethod;
+    
     /**
      * Agregar nueva categoria de menu en las pestañas
      */
@@ -157,6 +190,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar formulario que aparece al continuar la orden
      */
+    @FXML
     public void showOrderForm(){
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
@@ -169,6 +203,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar cartilla de menu que muestra los porductos
      */
+    @FXML
     public void showMenuWindow(){
         menuWindow.setVisible(true);
         menuOrderOptionsBox.setVisible(true);
@@ -180,6 +215,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar opcion de número de mesa
      */
+    @FXML
     public void showTableNumber(){
         tableNumberBox.setVisible(true);
     }
@@ -187,6 +223,7 @@ public class WnSaleController implements Initializable{
     /**
      * Ocultar opcion de número de mesa
      */
+    @FXML
     public void hideTableNumber(){
         tableNumberBox.setVisible(false);
     }

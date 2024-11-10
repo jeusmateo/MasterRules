@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.DAOTemporal;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class wnLoginController implements Initializable {  // Cambié el nombre a WnLoginController
+public class WnLoginController implements Initializable {
 
     private DAOTemporal chepo = new DAOTemporal();
 

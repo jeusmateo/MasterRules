@@ -57,4 +57,13 @@ public class CashFlowReport {
     public void setCashAmount(BigDecimal cashAmount) {
         this.cashAmount = cashAmount;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    
 }
