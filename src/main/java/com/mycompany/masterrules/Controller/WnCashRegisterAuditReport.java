@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
-import org.w3c.dom.Text;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 
 public class WnCashRegisterAuditReport implements Initializable{
 
