@@ -62,7 +62,7 @@ public class WnSideNavigationBar implements Initializable {
     private String activeView = null;
 
     @FXML
-    public void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
         // Inicializar por defecto maximizado
 
 //        scrPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -165,10 +165,5 @@ public class WnSideNavigationBar implements Initializable {
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());
         pane.prefHeightProperty().bind(scrPane.heightProperty());
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

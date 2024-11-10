@@ -1,5 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Combo;
+import com.mycompany.masterrules.Model.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -109,26 +111,8 @@ public class WnProductsController implements Initializable {
     private Tab tabFood;
 
     @FXML
-    private TableColumn<?, ?> tableColumnFoodID;
-
-    @FXML
-    private TableColumn<?, ?> tableColumnFoodName;
-
-    @FXML
-    private TableColumn<?, ?> tableColumnFoodPrice;
-
-    @FXML
-    private TableColumn<?, ?> tableColumnFoodType;
-
-    @FXML
-    private TableColumn<?, ?> tableColumnFoodVIPPrice;
-
-    @FXML
     private TableView<?> tableComboProducts;
-
-    @FXML
-    private TableView<?> tableFood;
-
+    
     @FXML
     private TableColumn<?, ?> tableProductCombo;
 
@@ -191,6 +175,70 @@ public class WnProductsController implements Initializable {
 
     @FXML
     private AnchorPane wnFood;
+    @FXML
+    private TableView<Product> tblFood;
+    @FXML
+    private TableColumn<Product, String> colFoodID;
+    @FXML
+    private TableColumn<Product, String> colFoodName;
+    @FXML
+    private TableColumn<Product, String> colFoodCategory;
+    @FXML
+    private TableColumn<Product, String> colFoodPrice;
+    @FXML
+    private TableColumn<Product, String> colFoodVipPrice;
+    @FXML
+    private TableView<Product> tblFood2;
+    @FXML
+    private TableColumn<Product, String> colFoodID2;
+    @FXML
+    private TableColumn<Product, String> colFoodName2;
+    @FXML
+    private TableColumn<Product, String> colFoodCategory2;
+    @FXML
+    private TableView<Product> tblBeverages;
+    @FXML
+    private TableColumn<Product, String> colBeveragesID;
+    @FXML
+    private TableColumn<Product, String> colBeveragesName;
+    @FXML
+    private TableColumn<Product, String> colBeveragesCategory;
+    @FXML
+    private TableColumn<Product, String> colBeveragesPrice;
+    @FXML
+    private TableColumn<Product, String> colBeveragesVipPrice;
+    @FXML
+    private TableView<Product> tblBeverages2;
+    @FXML
+    private TableColumn<Product, String> colBeveragesID2;
+    @FXML
+    private TableColumn<Product, String> colBeveragesName2;
+    @FXML
+    private TableColumn<Product, String> colBeveragesCategory2;
+    @FXML
+    private TableView<Combo> tblCombos;
+    @FXML
+    private TableColumn<Combo, String> colComboID;
+    @FXML
+    private TableColumn<Combo, String> colComboName;
+    @FXML
+    private TableColumn<Combo, String> colComboPrice;
+    @FXML
+    private TableColumn<Combo, String> colComboVipPrice;
+    @FXML
+    private AnchorPane scrChooseComboEdition;
+    @FXML
+    private Button btnEditDefinedCombo;
+    @FXML
+    private Button btnEditCustomCombo;
+    @FXML
+    private AnchorPane scrEditDefinedCombo;
+    @FXML
+    private AnchorPane scrEditCustomeCombo;
+    @FXML
+    private Button btnAddCategoryCustomeCombo1;
+    @FXML
+    private Button btnContinueCustomCombo1;
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {

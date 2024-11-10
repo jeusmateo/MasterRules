@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnInventoryController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnInventoryController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,16 +21,16 @@
                   <String fx:value="white-bg" />
                </styleClass>
                <children>
-                  <TableView layoutX="14.0" layoutY="67.0" prefHeight="513.0" prefWidth="842.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
+                  <TableView fx:id="tblInventory" layoutX="14.0" layoutY="67.0" prefHeight="513.0" prefWidth="842.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
                      <columns>
-                        <TableColumn prefWidth="88.0" text="ID PRODUCTO" />
-                        <TableColumn prefWidth="145.0" text="DESCRIPCION DEL PRODUCTO" />
-                        <TableColumn prefWidth="145.0" text="DEPARTAMENTO" />
-                        <TableColumn prefWidth="145.0" text="PRECIO ($)" />
-                        <TableColumn prefWidth="145.0" text="PRECIO VIP($)" />
-                        <TableColumn prefWidth="145.0" text="EXISTENCIA" />
-                        <TableColumn prefWidth="145.0" text="INV. MIN" />
-                        <TableColumn prefWidth="145.0" text="INV. MÁX" />
+                        <TableColumn fx:id="colProductID" prefWidth="113.0" text="ID PRODUCTO" />
+                        <TableColumn fx:id="colProductName" prefWidth="109.0" text="NOMBRE" />
+                        <TableColumn fx:id="colProductCategory" prefWidth="120.0" text="CATEGORÍA" />
+                        <TableColumn fx:id="colProductPrice" prefWidth="78.0" text="PRECIO ($)" />
+                        <TableColumn fx:id="colProductVipPrice" prefWidth="102.0" text="PRECIO VIP($)" />
+                        <TableColumn fx:id="colProductStock" prefWidth="86.0" text="EXISTENCIA" />
+                        <TableColumn fx:id="colProductMinStock" prefWidth="116.0" text="INV. MIN" />
+                        <TableColumn fx:id="colProductMaxStock" prefWidth="115.0" text="INV. MÁX" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
