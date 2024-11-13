@@ -1,9 +1,13 @@
 package com.mycompany.masterrules.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 /**
@@ -12,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
  */
 
 
-public class WnInventoryController{
+public class WnInventoryController implements Initializable {
 
     //COMPONENTES DE LA VENTANA DE INVENTARIO
     //-------------------------------------------------------------------------------------------
@@ -77,5 +81,8 @@ public class WnInventoryController{
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+    }
 }

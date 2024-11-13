@@ -19,8 +19,6 @@ public class POSManager {
     private UserAccount currentUser;
     private Order currentOrder;
 
-    
-
     public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
         customerManager = new CustomerManager();
         currentUser = userAccount;
@@ -39,7 +37,7 @@ public class POSManager {
         currentOrder.addProduct(product);
 
     }
-    
+
     /**
      * Busca un producto en el menu de la cafeteria
      *
@@ -56,33 +54,33 @@ public class POSManager {
         }
         return null;//creo ue seria mejor una exception
     }
-    
-    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate){//pequeño error ortografico decie Custome en vez de Custom
+
+    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
-        for(String keyQuantity: customComboTemplate.getQuantityByCategory().keySet()){
+        for (String keyQuantity : customComboTemplate.getQuantityByCategory().keySet()) {
             int quantity = 0;
-            quantity=customComboTemplate.getQuantityByCategory().get(quantity);
-            for(int iterationCounter=0;iterationCounter<quantity;iterationCounter++){
-                Product product=new Product();
+            quantity = customComboTemplate.getQuantityByCategory().get(quantity);
+            for (int iterationCounter = 0; iterationCounter < quantity; iterationCounter++) {
+                Product product = new Product();
                 products.add(product);
 
             }
-            
+
         }
 
-        if(customComboTemplate.getDefaultProducts()!=null){
-            for(Product product: customComboTemplate.getDefaultProducts()){
+        if (customComboTemplate.getDefaultProducts() != null) {
+            for (Product product : customComboTemplate.getDefaultProducts()) {
                 products.add(product);
             }
         }
         Combo combo = new Combo(products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice(), customComboTemplate.getComboName());
         this.addComboToOrder(combo);
     }
-    
-    public void addComboToOrder(Combo combo){
+
+    public void addComboToOrder(Combo combo) {
         currentOrder.addCombo(combo);
     }
-    
+
     /**
      * Realiza las ultimas configuraciones a la orden antes de venderla.
      *
@@ -124,7 +122,7 @@ public class POSManager {
         } else {
             if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
                 for (Product product : currentOrder.getProducts()) {
-                    amount = amount.add(product.getVIPprice());
+                    amount = amount.add(product.getVIPPrice());
                 }
             } else {
                 for (Product product : currentOrder.getProducts()) {
@@ -154,13 +152,13 @@ public class POSManager {
 
     }
 
-
     /**
      * Realiza el cobro de una deuda pendiente de un cliente.
+     *
      * @param customerArg El cliente al que se le cobrara la deuda.
      * @param debtArg La deuda que se cobrara.
      */
-    public void collectDebt(Customer customerArg,Debt debtArg){
+    public void collectDebt(Customer customerArg, Debt debtArg) {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
             Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getFullEmployeeName());
             this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
@@ -171,10 +169,12 @@ public class POSManager {
         } else {
             throw new IllegalArgumentException("No tiene permisos para vender");
         }
-        
+
     }
+
     /**
      * Permite realizar un pedido que se pagara en otro momento.
+     *
      * @param customer Requiere a un cliente para poder hacer la deuda.
      */
     public void buyNowPayLater(Customer customer) {
@@ -189,7 +189,7 @@ public class POSManager {
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
-            cashRegisterAuditReportManager.withdrawCash(reason, amount);
+            //cashRegisterAuditReportManager.withdrawCash(reason, amount);
 
         } else {
             throw new IllegalArgumentException("No tiene permisos para retirar dinero de caja");
@@ -200,7 +200,7 @@ public class POSManager {
         if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
-            cashRegisterAuditReportManager.depositCash(reason, amount);
+            //cashRegisterAuditReportManager.depositCash(reason, amount);
         } else {
             throw new IllegalArgumentException("No tiene permisos para ingresar dinero en caja");
         }
@@ -230,9 +230,11 @@ public class POSManager {
         this.cafeteriaManager = cafeteriaManager;
     }
 
+    /* 
+     
     public void createNewCustomer(String name, String phone) {//esto creo que debe estar arriba de lo metodos getters y setters
         customerManager.registerCustomer(name, phone);
 
     }
-
+     */
 }

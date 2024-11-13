@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class wnLoginController implements Initializable {
+public class WnLoginController implements Initializable {
 
     private DAOTemporal chepo = new DAOTemporal();
 
@@ -27,7 +27,6 @@ public class wnLoginController implements Initializable {
     private Button btnLogin;
     @FXML
     private TextField txtFieldUserName;
-
     @FXML
     private PasswordField txtFieldPassword;
 
@@ -35,10 +34,34 @@ public class wnLoginController implements Initializable {
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
 
-        if (evt.equals(txtFieldUserName) || evt.equals(txtFieldPassword)) {
+        if (evt.equals(txtFieldUserName)) {
             if (event.getCharacter().equals(" ")) {
                 event.consume();
+            } else if (event.getCharacter().equals("\r")) {
+                txtFieldPassword.requestFocus();
+                event.consume();
             }
+
+        } else  if (evt.equals(txtFieldPassword)) {
+            if (event.getCharacter().equals(" ")) {
+                event.consume();
+            } else if (event.getCharacter().equals("\r")) {
+                btnLogin.fire();
+                event.consume();
+
+            }
+        }
+        if(evt.equals(btnLogin)){
+            if(event.getCharacter().equals("\r")){
+                event.consume();
+                String user = txtFieldUserName.getText();
+                String pass = txtFieldPassword.getText();
+                if (this.chepo.verificador(user, pass)) {
+                    System.out.println("Usuario y contraseña correctos");
+                    loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                }
+            }
+
         }
 
     }
@@ -46,7 +69,6 @@ public class wnLoginController implements Initializable {
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-
         if (evt.equals(btnLogin)) {
             String user = txtFieldUserName.getText();
             String pass = txtFieldPassword.getText();
@@ -65,10 +87,10 @@ public class wnLoginController implements Initializable {
             Stage newStage = new Stage();
             newStage.setScene(scene);
             newStage.show();
-            
         } catch (Exception e) {
+            e.printStackTrace();  // Imprime la traza de error
+            System.err.println("Error al cargar la ventana: " + e.getMessage());
         }
-
     }
 
     @Override
@@ -76,5 +98,4 @@ public class wnLoginController implements Initializable {
         txtFieldUserName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtFieldPassword.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }
-
 }

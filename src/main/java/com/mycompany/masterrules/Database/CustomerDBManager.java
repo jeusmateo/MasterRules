@@ -20,8 +20,11 @@ public final class CustomerDBManager extends DatabaseManager<Customer, Long> {
         Session session = HibernateUtil.getOpenSession();
         try {
             return session.get(Customer.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el cliente con id: " + id);
             return null;
         } finally {
             session.close();
@@ -37,7 +40,10 @@ public final class CustomerDBManager extends DatabaseManager<Customer, Long> {
         try {
             return session.createQuery("from Customer", Customer.class).list();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al leer todos los clientes");
             return null;
         } finally {
             session.close();

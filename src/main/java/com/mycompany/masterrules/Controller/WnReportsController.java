@@ -1,14 +1,27 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CashFlowReport;
+import com.mycompany.masterrules.Model.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.Customer;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-public class WnReportsController {
+public class WnReportsController implements Initializable {
+
+    private CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
 
     @FXML
     private Button btnAcceptInflow;
@@ -41,12 +54,6 @@ public class WnReportsController {
     private AnchorPane scrReports;
 
     @FXML
-    private TableView<?> tblInFlowReport;
-
-    @FXML
-    private TableView<?> tblOutFlowReport;
-
-    @FXML
     private TextField txtFieldAmountInflow;
 
     @FXML
@@ -57,13 +64,28 @@ public class WnReportsController {
 
     @FXML
     private TextArea txtReasonInflow;
+    @FXML
+    private TableView<CashFlowReport> tableViewlOutFlowReport;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashOutReason;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashOutDate;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashOutQuantity;
+    @FXML
+    private TableView<CashFlowReport> tableViewlInFlowReport;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashInReason;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashInDate;
+    @FXML
+    private TableColumn<CashFlowReport, String> TableColumnCashInQuantity;
 
     @FXML
     void exitDoInflow(ActionEvent event) {
 
     }
 
-    @FXML
     void exitDoOutflow(ActionEvent event) {
 
     }
@@ -78,66 +100,73 @@ public class WnReportsController {
 
     }
 
-    @FXML
     void setBtnDoInFlowReport(ActionEvent event) {
 
     }
 
-    @FXML
     void setBtnDoOutFlowReport(ActionEvent event) {
 
     }
 
+    @FXML
+    private void eventAction(ActionEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(btnDoInFlowReport)) {
+            scrDoInflowCash.setVisible(true); // Muestra la ventana de reportes de entrada de efectivo
+            scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
+        } else if (evt.equals(btnDoOutFlowReport)) {
+            scrDoOutflowReport.setVisible(true); // Muestra la ventana de reportes de salida de efectivo
+            scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
+        } else if (evt.equals(btnExitDoInflow)) {
+            clearTextFields(txtFieldAmountInflow); // Limpia los campos de texto proporcionados
+            txtReasonInflow.clear(); // Limpia el campo de texto de la razón de la entrada de efectivo
+            scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
+            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        } else if (evt.equals(btnAcceptOutflow)) {
+            setBtnAcceptOutflow();
+        } else if (evt.equals(btnAcceptInflow)) {
+            setBtnAcceptInflow();
+        }
 
-
-// metodos de la ventana de reportes
-    //-------------------------------------------------------------------------------------------
-
-
-    /**
-     * Muestra la ventana de reportes de entrada de efectivo
-     */
-    public void setBtnDoInFlowReport() {
-        scrDoInflowCash.setVisible(true); // Muestra la ventana de reportes de entrada de efectivo
-        scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
     }
 
     /**
-     * Muestra la ventana principal de reportes.
-     * Sale de la ventana DoInflow.
+     * Muestra la ventana principal de reportes. Sale de la ventana DoInflow.
      * Acepta la entrada de efectivo
      */
     public void setBtnAcceptInflow() {
-        scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
-        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        try {
+            String cashAmount = txtFieldAmountInflow.getText();
+            String reason = txtReasonInflow.getText();
+            cashRegisterAuditReportManager.depositCash(reason, cashAmount);
+            ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+            tableViewlInFlowReport.setItems(cashInReports);
+            scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
+            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
-     * Muestra la ventana de reportes de salida de efectivo
-     */
-    public void setBtnDoOutFlowReport() {
-        scrDoOutflowReport.setVisible(true); // Muestra la ventana de reportes de salida de efectivo
-        scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
-    }
-
-    /**
-     * Muestra la ventana principal de reportes.
-     * Sale de la ventana DoOutflow.
+     * Muestra la ventana principal de reportes. Sale de la ventana DoOutflow.
      * Acepta la salida de efectivo
      */
     public void setBtnAcceptOutflow() {
-        scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-    }
+        try {
+            String cashAmount = txtFieldAmountOutflow.getText();
+            String reason = txtOutflowReason.getText();
+            cashRegisterAuditReportManager.withdrawCash(reason, cashAmount);
+            txtFieldAmountOutflow.setText("00.0");
+            txtOutflowReason.setText("");
+            ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+            tableViewlOutFlowReport.setItems(cashOutReports);
 
-    /**
-     * Muestra la ventana principal de reportes. Sale de la ventana DoInflow
-     */
-    public void exitDoInflow() {
-        clearTextFields(txtFieldAmountInflow); // Limpia los campos de texto proporcionados
-        txtReasonInflow.clear(); // Limpia el campo de texto de la razón de la entrada de efectivo
-        scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
-        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+            scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
+            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -152,6 +181,7 @@ public class WnReportsController {
 
     /**
      * Limpia los campos de texto proporcionados
+     *
      * @param textFields Campos de texto a limpiar
      */
     private void clearTextFields(TextField... textFields) {
@@ -161,6 +191,27 @@ public class WnReportsController {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+        ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+        TableColumnCashOutReason.setReorderable(false);
+        TableColumnCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        TableColumnCashOutDate.setReorderable(false);
+        TableColumnCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        TableColumnCashOutQuantity.setReorderable(false);
+        TableColumnCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+        tableViewlOutFlowReport.setItems(cashOutReports);
+
+        ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+        TableColumnCashInReason.setReorderable(false);
+        TableColumnCashInReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        TableColumnCashInDate.setReorderable(false);
+        TableColumnCashInDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        TableColumnCashInQuantity.setReorderable(false);
+        TableColumnCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+        tableViewlInFlowReport.setItems(cashInReports);
+
+    }
 
 }

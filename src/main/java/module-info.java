@@ -14,4 +14,6 @@ module com.mycompany.masterrules {
     opens com.mycompany.masterrules to javafx.fxml;
     exports com.mycompany.masterrules.Controller;
     opens com.mycompany.masterrules.Controller to javafx.fxml;
+    opens com.mycompany.masterrules.Model to javafx.base;
+
 }

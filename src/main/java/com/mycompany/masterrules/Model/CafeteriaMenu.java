@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class for instances of CafeteriaMenu
- * @author alexs
+ * Clase que representa el menu en MasterRules
+ * @author Alexandra Saavedra
  */
 public class CafeteriaMenu {
+    /**
+     * Titulo del menu
+     */
     private String title;
-    //private HashMap<String,ArrayList<Product>> products;
+    /**
+     * Productos disponibles en el menu
+     */
     private ArrayList<Product> products;//cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
+    /**
+     * Combos disponibles en el menu
+     */
     private ArrayList<Combo> combos;//falta combos
     
     /**
-     * Constructor of class CafeteriaMenu
-     * @param title 
+     * Constructor de clase
+     * @param title Titulo del menu
      */
     public CafeteriaMenu(String title) {
         this.title = title;
@@ -24,10 +32,10 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Constructor of class CafeteriaMenu
-     * @param title Menu title
-     * @param products Menu products
-     * @param combos Menu Combos
+     * Constructor de clase
+     * @param title Titulo del menu
+     * @param products Productos disponibles en el menu
+     * @param combos Combos disponibles en el menu
      */
     public CafeteriaMenu(String title, ArrayList<Product> products, ArrayList<Combo> combos) {
         this.title = title;
@@ -36,30 +44,13 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Adds product on the menu
-     * @param product Product to add on the menu
+     * Agrega un producto al menu
+     * @param product Producto a agregar al menu
      */
     public void addProduct(Product product) throws Exception{
-        /*
-        String productType=product.getProductType();
-        ArrayList<Product> newValue=new ArrayList<Product>();
-        
-        if(products.containsKey(productType)){//habria que asegurar que los productos dentro del tipo no sean lo mismo
-            newValue= products.get(productType);
-            newValue.add(product);
-        }
-        else{
-            newValue.add(product);
-        }
-        products.put(productType, newValue);
-        */
+        //se elimino la excepcion cuando se tiene un nombre ya existente
         if(!isProductOnMenu(product.getProductID())){
-            if(!isProductNameTaken(product.getProductName())){
-                products.add(product);
-            }
-            else{
-                throw new Exception("ERROR: El nombre del producto ya esta tomado");
-            }
+            products.add(product);
         }
         else{
             throw new Exception("ERROR: El producto ya existe");
@@ -67,30 +58,10 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Remove product on the menu by name
-     * @param productID Product identification
+     * Remover el product del menu
+     * @param productID Identificador del menu
      */
-    public void removeProduct(String productID) throws Exception{//cambie el parametro por id del producto en vez de nombre
-        /*
-        for(String key: products.keySet()){
-            ArrayList<Product> currentList=products.get(key);
-            
-            for(int i=0; i<currentList.size();i++){
-                if(productName.equals(currentList.get(i).getProductName())){
-                    currentList.remove(i);
-                    
-                    //Si al eliminar un producto, la categoría de comida queda vacía; entonces la categoria se elimina
-                    //-----No veo porque se debe eliminar la categoria, si no hay productos en ella.
-                    if(isFoodTypeEmpty(key)){
-                        products.remove(key);
-                    }
-                    return;
-                }
-                
-            }
-        }
-        System.out.println("ERROR:No se encontro el producto");//no se si esto necesite una excepcion, aunque es probable que nunca ocurra porque prmero se ve desde la BD
-        */
+    public void removeProduct(String productID) throws Exception{
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
             if(productID.equals(products.get(registeredProductCount).getProductID())){
                 products.remove(registeredProductCount);
@@ -100,6 +71,11 @@ public class CafeteriaMenu {
         throw new Exception("ERROR: El producto no existe");
     }
     
+    /**
+     * Checa si el producto esta en el menu
+     * @param productID Identificador del menu
+     * @return Verdadero, si el producto se encuentra en el menu. Falso, si el producto no se encuentra en el menu
+     */
     public boolean isProductOnMenu(String productID){//continuo trabajando con esto
         for(Product registeredProduct : products){
             if(productID.equals(registeredProduct.getProductID())){
@@ -109,6 +85,11 @@ public class CafeteriaMenu {
         return false;
     }
     
+    /**
+     * Checa si el nombre del producto ha sido tomado
+     * @param productName Nombre del producto
+     * @return Verdadero, si el nombre del producto ha sido tomado. Falso, si el nombre no ha sido tomado
+     */
     public boolean isProductNameTaken(String productName){
         for(Product registeredProduct : products){
             if(productName.equals(registeredProduct.getProductName())){
@@ -119,31 +100,11 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Modify product on the menu
-     * @param product Product to modify on the menu
-     * @throws Exception If the product is not on the menu, it causes an error
+     * Modifica un producto en el menu
+     * @param product Producto a modificar en el menu
+     * @throws Exception Si el producto no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
-    public void editProduct(Product product) throws Exception{//cambie el metodo
-        /*
-        for(String key : products.keySet()){
-            ArrayList<Product> currentList=products.get(key);
-            
-            for(int i=0;i<currentList.size();i++){
-                if(product.getProductName().equals(currentList.get(i).getProductName())){
-                    currentList.get(i).setPrice(product.getPrice());
-                    currentList.get(i).setProductName(product.getProductName());
-                    currentList.get(i).setVIPprice(product.getVIPprice());
-                    
-                    if(!product.getProductType().equals(currentList.get(i).getProductType())){
-                        removeProduct(product.getProductName());//lo removemos de esa categoria
-                        addProduct(product);//se inserta en la categoria correspondiente
-                    }
-                    return;
-                }
-            }
-        }
-        throw new Exception("ERROR: No se encontro el producto");
-        */
+    public void editProduct(Product product) throws Exception{
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
                 
@@ -159,7 +120,7 @@ public class CafeteriaMenu {
                 }
                 products.get(registeredProductCount).setProductType(product.getProductType());
                 products.get(registeredProductCount).setPrice(product.getPrice());
-                products.get(registeredProductCount).setVIPprice(product.getVIPprice());
+                products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
                 
                 return;
             }
@@ -169,12 +130,12 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Obtains the products that belong in a certain type
-     * @param ProductType Product type
-     * @return List of product that belong to the determined type
+     * Obtiene a los productos que pertenecen a un cierto tipo
+     * @param ProductType Tipo de productos
+     * @return Lista de productos que pertenecen a un cierto tipo
+     * @throws java.lang.Exception Si el tipo de productos solicitados no existen en el 
      */
     public ArrayList<Product> getProductsByType(String ProductType) throws Exception{
-        //return this.products.get(ProductType);
         ArrayList<Product> productsWithType= new ArrayList<Product>();
         
         for(Product product: products){
@@ -191,88 +152,134 @@ public class CafeteriaMenu {
     }
     
     /**
-     * Checks if the food category (clasified by food type) is empty
-     * @param productType Food type
-     * @return 
+     * Agregar un combo al menu
+     * @param combo Combo a agregar al menu
      */
-    /*//creo que ya no vamos a emplear este pues el arrayList no toma en cuenta esto
-    public boolean isFoodTypeEmpty(String productType){
-        //Si no quedan productos en una categoría de comida se retorna verdadero
-        
-        if(products.get(productType).isEmpty()){
-            return true;
+    public void addCombo(Combo combo) throws Exception{
+        if(!isComboOnMenu(combo.getComboID()+"")){
+            combos.add(combo);
         }
-        return false;
-    }
-    */
-    
-    /**
-     * Adds combo on the menu 
-     * @param combo Combo to add on the menu
-     */
-    public void addCombo(Combo combo){
-        //falta integrarlo al menu
+        else{
+            throw new Exception("ERROR: El combo ya existe");
+        }
     }
     
     /**
-     * Removes combo from the menu
-     * @param comboName Name of the combo to remove from the menu
+     * Remover un combo del menu
+     * @param comboID Identificador del combo
+     * @throws java.lang.Exception Si el combo no se encuentra en el menu, se lanza un error
      */
-    public void removeCombo(String comboName){
-        //falta integrarlo al menu
+    public void removeCombo(String comboID) throws Exception{//lo cambie por id
+        for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
+            if(comboID.equals(combos.get(registeredComboCount).getComboID())){
+                combos.remove(registeredComboCount);
+                return;
+            }
+        }
+        throw new Exception("ERROR: El combo no existe");
     }
 
     /**
-     * Modify combo on the menu
-     * @param combo Combo to modify on the menu
+     * Modificar un combo del menu
+     * @param combo Combo a modificar en el menu
+     * @throws java.lang.Exception Si el combo no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
-    public void editCombo(Combo combo){
-        //falta integrarlo al menu
+    public void editCombo(Combo combo) throws Exception{
+        for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
+            if(combo.getComboID().equals(combos.get(registeredComboCount).getComboID())){
+                
+                if(!combo.getComboName().equals(combos.get(registeredComboCount).getComboName())){
+                    
+                    if(!isComboNameTaken(combo.getComboName())){
+                        combos.get(registeredComboCount).setComboName(combo.getComboName());
+                    }
+                    else{
+                        throw new Exception("ERROR: El nombre del combo ya existe");
+                    }
+                    
+                }
+                combos.get(registeredComboCount).setProducts(combo.getProducts());
+                combos.get(registeredComboCount).setProductsTemplate(combo.getProductsTemplate());
+                combos.get(registeredComboCount).setPrice(combo.getPrice());
+                combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
+                
+                return;
+            }
+        }
+        throw new Exception("ERROR: El combo no existe");
     }
     
     /**
-     * Getter of menu title
-     * @return Menu title
+     * Checa si el combo existe en el menu
+     * @param comboID Identificador del combo
+     * @return Verdadero, si el combo existe en el menu. Falso, si el combo no existe en el menu
+     */
+    public boolean isComboOnMenu(String comboID){
+        for(Combo registeredCombo : combos){
+            if(comboID.equals(registeredCombo.getComboID()+"")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Checa si el nombre del combo ha sido tomado
+     * @param comboName Nombre del combo
+     * @return Verdadero, si el nombre del combo ya existe. Falso, si el nombre no existe
+     */
+    public boolean isComboNameTaken(String comboName){
+        for(Combo registeredProduct : combos){
+            if(comboName.equals(registeredProduct.getComboName())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Obtiene el titulo del menu
+     * @return Titulo del menu
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Getter of menu products
-     * @return Menu products
+     * Obtiene los productos del menu
+     * @return Productos del menu
      */
     public ArrayList<Product> getProducts() {    
         return products;
     }
 
     /**
-     * Getter of menu combos
-     * @return Menu combos
+     * Obtiene los combos del menu
+     * @return Combos del menu
      */
     public ArrayList<Combo> getCombos() {
         return combos;
     }
     
     /**
-     * Setter of menu title
-     * @param title Menu title
+     * Establece el titulo del menu
+     * @param title Titulo del menu
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Setter of menu products
-     * @param products Mennu products
+     * Establece los productos del menu
+     * @param products Productos del menu
      */
     public void setProducts(ArrayList<Product> products) {    
         this.products = products;
     }
 
     /**
-     * Setter of menu combos
-     * @param combos Menu combos
+     * Establece los combos del menu
+     * @param combos Combos del menu
      */
     public void setCombos(ArrayList<Combo> combos) {
         this.combos = combos;

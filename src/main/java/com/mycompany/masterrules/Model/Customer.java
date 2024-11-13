@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 /**
  *
  * @autor: David Torres
@@ -16,7 +18,7 @@ public class Customer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
+    private String ID;
     private String customerName;
     private String customerPhoneNumber;
     @Embedded
@@ -25,7 +27,7 @@ public class Customer {
     /*
      * Constructor por defecto para JPA
      **/
-    public Customer() {
+    protected Customer() {
     }
 
 
@@ -35,31 +37,22 @@ public class Customer {
      * @param customerPhoneNumber Numero de telefono del cliente
      */
 
-    public Customer(String customerName, String customerPhoneNumber) {
-        //Falta ver como generarlothis.ID = Random.nextLong(1000)+1;
+    public Customer(String id,String customerName, String customerPhoneNumber) {
+        this.ID=id;
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount();
     }
-
-    /**
-     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
-     * @return Retorna una cadena con la información del cliente
-     */
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "ID=" + ID +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
-                ", customerAccount=" + customerAccount +
-                '}';
+    public Customer(String id,String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
+        this.ID=id;
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);
     }
-
     /**
      * @return Retorna el ID del cliente
      */
-    public long getID() {
+    public String getID() {
         return ID;
     }
 
@@ -68,7 +61,7 @@ public class Customer {
      *
      * @param ID Recibe el ID del cliente
      */
-    public void setID(long ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -120,4 +113,31 @@ public class Customer {
         this.customerAccount = customerAccount;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return ID == customer.ID && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, customerName, customerPhoneNumber, customerAccount);
+    }
+
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     *
+     * @return Retorna una cadena con la información del cliente
+     */
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "ID=" + ID +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
+                ", customerAccount=" + customerAccount +
+                '}';
+    }
 }

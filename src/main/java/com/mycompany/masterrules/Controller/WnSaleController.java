@@ -1,30 +1,27 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Order;
+import com.mycompany.masterrules.Model.Product;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.mycompany.masterrules.Model.Product;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Controlador de la ventana de Venta
@@ -35,6 +32,9 @@ public class WnSaleController implements Initializable{
     //-------------------------------------------------------------------------------------------
     @FXML
     private Button btnContinue;
+
+    @FXML
+    private Button btnPay;
 
     @FXML
     private AnchorPane menuWindow;
@@ -50,9 +50,6 @@ public class WnSaleController implements Initializable{
 
     @FXML
     private TabPane menuCategories;
-
-    @FXML
-    private Button btnPay;
     
     
     //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
@@ -78,9 +75,39 @@ public class WnSaleController implements Initializable{
     private Stage stage;
     private WnSideNavigationBar wnSideNavigationBar;
 
+    @FXML
+    private AnchorPane scrCustomCombo;
+
+    @FXML
+    private TableView<Order> tblOrder;
+
+    @FXML
+    private TableColumn<Order, String> colAmount;
+
+    @FXML
+    private TableColumn<Order, String> colProduct;
+
+    @FXML
+    private TableColumn<Order, String> colPrice; // este si es un String?
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    private Button btnAdd;
+
+    @FXML
+    private Button btnRemove;
+
+    @FXML
+    private Label lblTotal;
+
+    @FXML
+    private Button btnCancel;
+
+    @FXML
+    private ToggleGroup deliveryMethod;
     
-
-
     /**
      * Agregar nueva categoria de menu en las pestañas
      */
@@ -163,6 +190,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar formulario que aparece al continuar la orden
      */
+    @FXML
     public void showOrderForm(){
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
@@ -175,6 +203,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar cartilla de menu que muestra los porductos
      */
+    @FXML
     public void showMenuWindow(){
         menuWindow.setVisible(true);
         menuOrderOptionsBox.setVisible(true);
@@ -186,6 +215,7 @@ public class WnSaleController implements Initializable{
     /**
      * Mostrar opcion de número de mesa
      */
+    @FXML
     public void showTableNumber(){
         tableNumberBox.setVisible(true);
     }
@@ -193,23 +223,48 @@ public class WnSaleController implements Initializable{
     /**
      * Ocultar opcion de número de mesa
      */
+    @FXML
     public void hideTableNumber(){
         tableNumberBox.setVisible(false);
     }
 
-      @FXML
+
+    @FXML
     private void handlePayAction(MouseEvent event) {
         try {
-            Parent paymentView = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            // Cargar la vista de pago desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            Parent paymentView = loader.load();
+
+            // Crear una nueva escena y un nuevo Stage para la vista de pago
             Scene paymentScene = new Scene(paymentView);
+            Stage paymentStage = new Stage();
+            paymentStage.setScene(paymentScene);
+
+            // Configurar el Stage como modal para bloquear interacciones en la ventana principal
+            paymentStage.initModality(Modality.WINDOW_MODAL);
+            paymentStage.initOwner(btnPay.getScene().getWindow());
+
+            // Configurar el Stage sin bordes (sin barra de título)
+            paymentStage.initStyle(StageStyle.UNDECORATED);
+
+            // Aplicar un efecto de difuminado a la ventana principal mientras el Stage modal esté abierto
             Stage currentStage = (Stage) btnPay.getScene().getWindow();
-            currentStage.setScene(paymentScene);
+            currentStage.getScene().getRoot().setEffect(new javafx.scene.effect.BoxBlur(10, 10, 3));
+
+            // Añadir un evento para restaurar el fondo al cerrar el modal
+            paymentStage.setOnHidden(e -> currentStage.getScene().getRoot().setEffect(null));
+
+            // Mostrar el modal
+            paymentStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error al cargar la vista de pago: " + e.getMessage());
         }
     }
-    
-    
+
+
+
     /**
      * Inicializar el controllador de la ventana de Venta
      * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz

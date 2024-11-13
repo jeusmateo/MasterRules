@@ -25,6 +25,8 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnLogin.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
+        root.requestFocus();
     }
 }
