@@ -20,10 +20,7 @@ public class UserPermissions {
         //Sales
         MAKE_SALE,
         CANCEL_SALE,
-        RECORD_CASHIN,
-        RECORD_CASHOUT,
         REVIEW_SALES_HISTORY,
-        REVIEW_CASH_REGISTER_HISTORY,
 
         //Products
         CREATE_PRODUCT,
@@ -40,16 +37,16 @@ public class UserPermissions {
         EDIT_CLIENT,
         DELETE_CLIENT,
         EDIT_CREDITS,
-        REVIEW_CLIENT_ACCOUNTS,
 
         //Inventory
         EDIT_STOCK,
         EDIT_MAX_MIN,
 
         //Reports
-        REVIEW_CLIENT_REPORT,
         REVIEW_SALE_REPORT,
-        REVIEW_INVENTORY_REPORT,
+        // REVIEW_INVENTORY_REPORT, // Pendiente para implementar
+        RECORD_CASHIN,
+        RECORD_CASHOUT,
 
         //Users
         CREATE_USER,
