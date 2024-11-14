@@ -89,3 +89,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .btn:hover{
     -fx-background-color: #C68FE6;
 }
+
+
+.label {
+    -fx-text-fill: #000;
+    -fx-font-size: 14px;
+}
+
+.label-error {
+    -fx-text-fill: #ff0000; /* Rojo para indicar error */
+    -fx-font-size: 14px;
+}
+
+.tab-background{
+    -fx-background-color: #f8f5f1;
+}
