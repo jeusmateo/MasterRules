@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.CafeteriaManager;
 import com.mycompany.masterrules.Model.Combo;
 import com.mycompany.masterrules.Model.Product;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable {
 
+    private CafeteriaManager cafeteriaManager;
     @FXML
     private Button btnAddCategoryCustomeCombo;
 
@@ -112,7 +114,7 @@ public class WnProductsController implements Initializable {
 
     @FXML
     private TableView<?> tableComboProducts;
-    
+
     @FXML
     private TableColumn<?, ?> tableProductCombo;
 
@@ -252,8 +254,8 @@ public class WnProductsController implements Initializable {
 
     @FXML
     void setScrCreateComboStepTwo(MouseEvent event) {
-            scrCreateComboStart.setVisible(false);
-            scrCreateComboStepTwo.setVisible(true);
+        scrCreateComboStart.setVisible(false);
+        scrCreateComboStepTwo.setVisible(true);
     }
 
     @FXML
@@ -261,7 +263,6 @@ public class WnProductsController implements Initializable {
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
         scrCreateCustomeCombo.setVisible(true);
-
 
     }
 
@@ -271,11 +272,19 @@ public class WnProductsController implements Initializable {
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(true);
 
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        /*
+        ObservableList<Product> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+        TableColumnCashOutReason.setReorderable(false);
+        TableColumnCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        TableColumnCashOutDate.setReorderable(false);
+        TableColumnCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        TableColumnCashOutQuantity.setReorderable(false);
+        TableColumnCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+        tableViewlOutFlowReport.setItems(cashOutReports);
+         */
     }
 }
