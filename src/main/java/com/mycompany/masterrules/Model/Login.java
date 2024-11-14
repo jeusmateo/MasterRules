@@ -30,18 +30,15 @@ public class Login {
      */
     public boolean validateUser(String username,String password) throws Exception{//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         //aqui probablemente se involucre la BD
-        if(!isUserRegistered(username)){
-            return false;
+        if(isUserRegistered(username)){
+            //se encuentra al usuario por nombre
+            UserAccount foundUser=findUser(username);
+
+            if(password.equals(foundUser.getPassword())){
+                return true;
+            }
         }
-        //se encuentra al usuario por nombre
-        UserAccount foundUser=findUser(username);
-        
-        if(password.equals(foundUser.getPassword())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return false;
     }
     
     /**
