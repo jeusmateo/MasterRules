@@ -22,7 +22,7 @@ public class UserAccount {
     /**
      * Nombre del usuario
      */
-    private String username;
+    private String userName;
     /**
      * Contraseña del usuario
      */
@@ -53,7 +53,7 @@ public class UserAccount {
      */
     public UserAccount(String userID, String username, String password, String fullEmployeeName) {
         this.userID = userID;
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.fullEmployeeName = fullEmployeeName;
         this.permissions = new UserPermissions();
@@ -70,7 +70,7 @@ public class UserAccount {
      */
     public UserAccount(String userID, String username, String password, UserPermissions permissions, String fullEmployeeName) {
         this.userID = userID;
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.permissions = permissions;
         this.fullEmployeeName = fullEmployeeName;
@@ -109,8 +109,8 @@ public class UserAccount {
      *
      * @return Nombre del usuario
      */
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     /**
@@ -118,8 +118,8 @@ public class UserAccount {
      *
      * @param username Nombre del usuario
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     /**
@@ -180,7 +180,7 @@ public class UserAccount {
     public String toString() {
         return "UserAccount{" +
                 "userID='" + userID + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", permissions=" + permissions +
                 ", fullEmployeeName='" + fullEmployeeName + '\'' +
@@ -193,7 +193,7 @@ public class UserAccount {
         if (o == null || getClass() != o.getClass()) return false;
         UserAccount that = (UserAccount) o;
         return Objects.equals(userID, that.userID) &&
-                Objects.equals(username, that.username) &&
+                Objects.equals(userName, that.userName) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(permissions, that.permissions) &&
                 Objects.equals(fullEmployeeName, that.fullEmployeeName);
@@ -201,6 +201,6 @@ public class UserAccount {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, username, password, permissions, fullEmployeeName);
+        return Objects.hash(userID, userName, password, permissions, fullEmployeeName);
     }
 }

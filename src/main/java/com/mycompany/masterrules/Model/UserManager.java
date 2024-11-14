@@ -17,6 +17,7 @@ public class UserManager {
      */
     public UserManager() {
         userAccounts= new ArrayList<UserAccount>();
+        userAccounts.add(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec"));
     }
     
     /**
@@ -34,7 +35,7 @@ public class UserManager {
      */
     public void addUser(UserAccount newUser) throws Exception{//cambie el nombre del parametro
         if(!isUserRegistered(newUser)){
-            if(!isUsernameTaken(newUser.getUsername())){//cambie el param por username
+            if(!isUsernameTaken(newUser.getUserName())){//cambie el param por username
                 userAccounts.add(newUser);
             }
             else{
@@ -82,7 +83,7 @@ public class UserManager {
      */
     private boolean isUsernameTaken(String username){//cambie el param por username
         for(UserAccount registeredUser : userAccounts){
-            if(username.equals(registeredUser.getUsername())){
+            if(username.equals(registeredUser.getUserName())){
                 return true;
             }
         }

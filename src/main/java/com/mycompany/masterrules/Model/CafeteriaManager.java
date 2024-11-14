@@ -4,11 +4,9 @@ import java.math.BigDecimal;
 
 /**
  * Class for instances of CafeteriaManager
- * @author alexs
  */
 public class CafeteriaManager {
-    /** ? */
-    //private ProductQueries productQueries;
+
     private CafeteriaMenu menu;
     private CafeteriaStorage storage;
 
