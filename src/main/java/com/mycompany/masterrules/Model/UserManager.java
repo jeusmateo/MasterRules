@@ -17,7 +17,8 @@ public class UserManager {
      */
     public UserManager() {
         userAccounts= new ArrayList<UserAccount>();
-        userAccounts.add(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec"));
+        userAccounts.add(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
+        userAccounts.add(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo"));
     }
     
     /**
