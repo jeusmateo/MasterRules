@@ -32,7 +32,7 @@ public class WnLoginController implements Initializable {
     private PasswordField txtFieldPassword;
 
     @FXML
-    private Label labelIncorrectCredential;
+    private Label lbIncorrectCredential;
 
     @FXML
     private void eventKey(KeyEvent event) {
@@ -79,7 +79,10 @@ public class WnLoginController implements Initializable {
             if (this.chepo.verificador(user, pass)) {
                 System.out.println("Usuario y contraseña correctos");
                 loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+            } else {
+                lbIncorrectCredential.setVisible(true);
             }
+
         }
     }
 
