@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 @Entity
 public class UserAccount {
+
     /**
      * Identificador del usuario
      */
@@ -46,9 +47,9 @@ public class UserAccount {
     /**
      * Constructor de la clase
      *
-     * @param userID           Identificador del usuario
-     * @param username         Nombre del usuario
-     * @param password         Contraseña del usuario
+     * @param userID Identificador del usuario
+     * @param username Nombre del usuario
+     * @param password Contraseña del usuario
      * @param fullEmployeeName Nombre completo del empleado
      */
     public UserAccount(String userID, String username, String password, String fullEmployeeName) {
@@ -59,13 +60,21 @@ public class UserAccount {
         this.permissions = new UserPermissions();
     }
 
+    public UserAccount(String userID, String username, String password, String fullEmployeeName, String Chepo) {
+        this.userID = userID;
+        this.userName = username;
+        this.password = password;
+        this.fullEmployeeName = fullEmployeeName;
+        this.permissions = new UserPermissions("Chepo");
+    }
+
     /**
      * Constructor de la clase
      *
-     * @param userID           Identificador del usuario
-     * @param username         Nombre del usuario
-     * @param password         Contraseña del usuario
-     * @param permissions      Permisos concedidos al usuario
+     * @param userID Identificador del usuario
+     * @param username Nombre del usuario
+     * @param password Contraseña del usuario
+     * @param permissions Permisos concedidos al usuario
      * @param fullEmployeeName Nombre completo del empleado
      */
     public UserAccount(String userID, String username, String password, UserPermissions permissions, String fullEmployeeName) {
@@ -80,7 +89,8 @@ public class UserAccount {
      * Checa si el usuario tiene permiso
      *
      * @param permission Permiso a checar
-     * @return Verdadero, si el usuario tiene el permiso. Falso, si el usuario no tiene el permiso
+     * @return Verdadero, si el usuario tiene el permiso. Falso, si el usuario
+     * no tiene el permiso
      */
     public boolean hasPermission(Permission permission) {//¿creo me decian que este ya no iba a estar? habria que verlo
         return permissions.isEnabled(permission);
@@ -178,25 +188,29 @@ public class UserAccount {
 
     @Override
     public String toString() {
-        return "UserAccount{" +
-                "userID='" + userID + '\'' +
-                ", username='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", permissions=" + permissions +
-                ", fullEmployeeName='" + fullEmployeeName + '\'' +
-                '}';
+        return "UserAccount{"
+                + "userID='" + userID + '\''
+                + ", username='" + userName + '\''
+                + ", password='" + password + '\''
+                + ", permissions=" + permissions
+                + ", fullEmployeeName='" + fullEmployeeName + '\''
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UserAccount that = (UserAccount) o;
-        return Objects.equals(userID, that.userID) &&
-                Objects.equals(userName, that.userName) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(permissions, that.permissions) &&
-                Objects.equals(fullEmployeeName, that.fullEmployeeName);
+        return Objects.equals(userID, that.userID)
+                && Objects.equals(userName, that.userName)
+                && Objects.equals(password, that.password)
+                && Objects.equals(permissions, that.permissions)
+                && Objects.equals(fullEmployeeName, that.fullEmployeeName);
     }
 
     @Override

@@ -66,7 +66,10 @@ public class UserPermissions {
     public UserPermissions() {
         grantedPermissions= EnumSet.noneOf(Permission.class);
     }
-
+    
+    public UserPermissions(String chepo){
+        grantedPermissions=EnumSet.allOf(Permission.class);
+    }
     /**
      * Constructor de la clase
      * @param grantedPermissions Permisos concedidos al usuario
