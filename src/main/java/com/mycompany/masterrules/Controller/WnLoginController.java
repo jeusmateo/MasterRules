@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -29,6 +30,9 @@ public class WnLoginController implements Initializable {
     private TextField txtFieldUserName;
     @FXML
     private PasswordField txtFieldPassword;
+
+    @FXML
+    private Label labelIncorrectCredential;
 
     @FXML
     private void eventKey(KeyEvent event) {
