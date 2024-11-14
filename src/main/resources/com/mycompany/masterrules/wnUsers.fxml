@@ -96,7 +96,7 @@
                                             <tabs>
                                               <Tab fx:id="tabSalePerm" text="Ventas">
                                                 <content>
-                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkMakeSalePerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
                                                                <font>
@@ -128,7 +128,7 @@
                                               </Tab>
                                               <Tab fx:id="tabProductsPerm" text="Productos">
                                                 <content>
-                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkCreateProductPerrm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
                                                                <font>
@@ -183,7 +183,7 @@
                                               </Tab>
                                                 <Tab fx:id="tabInventoryPerm" text="Inventario">
                                                    <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkEditStockPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="147.0" text="Editar Existencia">
                                                                <font>
@@ -206,7 +206,7 @@
                                                 </Tab>
                                                 <Tab fx:id="tabCustomerPerm" text="Clientes">
                                                    <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkCreateNewCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Clientes">
                                                                <font>
@@ -245,7 +245,7 @@
                                                 </Tab>
                                                 <Tab fx:id="tabReportPerm" text="Reportes">
                                                    <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkReviewCashRegisterAduitReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="239.0" text="Consultar Reporte de Venta">
                                                                <font>
@@ -276,7 +276,7 @@
                                                 </Tab>
                                                 <Tab fx:id="tabUserPerm" text="Usuarios">
                                                    <content>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
                                                             <CheckBox fx:id="chkCreateUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Usuario">
                                                                <font>
