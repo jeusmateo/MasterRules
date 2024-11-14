@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,7 @@
                <tabs>
                   <Tab fx:id="tabCustomerAccount" text="Cuenta Cliente">
                      <content>
-                        <AnchorPane fx:id="scrCustomerAccount" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="scrCustomerAccount" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <AnchorPane fx:id="scrMainViewCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                  <styleClass>
@@ -129,7 +129,7 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="scrEditCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
+                              <AnchorPane fx:id="scrEditCustomerAccount" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
                                  <styleClass>
                                     <String fx:value="radius" />
                                     <String fx:value="shadow" />
@@ -189,7 +189,7 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="textFieldEditCustomerStoreCredit" layoutX="143.0" onMouseClicked="#setScrWarningCredit" prefHeight="25.0" prefWidth="133.0" />
+                                                <TextField fx:id="txtEditCustomerStoreCredit" layoutX="143.0" onMouseClicked="#setScrWarningCredit" prefHeight="25.0" prefWidth="133.0" />
                                              </children>
                                           </Group>
                                           <Group>

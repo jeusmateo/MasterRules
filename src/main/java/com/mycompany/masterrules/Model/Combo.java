@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 
@@ -9,10 +10,10 @@ import jakarta.persistence.*;
 public class Combo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String comboID;//se cambio esto a string
-    @Column(name = "ComboName")
     private String comboName;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Product> products;
     @Transient
     private CustomComboTemplate productsTemplate;
@@ -22,7 +23,7 @@ public class Combo {
     /**
      * Constructor para JPA
      */
-    public Combo() {
+    protected Combo() {
 
     }
 
@@ -95,5 +96,28 @@ public class Combo {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Combo combo = (Combo) o;
+        return comboID == combo.comboID && Objects.equals(comboName, combo.comboName) && Objects.equals(products, combo.products) && Objects.equals(productsTemplate, combo.productsTemplate) && Objects.equals(price, combo.price) && Objects.equals(VIPPrice, combo.VIPPrice);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(comboID, comboName, products, productsTemplate, price, VIPPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "Combo{" +
+                "comboID=" + comboID +
+                ", comboName='" + comboName + '\'' +
+                ", products=" + products +
+                ", productsTemplate=" + productsTemplate +
+                ", price=" + price +
+                ", VIPPrice=" + VIPPrice +
+                '}';
+    }
 }

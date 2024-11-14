@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -16,7 +18,7 @@ public class CashFlowReport {
     private BigDecimal cashAmount;
 
     /**Fecha en la que se realiza el reporte */
-    private LocalDate date;
+    private String date;
 
 
     /**
@@ -27,7 +29,13 @@ public class CashFlowReport {
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
-        this.date = LocalDate.now();
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        
+        // Define el formato deseado, por ejemplo, "dd-MM-yyyy HH:mm:ss"
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        
+        // Formatea la fecha y hora actual
+        this.date = fechaHoraActual.format(formato);
     }
 
     /**
@@ -58,11 +66,11 @@ public class CashFlowReport {
         this.cashAmount = cashAmount;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
     

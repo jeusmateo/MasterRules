@@ -20,10 +20,7 @@ public class UserPermissions {
         //Sales
         MAKE_SALE,
         CANCEL_SALE,
-        RECORD_CASHIN,
-        RECORD_CASHOUT,
-        REVIEW_SALES_HISTORY,
-        REVIEW_CASH_REGISTER_HISTORY,
+        LOOK_SALES_HISTORY,
 
         //Products
         CREATE_PRODUCT,
@@ -36,20 +33,22 @@ public class UserPermissions {
         DELETE_COMBO,
 
         //Clients
-        CREATE_CLIENT,
-        EDIT_CLIENT,
-        DELETE_CLIENT,
+        CREATE_CUSTOMER,
+        EDIT_CUSTOMER,
+        DELETE_CUSTOMER,
         EDIT_CREDITS,
-        REVIEW_CLIENT_ACCOUNTS,
 
         //Inventory
         EDIT_STOCK,
         EDIT_MAX_MIN,
 
         //Reports
-        REVIEW_CLIENT_REPORT,
-        REVIEW_SALE_REPORT,
-        REVIEW_INVENTORY_REPORT,
+        LOOK_SALE_REPORT,
+        // REVIEW_INVENTORY_REPORT, // Pendiente para implementar
+        RECORD_CASHIN,
+        RECORD_CASHOUT,
+        RECORD_CASH_AUDIT_REPORT,
+        
 
         //Users
         CREATE_USER,
@@ -67,7 +66,10 @@ public class UserPermissions {
     public UserPermissions() {
         grantedPermissions= EnumSet.noneOf(Permission.class);
     }
-
+    
+    public UserPermissions(String chepo){
+        grantedPermissions=EnumSet.allOf(Permission.class);
+    }
     /**
      * Constructor de la clase
      * @param grantedPermissions Permisos concedidos al usuario

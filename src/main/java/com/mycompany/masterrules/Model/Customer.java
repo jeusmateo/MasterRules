@@ -17,7 +17,6 @@ public class Customer {
      * Atributos de la clase
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String ID;
     private String customerName;
     private String customerPhoneNumber;
@@ -118,7 +117,7 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return ID == customer.ID && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
+        return Objects.equals(ID, customer.ID) && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
     }
 
     @Override
