@@ -89,42 +89,7 @@ public class UserManager {
         return false;
     }
     
-    /**
-     * Valida al usuario cuando este ingrese al sistema de punto de venta
-     * @param username Nombre del usuario ingresado
-     * @param password Constraseña del usuario ingresado
-     * @return Verdadero, si el nombre y constraseña del usuario son correctos. Falso, si el nombre o contraseña del usuario son incorrectos
-     * @throws java.lang.Exception Si no se encuentra al usuario en el sistema de punto de venta, se lanza un error
-     */
-    public boolean validateUser(String username,String password) throws Exception{//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
-        //aqui probablemente se involucre la BD
-        
-        //se encuentra al usuario por nombre
-        UserAccount foundUser=findUser(username);
-        
-        if(foundUser.getPassword().equals(password)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    /**
-     * Busca a un usuario
-     * @param username Nombre de usuario a encontrar
-     * @return Usuario encontrado
-     * @throws java.lang.Exception Si el usuario no existe en el sistema de punto de venta, se lanza un error
-     */
-    public UserAccount findUser(String username) throws Exception{
-        //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
-        for(UserAccount registeredUser : userAccounts){
-            if(registeredUser.getUsername().equals(username)){
-                return registeredUser;
-            }
-        }
-        throw new Exception("ERROR: El usuario no existe");//quite return null por una exception
-    }
+    //movi los metodos FindUser y ValidateUser a la clase Login
     
     /**
      * Cambia los permisos de un usuario
