@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -35,6 +32,8 @@ public class CustomComboTemplate {
     private Map<String, Integer> quantityByCategory;
 
     /** Lista de productos para escoger correspondiente por cada categoria */
+    // TODO: ELIMINAR EL TRANSIENT MALDITASEA
+    @Transient
     private Map<String, List<Product>> productsEnableByCategory;
 
     /** Lista de productos por defecto */
