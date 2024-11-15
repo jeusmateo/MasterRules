@@ -73,7 +73,7 @@ public class WnSaleController implements Initializable{
     public static int cont=0;//borrar depues, solo es de prueba
     private WnSaleController wnSaleSection;
     private Stage stage;
-    private WnSideNavigationBar wnSideNavigationBar;
+    private WnSideNavigationBarController wnSideNavigationBar;
 
     @FXML
     private AnchorPane scrCustomCombo;
