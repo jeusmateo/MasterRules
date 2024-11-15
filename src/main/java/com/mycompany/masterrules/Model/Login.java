@@ -51,7 +51,7 @@ public class Login {
     public UserAccount findUser(String username) throws Exception{
         //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
         for(UserAccount registeredUser : userAccounts){
-            if(username.equals(registeredUser.getUsername())){
+            if(username.equals(registeredUser.getUserName())){
                 return registeredUser;
             }
         }
@@ -60,7 +60,7 @@ public class Login {
     
     public boolean isUserRegistered(String username){
         for(UserAccount registeredUser : userAccounts){
-            if(username.equals(registeredUser.getUsername())){
+            if(username.equals(registeredUser.getUserName())){
                 return true;
             }
         }
