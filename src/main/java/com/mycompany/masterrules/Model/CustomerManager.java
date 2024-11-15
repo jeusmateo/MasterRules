@@ -17,6 +17,8 @@ public class CustomerManager {
             
         }
     }
+
+    //TODO: los tres siguientes metodos no se usan?
     public void addCustomer(String name, String phone){
         
     }
@@ -44,6 +46,8 @@ public class CustomerManager {
         }
     }
 
+
+    // TODO: siento que no solo registra, tmb pone los puntos, no se deberia poner en un metodo aparte? pero a lo mejor toy loquita
     public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
 
         if(!name.trim().isEmpty()&&!phone.trim().isEmpty()){

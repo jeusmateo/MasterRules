@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  * @author David Torres
  */
 public class Printer {
+
+    //TODO: se debe cambiar a ingles la parte d elos metodos
     public void imprimirOrder(Order order){
         System.out.println("=====================================");
         System.out.println("Imprimiendo orden: " + order.getId());
