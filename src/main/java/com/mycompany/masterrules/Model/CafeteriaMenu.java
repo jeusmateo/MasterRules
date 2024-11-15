@@ -105,6 +105,10 @@ public class CafeteriaMenu {
      * @throws Exception Si el producto no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
     public void editProduct(Product product) throws Exception{
+
+        Product Chepo = bd.findByID(SADSA);
+        Chepo.setPrice(product.getPrice()XSADFA);
+        bd.update(Chepo);
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
                 
