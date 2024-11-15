@@ -1,5 +1,8 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.HashMap;
 
 /**
@@ -7,66 +10,116 @@ import java.util.HashMap;
  * @author alexs
  */
 public class CafeteriaStorage {
-
-    private HashMap<String,Integer> products;//HashMap<id,stock>
+private HashMap<Product,StockInfo> products;//HashMap<id,stock>
 
     /**
      * Constructor of class CafeteriaStorage
      */
     public CafeteriaStorage() {
-        this.products = new HashMap<String,Integer>();
+        this.products = new HashMap<Product,StockInfo>();
     }
     /**
      * Constructor of class CafeteriaStorage
      * @param products Products with their stocks
      */
-    public CafeteriaStorage(HashMap<String, Integer> products) {
+    public CafeteriaStorage(HashMap<Product, StockInfo> products){
         this.products = products;
     }
-    
+
     /**
      * Adds a product in the storage
-     * @param id Identification of the product
-     * @param stock Quantity available in the storage
+     * @param product Identification of the product
+     * @param stockInfo Quantity available in the storage
      * @throws Exception If the product already exists, it causes an error
      */
-    public void addProductToInventory(String id, int stock) throws Exception{
+    public void addProduct(Product product, StockInfo stockInfo) throws Exception {
         //se elimino la excepcion cuando el stock es negativo
-        if(isStored(id)){
-            throw new Exception("ERROR:El producto ya existe");
+        if(!isStored(product)){//inverti por el criterio de if (el caso deseado primero)
+            if(isStockInfoValid(stockInfo)){
+                products.put(product, stockInfo);
+            }
+            else{
+                throw new Exception("ERROR: La informacion del Stock es incorrecta");
+            }
         }
         else{
-            products.put(id, stock);
+            throw new Exception("ERROR:El producto ya existe");
+        }
+    }
+    
+    public boolean isStockInfoValid(StockInfo stockInfo){
+        if(stockInfo.getCurrentStock()>=0 && stockInfo.getMinStock()>=0 && stockInfo.getMaxStock()>=0){
+            return true;
+        }
+        else{
+            return false;
         }
     }
     
     /**
      * Removes a product from the storage
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @throws Exception If the product is not in inventory, it causes an error
      */
-    public void removeProductOnInventory(String id) throws Exception{
-        if(isStored(id)){
-            products.remove(id);
+    public void removeProduct(Product product) throws Exception{
+        if(isStored(product)){
+            products.remove(product);
         }
         else{
-            throw new Exception("El producto no existe en el inventario");//creo que no deberia marcar error pues algunos de los productos no existen en inventario. Aunque no se si conviene agregar un atributo en Product para que sepamos si es inventariable; o solo usar el metodo isStored() andtes de removeProduct()
+            throw new Exception("ERROR: El producto no existe en el inventario");//creo que no deberia marcar error pues algunos de los productos no existen en inventario. Aunque no se si conviene agregar un atributo en Product para que sepamos si es inventariable; o solo usar el metodo isStored() andtes de removeProduct()
         }
         
     }
     
     /**
      * Updates the stock of a product
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @param newQuantity New quantity of the product
      * @throws Exception If the product is not in inventory, it causes an error
      */
-
-    //TODO el nombre no es claro hay que cambiarlo
-    public void updateStock(String id,int newQuantity) throws Exception{
+    public void editCurrentStock(Product product,int newQuantity) throws Exception{//cambiae el nombre a editCurrentStock
         //*****Implementar funcion despues de acabar ventas
-        if(isStored(id)){
-            products.put(id, newQuantity);
+        if(isStored(product)){
+            if(newQuantity>=0){
+                StockInfo newStockInfo=products.get(product);
+                newStockInfo.setCurrentStock(newQuantity);
+                products.put(product, newStockInfo);
+            }
+            else{
+                throw new Exception("ERROR: La cantidad no puede ser negativa");
+            }
+        }
+        else{
+            throw new Exception("ERROR: El producto no existe en el inventario");
+        }
+    }
+    
+    public void editMinStock(Product product,int newQuantity) throws Exception{
+        if(isStored(product)){
+            if(newQuantity>=0){
+                StockInfo newStockInfo=products.get(product);
+                newStockInfo.setMinStock(newQuantity);
+                products.put(product, newStockInfo);
+            }
+            else{
+                throw new Exception("ERROR: La cantidad no puede ser negativa");
+            }
+        }
+        else{
+            throw new Exception("ERROR: El producto no existe en el inventario");
+        }
+    }
+    
+    public void editMaxStock(Product product,int newQuantity) throws Exception{
+        if(isStored(product)){
+            if(newQuantity>=0){
+                StockInfo newStockInfo = products.get(product);
+                newStockInfo.setMaxStock(newQuantity);
+                products.put(product, newStockInfo);
+            }
+            else{
+                throw new Exception("ERROR: La cantidad no puede ser negativa");
+            }
         }
         else{
             throw new Exception("ERROR: El producto no existe en el inventario");
@@ -75,39 +128,51 @@ public class CafeteriaStorage {
     
     /**
      * Increments the stock of a product
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @param increment Quantity to add in the product's stock
      * @throws Exception If the product isn't in storage or the increment is negative, it causes an error
      */
-    public void addToStock(String id,int increment) throws Exception{
-        if(isStored(id)){
-            if(increment<0){
+    public void addToCurrentStock(Product product,int increment) throws Exception{//!!!tengo que cambiar el nombre a addToCurrentStock
+        if(isStored(product)){
+            if(increment>=0){//inverti por el criterio de if (el caso deseado primero)
+                StockInfo newStockInfo=products.get(product);
+                newStockInfo.setCurrentStock(newStockInfo.getCurrentStock()+increment);
+                products.put(product, newStockInfo);
+            }
+            else{
                 throw new Exception("ERROR: El incremento no puede ser negativo");
             }
-            int newQuantity=products.get(id)+increment;
-            products.put(id, newQuantity);
         }
         else{
-            throw new Exception("ERROR: No se encontro el producto");
+            throw new Exception("ERROR: El producto no existe en el inventario");
         }
         
     }
     /**
      * Decrements the stock of a product
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @param decrement Quantity to remove from the product's stock
      * @throws Exception If the product isn't in storage, the decrement is negative or the decrement is greater than the current stock, it causes an error
      */
-    public void removeFromStock(String id,int decrement) throws Exception{
-        if(isStored(id)){
+    public void removeFromCurrentStock(Product product,int decrement) throws Exception{//!!!tengo que cambiar el nombre a removeFromCurrentStock
+        if(isStored(product)){
+            if(decrement>=0 && hasEnoughStock(product,decrement)){
+                StockInfo newStockInfo=products.get(product);
+                newStockInfo.setCurrentStock(newStockInfo.getCurrentStock()-decrement);
+                products.put(product, newStockInfo);
+            }
+            else{
+                throw new Exception("ERROR: El decremento no es apropiado");
+            }
+            
+            /*
             if(decrement<0){
                 throw new Exception("ERROR: El decremento no puede ser negativo");
             }
-            if(!hasEnoughStock(id,decrement)){
+            if(!hasEnoughStock(product,decrement)){
                 throw new Exception("ERROR:El decremento excede la cantidad almacenada del producto");
             }
-            int newQuantity=products.get(id)-decrement;
-            products.put(id, newQuantity);
+            */
         }
         else{
             throw new Exception("ERROR:No se encontro el producto");
@@ -116,12 +181,14 @@ public class CafeteriaStorage {
     
     /**
      * Checks if the product has enough stock for an operation involving the substraction of stock
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @param quantity Quantity to compare to current stock
      * @return True, if the quantity less than or equal the stock of the product. False, if the quantity is greater than the stock of the product
      */
-    public boolean hasEnoughStock(String id,int quantity){
-        if(quantity>products.get(id)){
+    public boolean hasEnoughStock(Product product,int quantity){//!!!cambiar nombre a hasEnoughCurrentStock
+        StockInfo stockInfo=products.get(product);
+        int currentStock=stockInfo.getCurrentStock();
+        if(quantity>currentStock){
             return false;
         }
         else{
@@ -138,11 +205,11 @@ public class CafeteriaStorage {
     
     /**
      * Checks if a product is stored in storage
-     * @param id Identification of the product
+     * @param product Identification of the product
      * @return True, if the product is in storage. False, if the product isn't in storage
      */
-    public boolean isStored(String id){
-        if(products.containsKey(id)){
+    public boolean isStored(Product product){
+        if(products.containsKey(product)){
             return true;
         }
         else{
@@ -154,16 +221,15 @@ public class CafeteriaStorage {
      * Getter of product with stock
      * @return Product with stock
      */
-    public HashMap<String, Integer> getProducts() {
+    public HashMap<Product, StockInfo> getProducts() {    
         return products;
     }
-
+    
     /**
      * Setter of product with stock
      * @param products Product with stock
      */
-    public void setProducts(HashMap<String, Integer> products) {
+    public void setProducts(HashMap<Product, StockInfo> products) {
         this.products = products;
     }
-    
 }
