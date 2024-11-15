@@ -64,6 +64,8 @@ public class CafeteriaStorage {
      * @param newQuantity New quantity of the product
      * @throws Exception If the product is not in inventory, it causes an error
      */
+
+    //TODO el nombre no es claro hay que cambiarlo
     public void updateStock(String id,int newQuantity) throws Exception{
         //*****Implementar funcion despues de acabar ventas
         if(isStored(id)){
