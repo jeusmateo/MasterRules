@@ -37,11 +37,16 @@ public class UserManager {
      */
     public void addUser(UserAccount newUser) throws Exception{//cambie el nombre del parametro
         if(!isUserRegistered(newUser)){
-            if(!isUsernameTaken(newUser.getUserName())){//cambie el param por username
-                userAccounts.add(newUser);
+            if(isUsernameValid(newUser.getUserName())){//cambie el metodo para que solo sea la validacion del username
+                if(isPasswordValid(newUser.getPassword())){
+                    userAccounts.add(newUser);
+                }
+                else{
+                    throw new Exception("ERROR: La constraseña no es válida");
+                }
             }
             else{
-                throw new Exception("ERROR: El nombre usuario ya esta tomado");
+                throw new Exception("ERROR: El nombre usuario es incorrecto o ya esta tomado");
             }
         }
         else{
@@ -78,6 +83,27 @@ public class UserManager {
         return false;
     }
     
+    private boolean isUsernameValid(String username){//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
+        //verificar si no es nulo
+        if(username.equals("")){
+            return false;
+        }
+        //verificar si hay espacios
+        if(username.contains(" ")){
+            return false;
+        }
+        //verificar la longitud de la contraseña
+        if(username.length()<6 || username.length()>20){
+            return false;
+        }
+        
+        if(isUsernameTaken(username)){
+            return false;
+        }
+        
+        return true;
+    }
+    
     /**
      * Checa si el nombre de usuario ya esta tomado
      * @param username Nombre de usuario a checar
@@ -90,6 +116,32 @@ public class UserManager {
             }
         }
         return false;
+    }
+    
+    private boolean isPasswordValid(String password){
+        //verificar si no es nulo
+        if(password.equals("")){
+            return false;
+        }
+        //verificar si hay espacios
+        if(password.contains(" ")){
+            return false;
+        }
+        //verificar la longitud de la contraseña
+        if(password.length()<8 || password.length()>20){
+            return false;
+        }
+        //verificar si no hay mas de 2 caracteres repetidos secuencialmente
+        if(hasMoreThanTwoConsecutiveChars(password)){
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private boolean hasMoreThanTwoConsecutiveChars(String input){
+        String threeRepeatedConsecutiveChars=".*(.)\\1\\1.*";
+        return input.matches(threeRepeatedConsecutiveChars);
     }
     
     //movi los metodos FindUser y ValidateUser a la clase Login
