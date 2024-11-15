@@ -9,6 +9,9 @@ import jakarta.persistence.Embeddable;
  */
 public class LoyaltyCard {
     private long ID;
+    public String accessCode;
+
+    public String getAccessCode(){ return accessCode; }
 
     public boolean accessCredit(){
         return true;
