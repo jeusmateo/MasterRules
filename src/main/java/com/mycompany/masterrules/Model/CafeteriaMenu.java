@@ -15,7 +15,7 @@ public class CafeteriaMenu {
     /**
      * Productos disponibles en el menu
      */
-    private ArrayList<Product> products;//cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
+    private ArrayList<Product> products;//TODO cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
     /**
      * Combos disponibles en el menu
      */
@@ -62,7 +62,7 @@ public class CafeteriaMenu {
      * @param productID Identificador del menu
      */
     public void removeProduct(String productID) throws Exception{
-        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(productID.equals(products.get(registeredProductCount).getProductID())){
                 products.remove(registeredProductCount);
                 return;
@@ -106,10 +106,8 @@ public class CafeteriaMenu {
      */
     public void editProduct(Product product) throws Exception{
 
-        Product Chepo = bd.findByID(SADSA);
-        Chepo.setPrice(product.getPrice()XSADFA);
-        bd.update(Chepo);
-        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
+
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
                 
                 if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){

@@ -10,14 +10,16 @@ import com.mycompany.masterrules.Model.UserPermissions.Permission;
  *
  * @author David Torres
  */
+
+//Este wey se encarga de vender
 public class POSManager {
 
-    private CustomerManager customerManager;
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager;
-    private CafeteriaManager cafeteriaManager;
-    private Printer printer;
-    private UserAccount currentUser;
-    private Order currentOrder;
+    private CustomerManager customerManager; //TODO No lo debe tener de atributo, debemos buscar cual sea la forma correcta de obtener la informacion.
+    private CashRegisterAuditReportManager cashRegisterAuditReportManager; //TODO Lo mismo, el pos debe poder comunicarse con la entidad que guarda los bills para guardarlos
+    private CafeteriaManager cafeteriaManager;//TODO basura
+    private Printer printer; //TODO Comunicacion mas no atributo
+    private UserAccount currentUser; //
+    private Order currentOrder; //TODO Este es el carrito, no esta del todo mal
 
     public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
         customerManager = new CustomerManager();
@@ -46,16 +48,17 @@ public class POSManager {
      * lista correcta del Hashmap que guarda los productos.
      * @return El producto encontrado, si no se encuentra retorna null.
      */
-    public Product findProductByType(String id, String type) throws Exception {//estaba en español. //tambien movi este metodo porque estaba arriva de los contructores
-        for (Product product : cafeteriaManager.getMenu().getProductsByType(type)) {//cambie el metodo getProductsByType
-            if (id.equals(product.getProductID())) {//inverti el id y product.getProductID() para que fuera mas legible
+    public Product findProductByType(String id, String type) throws Exception {//estaba en español. //TODO tambien movi este metodo porque estaba arriva de los contructores
+        //TODO Refactorizacion : Ya existe un codigo dentro del manager que hacer esto, simplemenbte puede guardarlo
+        for (Product product : cafeteriaManager.getMenu().getProductsByType(type)) {//TODO cambie el metodo getProductsByType
+            if (id.equals(product.getProductID())) {//TODO inverti el id y product.getProductID() para que fuera mas legible
                 return product;
             }
         }
         return null;//creo ue seria mejor una exception
     }
 
-    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//pequeño error ortografico decie Custome en vez de Custom
+    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
         for (String keyQuantity : customComboTemplate.getQuantityByCategory().keySet()) {
             int quantity = 0;
@@ -84,12 +87,12 @@ public class POSManager {
     /**
      * Realiza las ultimas configuraciones a la orden antes de venderla.
      *
-     * @param eleccion El metodo de entrega de la orden.
+     * @param metodoDeEntrega El metodo de entrega de la orden.
      * @param comentario Comentario adicional a la orden.
      * @param customer El cliente al que se le vendera la orden.
      */
-    public void configureOrder(String eleccion, String comentario, Customer customer) {
-        currentOrder.setDeliveryMethod(eleccion);
+    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
+        currentOrder.setDeliveryMethod(metodoDeEntrega);
         currentOrder.setComment(comentario);
         currentOrder.setCustomer(customer);
         currentOrder.setDate(LocalDateTime.now());
@@ -140,10 +143,10 @@ public class POSManager {
     public void sell() {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
 
-            BigDecimal amount = calculateTotalOrderAmount();
+            BigDecimal amount = calculateTotalOrderAmount(); //TODO NO DEBE ESTAR EN POS MANAGER
             Bill newBill = new Bill(currentOrder, amount, currentUser.getFullEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
-            printer.imprimirOrder(currentOrder);
+            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
+            printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
             printer.imprimirBill(newBill);
             currentOrder = new Order();
         } else {
@@ -185,7 +188,7 @@ public class POSManager {
         currentOrder = new Order();
     }
 
-    public void withdrawMoneyFromCashRegister() {//estaba en español
+    public void withdrawMoneyFromCashRegister() {//TODO estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
@@ -196,7 +199,7 @@ public class POSManager {
         }
     }
 
-    public void depositMoneyInCashRegister() {//estaba en español
+    public void depositMoneyInCashRegister() {//TODO estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
             String reason = "";
             BigDecimal amount = new BigDecimal("0");
