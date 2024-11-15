@@ -12,6 +12,7 @@ public class UserManager {
      */
     private ArrayList<UserAccount> userAccounts;
 
+    // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
     /**
      * Constructor de la clase
      */
