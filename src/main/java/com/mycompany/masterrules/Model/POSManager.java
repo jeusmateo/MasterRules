@@ -155,6 +155,47 @@ public class POSManager {
 
     }
 
+    private void processPayment(PaymentMethod paymentMethod){
+        switch (paymentMethod) {
+            case CARD -> System.out.println("Logica");
+            case CASH -> System.out.println("logica");
+            case STORE_CREDIT -> System.out.println("Logica");
+        }
+    }
+
+    private boolean processCardPayment(){
+        //Logica de la tajeta
+        return true;
+    }
+
+    private boolean processCashPayment(BigDecimal totalOrderAmount, BigDecimal cashReceived){
+        if(cashReceived.compareTo(totalOrderAmount) >= 0){
+            //cajaRegistradora.addCantidad
+            //abrir hardware de caja
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //TODO Checar el nombr ey orden de los parametros
+    private boolean processStoreCreditPayment(CustomerAccount customer, String customerAccess, BigDecimal totalOrderAmount){
+        if(customer.getLoyaltyCard().getAccessCode().equals(customerAccess)){
+            if(customer.getStoreCredit().compareTo(totalOrderAmount)>=0){
+                BigDecimal newCustomerStoreCredit = customer.getStoreCredit().subtract(totalOrderAmount);
+                customer.setStoreCredit(newCustomerStoreCredit);
+                return true;
+            }else{
+                //Excepcion
+            }
+        }
+        else{
+            //Excepcion
+        }
+        return false;
+    }
+
     /**
      * Realiza el cobro de una deuda pendiente de un cliente.
      *
