@@ -21,8 +21,9 @@ public class CustomerManager {
         }
     }
 
-    public void addCustomer(String name, String phone) {
 
+    //TODO: los tres siguientes metodos no se usan?
+    public void addCustomer(String name, String phone){
     }
 
     public void removeCustomer(long ID) {
@@ -48,7 +49,9 @@ public class CustomerManager {
         }
     }
 
-    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception {
+
+    // TODO: siento que no solo registra, tmb pone los puntos, no se deberia poner en un metodo aparte? pero a lo mejor toy loquita
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
 
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;

@@ -66,7 +66,8 @@ public class UserPermissions {
     public UserPermissions() {
         grantedPermissions= EnumSet.noneOf(Permission.class);
     }
-    
+
+    // TODO: inicia en mayúsculas
     public UserPermissions(String chepo){
         grantedPermissions=EnumSet.allOf(Permission.class);
     }
