@@ -57,6 +57,9 @@ public class CustomComboTemplate {
         price=priceArg;
         VIPPrice = VIPPriceArg;
     }
+
+    protected CustomComboTemplate() {
+    }
     
     /**
      * Constructor para el combo personalizado en el caso de que el combo no implemente productos por defecto
@@ -69,6 +72,7 @@ public class CustomComboTemplate {
         price=priceArg;
         VIPPrice = VIPPriceArg;
     }
+
 
     /**
      * Devuelve la lista de productos permitidos por la categoria correspondiente
