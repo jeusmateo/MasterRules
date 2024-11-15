@@ -27,10 +27,14 @@ public class CashRegisterAuditReportManager {
         cashRegisterAuditReports.remove(cashRegisterAuditReport);
     }
 
+
+    // TODO esta iniciado en mayusculas el nombre de la clase
     public void AddSaleToCashRegisterAuditReport(Bill sale) {
         currentCashRegisterAuditReport.addBill(sale);
     }
 
+
+    // esto, seguro que va aqui? pero si hace lo que dice el metodo
     public void withdrawCash(String reason, String amount) throws Exception {
 
         BigDecimal amountBigDecimal = new BigDecimal(amount);
@@ -43,6 +47,7 @@ public class CashRegisterAuditReportManager {
 
     }
 
+    // esto, seguro que va aqui? pero si hace lo que dice el metodo
     public void depositCash(String reason, String amount) throws Exception {
         if (amount.matches("\\d+")) {
             BigDecimal amountBigDecimal = new BigDecimal(amount);

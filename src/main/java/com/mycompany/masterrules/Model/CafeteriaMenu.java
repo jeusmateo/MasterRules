@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Clase que representa el menu en MasterRules
@@ -14,7 +15,7 @@ public class CafeteriaMenu {
     /**
      * Productos disponibles en el menu
      */
-    private ArrayList<Product> products;//cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
+    private ArrayList<Product> products;//TODO cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
     /**
      * Combos disponibles en el menu
      */
@@ -46,7 +47,7 @@ public class CafeteriaMenu {
      * Agrega un producto al menu
      * @param product Producto a agregar al menu
      */
-    public void addProductToMenu(Product product) throws Exception{
+    public void addProduct(Product product) throws Exception{
         //se elimino la excepcion cuando se tiene un nombre ya existente
         if(!isProductOnMenu(product.getProductID())){
             products.add(product);
@@ -60,8 +61,8 @@ public class CafeteriaMenu {
      * Remover el product del menu
      * @param productID Identificador del menu
      */
-    public void removeProductOnMenu(String productID) throws Exception{
-        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
+    public void removeProduct(String productID) throws Exception{
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(productID.equals(products.get(registeredProductCount).getProductID())){
                 products.remove(registeredProductCount);
                 return;
@@ -104,7 +105,10 @@ public class CafeteriaMenu {
      * @throws Exception Si el producto no existe en el menu o el nuevo nombre ya existe en el menu, ocasiona un error
      */
     public void editProduct(Product product) throws Exception{
-        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//hay que ver si este nombre del indice esta bien
+
+
+      
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
                 
                 if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){
@@ -154,7 +158,7 @@ public class CafeteriaMenu {
      * Agregar un combo al menu
      * @param combo Combo a agregar al menu
      */
-    public void addComboToMenu(Combo combo) throws Exception{
+    public void addCombo(Combo combo) throws Exception{
         if(!isComboOnMenu(combo.getComboID()+"")){
             combos.add(combo);
         }
@@ -168,7 +172,7 @@ public class CafeteriaMenu {
      * @param comboID Identificador del combo
      * @throws java.lang.Exception Si el combo no se encuentra en el menu, se lanza un error
      */
-    public void removeComboOnMenu(String comboID) throws Exception{//lo cambie por id
+    public void removeCombo(String comboID) throws Exception{//lo cambie por id
         for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
             if(comboID.equals(combos.get(registeredComboCount).getComboID())){
                 combos.remove(registeredComboCount);
