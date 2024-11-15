@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Order {
     private String comment;
     private String deliveryMethod;
     private LocalDateTime date;
+    private BigDecimal totalAmount;
 
     public Order(Product pro){
         // TODO: NO OLVIDAR CAMBIAR ESTE ID=4
@@ -120,6 +122,9 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public BigDecimal getTotalAmount() {return totalAmount;}
+    public void setTotalAmount(BigDecimal totalAmount) {this.totalAmount = totalAmount;}
 
 
     @Override
