@@ -49,6 +49,7 @@ public class CustomComboTemplate {
      * @param priceArg Precio del combo
      * @param VIPPriceArg Precio VIP del combo
      */
+    //TODO dice que no tiene constructor
     public CustomComboTemplate(ArrayList<Product> productosArg, BigDecimal priceArg, BigDecimal VIPPriceArg){
         defaultProducts = productosArg;
         this.quantityByCategory = new HashMap<>();
@@ -84,6 +85,7 @@ public class CustomComboTemplate {
      * @param categoryKey La categoria de la cual se desea obtener la cantidad de productos
      * @return La cantidad de productos permitidos por la categoria correspondiente
      */
+    //TODO: actualizar el nombre de la funcion?
     public int getQuantityByCategory(String categoryKey) {
         return quantityByCategory.getOrDefault(categoryKey, 0);
     }
@@ -102,6 +104,7 @@ public class CustomComboTemplate {
      * @param categoryKey La categoria a la cual se desea agregar el producto
      * @param product El producto a agregar
      */
+    //TODO: esto va aqui? como q añadir un producto a una categoria? no sería de cafeteriamanager?
     public void addProductToCategory(String categoryKey, Product product) {
         productsEnableByCategory.putIfAbsent(categoryKey, new ArrayList<>());
         productsEnableByCategory.get(categoryKey).add(product);
