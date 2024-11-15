@@ -11,7 +11,9 @@ import java.util.Objects;
  */
 @Entity
 public class Bill {
-
+    private BigDecimal pagadoEnEfectivo;
+    private BigDecimal pagadoEnTajeta;
+    private BigDecimal pagadoEnCreditoDeTienda;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -29,6 +31,8 @@ public class Bill {
     /** Orden a la que pertenece la factura */
     @Embedded
     private Order order;
+
+
 
     /**
      * Constructor para JPA

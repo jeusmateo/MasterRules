@@ -45,6 +45,7 @@ public class CustomerManager {
     }
 
     public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
+
         if(!name.trim().isEmpty()&&!phone.trim().isEmpty()){
             int loyaltyPointsInt;
         if(!loyaltyPoints.equals("")){

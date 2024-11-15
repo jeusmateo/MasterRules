@@ -38,6 +38,7 @@
                         <Font size="14.0" />
                      </font></Button>
                   <Line endX="100.0" layoutX="132.0" layoutY="104.0" startX="-100.0" stroke="#6351dd" />
+                  <Label fx:id="lbIncorrectCredential" layoutX="42.0" layoutY="238.0" styleClass="label-error" stylesheets="@viewTemplate.css" text="Usuario o contraseña incorrecto" textFill="#d70707" visible="false" />
                </children>
             </AnchorPane>
          </children>

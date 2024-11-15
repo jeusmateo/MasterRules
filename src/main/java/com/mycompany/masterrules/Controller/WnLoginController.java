@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -29,6 +30,9 @@ public class WnLoginController implements Initializable {
     private TextField txtFieldUserName;
     @FXML
     private PasswordField txtFieldPassword;
+
+    @FXML
+    private Label lbIncorrectCredential;
 
     @FXML
     private void eventKey(KeyEvent event) {
@@ -75,7 +79,10 @@ public class WnLoginController implements Initializable {
             if (this.chepo.verificador(user, pass)) {
                 System.out.println("Usuario y contraseña correctos");
                 loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+            } else {
+                lbIncorrectCredential.setVisible(true);
             }
+
         }
     }
 
