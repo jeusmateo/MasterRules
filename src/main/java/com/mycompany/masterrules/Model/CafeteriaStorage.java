@@ -1,8 +1,5 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 import java.util.HashMap;
 
 /**
@@ -33,7 +30,7 @@ public class CafeteriaStorage {
      * @param stock Quantity available in the storage
      * @throws Exception If the product already exists, it causes an error
      */
-    public void addProduct(String id,int stock) throws Exception{
+    public void addProductToInventory(String id, int stock) throws Exception{
         //se elimino la excepcion cuando el stock es negativo
         if(isStored(id)){
             throw new Exception("ERROR:El producto ya existe");
@@ -48,7 +45,7 @@ public class CafeteriaStorage {
      * @param id Identification of the product
      * @throws Exception If the product is not in inventory, it causes an error
      */
-    public void removeProduct(String id) throws Exception{
+    public void removeProductOnInventory(String id) throws Exception{
         if(isStored(id)){
             products.remove(id);
         }

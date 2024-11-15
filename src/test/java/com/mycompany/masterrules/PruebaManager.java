@@ -3,7 +3,6 @@ package com.mycompany.masterrules;
 import com.mycompany.masterrules.Model.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -50,7 +49,7 @@ public class PruebaManager {
 //        printProductDB(productQueries);
 
         //remover producto
-        manager.deleteProduct(P2.getProductName());
+        manager.deleteProductByID(P2.getProductName());
         //remover producto que no existe
         //manager.deleteProduct("banderilla");
 

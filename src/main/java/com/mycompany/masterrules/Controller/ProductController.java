@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.CafeteriaManager;
 import com.mycompany.masterrules.Model.Product;
-import com.mycompany.masterrules.Model.ProductQueries;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -91,7 +91,7 @@ public class ProductController {
         String id=scanStr.nextLine();
         //------------------todo esto se encuentra en vista---------------------------
         
-        model.deleteProduct(id);
+        model.deleteProductByID(id);
         
         //actualizar vista aqui?
         }

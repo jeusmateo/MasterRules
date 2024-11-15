@@ -1,7 +1,5 @@
 package com.mycompany.masterrules.Model;
 
-import java.math.BigDecimal;
-
 /**
  * Class for instances of CafeteriaManager
  */
@@ -20,7 +18,7 @@ public class CafeteriaManager {
         this.storage = storage;
     }
     
-    public void createProduct(Product newProduct,boolean inInventory, int quantity) throws Exception{
+    public void createProduct(Product newProduct, boolean inInventory, int quantity) throws Exception{
         //se modifico la excepcion
         if(quantity<0){
             throw new Exception("ERROR: La cantidad no puede ser negativa");
@@ -30,15 +28,15 @@ public class CafeteriaManager {
         }
         
         if(inInventory){
-            storage.addProduct(newProduct.getProductID(), quantity);
+            storage.addProductToInventory(newProduct.getProductID(), quantity);
         }
-        menu.addProduct(newProduct);
+        menu.addProductToMenu(newProduct);
         
     }
 
-    public void deleteProduct(String productID) throws Exception{//cambie por id
-        storage.removeProduct(productID);
-        menu.removeProduct(productID);//cambie por id
+    public void deleteProductByID(String productID) throws Exception{//cambie por id
+        storage.removeProductOnInventory(productID);
+        menu.removeProductOnMenu(productID);//cambie por id
             
     }
     
@@ -53,7 +51,7 @@ public class CafeteriaManager {
                 storage.updateStock(product.getProductID(), quantity);   
             }
             else{
-                storage.addProduct(product.getProductID(), quantity);    
+                storage.addProductToInventory(product.getProductID(), quantity);
             }
         }
         
@@ -65,11 +63,11 @@ public class CafeteriaManager {
             throw new Exception("ERROR: El nombre del combo ya está tomado");
         }
         
-        menu.addCombo(newCombo);
+        menu.addComboToMenu(newCombo);
     }
     
     public void deleteCombo(String comboID) throws Exception{
-        menu.removeCombo(comboID);
+        menu.removeComboOnMenu(comboID);
     }
     
     public void editCombo(Combo combo) throws Exception{
