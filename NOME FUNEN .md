@@ -1,6 +1,7 @@
 - encapsular los metodos que sean para la base de datos
 
 RESEÑA Cafeteria Manager
+- **add, create, remove/delete** de donde?
 - **createProduct** debe crear un producto (con cantidad) si no esta en inventario lo crea, sino tira error
   no debería ser poner nombre, cantidad, categoria...? las validaciones pueden ir en otro metodo
 - **deleteProduct** debe eliminar el producto por la ID
@@ -23,3 +24,25 @@ RESEÑA CafeteriaMenu
 - registeredComboCount esta cosa confunde y no se que es, o sea si, pero ugh
 - get/setTitle va a servir de algo?
 - lo demás se ve bien
+
+RESEÑA CafeteriaStorage
+- constrictores dupllicados, porque? 
+- addProduct, REMOVE a donde?
+- updateStock o addToStock?
+- los siguientes, que uso esta teniendo?
+  - searchProduct
+  - hasEnoughStock
+  - removeFromStock
+  - addToStock
+  - falta implementar searchProduct, o es el searchProduct?
+
+RESEÑA cashFlowReport
+lo veo bien :DDDD
+
+RESEÑA CASHREGISTERAUDITREPORT
+- removeCashOutFlowReport no se debería usar ni removeCashInFlowReport
+- calculateFinalCashAmount creo q se puede modularizar
+- lo demas lo veo bien :DDD
+
+RESEÑA CashRegisterAuditReportManager
+- TODO ESTA EN LA CLASE DE AQUI EN ADELANTE
