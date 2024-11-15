@@ -20,9 +20,9 @@ public class CafeteriaManager {
         this.storage = storage;
     }
     
-    public void createProduct(Product newProduct,boolean inInventory, int quantity) throws Exception{
+    public void createProduct(Product newProduct,boolean inInventory, StockInfo stockInfo) throws Exception{//se modifico acorde al nuevo storage
         //se modifico la excepcion
-        if(quantity<0){
+        if(!storage.isStockInfoValid(stockInfo)){
             throw new Exception("ERROR: La cantidad no puede ser negativa");
         }
         if(menu.isProductNameTaken(newProduct.getProductName())){
@@ -30,30 +30,32 @@ public class CafeteriaManager {
         }
         
         if(inInventory){
-            storage.addProduct(newProduct.getProductID(), quantity);
+            storage.addProduct(newProduct, stockInfo);
         }
         menu.addProduct(newProduct);
         
     }
 
-    public void deleteProduct(String productID) throws Exception{//cambie por id
-        storage.removeProduct(productID);
-        menu.removeProduct(productID);//cambie por id
+    public void deleteProduct(Product product) throws Exception{//cambie param por product
+        storage.removeProduct(product);
+        menu.removeProduct(product.getProductID());//cambie por id
             
     }
     
-    public void editProduct(Product product,boolean inInventory, int quantity) throws Exception{
-        if(quantity<0){
+    public void editProduct(Product product,boolean inInventory, StockInfo stockInfo) throws Exception{//cambie la cantidad por el stockInfo
+        if(!storage.isStockInfoValid(stockInfo)){
             throw new Exception("ERROR: La cantidad no puede ser negativa");
         }
         
         menu.editProduct(product);
         if(inInventory){
-            if(storage.isStored(product.getProductID())){
-                storage.updateStock(product.getProductID(), quantity);   
+            if(storage.isStored(product)){
+                storage.editCurrentStock(product, stockInfo.getCurrentStock());//se cambio a editCurrentStock
+                storage.editMinStock(product, stockInfo.getMinStock());
+                storage.editMaxStock(product, stockInfo.getMaxStock());
             }
             else{
-                storage.addProduct(product.getProductID(), quantity);    
+                storage.addProduct(product, stockInfo);    
             }
         }
         
