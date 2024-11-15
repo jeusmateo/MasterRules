@@ -15,3 +15,11 @@ RESEÑA Cafeteria Manager
 
 RESEÑA CafeteriaMenu
 - el constructor, porque se repite?
+- add product a donde? y asi en varios 
+- es correcto dejar las expeciones en metodos como addProduct, removeProduct, editProduct?
+- removeProdut: el método creo que podría enfocarse solo en eliminar el producto
+- editProduct: lo veo bien, podría modularizarse más?
+- getProductsByType SE USA EN DONDE? ya entendi, peroi mejor expliquenmelo
+- registeredComboCount esta cosa confunde y no se que es, o sea si, pero ugh
+- get/setTitle va a servir de algo?
+- lo demás se ve bien
