@@ -140,28 +140,31 @@ public class POSManager {
      * Realiza la logica de venta de la orden actual, crea la factura e imprime
      * la orden y factura.
      */
-    public void sell() {
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
 
-            BigDecimal amount = calculateTotalOrderAmount(); //TODO NO DEBE ESTAR EN POS MANAGER
-            Bill newBill = new Bill(currentOrder, amount, currentUser.getFullEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
-            printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
-            printer.imprimirBill(newBill);
-            currentOrder = new Order();
+    //TODO ESTO NO ESTA PARA NADA LISTO, ESTOY MUY CANSADO MENTALMENTE,POR FAVOR NO OLVIDEMOS CHECAR ESTO YA QUE TAMBIEN LOS BILL CAMBIAN SEGUN EL METODO DE PAGO YA QUE POR EJEMPLO EL DE TARJETA GUARDA LA REFERENCIA DEL METODO DE PAGO.
+    public void sell(PaymentDetails paymentDetails) {
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+            boolean paymentStatus;
+            switch (paymentDetails.getPaymentMethod()) {
+                case CARD -> paymentStatus=this.processCardPayment();
+                case CASH -> paymentStatus=processCashPayment(this.currentOrder.getTotalAmount() , paymentDetails.getCustomerCashAmount());
+                case STORE_CREDIT -> paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(),paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+                default ->  paymentStatus=false;
+            }
+            if(paymentStatus) {
+                BigDecimal amount = calculateTotalOrderAmount(); //TODO NO DEBE ESTAR EN POS MANAGER
+                Bill newBill = new Bill(currentOrder, amount, currentUser.getFullEmployeeName());
+                this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
+                printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
+                printer.imprimirBill(newBill);
+                currentOrder = new Order();
+            }
         } else {
             throw new IllegalArgumentException("No tiene permisos para vender");
         }
 
     }
 
-    private void processPayment(PaymentMethod paymentMethod){
-        switch (paymentMethod) {
-            case CARD -> System.out.println("Logica");
-            case CASH -> System.out.println("logica");
-            case STORE_CREDIT -> System.out.println("Logica");
-        }
-    }
 
     private boolean processCardPayment(){
         //Logica de la tajeta
@@ -180,7 +183,7 @@ public class POSManager {
     }
 
     //TODO Checar el nombr ey orden de los parametros
-    private boolean processStoreCreditPayment(CustomerAccount customer, String customerAccess, BigDecimal totalOrderAmount){
+    private boolean processStoreCreditPayment( BigDecimal totalOrderAmount,CustomerAccount customer, String customerAccess){
         if(customer.getLoyaltyCard().getAccessCode().equals(customerAccess)){
             if(customer.getStoreCredit().compareTo(totalOrderAmount)>=0){
                 BigDecimal newCustomerStoreCredit = customer.getStoreCredit().subtract(totalOrderAmount);
