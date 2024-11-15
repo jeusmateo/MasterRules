@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Model;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,6 +17,10 @@ public class CashRegisterAuditReportManager {
     public CashRegisterAuditReportManager() {
         currentCashRegisterAuditReport = new CashRegisterAuditReport(new BigDecimal("0"));
         cashRegisterAuditReports = new ArrayList<>();
+        currentCashRegisterAuditReport.getCashInFlowReports().add(new CashFlowReport("Inicializacion", new BigDecimal("0")));
+        currentCashRegisterAuditReport.getCashInFlowReports().add(new CashFlowReport("Capital", new BigDecimal("1500000000000000000000")));
+        currentCashRegisterAuditReport.getCashOutFlowReports().add(new CashFlowReport("Demanda", new BigDecimal("1500000000000000000000")));
+
     }
 
     public void removeCashRegisterAuditReport(CashRegisterAuditReport cashRegisterAuditReport) {

@@ -25,6 +25,8 @@ public class Printer {
                     System.out.println("Precio: "+product.getPrice());
                 }
             }
+        } else {
+            System.out.println("No hay combos en la orden");
         }
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println("Fecha: "+order.getDate().format(formato));
@@ -44,7 +46,9 @@ public class Printer {
         else{
             System.out.println("Nombre del cliente: Público general");
         }
+
         System.out.println("Productos: ");
+
         for (Product product : bill.getOrder().getProducts()) {
             System.out.println("Nombre : "+product.getProductName());
             System.out.println("Precio: "+product.getPrice());

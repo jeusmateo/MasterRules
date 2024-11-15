@@ -28,16 +28,17 @@ public class Login {
      * @return Verdadero, si el nombre y constraseña del usuario son correctos. Falso, si el nombre o contraseña del usuario son incorrectos
      * @throws java.lang.Exception Si no se encuentra al usuario en el sistema de punto de venta, se lanza un error
      */
-    public boolean validateUser(String username,String password) throws Exception{//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
+    public boolean validateUser(String username,String password) throws Exception {//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         //aqui probablemente se involucre la BD
-        if(isUserRegistered(username)){
+        if (isUserRegistered(username)) {
             //se encuentra al usuario por nombre
-            UserAccount foundUser=findUser(username);
+            UserAccount foundUser = findUser(username);
 
-            if(password.equals(foundUser.getPassword())){
+            if (password.equals(foundUser.getPassword())) {
                 return true;
             }
         }
+
         return false;
     }
     
