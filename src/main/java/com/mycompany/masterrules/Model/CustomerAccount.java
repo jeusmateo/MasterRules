@@ -8,7 +8,8 @@ import java.util.Objects;
 import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
 
-// TODO: Clase temporal para que no de errores
+// TODO: Clase temporal para que no de errores (antiguo)
+//TODO: SE PUEDEN QUITAR LOS TODO?
 @Embeddable
 public class CustomerAccount {
 
@@ -17,9 +18,9 @@ public class CustomerAccount {
     private boolean isVIP;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Debt> totalDebt;
-    @Transient // TODO: Revisar si es necesario
+    @Transient // TODO: Revisar si es necesario (antiguo)
     private LoyaltyCard loyaltyCard;
-    
+    //TODO: DOS CONSTRUCTORES?
     public CustomerAccount(){
         this.loyaltyPoints = 0;
         this.storeCredit = 0;
@@ -37,6 +38,7 @@ public class CustomerAccount {
 
     }
 
+    // TODO: QUE ES LO QUE ESTA BIEN AQUIIIII
     /**
      * NOTA: Este constructor no se usa en el programa, es solo para pruebas
      *
