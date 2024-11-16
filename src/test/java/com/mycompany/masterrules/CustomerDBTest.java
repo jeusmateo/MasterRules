@@ -42,7 +42,7 @@ public class CustomerDBTest {
         System.out.println("Añadiendo deuda a un cliente");
         Product newProduct = new Product("111", "Producto 1", "Descripcion 1", BigDecimal.valueOf(100), BigDecimal.valueOf(200));
         Order newOrder = new Order();
-        newOrder.addProduct(newProduct);
+        newOrder.addProduct(newProduct,1);
         Debt newDebt = new Debt(newOrder, BigDecimal.valueOf(1000));
         customer.getCustomerAccount().addDebt(newDebt);
         assert customerDBManager.update(customer);
