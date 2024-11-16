@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Database;
 
 import com.mycompany.masterrules.Model.Customer;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -25,6 +26,27 @@ public final class CustomerDBManager extends DatabaseManager<Customer, String> {
                 session.getTransaction().rollback();
             }
             System.err.println("Error al buscar el cliente con id: " + id);
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    /**
+     * @param name El nombre del cliente a buscar
+     * @return Una lista con los clientes que tengan el nombre dado, de lo contrario regresa una lista vacía
+     */
+    public List<Customer> findByName(String name) {
+        Session session = HibernateUtil.getOpenSession();
+        try {
+            return session.createQuery("from Customer where customerName = :name", Customer.class)
+                    .setParameter("name", name)
+                    .list();
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el cliente con nombre: " + name);
             return null;
         } finally {
             session.close();
