@@ -39,13 +39,15 @@ public class Combo {
 //    }
 
 
-    // TODO hacer que los coincidan con los parametros
+
     public Combo(String comboName, List<Product>products, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
         this.products = products;
         this.price = price;
         this.VIPPrice = VIPPrice;
     }
+
+
 
     public void setComboName(String comboName) {
 
@@ -99,6 +101,12 @@ public class Combo {
         if (o == null || getClass() != o.getClass()) return false;
         Combo combo = (Combo) o;
         return comboID == combo.comboID && Objects.equals(comboName, combo.comboName) && Objects.equals(products, combo.products) && Objects.equals(productsTemplate, combo.productsTemplate) && Objects.equals(price, combo.price) && Objects.equals(VIPPrice, combo.VIPPrice);
+    }
+
+    // Necesario para Hibernate
+
+    protected Combo() {
+
     }
 
     @Override
