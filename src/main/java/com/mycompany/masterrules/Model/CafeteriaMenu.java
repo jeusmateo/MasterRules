@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Clase que representa el menu en MasterRules
@@ -31,23 +30,12 @@ public class CafeteriaMenu {
         this.combos = new ArrayList<Combo>();
     }
     
-    /**
-     * Constructor de clase
-     * @param title Titulo del menu
-     * @param products Productos disponibles en el menu
-     * @param combos Combos disponibles en el menu
-     */
-    public CafeteriaMenu(String title, ArrayList<Product> products, ArrayList<Combo> combos) {
-        this.title = title;
-        this.products = products;
-        this.combos = combos;
-    }
-    
+
     /**
      * Agrega un producto al menu
      * @param product Producto a agregar al menu
      */
-    public void addProduct(Product product) throws Exception{
+    public void addProductToMenu(Product product) throws Exception{
         //se elimino la excepcion cuando se tiene un nombre ya existente
         if(!isProductOnMenu(product.getProductID())){
             products.add(product);
@@ -61,7 +49,7 @@ public class CafeteriaMenu {
      * Remover el product del menu
      * @param productID Identificador del menu
      */
-    public void removeProduct(String productID) throws Exception{
+    public void removeProductOnMenu(String productID) throws Exception{
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(productID.equals(products.get(registeredProductCount).getProductID())){
                 products.remove(registeredProductCount);
@@ -107,31 +95,31 @@ public class CafeteriaMenu {
     public void editProduct(Product product) throws Exception{
 
 
-      
+
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
-                
+
                 if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){
-                    
+
                     if(!isProductNameTaken(product.getProductName())){
                         products.get(registeredProductCount).setProductName(product.getProductName());
                     }
                     else{
                         throw new Exception("ERROR: El nombre del producto ya esta tomado");
                     }
-                    
+
                 }
                 products.get(registeredProductCount).setProductType(product.getProductType());
                 products.get(registeredProductCount).setPrice(product.getPrice());
                 products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
-                
+
                 return;
             }
         }
         throw new Exception("ERROR: El producto no existe");
-        
+
     }
-    
+
     /**
      * Obtiene a los productos que pertenecen a un cierto tipo
      * @param ProductType Tipo de productos
@@ -158,7 +146,7 @@ public class CafeteriaMenu {
      * Agregar un combo al menu
      * @param combo Combo a agregar al menu
      */
-    public void addCombo(Combo combo) throws Exception{
+    public void addComboToMenu(Combo combo) throws Exception{
         if(!isComboOnMenu(combo.getComboID()+"")){
             combos.add(combo);
         }
@@ -172,7 +160,7 @@ public class CafeteriaMenu {
      * @param comboID Identificador del combo
      * @throws java.lang.Exception Si el combo no se encuentra en el menu, se lanza un error
      */
-    public void removeCombo(String comboID) throws Exception{//lo cambie por id
+    public void removeComboOnMenu(String comboID) throws Exception{//lo cambie por id
         for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
             if(comboID.equals(combos.get(registeredComboCount).getComboID())){
                 combos.remove(registeredComboCount);

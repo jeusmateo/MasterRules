@@ -1,80 +1,69 @@
 package com.mycompany.masterrules.Model;
 
+import com.mycompany.masterrules.Database.CustomerDBManager;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
- *
  * @author David Torres Clase que se encarga de gestionar los clientes
  */
 public class CustomerManager {
 
-    private ArrayList<Customer> customers;
+    private List<Customer> customers;
 
     public CustomerManager() {
-        try {
-            customers = new ArrayList();
-
-        } catch (Exception e) {
-
-        }
+        CustomerDBManager customerDBManager = new CustomerDBManager();
+        customers =  customerDBManager.readAll();
     }
 
 
-    //TODO: los tres siguientes metodos no se usan?
-    public void addCustomer(String name, String phone){
+    public void removeCustomer(String id) {
+        CustomerDBManager customerDBManager = new CustomerDBManager();
+        Customer customer = customerDBManager.findById(id);
+        customerDBManager.delete(customer);
     }
 
-    public void removeCustomer(long ID) {
-        //Logica para remover cliente
-    }
 
-    public void setVIP(long ID) {
-        //Logica para setar cliente como VIP
-        //cliente.setVIP(true);
-    }
 
     public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
+        CustomerDBManager customerDBManager = new CustomerDBManager();
+        Customer customer = customerDBManager.findById(id);
+        customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
+        customer.getCustomerAccount().setIsVIP(vipStatus);
+        customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));
+        customerDBManager.update(customer);
 
-        for (Customer customer : customers) {
-            if (customer.getID().equals(id)) {
-                int loyaltyPointsInt = Integer.valueOf(loyaltyPoints);
-                BigDecimal storeCreditBigDecimal = new BigDecimal(storeCredit);
-                customer.getCustomerAccount().setLoyaltyPoints(loyaltyPointsInt);
-                customer.getCustomerAccount().setStoreCredit(storeCreditBigDecimal);
-                customer.getCustomerAccount().setIsVIP(vipStatus);
 
-            }
-        }
     }
 
 
     // TODO: siento que no solo registra, tmb pone los puntos, no se deberia poner en un metodo aparte? pero a lo mejor toy loquita
-    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception{
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception {
 
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;
-            if (!loyaltyPoints.equals("")) {
-                loyaltyPointsInt = Integer.valueOf(loyaltyPoints);
+            if (!loyaltyPoints.isEmpty()) {
+                loyaltyPointsInt = Integer.parseInt(loyaltyPoints);
             } else {
                 loyaltyPointsInt = 0;
             }
             Customer customer = new Customer(generateRandomId(), name, phone, loyaltyPointsInt, vipStatus);
-            customers.add(customer);
+            CustomerDBManager customerDBManager = new CustomerDBManager();
+            customerDBManager.save(customer);
         } else {
             throw new Exception("Parametros Incorrectos");
         }
 
     }
 
-    public ArrayList<Customer> getCustomers() {
+    public List<Customer> getCustomers() {
+        CustomerDBManager customerDBManager = new CustomerDBManager();
+        customers = customerDBManager.readAll();
         return customers;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
-        this.customers = customers;
-    }
 
     private boolean isIdUnique(String ID) {
         for (Customer customer : customers) {

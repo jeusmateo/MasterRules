@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
 
 /**
- *
  * @author David Torres
  */
 
@@ -35,19 +34,24 @@ public class POSManager {
      *
      * @param product El producto a agregar a la orden.
      */
+
+    /*
     public void addProductToOrder(Product product) {
         currentOrder.addProduct(product);
 
     }
 
+     */
+
     /**
      * Busca un producto en el menu de la cafeteria
      *
-     * @param id El identificador del producto a buscar.
+     * @param id   El identificador del producto a buscar.
      * @param type El tipo de producto a buscar, se requiere para buscar en la
-     * lista correcta del Hashmap que guarda los productos.
+     *             lista correcta del Hashmap que guarda los productos.
      * @return El producto encontrado, si no se encuentra retorna null.
      */
+    /*
     public Product findProductByType(String id, String type) throws Exception {//estaba en español. //TODO tambien movi este metodo porque estaba arriva de los contructores
         //TODO Refactorizacion : Ya existe un codigo dentro del manager que hacer esto, simplemenbte puede guardarlo
         for (Product product : cafeteriaManager.getMenu().getProductsByType(type)) {//TODO cambie el metodo getProductsByType
@@ -57,6 +61,8 @@ public class POSManager {
         }
         return null;//creo ue seria mejor una exception
     }
+
+     */
 
     public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
@@ -88,8 +94,8 @@ public class POSManager {
      * Realiza las ultimas configuraciones a la orden antes de venderla.
      *
      * @param metodoDeEntrega El metodo de entrega de la orden.
-     * @param comentario Comentario adicional a la orden.
-     * @param customer El cliente al que se le vendera la orden.
+     * @param comentario      Comentario adicional a la orden.
+     * @param customer        El cliente al que se le vendera la orden.
      */
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
         currentOrder.setDeliveryMethod(metodoDeEntrega);
@@ -102,7 +108,7 @@ public class POSManager {
      * Realiza las ultimas configuraciones a la orden antes de venderla. Aunque
      * en este caso no se le asigna un cliente.
      *
-     * @param eleccion El metodo de entrega de la orden.
+     * @param eleccion   El metodo de entrega de la orden.
      * @param comentario Comentario adicional a la orden.
      */
     public void configureOrder(String eleccion, String comentario) {
@@ -115,6 +121,8 @@ public class POSManager {
      *
      * @return El total de la orden actual.
      */
+
+    /*
     private BigDecimal calculateTotalOrderAmount() {
         BigDecimal amount = new BigDecimal("0");
         if (currentOrder.getCustomer() == null) {
@@ -122,20 +130,21 @@ public class POSManager {
             for (Product product : currentOrder.getProducts()) {
                 amount = amount.add(product.getPrice());
             }
+        } else if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
+            for (Product product : currentOrder.getProducts()) {
+                amount = amount.add(product.getVIPPrice());
+            }
         } else {
-            if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
-                for (Product product : currentOrder.getProducts()) {
-                    amount = amount.add(product.getVIPPrice());
-                }
-            } else {
-                for (Product product : currentOrder.getProducts()) {
-                    amount = amount.add(product.getPrice());
-                }
+            for (Product product : currentOrder.getProducts()) {
+                amount = amount.add(product.getPrice());
             }
         }
+
         return amount;
     }
+/*
 
+     */
     /**
      * Realiza la logica de venta de la orden actual, crea la factura e imprime
      * la orden y factura.
@@ -145,17 +154,35 @@ public class POSManager {
     public void sell(PaymentDetails paymentDetails) {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
             boolean paymentStatus;
+            Bill newBill = new Bill();
+            newBill.setOrder(currentOrder);
             switch (paymentDetails.getPaymentMethod()) {
-                case CARD -> paymentStatus=this.processCardPayment();
-                case CASH -> paymentStatus=processCashPayment(this.currentOrder.getTotalAmount() , paymentDetails.getCustomerCashAmount());
-                case STORE_CREDIT -> paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(),paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
-                default ->  paymentStatus=false;
+                case CARD -> {
+                    paymentStatus = this.processCardPayment(paymentDetails.getReference());
+                    newBill.setReference(paymentDetails.getReference());
+                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                }
+                case CASH -> {
+                    paymentStatus = processCashPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerCashAmount());
+                    newBill.setAmount(paymentDetails.getCustomerCashAmount());
+                    newBill.setPagadoEnEfectivo(paymentDetails.getCustomerCashAmount());
+
+                    newBill.setChange(paymentDetails.getCustomerCashAmount().subtract(currentOrder.getTotalAmount()));
+                }
+                case STORE_CREDIT -> {
+                    paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                newBill.setCustomerName(this.currentOrder.getCustomer().getCustomerName());
+                }
+                        default -> paymentStatus = false;
+
             }
-            if(paymentStatus) {
-                BigDecimal amount = calculateTotalOrderAmount(); //TODO NO DEBE ESTAR EN POS MANAGER
-                Bill newBill = new Bill(currentOrder, amount, currentUser.getFullEmployeeName());
+            newBill.setAmount(currentOrder.getTotalAmount());
+            newBill.setEmployeeName(currentUser.getFullEmployeeName());
+            if (paymentStatus) {
+
                 this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
-                printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
+               // printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
                 printer.imprimirBill(newBill);
                 currentOrder = new Order();
             }
@@ -166,34 +193,32 @@ public class POSManager {
     }
 
 
-    private boolean processCardPayment(){
+    private boolean processCardPayment(String reference) {
         //Logica de la tajeta
         return true;
     }
 
-    private boolean processCashPayment(BigDecimal totalOrderAmount, BigDecimal cashReceived){
-        if(cashReceived.compareTo(totalOrderAmount) >= 0){
+    private boolean processCashPayment(BigDecimal totalOrderAmount, BigDecimal cashReceived) {
+        if (cashReceived.compareTo(totalOrderAmount) >= 0) {
             //cajaRegistradora.addCantidad
             //abrir hardware de caja
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     //TODO Checar el nombr ey orden de los parametros
-    private boolean processStoreCreditPayment( BigDecimal totalOrderAmount,CustomerAccount customer, String customerAccess){
-        if(customer.getLoyaltyCard().getAccessCode().equals(customerAccess)){
-            if(customer.getStoreCredit().compareTo(totalOrderAmount)>=0){
+    private boolean processStoreCreditPayment(BigDecimal totalOrderAmount, CustomerAccount customer, String customerAccess) {
+        if (customer.getLoyaltyCard().getAccessCode().equals(customerAccess)) {
+            if (customer.getStoreCredit().compareTo(totalOrderAmount) >= 0) {
                 BigDecimal newCustomerStoreCredit = customer.getStoreCredit().subtract(totalOrderAmount);
                 customer.setStoreCredit(newCustomerStoreCredit);
                 return true;
-            }else{
+            } else {
                 //Excepcion
             }
-        }
-        else{
+        } else {
             //Excepcion
         }
         return false;
@@ -203,8 +228,10 @@ public class POSManager {
      * Realiza el cobro de una deuda pendiente de un cliente.
      *
      * @param customerArg El cliente al que se le cobrara la deuda.
-     * @param debtArg La deuda que se cobrara.
+     * @param debtArg     La deuda que se cobrara.
      */
+
+    /*
     public void collectDebt(Customer customerArg, Debt debtArg) {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
             Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getFullEmployeeName());
@@ -219,11 +246,15 @@ public class POSManager {
 
     }
 
+     */
+
     /**
      * Permite realizar un pedido que se pagara en otro momento.
      *
      * @param customer Requiere a un cliente para poder hacer la deuda.
      */
+
+    /*
     public void buyNowPayLater(Customer customer) {
         BigDecimal amount = calculateTotalOrderAmount();
         Debt tempDebt = new Debt(currentOrder, amount);
@@ -231,6 +262,8 @@ public class POSManager {
         printer.imprimirOrder(currentOrder);
         currentOrder = new Order();
     }
+
+     */
 
     public void withdrawMoneyFromCashRegister() {//TODO estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {

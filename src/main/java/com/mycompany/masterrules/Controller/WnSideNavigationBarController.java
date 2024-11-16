@@ -105,11 +105,7 @@ public class WnSideNavigationBarController implements Initializable {
             try {
                 System.out.println("Chepo");
                 CustomerManager prueba = new CustomerManager();
-                prueba.registerCustomer("Juan", "123", "", true);
-                prueba.registerCustomer("Pedro", "456", "0", true);
-                prueba.registerCustomer("Maria", "789", "", false);
-                prueba.registerCustomer("Jose", "101", "0", false);
-                prueba.registerCustomer("Luis", "112", "100", false);
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(CUSTOMERS_VIEW));
 
                 loader.setController(new WnCustomersController(prueba));

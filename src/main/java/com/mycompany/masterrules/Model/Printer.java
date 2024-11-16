@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Printer {
 
     //TODO: se debe cambiar a ingles la parte d elos metodos
+    /*
     public void imprimirOrder(Order order){
         System.out.println("=====================================");
         System.out.println("Imprimiendo orden: " + order.getId());
@@ -38,24 +39,28 @@ public class Printer {
 
     }
 
-    public void imprimirBill(Bill bill){
+     */
+
+    public void imprimirBill(Bill bill) {
         System.out.println("=====================================");
         System.out.println("Imprimiendo factura: ");
-        System.out.println("Nombre del empleado: "+bill.getEmployeeName());
-        if(bill.getCustomer()!=null){
-            System.out.println("Nombre del cliente: "+bill.getCustomer().getCustomerName());
-        }
-        else{
+        System.out.println("Nombre del empleado: " + bill.getEmployeeName());
+        if (bill.getCustomer() != null) {
+            System.out.println("Nombre del cliente: " + bill.getCustomer().getCustomerName());
+        } else {
             System.out.println("Nombre del cliente: Público general");
         }
 
         System.out.println("Productos: ");
-
+/*
         for (Product product : bill.getOrder().getProducts()) {
             System.out.println("Nombre : "+product.getProductName());
             System.out.println("Precio: "+product.getPrice());
         }
         System.out.println("Monto: "+bill.getAmount());
         System.out.println("=====================================");
+    }
+
+ */
     }
 }

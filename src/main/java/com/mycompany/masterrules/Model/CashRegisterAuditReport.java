@@ -59,22 +59,6 @@ public class CashRegisterAuditReport {
         System.out.println("Bill added");
     }
 
-    //Maybe deberan tener identificadores, de lo contrario no se podra eliminar
-    /**
-     * Metodo para eliminar un reporte de salida de dinero
-     * @param cashOutFlowReport Recibe el reporte de salida de dinero por medio de un dato de tipo CashFlowReport
-     */
-    public void removeCashOutFlowReport(CashFlowReport cashOutFlowReport){
-        cashOutFlowReports.remove(cashOutFlowReport);
-    }
-
-    /**
-     * Metodo para eliminar un reporte de entrada de dinero
-     * @param cashInFlowReport Recibe el reporte de entrada de dinero por medio de un dato de tipo CashFlowReport
-     */
-    public void removeCashInFlowReport(CashFlowReport cashInFlowReport){
-        cashInFlowReports.remove(cashInFlowReport);
-    }
 
     /**
      * Metodo para calcular el total de dinero ingresado por medio de efectivo.

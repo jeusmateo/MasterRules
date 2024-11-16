@@ -11,9 +11,12 @@ import java.util.Objects;
  */
 @Entity
 public class Bill {
+    private String reference;
     private BigDecimal pagadoEnEfectivo;
     private BigDecimal pagadoEnTajeta;
     private BigDecimal pagadoEnCreditoDeTienda;
+    private BigDecimal change;
+    private String customerName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -41,18 +44,54 @@ public class Bill {
 
     }
 
+    public BigDecimal getPagadoEnEfectivo() {
+        return pagadoEnEfectivo;
+    }
+
+    public void setPagadoEnEfectivo(BigDecimal pagadoEnEfectivo) {
+        this.pagadoEnEfectivo = pagadoEnEfectivo;
+    }
+
+    public BigDecimal getPagadoEnTajeta() {
+        return pagadoEnTajeta;
+    }
+
+    public void setPagadoEnTajeta(BigDecimal pagadoEnTajeta) {
+        this.pagadoEnTajeta = pagadoEnTajeta;
+    }
+
+    public BigDecimal getPagadoEnCreditoDeTienda() {
+        return pagadoEnCreditoDeTienda;
+    }
+
+    public void setPagadoEnCreditoDeTienda(BigDecimal pagadoEnCreditoDeTienda) {
+        this.pagadoEnCreditoDeTienda = pagadoEnCreditoDeTienda;
+    }
+
+    public BigDecimal getChange() {
+        return change;
+    }
+
+    public void setChange(BigDecimal change) {
+        this.change = change;
+    }
+
     /**
      * Constructor de la clase Bill
      * @param orderArg Orden a la que pertenece la factura
      * @param amountArg Monto total de la factura
      * @param employeeNameArg Nombre del empleado en turno
      */
-    public Bill(Order orderArg, BigDecimal amountArg, String employeeNameArg) {
+    public Bill(Order orderArg, String employeeNameArg) {
         order = orderArg;
-        amount = amountArg;
         employeeName = employeeNameArg;
     }
 
+
+    
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
     /**
      * Obtiene el id de la factura
      * @return El id de la factura
@@ -131,6 +170,14 @@ public class Bill {
      */
     public void setCustomerAccount(Customer customerAccount) {
         this.customer = customerAccount;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     /**
