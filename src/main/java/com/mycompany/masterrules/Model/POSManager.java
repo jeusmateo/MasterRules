@@ -63,7 +63,6 @@ public class POSManager {
     }
 
      */
-
     public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
         for (String keyQuantity : customComboTemplate.getQuantityByCategory().keySet()) {
@@ -145,6 +144,7 @@ public class POSManager {
 /*
 
      */
+
     /**
      * Realiza la logica de venta de la orden actual, crea la factura e imprime
      * la orden y factura.
@@ -171,10 +171,10 @@ public class POSManager {
                 }
                 case STORE_CREDIT -> {
                     paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
-                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-                newBill.setCustomerName(this.currentOrder.getCustomer().getCustomerName());
+                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    newBill.setCustomerName(this.currentOrder.getCustomer().getCustomerName());
                 }
-                        default -> paymentStatus = false;
+                default -> paymentStatus = false;
 
             }
             newBill.setAmount(currentOrder.getTotalAmount());
@@ -182,7 +182,7 @@ public class POSManager {
             if (paymentStatus) {
 
                 this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
-               // printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
+                // printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
                 printer.imprimirBill(newBill);
                 currentOrder = new Order();
             }
@@ -264,7 +264,6 @@ public class POSManager {
     }
 
      */
-
     public void withdrawMoneyFromCashRegister() {//TODO estaba en español
         if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
             String reason = "";
