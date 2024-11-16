@@ -23,11 +23,7 @@ public class Customer {
     @Embedded
     private CustomerAccount customerAccount;
 
-    /*
-     * Constructor por defecto para JPA
-     **/
-    protected Customer() {
-    }
+
 
 
     /**
@@ -118,6 +114,13 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return Objects.equals(ID, customer.ID) && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
+    }
+
+
+    /*
+     * Constructor por defecto para JPA
+     **/
+    protected Customer() {
     }
 
     @Override

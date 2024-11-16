@@ -11,7 +11,7 @@ import java.util.*;
  * @autor: David Torres
  *
  * Clase que representa un combo personalizado
- * TODO: arreglar el ADT de esta clase
+ *
  */
 
 @Entity
@@ -58,8 +58,6 @@ public class CustomComboTemplate {
         VIPPrice = VIPPriceArg;
     }
 
-    protected CustomComboTemplate() {
-    }
     
     /**
      * Constructor para el combo personalizado en el caso de que el combo no implemente productos por defecto
@@ -236,6 +234,12 @@ public class CustomComboTemplate {
                 Objects.equals(defaultProducts, that.defaultProducts) &&
                 Objects.equals(comboName, that.comboName);
     }
+
+    // Necesario para Hibernate
+
+    protected CustomComboTemplate() {
+    }
+
 
     @Override
     public int hashCode() {

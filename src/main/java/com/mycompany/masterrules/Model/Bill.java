@@ -37,12 +37,7 @@ public class Bill {
 
 
 
-    /**
-     * Constructor para JPA
-     */
-    protected Bill(){
 
-    }
 
     public BigDecimal getPagadoEnEfectivo() {
         return pagadoEnEfectivo;
@@ -178,6 +173,12 @@ public class Bill {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+
+    // Necesario para Hibernate
+    protected Bill(){
+
     }
 
     /**

@@ -39,25 +39,6 @@ public class CustomerAccount {
 
     }
 
-    // TODO: QUE ES LO QUE ESTA BIEN AQUIIIII
-    /**
-     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
-     *
-     * @return Retorna una cadena con la información de la cuenta del cliente
-     */
-    @Override
-    public String toString() {
-        return "CustomerAccount{" +
-                "loyaltyPoints=" + loyaltyPoints +
-                ", storeCredit=" + storeCredit +
-                ", isVIP=" + isVIP +
-                ", totalDebt=" + totalDebt +
-                ", loyaltyCard=" + loyaltyCard +
-                '}';
-    }
-
-
-
 
     public boolean isIsVIP() {
         return isVIP;
@@ -102,6 +83,8 @@ public class CustomerAccount {
     public void setStoreCredit(BigDecimal storeCredit) {
         this.storeCredit = storeCredit;
     }
+
+
     /*
 
     @Override
@@ -113,6 +96,24 @@ public class CustomerAccount {
         //return loyaltyPoints == that.loyaltyPoints && Double.compare(storeCredit, that.storeCredit) == 0 && isVIP == that.isVIP && Objects.equals(totalDebt, that.totalDebt);
     }
 */
+
+    /**
+     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
+     *
+     * @return Retorna una cadena con la información de la cuenta del cliente
+     */
+    @Override
+    public String toString() {
+        return "CustomerAccount{" +
+                "loyaltyPoints=" + loyaltyPoints +
+                ", storeCredit=" + storeCredit +
+                ", isVIP=" + isVIP +
+                ", totalDebt=" + totalDebt +
+                ", loyaltyCard=" + loyaltyCard +
+                '}';
+    }
+
+
     @Override
     public int hashCode() {
         return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt);

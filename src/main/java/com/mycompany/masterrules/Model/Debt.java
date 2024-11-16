@@ -26,11 +26,7 @@ public class Debt {
     private LocalDate date; //pensar en guardarlo como string
 
 
-    /**
-     * Constructor por defecto para JPA
-     * */
-    protected Debt() {
-    }
+
 
     public Debt(Order order, BigDecimal amount) {
         this.order = order;
@@ -68,6 +64,12 @@ public class Debt {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * Constructor por defecto para JPA
+     * */
+    protected Debt() {
     }
 
     @Override
