@@ -22,7 +22,6 @@
 
 
         <mapping class="com.mycompany.masterrules.Model.UserAccount"/>
-        <mapping class="com.mycompany.masterrules.Model.UserPermissions"/>
 
         <mapping class="com.mycompany.masterrules.Model.Customer"/>
         <mapping class="com.mycompany.masterrules.Model.Debt"/>

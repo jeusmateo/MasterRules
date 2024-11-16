@@ -1,8 +1,5 @@
 package com.mycompany.masterrules.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 import java.util.HashMap;
 
 /**
@@ -18,13 +15,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
     public CafeteriaStorage() {
         this.products = new HashMap<Product,StockInfo>();
     }
-    /**
-     * Constructor of class CafeteriaStorage
-     * @param products Products with their stocks
-     */
-    public CafeteriaStorage(HashMap<Product, StockInfo> products){
-        this.products = products;
-    }
+
 
     /**
      * Adds a product in the storage
@@ -32,6 +23,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @param stockInfo Quantity available in the storage
      * @throws Exception If the product already exists, it causes an error
      */
+
     public void addProduct(Product product, StockInfo stockInfo) throws Exception {
         //se elimino la excepcion cuando el stock es negativo
         if(!isStored(product)){//inverti por el criterio de if (el caso deseado primero)
@@ -42,11 +34,9 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
                 throw new Exception("ERROR: La informacion del Stock es incorrecta");
             }
         }
-        else{
-            throw new Exception("ERROR:El producto ya existe");
-        }
+
     }
-    
+
     public boolean isStockInfoValid(StockInfo stockInfo){
         if(stockInfo.getCurrentStock()>=0 && stockInfo.getMinStock()>=0 && stockInfo.getMaxStock()>=0){
             return true;
@@ -55,7 +45,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
             return false;
         }
     }
-    
+
     /**
      * Removes a product from the storage
      * @param product Identification of the product
@@ -65,9 +55,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
         if(isStored(product)){
             products.remove(product);
         }
-        else{
-            throw new Exception("ERROR: El producto no existe en el inventario");//creo que no deberia marcar error pues algunos de los productos no existen en inventario. Aunque no se si conviene agregar un atributo en Product para que sepamos si es inventariable; o solo usar el metodo isStored() andtes de removeProduct()
-        }
+
         
     }
     
@@ -89,9 +77,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
                 throw new Exception("ERROR: La cantidad no puede ser negativa");
             }
         }
-        else{
-            throw new Exception("ERROR: El producto no existe en el inventario");
-        }
+
     }
     
     public void editMinStock(Product product,int newQuantity) throws Exception{
@@ -105,9 +91,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
                 throw new Exception("ERROR: La cantidad no puede ser negativa");
             }
         }
-        else{
-            throw new Exception("ERROR: El producto no existe en el inventario");
-        }
+
     }
     
     public void editMaxStock(Product product,int newQuantity) throws Exception{
@@ -121,9 +105,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
                 throw new Exception("ERROR: La cantidad no puede ser negativa");
             }
         }
-        else{
-            throw new Exception("ERROR: El producto no existe en el inventario");
-        }
+
     }
     
     /**
@@ -142,9 +124,6 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
             else{
                 throw new Exception("ERROR: El incremento no puede ser negativo");
             }
-        }
-        else{
-            throw new Exception("ERROR: El producto no existe en el inventario");
         }
         
     }
@@ -174,9 +153,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
             }
             */
         }
-        else{
-            throw new Exception("ERROR:No se encontro el producto");
-        }
+
     }
     
     /**
@@ -208,12 +185,13 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @param product Identification of the product
      * @return True, if the product is in storage. False, if the product isn't in storage
      */
-    public boolean isStored(Product product){
+    public boolean isStored(Product product) throws Exception {
         if(products.containsKey(product)){
             return true;
         }
         else{
-            return false;
+            throw new Exception("ERROR:No se encontro el producto");
+
         }
     }
 

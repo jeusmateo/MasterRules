@@ -30,18 +30,7 @@ public class CafeteriaMenu {
         this.combos = new ArrayList<Combo>();
     }
     
-    /**
-     * Constructor de clase
-     * @param title Titulo del menu
-     * @param products Productos disponibles en el menu
-     * @param combos Combos disponibles en el menu
-     */
-    public CafeteriaMenu(String title, ArrayList<Product> products, ArrayList<Combo> combos) {
-        this.title = title;
-        this.products = products;
-        this.combos = combos;
-    }
-    
+
     /**
      * Agrega un producto al menu
      * @param product Producto a agregar al menu
@@ -106,31 +95,31 @@ public class CafeteriaMenu {
     public void editProduct(Product product) throws Exception{
 
 
-      
+
         for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
-                
+
                 if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){
-                    
+
                     if(!isProductNameTaken(product.getProductName())){
                         products.get(registeredProductCount).setProductName(product.getProductName());
                     }
                     else{
                         throw new Exception("ERROR: El nombre del producto ya esta tomado");
                     }
-                    
+
                 }
                 products.get(registeredProductCount).setProductType(product.getProductType());
                 products.get(registeredProductCount).setPrice(product.getPrice());
                 products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
-                
+
                 return;
             }
         }
         throw new Exception("ERROR: El producto no existe");
-        
+
     }
-    
+
     /**
      * Obtiene a los productos que pertenecen a un cierto tipo
      * @param ProductType Tipo de productos

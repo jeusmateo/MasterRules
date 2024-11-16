@@ -19,7 +19,8 @@ public class CafeteriaManager {
         this.menu = menu;
         this.storage = storage;
     }
-    
+
+
     public void createProduct(Product newProduct,boolean inInventory, StockInfo stockInfo) throws Exception{//se modifico acorde al nuevo storage
         //se modifico la excepcion
         if(!storage.isStockInfoValid(stockInfo)){
@@ -32,13 +33,13 @@ public class CafeteriaManager {
         if(inInventory){
             storage.addProduct(newProduct, stockInfo);
         }
-        menu.addProduct(newProduct);
+        menu.addProductToMenu(newProduct);
         
     }
 
     public void deleteProduct(Product product) throws Exception{//cambie param por product
         storage.removeProduct(product);
-        menu.removeProduct(product.getProductID());//cambie por id
+        menu.removeProductOnMenu(product.getProductID());//cambie por id
             
     }
     
@@ -67,11 +68,11 @@ public class CafeteriaManager {
             throw new Exception("ERROR: El nombre del combo ya está tomado");
         }
         
-        menu.addCombo(newCombo);
+        menu.addComboToMenu(newCombo);
     }
     
     public void deleteCombo(String comboID) throws Exception{
-        menu.removeCombo(comboID);
+        menu.removeComboOnMenu(comboID);
     }
     
     public void editCombo(Combo combo) throws Exception{
@@ -97,6 +98,8 @@ public class CafeteriaManager {
     public void setStorage(CafeteriaStorage storage) {
         this.storage = storage;
     }
+
+
     
     
     

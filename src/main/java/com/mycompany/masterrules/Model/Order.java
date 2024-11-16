@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  *
@@ -20,8 +18,10 @@ public class Order {
     private long id;
     @ManyToOne
     private Customer customer;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Product> products;
+   // @ManyToMany(fetch = FetchType.EAGER)
+    @ElementCollection
+    private Map<Product, Integer> products;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Combo> combos;
     private String comment;
@@ -29,30 +29,30 @@ public class Order {
     private LocalDateTime date;
     private BigDecimal totalAmount;
 
-    public Order(Product pro){
-        // TODO: NO OLVIDAR CAMBIAR ESTE ID=4
-        id=4;
-        products = new ArrayList();
-        products.add(pro);
-        date=LocalDateTime.now();
-    }
+
 
     public Order(){
-        products = new ArrayList();
+        products = new HashMap();
         combos = new ArrayList();
         date= LocalDateTime.now();
     }
 
-    public Order(Product pro, Customer customerArg){
-        customer=customerArg;
-        id=4;
-        products = new ArrayList();
-        products.add(pro);
-        date=LocalDateTime.now();
+
+/*
+    public void calculateTotalAmount(){
+        BigDecimal total = new BigDecimal(0);
+        for(Product product: products){
+            total=total.add(product.getPrice());
+        }
+        for(Combo combo: combos){
+            total = total.add(combo.getPrice());
+        }
+        totalAmount = total;
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
+ */
+    public void addProduct(Product product, int quantity) {
+        products.put(product, quantity);
     }
 
     public void removeProduct(Product product) {
@@ -83,7 +83,7 @@ public class Order {
         return customer;
     }
 
-    public List<Product> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
@@ -107,9 +107,7 @@ public class Order {
         this.customer = customer;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
+
 
     public void setCombos(ArrayList<Combo> combos) {
         this.combos = combos;

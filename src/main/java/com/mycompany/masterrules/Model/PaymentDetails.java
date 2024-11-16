@@ -3,10 +3,12 @@ package com.mycompany.masterrules.Model;
 import java.math.BigDecimal;
 
 public class PaymentDetails {
+
     private PaymentMethod paymentMethod;
     private CustomerAccount customerAccount;
     private String customerAccountAccess;
     private BigDecimal customerCashAmount;
+    private String reference;
 
     public PaymentDetails(PaymentMethod paymentMethod, CustomerAccount customerAccount, String customerAccountAccess,BigDecimal customerCashAmount) {
         this.paymentMethod = paymentMethod;
@@ -16,6 +18,7 @@ public class PaymentDetails {
 
     }
 
+    public String getReference() {return reference;}
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
