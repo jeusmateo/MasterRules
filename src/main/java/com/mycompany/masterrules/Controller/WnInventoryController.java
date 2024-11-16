@@ -75,9 +75,8 @@ public class WnInventoryController implements Initializable {
     private TableColumn<Product, String> colProductMaxStock; // Objeto incorrecto, en productos no almacenamos esta informacion
 
 
-    @FXML
     public void displaySelected(MouseEvent event) {
-    Product productSelected =tblInventory.getSelectionModel().getSelectedItem();
+    //Product productSelected =tblInventory.getSelectionModel().getSelectedItem();
     //poner la logica de eso, se supone que esto te entrega el cosito seleciconado, igual seria bueno cambiar el de los demas metodos porque hay que hacerlo bien gggggggg
     }
     /**
@@ -115,5 +114,9 @@ public class WnInventoryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @FXML
+    private void displaySelected(javafx.scene.input.MouseEvent event) {
     }
 }

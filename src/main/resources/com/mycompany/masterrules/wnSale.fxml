@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -21,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
       <AnchorPane layoutY="15.2" prefHeight="585.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -153,9 +158,9 @@
                                  <children>
                                     <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                                          <ScrollPane fx:id="menuCardsScroller1" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                                              <content>
-                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                                <FlowPane fx:id="productCardsScroller" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
                                              </content>
                                           </ScrollPane>
                                        </children>
@@ -168,28 +173,6 @@
                                  </children></AnchorPane>
                           </content>
                         </Tab>
-                        <Tab text="Bebidas">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
-                                 <children>
-                                    <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="12.0" prefHeight="525.0" prefWidth="532.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
-                                             <content>
-                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
-                                             </content>
-                                          </ScrollPane>
-                                       </children>
-                                       <styleClass>
-                                          <String fx:value="white-bg" />
-                                          <String fx:value="shadow" />
-                                          <String fx:value="radius" />
-                                       </styleClass>
-                                    </AnchorPane>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
                         <Tab text="Combos">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
@@ -198,7 +181,7 @@
                                        <children>
                                           <ScrollPane fx:id="menuCardsScroller" layoutX="13.0" layoutY="40.0" prefHeight="518.0" prefWidth="545.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="40.0">
                                              <content>
-                                                <FlowPane fx:id="menuCards" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
+                                                <FlowPane fx:id="comboCardsScroller" hgap="15.0" prefHeight="54.0" prefWidth="117.0" vgap="15.0" />
                                              </content>
                                           </ScrollPane>
                                           <Label layoutX="228.0" layoutY="7.0" text="CATEGORÍA">
