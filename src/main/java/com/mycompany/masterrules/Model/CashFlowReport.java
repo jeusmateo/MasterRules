@@ -29,13 +29,13 @@ public class CashFlowReport {
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
-        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        LocalDateTime actualDateTime = LocalDateTime.now();
         
         // Define el formato deseado, por ejemplo, "dd-MM-yyyy HH:mm:ss"
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         
         // Formatea la fecha y hora actual
-        this.date = fechaHoraActual.format(formato);
+        this.date = actualDateTime.format(format);
     }
 
     /**

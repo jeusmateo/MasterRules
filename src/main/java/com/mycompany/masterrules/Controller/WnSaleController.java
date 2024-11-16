@@ -2,9 +2,11 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.Order;
 import com.mycompany.masterrules.Model.Product;
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,9 +27,10 @@ import javafx.stage.StageStyle;
 
 /**
  * Controlador de la ventana de Venta
+ *
  * @author campv
  */
-public class WnSaleController implements Initializable{
+public class WnSaleController implements Initializable {
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
     @FXML
@@ -38,42 +41,41 @@ public class WnSaleController implements Initializable{
 
     @FXML
     private AnchorPane menuWindow;
-    
+
     @FXML
     private VBox menuOrderOptionsBox;
-    
+
     @FXML
     private ScrollPane menuCardsScroller;
-    
+
     @FXML
-    private FlowPane menuCards=new FlowPane();
+    private FlowPane productCardsScroller = new FlowPane();
 
     @FXML
     private TabPane menuCategories;
-    
-    
+
+
     //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
     //-------------------------------------------------------------------------------------------
     @FXML
     private AnchorPane continueOrderWindow;
-    
+
     @FXML
     private VBox continueOrderOptionsBox;
-    
+
     @FXML
     private HBox tableNumberBox;
-    
+
     @FXML
     private TextField inputClientName;
-    
-    
+
+
     //OTROS OBJETOS
     //-------------------------------------------------------------------------------------------
-    private ObservableList<Product> cardDataList=FXCollections.observableArrayList();
-    public static int cont=0;//borrar depues, solo es de prueba
+
+
     private WnSaleController wnSaleSection;
-    private Stage stage;
-    private WnSideNavigationBarController wnSideNavigationBar;
+
 
     @FXML
     private AnchorPane scrCustomCombo;
@@ -107,24 +109,29 @@ public class WnSaleController implements Initializable{
 
     @FXML
     private ToggleGroup deliveryMethod;
-    
+    @FXML
+    private ScrollPane menuCardsScroller1;
+    @FXML
+    private FlowPane comboCardsScroller;
+
     /**
      * Agregar nueva categoria de menu en las pestañas
      */
-    public void addMenuCategory(){
-        Tab newMenuCategory=new Tab("TabP"+cont);
-        cont++;//ELIMINAR ESTO DESPUES
-        
+    public void addMenuCategory() {
+        /*
         //Dependiendo de la categoria de menu seleccionada, se cambiaran los productos en pantalla
         newMenuCategory.setOnSelectionChanged(event -> {
-        if (newMenuCategory.isSelected()) {
-            //nombreTab.setText(newMenuCategory.getText());
-            
-        }
+            if (newMenuCategory.isSelected()) {
+                //nombreTab.setText(newMenuCategory.getText());
+
+            }
         });
-        
+
         menuCategories.getTabs().add(newMenuCategory);
-        
+
+
+
+         */
     }
     
     /*
@@ -132,28 +139,29 @@ public class WnSaleController implements Initializable{
         
     }
     */
-    
-    public void displayMenuCards(){
+
+    public void displayMenuCards() {
+        ObservableList<Product> productDataList = FXCollections.observableArrayList();
         //BORRAR ESTO SOLO ES DE PRUEBA
-        Product p1=new Product("P1","Burger","Platillo",new BigDecimal("20"),new BigDecimal("15"));
-        Product p2=new Product("P2","Fries","Platillo",new BigDecimal("15"),new BigDecimal("10"));
-        Product p3=new Product("P3","Soda","Platillo",new BigDecimal("20"),new BigDecimal("10"));
-        
-        cardDataList.clear();
-        cardDataList.add(p1);
-        cardDataList.add(p2);
-        cardDataList.add(p3);
-        
-        for(int currentProduct = 0; currentProduct < cardDataList.size();currentProduct++){
-            try{
-                FXMLLoader load=new FXMLLoader();
+        Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
+        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
+        Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
+
+        productDataList.clear();
+        productDataList.add(p1);
+        productDataList.add(p2);
+        productDataList.add(p3);
+
+        for (Product currentProduct: productDataList) {
+            try {
+                FXMLLoader load = new FXMLLoader();
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
-                AnchorPane pane=load.load();
-                ItemCardProductController cardController=load.getController();
-                
-                cardController.setProductDataToCard(cardDataList.get(currentProduct));
-                
-                menuCards.getChildren().add(pane);
+                AnchorPane pane = load.load();
+                ItemCardProductController cardController = load.getController();
+
+                cardController.setProductDataToCard(currentProduct);
+
+                productCardsScroller.getChildren().add(pane);
                 
                 /*
                 pane.setOnMousePressed(event -> {
@@ -161,11 +169,10 @@ public class WnSaleController implements Initializable{
                     //pane.setStyle("-fx-background-color: white");
                 });
                 */
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
         }
     }
     
@@ -186,45 +193,45 @@ public class WnSaleController implements Initializable{
         textfield.setContextMenu(nameSuggestionsMenu);
     }
     */
-    
+
     /**
      * Mostrar formulario que aparece al continuar la orden
      */
     @FXML
-    public void showOrderForm(){
+    public void showOrderForm() {
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
-        
+
         menuWindow.setVisible(false);
         menuOrderOptionsBox.setVisible(false);
-        
+
     }
-    
+
     /**
      * Mostrar cartilla de menu que muestra los porductos
      */
     @FXML
-    public void showMenuWindow(){
+    public void showMenuWindow() {
         menuWindow.setVisible(true);
         menuOrderOptionsBox.setVisible(true);
-        
+
         continueOrderWindow.setVisible(false);
         continueOrderOptionsBox.setVisible(false);
     }
-    
+
     /**
      * Mostrar opcion de número de mesa
      */
     @FXML
-    public void showTableNumber(){
+    public void showTableNumber() {
         tableNumberBox.setVisible(true);
     }
-    
+
     /**
      * Ocultar opcion de número de mesa
      */
     @FXML
-    public void hideTableNumber(){
+    public void hideTableNumber() {
         tableNumberBox.setVisible(false);
     }
 
@@ -264,21 +271,19 @@ public class WnSaleController implements Initializable{
     }
 
 
-
     /**
      * Inicializar el controllador de la ventana de Venta
+     *
      * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz
-     * @param rb Recursos utilizados para localizar el objeto raíz
+     * @param rb  Recursos utilizados para localizar el objeto raíz
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
-        menuCards.prefWidthProperty().bind(menuCardsScroller.widthProperty());
-        
+        productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
+        comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         displayMenuCards();
     }
-
-
 
 
 }
