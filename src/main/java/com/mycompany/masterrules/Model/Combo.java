@@ -20,12 +20,7 @@ public class Combo {
     private BigDecimal price;
     private BigDecimal VIPPrice;
 
-    /**
-     * Constructor para JPA
-     */
-    protected Combo() {
 
-    }
 
     public Combo(String comboName, List<Product> products, CustomComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
@@ -45,7 +40,7 @@ public class Combo {
 
 
     // TODO hacer que los coincidan con los parametros
-    public Combo(List<Product>products, BigDecimal price, BigDecimal VIPPrice, String comboName) {
+    public Combo(String comboName, List<Product>products, BigDecimal price, BigDecimal VIPPrice) {
         this.comboName = comboName;
         this.products = products;
         this.price = price;

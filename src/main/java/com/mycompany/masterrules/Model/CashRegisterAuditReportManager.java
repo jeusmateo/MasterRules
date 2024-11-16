@@ -24,8 +24,7 @@ public class CashRegisterAuditReportManager {
     }
 
 
-    // TODO esta iniciado en mayusculas el nombre de la clase
-    public void AddSaleToCashRegisterAuditReport(Bill sale) {
+    public void addSaleToCashRegisterAuditReport(Bill sale) {
         currentCashRegisterAuditReport.addBill(sale);
     }
 

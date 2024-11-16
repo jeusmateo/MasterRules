@@ -96,7 +96,7 @@ public class CafeteriaMenu {
 
 
 
-        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){//TODO hay que ver si este nombre del indice esta bien
+        for(int registeredProductCount=0;registeredProductCount<products.size();registeredProductCount++){
             if(product.getProductID().equals(products.get(registeredProductCount).getProductID())){
 
                 if(!product.getProductName().equals(products.get(registeredProductCount).getProductName())){
