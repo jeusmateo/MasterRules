@@ -20,9 +20,9 @@ public class BillDBTest {
         product = productDBManager.findById("1");
 
         Order order = new Order();
-        order.addProduct(product);
+        order.addProduct(product, 1);
 
-        Bill bill = new Bill(order, BigDecimal.valueOf(10.0), "David Torres");
+        Bill bill = new Bill(order, "David Torres");
 
         BillDBManager billDBManager = new BillDBManager();
 
@@ -44,7 +44,7 @@ public class BillDBTest {
         System.out.println("Bill updated successfully");
 
         // Save another bill
-        Bill bill2 = new Bill(order, BigDecimal.valueOf(20.0), "David Torres");
+        Bill bill2 = new Bill(order, "David Torres");
         assert billDBManager.save(bill2);
         System.out.println("Bill 2 saved successfully");
 

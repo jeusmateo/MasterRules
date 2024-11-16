@@ -28,7 +28,7 @@ public class CombosDBTest {
         CustomComboTemplate customComboTemplate = new CustomComboTemplate(BigDecimal.valueOf(30), BigDecimal.valueOf(15));
         customComboTemplate.setDefaultProducts(products);
 
-        Combo customCombo = new Combo(products, customComboTemplate, BigDecimal.valueOf(30), BigDecimal.valueOf(15));
+        Combo customCombo = new Combo(products, BigDecimal.valueOf(30), BigDecimal.valueOf(15), "Custom Combo 1");
         System.out.println(customCombo.toString());
 
         // Guardar el combo en la base de datos
