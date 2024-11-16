@@ -7,7 +7,9 @@ import jakarta.persistence.Embeddable;
  *
  * @author David Torres
  */
+@Embeddable
 public class LoyaltyCard {
+    @Column(name = "LoayltyCardID")
     private long ID;
     public String accessCode;
 
