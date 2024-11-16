@@ -1,10 +1,14 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.Combo;
+import com.mycompany.masterrules.Model.CustomComboTemplate;
 import com.mycompany.masterrules.Model.Order;
 import com.mycompany.masterrules.Model.Product;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -152,7 +156,7 @@ public class WnSaleController implements Initializable {
         productDataList.add(p2);
         productDataList.add(p3);
 
-        for (Product currentProduct: productDataList) {
+        for (Product currentProduct : productDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
@@ -163,6 +167,34 @@ public class WnSaleController implements Initializable {
 
                 productCardsScroller.getChildren().add(pane);
                 
+                /*
+                pane.setOnMousePressed(event -> {
+                    pane.setStyle("-fx-background-color: lightgray");
+                    //pane.setStyle("-fx-background-color: white");
+                });
+                */
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        List<Product> prueba= new ArrayList<>();
+        BigDecimal prueba1= new BigDecimal("30");
+        BigDecimal prueba2 = new BigDecimal("15");
+        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
+        productDataList.add(combo);
+
+        for (Product currentProductCombo : productDataList) {
+            try {
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                AnchorPane pane = load.load();
+                ItemCardProductController cardController = load.getController();
+
+                cardController.setProductDataToCard(currentProductCombo);
+
+                productCardsScroller.getChildren().add(pane);
+
                 /*
                 pane.setOnMousePressed(event -> {
                     pane.setStyle("-fx-background-color: lightgray");

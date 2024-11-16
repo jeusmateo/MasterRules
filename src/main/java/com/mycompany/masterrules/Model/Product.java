@@ -42,7 +42,6 @@ public class Product {
     private BigDecimal VIPPrice;
 
 
-
     /**
      * Constructor de clase
      *
@@ -56,6 +55,14 @@ public class Product {
         this.productID = productID;
         this.productName = productName;
         this.productType = productType;
+        this.price = price;
+        this.VIPPrice = VIPPrice;
+    }
+
+    public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productType = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
     }
