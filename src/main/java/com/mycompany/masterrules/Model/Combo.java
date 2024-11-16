@@ -1,13 +1,15 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
+
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-
-import jakarta.persistence.*;
 
 @Entity
-public class Combo extends Product{
+public class Combo extends Product {
 
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -15,11 +17,12 @@ public class Combo extends Product{
     @Transient
     private CustomComboTemplate productsTemplate;
 
-
+    protected Combo() {
+    }
 
 
     public Combo(String comboName, List<Product> products, CustomComboTemplate productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
-        super(comboName,price,VIPPrice);
+        super(comboName, price, VIPPrice);
         this.products = products;
         this.productsTemplate = productsTemplate;
 
@@ -34,33 +37,26 @@ public class Combo extends Product{
 //    }
 
 
-
-    public Combo(String comboName, List<Product>products, BigDecimal price, BigDecimal VIPPrice) {
-        super(comboName,price,VIPPrice);
+    public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
+        super(comboName, price, VIPPrice);
         this.products = products;
 
     }
-
-
-
-
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void setProductsTemplate(CustomComboTemplate productsTemplate) {
-        this.productsTemplate = productsTemplate;
-    }
-
-
 
     public List<Product> getProducts() {
         return products;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public CustomComboTemplate getProductsTemplate() {
         return productsTemplate;
+    }
+
+    public void setProductsTemplate(CustomComboTemplate productsTemplate) {
+        this.productsTemplate = productsTemplate;
     }
 
 

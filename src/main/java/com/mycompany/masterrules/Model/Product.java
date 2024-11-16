@@ -2,9 +2,12 @@ package com.mycompany.masterrules.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Clase que representa al producto que se vende en MasterRules
@@ -17,6 +20,7 @@ import java.util.Objects;
  *  y modificarlo segun los requerimientos
  * */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Product {
     @Id
     /**
@@ -60,7 +64,8 @@ public class Product {
     }
 
     public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
-        this.productID = productID;
+        // id generado automaticamente
+        this.productID = UUID.randomUUID().toString();
         this.productName = productName;
         this.productType = "combo";
         this.price = price;
