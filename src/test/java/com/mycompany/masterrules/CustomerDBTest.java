@@ -51,7 +51,7 @@ public class CustomerDBTest {
         System.out.println("Obteniendo al cliente actualizado");
         Customer updatedCustomer = customerDBManager.findById(customer.getID());
         assert updatedCustomer != null;
-        System.out.println(updatedCustomer.toString());
+//        System.out.println(updatedCustomer);
 
         // Eliminar un cliente
         System.out.println("Eliminando un cliente");
