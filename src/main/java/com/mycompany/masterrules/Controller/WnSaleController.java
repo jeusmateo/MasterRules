@@ -1,9 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.Combo;
-import com.mycompany.masterrules.Model.CustomComboTemplate;
-import com.mycompany.masterrules.Model.Order;
-import com.mycompany.masterrules.Model.Product;
+import com.mycompany.masterrules.Database.CustomerDBManager;
+import com.mycompany.masterrules.Model.*;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -20,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -37,6 +36,8 @@ import javafx.stage.StageStyle;
 public class WnSaleController implements Initializable {
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
+    //TODO Retirar esta Order.
+    private Order currentTemporalOrder;
     @FXML
     private Button btnContinue;
 
@@ -72,6 +73,10 @@ public class WnSaleController implements Initializable {
 
     @FXML
     private TextField inputClientName;
+    @FXML
+    private ComboBox<Customer> cboCustomers;
+    @FXML
+    private TextArea txtAdittionalComments;
 
 
     //OTROS OBJETOS
@@ -85,16 +90,16 @@ public class WnSaleController implements Initializable {
     private AnchorPane scrCustomCombo;
 
     @FXML
-    private TableView<Order> tblOrder;
+    private TableView<Product> tblOrder;
 
     @FXML
-    private TableColumn<Order, String> colAmount;
+    private TableColumn<Product, String> colAmount;
 
     @FXML
-    private TableColumn<Order, String> colProduct;
+    private TableColumn<Product, String> colProduct;
 
     @FXML
-    private TableColumn<Order, String> colPrice; // este si es un String?
+    private TableColumn<Product, String> colPrice; // este si es un String?
 
     @FXML
     private Button btnBack;
@@ -117,6 +122,7 @@ public class WnSaleController implements Initializable {
     private ScrollPane menuCardsScroller1;
     @FXML
     private FlowPane comboCardsScroller;
+
 
     /**
      * Agregar nueva categoria de menu en las pestañas
@@ -146,6 +152,7 @@ public class WnSaleController implements Initializable {
 
     public void displayMenuCards() {
         ObservableList<Product> productDataList = FXCollections.observableArrayList();
+        ObservableList<Product> comboDataList = FXCollections.observableArrayList();
         //BORRAR ESTO SOLO ES DE PRUEBA
         Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
         Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
@@ -178,13 +185,13 @@ public class WnSaleController implements Initializable {
             }
 
         }
-        List<Product> prueba= new ArrayList<>();
-        BigDecimal prueba1= new BigDecimal("30");
+        List<Product> prueba = new ArrayList<>();
+        BigDecimal prueba1 = new BigDecimal("30");
         BigDecimal prueba2 = new BigDecimal("15");
         Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
-        productDataList.add(combo);
+        comboDataList.add(combo);
 
-        for (Product currentProductCombo : productDataList) {
+        for (Product currentProductCombo : comboDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
@@ -193,7 +200,7 @@ public class WnSaleController implements Initializable {
 
                 cardController.setProductDataToCard(currentProductCombo);
 
-                productCardsScroller.getChildren().add(pane);
+                comboCardsScroller.getChildren().add(pane);
 
                 /*
                 pane.setOnMousePressed(event -> {
@@ -296,6 +303,7 @@ public class WnSaleController implements Initializable {
 
             // Mostrar el modal
             paymentStage.showAndWait();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error al cargar la vista de pago: " + e.getMessage());
@@ -311,10 +319,58 @@ public class WnSaleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<Product> productOrderList = FXCollections.observableArrayList();
+
+        colAmount.setReorderable(false);
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+        colPrice.setReorderable(false);
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colProduct.setReorderable(false);
+        colProduct.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+        Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
+        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
+        Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
+        productOrderList.add(p1);
+        productOrderList.add(p2);
+        productOrderList.add(p3);
+        tblOrder.setItems(productOrderList);
+
+
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         displayMenuCards();
+        CustomerDBManager cdbm = new CustomerDBManager();
+        //TODO CAMBIAR NOMBRE DE TODOS LOS CHEPOS
+        List<Customer> chepo = cdbm.readAll();
+        ObservableList<Customer> cutomersList = FXCollections.observableArrayList(chepo);
+        cboCustomers.setItems(cutomersList);
+        //TODO ChepoEmergencia se tuvo que hacer feo uwur
+        cboCustomers.setCellFactory(lv -> new ListCell<Customer>() {
+            @Override
+            protected void updateItem(Customer customer, boolean empty) {
+                super.updateItem(customer, empty);
+                if (empty || customer == null) {
+                    setText(null);
+                } else {
+                    setText(customer.getCustomerName()); // Mostrar solo el nombre del cliente
+                }
+            }
+        });
+        cboCustomers.setButtonCell(new ListCell<Customer>() {
+            @Override
+            protected void updateItem(Customer customer, boolean empty) {
+                super.updateItem(customer, empty);
+                if (empty || customer == null) {
+                    setText(null);
+                } else {
+                    setText(customer.getCustomerName());
+                }
+            }
+        });
+
+
     }
 
 
