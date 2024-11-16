@@ -20,12 +20,8 @@ public class CafeteriaMenu {
      */
     private ArrayList<Combo> combos;//falta combos
     
-    /**
-     * Constructor de clase
-     * @param title Titulo del menu
-     */
-    public CafeteriaMenu(String title) {
-        this.title = title;
+
+    public CafeteriaMenu() {
         this.products = new ArrayList<Product>();
         this.combos = new ArrayList<Combo>();
     }
@@ -78,7 +74,7 @@ public class CafeteriaMenu {
      * @param productName Nombre del producto
      * @return Verdadero, si el nombre del producto ha sido tomado. Falso, si el nombre no ha sido tomado
      */
-    public boolean isProductNameTaken(String productName){
+    public boolean isProductNameTaken(String productName){ // TODO cambiar a isProductTaken es demasialdo informal
         for(Product registeredProduct : products){
             if(productName.equals(registeredProduct.getProductName())){
                 return true;
@@ -219,7 +215,7 @@ public class CafeteriaMenu {
      * @param comboName Nombre del combo
      * @return Verdadero, si el nombre del combo ya existe. Falso, si el nombre no existe
      */
-    public boolean isComboNameTaken(String comboName){
+    public boolean isComboNameTaken(String comboName){ //TODO cambiar a isComboTaken es demasialdo informal
         for(Combo registeredProduct : combos){
             if(comboName.equals(registeredProduct.getProductName())){
                 return true;

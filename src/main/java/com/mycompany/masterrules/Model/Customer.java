@@ -33,12 +33,7 @@ public class Customer {
      * @param customerName        Nombre del cliente
      * @param customerPhoneNumber Numero de telefono del cliente
      */
-    //TODO: cual es el constructor bueno? o son dos?
-    public Customer(String customerName, String customerPhoneNumber) {
-        this.customerName = customerName;
-        this.customerPhoneNumber = customerPhoneNumber;
-        this.customerAccount = new CustomerAccount();
-    }
+
     public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;

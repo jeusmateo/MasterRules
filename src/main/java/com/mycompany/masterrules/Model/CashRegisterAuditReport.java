@@ -53,7 +53,7 @@ public class CashRegisterAuditReport {
      * Metodo para agregar una factura a la caja
      * @param bill La factura a agregar
      */
-    public void addBill(Bill bill){
+    public void addBill(Bill bill){ //TODO ESTA COSA TIENE QUE ABSTRAERSE A TRAVES DE LA LISTA DE INVOICE
         currentCashAmount = currentCashAmount.add(bill.getAmount());
         bills.add(bill);
         System.out.println("Bill added");
