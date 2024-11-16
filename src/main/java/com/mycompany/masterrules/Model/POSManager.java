@@ -81,7 +81,7 @@ public class POSManager {
                 products.add(product);
             }
         }
-        Combo combo = new Combo(products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice(), customComboTemplate.getComboName());
+        Combo combo = new Combo(customComboTemplate.getComboName(),products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice());
         this.addComboToOrder(combo);
     }
 

@@ -41,11 +41,7 @@ public class Product {
      */
     private BigDecimal VIPPrice;
 
-    /**
-     * Constructor de clase NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
-     */
-    protected Product() {
-    }
+
 
     /**
      * Constructor de clase
@@ -164,6 +160,15 @@ public class Product {
     public void setVIPPrice(BigDecimal VIPPrice) {
         this.VIPPrice = VIPPrice;
     }
+
+    // Necesario para Hibernate
+
+    /**
+     * Constructor de clase NECESARIO PARA JPA (Java Persistence API) NO ELIMINAR LOS CONSTRUCTORES VACIOS >:(
+     */
+    protected Product() {
+    }
+
 
     @Override
     public String toString() {
