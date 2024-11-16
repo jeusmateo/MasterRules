@@ -19,7 +19,7 @@ public class CustomerAccount {
     private boolean isVIP;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Debt> totalDebt;
-    @Transient // TODO: Revisar si es necesario (antiguo)
+    @Embedded // TODO: Revisar si es necesario (antiguo)
     private LoyaltyCard loyaltyCard;
     //TODO: DOS CONSTRUCTORES?
     public CustomerAccount(){
