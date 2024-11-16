@@ -17,6 +17,7 @@ public class Customer {
      * Atributos de la clase
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String ID;
     private String customerName;
     private String customerPhoneNumber;
@@ -28,18 +29,17 @@ public class Customer {
 
     /**
      * Constructor de la clase
-     * @param customerName Nombre del cliente
+     *
+     * @param customerName        Nombre del cliente
      * @param customerPhoneNumber Numero de telefono del cliente
      */
     //TODO: cual es el constructor bueno? o son dos?
-    public Customer(String id,String customerName, String customerPhoneNumber) {
-        this.ID=id;
+    public Customer(String customerName, String customerPhoneNumber) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount();
     }
-    public Customer(String id,String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
-        this.ID=id;
+    public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);

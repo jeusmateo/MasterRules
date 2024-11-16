@@ -4,7 +4,6 @@ import com.mycompany.masterrules.Database.CustomerDBManager;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author David Torres Clase que se encarga de gestionar los clientes
@@ -49,7 +48,7 @@ public class CustomerManager {
             } else {
                 loyaltyPointsInt = 0;
             }
-            Customer customer = new Customer(generateRandomId(), name, phone, loyaltyPointsInt, vipStatus);
+            Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
             CustomerDBManager customerDBManager = new CustomerDBManager();
             customerDBManager.save(customer);
         } else {
@@ -62,26 +61,6 @@ public class CustomerManager {
         CustomerDBManager customerDBManager = new CustomerDBManager();
         customers = customerDBManager.readAll();
         return customers;
-    }
-
-
-    private boolean isIdUnique(String ID) {
-        for (Customer customer : customers) {
-            if (customer.getID().equals(ID)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String generateRandomId() {
-        Random random = new Random();
-        long idNumber = Math.abs(random.nextLong());
-        String idString = String.valueOf(idNumber);
-        if (isIdUnique(idString)) {
-            return idString;
-        }
-        return generateRandomId();
     }
 
 }
