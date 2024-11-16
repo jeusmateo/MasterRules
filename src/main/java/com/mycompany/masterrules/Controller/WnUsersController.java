@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +39,7 @@ public class WnUsersController implements Initializable {
     private void setUserEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
     }
+
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap();
 
     @FXML
@@ -177,36 +179,36 @@ public class WnUsersController implements Initializable {
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        try{
-        if (evt.equals(btnEditUser)) {
-            String editUserName = txtEditUserName.getText();
-            String editUserPassword = pwfUserPassword.getText();
-            String confirmUserPassword = pwfUserPasswordConfirm.getText();
-            String confirUserAccountUserEdit = textEditUserAccountUser.getText();
-            if (editUserPassword.equals(confirmUserPassword)) {
-                this.userEdit.setFullEmployeeName(editUserName);
-                this.userEdit.setPassword(editUserPassword);
-                this.userEdit.setUserName(confirUserAccountUserEdit);
-                ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
-                tblUserAccount2.setItems(userAccounts);
-            } else {
-                //throw Exception chepo = new Exception("Chepo");
+        try {
+            if (evt.equals(btnEditUser)) {
+                String editUserName = txtEditUserName.getText();
+                String editUserPassword = pwfUserPassword.getText();
+                String confirmUserPassword = pwfUserPasswordConfirm.getText();
+                String confirUserAccountUserEdit = textEditUserAccountUser.getText();
+                if (editUserPassword.equals(confirmUserPassword)) {
+                    this.userEdit.setFullEmployeeName(editUserName);
+                    this.userEdit.setPassword(editUserPassword);
+                    this.userEdit.setUserName(confirUserAccountUserEdit);
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    tblUserAccount2.setItems(userAccounts);
+                } else {
+                    //throw Exception chepo = new Exception("Chepo");
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Chepo " + e.getMessage());
         }
-        }catch(Exception e){
-            System.out.println("Chepo "+e.getMessage());
-        }
-        }
+    }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+    private void configCheckBox() {
         checkBoxPermissionMap.put(chkMakeSalePerm2, Permission.MAKE_SALE);
         checkBoxPermissionMap.put(chkCancelSalePerm2, Permission.CANCEL_SALE);
         checkBoxPermissionMap.put(chkReviewSaleHistoryPerm2, Permission.LOOK_SALES_HISTORY);
         checkBoxPermissionMap.put(chkCreateProductPerrm2, Permission.CREATE_PRODUCT);
         checkBoxPermissionMap.put(chkEditProductPerm2, Permission.EDIT_PRODUCT);
         checkBoxPermissionMap.put(chkDeleteProductPerm2, Permission.DELETE_PRODUCT);
-//        checkBoxPermissionMap.put(chkCreateComboPerm, Permission.CREATE_COMBO); //NO OLVIDAR QUITARLOS PORQUE USARA EL MISMO PERMISO PARA COMBO
+//        checkBoxPermissionMap.put(chkCreateComboPerm, Permission.CREATE_COMBO); //todo NO OLVIDAR QUITARLOS PORQUE USARA EL MISMO PERMISO PARA COMBO
         checkBoxPermissionMap.put(chkEditStockPerm2, Permission.EDIT_STOCK);
         checkBoxPermissionMap.put(chkEditStockMinMaxPerm2, Permission.EDIT_MAX_MIN);
         checkBoxPermissionMap.put(chkCreateNewCustomerPerm2, Permission.CREATE_CUSTOMER);
@@ -219,39 +221,46 @@ public class WnUsersController implements Initializable {
         checkBoxPermissionMap.put(chkCreateUserPerm2, Permission.CREATE_USER);
         checkBoxPermissionMap.put(chkEditUserPerm2, Permission.EDIT_USER);
         checkBoxPermissionMap.put(chkDeleteUserPerm2, Permission.DELETE_USER);
+    }
 
-        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+    private void configColumns() {
         colUserID.setReorderable(false);
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         colUserName.setReorderable(false);
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
-        tblUserAccount.setItems(userAccounts);
 
         colUserID2.setReorderable(false);
         colUserID2.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         colUserName2.setReorderable(false);
         colUserName2.setCellValueFactory(new PropertyValueFactory<>("userName"));
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        configCheckBox();
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+        configColumns();
+        tblUserAccount.setItems(userAccounts);
         tblUserAccount2.setItems(userAccounts);
         tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
         tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
     private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
-        this.userEdit=userAccount;
-        if(userAccount == null){
+        this.userEdit = userAccount;
+        if (userAccount == null) {
             System.out.println("Chepo23");
         }
-        try{
-        txtEditUserName.setText(userAccount.getFullEmployeeName());
-        syncCheckBoxesWithPermissions(userAccount);
-        }catch(Exception e){
+        try {
+            txtEditUserName.setText(userAccount.getFullEmployeeName());
+            syncCheckBoxesWithPermissions(userAccount);
+        } catch (Exception e) {
             System.out.println("Chepo2");
         }
-        }
+    }
 
     private void syncCheckBoxesWithPermissions(UserAccount userAccount) {
         // Itera sobre el Map para establecer el estado inicial de los CheckBox

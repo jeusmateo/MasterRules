@@ -38,11 +38,7 @@ public class UserAccount {
      */
     private String fullEmployeeName;//le cambie el nombre para que indique que es el nombre completo
 
-    /**
-     * Constructor vacío de la clase UserAccount para Hibernate
-     */
-    protected UserAccount() {
-    }
+
 
     /**
      * Constructor de la clase
@@ -184,6 +180,11 @@ public class UserAccount {
      */
     public void setFullEmployeeName(String fullEmployeeName) {
         this.fullEmployeeName = fullEmployeeName;
+    }
+
+
+    // Necesario para Hibernate
+    public UserAccount() {
     }
 
     @Override

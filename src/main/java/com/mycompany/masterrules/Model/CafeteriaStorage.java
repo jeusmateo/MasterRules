@@ -26,7 +26,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
 
     public void addProduct(Product product, StockInfo stockInfo) throws Exception {
         //se elimino la excepcion cuando el stock es negativo
-        if(!isStored(product)){//inverti por el criterio de if (el caso deseado primero)
+        if(!isProductStored(product)){//inverti por el criterio de if (el caso deseado primero)
             if(isStockInfoValid(stockInfo)){
                 products.put(product, stockInfo);
             }
@@ -52,7 +52,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @throws Exception If the product is not in inventory, it causes an error
      */
     public void removeProduct(Product product) throws Exception{
-        if(isStored(product)){
+        if(isProductStored(product)){
             products.remove(product);
         }
 
@@ -67,7 +67,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      */
     public void editCurrentStock(Product product,int newQuantity) throws Exception{//cambiae el nombre a editCurrentStock
         //*****Implementar funcion despues de acabar ventas
-        if(isStored(product)){
+        if(isProductStored(product)){
             if(newQuantity>=0){
                 StockInfo newStockInfo=products.get(product);
                 newStockInfo.setCurrentStock(newQuantity);
@@ -81,7 +81,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
     }
     
     public void editMinStock(Product product,int newQuantity) throws Exception{
-        if(isStored(product)){
+        if(isProductStored(product)){
             if(newQuantity>=0){
                 StockInfo newStockInfo=products.get(product);
                 newStockInfo.setMinStock(newQuantity);
@@ -95,7 +95,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
     }
     
     public void editMaxStock(Product product,int newQuantity) throws Exception{
-        if(isStored(product)){
+        if(isProductStored(product)){
             if(newQuantity>=0){
                 StockInfo newStockInfo = products.get(product);
                 newStockInfo.setMaxStock(newQuantity);
@@ -114,8 +114,8 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @param increment Quantity to add in the product's stock
      * @throws Exception If the product isn't in storage or the increment is negative, it causes an error
      */
-    public void addToCurrentStock(Product product,int increment) throws Exception{//!!!tengo que cambiar el nombre a addToCurrentStock
-        if(isStored(product)){
+    public void incrementCurrentStock(Product product, int increment) throws Exception{
+        if(isProductStored(product)){
             if(increment>=0){//inverti por el criterio de if (el caso deseado primero)
                 StockInfo newStockInfo=products.get(product);
                 newStockInfo.setCurrentStock(newStockInfo.getCurrentStock()+increment);
@@ -133,9 +133,9 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @param decrement Quantity to remove from the product's stock
      * @throws Exception If the product isn't in storage, the decrement is negative or the decrement is greater than the current stock, it causes an error
      */
-    public void removeFromCurrentStock(Product product,int decrement) throws Exception{//!!!tengo que cambiar el nombre a removeFromCurrentStock
-        if(isStored(product)){
-            if(decrement>=0 && hasEnoughStock(product,decrement)){
+    public void decrementCurrentStock(Product product, int decrement) throws Exception{
+        if(isProductStored(product)){
+            if(decrement>=0 && isEnoughStock(product,decrement)){
                 StockInfo newStockInfo=products.get(product);
                 newStockInfo.setCurrentStock(newStockInfo.getCurrentStock()-decrement);
                 products.put(product, newStockInfo);
@@ -143,15 +143,6 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
             else{
                 throw new Exception("ERROR: El decremento no es apropiado");
             }
-            
-            /*
-            if(decrement<0){
-                throw new Exception("ERROR: El decremento no puede ser negativo");
-            }
-            if(!hasEnoughStock(product,decrement)){
-                throw new Exception("ERROR:El decremento excede la cantidad almacenada del producto");
-            }
-            */
         }
 
     }
@@ -162,7 +153,7 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
      * @param quantity Quantity to compare to current stock
      * @return True, if the quantity less than or equal the stock of the product. False, if the quantity is greater than the stock of the product
      */
-    public boolean hasEnoughStock(Product product,int quantity){//!!!cambiar nombre a hasEnoughCurrentStock
+    public boolean isEnoughStock(Product product, int quantity){ // TODO cambiar nombre de la funcion
         StockInfo stockInfo=products.get(product);
         int currentStock=stockInfo.getCurrentStock();
         if(quantity>currentStock){
@@ -172,20 +163,14 @@ private HashMap<Product,StockInfo> products;//HashMap<id,stock>
             return true;
         }
     }
-    
-    /**
-     * Searches for a prodcut in storage
-     */
-    public void searchProduct(){
-        //falta y no se que se tiene que hacer aquí
-    }
+
     
     /**
      * Checks if a product is stored in storage
      * @param product Identification of the product
      * @return True, if the product is in storage. False, if the product isn't in storage
      */
-    public boolean isStored(Product product) throws Exception {
+    public boolean isProductStored(Product product) throws Exception {
         if(products.containsKey(product)){
             return true;
         }
