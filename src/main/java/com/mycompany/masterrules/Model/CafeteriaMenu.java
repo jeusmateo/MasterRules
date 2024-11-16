@@ -147,7 +147,7 @@ public class CafeteriaMenu {
      * @param combo Combo a agregar al menu
      */
     public void addComboToMenu(Combo combo) throws Exception{
-        if(!isComboOnMenu(combo.getComboID()+"")){
+        if(!isComboOnMenu(combo.getProductID()+"")){
             combos.add(combo);
         }
         else{
@@ -162,7 +162,7 @@ public class CafeteriaMenu {
      */
     public void removeComboOnMenu(String comboID) throws Exception{//lo cambie por id
         for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
-            if(comboID.equals(combos.get(registeredComboCount).getComboID())){
+            if(comboID.equals(combos.get(registeredComboCount).getProductID())){
                 combos.remove(registeredComboCount);
                 return;
             }
@@ -177,12 +177,12 @@ public class CafeteriaMenu {
      */
     public void editCombo(Combo combo) throws Exception{
         for(int registeredComboCount=0;registeredComboCount<combos.size();registeredComboCount++){
-            if(combo.getComboID().equals(combos.get(registeredComboCount).getComboID())){
+            if(combo.getProductID().equals(combos.get(registeredComboCount).getProductID())){
                 
-                if(!combo.getComboName().equals(combos.get(registeredComboCount).getComboName())){
+                if(!combo.getProductName().equals(combos.get(registeredComboCount).getProductName())){
                     
-                    if(!isComboNameTaken(combo.getComboName())){
-                        combos.get(registeredComboCount).setComboName(combo.getComboName());
+                    if(!isComboNameTaken(combo.getProductName())){
+                        combos.get(registeredComboCount).setProductName(combo.getProductName());
                     }
                     else{
                         throw new Exception("ERROR: El nombre del combo ya existe");
@@ -207,7 +207,7 @@ public class CafeteriaMenu {
      */
     public boolean isComboOnMenu(String comboID){
         for(Combo registeredCombo : combos){
-            if(comboID.equals(registeredCombo.getComboID()+"")){
+            if(comboID.equals(registeredCombo.getProductID()+"")){
                 return true;
             }
         }
@@ -221,7 +221,7 @@ public class CafeteriaMenu {
      */
     public boolean isComboNameTaken(String comboName){
         for(Combo registeredProduct : combos){
-            if(comboName.equals(registeredProduct.getComboName())){
+            if(comboName.equals(registeredProduct.getProductName())){
                 return true;
             }
         }

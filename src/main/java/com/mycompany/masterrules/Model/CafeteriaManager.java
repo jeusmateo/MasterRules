@@ -62,14 +62,16 @@ public class CafeteriaManager {
         
         
     }
-    
+
     public void createCombo(Combo newCombo) throws Exception{
-        if(menu.isComboNameTaken(newCombo.getComboName())){
+        if(menu.isComboNameTaken(newCombo.getProductName())){
             throw new Exception("ERROR: El nombre del combo ya está tomado");
         }
         
         menu.addComboToMenu(newCombo);
     }
+
+
     
     public void deleteCombo(String comboID) throws Exception{
         menu.removeComboOnMenu(comboID);
