@@ -15,7 +15,7 @@ D:/jeusm.MASTER/Documents/NetBeansProjects/MasterRules/src/main/resources/hibern
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="CafeteriaMasterRulesDB" uuid="ea4b4dde-1634-4696-a5a7-c5cff83b9b7a">
+    <data-source source="LOCAL" name="CafeteriaMasterRulesDB" uuid="622d11f3-6f46-45ae-ab42-b532ac394e33">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
