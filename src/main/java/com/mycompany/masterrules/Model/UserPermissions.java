@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 @Embeddable
 public class UserPermissions {
+
     //falta probar si funciona con la gran cantidad de permisos que puse
     //probablemente Permissions se ponga en un archivo separado de esta clase?
     /**
@@ -55,10 +56,6 @@ public class UserPermissions {
         EDIT_USER,
         DELETE_USER,
     };
-    /**
-     * Permisos concedidos al usuario
-     */
-    private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
 
     /**
      * Constructor de la clase
@@ -67,14 +64,20 @@ public class UserPermissions {
         grantedPermissions= EnumSet.noneOf(Permission.class);
     }
 
-    // TODO: inicia en mayúsculas
+    /**
+     * Permisos concedidos al usuario
+     */
+    private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
+
+    /**
+     * Constructor de la clase
+     */
+
+    // TODO constructor de chepo, eliminarlo
     public UserPermissions(String chepo){
         grantedPermissions=EnumSet.allOf(Permission.class);
     }
-    /**
-     * Constructor de la clase
-     * @param grantedPermissions Permisos concedidos al usuario
-     */
+
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
     }
