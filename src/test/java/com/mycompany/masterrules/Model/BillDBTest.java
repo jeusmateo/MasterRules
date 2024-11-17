@@ -21,7 +21,8 @@ public class BillDBTest {
         // Save the product
         assertTrue(productDBManager.save(Product));
         var order = new Order();
-        order.addProduct(Product, 1);
+        var orderItem = new OrderItem(Product);
+        order.addProductToOrderItemList(orderItem);
         var bill = new Bill(order, "David Torres");
         assertTrue(billDBManager.save(bill));
         System.out.println("Bill saved successfully");

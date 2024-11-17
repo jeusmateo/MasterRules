@@ -35,10 +35,6 @@ public class Bill {
     @Embedded
     private Order order;
 
-
-
-
-
     public BigDecimal getPagadoEnEfectivo() {
         return pagadoEnEfectivo;
     }

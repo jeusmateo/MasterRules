@@ -24,5 +24,6 @@
         <mapping class="com.mycompany.masterrules.Model.Customer"/>
         <mapping class="com.mycompany.masterrules.Model.Debt"/>
         <mapping class="com.mycompany.masterrules.Model.Bill"/>
+        <mapping class="com.mycompany.masterrules.Model.OrderItem"/>
     </session-factory>
 </hibernate-configuration>

@@ -15,6 +15,7 @@ public class Order {
     @ManyToOne
     private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
     // @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "order_employee_name")
     private String employeeName; //TODO debe ser un nombre mas claro que diga que es el empleado de turno quien toma la comanda
     private String numeroDeMesa; //TODO CAMBIAR NOMBRE A INGLES
     private String comment;
