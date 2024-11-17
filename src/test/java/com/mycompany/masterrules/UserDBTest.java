@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class UserDBTest {
     public static void main(String[] args) {
-        UserAccount user = new UserAccount("1", "alex", "1234", "Alex S");
+        UserAccount user = new UserAccount("alex", "1234", "Alex S");
 
         // Asignar permisos
         UserPermissions permissions = new UserPermissions();

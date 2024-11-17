@@ -1,9 +1,7 @@
 package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Model.UserPermissions.Permission;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -12,6 +10,7 @@ import java.util.Objects;
 public class UserAccount {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userID;//agregue esto
     private String userName;
     private String password;
@@ -19,8 +18,7 @@ public class UserAccount {
     private UserPermissions permissions;
     private String fullEmployeeName;//le cambie el nombre para que indique que es el nombre completo
 
-
-    public UserAccount(String userID, String username, String password, String fullEmployeeName) {
+    public UserAccount(String username, String password, String fullEmployeeName) {
         this.userID = userID;
         this.userName = username;
         this.password = password;
@@ -28,30 +26,13 @@ public class UserAccount {
         this.permissions = new UserPermissions();
     }
 
-    public UserAccount(String userID, String username, String password, String fullEmployeeName, String Chepo) {
-        this.userID = userID;
-        this.userName = username;
-        this.password = password;
-        this.fullEmployeeName = fullEmployeeName;
-        this.permissions = new UserPermissions("Chepo");
-    }
-
-    public UserAccount(String userID, String username, String password, UserPermissions permissions, String fullEmployeeName) {
+    public UserAccount(String username, String password, UserPermissions permissions, String fullEmployeeName) {
         this.userID = userID;
         this.userName = username;
         this.password = password;
         this.permissions = permissions;
         this.fullEmployeeName = fullEmployeeName;
     }
-
-    public UserAccount(String userName, String userPassword, String userAccountUser) {
-        this.userName = userName;
-        this.password = userPassword;
-        this.fullEmployeeName = userAccountUser;
-        this.permissions = new UserPermissions();
-
-    }
-
 
     public boolean hasPermission(Permission permission) {//¿creo me decian que este ya no iba a estar? habria que verlo
         return permissions.isEnabled(permission);
