@@ -96,10 +96,10 @@ public class POSManager {
      * @param comentario      Comentario adicional a la orden.
      * @param customer        El cliente al que se le vendera la orden.
      */
-    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
+    public void configureOrder(Customer customer, String metodoDeEntrega, String comentario) {
+        currentOrder.setCustomer(customer);
         currentOrder.setDeliveryMethod(metodoDeEntrega);
         currentOrder.setComment(comentario);
-        currentOrder.setCustomer(customer);
         currentOrder.setDate(LocalDateTime.now());
     }
 
