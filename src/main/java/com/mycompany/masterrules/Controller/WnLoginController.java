@@ -77,7 +77,6 @@ public class WnLoginController implements Initializable {
             String user = txtFieldUserName.getText();
             String pass = txtFieldPassword.getText();
             if (this.chepo.verificador(user, pass)) {
-                System.out.println("Usuario y contraseña correctos");
                 loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
             } else {
                 lbIncorrectCredential.setVisible(true);
