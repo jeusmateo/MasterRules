@@ -181,11 +181,7 @@ public class WnUsersController implements Initializable {
         Object evt = event.getSource();
         try {
             if (evt.equals(btnEditUser)) {
-                System.out.println("Aqui antes de editar");
-                for (UserAccount userAccount : userManager.getUserAccounts()) {
-                    System.out.println(userAccount.getFullEmployeeName());
 
-                }
                 String editUserName = txtEditUserCompleteName.getText();
                 String editUserPassword = pwfUserPassword.getText();
                 String confirmUserPassword = pwfUserPasswordConfirm.getText();
@@ -194,16 +190,15 @@ public class WnUsersController implements Initializable {
                     this.userEdit.setFullEmployeeName(editUserName);
                     this.userEdit.setPassword(editUserPassword);
                     this.userEdit.setUserName(confirUserAccountUserEdit);
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    userManager.updateUserInformation(this.userEdit);
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts()); //todo NO DEBE SER ASI, EL CODIGO NO DEBERIA ESTAR LLENO DE LINEAS REPETIDAS DE ESTO
                     tblUserAccount.setItems(userAccounts);
-                    System.out.println("Aqui despues de editar");
-                    for (UserAccount userAccount : userAccounts) {
-                        System.out.println(userAccount.getFullEmployeeName());
 
-                    }
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
+
+            } else if () {
 
             }
         } catch (Exception e) {
@@ -283,7 +278,7 @@ public class WnUsersController implements Initializable {
     }
 
     @FXML
-    private void displaySelected( javafx.scene.input.MouseEvent event) {
+    private void displaySelected(javafx.scene.input.MouseEvent event) {
         UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
         showUserAccountInfoForEditButtonHolaJajajChepo(userAccount);
     }
