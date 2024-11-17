@@ -244,23 +244,46 @@ public class WnCustomersController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        setupTextFieldFilters();
+        setupCustomerTableColumns();
+        initializeCustomerTable();
+        setupCustomerSelectionListeners();
+    }
+
+    // Configura los filtros para los campos de texto
+    private void setupTextFieldFilters() {
         txtNewCustomerName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        List<Customer> chepo = customerManager.getCustomers();
-        ObservableList<Customer> customers = FXCollections.observableArrayList(chepo);
+    }
+
+    // Configura las columnas de la tabla de clientes
+    private void setupCustomerTableColumns() {
         colCustomerId.setReorderable(false);
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colCustomerName.setReorderable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-
-
-        setItemsToAllTables(customers);
-        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
-        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
     }
+
+    // Inicializa los datos de la tabla de clientes
+    private void initializeCustomerTable() {
+        List<Customer> customerList = customerManager.getCustomers();
+        ObservableList<Customer> customers = FXCollections.observableArrayList(customerList);
+        setItemsToAllTables(customers);
+    }
+
+    // Configura los listeners para la selección de clientes
+    private void setupCustomerSelectionListeners() {
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showCustomerDetails(newValue)
+        );
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue)
+        );
+    }
+
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
         tblCustomers.setItems(customers);

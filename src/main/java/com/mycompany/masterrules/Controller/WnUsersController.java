@@ -54,12 +54,6 @@ public class WnUsersController implements Initializable {
     @FXML
     private TableColumn<UserAccount, String> colUserName;
     @FXML
-    private TableView<UserAccount> tblUserAccount2;
-    @FXML
-    private TableColumn<UserAccount, String> colUserID2;
-    @FXML
-    private TableColumn<UserAccount, String> colUserName2;
-    @FXML
     private Tab tabSalePerm;
     @FXML
     private CheckBox chkMakeSalePerm; //Ya estufas
@@ -190,7 +184,7 @@ public class WnUsersController implements Initializable {
                     this.userEdit.setPassword(editUserPassword);
                     this.userEdit.setUserName(confirUserAccountUserEdit);
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
-                    tblUserAccount2.setItems(userAccounts);
+                    tblUserAccount.setItems(userAccounts);
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
@@ -231,11 +225,11 @@ public class WnUsersController implements Initializable {
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
 
-        colUserID2.setReorderable(false);
-        colUserID2.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colUserID.setReorderable(false);
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
-        colUserName2.setReorderable(false);
-        colUserName2.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colUserName.setReorderable(false);
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
     }
 
     @Override
@@ -244,9 +238,9 @@ public class WnUsersController implements Initializable {
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
         configColumns();
         tblUserAccount.setItems(userAccounts);
-        tblUserAccount2.setItems(userAccounts);
-        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
-        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
+        tblUserAccount.setItems(userAccounts);
+        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
+        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
     private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
