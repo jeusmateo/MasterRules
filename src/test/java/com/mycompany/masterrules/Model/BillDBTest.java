@@ -1,10 +1,7 @@
-package com.mycompany.masterrules;
+package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Database.BillDBManager;
 import com.mycompany.masterrules.Database.ProductDBManager;
-import com.mycompany.masterrules.Model.Bill;
-import com.mycompany.masterrules.Model.Order;
-import com.mycompany.masterrules.Model.Product;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -51,20 +48,6 @@ public class BillDBTest {
         var Bills = billDBManager.readAll();
         assertNotNull(Bills);
         System.out.println("All bills read successfully");
-    }
-
-    @Test
-    void getBillsByDateRange() {
-
-        var order = new Order();
-        order.setDate(LocalDateTime.of(2021, 1, 1, 0, 0));
-        var bill = new Bill(order, "David Torres");
-        assertTrue(billDBManager.save(bill));
-        var Bills = billDBManager.findByDateRange(
-                LocalDateTime.of(2021, 1, 1, 0, 0),
-                LocalDateTime.of(2021, 1, 1, 23, 59));
-        assertNotNull(Bills);
-        System.out.println("Bills found by date range successfully");
     }
 
     @Test

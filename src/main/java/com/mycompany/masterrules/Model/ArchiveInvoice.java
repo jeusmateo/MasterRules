@@ -1,16 +1,33 @@
 package com.mycompany.masterrules.Model;
 
+import com.mycompany.masterrules.Database.BillDBManager;
 import com.mycompany.masterrules.Database.CustomerDBManager;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class ArchiveInvoice{
 
-    CustomerDBManager customerDBManager = new CustomerDBManager();
+    BillDBManager customerDBManager = new BillDBManager();
 
-    public void ArchiveBill(String id) {
-        Customer customer = customerDBManager.findById(id);
-        customerDBManager.delete(customer);
+    public boolean ArchiveBill(Bill bill) {
+        return customerDBManager.save(bill);
+    }
+
+
+    public List<Bill> getAllBills() {
+        return customerDBManager.readAll();
+    }
+
+    public List<Bill> getBillsByDateRange(LocalDate beginDate, LocalDate endDate){
+        var bills = customerDBManager.readAll();
+
+        return bills.stream()
+                .filter(bill -> bill.getOrder().getDate().isAfter(beginDate.atStartOfDay()) &&
+                        bill.getOrder().getDate().isBefore(endDate.atStartOfDay()))
+                .toList();
     }
 
 }

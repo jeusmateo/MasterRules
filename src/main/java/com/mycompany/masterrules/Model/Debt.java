@@ -25,9 +25,6 @@ public class Debt {
     private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
 
-
-
-
     public Debt(Order order, BigDecimal amount) {
         this.order = order;
         this.amount = amount;
