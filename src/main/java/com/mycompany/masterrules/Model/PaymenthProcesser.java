@@ -2,10 +2,13 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 
-public abstract class PaymentMethod2 {
+
+//CLASE DE BAJO NIVEL DE ABSTRACCION, DEBEMOS VER COMO OCULTARLA PARA QUE SE VUELVA UN ADT O TRABAJARLA EN OTRO NIVEL DE ABSTRACCION
+//ES BAJO PORQUE ELLA Y SUS HIJAS TRABAJAN LOGICA SOBRE PAGO Y OPERACIONES NECESARIAS PARA VENDER.
+public abstract class PaymenthProcesser {
     private BigDecimal totalAmount;
 
-    public PaymentMethod2(BigDecimal totalAmount) {
+    public PaymenthProcesser(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
