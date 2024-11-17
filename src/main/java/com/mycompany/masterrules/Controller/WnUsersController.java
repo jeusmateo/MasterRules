@@ -33,7 +33,8 @@ public class WnUsersController implements Initializable {
 
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
-
+    @FXML
+    private TextField textEditUserAccountUser;
 
     private void setUserEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
@@ -41,8 +42,6 @@ public class WnUsersController implements Initializable {
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap();
 
-    @FXML
-    private TextField textEditUserName;
     @FXML
     private AnchorPane verCliente;
 
@@ -54,12 +53,6 @@ public class WnUsersController implements Initializable {
     private TableColumn<UserAccount, String> colUserID;
     @FXML
     private TableColumn<UserAccount, String> colUserName;
-    @FXML
-    private TableView<UserAccount> tblUserAccount2;
-    @FXML
-    private TableColumn<UserAccount, String> colUserID2;
-    @FXML
-    private TableColumn<UserAccount, String> colUserName2;
     @FXML
     private Tab tabSalePerm;
     @FXML
@@ -169,7 +162,7 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkEditStockMinMaxPerm2;
     @FXML
-    private TextField txtEditUserCompleteName;
+    private TextField txtEditUserName;
     @FXML
     private PasswordField pwfUserPassword;
     @FXML
@@ -182,17 +175,16 @@ public class WnUsersController implements Initializable {
         Object evt = event.getSource();
         try {
             if (evt.equals(btnEditUser)) {
-                String editUserName = txtEditUserCompleteName.getText();
+                String editUserName = txtEditUserName.getText();
                 String editUserPassword = pwfUserPassword.getText();
                 String confirmUserPassword = pwfUserPasswordConfirm.getText();
-                String confirmUserAccountUserEdit = textEditUserName.getText();
-
+                String confirUserAccountUserEdit = textEditUserAccountUser.getText();
                 if (editUserPassword.equals(confirmUserPassword)) {
                     this.userEdit.setFullEmployeeName(editUserName);
                     this.userEdit.setPassword(editUserPassword);
-                    this.userEdit.setUserName(confirmUserAccountUserEdit);
+                    this.userEdit.setUserName(confirUserAccountUserEdit);
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
-                    tblUserAccount2.setItems(userAccounts);
+                    tblUserAccount.setItems(userAccounts);
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
@@ -233,11 +225,11 @@ public class WnUsersController implements Initializable {
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
 
-        colUserID2.setReorderable(false);
-        colUserID2.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colUserID.setReorderable(false);
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
-        colUserName2.setReorderable(false);
-        colUserName2.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colUserName.setReorderable(false);
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
     }
 
     @Override
@@ -246,19 +238,18 @@ public class WnUsersController implements Initializable {
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
         configColumns();
         tblUserAccount.setItems(userAccounts);
-        tblUserAccount2.setItems(userAccounts);
-        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> btnShowUserAccountInfoForEdit(newValue));
-        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
+        tblUserAccount.setItems(userAccounts);
+        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
+        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
-    private void btnShowUserAccountInfoForEdit(UserAccount userAccount) {
+    private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
         this.userEdit = userAccount;
         if (userAccount == null) {
             System.out.println("Chepo23");
         }
         try {
-            txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
-            textEditUserName.setText(userAccount.getUserName());
+            txtEditUserName.setText(userAccount.getFullEmployeeName());
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
             System.out.println("Chepo2");
