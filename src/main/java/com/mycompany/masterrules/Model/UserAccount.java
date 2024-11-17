@@ -19,7 +19,6 @@ public class UserAccount {
     private String fullEmployeeName;//le cambie el nombre para que indique que es el nombre completo
 
     public UserAccount(String username, String password, String fullEmployeeName) {
-        this.userID = userID;
         this.userName = username;
         this.password = password;
         this.fullEmployeeName = fullEmployeeName;
@@ -27,17 +26,18 @@ public class UserAccount {
     }
 
     public UserAccount(String username, String password, UserPermissions permissions, String fullEmployeeName) {
-        this.userID = userID;
         this.userName = username;
         this.password = password;
         this.permissions = permissions;
         this.fullEmployeeName = fullEmployeeName;
     }
 
+    protected UserAccount() {
+    }
+
     public boolean hasPermission(Permission permission) {//¿creo me decian que este ya no iba a estar? habria que verlo
         return permissions.isEnabled(permission);
     }
-
 
     public String getUserID() {
         return userID;
@@ -79,36 +79,27 @@ public class UserAccount {
         this.fullEmployeeName = fullEmployeeName;
     }
 
-
-
-    protected UserAccount() {
-    }
-
     @Override
     public String toString() {
-        return "UserAccount{"
-                + "userID='" + userID + '\''
-                + ", username='" + userName + '\''
-                + ", password='" + password + '\''
-                + ", permissions=" + permissions
-                + ", fullEmployeeName='" + fullEmployeeName + '\''
-                + '}';
+        return "UserAccount{" +
+                "userID='" + userID + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", permissions=" + permissions +
+                ", fullEmployeeName='" + fullEmployeeName + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         UserAccount that = (UserAccount) o;
-        return Objects.equals(userID, that.userID)
-                && Objects.equals(userName, that.userName)
-                && Objects.equals(password, that.password)
-                && Objects.equals(permissions, that.permissions)
-                && Objects.equals(fullEmployeeName, that.fullEmployeeName);
+        return Objects.equals(userID, that.userID) &&
+                Objects.equals(userName, that.userName) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(permissions, that.permissions) &&
+                Objects.equals(fullEmployeeName, that.fullEmployeeName);
     }
 
     @Override

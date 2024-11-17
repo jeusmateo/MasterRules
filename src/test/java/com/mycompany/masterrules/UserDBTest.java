@@ -4,6 +4,7 @@ import com.mycompany.masterrules.Model.UserAccount;
 
 import com.mycompany.masterrules.Database.UserDBManager;
 import com.mycompany.masterrules.Model.UserPermissions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
@@ -11,7 +12,8 @@ import java.util.Objects;
  * Clase para pruebas de la base de datos de usuarios
  */
 public class UserDBTest {
-    public static void main(String[] args) {
+    @Test
+    void general() {
         UserAccount user = new UserAccount("alex", "1234", "Alex S");
 
         // Asignar permisos
