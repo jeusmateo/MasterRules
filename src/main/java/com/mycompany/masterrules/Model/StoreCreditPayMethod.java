@@ -9,4 +9,17 @@ public class StoreCreditPayMethod extends PaymentMethod2{
         this.storeCreditUsed = customerStoreCredit;
 
     }
+
+    @Override
+    public PaymentDetails paymentProcess() {
+        PaymentDetails paymentDetails= new PaymentDetails(PaymentMethod.STORE_CREDIT,this.getTotalAmount());
+
+        return paymentDetails;
+    }
+
+    @Override
+    protected String paymentDescription() {
+
+        return String.format("PAGADO CON CRÉDITO DE TIENDA :$"+ String.valueOf(getTotalAmount()));
+    }
 }

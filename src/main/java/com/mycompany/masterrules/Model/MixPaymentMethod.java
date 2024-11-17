@@ -16,4 +16,9 @@ public class MixPaymentMethod extends PaymentMethod2{
         this.setTotalAmount(this.getTotalAmount().add(paymentMethod.getTotalAmount()));
     }
 
+    @Override
+    public PaymentDetails paymentProcess() {
+
+        return null;
+    }
 }

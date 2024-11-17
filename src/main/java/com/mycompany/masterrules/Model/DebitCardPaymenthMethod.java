@@ -8,4 +8,11 @@ public class DebitCardPaymenthMethod extends PaymentMethod2{
         super(totalAmount);
         this.reference = reference;
     }
+
+    @Override
+    public PaymentDetails paymentProcess() {
+        PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CARD,this.getTotalAmount());
+        paymentDetails.setReference(reference);
+        return paymentDetails;
+    }
 }
