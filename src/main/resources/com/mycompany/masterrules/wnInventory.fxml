@@ -68,8 +68,8 @@
                         <TextField fx:id="txtFieldMaxInv" layoutX="103.0" layoutY="57.0" />
                      </children>
                   </Group>
-                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#saveInfo" prefHeight="60.0" prefWidth="120.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar" />
-                  <Button fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" layoutX="295.0" layoutY="24.0" mnemonicParsing="false" onAction="#exit" onMouseClicked="#saveInfo" prefHeight="20.0" prefWidth="108.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Atrás" />
+                  <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#buttonSaveInfo" prefHeight="60.0" prefWidth="120.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Guardar" />
+                  <Button fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" layoutX="295.0" layoutY="24.0" mnemonicParsing="false" onAction="#exit" onMouseClicked="#buttonSaveInfo" prefHeight="20.0" prefWidth="108.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Atrás" />
                </children>
                <styleClass>
                   <String fx:value="white-bg" />

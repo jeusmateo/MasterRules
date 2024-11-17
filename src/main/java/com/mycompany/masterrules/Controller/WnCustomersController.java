@@ -21,6 +21,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+
+//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
 public class WnCustomersController implements Initializable {
 
     private CustomerManager customerManager;
@@ -97,20 +99,8 @@ public class WnCustomersController implements Initializable {
     private TableColumn<Customer, String> colCustomerId;
     @FXML
     private TableColumn<Customer, String> colCustomerName;
-    @FXML
-    private TableColumn<Customer, String> tableColumnEditCustomerId;
-    @FXML
-    private TableColumn<Customer, String> tableColumnEditCustomerName;
-    @FXML
-    private TableView<Customer> tableViewCustomerEdit;
 
-    @FXML
-    private TableView<Customer> tblCustomers2;
-    @FXML
-    private TableColumn<Customer, String> colCustomerId2;
-    
-    @FXML
-    private TableColumn<Customer, String> colCustomerName2;
+
 
     @FXML
     private Label lbCustomerIdAuxiliar;
@@ -165,7 +155,7 @@ public class WnCustomersController implements Initializable {
     }
 
 
-
+    // checar si customer es nullo
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
@@ -265,24 +255,17 @@ public class WnCustomersController implements Initializable {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colCustomerName.setReorderable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        colCustomerId2.setReorderable(false);
-        colCustomerId2.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        colCustomerName2.setReorderable(false);
-        colCustomerName2.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        tableColumnEditCustomerId.setReorderable(false);
-        tableColumnEditCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        tableColumnEditCustomerName.setReorderable(false);
-        tableColumnEditCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+
+
         setItemsToAllTables(customers);
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
-        tableViewCustomerEdit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
         tblCustomers.setItems(customers);
-        tblCustomers2.setItems(customers);
-        tableViewCustomerEdit.setItems(customers);
+
+
     }
 
     private void showCustomerDetailsForUpdate(Customer customer) {
