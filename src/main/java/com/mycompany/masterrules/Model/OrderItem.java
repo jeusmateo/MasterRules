@@ -1,12 +1,19 @@
 package com.mycompany.masterrules.Model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
+@Entity
 public class OrderItem {
     private int quantity;
+    @Id
+    @OneToOne
     private Product product;
     private BigDecimal amount;
 
+    protected OrderItem() {
+    }
 
     public OrderItem(int quantity, Product product) {
         this.quantity = quantity;
