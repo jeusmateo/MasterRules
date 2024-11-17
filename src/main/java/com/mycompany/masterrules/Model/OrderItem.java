@@ -15,8 +15,8 @@ public class OrderItem {
     protected OrderItem() {
     }
 
-    public OrderItem(int quantity, Product product) {
-        this.quantity = quantity;
+    public OrderItem(Product product) {
+        this.quantity = 1;
         this.product = product;
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));
     }

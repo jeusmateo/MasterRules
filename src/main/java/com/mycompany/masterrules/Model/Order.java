@@ -22,11 +22,11 @@ public class Order {
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount; //Chepo necesidad: TODO ESTO DEBERIA SER EL SUBTOTAL
     @OneToMany
-    private List<OrderItem> products;
+    private List<OrderItem> orderItemList; //TODO siento que no es del todo legible al utilizar algo como products en un objeto que no es producto
 
 
     public Order() {
-        products = new ArrayList<>();
+        orderItemList = new ArrayList<>();
     }
 
 
@@ -44,15 +44,19 @@ public class Order {
 
      */
     //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
-    public void addProductToOrder(OrderItem product) {
-        if (products.contains(product)) {
-            product.addQuantity();
+    public void addProductToOrderItemList(OrderItem newOrderItem) {
+        for(OrderItem orderItem : orderItemList){
+            if(newOrderItem.getProduct().equals(orderItem.getProduct())){
+                orderItem.addQuantity();
+            }else{
+                orderItemList.add(newOrderItem);
+            }
         }
     }
 
 
     public void removeProduct(Product product) {
-        products.remove(product);
+        orderItemList.remove(product);
     }
 
     public Customer getCustomer() {
@@ -87,6 +91,10 @@ public class Order {
         this.date = date;
     }
 
+    public void setDateNow(){
+        this.date = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
@@ -115,7 +123,7 @@ public class Order {
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
                 ", totalAmount=" + totalAmount +
-                ", products=" + products +
+                ", products=" + orderItemList +
                 '}';
     }
 
@@ -132,12 +140,12 @@ public class Order {
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(totalAmount, order.totalAmount) &&
-                Objects.equals(products, order.products);
+                Objects.equals(orderItemList, order.orderItemList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, employeeName, numeroDeMesa, comment, deliveryMethod, date, totalAmount, products);
+        return Objects.hash(id, customer, employeeName, numeroDeMesa, comment, deliveryMethod, date, totalAmount, orderItemList);
     }
 }
 
