@@ -29,9 +29,10 @@ public class WnLoginController implements Initializable {
     private TextField txtFieldUserName;
     @FXML
     private PasswordField txtFieldPassword;
-
     @FXML
     private Label lbIncorrectCredential;
+
+
 
     @FXML
     private void eventKey(KeyEvent event) {
