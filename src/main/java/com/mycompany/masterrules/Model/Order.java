@@ -32,8 +32,8 @@ public class Order {
 
 
     public Order(){
-        products = new HashMap();
-        combos = new ArrayList();
+        products = new HashMap<>();
+        combos = new ArrayList<>();
         date= LocalDateTime.now();
     }
 
