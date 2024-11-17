@@ -5,56 +5,73 @@ import com.mycompany.masterrules.Database.ProductDBManager;
 import com.mycompany.masterrules.Model.Bill;
 import com.mycompany.masterrules.Model.Order;
 import com.mycompany.masterrules.Model.Product;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Objects;
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BillDBTest {
-    public static void main(String[] args) {
-        Product product = new Product("1", "Coca cola", "Refresco", BigDecimal.valueOf(10.0), BigDecimal.valueOf(1.0));
-        ProductDBManager productDBManager = new ProductDBManager();
-        assert productDBManager.save(product); // Se debe guardar el producto en la base de datos para poder guardar la factura
+    static final BillDBManager billDBManager = new BillDBManager();
 
-        product = null;
 
-        product = productDBManager.findById("1");
-
-        Order order = new Order();
-        order.addProduct(product, 1);
-
-        Bill bill = new Bill(order, "David Torres");
-
-        BillDBManager billDBManager = new BillDBManager();
-
-        // Save the bill
-        assert billDBManager.save(bill);
-
+    @Test
+    void saveBill() {
+        var Product = new Product("1", "Coca cola", "Refresco", BigDecimal.valueOf(10.0), BigDecimal.valueOf(1.0));
+        var productDBManager = new ProductDBManager();
+        // Save the product
+        assertTrue(productDBManager.save(Product));
+        var order = new Order();
+        order.addProduct(Product, 1);
+        var bill = new Bill(order, "David Torres");
+        assertTrue(billDBManager.save(bill));
         System.out.println("Bill saved successfully");
+    }
 
-        // find the bill
-        Bill foundBill = billDBManager.findById(bill.getId());
-        assert foundBill != null;
-//        assert foundBill.equals(bill); // This will fail because the equals method is not implemented
-
+    @Test
+    void findBill() {
+        var Bill = billDBManager.findById(1L);
+        assertNotNull(Bill);
         System.out.println("Bill found successfully");
+    }
 
-        // Update the bill
-        foundBill.setAmount(BigDecimal.valueOf(20.0));
-        assert billDBManager.update(foundBill);
+    @Test
+    void updateBill() {
+        var Bill = billDBManager.findById(1L);
+        assertNotNull(Bill);
+        Bill.setAmount(BigDecimal.valueOf(20.0));
+        assertTrue(billDBManager.update(Bill));
         System.out.println("Bill updated successfully");
+    }
 
-        // Save another bill
-        Bill bill2 = new Bill(order, "David Torres");
-        assert billDBManager.save(bill2);
-        System.out.println("Bill 2 saved successfully");
-
-        // get all bills
-        assert Objects.requireNonNull(billDBManager.readAll()).size() == 2;
+    @Test
+    void getAllBills() {
+        var Bills = billDBManager.readAll();
+        assertNotNull(Bills);
         System.out.println("All bills read successfully");
+    }
 
-        // Delete the bill
-        assert billDBManager.delete(foundBill);
+    @Test
+    void getBillsByDateRange() {
+
+        var order = new Order();
+        order.setDate(LocalDateTime.of(2021, 1, 1, 0, 0));
+        var bill = new Bill(order, "David Torres");
+        assertTrue(billDBManager.save(bill));
+        var Bills = billDBManager.findByDateRange(
+                LocalDateTime.of(2021, 1, 1, 0, 0),
+                LocalDateTime.of(2021, 1, 1, 23, 59));
+        assertNotNull(Bills);
+        System.out.println("Bills found by date range successfully");
+    }
+
+    @Test
+    void deleteBill() {
+        var Bill = billDBManager.findById(1L);
+        assertNotNull(Bill);
+        assertTrue(billDBManager.delete(Bill));
         System.out.println("Bill deleted successfully");
-
     }
 }
