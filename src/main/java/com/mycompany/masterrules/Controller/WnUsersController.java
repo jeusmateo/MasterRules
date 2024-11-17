@@ -198,9 +198,10 @@ public class WnUsersController implements Initializable {
                     //throw Exception chepo = new Exception("Chepo");
                 }
 
-            } else if () {
-
             }
+//            else if () {
+//
+//            }
         } catch (Exception e) {
             System.out.println("Chepo " + e.getMessage());
         }
