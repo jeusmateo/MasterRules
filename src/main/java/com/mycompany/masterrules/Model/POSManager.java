@@ -39,11 +39,11 @@ public class POSManager {
     }
 
 
-    public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
+    public void addCustomComboToOrder(CustomCombo customCombo) {//TODO pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
-        for (String keyQuantity : customComboTemplate.getQuantityByCategory().keySet()) {
+        for (String keyQuantity : customCombo.getQuantityPerCategory().keySet()) {
             int quantity = 0;
-            quantity = customComboTemplate.getQuantityByCategory().get(quantity);
+            quantity = customCombo.getQuantityPerCategory().get(quantity);
             for (int iterationCounter = 0; iterationCounter < quantity; iterationCounter++) {
                 Product product = new Product();
                 products.add(product);
@@ -52,12 +52,12 @@ public class POSManager {
 
         }
 
-        if (customComboTemplate.getDefaultProducts() != null) {
-            for (Product product : customComboTemplate.getDefaultProducts()) {
+        if (customCombo.getAllProducts() != null) {
+            for (Product product : customCombo.getAllProducts()) {
                 products.add(product);
             }
         }
-        Combo combo = new Combo(customComboTemplate.getComboName(), products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice());
+        Combo combo = new Combo(customCombo.getComboName(), products, customCombo.getPrice(), customCombo.getVIPPrice());
         this.addProductToOrder(combo);
     }
 

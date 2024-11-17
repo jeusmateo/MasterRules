@@ -16,7 +16,7 @@
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
         <mapping class="com.mycompany.masterrules.Model.Combo"/>
-        <mapping class="com.mycompany.masterrules.Model.CustomComboTemplate"/>
+        <mapping class="com.mycompany.masterrules.Model.CustomCombo"/>
 
 
         <mapping class="com.mycompany.masterrules.Model.UserAccount"/>

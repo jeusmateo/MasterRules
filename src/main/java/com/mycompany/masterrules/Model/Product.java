@@ -19,7 +19,6 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Product {
     @Id
-
     private String productID;
     private String productName;
     private String productType;
