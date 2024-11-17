@@ -16,7 +16,6 @@ public class POSManager {
     private CustomerManager customerManager; //TODO No lo debe tener de atributo, debemos buscar cual sea la forma correcta de obtener la informacion.
     private CashRegisterAuditReportManager cashRegisterAuditReportManager; //TODO Lo mismo, el pos debe poder comunicarse con la entidad que guarda los bills para guardarlos
     private CafeteriaManager cafeteriaManager;//TODO basura
-    private Printer printer; //TODO Comunicacion mas no atributo
     private UserAccount currentUser; //
     private Order currentOrder; //TODO Este es el carrito, no esta del todo mal
 
@@ -25,42 +24,21 @@ public class POSManager {
         currentUser = userAccount;
         cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
         cafeteriaManager = cafeteriaManagerArg;
-        printer = new Printer();
+
         currentOrder = new Order();
     }
 
-    /**
-     * Agrega un producto a la orden actual
-     *
-     * @param product El producto a agregar a la orden.
-     */
+    //Flujo Chepil para vender.
+    //-Primero tomamos la orden para añadir
+    //Configuramos la orden
+    //Para vender tomamos la orden y cobramos
+    //Creamos el bill y devolvemos.
 
     /*
-    public void addProductToOrder(Product product) {
-        currentOrder.addProduct(product);
 
-    }
 
-     */
 
-    /**
-     * Busca un producto en el menu de la cafeteria
-     *
-     * @param id   El identificador del producto a buscar.
-     * @param type El tipo de producto a buscar, se requiere para buscar en la
-     *             lista correcta del Hashmap que guarda los productos.
-     * @return El producto encontrado, si no se encuentra retorna null.
-     */
-    /*
-    public Product findProductByType(String id, String type) throws Exception {//estaba en español. //TODO tambien movi este metodo porque estaba arriva de los contructores
-        //TODO Refactorizacion : Ya existe un codigo dentro del manager que hacer esto, simplemenbte puede guardarlo
-        for (Product product : cafeteriaManager.getMenu().getProductsByType(type)) {//TODO cambie el metodo getProductsByType
-            if (id.equals(product.getProductID())) {//TODO inverti el id y product.getProductID() para que fuera mas legible
-                return product;
-            }
-        }
-        return null;//creo ue seria mejor una exception
-    }
+
 
      */
     public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
@@ -81,21 +59,10 @@ public class POSManager {
                 products.add(product);
             }
         }
-        Combo combo = new Combo(customComboTemplate.getComboName(),products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice());
-        this.addComboToOrder(combo);
+        Combo combo = new Combo(customComboTemplate.getComboName(), products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice());
     }
 
-    public void addComboToOrder(Combo combo) {
-        currentOrder.addCombo(combo);
-    }
 
-    /**
-     * Realiza las ultimas configuraciones a la orden antes de venderla.
-     *
-     * @param metodoDeEntrega El metodo de entrega de la orden.
-     * @param comentario      Comentario adicional a la orden.
-     * @param customer        El cliente al que se le vendera la orden.
-     */
     public void configureOrder(Customer customer, String metodoDeEntrega, String comentario) {
         currentOrder.setCustomer(customer);
         currentOrder.setDeliveryMethod(metodoDeEntrega);
@@ -103,23 +70,12 @@ public class POSManager {
         currentOrder.setDate(LocalDateTime.now());
     }
 
-    /**
-     * Realiza las ultimas configuraciones a la orden antes de venderla. Aunque
-     * en este caso no se le asigna un cliente.
-     *
-     * @param eleccion   El metodo de entrega de la orden.
-     * @param comentario Comentario adicional a la orden.
-     */
+
     public void configureOrder(String eleccion, String comentario) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
     }
 
-    /**
-     * Calcula el total de la orden actual.
-     *
-     * @return El total de la orden actual.
-     */
 
     /*
     private BigDecimal calculateTotalOrderAmount() {
@@ -145,10 +101,6 @@ public class POSManager {
 
      */
 
-    /**
-     * Realiza la logica de venta de la orden actual, crea la factura e imprime
-     * la orden y factura.
-     */
 
     //TODO ESTO NO ESTA PARA NADA LISTO, ESTOY MUY CANSADO MENTALMENTE,POR FAVOR NO OLVIDEMOS CHECAR ESTO YA QUE TAMBIEN LOS BILL CAMBIAN SEGUN EL METODO DE PAGO YA QUE POR EJEMPLO EL DE TARJETA GUARDA LA REFERENCIA DEL METODO DE PAGO.
     public void sell(PaymentDetails paymentDetails) {
@@ -180,7 +132,7 @@ public class POSManager {
             newBill.setAmount(currentOrder.getTotalAmount());
             newBill.setEmployeeName(currentUser.getFullEmployeeName());
             if (paymentStatus) {
-
+                Printer printer = new Printer();
                 this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
                 // printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
                 printer.imprimirBill(newBill);
@@ -224,12 +176,6 @@ public class POSManager {
         return false;
     }
 
-    /**
-     * Realiza el cobro de una deuda pendiente de un cliente.
-     *
-     * @param customerArg El cliente al que se le cobrara la deuda.
-     * @param debtArg     La deuda que se cobrara.
-     */
 
     /*
     public void collectDebt(Customer customerArg, Debt debtArg) {
@@ -248,11 +194,6 @@ public class POSManager {
 
      */
 
-    /**
-     * Permite realizar un pedido que se pagara en otro momento.
-     *
-     * @param customer Requiere a un cliente para poder hacer la deuda.
-     */
 
     /*
     public void buyNowPayLater(Customer customer) {
