@@ -64,6 +64,8 @@ public class POSManager {
 
     public void configureOrder(Customer customer, String metodoDeEntrega, String comentario) {
         currentOrder.setCustomer(customer);
+        currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
+
         currentOrder.setDeliveryMethod(metodoDeEntrega);
         currentOrder.setComment(comentario);
         currentOrder.setDate(LocalDateTime.now());
@@ -75,6 +77,30 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
+    public void sell(PaymentDetails paymentDetails, Order order) {
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+            boolean paymentStatus;
+            switch (paymentDetails.getPaymentMethod()) {
+                case CARD -> {
+                    paymentStatus = this.processCardPayment(paymentDetails.getReference());
+
+                }
+                case CASH -> {
+                    paymentStatus = processCashPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerCashAmount());
+
+                }
+                case STORE_CREDIT -> {
+                    paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+                }
+                default -> paymentStatus = false;
+
+            }
+            if(paymentStatus){
+                Bill newBill = new Bill();
+
+            }
+        }
+    }
 
     /*
     private BigDecimal calculateTotalOrderAmount() {

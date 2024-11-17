@@ -55,7 +55,9 @@ public class Order {
         }
     }
 
-
+    public void setEmployeeName(String employeeName){
+        this.employeeName = employeeName;
+    }
     public void removeProduct(Product product) {
         orderItemList.remove(product);
     }
