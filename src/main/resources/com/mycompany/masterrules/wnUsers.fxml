@@ -596,7 +596,7 @@
                                           <HBox layoutX="287.0" layoutY="157.0" spacing="130.0" AnchorPane.bottomAnchor="373.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="157.0">
                                              <children>
                                                 <Label text="User" />
-                                                <TextField fx:id="textEditUserAccountUser" />
+                                                <TextField fx:id="textEditUserName" />
                                              </children>
                                           </HBox>
                                        </children>
