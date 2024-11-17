@@ -5,9 +5,7 @@ import com.mycompany.masterrules.Database.CustomerDBManager;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @author David Torres Clase que se encarga de gestionar los clientes
- */
+
 public class CustomerManager {
     CustomerDBManager customerDBManager = new CustomerDBManager();
 

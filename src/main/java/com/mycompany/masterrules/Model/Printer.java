@@ -2,10 +2,6 @@ package com.mycompany.masterrules.Model;
 
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author David Torres
- */
 public class Printer {
 
     //TODO: se debe cambiar a ingles la parte d elos metodos

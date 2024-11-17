@@ -6,11 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- *
- * @author David Torres
- *
- */
+
 @Entity
 public class Debt {
 

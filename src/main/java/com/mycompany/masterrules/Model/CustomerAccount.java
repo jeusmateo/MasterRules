@@ -99,11 +99,6 @@ public class CustomerAccount {
     }
 */
 
-    /**
-     * NOTA: Este constructor no se usa en el programa, es solo para pruebas
-     *
-     * @return Retorna una cadena con la información de la cuenta del cliente
-     */
     @Override
     public String toString() {
         return "CustomerAccount{" +
