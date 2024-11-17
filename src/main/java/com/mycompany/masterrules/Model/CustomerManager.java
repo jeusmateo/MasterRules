@@ -9,7 +9,7 @@ import java.util.List;
  * @author David Torres Clase que se encarga de gestionar los clientes
  */
 public class CustomerManager {
-    CustomerDBManager customerDBManager = new CustomerDBManager();
+    private final CustomerDBManager customerDBManager = new CustomerDBManager();
 
     public void removeCustomer(String id) {
         Customer customer = customerDBManager.findById(id);
