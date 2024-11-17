@@ -9,9 +9,6 @@ import com.mycompany.masterrules.Database.UserDBManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author alexs
- */
 // todo: renombrar esta clase
 public class LoginValidator {
     private final List<UserAccount> userAccounts;
@@ -28,13 +25,6 @@ public class LoginValidator {
         return username.equals("admin") && password.equals("admin") || username.isEmpty() && password.isEmpty();
     }
 
-    /**
-     * Valida al usuario cuando este ingrese al sistema de punto de venta
-     *
-     * @param username Nombre del usuario ingresado
-     * @param password Constraseña del usuario ingresado
-     * @return Verdadero, si el nombre y constraseña del usuario son correctos. Falso, si el nombre o contraseña del usuario son incorrectos
-     */
     public boolean validateUser(String username, String password) throws Exception {//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         // hardcodeado el admin y el password
         if (isAdmin(username, password)) {
@@ -53,13 +43,6 @@ public class LoginValidator {
 
     }
 
-    /**
-     * Busca a un usuario
-     *
-     * @param username Nombre de usuario a encontrar
-     * @return Usuario encontrado
-     * @throws java.lang.Exception Si el usuario no existe en el sistema de punto de venta, se lanza un error
-     */
     public UserAccount findUser(String username) throws Exception {
         //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
         for (UserAccount registeredUser : userAccounts) {

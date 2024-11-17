@@ -4,10 +4,7 @@
  */
 package com.mycompany.masterrules.Model;
 
-/**
- *
- * @author alexs
- */
+
 public class StockInfo {
     private int currentStock;
     private int minStock;

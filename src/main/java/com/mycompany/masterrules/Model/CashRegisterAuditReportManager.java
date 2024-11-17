@@ -5,10 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-/**
- *
- * @author David Torres
- */
+
 public class CashRegisterAuditReportManager {
 
     private ArrayList<CashRegisterAuditReport> cashRegisterAuditReports;

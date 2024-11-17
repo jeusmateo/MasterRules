@@ -6,9 +6,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * @autor: Raul Magaña
- */
 @Embeddable
 public class Order {
 

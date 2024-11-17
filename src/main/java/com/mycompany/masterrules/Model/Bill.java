@@ -71,12 +71,7 @@ public class Bill {
         this.change = change;
     }
 
-    /**
-     * Constructor de la clase Bill
-     * @param orderArg Orden a la que pertenece la factura
-     * @param amountArg Monto total de la factura
-     * @param employeeNameArg Nombre del empleado en turno
-     */
+
     public Bill(Order orderArg, String employeeNameArg) {
         order = orderArg;
         employeeName = employeeNameArg;
@@ -87,82 +82,52 @@ public class Bill {
     public void setReference(String reference) {
         this.reference = reference;
     }
-    /**
-     * Obtiene el id de la factura
-     * @return El id de la factura
-     */
+
     public long getId() {
         return id;
     }
 
-    /**
-     * Establece el id de la factura
-     * @param id El id de la factura
-     */
+
     public void setId(long id) {
         this.id = id;
     }
 
-    /**
-     * Obtiene la orden a la que pertenece la factura
-     * @return La orden a la que pertenece la factura
-     */
+
     public Order getOrder() {
         return order;
     }
 
-    /**
-     * Establece la orden a la que pertenece la factura
-     * @param order La orden a la que pertenece la factura
-     */
+
     public void setOrder(Order order) {
         this.order = order;
     }
 
-    /**
-     * Obtiene el monto total de la factura
-     * @return El monto total de la factura
-     */
+
     public BigDecimal getAmount() {
         return amount;
     }
 
-    /**
-     * Establece el monto total de la factura
-     * @param amount El monto total de la factura
-     */
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    /**
-     * Obtiene el nombre del empleado en turno
-     * @return El nombre del empleado en turno
-     */
+
     public String getEmployeeName() {
         return employeeName;
     }
 
-    /**
-     * Establece el nombre del empleado en turno
-     * @param employeeName El nombre del empleado en turno
-     */
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
 
-    /**
-     * Obtiene el cliente al que se le realiza la factura
-     * @return El cliente al que se le realiza la factura
-     */
+
     public Customer getCustomer() {
         return customer;
     }
 
-    /**
-     * Establece el cliente al que se le realiza la factura
-     * @param customerAccount El cliente al que se le realiza la factura
-     */
+
     public void setCustomerAccount(Customer customerAccount) {
         this.customer = customerAccount;
     }
@@ -181,10 +146,7 @@ public class Bill {
 
     }
 
-    /**
-     * @param o Objeto a comparar con la factura
-     * @return true si el objeto es igual a la factura, de lo contrario false
-     */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -194,17 +156,13 @@ public class Bill {
         return id == bill.id && Objects.equals(employeeName, bill.employeeName) && Objects.equals(customer, bill.customer) && amount.compareTo(bill.amount) == 0 && Objects.equals(order, bill.order);
     }
 
-    /**
-     * @return El hash de la factura
-     */
+
     @Override
     public int hashCode() {
         return Objects.hash(id, employeeName, customer, amount, order);
     }
 
-    /**
-     * @return La representación en cadena de la factura
-     */
+
     @Override
     public String toString() {
         return "Bill{" +

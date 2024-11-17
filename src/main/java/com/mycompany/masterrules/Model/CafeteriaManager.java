@@ -1,8 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-/**
- * Class for instances of CafeteriaManager
- */
+
 public class CafeteriaManager {
 
     private final CafeteriaMenu menu;
