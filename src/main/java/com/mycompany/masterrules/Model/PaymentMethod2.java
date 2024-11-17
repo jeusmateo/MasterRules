@@ -20,7 +20,7 @@ public abstract class PaymentMethod2 {
 
     public abstract PaymentDetails paymentProcess();
 
-    protected abstract String paymentDescription();
+    public abstract String paymentDescription();
 
 }
 

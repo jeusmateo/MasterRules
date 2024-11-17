@@ -3,10 +3,11 @@ package com.mycompany.masterrules.Model;
 import java.math.BigDecimal;
 
 public class StoreCreditPayMethod extends PaymentMethod2{
-    private BigDecimal storeCreditUsed;
+    private BigDecimal recibido;
+
     public StoreCreditPayMethod(BigDecimal totalAmount, BigDecimal customerStoreCredit){
         super(totalAmount);
-        this.storeCreditUsed = customerStoreCredit;
+        this.recibido = customerStoreCredit;
 
     }
 
@@ -18,8 +19,8 @@ public class StoreCreditPayMethod extends PaymentMethod2{
     }
 
     @Override
-    protected String paymentDescription() {
+    public String paymentDescription() {
 
-        return String.format("PAGADO CON CRÉDITO DE TIENDA :$"+ String.valueOf(getTotalAmount()));
+        return String.format("PAGADO CON CRÉDITO DE TIENDA :$"+ String.valueOf(getTotalAmount())+"\n");
     }
 }

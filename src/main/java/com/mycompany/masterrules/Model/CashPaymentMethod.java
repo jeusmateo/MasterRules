@@ -4,28 +4,29 @@ import java.math.BigDecimal;
 
 public class CashPaymentMethod extends PaymentMethod2{
     private BigDecimal customerCashAmount;
+    private BigDecimal changeAmount;
     public CashPaymentMethod(BigDecimal totalAmount, BigDecimal customerCashAmount){
         super(totalAmount);
         this.customerCashAmount = customerCashAmount;
-
+        this.changeAmount = customerCashAmount.subtract(totalAmount);
 
     }
 
     @Override
     public PaymentDetails paymentProcess() {
         PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH,this.getTotalAmount());
-        paymentDetails.setChangeAmount(customerCashAmount.subtract(this.getTotalAmount()));
+        paymentDetails.setChangeAmount(changeAmount);
 
         return null;
     }
 
     @Override
-    protected String paymentDescription() {
+    public String paymentDescription() {
         StringBuilder description = new StringBuilder("PAGADO CON EN EFECTIVO: $");
         description.append(String.valueOf(this.getTotalAmount()));
-        description.append("/n");
-        description.append("CAMBIO: $"+String.valueOf(customerCashAmount.subtract(this.getTotalAmount())));
-        description.append("/n");
+        description.append("\n");
+        description.append("CAMBIO: $"+String.valueOf(changeAmount));
+        description.append("\n");
 
         return description.toString();
     }
