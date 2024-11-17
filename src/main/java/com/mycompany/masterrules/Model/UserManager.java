@@ -13,11 +13,13 @@ public class UserManager {
     // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
 
     public UserManager() {
-        // todo: usuarios temporales
-        userDBManager.save(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
-        userDBManager.save(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo"));
-    }
+      //  userDBManager.save(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
+//userDBManager.save(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo")); // todo: usuarios temporales
 
+    }
+    public void updateUserInformation(UserAccount editedUserAccount){
+        userDBManager.update(editedUserAccount);
+    }
 
     public UserManager(List<UserAccount> userAccounts) {
         throw new UnsupportedOperationException("Not supported yet.");
