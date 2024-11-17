@@ -1,8 +1,8 @@
-package com.mycompany.masterrules;
+package com.mycompany.masterrules.Model;
 
-import com.mycompany.masterrules.Model.UserAccount;
-import com.mycompany.masterrules.Model.UserManager;
-import com.mycompany.masterrules.Model.UserPermissions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,4 +41,5 @@ class UserManagerTest {
 
         assertNotNull(userManager.getUserAccounts());
     }
+
 }

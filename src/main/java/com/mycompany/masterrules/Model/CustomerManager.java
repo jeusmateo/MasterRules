@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class CustomerManager {
-    CustomerDBManager customerDBManager = new CustomerDBManager();
+    private final CustomerDBManager customerDBManager = new CustomerDBManager();
 
     public void removeCustomer(String id) {
         Customer customer = customerDBManager.findById(id);
