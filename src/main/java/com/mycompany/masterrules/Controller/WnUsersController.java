@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,14 +33,16 @@ public class WnUsersController implements Initializable {
 
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
-    @FXML
-    private TextField textEditUserAccountUser;
+
 
     private void setUserEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
     }
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap();
+
+    @FXML
+    private TextField textEditUserName;
 
     @FXML
     private AnchorPane verCliente;
@@ -163,32 +164,47 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkEditStockMinMaxPerm2;
     @FXML
-    private TextField txtEditUserName;
+    private TextField txtEditUserCompleteName;
     @FXML
     private PasswordField pwfUserPassword;
     @FXML
     private PasswordField pwfUserPasswordConfirm;
     @FXML
     private Button btnEditUser;
+    @FXML
+    private TextField txtFieldCreateUserCompleteName;
+    @FXML
+    private TextField txtFieldCreateUserName;
 
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
         try {
             if (evt.equals(btnEditUser)) {
-                String editUserName = txtEditUserName.getText();
+                System.out.println("Aqui antes de editar");
+                for (UserAccount userAccount : userManager.getUserAccounts()) {
+                    System.out.println(userAccount.getFullEmployeeName());
+
+                }
+                String editUserName = txtEditUserCompleteName.getText();
                 String editUserPassword = pwfUserPassword.getText();
                 String confirmUserPassword = pwfUserPasswordConfirm.getText();
-                String confirUserAccountUserEdit = textEditUserAccountUser.getText();
+                String confirUserAccountUserEdit = textEditUserName.getText();
                 if (editUserPassword.equals(confirmUserPassword)) {
                     this.userEdit.setFullEmployeeName(editUserName);
                     this.userEdit.setPassword(editUserPassword);
                     this.userEdit.setUserName(confirUserAccountUserEdit);
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
                     tblUserAccount.setItems(userAccounts);
+                    System.out.println("Aqui despues de editar");
+                    for (UserAccount userAccount : userAccounts) {
+                        System.out.println(userAccount.getFullEmployeeName());
+
+                    }
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
+
             }
         } catch (Exception e) {
             System.out.println("Chepo " + e.getMessage());
@@ -238,7 +254,7 @@ public class WnUsersController implements Initializable {
         configCheckBox();
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
         configColumns();
-        tblUserAccount.setItems(userAccounts);
+
         tblUserAccount.setItems(userAccounts);
         // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
         // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
@@ -250,12 +266,12 @@ public class WnUsersController implements Initializable {
             System.out.println("Chepo23");
         }
         try {
-            txtEditUserName.setText(userAccount.getFullEmployeeName());
-            textEditUserAccountUser.setText(userAccount.getUserName());
+            txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
+            textEditUserName.setText(userAccount.getUserName());
             pwfUserPassword.setText(userAccount.getPassword());
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
-            System.out.println("Chepo2");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -273,14 +289,14 @@ public class WnUsersController implements Initializable {
     }
 
     private void registerUserAccount() {
-
-        String userName = txtEditUserName.getText();
+        String userCompleteName = txtFieldCreateUserCompleteName.getText();
         String userPassword = pwfUserPassword.getText();
-        String userAccountUser = textEditUserAccountUser.getText();
-        UserAccount newUserAccount = new UserAccount("4",userName, userPassword, userAccountUser); // TODO Decirle a matero que no se registra por error en base de datos
+        String userName = txtFieldCreateUserName.getText();
+        UserAccount newUserAccount = new UserAccount(userCompleteName, userPassword, userName); // TODO Decirle a matero que no se registra por error en base de datos
         userManager.registerNewUser(newUserAccount);
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
         tblUserAccount.setItems(userAccounts);
+
     }
 
 }
