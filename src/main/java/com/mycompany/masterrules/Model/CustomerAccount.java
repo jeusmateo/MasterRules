@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
 
 // TODO: Clase temporal para que no de errores (antiguo)
-//TODO: SE PUEDEN QUITAR LOS TODO?
 @Embeddable
 public class CustomerAccount {
 
@@ -21,7 +20,10 @@ public class CustomerAccount {
     private List<Debt> totalDebt;
     @Embedded // TODO: Revisar si es necesario (antiguo)
     private LoyaltyCard loyaltyCard;
+
+
     //TODO: DOS CONSTRUCTORES?
+
     public CustomerAccount(){
         this.loyaltyPoints = 0;
         this.storeCredit = BigDecimal.ZERO;

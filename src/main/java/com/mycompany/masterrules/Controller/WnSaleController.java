@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -90,16 +91,16 @@ public class WnSaleController implements Initializable {
     private AnchorPane scrCustomCombo;
 
     @FXML
-    private TableView<Product> tblOrder;
+    private TableView<OrderItem> tblOrder;
 
     @FXML
-    private TableColumn<Product, String> colAmount;
+    private TableColumn<OrderItem, String> colAmount;
 
     @FXML
-    private TableColumn<Product, String> colProduct;
+    private TableColumn<OrderItem, String> colProduct;
 
     @FXML
-    private TableColumn<Product, String> colPrice; // este si es un String?
+    private TableColumn<OrderItem, String> colPrice; // este si es un String?
 
     @FXML
     private Button btnBack;
@@ -319,22 +320,28 @@ public class WnSaleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<Product> productOrderList = FXCollections.observableArrayList();
+        ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList();
 
         colAmount.setReorderable(false);
-        colAmount.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+
+        colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));
         colPrice.setReorderable(false);
-        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
         colProduct.setReorderable(false);
-        colProduct.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        colProduct.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductName()));
 
         Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
         Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
         Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
-        productOrderList.add(p1);
-        productOrderList.add(p2);
-        productOrderList.add(p3);
+        OrderItem pI1 = new OrderItem(1,p1);
+        OrderItem pI2 = new OrderItem(1,p2);
+        OrderItem pI3 = new OrderItem(2,p3);
+
+        productOrderList.add(pI1);
+        productOrderList.add(pI2);
+        productOrderList.add(pI3);
         tblOrder.setItems(productOrderList);
+
 
 
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
