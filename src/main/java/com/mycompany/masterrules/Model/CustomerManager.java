@@ -9,32 +9,19 @@ import java.util.List;
  * @author David Torres Clase que se encarga de gestionar los clientes
  */
 public class CustomerManager {
-
-    private List<Customer> customers;
-
-    public CustomerManager() {
-        CustomerDBManager customerDBManager = new CustomerDBManager();
-        customers =  customerDBManager.readAll();
-    }
-
+    CustomerDBManager customerDBManager = new CustomerDBManager();
 
     public void removeCustomer(String id) {
-        CustomerDBManager customerDBManager = new CustomerDBManager();
         Customer customer = customerDBManager.findById(id);
         customerDBManager.delete(customer);
     }
 
-
-
     public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
-        CustomerDBManager customerDBManager = new CustomerDBManager();
         Customer customer = customerDBManager.findById(id);
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
         customer.getCustomerAccount().setIsVIP(vipStatus);
         customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));
         customerDBManager.update(customer);
-
-
     }
 
 
@@ -49,7 +36,6 @@ public class CustomerManager {
                 loyaltyPointsInt = 0;
             }
             Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
-            CustomerDBManager customerDBManager = new CustomerDBManager();
             customerDBManager.save(customer);
         } else {
             throw new Exception("Parametros Incorrectos");
@@ -58,9 +44,7 @@ public class CustomerManager {
     }
 
     public List<Customer> getCustomers() {
-        CustomerDBManager customerDBManager = new CustomerDBManager();
-        customers = customerDBManager.readAll();
-        return customers;
+        return customerDBManager.readAll();
     }
 
 }

@@ -1,180 +1,125 @@
 package com.mycompany.masterrules.Model;
 
+import com.mycompany.masterrules.Database.UserDBManager;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que representa al conjunto de usuarios en MasterRules
- * @author alexs 
+ * @author alexs
  */
 public class UserManager {
     /**
      * Conjunto de usuarios en el sistema de punto de venta
      */
-    private ArrayList<UserAccount> userAccounts;
+    private final UserDBManager userDBManager = new UserDBManager();
 
     // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
     /**
      * Constructor de la clase
      */
     public UserManager() {
-        userAccounts= new ArrayList<UserAccount>();
-        userAccounts.add(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
-        userAccounts.add(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo"));
+        // todo: usuarios temporales
+        userDBManager.save(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
+        userDBManager.save(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo"));
     }
-    
+
     /**
      * Constructor de la clase
      * @param userAccounts Conjunto de usuarios en el sistema de punto de venta
      */
-    public UserManager(ArrayList<UserAccount> userAccounts) {
-        this.userAccounts = userAccounts;
+    public UserManager(List<UserAccount> userAccounts) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     /**
      * Agrega a un usuario en el sistema de punto de venta
      * @param newUser Usuario a agregar
-     * @throws java.lang.Exception Si el usuario ya esta en el sistema de punto de venta o si el nombre de usuario ya esta existe, se lanza un error
      */
-    public void addUser(UserAccount newUser) throws Exception{//cambie el nombre del parametro
-        if(!isUserRegistered(newUser)){
-            if(isUsernameValid(newUser.getUserName())){//cambie el metodo para que solo sea la validacion del username
-                if(isPasswordValid(newUser.getPassword())){
-                    userAccounts.add(newUser);
-                }
-                else{
-                    throw new Exception("ERROR: La constraseña no es válida");
-                }
-            }
-            else{
-                throw new Exception("ERROR: El nombre usuario es incorrecto o ya esta tomado");
-            }
+    public boolean registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
+        if (isValid(newUser)) {
+            return false;
         }
-        else{
-            throw new Exception("ERROR: EL usuario ya existe");
-        }
+        return userDBManager.save(newUser);
     }
-    
+
+    private boolean isValid(UserAccount newUser) {
+        return !isUserRegistered(newUser) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
+    }
+
     /**
      * Remueve un usuario del sistema de punto de venta
      * @param userID Identificador del usuario a eliminar
      * @throws java.lang.Exception Si el usuario no existe en el sistema de punto de venta, se lanza un error
      */
     public void removeUser(String userID) throws Exception{
-        for(int registeredUserCount=0;registeredUserCount<userAccounts.size();registeredUserCount++){//hay que ver si este nombre del indice esta bien
-            if(userID.equals(userAccounts.get(registeredUserCount).getUserID())){
-                userAccounts.remove(registeredUserCount);
-                return;//se me olvido terminar la busqueda aqui
-            }
+        var findUser = userDBManager.findById(userID);
+        if(findUser==null){
+            throw new UserNotFoundException(userID + " no encontrado");
         }
-        throw new Exception("ERROR: El usuario no existe");
+        userDBManager.delete(findUser);
     }
-    
+
     /**
      * Checa si el usuario ya esta registrado en el sistema de punto de venta
      * @param user Usuario a checar
      * @return Verdadero, si el usuario existe en el sistema de punto de venta. Falso, si el usuario no existe en el sistema
      */
     private boolean isUserRegistered(UserAccount user){
-        for(UserAccount registeredUser : userAccounts){
-            if(user.getUserID().equals(registeredUser.getUserID())){
-                return true;
-            }
-        }
-        return false;
+        return userDBManager.findById(user.getUserID()) != null;
     }
-    
+
     private boolean isUsernameValid(String username){//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
-        //verificar si no es nulo
-        if(username.equals("")){
-            return false;
-        }
-        //verificar si hay espacios
-        if(username.contains(" ")){
-            return false;
-        }
-        //verificar la longitud de la contraseña
-        if(username.length()<6 || username.length()>20){
-            return false;
-        }
-        
-        if(isUsernameTaken(username)){
-            return false;
-        }
-        
-        return true;
+        return !username.contains(" ") && username.length() >= 6 && username.length() <= 20 && !isUsernameTaken(username);
     }
-    
+
     /**
      * Checa si el nombre de usuario ya esta tomado
      * @param username Nombre de usuario a checar
      * @return Verdadero, si el nombre de usuario ya esta tomado. Falso, si no fue tomado
      */
     private boolean isUsernameTaken(String username){//cambie el param por username
-        for(UserAccount registeredUser : userAccounts){
+        for(UserAccount registeredUser : getUserAccounts()){
             if(username.equals(registeredUser.getUserName())){
                 return true;
             }
         }
         return false;
     }
-    
+
     private boolean isPasswordValid(String password){
-        //verificar si no es nulo
-        if(password.equals("")){
-            return false;
-        }
-        //verificar si hay espacios
-        if(password.contains(" ")){
-            return false;
-        }
-        //verificar la longitud de la contraseña
-        if(password.length()<8 || password.length()>20){
-            return false;
-        }
-        //verificar si no hay mas de 2 caracteres repetidos secuencialmente
-        if(hasMoreThanTwoConsecutiveChars(password)){
-            return false;
-        }
-        
-        return true;
+        return !password.contains(" ") && password.length() >= 8 && password.length() <= 20 && !hasMoreThanTwoConsecutiveChars(password);
     }
-    
+
     private boolean hasMoreThanTwoConsecutiveChars(String input){
         String threeRepeatedConsecutiveChars=".*(.)\\1\\1.*";
         return input.matches(threeRepeatedConsecutiveChars);
     }
-    
-    //movi los metodos FindUser y ValidateUser a la clase Login
-    
+
+    //movi los metodos FindUser y ValidateUser a la clase LoginValidator
+
     /**
      * Cambia los permisos de un usuario
      * @param userID Identificador del usuario al cual se le cambiara sus permisos
      * @param newPermissions Nuevos permisos del usuario
      * @throws java.lang.Exception Si el usuario no existe en el sistema de punto de venta, se lanza error
      */
-    public void changeUserPermits(String userID, UserPermissions newPermissions) throws Exception{//cambie el nombre del parametro permissions  newPermission//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
-        for(int registeredUserCount=0;registeredUserCount<userAccounts.size();registeredUserCount++){//hay que ver si el nombre del indice esta bien
-            if(userAccounts.get(registeredUserCount).getUserID().equals(userID)){
-                userAccounts.get(registeredUserCount).setPermissions(newPermissions);
+    public void changeUserPermissons(String userID, UserPermissions newPermissions) throws Exception{//cambie el nombre del parametro permissions  newPermission//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
+        for (UserAccount userAccount : getUserAccounts()) {
+            if (userAccount.getUserID().equals(userID)) {
+                userAccount.setPermissions(newPermissions);
                 return;
             }
         }
-        throw new Exception("ERROR: El usuario no existe");
+        throw new UserNotFoundException(userID + " no encontrado");
     }
 
     /**
      * Obtiene el conjunto de usuarios en el sistema de punto de venta
      * @return Conjunto de usuarios en el sistema de punto de venta
      */
-    public ArrayList<UserAccount> getUserAccounts() {
-        return userAccounts;
-    }
-
-    /**
-     * Establece el conjunto de usuarios en el sistema de punto de venta
-     * @param userAccounts Conjunto de usuarios en el sistema de punto de venta
-     */
-    public void setUserAccounts(ArrayList<UserAccount> userAccounts) {
-        this.userAccounts = userAccounts;
+    public List<UserAccount> getUserAccounts() {
+        return userDBManager.readAll();
     }
 }

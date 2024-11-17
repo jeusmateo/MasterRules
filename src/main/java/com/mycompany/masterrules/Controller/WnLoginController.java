@@ -3,8 +3,7 @@ package com.mycompany.masterrules.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.DAOTemporal;
-
+import com.mycompany.masterrules.Model.LoginValidator;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,7 +21,7 @@ import javafx.stage.Stage;
 
 public class WnLoginController implements Initializable {
 
-    private DAOTemporal chepo = new DAOTemporal();
+    private LoginValidator chepo = new LoginValidator();
 
     @FXML
     private Button btnLogin;
@@ -60,9 +59,14 @@ public class WnLoginController implements Initializable {
                 event.consume();
                 String user = txtFieldUserName.getText();
                 String pass = txtFieldPassword.getText();
-                if (this.chepo.verificador(user, pass)) {
-                    System.out.println("Usuario y contraseña correctos");
-                    loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                try {
+                    if (chepo.validateUser(user, pass)) {
+                        System.out.println("Usuario y contraseña correctos");
+                        loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error al validar usuario: " + e);
+                    lbIncorrectCredential.setVisible(true);
                 }
             }
 
@@ -76,9 +80,15 @@ public class WnLoginController implements Initializable {
         if (evt.equals(btnLogin)) {
             String user = txtFieldUserName.getText();
             String pass = txtFieldPassword.getText();
-            if (this.chepo.verificador(user, pass)) {
-                loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
-            } else {
+            try {
+                if (chepo.validateUser(user, pass)) {
+                    System.out.println("Usuario y contraseña correctos");
+                    loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                } else {
+                    lbIncorrectCredential.setVisible(true);
+                }
+            } catch (Exception e) {
+                System.err.println("Error al validar usuario: " + e);
                 lbIncorrectCredential.setVisible(true);
             }
 

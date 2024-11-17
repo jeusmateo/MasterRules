@@ -1,7 +1,5 @@
 package com.mycompany.masterrules.Model;
 
-import java.math.BigDecimal;
-
 /**
  * Class for instances of CafeteriaManager
  */
@@ -11,7 +9,6 @@ public class CafeteriaManager {
     private CafeteriaStorage storage;
 
     public CafeteriaManager() {
-        this.menu = new CafeteriaMenu("MR menu");
         this.storage = new CafeteriaStorage();
     }
     
@@ -50,7 +47,7 @@ public class CafeteriaManager {
         
         menu.editProduct(product);
         if(inInventory){
-            if(storage.isStored(product)){
+            if(storage.isProductStored(product)){
                 storage.editCurrentStock(product, stockInfo.getCurrentStock());//se cambio a editCurrentStock
                 storage.editMinStock(product, stockInfo.getMinStock());
                 storage.editMaxStock(product, stockInfo.getMaxStock());

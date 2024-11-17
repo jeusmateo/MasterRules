@@ -4,17 +4,15 @@
         TODO: modificar la base de datos por la final final y ver si se cambia de tecnología
         -->
         <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
+        <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
 <!--        <property name="hibernate.connection.url">jdbc:sqlite::memory:</property>-->
 <!--        Lo comenté para hacer pruebas con una BD nueva cada vez que se ejecute el programa-->
         <property name="hibernate.connection.url">jdbc:sqlite:CafeteriaMasterRulesDB.sqlite</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
-        <property name="hibernate.highlight_sql">true</property>
+<!---->
+<!--        <property name="show_sql">true</property>-->
+<!--        <property name="format_sql">true</property>-->
+<!--        <property name="hibernate.highlight_sql">true</property>-->
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.Product"/>
         <mapping class="com.mycompany.masterrules.Model.Combo"/>

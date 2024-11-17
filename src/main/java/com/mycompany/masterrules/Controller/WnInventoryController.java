@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +19,7 @@ import javafx.scene.control.TableView;
  * @author Jimena Garcia
  */
 
-
+//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
 public class WnInventoryController implements Initializable {
 
     //COMPONENTES DE LA VENTANA DE INVENTARIO
@@ -74,7 +73,7 @@ public class WnInventoryController implements Initializable {
     @FXML
     private TableColumn<Product, String> colProductMaxStock; // Objeto incorrecto, en productos no almacenamos esta informacion
 
-
+    //TODO esto
     public void displaySelected(MouseEvent event) {
     //Product productSelected =tblInventory.getSelectionModel().getSelectedItem();
     //poner la logica de eso, se supone que esto te entrega el cosito seleciconado, igual seria bueno cambiar el de los demas metodos porque hay que hacerlo bien gggggggg
@@ -101,7 +100,7 @@ public class WnInventoryController implements Initializable {
 
 
     @FXML
-    public void saveInfo(){
+    public void buttonSaveInfo(){
         scrEditInfo.setVisible(false);
         scrSeeClient.setVisible(true);
         txtFieldMinInv.clear();
