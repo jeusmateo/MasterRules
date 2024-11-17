@@ -34,13 +34,11 @@ public class POSManager {
     //Para vender tomamos la orden y cobramos
     //Creamos el bill y devolvemos.
 
-    /*
+    public void addProductToOrder(Product product) {
+        currentOrder.addProductToOrderItemList(new OrderItem(product));
+    }
 
 
-
-
-
-     */
     public void addCustomComboToOrder(CustomComboTemplate customComboTemplate) {//TODO pequeño error ortografico decie Custome en vez de Custom
         ArrayList<Product> products = new ArrayList();
         for (String keyQuantity : customComboTemplate.getQuantityByCategory().keySet()) {
@@ -60,6 +58,7 @@ public class POSManager {
             }
         }
         Combo combo = new Combo(customComboTemplate.getComboName(), products, customComboTemplate.getPrice(), customComboTemplate.getVIPPrice());
+        this.addProductToOrder(combo);
     }
 
 

@@ -333,9 +333,9 @@ public class WnSaleController implements Initializable {
         Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
         Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
         Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
-        OrderItem pI1 = new OrderItem(1,p1);
-        OrderItem pI2 = new OrderItem(1,p2);
-        OrderItem pI3 = new OrderItem(2,p3);
+        OrderItem pI1 = new OrderItem(p1);
+        OrderItem pI2 = new OrderItem(p2);
+        OrderItem pI3 = new OrderItem(p3);
 
         productOrderList.add(pI1);
         productOrderList.add(pI2);
