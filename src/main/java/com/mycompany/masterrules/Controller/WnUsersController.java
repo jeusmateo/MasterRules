@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -239,8 +240,8 @@ public class WnUsersController implements Initializable {
         configColumns();
         tblUserAccount.setItems(userAccounts);
         tblUserAccount.setItems(userAccounts);
-        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
-        tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
+        // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
+        // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
     private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
@@ -250,6 +251,8 @@ public class WnUsersController implements Initializable {
         }
         try {
             txtEditUserName.setText(userAccount.getFullEmployeeName());
+            textEditUserAccountUser.setText(userAccount.getUserName());
+            pwfUserPassword.setText(userAccount.getPassword());
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
             System.out.println("Chepo2");
@@ -261,6 +264,23 @@ public class WnUsersController implements Initializable {
         checkBoxPermissionMap.forEach((checkBox, permission) -> {
             checkBox.setSelected(userAccount.hasPermission(permission));
         });
+    }
+
+    @FXML
+    private void displaySelected( javafx.scene.input.MouseEvent event) {
+        UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
+        showUserAccountInfoForEditButtonHolaJajajChepo(userAccount);
+    }
+
+    private void registerUserAccount() {
+
+        String userName = txtEditUserName.getText();
+        String userPassword = pwfUserPassword.getText();
+        String userAccountUser = textEditUserAccountUser.getText();
+        UserAccount newUserAccount = new UserAccount("4",userName, userPassword, userAccountUser); // TODO Decirle a matero que no se registra por error en base de datos
+        userManager.registerNewUser(newUserAccount);
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+        tblUserAccount.setItems(userAccounts);
     }
 
 }
