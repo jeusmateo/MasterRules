@@ -13,27 +13,25 @@ import java.util.*;
 public class Order {
 
     @Transient
-    private long id;
+    private long id; //Chepo necesidad: Este es el numero de la comanda
     @ManyToOne
-    private Customer customer;
+    private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
     // @ManyToMany(fetch = FetchType.EAGER)
+    private String employeeName; //TODO debe ser un nombre mas claro que diga que es el empleado de turno quien toma la comanda
+    private String numeroDeMesa; //TODO CAMBIAR NOMBRE A INGLES
     @ElementCollection
-    private Map<Product, Integer> products;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Combo> combos;
     private String comment;
-    private String deliveryMethod;
-    private LocalDateTime date;
-    private BigDecimal totalAmount;
+    private String deliveryMethod; //Chepo necesidad: esto aun falta por checar
+    private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
+    private BigDecimal totalAmount; //Chepo necesidad: TODO ESTO DEBERIA SER EL SUBTOTAL
 
-    //private List<OrderItem> orderItems;
+    private List<OrderItem> products;
 
 
     public Order() {
-        products = new HashMap<>();
-        combos = new ArrayList<>();
-        date = LocalDateTime.now();
+        products = new ArrayList<>();
     }
 
 
@@ -50,30 +48,19 @@ public class Order {
     }
 
  */
-
-    public void addProductToOrder(Product product) {
-        if (products.containsKey(product)) {
-            products.put(product, products.get(product) + 1);
-        } else {
-            products.put(product, 1);
+    //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
+    public void addProductToOrder(OrderItem product) {
+        if (products.contains(product)) {
+            product.addQuantity();
         }
     }
 
-    public void addProduct(Product product, int quantity) {
-        products.put(product, quantity);
-    }
 
     public void removeProduct(Product product) {
         products.remove(product);
     }
 
-    public void addCombo(Combo combo) {
-        combos.add(combo);
-    }
 
-    public void removeCombo(Combo combo) {
-        combos.remove(combo);
-    }
 
     public void setComment(String comment) {
         this.comment = comment;
@@ -91,13 +78,6 @@ public class Order {
         return customer;
     }
 
-    public Map<Product, Integer> getProducts() {
-        return products;
-    }
-
-    public List<Combo> getCombos() {
-        return combos;
-    }
 
     public String getComment() {
         return comment;
@@ -116,9 +96,6 @@ public class Order {
     }
 
 
-    public void setCombos(ArrayList<Combo> combos) {
-        this.combos = combos;
-    }
 
     public Long getId() {
         return id;

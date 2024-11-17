@@ -5,12 +5,18 @@ import java.math.BigDecimal;
 public class OrderItem {
     private int quantity;
     private Product product;
+    private BigDecimal amount;
+
 
     public OrderItem(int quantity, Product product) {
         this.quantity = quantity;
         this.product = product;
+        this.amount = product.getPrice().multiply(new BigDecimal(quantity));
     }
 
+    public void addQuantity(){
+        quantity++;
+    }
     public int getQuantity() {
         return quantity;
     }
