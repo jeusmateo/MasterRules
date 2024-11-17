@@ -179,11 +179,7 @@ public class WnReportsController implements Initializable {
         scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
     }
 
-    /**
-     * Limpia los campos de texto proporcionados
-     *
-     * @param textFields Campos de texto a limpiar
-     */
+
     private void clearTextFields(TextField... textFields) {
         // Limpia cada campo de texto proporcionado
         for (TextField textField : textFields) {
@@ -193,25 +189,45 @@ public class WnReportsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeCashOutFlowTable();
+        initializeCashInFlowTable();
+    }
 
-        ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+    // Configura la tabla y los datos para Cash Out Flow
+    private void initializeCashOutFlowTable() {
+        ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(
+                cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports()
+        );
+
         TableColumnCashOutReason.setReorderable(false);
         TableColumnCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+
         TableColumnCashOutDate.setReorderable(false);
         TableColumnCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
         TableColumnCashOutQuantity.setReorderable(false);
         TableColumnCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
-        tableViewlOutFlowReport.setItems(cashOutReports);
 
-        ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+        tableViewlOutFlowReport.setItems(cashOutReports);
+    }
+
+    // Configura la tabla y los datos para Cash In Flow
+    private void initializeCashInFlowTable() {
+        ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(
+                cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports()
+        );
+
         TableColumnCashInReason.setReorderable(false);
         TableColumnCashInReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+
         TableColumnCashInDate.setReorderable(false);
         TableColumnCashInDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
         TableColumnCashInQuantity.setReorderable(false);
         TableColumnCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
-        tableViewlInFlowReport.setItems(cashInReports);
 
+        tableViewlInFlowReport.setItems(cashInReports);
     }
+
 
 }

@@ -111,7 +111,13 @@ public class WnLoginController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        setupTextFieldFilters();
+    }
+
+    // Configura los filtros para los campos de texto
+    private void setupTextFieldFilters() {
         txtFieldUserName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtFieldPassword.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }
+
 }
