@@ -175,8 +175,6 @@ public class WnUsersController implements Initializable {
     private TextField txtFieldCreateUserCompleteName;
     @FXML
     private TextField txtFieldCreateUserName;
-    @FXML
-    private Button btnCreateUserAccount;
 
     @FXML
     private void eventAction(ActionEvent event) {
@@ -200,11 +198,10 @@ public class WnUsersController implements Initializable {
                     //throw Exception chepo = new Exception("Chepo");
                 }
 
-            } else if (evt.equals(btnCreateUserAccount)){
-                registerUserAccount();
-
-
             }
+//            else if () {
+//
+//            }
         } catch (Exception e) {
             System.out.println("Chepo " + e.getMessage());
         }
@@ -295,6 +292,7 @@ public class WnUsersController implements Initializable {
         userManager.registerNewUser(newUserAccount);
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
         tblUserAccount.setItems(userAccounts);
+
     }
 
 }
