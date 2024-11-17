@@ -30,7 +30,7 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Button btnAcceptCredit;
 
-   // @FXML
+    // @FXML
     //private PasswordField psswrdFieldAccesstoStoreCredit;
 
     @FXML
@@ -73,7 +73,7 @@ public class WnCustomersController implements Initializable {
     private Label lbStoreCredit;
     @FXML
     private Label lbCustomerPhoneNumber;
-    
+
     @FXML
     private CheckBox chkCustomerVip;
     @FXML
@@ -99,7 +99,6 @@ public class WnCustomersController implements Initializable {
     private TableColumn<Customer, String> colCustomerId;
     @FXML
     private TableColumn<Customer, String> colCustomerName;
-
 
 
     @FXML
@@ -131,14 +130,14 @@ public class WnCustomersController implements Initializable {
     public void setBtnBackEditCustomerAccount() {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
-        clearTextFields( txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints );
+        clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
 
     }
 
 
     // falta que lo de atras no sea editable y se desenfoque
     @FXML
-    private void setScrWarningCredit(){
+    private void setScrWarningCredit() {
         scrWarningCredit.setVisible(true);
     }
 
@@ -180,7 +179,7 @@ public class WnCustomersController implements Initializable {
         ObservableList<Customer> customers = FXCollections.observableArrayList(customerManager.getCustomers());
         setItemsToAllTables(customers);
     }
-
+    // TODO: Recordatorio chepil; Aqui algo esta mal. Aqui no de este metodo, en la clase de actualizar informacion de cliente. Clase de actualizar que no es clase es metodo. UWU
     private void registerNewCustomer() throws Exception {
         String newCustomerName = txtNewCustomerName.getText();
         String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
@@ -190,6 +189,7 @@ public class WnCustomersController implements Initializable {
 
     }
 
+    // TODO: REFACTORIZAR LEGIBILIDAD POR QUE ESA MADRE DE ULTIMO TA LARGA
     private void editCustomerInfo() {
         String customerId = lbCustomerIdAuxiliar.getText();
         String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
@@ -242,24 +242,44 @@ public class WnCustomersController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+
+    private void configTextFields(){
         txtNewCustomerName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        List<Customer> chepo = customerManager.getCustomers();
-        ObservableList<Customer> customers = FXCollections.observableArrayList(chepo);
+    }
+
+    private void configTableColumns() {
         colCustomerId.setReorderable(false);
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colCustomerName.setReorderable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+    }
 
+    private void configTableSelection() {
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showCustomerDetails(newValue)
+        );
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue)
+        );
+    }
 
+    private void loadCustomerData() {
+        List<Customer> customerList = customerManager.getCustomers();
+        ObservableList<Customer> customers = FXCollections.observableArrayList(customerList);
         setItemsToAllTables(customers);
-        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetails(newValue));
-        tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCustomerDetailsForUpdate(newValue));
+    }
+
+    // TODO: Recordatorio chepil; aqui algo esta mal. Aqui no de este metodo, en la clase de actualizar informacion de cliente. Clase de actualizar que no es clase es metodo. UWU
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        configTextFields();
+        configTableColumns();
+        configTableSelection();
+        loadCustomerData();
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {

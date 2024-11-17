@@ -33,8 +33,7 @@ public class WnUsersController implements Initializable {
 
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
-    @FXML
-    private TextField textEditUserAccountUser;
+
 
     private void setUserEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
@@ -42,6 +41,8 @@ public class WnUsersController implements Initializable {
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap();
 
+    @FXML
+    private TextField textEditUserName;
     @FXML
     private AnchorPane verCliente;
 
@@ -168,7 +169,7 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkEditStockMinMaxPerm2;
     @FXML
-    private TextField txtEditUserName;
+    private TextField txtEditUserCompleteName;
     @FXML
     private PasswordField pwfUserPassword;
     @FXML
@@ -181,14 +182,15 @@ public class WnUsersController implements Initializable {
         Object evt = event.getSource();
         try {
             if (evt.equals(btnEditUser)) {
-                String editUserName = txtEditUserName.getText();
+                String editUserName = txtEditUserCompleteName.getText();
                 String editUserPassword = pwfUserPassword.getText();
                 String confirmUserPassword = pwfUserPasswordConfirm.getText();
-                String confirUserAccountUserEdit = textEditUserAccountUser.getText();
+                String confirmUserAccountUserEdit = textEditUserName.getText();
+
                 if (editUserPassword.equals(confirmUserPassword)) {
                     this.userEdit.setFullEmployeeName(editUserName);
                     this.userEdit.setPassword(editUserPassword);
-                    this.userEdit.setUserName(confirUserAccountUserEdit);
+                    this.userEdit.setUserName(confirmUserAccountUserEdit);
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
                     tblUserAccount2.setItems(userAccounts);
                 } else {
@@ -245,17 +247,18 @@ public class WnUsersController implements Initializable {
         configColumns();
         tblUserAccount.setItems(userAccounts);
         tblUserAccount2.setItems(userAccounts);
-        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
+        tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> btnShowUserAccountInfoForEdit(newValue));
         tblUserAccount2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
-    private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
+    private void btnShowUserAccountInfoForEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
         if (userAccount == null) {
             System.out.println("Chepo23");
         }
         try {
-            txtEditUserName.setText(userAccount.getFullEmployeeName());
+            txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
+            textEditUserName.setText(userAccount.getUserName());
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
             System.out.println("Chepo2");
