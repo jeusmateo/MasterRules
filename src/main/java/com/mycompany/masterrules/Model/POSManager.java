@@ -64,6 +64,8 @@ public class POSManager {
 
     public void configureOrder(Customer customer, String metodoDeEntrega, String comentario) {
         currentOrder.setCustomer(customer);
+        currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
+
         currentOrder.setDeliveryMethod(metodoDeEntrega);
         currentOrder.setComment(comentario);
         currentOrder.setDate(LocalDateTime.now());
@@ -75,6 +77,33 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
+    /*
+    public void sell(PaymentDetails paymentDetails, Order order) {
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+            boolean paymentStatus;
+            switch (paymentDetails.getPaymentMethod()) {
+                case CARD -> {
+                    paymentStatus = this.processCardPayment(paymentDetails.getReference());
+
+                }
+                case CASH -> {
+                    paymentStatus = processCashPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerCashAmount());
+
+                }
+                case STORE_CREDIT -> {
+                   // paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+                }
+                default -> paymentStatus = false;
+
+            }
+            if(paymentStatus){
+                Bill newBill = new Bill();
+
+            }
+        }
+    }
+
+     */
 
     /*
     private BigDecimal calculateTotalOrderAmount() {
@@ -100,6 +129,7 @@ public class POSManager {
 
      */
 
+    /*
 
     //TODO ESTO NO ESTA PARA NADA LISTO, ESTOY MUY CANSADO MENTALMENTE,POR FAVOR NO OLVIDEMOS CHECAR ESTO YA QUE TAMBIEN LOS BILL CAMBIAN SEGUN EL METODO DE PAGO YA QUE POR EJEMPLO EL DE TARJETA GUARDA LA REFERENCIA DEL METODO DE PAGO.
     public void sell(PaymentDetails paymentDetails) {
@@ -121,7 +151,7 @@ public class POSManager {
                     newBill.setChange(paymentDetails.getCustomerCashAmount().subtract(currentOrder.getTotalAmount()));
                 }
                 case STORE_CREDIT -> {
-                    paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+                    //paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
                     newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
                     newBill.setCustomerName(this.currentOrder.getCustomer().getCustomerName());
                 }
@@ -142,6 +172,8 @@ public class POSManager {
         }
 
     }
+
+     */
 
 
     private boolean processCardPayment(String reference) {

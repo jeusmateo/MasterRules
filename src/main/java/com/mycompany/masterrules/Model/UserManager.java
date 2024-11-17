@@ -24,11 +24,9 @@ public class UserManager {
     }
 
 
-    public boolean registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
-        if (isValid(newUser)) {
-            return false;
-        }
-        return userDBManager.save(newUser);
+    public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
+        userDBManager.save(newUser);
+
     }
 
     private boolean isValid(UserAccount newUser) {

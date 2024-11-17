@@ -44,6 +44,15 @@ public class UserAccount {
         this.fullEmployeeName = fullEmployeeName;
     }
 
+    public UserAccount(String userName, String userPassword, String userAccountUser) {
+        this.userName = userName;
+        this.password = userPassword;
+        this.fullEmployeeName = userAccountUser;
+        this.permissions = new UserPermissions();
+
+    }
+
+
     public boolean hasPermission(Permission permission) {//¿creo me decian que este ya no iba a estar? habria que verlo
         return permissions.isEnabled(permission);
     }

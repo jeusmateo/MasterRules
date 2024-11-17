@@ -85,6 +85,9 @@ public class WnProductsController implements Initializable {
     @FXML
     private ScrollPane scrollPaneMenu;
 
+
+
+    //Tabla para combos
     @FXML
     private Tab tabCombos;
 
@@ -96,6 +99,8 @@ public class WnProductsController implements Initializable {
 
     @FXML
     private Tab tabCreateFood;
+
+
 
     @FXML
     private Tab tabDrinks;
