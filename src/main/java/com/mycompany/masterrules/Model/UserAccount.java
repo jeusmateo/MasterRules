@@ -184,7 +184,7 @@ public class UserAccount {
 
 
     // Necesario para Hibernate
-    public UserAccount() {
+    protected UserAccount() {
     }
 
     @Override

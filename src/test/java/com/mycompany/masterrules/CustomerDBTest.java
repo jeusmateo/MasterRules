@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class CustomerDBTest {
     public static void main(String[] args) {
-        Customer customer = new Customer("David", "1234567890");
+        Customer customer = new Customer("David", "1234567890",0,false);
 
         // Guardar un cliente con una cuenta
         System.out.println("Guardando un cliente con una cuenta");

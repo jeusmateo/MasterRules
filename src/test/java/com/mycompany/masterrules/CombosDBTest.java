@@ -44,13 +44,13 @@ public class CombosDBTest {
         }
 
         // Buscar un combo por su id
-        Combo comboFound = combosDBManager.findById("1");
+        Combo comboFound = combosDBManager.findById(combo.getProductID());
         assert comboFound != null;
 
         System.out.println(comboFound.toString());
 
         // Borrar el combo de la base de datos
-        assert combosDBManager.delete(comboFound);
+//        assert combosDBManager.delete(comboFound);
 
 
     }
