@@ -13,7 +13,14 @@ public abstract class PaymentMethod2 {
         return totalAmount;
     }
 
+
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    public abstract PaymentDetails paymentProcess();
+
+    public abstract String paymentDescription();
+
 }
+
