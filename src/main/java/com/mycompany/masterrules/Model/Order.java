@@ -7,18 +7,16 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- *
  * @autor: Raul Magaña
- *
- *
  */
 @Embeddable
 public class Order {
+
     @Transient
     private long id;
     @ManyToOne
     private Customer customer;
-   // @ManyToMany(fetch = FetchType.EAGER)
+    // @ManyToMany(fetch = FetchType.EAGER)
     @ElementCollection
     private Map<Product, Integer> products;
 
@@ -29,12 +27,13 @@ public class Order {
     private LocalDateTime date;
     private BigDecimal totalAmount;
 
+    //private List<OrderItem> orderItems;
 
 
-    public Order(){
+    public Order() {
         products = new HashMap();
         combos = new ArrayList();
-        date= LocalDateTime.now();
+        date = LocalDateTime.now();
     }
 
 
@@ -51,6 +50,15 @@ public class Order {
     }
 
  */
+
+    public void addProductToOrder(Product product) {
+        if (products.containsKey(product)) {
+            products.put(product, products.get(product) + 1);
+        } else {
+            products.put(product, 1);
+        }
+    }
+
     public void addProduct(Product product, int quantity) {
         products.put(product, quantity);
     }
@@ -108,7 +116,6 @@ public class Order {
     }
 
 
-
     public void setCombos(ArrayList<Combo> combos) {
         this.combos = combos;
     }
@@ -121,8 +128,13 @@ public class Order {
         this.id = id;
     }
 
-    public BigDecimal getTotalAmount() {return totalAmount;}
-    public void setTotalAmount(BigDecimal totalAmount) {this.totalAmount = totalAmount;}
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
 
     @Override
