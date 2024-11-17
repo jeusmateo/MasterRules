@@ -29,7 +29,7 @@
                            <children>
                               <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <AnchorPane fx:id="verCliente" layoutX="9.0" layoutY="8.0" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                    <AnchorPane fx:id="verCliente" layoutX="3.0" layoutY="8.0" prefHeight="559.0" prefWidth="867.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                        <styleClass>
                                           <String fx:value="radius" />
                                           <String fx:value="shadow" />
@@ -78,12 +78,232 @@
                                                 </Group>
                                              </children>
                                           </VBox>
-                                          <Label layoutX="281.0" layoutY="174.0" prefHeight="21.0" prefWidth="157.0" text="Permisos" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="174.0">
+                                          <Label layoutX="287.0" layoutY="184.0" prefHeight="21.0" prefWidth="157.0" text="Permisos" AnchorPane.rightAnchor="417.0" AnchorPane.topAnchor="184.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="485.0" layoutY="472.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Usuario" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="220.0" />
+                                          <Button layoutX="486.0" layoutY="443.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Usuario" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="219.0" />
+                                          <TabPane layoutX="287.0" layoutY="212.0" prefHeight="224.0" prefWidth="543.0" stylesheets="@viewTemplate.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="212.0">
+                                            <tabs>
+                                              <Tab fx:id="tabSalePerm" text="Ventas">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkMakeSalePerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCancelSalePerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Cancelar venta">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkReviewSaleHistoryPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="232.0" text="Consultar Historial de Ventas">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                </content>
+                                              </Tab>
+                                              <Tab fx:id="tabProductsPerm" text="Productos">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateProductPerrm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditProductPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="140.0" text="Editar Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteProductPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="141.0" text="Borrar Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children></AnchorPane>
+                                                </content>
+                                              </Tab>
+                                                <Tab fx:id="tabInventoryPerm" text="Inventario">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkEditStockPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="147.0" text="Editar Existencia">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditStockMinMaxPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="75.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Existencia máxima y mínima">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children></AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabCustomerPerm" text="Clientes">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateNewCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Clientes">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditStoreCreditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Credito de Tienda">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children></AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabReportPerm" text="Reportes">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkReviewCashRegisterAduitReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="239.0" text="Consultar Reporte de Venta">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateCashInReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Ingreso de Efectivo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateCashOutReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Salida de Efectivo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children></AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabUserPerm" text="Usuarios">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children></AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                            </tabs>
+                                             <styleClass>
+                                                <String fx:value="shadow" />
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="radius" />
+                                             </styleClass>
+                                          </TabPane>
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -98,7 +318,7 @@
                            <children>
                               <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <AnchorPane fx:id="verCliente1" layoutX="9.0" layoutY="8.0" prefHeight="555.0" prefWidth="865.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                    <AnchorPane fx:id="verCliente1" layoutX="4.0" layoutY="8.0" prefHeight="555.0" prefWidth="866.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                        <styleClass>
                                           <String fx:value="radius" />
                                           <String fx:value="shadow" />
@@ -152,7 +372,227 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="btnEditUser" layoutX="483.0" layoutY="476.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Usuario" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="222.0" />
+                                          <Button fx:id="btnEditUser" layoutX="486.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Usuario" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="219.0" />
+                                          <TabPane layoutX="287.0" layoutY="212.0" prefHeight="224.0" prefWidth="543.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="212.0">
+                                             <tabs>
+                                                <Tab fx:id="tabSalePerm1" text="Ventas">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
+                                                         <children>
+                                                            <CheckBox fx:id="chkMakeSalePerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCancelSalePerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Cancelar venta">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkReviewSaleHistoryPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="232.0" text="Consultar Historial de Ventas">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabProductsPerm1" text="Productos">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateProductPerrm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditProductPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="140.0" text="Editar Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteProductPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="141.0" text="Borrar Producto">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateComboPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditComboPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteComboPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabInventoryPerm1" text="Inventario">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <CheckBox fx:id="chkEditStockPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="147.0" text="Editar Existencia">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditStockMinMaxPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="75.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Existencia máxima y mínima">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabCustomerPerm1" text="Clientes">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateNewCustomerPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Clientes">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditCustomerPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteCustomerPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Cliente">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditStoreCreditPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Credito de Tienda">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabReportPerm1" text="Reportes">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <CheckBox fx:id="chkReviewCashRegisterAduitReportPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="239.0" text="Consultar Reporte de Venta">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateCashInReportPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Ingreso de Efectivo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkCreateCashOutReportPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Salida de Efectivo">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabUserPerm1" text="Usuarios">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <CheckBox fx:id="chkCreateUserPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkEditUserPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="chkDeleteUserPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Usuario">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                             </tabs>
+                                          </TabPane>
                                           <HBox layoutX="287.0" layoutY="157.0" spacing="130.0" AnchorPane.bottomAnchor="373.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="157.0">
                                              <children>
                                                 <Label text="User" />
@@ -171,9 +611,9 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="17.0" layoutY="87.0" prefHeight="489.0" prefWidth="258.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="605.0" AnchorPane.topAnchor="87.0">
+      <AnchorPane layoutY="84.0" prefHeight="505.0" prefWidth="256.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="84.0">
          <children>
-            <TableView fx:id="tblUserAccount" layoutX="11.0" layoutY="6.0" prefHeight="478.0" prefWidth="237.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="6.0">
+            <TableView fx:id="tblUserAccount" layoutX="10.0" layoutY="6.0" prefHeight="489.0" prefWidth="237.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="6.0">
                <columns>
                   <TableColumn fx:id="colUserID" prefWidth="88.0" text="ID USUARIO" />
                   <TableColumn fx:id="colUserName" prefWidth="145.0" text="USUARIO" />
@@ -184,235 +624,11 @@
             </TableView>
          </children>
          <styleClass>
-            <String fx:value="shadow" />
-            <String fx:value="radius" />
             <String fx:value="white-bg" />
+            <String fx:value="radius" />
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
          </styleClass>
       </AnchorPane>
-      <TabPane layoutX="320.0" layoutY="251.0" prefHeight="248.0" prefWidth="519.0" stylesheets="@viewTemplate.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="101.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="251.0">
-        <tabs>
-          <Tab fx:id="tabSalePerm" text="Ventas">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkMakeSalePerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkCancelSalePerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Cancelar venta">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkReviewSaleHistoryPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="232.0" text="Consultar Historial de Ventas">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="tabProductsPerm" text="Productos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkCreateProductPerrm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditProductPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="140.0" text="Editar Producto">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkDeleteProductPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="141.0" text="Borrar Producto">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkCreateComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkDeleteComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="tabInventoryPerm" text="Inventario">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkEditStockPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="147.0" text="Editar Existencia">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditStockMinMaxPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="24.0" layoutY="75.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Existencia máxima y mínima">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabCustomerPerm" text="Clientes">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkCreateNewCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Clientes">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Cliente">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkDeleteCustomerPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Cliente">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditStoreCreditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Credito de Tienda">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabReportPerm" text="Reportes">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkReviewCashRegisterAduitReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="239.0" text="Consultar Reporte de Venta">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkCreateCashInReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Ingreso de Efectivo">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkCreateCashOutReportPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="297.0" text="Crear Reporte de Salida de Efectivo">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabUserPerm" text="Usuarios">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
-                     <children>
-                        <CheckBox fx:id="chkCreateUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Crear Usuario">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkEditUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Editar Usuario">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                        <CheckBox fx:id="chkDeleteUserPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="268.0" text="Borrar Usuario">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </CheckBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-         <styleClass>
-            <String fx:value="shadow" />
-            <String fx:value="white-bg" />
-            <String fx:value="radius" />
-         </styleClass>
-      </TabPane>
    </children>
 </AnchorPane>
