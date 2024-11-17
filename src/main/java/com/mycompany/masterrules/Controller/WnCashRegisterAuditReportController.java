@@ -95,24 +95,35 @@ public class WnCashRegisterAuditReportController implements Initializable{
 //        txtTSStoreCard.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalStoreCard().toString());
 //    }
 
-    
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set up table columns for Cash In Flow
+        setupCashInFlowTable();
+        setupCashOutFlowTable();
+        initializeTableData();
+    }
+
+    // Método para configurar la tabla de Cash In Flow
+    private void setupCashInFlowTable() {
         colReasonCashInFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashInFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashInFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+    }
 
-        // Set up table columns for Cash Out Flow
+    // Método para configurar la tabla de Cash Out Flow
+    private void setupCashOutFlowTable() {
         colReasonCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+    }
 
-        // Initially set empty tables; data will be set in setCashRegisterAuditReportManager
+    // Método para inicializar los datos de las tablas
+    private void initializeTableData() {
         tblCashInFlowReport.setItems(cashInFlowReports);
         tblCashOutFlowReport.setItems(cashOutFlowReports);
     }
+
 
 }
 
