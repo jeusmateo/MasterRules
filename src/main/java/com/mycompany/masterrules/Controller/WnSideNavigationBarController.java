@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.model.customers.CustomerManager;
+import com.mycompany.masterrules.Model.customers.CustomerManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -14,16 +14,16 @@
 <!--        <property name="format_sql">true</property>-->
 <!--        <property name="hibernate.highlight_sql">true</property>-->
         <!--       todo-->
-        <mapping class="com.mycompany.masterrules.model.cafeteria.Product"/>
-        <mapping class="com.mycompany.masterrules.model.cafeteria.Combo"/>
-        <mapping class="com.mycompany.masterrules.model.cafeteria.CustomCombo"/>
+        <mapping class="com.mycompany.masterrules.Model.cafeteria.Product"/>
+        <mapping class="com.mycompany.masterrules.Model.cafeteria.Combo"/>
+        <mapping class="com.mycompany.masterrules.Model.cafeteria.CustomCombo"/>
 
 
-        <mapping class="com.mycompany.masterrules.model.users.UserAccount"/>
+        <mapping class="com.mycompany.masterrules.Model.users.UserAccount"/>
 
-        <mapping class="com.mycompany.masterrules.model.customers.Customer"/>
-        <mapping class="com.mycompany.masterrules.model.possystem.Debt"/>
-        <mapping class="com.mycompany.masterrules.model.possystem.Bill"/>
-        <mapping class="com.mycompany.masterrules.model.possystem.PedidoComanda"/>
+        <mapping class="com.mycompany.masterrules.Model.customers.Customer"/>
+        <mapping class="com.mycompany.masterrules.Model.possystem.Debt"/>
+        <mapping class="com.mycompany.masterrules.Model.possystem.Bill"/>
+        <mapping class="com.mycompany.masterrules.Model.possystem.PedidoComanda"/>
     </session-factory>
 </hibernate-configuration>

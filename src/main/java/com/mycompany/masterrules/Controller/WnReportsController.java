@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.model.finanzas.CashFlowReport;
-import com.mycompany.masterrules.model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;

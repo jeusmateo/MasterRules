@@ -4,7 +4,7 @@
  */
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.model.cafeteria.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;

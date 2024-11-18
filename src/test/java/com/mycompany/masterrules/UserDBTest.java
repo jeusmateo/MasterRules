@@ -1,9 +1,9 @@
 package com.mycompany.masterrules;
 
-import com.mycompany.masterrules.model.users.UserAccount;
+import com.mycompany.masterrules.Model.users.UserAccount;
 
 import com.mycompany.masterrules.Database.UserDBManager;
-import com.mycompany.masterrules.model.users.UserPermissions;
+import com.mycompany.masterrules.Model.users.UserPermissions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
