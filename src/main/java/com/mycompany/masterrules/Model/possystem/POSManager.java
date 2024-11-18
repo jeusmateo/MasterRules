@@ -4,11 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import com.mycompany.masterrules.Model.cafeteria.ComboCreator;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
-import com.mycompany.masterrules.Model.cafeteria.Combo;
-import com.mycompany.masterrules.Model.cafeteria.CustomCombo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerAccount;
@@ -20,6 +19,7 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
  */
 
 //Este wey se encarga de vender
+@Deprecated
 public class POSManager {
 
     private CustomerManager customerManager; //TODO No lo debe tener de atributo, debemos buscar cual sea la forma correcta de obtener la informacion.
@@ -56,26 +56,26 @@ public class POSManager {
     }
 
 
-    public void addCustomComboToOrder(CustomCombo customCombo) {
+    public void addCustomComboToOrder(ComboCreator comboCreator) {
         ArrayList<Product> products = new ArrayList();
-        for (String keyQuantity : customCombo.getQuantityPerCategory().keySet()) {
+        for (String keyQuantity : comboCreator.getAllowedQuantity().keySet()) {
             int quantity = 0;
-            quantity = customCombo.getQuantityPerCategory().get(quantity);
+            quantity = comboCreator.getAllowedQuantity().get(quantity);
             for (int iterationCounter = 0; iterationCounter < quantity; iterationCounter++) {
-                Product product = new Product();
-                products.add(product);
+//                Product product = new Product();
+//                products.add(product);
 
             }
 
         }
 
-        if (customCombo.getAllProducts() != null) {
-            for (Product product : customCombo.getAllProducts()) {
-                products.add(product);
-            }
-        }
-        Combo combo = new Combo(customCombo.getComboName(), products, customCombo.getPrice(), customCombo.getVIPPrice());
-        this.addProductToOrder(combo);
+//        if (comboCreator.getAllProducts() != null) {
+//            for (Product product : comboCreator.getAllProducts()) {
+//                products.add(product);
+//            }
+//        }
+//        Combo combo = new Combo(comboCreator.getComboName(), products, comboCreator.getPrice(), comboCreator.getVIPPrice());
+//        this.addProductToOrder(combo);
     }
 
 
