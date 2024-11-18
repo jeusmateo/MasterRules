@@ -25,6 +25,7 @@
         <mapping class="com.mycompany.masterrules.Model.possystem.Debt"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.Bill"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.PedidoComanda"/>
+        <mapping class="com.mycompany.masterrules.Model.finanzas.CashFlowReport"/>
 
     </session-factory>
 </hibernate-configuration>

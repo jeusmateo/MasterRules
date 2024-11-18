@@ -68,15 +68,17 @@ public class WnCashRegisterAuditReportController implements Initializable{
 
 
 
-    private final ObservableList<CashFlowReport> cashInFlowReports = FXCollections.observableArrayList(this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
-    private final ObservableList<CashFlowReport> cashOutFlowReports = FXCollections.observableArrayList( this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+//    private final ObservableList<CashFlowReport> cashInFlowReports = FXCollections.observableArrayList(this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+//    private final ObservableList<CashFlowReport> cashOutFlowReports = FXCollections.observableArrayList( this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+    private final ObservableList<CashFlowReport> cashInFlowReports=null;
+    private final ObservableList<CashFlowReport> cashOutFlowReports = null;
 
     public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
         this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
 
         // Use the manager to get the current cash flow reports
-        cashInFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
-        cashOutFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+//        cashInFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+//        cashOutFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
 
         // Update tables with new data
         tblCashInFlowReport.setItems(cashInFlowReports);

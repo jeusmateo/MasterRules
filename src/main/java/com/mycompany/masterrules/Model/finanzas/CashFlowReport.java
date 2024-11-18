@@ -1,22 +1,27 @@
 package com.mycompany.masterrules.Model.finanzas;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+@Entity
 public class CashFlowReport {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String reason;
-
-
     private BigDecimal cashAmount;
-
-
     private String date;
 
+    protected CashFlowReport() {
 
+    }
 
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
@@ -30,6 +35,9 @@ public class CashFlowReport {
         this.date = actualDateTime.format(format);
     }
 
+    public long getId() {
+        return id;
+    }
 
     public String getReason() {
         return reason;
