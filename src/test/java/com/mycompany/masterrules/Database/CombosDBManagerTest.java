@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CombosDBManagerTest {
 
-    static CombosDBManager combosDBManager = new CombosDBManager();
+    static ProductDBManager combosDBManager = new ProductDBManager();
 
     @BeforeAll
     static void setUp() {

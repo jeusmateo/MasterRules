@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Combo extends Product {
@@ -29,4 +30,17 @@ public class Combo extends Product {
         this.products = products;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Combo combo = (Combo) o;
+        return Objects.equals(products, combo.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), products);
+    }
 }

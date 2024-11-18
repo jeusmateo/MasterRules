@@ -36,7 +36,7 @@ public class Product {
 
     public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
         // id generado automaticamente
-        this.id = UUID.randomUUID().toString();
+        this.id = String.valueOf(hashCode());
         this.name = productName;
         this.type = "combo";
         this.price = price;
