@@ -303,8 +303,8 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 Product product = new Product(id, name, type, price, vipPrice);
 
                 // Registrar el producto en el modelo
-               // cafeteriaMenu.addProductToMenu(product);
-                cafeteriaMenu.registerNewProduct(product);
+                cafeteriaMenu.addProductToMenu(product);
+
                 List<Product> chepo = cafeteriaMenu.getProducts();
                 ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
                 // Agregar el producto al ObservableList

@@ -35,6 +35,48 @@ public final class ProductDatabase extends Database<String, Product> {
         }
     }
 
+    public List<Product> findByName(String name) {
+        Session session = HibernateUtil.getOpenSession();
+        try {
+            session.beginTransaction();
+            List<Product> products = session.createQuery("from Product where name = :name", Product.class)
+                    .setParameter("name", name)
+                    .list();
+            session.getTransaction().commit();
+            return products;
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el producto: " + ex);
+            return List.of();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    public List<Product> findByType(String type){
+        Session session = HibernateUtil.getOpenSession();
+        try {
+            session.beginTransaction();
+            List<Product> products = session.createQuery("from Product where type = :type", Product.class)
+                    .setParameter("type", type)
+                    .list();
+            session.getTransaction().commit();
+            return products;
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("Error al buscar el producto: " + ex);
+            return List.of();
+        }
+        finally {
+            session.close();
+        }
+    }
+
     /**
      * @return Una lista con todos los productos en la base de datos
      */
@@ -51,7 +93,7 @@ public final class ProductDatabase extends Database<String, Product> {
                 session.getTransaction().rollback();
             }
             System.err.println("Error al leer los productos: " + ex);
-            return null;
+            return List.of();
         }
         finally {
             session.close();

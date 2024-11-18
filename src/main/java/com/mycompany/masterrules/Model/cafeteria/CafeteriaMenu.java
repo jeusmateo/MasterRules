@@ -1,93 +1,96 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
+import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
-import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import java.util.List;
 
 
 public class CafeteriaMenu {
 
+    private final ProductDatabase productDatabase;
+    private final ComboDatabase comboDatabase;
     private String title;
-    private ArrayList<Product> products;//TODO cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
-    private ArrayList<Combo> combos;//falta combos
-    private final ProductDatabase productDBManager = new ProductDatabase();
 
     public CafeteriaMenu() {
-        this.products = new ArrayList<Product>();
-        this.combos = new ArrayList<Combo>();
+        productDatabase = new ProductDatabase();
+        comboDatabase = new ComboDatabase();
     }
 
     public void addProductToMenu(Product product) {
         if (!isProductOnMenu(product.getId())) {
-            products.add(product);
+            productDatabase.save(product);
         } else {
             throw new IllegalArgumentException("ERROR: El producto ya existe");
         }
     }
 
-    public void registerNewProduct(Product product) {//cambie el nombre del parametro
-        productDBManager.save(product);
-    }
-
     public void removeProductOnMenu(String productID) {
-        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
-            if (productID.equals(products.get(registeredProductCount).getId())) {
-                products.remove(registeredProductCount);
-                return;
-            }
+//        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
+//            if (productID.equals(products.get(registeredProductCount).getId())) {
+//                products.remove(registeredProductCount);
+//                productDatabase.delete(productDatabase.findById(productID));
+//                return;
+//            }
+//        }
+
+        if (productDatabase.delete(productDatabase.findById(productID))) {
+            return;
         }
+
         throw new IllegalArgumentException("El producto con ID " + productID + " no existe en el menú.");
     }
 
 
-    public boolean isProductOnMenu(String productID){//continuo trabajando con esto
-        for(Product registeredProduct : products){
-            if(productID.equals(registeredProduct.getId())){
-                return true;
-            }
-        }
-        return false;
+    public boolean isProductOnMenu(String productID) {//continuo trabajando con esto
+//        for(Product registeredProduct : products){
+//            if(productID.equals(registeredProduct.getId())){
+//                return true;
+//            }
+//        }
+
+        return productDatabase.findById(productID) != null;
     }
 
-    public boolean isProductNameTaken(String productName){ // TODO cambiar a isProductTaken es demasialdo informal
-        for(Product registeredProduct : products){
-            if(productName.equals(registeredProduct.getName())){
-                return true;
-            }
-        }
-        return false;
+    public boolean isProductNameTaken(String productName) { // TODO cambiar a isProductTaken es demasialdo informal
+//        for(Product registeredProduct : products){
+//            if(productName.equals(registeredProduct.getName())){
+//                return true;
+//            }
+//        }
+
+        return productDatabase.findByName(productName) != null;
     }
 
     public void editProduct(Product product) {
-        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
-            if (product.getId().equals(products.get(registeredProductCount).getId())) {
-                if (!product.getName().equals(products.get(registeredProductCount).getName())) {
-                    if (!isProductNameTaken(product.getName())) {
-                        products.get(registeredProductCount).setName(product.getName());
-                    } else {
-                        throw new IllegalArgumentException("ERROR: El nombre del producto ya está tomado");
-                    }
-                }
-                products.get(registeredProductCount).setType(product.getType());
-                products.get(registeredProductCount).setPrice(product.getPrice());
-                products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
-                return;
-            }
+//        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
+//            if (product.getId().equals(products.get(registeredProductCount).getId())) {
+//                if (!product.getName().equals(products.get(registeredProductCount).getName())) {
+//                    if (!isProductNameTaken(product.getName())) {
+//                        products.get(registeredProductCount).setName(product.getName());
+//                    } else {
+//                        throw new IllegalArgumentException("ERROR: El nombre del producto ya está tomado");
+//                    }
+//                }
+//                products.get(registeredProductCount).setType(product.getType());
+//                products.get(registeredProductCount).setPrice(product.getPrice());
+//                products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
+//                return;
+//            }
+//        }
+
+        if (productDatabase.update(product)) {
+            return;
         }
+
         throw new IllegalArgumentException("ERROR: El producto no existe");
     }
 
 
-    public ArrayList<Product> getProductsByType(String productType) {
-        ArrayList<Product> productsWithType = new ArrayList<>();
+    public List<Product> getProductsByType(String productType) {
 
-        for (Product product : products) {
-            if (product.getType().equals(productType)) {
-                productsWithType.add(product);
-            }
-        }
+        List<Product> productsWithType = productDatabase.findByType(productType);
 
         if (productsWithType.isEmpty()) {
             throw new IllegalArgumentException("ERROR: El tipo de producto no existe en el menú");
@@ -98,88 +101,106 @@ public class CafeteriaMenu {
 
 
     public void addComboToMenu(Combo combo) {
-        if (!isComboOnMenu(combo.getId() + "")) {
-            combos.add(combo);
+//        if (!isComboOnMenu(combo.getId() + "")) {
+//            combos.add(combo);
+//        } else {
+//            throw new IllegalArgumentException("ERROR: El combo ya existe");
+//        }
+
+        if (!isComboOnMenu(combo)) {
+            comboDatabase.save(combo);
         } else {
             throw new IllegalArgumentException("ERROR: El combo ya existe");
         }
     }
 
+    private boolean isComboOnMenu(Combo combo) {
+        return comboDatabase.findById(combo.getId()) != null;
+    }
+
 
     public void removeComboOnMenu(String comboID) {
-        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
-            if (comboID.equals(combos.get(registeredComboCount).getId())) {
-                combos.remove(registeredComboCount);
-                return;
-            }
+//        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
+//            if (comboID.equals(combos.get(registeredComboCount).getId())) {
+//                combos.remove(registeredComboCount);
+//                return;
+//            }
+//        }
+//        throw new NoSuchElementException("ERROR: El combo no existe");
+
+        if (comboDatabase.delete(comboDatabase.findById(comboID))) {
+            return;
         }
-        throw new NoSuchElementException("ERROR: El combo no existe");
+
+        throw new IllegalArgumentException("El combo con ID " + comboID + " no existe en el menú.");
+
     }
 
 
     public void editCombo(Combo combo) {
-        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
-            if (combo.getId().equals(combos.get(registeredComboCount).getId())) {
-                if (!combo.getName().equals(combos.get(registeredComboCount).getName())) {
-                    if (!isComboNameTaken(combo.getName())) {
-                        combos.get(registeredComboCount).setName(combo.getName());
-                    } else {
-                        throw new IllegalArgumentException("ERROR: El nombre del combo ya existe");
-                    }
-                }
-                combos.get(registeredComboCount).setProducts(combo.getProducts());
-                combos.get(registeredComboCount).setPrice(combo.getPrice());
-                combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
-                return;
-            }
+//        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
+//            if (combo.getId().equals(combos.get(registeredComboCount).getId())) {
+//                if (!combo.getName().equals(combos.get(registeredComboCount).getName())) {
+//                    if (!isComboNameTaken(combo.getName())) {
+//                        combos.get(registeredComboCount).setName(combo.getName());
+//                    } else {
+//                        throw new IllegalArgumentException("ERROR: El nombre del combo ya existe");
+//                    }
+//                }
+//                combos.get(registeredComboCount).setProducts(combo.getProducts());
+//                combos.get(registeredComboCount).setPrice(combo.getPrice());
+//                combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
+//                return;
+//            }
+//        }
+//        throw new NoSuchElementException("ERROR: El combo no existe");
+
+        if (comboDatabase.update(combo)) {
+            return;
         }
-        throw new NoSuchElementException("ERROR: El combo no existe");
+
+        throw new IllegalArgumentException("ERROR: El combo no existe");
+
     }
 
+    private boolean isComboNameTaken(String comboName) { //TODO cambiar a isComboTaken es demasialdo informal
+//        for(Combo registeredProduct : combos){
+//            if(comboName.equals(registeredProduct.getName())){
+//                return true;
+//            }
+//        }
 
 
-    public boolean isComboOnMenu(String comboID){
-        for(Combo registeredCombo : combos){
-            if(comboID.equals(registeredCombo.getId()+"")){
-                return true;
-            }
-        }
         return false;
     }
-    
 
-    public boolean isComboNameTaken(String comboName){ //TODO cambiar a isComboTaken es demasialdo informal
-        for(Combo registeredProduct : combos){
-            if(comboName.equals(registeredProduct.getName())){
-                return true;
-            }
-        }
-        return false;
-    }
-    
 
     public String getTitle() {
         return title;
-    }
-
-    public ArrayList<Product> getProducts() {
-        return (ArrayList<Product>) productDBManager.readAll();
-    }
-
-    public ArrayList<Combo> getCombos() {
-        return combos;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setProducts(ArrayList<Product> products) {    
-        this.products = products;
+    public List<Product> getProducts() {
+        return productDatabase.readAll();
     }
 
-    public void setCombos(ArrayList<Combo> combos) {
-        this.combos = combos;
+    public void setProducts(List<Product> products) {
+        for (Product product : products) {
+            addProductToMenu(product);
+        }
     }
-    
+
+    public List<Combo> getCombos() {
+        return comboDatabase.readAll();
+    }
+
+    public void setCombos(List<Combo> combos) {
+        for (Combo combo : combos) {
+            addComboToMenu(combo);
+        }
+    }
+
 }
