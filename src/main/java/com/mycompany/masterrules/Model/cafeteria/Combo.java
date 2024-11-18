@@ -12,6 +12,7 @@ public class Combo extends Product {
     private List<Product> products;
 
     protected Combo() {
+        throw new IllegalArgumentException("No se puede crear un combo sin productos");
     }
 
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
@@ -19,14 +20,6 @@ public class Combo extends Product {
         this.products = products;
 
     }
-
-//    public Combo(List<Product> products, ComboCreator productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
-//        this.comboName = "Combo Temporal";
-//        this.products = products;
-//        this.productsTemplate = productsTemplate;
-//        this.price = price;
-//        this.VIPPrice = VIPPrice;
-//    }
 
     public List<Product> getProducts() {
         return products;

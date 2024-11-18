@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.mycompany.masterrules.Model.cafeteria.ComboCreator;
+import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
@@ -56,11 +56,11 @@ public class POSManager {
     }
 
 
-    public void addCustomComboToOrder(ComboCreator comboCreator) {
+    public void addCustomComboToOrder(CustomComboCreator customComboCreator) {
         ArrayList<Product> products = new ArrayList();
-        for (String keyQuantity : comboCreator.getAllowedQuantity().keySet()) {
+        for (String keyQuantity : customComboCreator.getAllowedQuantity().keySet()) {
             int quantity = 0;
-            quantity = comboCreator.getAllowedQuantity().get(quantity);
+            quantity = customComboCreator.getAllowedQuantity().get(quantity);
             for (int iterationCounter = 0; iterationCounter < quantity; iterationCounter++) {
 //                Product product = new Product();
 //                products.add(product);
@@ -69,12 +69,12 @@ public class POSManager {
 
         }
 
-//        if (comboCreator.getAllProducts() != null) {
-//            for (Product product : comboCreator.getAllProducts()) {
+//        if (customComboCreator.getAllProducts() != null) {
+//            for (Product product : customComboCreator.getAllProducts()) {
 //                products.add(product);
 //            }
 //        }
-//        Combo combo = new Combo(comboCreator.getComboName(), products, comboCreator.getPrice(), comboCreator.getVIPPrice());
+//        Combo combo = new Combo(customComboCreator.getComboName(), products, customComboCreator.getPrice(), customComboCreator.getVIPPrice());
 //        this.addProductToOrder(combo);
     }
 
