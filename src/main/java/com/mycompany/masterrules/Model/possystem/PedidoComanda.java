@@ -46,6 +46,6 @@ public class PedidoComanda {
     }
 
     public String getProductName() {
-        return product.getProductName();
+        return product.getName();
     }
 }

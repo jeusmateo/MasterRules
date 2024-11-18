@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Combo extends Product {
@@ -12,6 +13,7 @@ public class Combo extends Product {
     private List<Product> products;
 
     protected Combo() {
+        throw new IllegalArgumentException("No se puede crear un combo sin productos");
     }
 
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
@@ -19,14 +21,6 @@ public class Combo extends Product {
         this.products = products;
 
     }
-
-//    public Combo(List<Product> products, ComboCreator productsTemplate, BigDecimal price, BigDecimal VIPPrice) {
-//        this.comboName = "Combo Temporal";
-//        this.products = products;
-//        this.productsTemplate = productsTemplate;
-//        this.price = price;
-//        this.VIPPrice = VIPPrice;
-//    }
 
     public List<Product> getProducts() {
         return products;
@@ -36,4 +30,17 @@ public class Combo extends Product {
         this.products = products;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Combo combo = (Combo) o;
+        return Objects.equals(products, combo.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), products);
+    }
 }

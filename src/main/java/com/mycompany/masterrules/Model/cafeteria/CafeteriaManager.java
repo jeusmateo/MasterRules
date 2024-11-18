@@ -18,7 +18,7 @@ public class CafeteriaManager {
     //se modifico acorde al nuevo storage
     public void createProduct(Product newProduct, boolean inInventory, StockInfo stockInfo) throws Exception {
         //se modifico la excepcion
-        if (menu.isProductNameTaken(newProduct.getProductName())) {
+        if (menu.isProductNameTaken(newProduct.getName())) {
             throw new Exception("ERROR: El nombre del producto ya está tomado");
         }
         menu.addProductToMenu(newProduct);
@@ -26,7 +26,7 @@ public class CafeteriaManager {
     }
 
     public void deleteProduct(Product product) throws Exception {//cambie param por product
-        menu.removeProductOnMenu(product.getProductID());//cambie por id
+        menu.removeProductOnMenu(product.getId());//cambie por id
 
     }
 
@@ -37,7 +37,7 @@ public class CafeteriaManager {
     }
 
     public void createCombo(Combo newCombo) throws Exception {
-        if (menu.isComboNameTaken(newCombo.getProductName())) {
+        if (menu.isComboNameTaken(newCombo.getName())) {
             throw new Exception("ERROR: El nombre del combo ya está tomado");
         }
 

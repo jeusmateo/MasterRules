@@ -38,7 +38,7 @@ public final class CombosDBManager extends DatabaseManager<Combo, String> {
         Session session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
-            List<Combo> combos = session.createQuery("from Combo").list();
+            List<Combo> combos = session.createQuery("from Combo",Combo.class).getResultList();
             session.getTransaction().commit();
             return combos;
         } catch (Exception ex) {

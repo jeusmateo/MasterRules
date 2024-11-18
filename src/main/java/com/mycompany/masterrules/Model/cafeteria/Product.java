@@ -19,32 +19,32 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Product {
     @Id
-    private String productID;
-    private String productName;
-    private String productType;
+    private String id;
+    private String name;
+    private String type;
     private BigDecimal price;
     private BigDecimal VIPPrice;
 
 
     public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
-        this.productID = productID;
-        this.productName = productName;
-        this.productType = productType;
+        this.id = productID;
+        this.name = productName;
+        this.type = productType;
         this.price = price;
         this.VIPPrice = VIPPrice;
     }
 
     public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
         // id generado automaticamente
-        this.productID = UUID.randomUUID().toString();
-        this.productName = productName;
-        this.productType = "combo";
+        this.id = String.valueOf(hashCode());
+        this.name = productName;
+        this.type = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
     }
 
-    public String getProductID() {
-        return productID;
+    public String getId() {
+        return id;
     }
     /*
     public long getID() {
@@ -52,24 +52,24 @@ public class Product {
     }
      */
 
-    public void setProductID(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
-        this.productID = productID;
+    public void setId(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
+        this.id = productID;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String productName) {
+        this.name = productName;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getType() {
+        return type;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setType(String productType) {
+        this.type = productType;
     }
 
     /*
@@ -103,9 +103,9 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "productID='" + productID + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productType='" + productType + '\'' +
+                "productID='" + id + '\'' +
+                ", productName='" + name + '\'' +
+                ", productType='" + type + '\'' +
                 ", price=" + price +
                 ", VIPPrice=" + VIPPrice +
                 '}';
@@ -116,15 +116,15 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productID, product.productID) &&
-                Objects.equals(productName, product.productName) &&
-                Objects.equals(productType, product.productType) &&
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(type, product.type) &&
                 price.compareTo(product.price) == 0 &&
                 VIPPrice.compareTo(product.VIPPrice) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productID, productName, productType, price, VIPPrice);
+        return Objects.hash(id, name, type, price, VIPPrice);
     }
 }

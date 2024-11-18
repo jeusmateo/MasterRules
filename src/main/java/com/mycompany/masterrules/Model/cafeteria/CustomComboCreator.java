@@ -1,26 +1,39 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 // TODO: pensar un nombre mejor y justificar la existencia de este ADT
-public class ComboCreator {
+public class CustomComboCreator {
 
     private final Map<String, Integer> quantityPerCategory;
     private final Map<String, List<Product>> productsPerCategory;
 
-    public ComboCreator(Map<String, Integer> quantityPerCategory) {
+    public CustomComboCreator(Map<String, Integer> quantityPerCategory) {
         this.quantityPerCategory = quantityPerCategory;
         this.productsPerCategory = new HashMap<>();
 
         initializeProductsPerCategory();
     }
 
-    public ComboCreator(Map<String, Integer> quantityPerCategory, Map<String, List<Product>> productsPerCategory) {
+    public CustomComboCreator(Map<String, Integer> quantityPerCategory, Map<String, List<Product>> productsPerCategory) {
         this.quantityPerCategory = quantityPerCategory;
         this.productsPerCategory = productsPerCategory;
+    }
+
+    public List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<>();
+        for (List<Product> products : productsPerCategory.values()) {
+            allProducts.addAll(products);
+        }
+        return allProducts;
+    }
+
+    public Combo createCombo(String comboName, BigDecimal price, BigDecimal VIPPrice) {
+        return new Combo(comboName, getAllProducts(), price, VIPPrice);
     }
 
     private void initializeProductsPerCategory() {
