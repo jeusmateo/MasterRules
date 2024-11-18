@@ -9,7 +9,7 @@ import java.util.List;
  * Clase que administra la base de datos de productos.
  *
  */
-public final class ProductDBManager extends DatabaseManager<Product, String> {
+public final class ProductDatabase extends Database<String, Product> {
 
     /**
      * @param id La llave primaria de la entidad

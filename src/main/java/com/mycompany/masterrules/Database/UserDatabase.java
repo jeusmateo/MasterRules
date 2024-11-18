@@ -5,7 +5,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public final class UserDBManager extends DatabaseManager<UserAccount, String> {
+public final class UserDatabase extends Database<String, UserAccount> {
 
     /**
      * @param id La llave primaria de la entidad

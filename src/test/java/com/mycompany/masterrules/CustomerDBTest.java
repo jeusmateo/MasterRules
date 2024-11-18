@@ -1,6 +1,6 @@
 //package com.mycompany.masterrules;
 //
-//import com.mycompany.masterrules.Database.CustomerDBManager;
+//import com.mycompany.masterrules.Database.CustomerDatabase;
 //import com.mycompany.masterrules.Model.*;
 //
 //import java.math.BigDecimal;
@@ -8,7 +8,7 @@
 //import java.util.Objects;
 //
 ///**
-// * Clase que prueba la clase CustomerDBManager
+// * Clase que prueba la clase CustomerDatabase
 // * Nota: Se debe compilar con assert habilitado
 // */
 //public class CustomerDBTest {
@@ -17,7 +17,7 @@
 //
 //        // Guardar un cliente con una cuenta
 //        System.out.println("Guardando un cliente con una cuenta");
-//        CustomerDBManager customerDBManager = new CustomerDBManager();
+//        CustomerDatabase customerDBManager = new CustomerDatabase();
 //        assert customerDBManager.save(customer);
 //        System.out.println(customer);
 //

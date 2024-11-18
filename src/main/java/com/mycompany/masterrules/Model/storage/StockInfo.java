@@ -4,8 +4,16 @@
  */
 package com.mycompany.masterrules.Model.storage;
 
+import com.mycompany.masterrules.Model.cafeteria.Product;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
+@Entity
 public class StockInfo {
+    @Id
+    @OneToOne
+    private Product product;
     private int currentStock;
     private int minStock;
     private int maxStock;
