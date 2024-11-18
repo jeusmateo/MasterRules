@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import com.mycompany.masterrules.Model.finanzas.CashPaymentMethod;
+import com.mycompany.masterrules.Model.possystem.CashPaymentMethod;
 import com.mycompany.masterrules.Model.possystem.DebitCardPaymenthMethod;
 import com.mycompany.masterrules.Model.possystem.MixPaymentMethod;
 import com.mycompany.masterrules.Model.possystem.StoreCreditPayMethod;

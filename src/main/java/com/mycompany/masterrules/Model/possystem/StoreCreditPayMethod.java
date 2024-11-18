@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model.possystem;
 
 import java.math.BigDecimal;
 
-public class StoreCreditPayMethod extends PaymenthProcesser {
+public class StoreCreditPayMethod extends PaymentMethod {
     private BigDecimal recibido;
 
     public StoreCreditPayMethod(BigDecimal totalAmount, BigDecimal customerStoreCredit){
@@ -13,7 +13,7 @@ public class StoreCreditPayMethod extends PaymenthProcesser {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails= new PaymentDetails(PaymentMethod.STORE_CREDIT,this.getTotalAmount());
+        PaymentDetails paymentDetails= new PaymentDetails();
 
         return paymentDetails;
     }
