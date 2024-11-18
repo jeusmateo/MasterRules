@@ -1,7 +1,8 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
-import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finanzas.CashFlowReportManager;
+import com.mycompany.masterrules.Model.finanzas.CashRegister;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +21,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class WnReportsController implements Initializable {
 
-    private final CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
+    private final CashRegister cashRegister = new CashRegister();
+    CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
 
     @FXML
     private Button btnAcceptInflow;
@@ -111,8 +113,8 @@ public class WnReportsController implements Initializable {
         try {
             String cashAmount = txtFieldAmountInflow.getText();
             String reason = txtReasonInflow.getText();
-           // cashRegisterAuditReportManager.depositCash(reason, cashAmount);
-            ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+           cashRegister.depositCash(reason, cashAmount);
+            ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashFlowReportManager.getCashInFlowReports());
             tableViewlInFlowReport.setItems(cashInReports);
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
@@ -129,10 +131,10 @@ public class WnReportsController implements Initializable {
         try {
             String cashAmount = txtFieldAmountOutflow.getText();
             String reason = txtOutflowReason.getText();
-           // cashRegisterAuditReportManager.withdrawCash(reason, cashAmount);
+            cashRegister.withdrawCash(reason, cashAmount);
             txtFieldAmountOutflow.setText("00.0");
             txtOutflowReason.setText("");
-            ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+            ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashFlowReportManager.getCashOutFlowReports());
             tableViewlOutFlowReport.setItems(cashOutReports);
 
             scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
@@ -169,7 +171,7 @@ public class WnReportsController implements Initializable {
     // Configura la tabla y los datos para Cash Out Flow
     private void initializeCashOutFlowTable() {
         ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(
-                cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports()
+                cashFlowReportManager.getCashOutFlowReports()
         );
 
         colCashOutReason.setReorderable(false);
@@ -187,7 +189,7 @@ public class WnReportsController implements Initializable {
     // Configura la tabla y los datos para Cash In Flow
     private void initializeCashInFlowTable() {
         ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(
-                cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports()
+                cashFlowReportManager.getCashInFlowReports()
         );
 
         colCashInReason.setReorderable(false);
