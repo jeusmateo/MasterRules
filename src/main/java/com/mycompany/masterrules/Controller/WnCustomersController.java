@@ -34,6 +34,9 @@ public class WnCustomersController implements Initializable {
     private Button btnUpdateCustomerAccount;
 
     @FXML
+    private Button btnDeleteCustomer;
+
+    @FXML
     private AnchorPane guardarClienteNvo;
 
     @FXML
@@ -113,19 +116,20 @@ public class WnCustomersController implements Initializable {
         tblCustomers.setItems(filteredObservableList);
     }
 
+    //TODO: ESTO DEBE QUITARSE PORQUE NO SE USA
     public void setBtnShowInformation() {
         scrViewInfoCustomer.setVisible(true);
         scrMainViewCustomerAccount.setVisible(false);
 
     }
 
+    //TODO: ESTO DEBE QUITARSE PORQUE NO SE USA
     public void setBtnBackViewInfoCustomer() {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
 
         // esto creo que esta mal usado, debería ser clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints ) o lgo parecido
         clearTextFields(new TextField());
-
     }
 
     @FXML
