@@ -13,8 +13,8 @@ public class UserManager {
     // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
 
     public UserManager() {
-      //  userDBManager.save(new UserAccount("4", "Chepo", "Chepo", "Josue David Torres Tec","Chepo"));
-//userDBManager.save(new UserAccount("2", "Chepo", "Chepo", "Chepito","Chepo")); // todo: usuarios temporales
+
+        // userDBManager.save(new UserAccount("Chepo", "Chepo", new UserPermissions(), "Chepito")); // todo: usuarios temporales
 
     }
     public void updateUserInformation(UserAccount editedUserAccount){
@@ -28,7 +28,6 @@ public class UserManager {
 
     public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
         userDBManager.save(newUser);
-
     }
 
     private boolean isValid(UserAccount newUser) {

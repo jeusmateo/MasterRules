@@ -166,15 +166,21 @@ public class WnUsersController implements Initializable {
     @FXML
     private TextField txtEditUserCompleteName;
     @FXML
-    private PasswordField pwfUserPassword;
+    private PasswordField pswdFieldCreateUserAccount;
     @FXML
-    private PasswordField pwfUserPasswordConfirm;
+    private PasswordField pswdFieldConfirmCreateUserAccount;
+    @FXML
+    private PasswordField pswdFieldEditUserPasswordConfirm;
+    @FXML
+    private PasswordField pswdFieldEditUserAccount;
     @FXML
     private Button btnEditUser;
     @FXML
     private TextField txtFieldCreateUserCompleteName;
     @FXML
     private TextField txtFieldCreateUserName;
+    @FXML
+    private Button btnCreateUserAccount;
 
     @FXML
     private void eventAction(ActionEvent event) {
@@ -183,8 +189,8 @@ public class WnUsersController implements Initializable {
             if (evt.equals(btnEditUser)) {
 
                 String editUserName = txtEditUserCompleteName.getText();
-                String editUserPassword = pwfUserPassword.getText();
-                String confirmUserPassword = pwfUserPasswordConfirm.getText();
+                String editUserPassword = pswdFieldEditUserAccount.getText();
+                String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
                 String confirUserAccountUserEdit = textEditUserName.getText();
                 if (editUserPassword.equals(confirmUserPassword)) {
                     this.userEdit.setFullEmployeeName(editUserName);
@@ -199,9 +205,22 @@ public class WnUsersController implements Initializable {
                 }
 
             }
-//            else if () {
-//
-//            }
+            else if(evt.equals(btnCreateUserAccount)){
+                String createUserCompleteName = txtFieldCreateUserCompleteName.getText();
+                String createUserName = txtFieldCreateUserName.getText();
+                String createUserPassword = pswdFieldCreateUserAccount.getText();
+                String createUserPasswordConfirm = pswdFieldConfirmCreateUserAccount.getText();
+                if (createUserPassword.equals(createUserPasswordConfirm)) {
+                    System.out.println("Chepo");
+                    UserAccount newUser = new UserAccount(createUserName, createUserPassword, createUserCompleteName);
+                    userManager.registerNewUser(newUser);
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    tblUserAccount.setItems(userAccounts);
+                    tblUserAccount.refresh();
+                } else {
+                    //throw Exception chepo = new Exception("Chepo");
+                }
+            }
         } catch (Exception e) {
             System.out.println("Chepo " + e.getMessage());
         }
@@ -264,7 +283,7 @@ public class WnUsersController implements Initializable {
         try {
             txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
             textEditUserName.setText(userAccount.getUserName());
-            pwfUserPassword.setText(userAccount.getPassword());
+            pswdFieldEditUserAccount.setText(userAccount.getPassword());
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -284,15 +303,6 @@ public class WnUsersController implements Initializable {
         showUserAccountInfoForEditButtonHolaJajajChepo(userAccount);
     }
 
-    private void registerUserAccount() {
-        String userCompleteName = txtFieldCreateUserCompleteName.getText();
-        String userPassword = pwfUserPassword.getText();
-        String userName = txtFieldCreateUserName.getText();
-        UserAccount newUserAccount = new UserAccount(userCompleteName, userPassword, userName); // TODO Decirle a matero que no se registra por error en base de datos
-        userManager.registerNewUser(newUserAccount);
-        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
-        tblUserAccount.setItems(userAccounts);
 
-    }
 
 }

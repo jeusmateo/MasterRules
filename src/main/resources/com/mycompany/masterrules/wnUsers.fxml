@@ -23,7 +23,7 @@
          <children>
             <TabPane layoutX="2.0" prefHeight="600.0" prefWidth="882.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
-                  <Tab text="Crear Usuario">
+                  <Tab fx:id="tabCreateUserAccount" text="Crear Usuario">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -83,7 +83,7 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="486.0" layoutY="443.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Usuario" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="219.0" />
+                                          <Button fx:id="btnCreateUserAccount" layoutX="486.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Usuario" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="219.0" />
                                           <TabPane layoutX="287.0" layoutY="212.0" prefHeight="224.0" prefWidth="543.0" stylesheets="@viewTemplate.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="212.0">
                                             <tabs>
                                               <Tab fx:id="tabSalePerm" text="Ventas">
@@ -358,7 +358,7 @@
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <PasswordField fx:id="pwfUserPassword" layoutX="162.0" promptText="*****************************" />
+                                                      <PasswordField fx:id="pswdFieldEditUserAccount" layoutX="162.0" promptText="*****************************" />
                                                    </children>
                                                 </Group>
                                                 <Group>
@@ -368,7 +368,7 @@
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <PasswordField fx:id="pwfUserPasswordConfirm" layoutX="163.0" promptText="******************************" />
+                                                      <PasswordField fx:id="pswdFieldEditUserPasswordConfirm" layoutX="163.0" promptText="******************************" />
                                                    </children>
                                                 </Group>
                                              </children>
