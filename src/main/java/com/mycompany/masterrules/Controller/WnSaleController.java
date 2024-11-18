@@ -49,8 +49,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private ToggleGroup group;
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
-    //TODO Retirar esta Order.
-    private Order currentTemporalOrder;
+
     @FXML
     private Button btnContinue;
 
@@ -459,7 +458,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
             Parent paymentView = loader.load();
             WnPaymentController paymentController = loader.getController();
-            paymentController.setOrderData(posManager.getCurrentOrder().calculateTotalAmount(),posManager.getCurrentOrder().getCustomer());
+            try {
+                paymentController.setOrderData(posManager.getCurrentOrder().calculateTotalAmount(), posManager.getCurrentOrder().getCustomer());
+            }catch (Exception e){
+                System.out.println("Chepipi "+e.getMessage());
+            }
             // Crear una nueva escena y un nuevo Stage para la vista de pago
             Scene paymentScene = new Scene(paymentView);
             Stage paymentStage = new Stage();
@@ -494,7 +497,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
         } catch (Exception e) {
 
-            System.err.println("Error al cargar la vista de pago: " + e.getMessage());
+            System.err.println("Error al cargar la vista de pago: " + e.getStackTrace());
+            e.printStackTrace();
         }
     }
 

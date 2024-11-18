@@ -4,6 +4,7 @@ package com.mycompany.masterrules.Model.possystem;
 import java.time.LocalDateTime;
 
 
+import com.mycompany.masterrules.Database.UserDBManager;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
@@ -35,9 +36,9 @@ public class POSManager {
     }
 
     public POSManager() {
-
+        UserDBManager bd = new UserDBManager();
         currentOrder = new Order();
-
+        currentUser = bd.findById("1");
 
 
     }
@@ -78,28 +79,54 @@ public class POSManager {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
     }
-
+//TODO MUY URGENTE
     private Bill createBill(PaymentDetails data) {
-        Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
+        if(data.getCustomer() != null){
+            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
+            switch (data.getMetodoDePago()) {
+                case "CASH":
+                    newBill.setChange(data.getChangeAmount());
+                    newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
+                    break;
+                case "CARD":
+                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                    newBill.setReference(data.getReference());
+                    break;
+                case "STORE_CREDIT":
+                    if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
+                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    }
+                    break;
+                default:
+                    break;
 
-        switch (data.getMetodoDePago()) {
-            case "CASH":
-                newBill.setChange(data.getChangeAmount());
-                newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
-                break;
-            case "CARD":
-                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
-                newBill.setReference(data.getReference());
-                break;
-            case "STORE_CREDIT":
-                if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
-                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-                }
-                break;
-            default:
-                break;
+            }
+            return newBill;
+        }else{
+            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago());
+            switch (data.getMetodoDePago()) {
+                case "CASH":
+                    newBill.setChange(data.getChangeAmount());
+                    newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
+                    break;
+                case "CARD":
+                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                    newBill.setReference(data.getReference());
+                    break;
+                case "STORE_CREDIT":
+                    if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
+                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return newBill;
         }
-        return newBill;
+
+
+
+
     }
 
 
