@@ -528,7 +528,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
             String newType = txtProductType_tabEdit.getText();
             BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
             BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
-
+            System.out.println(selectedProduct.getId());
             selectedProduct.setName(newName);
             selectedProduct.setType(newType);
             selectedProduct.setPrice(newPrice);

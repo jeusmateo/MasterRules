@@ -9,3 +9,35 @@ Comentarios adicionales:
 Para: a
 Entregar en: Para Llevar
 =====================================
+Fecha: viernes, 22 noviembre 2024, 08:09:04 a. m.
+
+=====================================
+Imprimiendo orden: 0
+Productos: 
+Nombre : 1                    Cantidad: 35
+Nombre : 778                    Cantidad: 3
+Nombre : 213                    Cantidad: 1
+Comentarios adicionales: lA VERDAD ES QUE N NUACN ASJDJHASDKJLASKJDAJDHJASLKJFDSJKHFKhjgdhfjaflkjahdkhakalaksdkafjkdsajkfsadhjkf hsafalalalajdfsjjhf dshfk s
+Para: a
+Entregar en: Mesa - Mesa: 21
+=====================================
+Fecha: viernes, 22 agosto 2025, 09:00:26 p. m.
+
+=====================================
+Imprimiendo orden: 0
+Productos: 
+Nombre : asdadada                    Cantidad: 7
+Comentarios adicionales: 
+Para: C
+Entregar en: Mostrador
+=====================================
+Fecha: sábado, 23 agosto 2025, 08:13:01 p. m.
+
+=====================================
+Imprimiendo orden: 0
+Productos: 
+Nombre : Product 2                    Cantidad: 3
+Comentarios adicionales: 
+Para: EVELYN GERALDINE NUÑEZ TREJO
+Entregar en: Para Llevar
+=====================================

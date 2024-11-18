@@ -192,3 +192,29 @@ PAGADO CON EFECTIVO: 3
 CAMBIO: $0
 
 =====================================
+=====================================
+Imprimiendo factura :0
+Nombre del empleado: admin
+Nombre del cliente: a
+Productos:
+Nombre: 1   Cantidad: 35  Precio: 35
+Nombre: 778   Cantidad: 3  Precio: 23661
+Nombre: 213   Cantidad: 1  Precio: 12131
+
+=====================================
+=====================================
+Imprimiendo factura :1
+Nombre del empleado: admin
+Nombre del cliente: C
+Productos:
+Nombre: asdadada   Cantidad: 7  Precio: 77
+
+=====================================
+=====================================
+Imprimiendo factura :2
+Nombre del empleado: admin
+Nombre del cliente: EVELYN GERALDINE NUÑEZ TREJO
+Productos:
+Nombre: Product 2   Cantidad: 3  Precio: 60
+
+=====================================
