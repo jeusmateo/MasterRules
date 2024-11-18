@@ -1,8 +1,10 @@
 package com.mycompany.masterrules.Model.possystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * @author David Torres
@@ -10,10 +12,10 @@ import java.math.BigDecimal;
 
 public class Bill2 {
     private String reference;
-    private String pagadoEnEfectivo;
-    private String pagadoEnTajeta;
-    private String pagadoEnCreditoDeTienda;
-    private String change;
+    private BigDecimal pagadoEnEfectivo;
+    private BigDecimal pagadoEnTajeta;
+    private BigDecimal pagadoEnCreditoDeTienda;
+    private BigDecimal change;
     private String customerName;
     private String paymentMethod;
     private long id;
@@ -27,7 +29,7 @@ public class Bill2 {
      * Cliente al que se le realiza la factura
      */
 
-    private Customer customer;
+    private String customer;
 
     /**
      * Monto total de la factura
@@ -38,38 +40,107 @@ public class Bill2 {
      * Orden a la que pertenece la factura
      */
 
-    private Order order;
+    public Bill2(String employeeName, String customer, BigDecimal amount, String paymentMethod) {
+        this.employeeName = employeeName;
+        this.customerName = customer;
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
 
+    }
 
-    public void configProductDetails() {
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public BigDecimal getPagadoEnEfectivo() {
+        return pagadoEnEfectivo;
+    }
+
+    public void setPagadoEnEfectivo(BigDecimal pagadoEnEfectivo) {
+        this.pagadoEnEfectivo = pagadoEnEfectivo;
+    }
+
+    public BigDecimal getPagadoEnTajeta() {
+        return pagadoEnTajeta;
+    }
+
+    public void setPagadoEnTajeta(BigDecimal pagadoEnTajeta) {
+        this.pagadoEnTajeta = pagadoEnTajeta;
+    }
+
+    public BigDecimal getPagadoEnCreditoDeTienda() {
+        return pagadoEnCreditoDeTienda;
+    }
+
+    public void setPagadoEnCreditoDeTienda(BigDecimal pagadoEnCreditoDeTienda) {
+        this.pagadoEnCreditoDeTienda = pagadoEnCreditoDeTienda;
+    }
+
+    public BigDecimal getChange() {
+        return change;
+    }
+
+    public void setChange(BigDecimal change) {
+        this.change = change;
     }
 
 
-    private void configPaymenthDetails(PaymentDetails paymentDetails) {
-        switch (paymentDetails.getPaymentMethod()) {
-            case CARD -> {
-                this.paymentMethod = "PAGADO POR TARJETA";
-                this.reference = paymentDetails.getReference();
-            }
-            case CASH -> {
-                this.paymentMethod = "PAGADO POR EFECTIVO";
-                this.pagadoEnEfectivo = String.valueOf(paymentDetails.getCustomerCashAmount());
-                this.change = String.valueOf(paymentDetails.getCustomerCashAmount().subtract(paymentDetails.getCustomerCashAmount()));
+    public Bill2(Order orderArg, String employeeNameArg) {
 
-            }
-            //todo checar el de aqui y el de arriba porque no jalan, debem ser lo que pagó
-            case STORE_CREDIT -> {
-                this.paymentMethod = "PAGADO POR CREDITO DE TIENDA";
-                this.pagadoEnCreditoDeTienda = String.valueOf(paymentDetails.getCustomerCashAmount());
+        employeeName = employeeNameArg;
+    }
 
 
-            }
-            default -> {
-                break;
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
-            }
-        }
+    public long getId() {
+        return id;
+    }
 
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+
+
+
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+
+    // Necesario para Hibernate
+    protected Bill2() {
 
     }
+
+
 }

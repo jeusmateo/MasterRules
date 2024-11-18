@@ -1,15 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package com.mycompany.masterrules.Model.possystem;
 
-/**
- *
- * @author chepo
- */
-public enum PaymentMethod {
-    CARD,
-    CASH,
-    STORE_CREDIT
+import java.math.BigDecimal;
+
+
+//CLASE DE BAJO NIVEL DE ABSTRACCION, DEBEMOS VER COMO OCULTARLA PARA QUE SE VUELVA UN ADT O TRABAJARLA EN OTRO NIVEL DE ABSTRACCION
+//ES BAJO PORQUE ELLA Y SUS HIJAS TRABAJAN LOGICA SOBRE PAGO Y OPERACIONES NECESARIAS PARA VENDER.
+public abstract class PaymentMethod {
+    private BigDecimal totalAmount;
+
+    public PaymentMethod(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    protected void processPayment(){}
+
+    public abstract PaymentDetails paymentProcess();
+
+    public abstract String paymentDescription();
+
 }
+

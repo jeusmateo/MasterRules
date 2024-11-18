@@ -1,14 +1,11 @@
-package com.mycompany.masterrules.Model.finanzas;
-
-import com.mycompany.masterrules.Model.possystem.PaymentDetails;
-import com.mycompany.masterrules.Model.possystem.PaymentMethod;
-import com.mycompany.masterrules.Model.possystem.PaymenthProcesser;
+package com.mycompany.masterrules.Model.possystem;
 
 import java.math.BigDecimal;
 
-public class CashPaymentMethod extends PaymenthProcesser {
+public class CashPaymentMethod extends PaymentMethod {
     private BigDecimal customerCashAmount;
     private BigDecimal changeAmount;
+
     public CashPaymentMethod(BigDecimal totalAmount, BigDecimal customerCashAmount){
         super(totalAmount);
         this.customerCashAmount = customerCashAmount;
@@ -18,7 +15,7 @@ public class CashPaymentMethod extends PaymenthProcesser {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH,this.getTotalAmount());
+        PaymentDetails paymentDetails = new PaymentDetails();
         paymentDetails.setChangeAmount(changeAmount);
 
         return null;
