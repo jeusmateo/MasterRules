@@ -32,7 +32,9 @@ public class Order {
         pedidoComandaList = new ArrayList<>();
     }
 
-
+    public List<PedidoComanda> getPedidoComandaList(){
+        return pedidoComandaList;
+    }
     /*
         public void calculateTotalAmount(){
             BigDecimal total = new BigDecimal(0);
@@ -48,13 +50,14 @@ public class Order {
      */
     //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
     public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
-        for(PedidoComanda pedidoComanda : pedidoComandaList){
-            if(newPedidoComanda.getProduct().equals(pedidoComanda.getProduct())){
-                pedidoComanda.addQuantity();
-            }else{
-                pedidoComandaList.add(newPedidoComanda);
-            }
-        }
+        pedidoComandaList.add(newPedidoComanda);
+//        for(PedidoComanda pedidoComanda : pedidoComandaList){
+//            if(newPedidoComanda.getProduct().equals(pedidoComanda.getProduct())){
+//                pedidoComanda.addQuantity();
+//            }else{
+//                pedidoComandaList.add(newPedidoComanda);
+//            }
+//        }
     }
 
     public void setEmployeeName(String employeeName){
