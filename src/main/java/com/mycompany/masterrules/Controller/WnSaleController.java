@@ -47,6 +47,8 @@ import javafx.stage.StageStyle;
 public class WnSaleController implements Initializable, ProductSelectionListener {
     private POSManager posManager;
     private ToggleGroup group;
+    private static final String ITEM_CARD_PRODUCT_FXML = "/com/mycompany/masterrules/itemCardProduct.fxml";
+
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
 
@@ -202,7 +204,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             for (Product product : selectedCategory) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                    loader.setLocation(getClass().getResource(ITEM_CARD_PRODUCT_FXML ));
                     AnchorPane productPane = loader.load();
                     ItemCardProductController controller = loader.getController();
                     controller.setProductDataToCard(product);
@@ -292,7 +294,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             for (Product product : categoryProducts) {
                 try {
                     FXMLLoader productLoader = new FXMLLoader();
-                    productLoader.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                    productLoader.setLocation(getClass().getResource(ITEM_CARD_PRODUCT_FXML));
                     AnchorPane productPane = productLoader.load();
 
                     // Configurar datos del producto en la tarjeta
@@ -327,7 +329,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         for (Product currentProduct : productDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                load.setLocation(getClass().getResource(ITEM_CARD_PRODUCT_FXML));
                 AnchorPane pane = load.load();
                 ItemCardProductController cardController = load.getController();
 
@@ -356,7 +358,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         for (Product currentProductCombo : comboDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                load.setLocation(getClass().getResource(ITEM_CARD_PRODUCT_FXML));
                 AnchorPane pane = load.load();
                 ItemCardProductController cardController = load.getController();
 
@@ -436,33 +438,28 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         tableNumberBox.setVisible(false);
     }
 
-    private void configOrderInfo(){
-        Customer customerInfo=cboCustomers.getValue();
+    private void configOrderInfo() {
+        Customer customerInfo = cboCustomers.getValue();
         RadioButton selected = (RadioButton) group.getSelectedToggle();
-        String deliveryMethod="";
+        String selectedDeliveryMethod = ""; // Renombrar la variable local
         if (selected != null) {
-            deliveryMethod=selected.getText();
+            selectedDeliveryMethod = selected.getText();
         } else {
             System.out.println("No hay ninguna opción seleccionada");
         }
         String comments = txtAdittionalComments.getText();
-        //TODO validaciones para null
-        posManager.configureOrder(deliveryMethod,comments,customerInfo);
+        // TODO: validaciones para null
+        posManager.configureOrder(selectedDeliveryMethod, comments, customerInfo);
     }
+
 
 
     @FXML
     private void handlePayAction(MouseEvent event) {
         try {
-            // Cargar la vista de pago desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
-            Parent paymentView = loader.load();
-            WnPaymentController paymentController = loader.getController();
-            try {
-                paymentController.setOrderData(posManager.getCurrentOrder().calculateTotalAmount(), posManager.getCurrentOrder().getCustomer());
-            }catch (Exception e){
-                System.out.println("Chepipi "+e.getMessage());
-            }
+            Parent paymentView = loadPaymentView();
+            WnPaymentController paymentController = initializePaymentController();
+
             // Crear una nueva escena y un nuevo Stage para la vista de pago
             Scene paymentScene = new Scene(paymentView);
             Stage paymentStage = new Stage();
@@ -491,16 +488,35 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             if (paymentResult != null) {
                 System.out.println("Pago realizado:");
                 posManager.sell(paymentResult);
-
             } else {
                 System.out.println("Pago cancelado.");
             }
         } catch (Exception e) {
-
             System.err.println("Error al cargar la vista de pago: " + e.getStackTrace());
             e.printStackTrace();
         }
     }
+
+    private Parent loadPaymentView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+        return loader.load();
+    }
+
+    private WnPaymentController initializePaymentController() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
+            loader.load();
+            WnPaymentController paymentController = loader.getController();
+            paymentController.setOrderData(
+                    posManager.getCurrentOrder().calculateTotalAmount(),
+                    posManager.getCurrentOrder().getCustomer()
+            );
+            return paymentController;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al inicializar el controlador de pago: " + e.getMessage(), e);
+        }
+    }
+
 
 
     /**
@@ -521,20 +537,15 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
-        List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
         ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
-        System.out.println("ahahhaha");
         try {
             for(PedidoComanda pc: productOrderList){
                 System.out.println(pc.getProduct().getName());
 
             }
-            System.out.println("ahahhaha------");
         }catch (Exception e) {
             System.out.println("error" + e.getMessage());
         }
-
-        System.out.println("ahahhaha---------------------------------------------");
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));

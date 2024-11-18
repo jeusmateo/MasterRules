@@ -25,6 +25,8 @@ public class WnPaymentController implements Initializable {
     private Customer customer;
     private BigDecimal totalAmount;
     private PaymentDetails resultPayementDetails;
+
+
     @FXML
     private Button btnCancel;
 
@@ -39,6 +41,7 @@ public class WnPaymentController implements Initializable {
 
     @FXML
     private Button btnPaywSC;
+
 
     @FXML
     private Label labelCashIncome;
@@ -67,14 +70,22 @@ public class WnPaymentController implements Initializable {
     @FXML
     private Label labelTotalPriceSC;
 
+
     @FXML
     private PasswordField pswrdCreditAccess;
+
 
     @FXML
     private AnchorPane scrNoStoreCredit;
 
+
     @FXML
     private Tab tabCash;
+
+    @FXML
+    private Tab tabStoreCredit;
+
+
 
     @FXML
     private TextField txtFieldCashIncome;
@@ -90,8 +101,8 @@ public class WnPaymentController implements Initializable {
 
     @FXML
     private TextField txtFieldRemainingPayment;
-    @FXML
-    private Tab tabStoreCredit;
+
+
 
     /**
      * Initializes the controller class.
@@ -106,9 +117,9 @@ public class WnPaymentController implements Initializable {
             return null; // Rechaza el cambio si no cumple la expresión regular
         }));
 
-        txtFieldCashIncome.textProperty().addListener((observable, oldValue, newValue) -> {
-            calcularCambio(newValue);
-        });
+        txtFieldCashIncome.textProperty().addListener((observable, oldValue, newValue) ->
+            calcularCambio(newValue)
+    );
     }
 
     public void setOrderData(BigDecimal totalAmount, Customer customerInfo) {
@@ -124,6 +135,7 @@ public class WnPaymentController implements Initializable {
         labelTotalPrice.setText(String.valueOf(totalAmount));
     }
 
+    //TODO Remove this unused private "setScrNoStoreCredit" method.
     private void setScrNoStoreCredit() {
         scrNoStoreCredit.setVisible(true);
     }
@@ -160,6 +172,7 @@ public class WnPaymentController implements Initializable {
                 stage.close();
             }
         } else if (evt.equals(btnPayMP)) {
+            // Either remove or fill this block of code.
 
         }
 
