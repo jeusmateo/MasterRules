@@ -5,6 +5,9 @@ import com.mycompany.masterrules.Model.customers.CustomerManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,7 +97,7 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Label lbCustomerIdAuxiliar;
 
-
+    private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
 
     @FXML
     private void searchCustomers() {
@@ -171,7 +174,8 @@ public class WnCustomersController implements Initializable {
                 clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
                 chkNewCustomerVipStatus.setSelected(false);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                // esto decia que se hiciera con sonar lint, se cambio *System.out.println(e.getMessage());* al logger
+                logger.log(Level.SEVERE, "Error registering new customer", e);
             }
         } else if (evt.equals(btnUpdateCustomerAccount)) {
             editCustomerInfo();
