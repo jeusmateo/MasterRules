@@ -145,6 +145,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     private int currentCategoryIndex = 0;
 
+
+
     @FXML
     private void handleCategoryNavigation(ActionEvent evt) {
         try {
@@ -164,6 +166,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     System.out.println("Ya estás en la primera categoría");
                 }
             }
+
         } catch (Exception e) {
             System.err.println("Error al navegar entre categorías: " + e.getMessage());
             e.printStackTrace();
@@ -378,6 +381,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void showOrderForm() {
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
+
+
 
         menuWindow.setVisible(false);
         menuOrderOptionsBox.setVisible(false);
