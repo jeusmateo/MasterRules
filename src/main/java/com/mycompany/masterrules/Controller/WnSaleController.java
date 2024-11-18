@@ -464,8 +464,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
-        List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
-        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(chepo1);
+       // List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
+        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));
@@ -476,7 +476,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
         PedidoComanda pI3 = new PedidoComanda(p3);
         productOrderList.add(pI3);
-        /*
+
         Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
         Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
 
@@ -488,7 +488,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         productOrderList.add(pI2);
 
 
-         */
+
         tblOrder.setItems(productOrderList);
 
 
