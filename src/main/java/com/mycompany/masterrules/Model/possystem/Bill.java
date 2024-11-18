@@ -18,6 +18,8 @@ public class Bill {
     private BigDecimal pagadoEnCreditoDeTienda;
     private BigDecimal change;
     private String customerName;
+    private String paymentMethod;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -35,6 +37,14 @@ public class Bill {
     /** Orden a la que pertenece la factura */
     @Embedded
     private Order order;
+
+    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod) {
+        this.employeeName = employeeName;
+        this.customerName = customer;
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+
+    }
 
     public BigDecimal getPagadoEnEfectivo() {
         return pagadoEnEfectivo;
