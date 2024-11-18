@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Model.possystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

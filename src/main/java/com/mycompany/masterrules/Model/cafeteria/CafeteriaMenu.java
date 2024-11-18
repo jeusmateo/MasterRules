@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.cafeteria.menu;
+package com.mycompany.masterrules.Model.cafeteria;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.hibernate.Session;
 
 import java.util.List;
