@@ -3,7 +3,9 @@ package com.mycompany.masterrules.Model.possystem;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
@@ -18,6 +20,9 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
  */
 
 //Este wey se encarga de vender
+
+
+
 
 public class POSManager {
 
@@ -54,9 +59,13 @@ public class POSManager {
         currentOrder.addProductToOrderItemList(new PedidoComanda(product));
     }
 
+
     //Ejemplo el constructor recibe el paymentMethod -> new DebitCard("TOTAL", "String")
     //Aqui vas a llamar su procesador de pago y ya
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
+
+   
+
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 

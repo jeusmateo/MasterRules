@@ -16,8 +16,6 @@
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Product"/>
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Combo"/>
-        <mapping class="com.mycompany.masterrules.Model.cafeteria.CustomCombo"/>
-
 
         <mapping class="com.mycompany.masterrules.Model.users.UserAccount"/>
 

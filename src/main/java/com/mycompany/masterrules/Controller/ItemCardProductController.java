@@ -36,7 +36,7 @@ public class ItemCardProductController implements Initializable{
     public void setProductDataToCard(Product productData){
         this.productData=productData;
         
-        setCardProductName(productData.getProductName());
+        setCardProductName(productData.getName());
         setCardPrice(productData.getPrice());
         
         //Se debe poner la imagen, pero por ahora no lo hare

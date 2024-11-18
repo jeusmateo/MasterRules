@@ -3,7 +3,7 @@
 //import com.mycompany.masterrules.Database.CombosDBManager;
 //import com.mycompany.masterrules.Database.ProductDBManager;
 //import com.mycompany.masterrules.Model.cafeteria.Combo;
-//import com.mycompany.masterrules.Model.cafeteria.CustomCombo;
+//import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 //import com.mycompany.masterrules.Model.cafeteria.Product;
 //
 //import java.math.BigDecimal;
@@ -25,7 +25,7 @@
 //        Combo combo = new Combo("Combo 1", products, null, BigDecimal.valueOf(30), BigDecimal.valueOf(15));
 //        System.out.println(combo.toString());
 //
-//        CustomCombo customComboTemplate = new CustomCombo();
+//        CustomComboCreator customComboTemplate = new CustomComboCreator();
 //        customComboTemplate.setProducts(products);
 //
 //        Combo customCombo = new Combo("Custom Combo 1", products, BigDecimal.valueOf(30), BigDecimal.valueOf(15));

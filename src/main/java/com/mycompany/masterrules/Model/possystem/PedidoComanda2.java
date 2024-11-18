@@ -20,7 +20,7 @@ public class PedidoComanda2 {
 
     public PedidoComanda2(Product product, int quantity) {
         this.quantity =  quantity;
-        this.product = product.getProductName();
+        this.product = product.getName();
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));
     }
 
