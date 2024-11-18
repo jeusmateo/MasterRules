@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.customers.CustomerAccount;
 
 import java.math.BigDecimal;
 
@@ -61,6 +60,7 @@ public class PaymentDetails {
 
 
     public void setReference(String reference) {
+        // Noncompliant - method is empty
     }
 
     public Customer getCustomer(){return this.customer;}
