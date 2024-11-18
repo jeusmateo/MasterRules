@@ -1,62 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Model.users;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mycompany.masterrules.Database.UserDBManager;
 
-// todo: renombrar esta clase
 public class LoginValidator {
-    private final List<UserAccount> userAccounts;
+    private final UserDBManager userDBManager;
 
     public LoginValidator() {
-        userAccounts = new ArrayList<UserAccount>();
-    }
-
-    public LoginValidator(List<UserAccount> userAccounts) {
-        this.userAccounts = userAccounts;
+        this.userDBManager = new UserDBManager();
     }
 
     private boolean isAdmin(String username, String password) {
         return username.equals("admin") && password.equals("admin") || username.isEmpty() && password.isEmpty();
     }
 
-    public boolean validateUser(String username, String password) throws Exception {//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
-        // hardcodeado el admin y el password
+    public boolean validateUser(String username, String password) {
+        System.out.println("Validando usuario: " + username);
+
+        // Validación hardcodeada para administrador
         if (isAdmin(username, password)) {
+            System.out.println("Usuario administrador validado.");
             return true;
         }
 
-        //aqui probablemente se involucre la BD
-        if (!isUserRegistered(username)) {
+        // Verifica si el usuario existe usando findByUserName
+        UserAccount foundUser = userDBManager.findByUserName(username);
+        if (foundUser == null) {
+            System.out.println("Usuario no encontrado en la base de datos.");
             return false;
         }
 
-        //se encuentra al usuario por nombre
-        UserAccount foundUser = findUser(username);
+        System.out.println("Usuario encontrado: " + foundUser.getUserName());
+        System.out.println("Comparando contraseñas...");
 
-        return password.equals(foundUser.getPassword());
-
+        // Compara las contraseñas
+        if (password.equals(foundUser.getPassword())) {
+            System.out.println("Contraseña válida.");
+            return true;
+        } else {
+            System.out.println("Contraseña incorrecta.");
+            return false;
+        }
     }
 
-    public UserAccount findUser(String username) throws Exception {
-        //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
-        for (UserAccount registeredUser : userAccounts) {
-            if (username.equals(registeredUser.getUserName())) {
-                return registeredUser;
-            }
+
+    public UserAccount findUser(String username) throws Throwable {
+        // Obtiene al usuario directamente desde la base de datos
+        UserAccount foundUser = userDBManager.findById(username);
+        if (foundUser == null) {
+            throw new UserNotFoundException(username + " no encontrado");
         }
-        throw new UserNotFoundException(username + " no encontrado");
+        return foundUser;
     }
 
     public boolean isUserRegistered(String username) {
-        for (UserAccount registeredUser : userAccounts) {
-            if (username.equals(registeredUser.getUserName())) {
-                return true;
-            }
-        }
-        return false;
+        // Verifica si el usuario existe en la base de datos
+        return userDBManager.findById(username) != null;
     }
 }

@@ -23,6 +23,7 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
         }
         PaymentDetails paymentDetails= new PaymentDetails("PAGADO CON CREDITO DE TIENDA",this.getTotalAmount());
         paymentDetails.setCustomer(customer);
+        paymentDetails.setPaymentDescription(paymentDescription());;
         return paymentDetails;
     }
 

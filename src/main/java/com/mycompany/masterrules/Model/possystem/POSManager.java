@@ -1,19 +1,14 @@
 package com.mycompany.masterrules.Model.possystem;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 
 
-import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
-import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
-import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
+
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.customers.CustomerAccount;
-import com.mycompany.masterrules.Model.customers.CustomerManager;
-import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 
 /**
  * @author David Torres
@@ -27,8 +22,8 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 public class POSManager {
 
 
-    private UserAccount currentUser; //
-    private Order currentOrder; //TODO Este es el carrito, no esta del todo mal
+    private UserAccount currentUser;
+    private Order currentOrder;
 
     public POSManager( UserAccount userAccount) {
 
@@ -66,9 +61,6 @@ public class POSManager {
 
     }
 
-
-    //Ejemplo el constructor recibe el paymentMethod -> new DebitCard("TOTAL", "String")
-    //Aqui vas a llamar su procesador de pago y ya
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
 
@@ -87,8 +79,8 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
-    private Bill2 createBill(PaymentDetails data) {
-        Bill2 newBill = new Bill2(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
+    private Bill createBill(PaymentDetails data) {
+        Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
 
         switch (data.getMetodoDePago()) {
             case "CASH":
@@ -104,35 +96,19 @@ public class POSManager {
                     newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
                 }
                 break;
-
+            default:
+                break;
         }
         return newBill;
     }
 
 
     public void sell(PaymentDetails paymentMethod) {
-        Bill2 bill = createBill(paymentMethod);
+        Bill bill = createBill(paymentMethod);
         ArchiveInvoice ai = new ArchiveInvoice();
-        // ai.ArchiveBill(bill);
+        ai.ArchiveBill(bill);
     }
 
-    public void processPay(PaymentDetails data) {
-        switch (data.getMetodoDePago()) {
-            case "CASH":
-
-                break;
-            case "CARD":
-
-                break;
-            case "STORE_CREDIT":
-                if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
-
-                }
-                break;
-
-        }
-
-    }
 
 
 

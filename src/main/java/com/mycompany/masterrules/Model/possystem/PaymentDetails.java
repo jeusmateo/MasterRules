@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 public class PaymentDetails {
 
+    private String paymentDescription;
     private String metodoDePago;
     private BigDecimal totalAmount;
     private BigDecimal customerCashAmount;
@@ -20,7 +21,13 @@ public class PaymentDetails {
         this.totalAmount = totalAmount;
     }
 
+    public String getPaymentDescription() {
+        return paymentDescription;
+    }
 
+    public void setPaymentDescription(String paymentDescription) {
+        this.paymentDescription = paymentDescription;
+    }
     public String getMetodoDePago() {
         return metodoDePago;
     }

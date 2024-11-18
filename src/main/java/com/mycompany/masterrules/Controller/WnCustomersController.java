@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 //TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
 public class WnCustomersController implements Initializable {
 
-    private CustomerManager customerManager;
+    private final CustomerManager customerManager;
 
     @FXML
     private Button btnAcceptCredit;
@@ -249,9 +249,37 @@ public class WnCustomersController implements Initializable {
         } else if (event.getCharacter().equals("\r")) {
             chkNewCustomerVipStatus.requestFocus();
             event.consume();
+            handleTextFieldEnterKey(event, txtNewCustomerPhoneNumber);
+        } else if (evt.equals(txtEditCustomerStoreCredit) || evt.equals(txtNewCustomerPhoneNumber)) {
+            handleNumericInput(event);
+            if (evt.equals(txtNewCustomerPhoneNumber) && isEnterKey(event)) {
+                txtNewCustomerLoyaltyPoints.requestFocus();
+            }
+        } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
+            handleNumericInput(event);
+            if (isEnterKey(event)) {
+                chkNewCustomerVipStatus.requestFocus();
+            }
         }
     }
 // hasta aqui es lo q se factorizo
+
+    private void handleTextFieldEnterKey(KeyEvent event, Control nextField) {
+        if (isEnterKey(event)) {
+            nextField.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleNumericInput(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !isEnterKey(event)) {
+            event.consume();
+        }
+    }
+
+    private boolean isEnterKey(KeyEvent event) {
+        return event.getCharacter().equals("\r");
+    }
 
     private void showCustomerDetails(Customer customer) {
         if (customer != null) {
