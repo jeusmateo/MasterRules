@@ -100,9 +100,24 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TableColumn<Customer, String> colCustomerName;
 
-
     @FXML
     private Label lbCustomerIdAuxiliar;
+
+
+
+    @FXML
+    private void searchCustomers() {
+        String searchText = txtFieldSearch.getText().toLowerCase();
+
+        // Filtrar la lista de clientes
+        List<Customer> filteredCustomers = customerManager.getCustomers().stream()
+                .filter(customer -> customer.getCustomerName().toLowerCase().contains(searchText))
+                .toList();
+
+        // Actualizar la tabla con los clientes filtrados
+        ObservableList<Customer> filteredObservableList = FXCollections.observableArrayList(filteredCustomers);
+        tblCustomers.setItems(filteredObservableList);
+    }
 
     public void setBtnShowInformation() {
         scrViewInfoCustomer.setVisible(true);
@@ -280,6 +295,7 @@ public class WnCustomersController implements Initializable {
         configTableColumns();
         configTableSelection();
         loadCustomerData();
+        txtFieldSearch.textProperty().addListener((observable, oldValue, newValue) -> searchCustomers());
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
@@ -305,6 +321,8 @@ public class WnCustomersController implements Initializable {
         this.customerManager = cm;
 
     }
+
+
 
 
 
