@@ -215,7 +215,7 @@ public class WnUsersController implements Initializable {
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
-
+                    clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
@@ -237,6 +237,11 @@ public class WnUsersController implements Initializable {
                     UserPermissions permissions = new UserPermissions(selectedPermissions);
                     UserAccount newUser = new UserAccount(createUserName, createUserPassword, permissions, createUserCompleteName);
                     userManager.registerNewUser(newUser);
+                    clearFields(
+                            new TextField[]{txtFieldCreateUserCompleteName, txtFieldCreateUserName},
+                            new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount},
+                            checkBoxPermissionMap
+                    );
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
@@ -329,6 +334,7 @@ public class WnUsersController implements Initializable {
             txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
             textEditUserName.setText(userAccount.getUserName());
             pswdFieldEditUserAccount.setText(userAccount.getPassword());
+            clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
             syncCheckBoxesWithPermissions(userAccount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -353,6 +359,24 @@ public class WnUsersController implements Initializable {
         showUserAccountInfoForEditButtonHolaJajajChepo(userAccount);
     }
 
+    private void clearFields(TextField[] textFields, PasswordField[] passwordFields, Map<CheckBox, Permission>... checkBoxMaps) {
+        if (textFields != null) {
+            for (TextField textField : textFields) {
+                textField.clear();
+            }
+        }
 
+        if (passwordFields != null) {
+            for (PasswordField passwordField : passwordFields) {
+                passwordField.clear();
+            }
+        }
+
+        if (checkBoxMaps != null) {
+            for (Map<CheckBox, Permission> checkBoxMap : checkBoxMaps) {
+                checkBoxMap.keySet().forEach(checkBox -> checkBox.setSelected(false));
+            }
+        }
+    }
 
 }
