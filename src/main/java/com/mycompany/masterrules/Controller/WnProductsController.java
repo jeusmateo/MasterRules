@@ -298,17 +298,18 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
                 BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
                 ProductDatabase chepobd = new ProductDatabase();
-                List<Product> chepo = chepobd.readAll();
-                ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
+
                 // Crear el producto
                 Product product = new Product(id, name, type, price, vipPrice);
 
                 // Registrar el producto en el modelo
                 cafeteriaMenu.addProductToMenu(product);
 
+                List<Product> chepo = cafeteriaMenu.getProducts();
+                ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
                 // Agregar el producto al ObservableList
-                observableProductList.add(product);
-                chepobd.save(product);
+               // observableProductList.add(product);
+                //chepobd.save(product);
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
