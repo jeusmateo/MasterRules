@@ -43,7 +43,7 @@ public class LoginValidator {
     }
 
 
-    public UserAccount findUser(String username) throws Throwable {
+    public UserAccount findUser(String username) throws UserNotFoundException {
         // Obtiene al usuario directamente desde la base de datos
         UserAccount foundUser = userDBManager.findById(username);
         if (foundUser == null) {

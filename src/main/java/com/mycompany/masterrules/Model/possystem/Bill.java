@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Model.possystem;
 
-import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -28,7 +27,7 @@ public class Bill {
     private BigDecimal change;
     private String customerName;
     private String paymentMethod;
-    private LocalDateTime date;
+    private LocalDateTime date; //TODO Remove this unused "date" private field.
 
     public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod,Order order) {
         this.employeeName = employeeName;

@@ -114,7 +114,7 @@ public class CafeteriaStorage {
         return products;
     }
 
-
+    //The type of "products" should be an interface such as "Map" rather than the implementation "HashMap".
     public void setProducts(HashMap<Product, StockInfo> products) {
         this.products = products;
     }

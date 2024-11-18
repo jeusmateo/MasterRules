@@ -25,22 +25,25 @@ public class CustomerManager {
 
 
 
-    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) throws Exception {
-
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus){
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;
-            if (!loyaltyPoints.isEmpty()) {
-                loyaltyPointsInt = Integer.parseInt(loyaltyPoints);
-            } else {
-                loyaltyPointsInt = 0;
+            try {
+                if (!loyaltyPoints.isEmpty()) {
+                    loyaltyPointsInt = Integer.parseInt(loyaltyPoints);
+                } else {
+                    loyaltyPointsInt = 0;
+                }
+                Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
+                customerDBManager.save(customer);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Puntos de fidelidad no válidos", e);
             }
-            Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
-            customerDBManager.save(customer);
         } else {
-            throw new Exception("Parametros Incorrectos");
+            throw new IllegalArgumentException("Parametros Incorrectos: Nombre o teléfono vacío");
         }
-
     }
+
 
     public List<Customer> getCustomers() {
         return customerDBManager.readAll();

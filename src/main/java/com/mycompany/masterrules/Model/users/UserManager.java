@@ -34,7 +34,7 @@ public class UserManager {
     }
 
 
-    public void removeUser(String userID) throws Exception{
+    public void removeUser(String userID) throws UserNotFoundException{
         var findUser = userDBManager.findById(userID);
         if(findUser==null){
             throw new UserNotFoundException(userID + " no encontrado");
@@ -73,7 +73,7 @@ public class UserManager {
     //movi los metodos FindUser y ValidateUser a la clase LoginValidator
 
 
-    public void changeUserPermissons(String userID, UserPermissions newPermissions) throws Exception{//cambie el nombre del parametro permissions  newPermission//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
+    public void changeUserPermissons(String userID, UserPermissions newPermissions) throws UserNotFoundException{//cambie el nombre del parametro permissions  newPermission//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
         for (UserAccount userAccount : getUserAccounts()) {
             if (userAccount.getUserID().equals(userID)) {
                 userAccount.setPermissions(newPermissions);

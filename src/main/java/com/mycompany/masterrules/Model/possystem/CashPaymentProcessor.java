@@ -27,7 +27,7 @@ public class CashPaymentProcessor extends PaymentProcessor {
         StringBuilder description = new StringBuilder("PAGADO CON EN EFECTIVO: $");
         description.append(String.valueOf(this.getTotalAmount()));
         description.append("\n");
-        description.append("CAMBIO: $"+String.valueOf(changeAmount));
+        description.append("CAMBIO: $"+ changeAmount);
         description.append("\n");
 
         return description.toString();
