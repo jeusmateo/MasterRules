@@ -59,7 +59,7 @@ public class UserPermissions {
 
     private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
 
-
+    //The type of "grantedPermissions" should be an interface such as "Set" rather than the implementation "EnumSet".
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;
     }

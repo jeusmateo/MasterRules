@@ -8,7 +8,7 @@ import jakarta.persistence.Embeddable;
 public class LoyaltyCard {
     @Column(name = "LoayltyCardID")
     private long ID;
-    public String accessCode;
+    public String accessCode; // Make accessCode a static final constant or non-public and provide accessors if needed.
 
     public String getAccessCode(){ return accessCode; }
 

@@ -12,16 +12,6 @@ public class CashRegisterAuditReport {
 
     private BigDecimal initialCashAmount;
 
-
-    private BigDecimal currentCashAmount;
-
-
-    private ArrayList<CashFlowReport> cashOutFlowReports;
-
-
-    private ArrayList<CashFlowReport> cashInFlowReports;
-
-
     private ArrayList<Bill> bills;
 
 
@@ -33,34 +23,34 @@ public class CashRegisterAuditReport {
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-        this.currentCashAmount=initialCashAmount;
+
         this.initialCutofDate = LocalDateTime.now();
-        this.cashOutFlowReports = new ArrayList<>();
-        this.cashInFlowReports = new ArrayList<>();
+//        this.cashOutFlowReports = new ArrayList<>();
+//        this.cashInFlowReports = new ArrayList<>();
         this.bills = new ArrayList<>();
         
         
     }
 
     public void addBill(Bill bill){ //TODO ESTA COSA TIENE QUE ABSTRAERSE A TRAVES DE LA LISTA DE INVOICE
-        currentCashAmount = currentCashAmount.add(bill.getAmount());
+
         bills.add(bill);
         System.out.println("Bill added");
     }
 
     private BigDecimal calculateTotalCashIn(){
         BigDecimal totalCashIn =  BigDecimal.ZERO;
-        for (CashFlowReport cashInFlowReport : cashInFlowReports) {
-            totalCashIn.add(cashInFlowReport.getCashAmount());
-        }
+//        for (CashFlowReport cashInFlowReport : cashInFlowReports) {
+//            totalCashIn.add(cashInFlowReport.getCashAmount());
+//        }
         return totalCashIn;
     }
 
     private BigDecimal calculateTotalCashOut(){
         BigDecimal totalCashOut =  BigDecimal.ZERO;
-        for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
-            totalCashOut.add(cashOutFlowReport.getCashAmount());
-        }
+//        for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
+//            totalCashOut.add(cashOutFlowReport.getCashAmount());
+//        }
         return totalCashOut;
     }
 
@@ -76,10 +66,7 @@ public class CashRegisterAuditReport {
         BigDecimal totalCashIn = calculateTotalCashIn();
         BigDecimal totalCashOut = calculateTotalCashOut();
         BigDecimal totalSellAmount = calculateTotalBills();
-        currentCashAmount=currentCashAmount.add(initialCashAmount);
-        currentCashAmount=currentCashAmount.add(totalSellAmount);
-        currentCashAmount=currentCashAmount.add(totalCashIn);
-        currentCashAmount=currentCashAmount.subtract(totalCashOut);
+
         
     }
 
@@ -91,29 +78,8 @@ public class CashRegisterAuditReport {
         this.initialCashAmount = initialCashAmount;
     }
 
-    public BigDecimal getcurrentCashAmount() {
-        return currentCashAmount;
-    }
 
-    public void setcurrentCashAmount(BigDecimal currentCashAmount) {
-        this.currentCashAmount = currentCashAmount;
-    }
 
-    public ArrayList<CashFlowReport> getCashOutFlowReports() {
-        return cashOutFlowReports;
-    }
-
-    public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
-        this.cashOutFlowReports = cashOutFlowReports;
-    }
-
-    public ArrayList<CashFlowReport> getCashInFlowReports() {
-        return cashInFlowReports;
-    }
-
-    public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
-        this.cashInFlowReports = cashInFlowReports;
-    }
 
     public ArrayList<Bill> getBills() {
         return bills;
@@ -139,13 +105,6 @@ public class CashRegisterAuditReport {
         this.finalCutofDate = finalCutofDate;
     }
 
-    public BigDecimal getCurrentCashAmount() {
-        return currentCashAmount;
-    }
-
-    public void setCurrentCashAmount(BigDecimal currentCashAmount) {
-        this.currentCashAmount = currentCashAmount;
-    }
     
     
 }

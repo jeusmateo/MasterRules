@@ -99,7 +99,19 @@ public class CustomerAccount {
                 '}';
     }
 
-
+    // TODO: This class overrides "hashCode()" and should therefore also override "equals()".
+//    @Override
+//    todo ESTA COSA ES LO Q ME DA COPILOT, PERO HAY QUE VERIFICARLO
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        CustomerAccount that = (CustomerAccount) o;
+//        return loyaltyPoints == that.loyaltyPoints &&
+//                isVIP == that.isVIP &&
+//                Objects.equals(storeCredit, that.storeCredit) &&
+//                Objects.equals(totalDebt, that.totalDebt) &&
+//                Objects.equals(loyaltyCard, that.loyaltyCard);
+//    }
     @Override
     public int hashCode() {
         return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt);
