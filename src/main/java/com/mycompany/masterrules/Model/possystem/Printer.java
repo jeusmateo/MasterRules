@@ -39,8 +39,8 @@ public class Printer {
         System.out.println("=====================================");
         System.out.println("Imprimiendo factura: ");
         System.out.println("Nombre del empleado: " + bill.getEmployeeName());
-        if (bill.getCustomer() != null) {
-            System.out.println("Nombre del cliente: " + bill.getCustomer().getCustomerName());
+        if (bill.getCustomerName() != null) {
+            System.out.println("Nombre del cliente: " + bill.getCustomerName());
         } else {
             System.out.println("Nombre del cliente: Público general");
         }

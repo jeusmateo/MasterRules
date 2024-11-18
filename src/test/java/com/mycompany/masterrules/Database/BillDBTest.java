@@ -1,7 +1,5 @@
-package com.mycompany.masterrules.Model;
+package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Database.BillDBManager;
-import com.mycompany.masterrules.Database.ProductDBManager;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.possystem.Bill;
 import com.mycompany.masterrules.Model.possystem.Order;
