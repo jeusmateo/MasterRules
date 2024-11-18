@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
+import com.mycompany.masterrules.Database.UserDBManager;
 import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
@@ -40,7 +41,8 @@ public class POSManager {
     }
 
     public POSManager() {
-
+        UserDBManager bd = new UserDBManager();
+        currentUser= bd.findById("1");
         currentOrder = new Order();
 
 
@@ -87,8 +89,8 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
-    private Bill2 createBill(PaymentDetails data) {
-        Bill2 newBill = new Bill2(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
+    private Bill createBill(PaymentDetails data) {
+        Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
 
         switch (data.getMetodoDePago()) {
             case "CASH":
@@ -111,28 +113,11 @@ public class POSManager {
 
 
     public void sell(PaymentDetails paymentMethod) {
-        Bill2 bill = createBill(paymentMethod);
+        Bill bill = createBill(paymentMethod);
         ArchiveInvoice ai = new ArchiveInvoice();
-        // ai.ArchiveBill(bill);
+        ai.ArchiveBill(bill);
     }
 
-    public void processPay(PaymentDetails data) {
-        switch (data.getMetodoDePago()) {
-            case "CASH":
-
-                break;
-            case "CARD":
-
-                break;
-            case "STORE_CREDIT":
-                if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
-
-                }
-                break;
-
-        }
-
-    }
 
 
 

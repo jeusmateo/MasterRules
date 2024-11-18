@@ -15,6 +15,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.possystem.Order;
 import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.possystem.PaymentDetails;
 import com.mycompany.masterrules.Model.possystem.PedidoComanda;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions;
@@ -482,8 +483,17 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             paymentStage.showAndWait();
 
             configOrderInfo();
+
+            PaymentDetails paymentResult = paymentController.getPaymentDetails();
+            if (paymentResult != null) {
+                System.out.println("Pago realizado:");
+                posManager.sell(paymentResult);
+
+            } else {
+                System.out.println("Pago cancelado.");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+
             System.err.println("Error al cargar la vista de pago: " + e.getMessage());
         }
     }

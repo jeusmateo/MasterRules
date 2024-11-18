@@ -6,10 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.possystem.CashPaymentProcessor;
-import com.mycompany.masterrules.Model.possystem.DebitCardPaymenthProcessor;
-import com.mycompany.masterrules.Model.possystem.PaymentProcessor;
-import com.mycompany.masterrules.Model.possystem.StoreCreditPayProcessor;
+import com.mycompany.masterrules.Model.possystem.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +24,7 @@ public class WnPaymentController implements Initializable {
 
     private Customer customer;
     private BigDecimal totalAmount;
+    private PaymentDetails resultPayementDetails;
     @FXML
     private Button btnCancel;
 
@@ -145,13 +143,21 @@ public class WnPaymentController implements Initializable {
         if (evt.equals(btnPay)) {
             BigDecimal cashIncome = new BigDecimal(txtFieldCashIncome.getText());
             PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
+            this.resultPayementDetails= processor.paymentProcess();
+            Stage stage = (Stage) btnPay.getScene().getWindow();
+            stage.close();
         } else if (evt.equals(btnPaywCreditCard)) {
             String transactionReferenceNum = txtFieldReferenceNum.getText();
             PaymentProcessor processor = new DebitCardPaymenthProcessor(totalAmount, totalAmount, transactionReferenceNum);
-
+            this.resultPayementDetails= processor.paymentProcess();
+            Stage stage = (Stage) btnPaywCreditCard.getScene().getWindow();
+            stage.close();
         } else if (evt.equals(btnPaywSC)) {
             if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
                 PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, totalAmount, customer);
+                this.resultPayementDetails= processor.paymentProcess();
+                Stage stage = (Stage) btnPaywSC.getScene().getWindow();
+                stage.close();
             }
         } else if (evt.equals(btnPayMP)) {
 
@@ -159,6 +165,9 @@ public class WnPaymentController implements Initializable {
 
     }
 
+    public PaymentDetails getPaymentDetails(){
+        return resultPayementDetails;
+    }
 
     private void calcularCambio(String cashIncome) {
         try {

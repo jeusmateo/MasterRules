@@ -16,6 +16,7 @@ public class DebitCardPaymenthProcessor extends PaymentProcessor {
         PaymentDetails paymentDetails = new PaymentDetails("PAGADO CON TARJETA", this.getTotalAmount());
 
         paymentDetails.setReference(reference);
+        paymentDetails.setPaymentDescription(paymentDescription());
         return paymentDetails;
     }
 
