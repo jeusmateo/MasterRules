@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Database;
 
 import com.mycompany.masterrules.Model.cafeteria.Combo;
-import com.mycompany.masterrules.Model.cafeteria.CustomCombo;
+import com.mycompany.masterrules.Model.cafeteria.ComboCreator;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.junit.jupiter.api.Test;
 
@@ -37,8 +37,8 @@ class CombosDBManagerTest {
         var postre1 = new Product("3", "Postre 1", "Postres", BigDecimal.valueOf(10), BigDecimal.valueOf(5));
         var postre2 = new Product("4", "Postre 2", "Postres", BigDecimal.valueOf(20), BigDecimal.valueOf(10));
 
-        var customCombo = new CustomCombo(quantityPerCategory);
-        customCombo.set;
+        var customCombo = new ComboCreator(quantityPerCategory);
+//        customCombo.set;
     }
 
     @Test

@@ -118,7 +118,7 @@ public class CafeteriaMenu {
                     }
                 }
                 combos.get(registeredComboCount).setProducts(combo.getProducts());
-                combos.get(registeredComboCount).setProductsTemplate(combo.getProductsTemplate());
+//                combos.get(registeredComboCount).setProductsTemplate(combo.getProductsTemplate());
                 combos.get(registeredComboCount).setPrice(combo.getPrice());
                 combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
                 return;
