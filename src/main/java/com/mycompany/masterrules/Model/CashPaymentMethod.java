@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 
-public class CashPaymentMethod extends PaymentMethod2{
+public class CashPaymentMethod extends PaymenthProcesser {
     private BigDecimal customerCashAmount;
     private BigDecimal changeAmount;
     public CashPaymentMethod(BigDecimal totalAmount, BigDecimal customerCashAmount){

@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import java.math.BigDecimal;
 
-public class StoreCreditPayMethod extends PaymentMethod2{
+public class StoreCreditPayMethod extends PaymenthProcesser {
     private BigDecimal recibido;
 
     public StoreCreditPayMethod(BigDecimal totalAmount, BigDecimal customerStoreCredit){
