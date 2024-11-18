@@ -15,6 +15,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.possystem.Order;
 import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.possystem.PaymentDetails;
 import com.mycompany.masterrules.Model.possystem.PedidoComanda;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions;
@@ -45,7 +46,7 @@ import javafx.stage.StageStyle;
  */
 public class WnSaleController implements Initializable, ProductSelectionListener {
     private POSManager posManager;
-
+    private ToggleGroup group;
     //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
     //-------------------------------------------------------------------------------------------
     //TODO Retirar esta Order.
@@ -98,8 +99,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private WnSaleController wnSaleSection;
 
 
-    @FXML
-    private AnchorPane scrCustomCombo;
 
     @FXML
     private TableView<PedidoComanda> tblOrder;
@@ -112,15 +111,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     @FXML
     private TableColumn<PedidoComanda, String> colPrice; // este si es un String?
-
-    @FXML
-    private Button btnBack;
-
-    @FXML
-    private Button btnAdd;
-
-    @FXML
-    private Button btnRemove;
 
     @FXML
     private Label lblTotal;
@@ -144,6 +134,38 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private Label lbCategory;
 
     private int currentCategoryIndex = 0;
+    @FXML
+    private AnchorPane main;
+    @FXML
+    private AnchorPane scrMainSale;
+    @FXML
+    private AnchorPane scrOrderTable;
+    @FXML
+    private AnchorPane scrMainSale1;
+    @FXML
+    private AnchorPane scrCustomCombo1;
+    @FXML
+    private TableView<?> tblAuxiliarCustomCombo;
+    @FXML
+    private TableColumn<?, ?> colAmount1;
+    @FXML
+    private TableColumn<?, ?> colProduct1;
+    @FXML
+    private TableColumn<?, ?> colPrice1;
+    @FXML
+    private VBox navigationCategory;
+    @FXML
+    private Button btnAdd1;
+    @FXML
+    private Button btnRemove1;
+    @FXML
+    private AnchorPane scrCustomCombo11;
+    @FXML
+    private RadioButton paraMostradoMetodo;
+    @FXML
+    private RadioButton paraLlevarMetodo;
+    @FXML
+    private RadioButton paraMesaMetodo;
 
 
 
@@ -415,6 +437,20 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         tableNumberBox.setVisible(false);
     }
 
+    private void configOrderInfo(){
+        Customer customerInfo=cboCustomers.getValue();
+        RadioButton selected = (RadioButton) group.getSelectedToggle();
+        String deliveryMethod="";
+        if (selected != null) {
+            deliveryMethod=selected.getText();
+        } else {
+            System.out.println("No hay ninguna opción seleccionada");
+        }
+        String comments = txtAdittionalComments.getText();
+        //TODO validaciones para null
+        posManager.configureOrder(deliveryMethod,comments,customerInfo);
+    }
+
 
     @FXML
     private void handlePayAction(MouseEvent event) {
@@ -422,7 +458,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             // Cargar la vista de pago desde el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
             Parent paymentView = loader.load();
-
+            WnPaymentController paymentController = loader.getController();
+            paymentController.setOrderData(posManager.getCurrentOrder().calculateTotalAmount(),posManager.getCurrentOrder().getCustomer());
             // Crear una nueva escena y un nuevo Stage para la vista de pago
             Scene paymentScene = new Scene(paymentView);
             Stage paymentStage = new Stage();
@@ -445,8 +482,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             // Mostrar el modal
             paymentStage.showAndWait();
 
+            configOrderInfo();
+
+            PaymentDetails paymentResult = paymentController.getPaymentDetails();
+            if (paymentResult != null) {
+                System.out.println("Pago realizado:");
+                posManager.sell(paymentResult);
+
+            } else {
+                System.out.println("Pago cancelado.");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+
             System.err.println("Error al cargar la vista de pago: " + e.getMessage());
         }
     }
@@ -460,12 +507,30 @@ public class WnSaleController implements Initializable, ProductSelectionListener
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        group = new ToggleGroup();
+        paraMostradoMetodo.setToggleGroup(group);
+         paraLlevarMetodo.setToggleGroup(group);
+          paraMesaMetodo.setToggleGroup(group);
+
         posManager = new POSManager();
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
         List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
-        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(chepo1);
+        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
+        System.out.println("ahahhaha");
+        try {
+            for(PedidoComanda pc: productOrderList){
+                System.out.println(pc.getProduct().getName());
+
+            }
+            System.out.println("ahahhaha------");
+        }catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+
+        System.out.println("ahahhaha---------------------------------------------");
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));
@@ -473,23 +538,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
         colProduct.setReorderable(false);
         colProduct.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductName()));
-        Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
-        PedidoComanda pI3 = new PedidoComanda(p3);
-        productOrderList.add(pI3);
-        /*
-        Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
-        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
-
-        PedidoComanda pI1 = new PedidoComanda(p1);
-        PedidoComanda pI2 = new PedidoComanda(p2);
-        ;
-
-        productOrderList.add(pI1);
-        productOrderList.add(pI2);
-
-
-         */
         tblOrder.setItems(productOrderList);
+        tblOrder.refresh();
 
 
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
@@ -530,12 +580,16 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
 
     @Override
-    public Product onProductSelected(Product product) {
-        System.out.println("Producto recibido: " + product.getName());
+    public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
-        return product;
+        tblOrder.refresh();
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+
+
+
+
 
     }
 }

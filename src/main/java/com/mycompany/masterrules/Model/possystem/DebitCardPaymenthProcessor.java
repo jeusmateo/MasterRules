@@ -2,10 +2,10 @@ package com.mycompany.masterrules.Model.possystem;
 
 import java.math.BigDecimal;
 
-public class DebitCardPaymenthMethod extends PaymentMethod {
+public class DebitCardPaymenthProcessor extends PaymentProcessor {
     private String reference;
     private BigDecimal recibido;
-    public DebitCardPaymenthMethod(BigDecimal totalAmount, BigDecimal recibido,String reference){
+    public DebitCardPaymenthProcessor(BigDecimal totalAmount, BigDecimal recibido, String reference){
         super(totalAmount);
         this.reference = reference;
         this.recibido = recibido;
@@ -13,8 +13,10 @@ public class DebitCardPaymenthMethod extends PaymentMethod {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails();
+        PaymentDetails paymentDetails = new PaymentDetails("CARD", this.getTotalAmount());
+
         paymentDetails.setReference(reference);
+        paymentDetails.setPaymentDescription(paymentDescription());
         return paymentDetails;
     }
 

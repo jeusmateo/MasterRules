@@ -62,7 +62,7 @@ public class CustomerAccount {
         return totalDebt;
     }
 
-    public void setTotalDebt(ArrayList<Debt> totalDebt) {
+    public void setTotalDebt(List<Debt> totalDebt) {
         this.totalDebt = totalDebt;
     }
 
@@ -87,17 +87,6 @@ public class CustomerAccount {
     }
 
 
-    /*
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CustomerAccount that = (CustomerAccount) o;
-        //TODO Corregir
-        //return loyaltyPoints == that.loyaltyPoints && Double.compare(storeCredit, that.storeCredit) == 0 && isVIP == that.isVIP && Objects.equals(totalDebt, that.totalDebt);
-    }
-*/
 
     @Override
     public String toString() {

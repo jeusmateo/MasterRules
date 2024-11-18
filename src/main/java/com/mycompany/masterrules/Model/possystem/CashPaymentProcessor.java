@@ -2,11 +2,11 @@ package com.mycompany.masterrules.Model.possystem;
 
 import java.math.BigDecimal;
 
-public class CashPaymentMethod extends PaymentMethod {
+public class CashPaymentProcessor extends PaymentProcessor {
     private BigDecimal customerCashAmount;
     private BigDecimal changeAmount;
 
-    public CashPaymentMethod(BigDecimal totalAmount, BigDecimal customerCashAmount){
+    public CashPaymentProcessor(BigDecimal totalAmount, BigDecimal customerCashAmount){
         super(totalAmount);
         this.customerCashAmount = customerCashAmount;
         this.changeAmount = customerCashAmount.subtract(totalAmount);
@@ -15,10 +15,11 @@ public class CashPaymentMethod extends PaymentMethod {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails();
+        PaymentDetails paymentDetails = new PaymentDetails("CASH",this.getTotalAmount());
+        paymentDetails.setCustomerCashAmount(this.customerCashAmount);
         paymentDetails.setChangeAmount(changeAmount);
-
-        return null;
+        paymentDetails.setPaymentDescription(paymentDescription());
+        return paymentDetails;
     }
 
     @Override

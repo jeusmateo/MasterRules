@@ -50,7 +50,7 @@ public class UserPermissions {
         CREATE_USER,
         EDIT_USER,
         DELETE_USER,
-    };
+    }
 
     public UserPermissions() {
         grantedPermissions= EnumSet.noneOf(Permission.class);
@@ -59,11 +59,6 @@ public class UserPermissions {
 
     private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
 
-
-    // TODO constructor de chepo, eliminarlo
-    public UserPermissions(String chepo){
-        grantedPermissions=EnumSet.allOf(Permission.class);
-    }
 
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
         this.grantedPermissions = grantedPermissions;

@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.cafeteria.Product;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,54 +17,61 @@ public class Order {
     private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
     // @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "order_employee_name")
-    private String employeeName; //TODO debe ser un nombre mas claro que diga que es el empleado de turno quien toma la comanda
-    private String numeroDeMesa; //TODO CAMBIAR NOMBRE A INGLES
+    private String employeeName;
+    private String tableNumber;
     private String comment;
-    private String deliveryMethod; //Chepo necesidad: esto aun falta por checar
+    private String deliveryMethod;
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
-    private BigDecimal totalAmount; //Chepo necesidad: TODO ESTO DEBERIA SER EL SUBTOTAL
+    private BigDecimal totalAmount;
     @OneToMany
-    private List<PedidoComanda> pedidoComandaList; //TODO siento que no es del todo legible al utilizar algo como products en un objeto que no es producto
+    private List<PedidoComanda> pedidoComandaList;
 
 
     public Order() {
         pedidoComandaList = new ArrayList<>();
     }
 
-    public List<PedidoComanda> getPedidoComandaList(){
+    public List<PedidoComanda> getPedidoComandaList() {
         return pedidoComandaList;
     }
-    /*
-        public void calculateTotalAmount(){
-            BigDecimal total = new BigDecimal(0);
-            for(Product product: products){
-                total=total.add(product.getPrice());
+
+    public BigDecimal calculateTotalAmount() {
+        BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
+        for (PedidoComanda currentProduct : pedidoComandaList) {
+            calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
+        }
+        return calculatedTotalAmount;
+    }
+    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
+
+        boolean found = false;
+
+        if (!pedidoComandaList.isEmpty()) {
+            for (PedidoComanda p : pedidoComandaList) {
+                if (newPedidoComanda.getProduct().getId().equals(p.getProduct().getId())) {
+                    p.addQuantity();
+                    found = true;
+                    break; // Ya lo encontramos, no es necesario seguir iterando.
+                }
             }
-            for(Combo combo: combos){
-                total = total.add(combo.getPrice());
+            if (!found) {
+                pedidoComandaList.add(newPedidoComanda);
+
             }
-            totalAmount = total;
+        } else {
+            pedidoComandaList.add(newPedidoComanda);
+
         }
 
-     */
-    //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
-    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
-        pedidoComandaList.add(newPedidoComanda);
-//        for(PedidoComanda pedidoComanda : pedidoComandaList){
-//            if(newPedidoComanda.getProduct().equals(pedidoComanda.getProduct())){
-//                pedidoComanda.addQuantity();
-//            }else{
-//                pedidoComandaList.add(newPedidoComanda);
-//            }
-//        }
     }
 
-    public void setEmployeeName(String employeeName){
+
+
+    public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
-    public void removeProduct(Product product) {
-        pedidoComandaList.remove(product);
-    }
+
+
 
     public Customer getCustomer() {
         return customer;
@@ -99,7 +105,7 @@ public class Order {
         this.date = date;
     }
 
-    public void setDateNow(){
+    public void setDateNow() {
         this.date = LocalDateTime.now();
     }
 
@@ -126,7 +132,7 @@ public class Order {
                 "id=" + id +
                 ", customer=" + customer +
                 ", employeeName='" + employeeName + '\'' +
-                ", numeroDeMesa='" + numeroDeMesa + '\'' +
+                ", numeroDeMesa='" + tableNumber + '\'' +
                 ", comment='" + comment + '\'' +
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
@@ -143,7 +149,7 @@ public class Order {
         return id == order.id &&
                 Objects.equals(customer, order.customer) &&
                 Objects.equals(employeeName, order.employeeName) &&
-                Objects.equals(numeroDeMesa, order.numeroDeMesa) &&
+                Objects.equals(tableNumber, order.tableNumber) &&
                 Objects.equals(comment, order.comment) &&
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
@@ -153,7 +159,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, employeeName, numeroDeMesa, comment, deliveryMethod, date, totalAmount, pedidoComandaList);
+        return Objects.hash(id, customer, employeeName, tableNumber, comment, deliveryMethod, date, totalAmount, pedidoComandaList);
     }
 }
 

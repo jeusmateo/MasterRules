@@ -21,7 +21,7 @@
          <children>
             <AnchorPane prefHeight="172.0" prefWidth="207.0">
                <children>
-                  <ImageView fx:id="imageProduct" fitHeight="139.0" fitWidth="192.0" layoutX="8.0" layoutY="9.0" onMouseClicked="#eventAction" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageProduct" fitHeight="139.0" fitWidth="192.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <VBox prefHeight="89.0" prefWidth="207.0">
