@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
+import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
-
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
@@ -26,19 +26,37 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 
 public class POSManager {
 
-    private CustomerManager customerManager; //TODO No lo debe tener de atributo, debemos buscar cual sea la forma correcta de obtener la informacion.
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager; //TODO Lo mismo, el pos debe poder comunicarse con la entidad que guarda los bills para guardarlos
-    private CafeteriaManager cafeteriaManager;//TODO basura
+
     private UserAccount currentUser; //
     private Order currentOrder; //TODO Este es el carrito, no esta del todo mal
 
-    public POSManager(CashRegisterAuditReportManager cashRegisterAuditReportManagerArg, CafeteriaManager cafeteriaManagerArg, UserAccount userAccount) {
-        customerManager = new CustomerManager();
+    public POSManager( UserAccount userAccount) {
+
         currentUser = userAccount;
-        cashRegisterAuditReportManager = cashRegisterAuditReportManagerArg;
-        cafeteriaManager = cafeteriaManagerArg;
+
+
 
         currentOrder = new Order();
+    }
+
+    public POSManager() {
+        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
+        PedidoComanda pI2 = new PedidoComanda(p2);
+        currentOrder = new Order();
+        currentOrder.addProductToOrderItemList(pI2);
+        System.out.println("ahahhaha");
+        try {
+            for(PedidoComanda pc: currentOrder.getPedidoComandaList()){
+                System.out.println(pc.getProduct().getName());
+
+            }
+            System.out.println("ahahhaha------");
+        }catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+
+        System.out.println("ahahhaha---------------------------------------------");
+
     }
 
     //Flujo Chepil para vender.
@@ -57,6 +75,7 @@ public class POSManager {
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         currentOrder.addProductToOrderItemList(new PedidoComanda(product));
+        System.out.println("Si jalo "+product.getName());
     }
 
 
@@ -64,7 +83,7 @@ public class POSManager {
     //Aqui vas a llamar su procesador de pago y ya
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
-   
+
 
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
@@ -158,38 +177,8 @@ public class POSManager {
         printer.imprimirOrder(currentOrder);
         currentOrder = new Order();
     }
+*/
 
+public Order getCurrentOrder() {return currentOrder;}
 
-
-    public CustomerManager getCustomerManager() {
-        return customerManager;
-    }
-
-    public void setCustomerManager(CustomerManager customerManager) {
-        this.customerManager = customerManager;
-    }
-
-    public CashRegisterAuditReportManager getCashRegisterAuditReportManager() {
-        return cashRegisterAuditReportManager;
-    }
-
-    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
-        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-    }
-
-    public CafeteriaManager getCafeteriaManager() {
-        return cafeteriaManager;
-    }
-
-    public void setCafeteriaManager(CafeteriaManager cafeteriaManager) {
-        this.cafeteriaManager = cafeteriaManager;
-    }
-
-    /* 
-     
-    public void createNewCustomer(String name, String phone) {//esto creo que debe estar arriba de lo metodos getters y setters
-        customerManager.registerCustomer(name, phone);
-
-    }
-     */
 }
