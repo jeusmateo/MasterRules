@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
-@Entity
+@Embeddable
 public class PedidoComanda {
     private int quantity;
-    @Id
     @OneToOne
     private Product product;
     private BigDecimal amount;
