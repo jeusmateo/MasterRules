@@ -208,7 +208,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tblOrder" layoutX="10.0" layoutY="21.0" prefHeight="269.0" prefWidth="270.0" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="21.0">
+                  <TableView fx:id="tblAuxiliarCustomCombo" layoutX="10.0" layoutY="21.0" prefHeight="269.0" prefWidth="270.0" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="21.0">
                      <columns>
                         <TableColumn fx:id="colAmount" prefWidth="58.66662883758545" text="Cantidad" />
                         <TableColumn fx:id="colProduct" prefWidth="108.66661834716797" text="Producto" />
@@ -218,7 +218,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <VBox fx:id="menuOrderOptionsBox" layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" AnchorPane.bottomAnchor="32.66666666666663">
+                  <VBox fx:id="navigationCategory" layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" AnchorPane.bottomAnchor="32.66666666666663">
                      <children>
                         <Button fx:id="btnNextCategory" mnemonicParsing="false" onAction="#handleCategoryNavigation" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="SIGUIENTE" />
                         <Button fx:id="btnPreviousCategory" mnemonicParsing="false" onAction="#handleCategoryNavigation" prefHeight="35.0" prefWidth="179.0" styleClass="btn" stylesheets="@viewTemplate.css" text="ATRAS">
