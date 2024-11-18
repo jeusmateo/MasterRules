@@ -6,6 +6,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.possystem.CashPaymentProcessor;
+import com.mycompany.masterrules.Model.possystem.DebitCardPaymenthProcessor;
+import com.mycompany.masterrules.Model.possystem.PaymentProcessor;
+import com.mycompany.masterrules.Model.possystem.StoreCreditPayProcessor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -138,15 +142,18 @@ public class WnPaymentController implements Initializable {
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        if(evt.equals(btnPay)){
+        if (evt.equals(btnPay)) {
+            BigDecimal cashIncome = new BigDecimal(txtFieldCashIncome.getText());
+            PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
+        } else if (evt.equals(btnPaywCreditCard)) {
+            String transactionReferenceNum = txtFieldReferenceNum.getText();
+            PaymentProcessor processor = new DebitCardPaymenthProcessor(totalAmount, totalAmount, transactionReferenceNum);
 
-        }
-        else if(evt.equals(btnPaywCreditCard)){
-
-        }
-        else if(evt.equals(btnPaywSC)){
-
-        }else if(evt.equals(btnPayMP)){
+        } else if (evt.equals(btnPaywSC)) {
+            if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
+                PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, totalAmount, customer);
+            }
+        } else if (evt.equals(btnPayMP)) {
 
         }
 
