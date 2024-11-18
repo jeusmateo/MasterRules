@@ -28,11 +28,6 @@ public class CashRegisterAuditReportManager {
     }
 
 
-    // esto, seguro que va aqui? pero si hace lo que dice el metodo
-
-
-    // esto, seguro que va aqui? pero si hace lo que dice el metodo
-
 
     /**
      * Metodo para finalizar el corte actual.
