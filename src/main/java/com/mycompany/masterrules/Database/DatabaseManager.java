@@ -1,14 +1,8 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Product;
-import com.mycompany.masterrules.Model.UserAccount;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Clase que implementa las operaciones básicas de un DAO (Data Access Object) utilizando Hibernate.

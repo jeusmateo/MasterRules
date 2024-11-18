@@ -1,9 +1,7 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Customer;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.mycompany.masterrules.model.customers.Customer;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 

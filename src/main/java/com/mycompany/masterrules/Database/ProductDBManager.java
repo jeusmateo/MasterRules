@@ -1,10 +1,8 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Product;
-import org.hibernate.HibernateException;
+import com.mycompany.masterrules.model.cafeteria.Product;
 import org.hibernate.Session;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
