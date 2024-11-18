@@ -199,6 +199,7 @@ public class WnUsersController implements Initializable {
                     userManager.updateUserInformation(this.userEdit);
                     ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts()); //todo NO DEBE SER ASI, EL CODIGO NO DEBERIA ESTAR LLENO DE LINEAS REPETIDAS DE ESTO
                     tblUserAccount.setItems(userAccounts);
+                    tblUserAccount.refresh();
 
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
