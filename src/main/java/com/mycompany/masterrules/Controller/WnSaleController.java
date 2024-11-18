@@ -378,17 +378,13 @@ public class WnSaleController implements Initializable, ProductSelectionListener
      * Mostrar formulario que aparece al continuar la orden
      */
     @FXML
-    public void showOrderForm(ActionEvent event) {
-        Object evt = event.getSource();
-        if(evt.equals(btnContinue)) {
+    public void showOrderForm() {
+        continueOrderWindow.setVisible(true);
+        continueOrderOptionsBox.setVisible(true);
 
-            continueOrderWindow.setVisible(true);
-            continueOrderOptionsBox.setVisible(true);
+        menuWindow.setVisible(false);
+        menuOrderOptionsBox.setVisible(false);
 
-            menuWindow.setVisible(false);
-            menuOrderOptionsBox.setVisible(false);
-
-        }
     }
 
     /**
