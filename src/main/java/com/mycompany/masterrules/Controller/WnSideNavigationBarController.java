@@ -87,7 +87,7 @@ public class WnSideNavigationBarController implements Initializable {
     }
 
     @FXML
-    void customerSection(ActionEvent event) throws IOException, Exception {
+    void customerSection(ActionEvent event) {
         if (!CUSTOMERS_VIEW.equals(activeView)) {
             try {
                 System.out.println("Chepo");

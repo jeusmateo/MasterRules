@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class WnReportsController implements Initializable {
 
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
+    private final CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
 
     @FXML
     private Button btnAcceptInflow;
@@ -80,32 +80,6 @@ public class WnReportsController implements Initializable {
     @FXML
     private TableColumn<CashFlowReport, String> TableColumnCashInQuantity;
 
-    @FXML
-    void exitDoInflow(ActionEvent event) {
-
-    }
-
-    void exitDoOutflow(ActionEvent event) {
-
-    }
-
-    @FXML
-    void setBtnAcceptInflow(ActionEvent event) {
-
-    }
-
-    @FXML
-    void setBtnAcceptOutflow(ActionEvent event) {
-
-    }
-
-    void setBtnDoInFlowReport(ActionEvent event) {
-
-    }
-
-    void setBtnDoOutFlowReport(ActionEvent event) {
-
-    }
 
     @FXML
     private void eventAction(ActionEvent event) {

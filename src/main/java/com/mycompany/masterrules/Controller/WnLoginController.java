@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.users.LoginValidator;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class WnLoginController implements Initializable {
 
-    private LoginValidator chepo = new LoginValidator();
+    private final LoginValidator loginValidator = new LoginValidator();
 
     @FXML
     private Button btnLogin;
@@ -55,23 +56,23 @@ public class WnLoginController implements Initializable {
 
             }
         }
-        if(evt.equals(btnLogin)){
-            if(event.getCharacter().equals("\r")){
+        if(evt.equals(btnLogin) && event.getCharacter().equals("\r")){
                 event.consume();
                 String user = txtFieldUserName.getText();
                 String pass = txtFieldPassword.getText();
                 try {
-                    if (chepo.validateUser(user, pass)) {
+                    if (loginValidator.validateUser(user, pass)) {
                         System.out.println("Usuario y contraseña correctos");
                         loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
                     }
                 } catch (Exception e) {
                     System.err.println("Error al validar usuario: " + e);
                     lbIncorrectCredential.setVisible(true);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
                 }
             }
 
-        }
 
     }
 
@@ -82,7 +83,7 @@ public class WnLoginController implements Initializable {
             String user = txtFieldUserName.getText();
             String pass = txtFieldPassword.getText();
             try {
-                if (chepo.validateUser(user, pass)) {
+                if (loginValidator.validateUser(user, pass)) {
                     System.out.println("Usuario y contraseña correctos");
                     loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
                 } else {
@@ -91,6 +92,8 @@ public class WnLoginController implements Initializable {
             } catch (Exception e) {
                 System.err.println("Error al validar usuario: " + e);
                 lbIncorrectCredential.setVisible(true);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
             }
 
         }
@@ -99,7 +102,7 @@ public class WnLoginController implements Initializable {
     private void loadStage(String url, Event event) {
         try {
             ((Node) event.getSource()).getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(getClass().getResource(url));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(url)));
             Scene scene = new Scene(root);
             Stage newStage = new Stage();
             newStage.setScene(scene);

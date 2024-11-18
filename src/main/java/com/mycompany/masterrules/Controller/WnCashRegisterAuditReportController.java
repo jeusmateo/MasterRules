@@ -28,7 +28,6 @@ public class WnCashRegisterAuditReportController implements Initializable{
     @FXML
     private Label labelTotalSales;
 
-
     @FXML
     private Text txtCashFunds;
 
@@ -69,8 +68,8 @@ public class WnCashRegisterAuditReportController implements Initializable{
 
 
 
-    private ObservableList<CashFlowReport> cashInFlowReports = FXCollections.observableArrayList(this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
-    private ObservableList<CashFlowReport> cashOutFlowReports = FXCollections.observableArrayList( this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
+    private final ObservableList<CashFlowReport> cashInFlowReports = FXCollections.observableArrayList(this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
+    private final ObservableList<CashFlowReport> cashOutFlowReports = FXCollections.observableArrayList( this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
 
     public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
         this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
