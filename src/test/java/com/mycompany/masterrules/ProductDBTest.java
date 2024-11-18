@@ -2,6 +2,7 @@ package com.mycompany.masterrules;
 
 import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class ProductDBTest {
 
-    public static void main(String[] args) {
+    @Test
+    void general() {
         Product tmpProduct = new Product("1", "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
         ProductDatabase productDatabase = new ProductDatabase();

@@ -38,9 +38,9 @@ public class CafeteriaManager {
     }
 
     public void createCombo(Combo newCombo) throws Exception {
-        if (menu.isComboNameTaken(newCombo.getName())) {
-            throw new Exception("ERROR: El nombre del combo ya está tomado");
-        }
+//        if (menu.isComboNameTaken(newCombo.getName())) {
+//            throw new Exception("ERROR: El nombre del combo ya está tomado");
+//        }
 
         menu.addComboToMenu(newCombo);
     }

@@ -316,6 +316,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
                 // Actualizar la tabla con los productos más recientes
                 updateProductTable();
+
+                //List<Product> chepo = cafeteriaMenu.getProducts();
+                //ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
+  
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
