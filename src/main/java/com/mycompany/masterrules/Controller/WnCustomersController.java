@@ -10,13 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,9 +23,6 @@ public class WnCustomersController implements Initializable {
 
     @FXML
     private Button btnAcceptCredit;
-
-    // @FXML
-    //private PasswordField psswrdFieldAccesstoStoreCredit;
 
     @FXML
     private Button btnSaveNewCustomer;
@@ -213,34 +204,54 @@ public class WnCustomersController implements Initializable {
         customerManager.updateCustomerData(customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity);
     }
 
+
+    //Esto se factorizo, revbisen si lo hizo gpt bien
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
+
         if (evt.equals(txtNewCustomerName)) {
-            if (event.getCharacter().equals("\r")) {
-                txtNewCustomerPhoneNumber.requestFocus();
-                event.consume();
-            }
+            handleNewCustomerName(event);
         } else if (evt.equals(txtEditCustomerStoreCredit)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            }
+            handleEditCustomerStoreCredit(event);
         } else if (evt.equals(txtNewCustomerPhoneNumber)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
-                txtNewCustomerLoyaltyPoints.requestFocus();
-                event.consume();
-            }
+            handleNewCustomerPhoneNumber(event);
         } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
-                chkNewCustomerVipStatus.requestFocus();
-                event.consume();
-            }
+            handleLoyaltyPoints(event);
         }
     }
+
+    private void handleNewCustomerName(KeyEvent event) {
+        if (event.getCharacter().equals("\r")) {
+            txtNewCustomerPhoneNumber.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleEditCustomerStoreCredit(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        }
+    }
+
+    private void handleNewCustomerPhoneNumber(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        } else if (event.getCharacter().equals("\r")) {
+            txtNewCustomerLoyaltyPoints.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleLoyaltyPoints(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        } else if (event.getCharacter().equals("\r")) {
+            chkNewCustomerVipStatus.requestFocus();
+            event.consume();
+        }
+    }
+// hasta aqui es lo q se factorizo
 
     private void showCustomerDetails(Customer customer) {
         if (customer != null) {
@@ -250,8 +261,7 @@ public class WnCustomersController implements Initializable {
             lbStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkCustomerVip.setSelected(customer.getCustomerAccount().isIsVIP());
             lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
-            //txtAreaCustomerNote.setText(customer.getCustomerNote());
-            //heckboxCustomerVip.setSelected(customer.isCustomerVip());
+            //checkboxCustomerVip.setSelected(customer.isCustomerVip());
         } else {
             clearTextFields();
         }
