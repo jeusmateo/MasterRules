@@ -81,7 +81,7 @@ public class ItemCardProductController implements Initializable {
             try {
                  selectionListener.onProductSelected(productData);
             }catch (Exception e) {
-                System.out.println("ChepoEn el item "+e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }
