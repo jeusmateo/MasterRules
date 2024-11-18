@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
-import com.mycompany.masterrules.Database.ProductDBManager;
+import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class CafeteriaMenu {
     private String title;
     private ArrayList<Product> products;//TODO cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
     private ArrayList<Combo> combos;//falta combos
-    private final ProductDBManager productDBManager = new ProductDBManager();
+    private final ProductDatabase productDBManager = new ProductDatabase();
 
     public CafeteriaMenu() {
         this.products = new ArrayList<Product>();

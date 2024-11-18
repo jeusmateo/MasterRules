@@ -7,20 +7,20 @@ import java.util.List;
 
 
 public class CustomerManager {
-    private final CustomerDatabase customerDatabaseManager = new CustomerDatabase();
+    private final CustomerDatabase customerDatabase = new CustomerDatabase();
 
     public void removeCustomer(String id) {
-        Customer customer = customerDatabaseManager.findById(id);
-        customerDatabaseManager.delete(customer);
+        Customer customer = customerDatabase.findById(id);
+        customerDatabase.delete(customer);
     }
 
     public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
-        Customer customer = customerDatabaseManager.findById(id);
+        Customer customer = customerDatabase.findById(id);
         assert customer != null;
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
         customer.getCustomerAccount().setIsVIP(vipStatus);
         customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));
-        customerDatabaseManager.update(customer);
+        customerDatabase.update(customer);
     }
 
 
@@ -35,12 +35,12 @@ public class CustomerManager {
                     loyaltyPointsInt = 0;
                 }
                 Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
-                customerDBManager.save(customer);
+                customerDatabase.save(customer);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Puntos de fidelidad no válidos", e);
             }
             Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
-            customerDatabaseManager.save(customer);
+            customerDatabase.save(customer);
 
         } else {
             throw new IllegalArgumentException("Parametros Incorrectos: Nombre o teléfono vacío");
@@ -49,7 +49,7 @@ public class CustomerManager {
 
 
     public List<Customer> getCustomers() {
-        return customerDatabaseManager.readAll();
+        return customerDatabase.readAll();
     }
 
 }
