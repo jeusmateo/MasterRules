@@ -1,10 +1,10 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

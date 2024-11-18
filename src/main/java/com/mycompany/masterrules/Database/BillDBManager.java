@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Database;
 
 
-import com.mycompany.masterrules.model.possystem.Bill;
+import com.mycompany.masterrules.Model.possystem.Bill;
 import org.hibernate.Session;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.model.users.UserAccount;
+import com.mycompany.masterrules.Model.users.UserAccount;
 import org.hibernate.Session;
 
 import java.util.List;

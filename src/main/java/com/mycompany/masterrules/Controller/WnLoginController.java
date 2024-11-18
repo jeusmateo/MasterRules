@@ -3,7 +3,7 @@ package com.mycompany.masterrules.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.model.users.LoginValidator;
+import com.mycompany.masterrules.Model.users.LoginValidator;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;

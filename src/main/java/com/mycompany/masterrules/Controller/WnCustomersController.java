@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.model.customers.Customer;
-import com.mycompany.masterrules.model.customers.CustomerManager;
+import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.customers.CustomerManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
