@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -9,18 +15,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="207.0" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.ItemCardProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="207.0" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.ItemCardProductController">
    <children>
       <VBox alignment="BOTTOM_LEFT" layoutX="65.0" layoutY="-14.0" prefHeight="240.0" prefWidth="227.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="172.0" prefWidth="207.0">
                <children>
-                  <ImageView fx:id="imageProduct" fitHeight="139.0" fitWidth="192.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageProduct" fitHeight="139.0" fitWidth="192.0" layoutX="8.0" layoutY="9.0" onMouseClicked="#eventAction" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <VBox prefHeight="89.0" prefWidth="207.0">
                <children>
-                  <Button fx:id="productName" mnemonicParsing="false" prefHeight="29.0" prefWidth="207.0" styleClass="btnProduct" stylesheets="@cardDesign.css" text="Product">
+                  <Button fx:id="productName" mnemonicParsing="false" onAction="#eventAction" prefHeight="29.0" prefWidth="207.0" styleClass="btnProduct" stylesheets="@cardDesign.css" text="Product">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
