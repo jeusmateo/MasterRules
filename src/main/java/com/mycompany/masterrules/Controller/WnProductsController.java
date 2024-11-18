@@ -305,7 +305,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
                 // Registrar el producto en el modelo
                 cafeteriaMenu.addProductToMenu(product);
-                cafeteriaMenu.registerNewProduct(product);
 
                 // Agregar el producto al ObservableList
                 observableProductList.add(product);
