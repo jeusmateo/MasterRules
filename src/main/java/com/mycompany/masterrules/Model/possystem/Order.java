@@ -119,7 +119,7 @@ public class Order {
     }
 
     public BigDecimal getTotalAmount() {
-        return totalAmount;
+        return calculateTotalAmount();
     }
 
     public void setTotalAmount(BigDecimal totalAmount) {
