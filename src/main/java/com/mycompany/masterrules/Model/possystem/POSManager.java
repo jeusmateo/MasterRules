@@ -40,10 +40,9 @@ public class POSManager {
     }
 
     public POSManager() {
-        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
-        PedidoComanda pI2 = new PedidoComanda(p2);
+
         currentOrder = new Order();
-        currentOrder.addProductToOrderItemList(pI2);
+
 
 
     }
@@ -64,7 +63,7 @@ public class POSManager {
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         currentOrder.addProductToOrderItemList(new PedidoComanda(product));
-        System.out.println("Si jalo "+product.getName());
+
     }
 
 

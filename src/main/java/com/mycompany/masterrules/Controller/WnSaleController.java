@@ -485,19 +485,19 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
         colProduct.setReorderable(false);
         colProduct.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductName()));
-        Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
-        PedidoComanda pI3 = new PedidoComanda(p3);
-        productOrderList.add(pI3);
-
-        Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
-        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
-
-        PedidoComanda pI1 = new PedidoComanda(p1);
-        PedidoComanda pI2 = new PedidoComanda(p2);
-        ;
-
-        productOrderList.add(pI1);
-        productOrderList.add(pI2);
+//        Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
+//        PedidoComanda pI3 = new PedidoComanda(p3);
+//        productOrderList.add(pI3);
+//
+//        Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
+//        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
+//
+//        PedidoComanda pI1 = new PedidoComanda(p1);
+//        PedidoComanda pI2 = new PedidoComanda(p2);
+//        ;
+//
+//        productOrderList.add(pI1);
+//        productOrderList.add(pI2);
 
 
 
@@ -543,12 +543,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
 
     @Override
-    public Product onProductSelected(Product product) {
+    public void onProductSelected(Product product) {
         System.out.println("Producto recibido: " + product.getName());
+        System.out.println("------------------------");
         posManager.addProductToOrder(product);
+        System.out.println("------------------------2");
         ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
-        return product;
+        tblOrder.refresh();
+
+
+
+
 
     }
 }
