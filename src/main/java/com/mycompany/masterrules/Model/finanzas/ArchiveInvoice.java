@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model.finanzas;
 
-import com.mycompany.masterrules.Database.BillDBManager;
+import com.mycompany.masterrules.Database.BillDB;
 import com.mycompany.masterrules.Model.possystem.Bill;
 
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ArchiveInvoice{
 
-    BillDBManager customerDBManager = new BillDBManager();
+    BillDB customerDBManager = new BillDB();
 
     public boolean ArchiveBill(Bill bill) {
         return customerDBManager.save(bill);

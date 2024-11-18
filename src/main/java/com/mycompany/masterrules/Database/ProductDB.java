@@ -1,34 +1,33 @@
 package com.mycompany.masterrules.Database;
 
-
-import com.mycompany.masterrules.Model.possystem.Bill;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.hibernate.Session;
 
 import java.util.List;
 
 /**
- * Clase que administra la base de datos de facturas.
+ * Clase que administra la base de datos de productos.
+ *
  */
-public final class BillDBManager extends DatabaseManager<Bill, Long>{
+public final class ProductDB extends Database<String, Product> {
 
     /**
      * @param id La llave primaria de la entidad
      * @return El producto encontrado, o null si no se encontró
      */
     @Override
-    public Bill findById(Long id) {
+    public Product findById(String id) {
         Session session = HibernateUtil.getOpenSession();
-        try{
+        try {
             session.beginTransaction();
-            Bill bill = session.get(Bill.class, id);
+            Product product = session.get(Product.class, id);
             session.getTransaction().commit();
-            return bill;
-        }
-        catch (Exception e){
+            return product;
+        }catch (Exception ex){
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            System.err.println("Error al buscar la factura: " + e);
+            System.err.println("Error al buscar el producto: " + ex);
             return null;
         }
         finally {
@@ -37,23 +36,25 @@ public final class BillDBManager extends DatabaseManager<Bill, Long>{
     }
 
     /**
-     * @return Una lista con todas las facturas en la base de datos
+     * @return Una lista con todos los productos en la base de datos
      */
     @Override
-    public List<Bill> readAll() {
+    public List<Product> readAll() {
         Session session = HibernateUtil.getOpenSession();
-        try{
+        try {
             session.beginTransaction();
-            List<Bill> bills = session.createQuery("from Bill", Bill.class).list();
+            List<Product> products = session.createQuery("from Product", Product.class).list();
             session.getTransaction().commit();
-            return bills;
-        }
-        catch (Exception e){
+            return products;
+        } catch (Exception ex) {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            System.err.println("Error al leer las facturas: " + e);
+            System.err.println("Error al leer los productos: " + ex);
             return null;
+        }
+        finally {
+            session.close();
         }
     }
 }

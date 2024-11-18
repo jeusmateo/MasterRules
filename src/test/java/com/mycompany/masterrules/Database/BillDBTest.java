@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BillDBTest {
-    static final BillDBManager billDBManager = new BillDBManager();
+    static final BillDB billDBManager = new BillDB();
 
 
     @Test
     void saveBill() {
         var Product = new Product("1", "Coca cola", "Refresco", BigDecimal.valueOf(10.0), BigDecimal.valueOf(1.0));
-        var productDBManager = new ProductDBManager();
+        var productDBManager = new ProductDB();
         // Save the product
         assertTrue(productDBManager.save(Product));
         var order = new Order();

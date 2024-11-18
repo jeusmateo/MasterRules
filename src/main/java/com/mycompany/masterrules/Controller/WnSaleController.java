@@ -1,24 +1,20 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Database.CustomerDBManager;
+import com.mycompany.masterrules.Database.CustomerDB;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.possystem.Order;
 import com.mycompany.masterrules.Model.possystem.POSManager;
 import com.mycompany.masterrules.Model.possystem.PaymentDetails;
 import com.mycompany.masterrules.Model.possystem.PedidoComanda;
-import com.mycompany.masterrules.Model.users.UserAccount;
-import com.mycompany.masterrules.Model.users.UserPermissions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -550,7 +546,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         displayMenuCards();
-        CustomerDBManager cdbm = new CustomerDBManager();
+        CustomerDB cdbm = new CustomerDB();
         //TODO CAMBIAR NOMBRE DE TODOS LOS CHEPOS
         List<Customer> chepo = cdbm.readAll();
         ObservableList<Customer> cutomersList = FXCollections.observableArrayList(chepo);

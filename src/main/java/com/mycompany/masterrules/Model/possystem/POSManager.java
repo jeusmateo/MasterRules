@@ -4,7 +4,7 @@ package com.mycompany.masterrules.Model.possystem;
 import java.time.LocalDateTime;
 
 
-import com.mycompany.masterrules.Database.UserDBManager;
+import com.mycompany.masterrules.Database.UserDB;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
@@ -36,7 +36,7 @@ public class POSManager {
     }
 
     public POSManager() {
-        UserDBManager bd = new UserDBManager();
+        UserDB bd = new UserDB();
         currentOrder = new Order();
         currentUser = bd.findById("1");
 

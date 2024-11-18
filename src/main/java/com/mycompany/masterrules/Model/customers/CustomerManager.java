@@ -1,13 +1,13 @@
 package com.mycompany.masterrules.Model.customers;
 
-import com.mycompany.masterrules.Database.CustomerDBManager;
+import com.mycompany.masterrules.Database.CustomerDB;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
 public class CustomerManager {
-    private final CustomerDBManager customerDBManager = new CustomerDBManager();
+    private final CustomerDB customerDBManager = new CustomerDB();
 
     public void removeCustomer(String id) {
         Customer customer = customerDBManager.findById(id);

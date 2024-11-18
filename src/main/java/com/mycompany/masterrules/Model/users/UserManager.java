@@ -1,13 +1,13 @@
 package com.mycompany.masterrules.Model.users;
 
-import com.mycompany.masterrules.Database.UserDBManager;
+import com.mycompany.masterrules.Database.UserDB;
 
 import java.util.List;
 
 
 public class UserManager {
 
-    private final UserDBManager userDBManager = new UserDBManager();
+    private final UserDB userDBManager = new UserDB();
 
     // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
 

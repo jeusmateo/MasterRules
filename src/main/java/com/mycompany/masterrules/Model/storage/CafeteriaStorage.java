@@ -1,26 +1,20 @@
 package com.mycompany.masterrules.Model.storage;
 
-import com.mycompany.masterrules.Database.ProductDBManager;
+import com.mycompany.masterrules.Database.ProductDB;
+import com.mycompany.masterrules.Database.StorageDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Product;
-import jakarta.persistence.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Entity
 public class CafeteriaStorage {
-    @Transient
-    private final ProductDBManager productDBManager;
 
-    @Id
-    @Lob
-    @Convert
     private Map<Product, StockInfo> products;
-
+    private StorageDatabase storageDatabase;
 
     public CafeteriaStorage() {
         this.products = new HashMap<>();
-        this.productDBManager = new ProductDBManager();
+        this.storageDatabase = new StorageDatabase();
     }
 
     public boolean addProduct(Product product, StockInfo stockInfo) {
@@ -29,7 +23,7 @@ public class CafeteriaStorage {
         }
 
         products.put(product, stockInfo);
-
+        storageDatabase.save(stockInfo);
         return true;
     }
 

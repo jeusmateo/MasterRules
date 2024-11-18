@@ -2,7 +2,7 @@ package com.mycompany.masterrules;
 
 import com.mycompany.masterrules.Model.users.UserAccount;
 
-import com.mycompany.masterrules.Database.UserDBManager;
+import com.mycompany.masterrules.Database.UserDB;
 import com.mycompany.masterrules.Model.users.UserPermissions;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class UserDBTest {
         user.setPermissions(permissions);
 
         // Insertar usuario
-        UserDBManager userDBManager = new UserDBManager();
+        UserDB userDBManager = new UserDB();
         assert userDBManager.save(user);
 
         // Leer usuario

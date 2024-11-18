@@ -1,12 +1,12 @@
 package com.mycompany.masterrules.Model.users;
 
-import com.mycompany.masterrules.Database.UserDBManager;
+import com.mycompany.masterrules.Database.UserDB;
 
 public class LoginValidator {
-    private final UserDBManager userDBManager;
+    private final UserDB userDBManager;
 
     public LoginValidator() {
-        this.userDBManager = new UserDBManager();
+        this.userDBManager = new UserDB();
     }
 
     private boolean isAdmin(String username, String password) {

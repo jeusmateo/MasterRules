@@ -1,6 +1,6 @@
 package com.mycompany.masterrules;
 
-import com.mycompany.masterrules.Database.ProductDBManager;
+import com.mycompany.masterrules.Database.ProductDB;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ public class ProductDBTest {
     public static void main(String[] args) {
         Product tmpProduct = new Product("1", "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
-        ProductDBManager productDB = new ProductDBManager();
+        ProductDB productDB = new ProductDB();
         assert productDB.save(tmpProduct);
 
         Product tmpPapas = new Product("2", "Papas", "Snack", BigDecimal.valueOf(1.00), BigDecimal.valueOf(0.90));

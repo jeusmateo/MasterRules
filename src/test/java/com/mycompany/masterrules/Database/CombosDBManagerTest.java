@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CombosDBManagerTest {
 
-    static ProductDBManager combosDBManager = new ProductDBManager();
+    static ProductDB combosDBManager = new ProductDB();
 
     @BeforeAll
     static void setUp() {
@@ -27,7 +27,7 @@ class CombosDBManagerTest {
         // creando un combo normal
         var product1 = new Product("1", "Product 1", "Type 1", BigDecimal.valueOf(10), BigDecimal.valueOf(5));
         var product2 = new Product("2", "Product 2", "Type 2", BigDecimal.valueOf(20), BigDecimal.valueOf(10));
-        var productDBManager = new ProductDBManager();
+        var productDBManager = new ProductDB();
         assertTrue(productDBManager.save(product1));
         assertTrue(productDBManager.save(product2));
 
@@ -46,7 +46,7 @@ class CombosDBManagerTest {
         var postre1 = new Product("3", "Postre 1", "Postres", BigDecimal.valueOf(10), BigDecimal.valueOf(5));
         var postre2 = new Product("4", "Postre 2", "Postres", BigDecimal.valueOf(20), BigDecimal.valueOf(10));
 
-        var productDBManager = new ProductDBManager();
+        var productDBManager = new ProductDB();
         assertTrue(productDBManager.save(postre1));
         assertTrue(productDBManager.save(postre2));
 
