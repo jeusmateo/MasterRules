@@ -79,7 +79,7 @@ public class POSManager {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
     }
-//TODO MUY URGENTE
+
     private Bill createBill(PaymentDetails data) {
         if(data.getCustomer() != null){
             Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());

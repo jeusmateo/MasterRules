@@ -4,6 +4,7 @@ import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -27,12 +28,15 @@ public class Bill {
     private BigDecimal change;
     private String customerName;
     private String paymentMethod;
+    private LocalDateTime date;
 
     public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod) {
         this.employeeName = employeeName;
         this.customerName = customer;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
+        this.date = LocalDateTime.now();
+
 
     }
 
