@@ -31,15 +31,23 @@ public class POSManager {
     //Flujo Chepil para vender.
     //-Primero tomamos la orden para añadir
     //Configuramos la orden
-    //Para vender tomamos la orden y cobramos
-    //Creamos el bill y devolvemos.
+    //PAGAR
+    // CREAR FACTURA
+    // DAR BIENES
+    //DAR FACTURA
 
+
+    //FLUJO CHEPIL 2
+    //identificar producto
+    //REALIZAR TRANSACCION
+    //CONFIRMAR ENTREGA
+    //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         currentOrder.addProductToOrderItemList(new OrderItem(product));
     }
 
 
-    public void addCustomComboToOrder(CustomCombo customCombo) {//TODO pequeño error ortografico decie Custome en vez de Custom
+    public void addCustomComboToOrder(CustomCombo customCombo) {
         ArrayList<Product> products = new ArrayList();
         for (String keyQuantity : customCombo.getQuantityPerCategory().keySet()) {
             int quantity = 0;
@@ -78,6 +86,17 @@ public class POSManager {
     }
 
     /*
+    public void sell("AQUI DEBERIA RECIBIR EL PARAMETRO QUE ESCOJE EL TIPO DE COBRO, YO PENSABA JUSTO EN EL ENUM, PERO PUEDE SER EL OBJETO ESCOGIDO){
+
+
+
+
+    }
+
+
+
+
+
     public void sell(PaymentDetails paymentDetails, Order order) {
         if (currentUser.hasPermission(Permission.MAKE_SALE)) {
             boolean paymentStatus;

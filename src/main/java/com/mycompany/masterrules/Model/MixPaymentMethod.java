@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MixPaymentMethod extends PaymentMethod2{
-    private List<PaymentMethod2> paymentMethods;
+public class MixPaymentMethod extends PaymenthProcesser {
+    private List<PaymenthProcesser> paymentMethods;
     private BigDecimal recibido;
     private BigDecimal faltante;
     public MixPaymentMethod(BigDecimal totalAmount){
@@ -15,7 +15,7 @@ public class MixPaymentMethod extends PaymentMethod2{
         faltante = totalAmount;
     }
 
-    public void addPaymentMethod(PaymentMethod2 paymentMethod){
+    public void addPaymentMethod(PaymenthProcesser paymentMethod){
         paymentMethods.add(paymentMethod);
         this.recibido = (this.getTotalAmount().add(paymentMethod.getTotalAmount()));
         faltante = faltante.subtract(paymentMethod.getTotalAmount());
@@ -34,7 +34,7 @@ public class MixPaymentMethod extends PaymentMethod2{
     @Override
     public String paymentDescription() {
         StringBuilder description = new StringBuilder("Pago Mixto:\n");
-        for (PaymentMethod2 pago : paymentMethods) {
+        for (PaymenthProcesser pago : paymentMethods) {
             description.append("  ").append(pago.paymentDescription()).append("\n");
         }
         return description.toString();
