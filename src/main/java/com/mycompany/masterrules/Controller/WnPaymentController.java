@@ -1,7 +1,6 @@
 
 package com.mycompany.masterrules.Controller;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,11 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-/**
- * FXML Controller class
- *
- * @author Jimena Garcia
- */
 public class WnPaymentController implements Initializable {
 
 

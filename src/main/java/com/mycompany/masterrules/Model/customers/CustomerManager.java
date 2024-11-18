@@ -16,6 +16,7 @@ public class CustomerManager {
 
     public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
         Customer customer = customerDBManager.findById(id);
+        assert customer != null;
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
         customer.getCustomerAccount().setIsVIP(vipStatus);
         customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));

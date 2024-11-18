@@ -13,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -40,40 +37,50 @@ public class WnLoginController implements Initializable {
         Object evt = event.getSource();
 
         if (evt.equals(txtFieldUserName)) {
-            if (event.getCharacter().equals(" ")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
-                txtFieldPassword.requestFocus();
-                event.consume();
-            }
-
-        } else  if (evt.equals(txtFieldPassword)) {
-            if (event.getCharacter().equals(" ")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
-                btnLogin.fire();
-                event.consume();
-
-            }
+            handleTextInput(event, txtFieldPassword);
+        } else if (evt.equals(txtFieldPassword)) {
+            handlePasswordInput(event);
+        } else if (evt.equals(btnLogin) && isEnterKey(event)) {
+            handleLogin(event);
         }
-        if(evt.equals(btnLogin) && event.getCharacter().equals("\r")){
-                event.consume();
-                String user = txtFieldUserName.getText();
-                String pass = txtFieldPassword.getText();
-                try {
-                    if (loginValidator.validateUser(user, pass)) {
-                        System.out.println("Usuario y contraseña correctos");
-                        loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error al validar usuario: " + e);
-                    lbIncorrectCredential.setVisible(true);
-                } catch (Throwable e) {
-                    throw new RuntimeException(e);
-                }
+    }
+
+    private void handleTextInput(KeyEvent event, Control nextField) {
+        if (event.getCharacter().equals(" ")) {
+            event.consume(); // Evita espacios en el nombre de usuario
+        } else if (isEnterKey(event)) {
+            nextField.requestFocus();
+            event.consume(); // Mueve el foco al siguiente campo
+        }
+    }
+
+    private void handlePasswordInput(KeyEvent event) {
+        if (event.getCharacter().equals(" ")) {
+            event.consume(); // Evita espacios en la contraseña
+        } else if (isEnterKey(event)) {
+            btnLogin.fire(); // Simula un clic en el botón "Iniciar sesión"
+            event.consume();
+        }
+    }
+
+    private void handleLogin(KeyEvent event) {
+        event.consume();
+        String user = txtFieldUserName.getText();
+        String pass = txtFieldPassword.getText();
+
+        try {
+            if (loginValidator.validateUser(user, pass)) {
+                System.out.println("Usuario y contraseña correctos");
+                loadStage(event);
             }
+        } catch (Throwable e) {
+            System.err.println("Error al validar usuario: " + e.getMessage());
+            lbIncorrectCredential.setVisible(true); // Muestra mensaje de error
+        }
+    }
 
-
+    private boolean isEnterKey(KeyEvent event) {
+        return event.getCharacter().equals("\r");
     }
 
     @FXML
@@ -85,7 +92,7 @@ public class WnLoginController implements Initializable {
             try {
                 if (loginValidator.validateUser(user, pass)) {
                     System.out.println("Usuario y contraseña correctos");
-                    loadStage("/com/mycompany/masterrules/wnSideNavigationBar.fxml", event);
+                    loadStage(event);
                 } else {
                     lbIncorrectCredential.setVisible(true);
                 }
@@ -99,10 +106,10 @@ public class WnLoginController implements Initializable {
         }
     }
 
-    private void loadStage(String url, Event event) {
+    private void loadStage(Event event) {
         try {
             ((Node) event.getSource()).getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(url)));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/mycompany/masterrules/wnSideNavigationBar.fxml")));
             Scene scene = new Scene(root);
             Stage newStage = new Stage();
             newStage.setScene(scene);

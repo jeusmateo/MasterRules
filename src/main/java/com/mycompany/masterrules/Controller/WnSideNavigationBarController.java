@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class WnSideNavigationBarController implements Initializable {
@@ -139,7 +140,7 @@ public class WnSideNavigationBarController implements Initializable {
     }
 
     private void loadSection(String fxmlPath) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
+        AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
         scrPane.getChildren().setAll(pane);
         setPaneToFitScrPane(pane);
     }
