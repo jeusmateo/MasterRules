@@ -79,10 +79,10 @@ public class POSManager {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
     }
-//TODO MUY URGENTE
+
     private Bill createBill(PaymentDetails data) {
         if(data.getCustomer() != null){
-            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
+            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
                     newBill.setChange(data.getChangeAmount());
@@ -103,7 +103,7 @@ public class POSManager {
             }
             return newBill;
         }else{
-            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago());
+            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
                     newBill.setChange(data.getChangeAmount());

@@ -258,10 +258,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
          */
     }
-    
+
     /*
     public ObservableList<ProductTest> getProductCardData(){
-        
+
     }
     */
 
@@ -335,7 +335,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 cardController.setSelectionListener(this);
 
                 productCardsScroller.getChildren().add(pane);
-                
+
                 /*
                 pane.setOnMousePressed(event -> {
                     pane.setStyle("-fx-background-color: lightgray");
@@ -376,21 +376,21 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         }
     }
-    
+
     /*
     public void setupAutoCompleteOnTextfield(TextField textfield){//List<String> clientNames poner como parametro
         ContextMenu nameSuggestionsMenu=new ContextMenu();
-        
+
         textfield.textProperty().addListener((observable,newInput,oldInput)->{
             if(newInput.isEmpty()){
                 nameSuggestionsMenu.hide();
             }
             nameSuggestionsMenu.show(textfield, Side.BOTTOM, 0, 0);
         });
-        
+
         MenuItem nameSugesstion=new MenuItem("Jose");
         nameSuggestionsMenu.getItems().add(nameSugesstion);
-        
+
         textfield.setContextMenu(nameSuggestionsMenu);
     }
     */
@@ -514,8 +514,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         group = new ToggleGroup();
         paraMostradoMetodo.setToggleGroup(group);
-         paraLlevarMetodo.setToggleGroup(group);
-          paraMesaMetodo.setToggleGroup(group);
+        paraLlevarMetodo.setToggleGroup(group);
+        paraMesaMetodo.setToggleGroup(group);
 
         posManager = new POSManager();
 
