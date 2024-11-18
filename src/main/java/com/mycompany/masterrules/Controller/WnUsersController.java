@@ -201,9 +201,12 @@ public class WnUsersController implements Initializable {
                 tblUserAccount.setItems(userAccounts);
                 tblUserAccount.refresh();
 
-            } else{
-
-            }
+                } else {
+                    //throw Exception chepo = new Exception("Chepo");
+                }
+//            else if () {
+//
+//            }
         } catch (Exception e) {
             System.out.println("Chepo " + e.getMessage());
         }
