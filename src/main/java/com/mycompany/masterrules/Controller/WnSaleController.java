@@ -382,8 +382,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
 
-
-
         menuWindow.setVisible(false);
         menuOrderOptionsBox.setVisible(false);
 
