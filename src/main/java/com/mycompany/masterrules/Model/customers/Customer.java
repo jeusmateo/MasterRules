@@ -12,6 +12,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String ID;
     private String customerName;
+    @Column(unique = true, length = 16)
     private String customerPhoneNumber;
     @Embedded
     private CustomerAccount customerAccount;
