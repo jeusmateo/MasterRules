@@ -162,8 +162,8 @@ public class CafeteriaMenu {
         return title;
     }
 
-    public ArrayList<Product> getProducts() {    
-        return products;
+    public ArrayList<Product> getProducts() {
+        return (ArrayList<Product>) productDBManager.readAll();
     }
 
     public ArrayList<Combo> getCombos() {
