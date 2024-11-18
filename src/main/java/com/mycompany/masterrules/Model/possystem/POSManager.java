@@ -40,22 +40,10 @@ public class POSManager {
     }
 
     public POSManager() {
-        Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
-        PedidoComanda pI2 = new PedidoComanda(p2);
+
         currentOrder = new Order();
-        currentOrder.addProductToOrderItemList(pI2);
-        System.out.println("ahahhaha");
-        try {
-            for(PedidoComanda pc: currentOrder.getPedidoComandaList()){
-                System.out.println(pc.getProduct().getName());
 
-            }
-            System.out.println("ahahhaha------");
-        }catch (Exception e) {
-            System.out.println("error" + e.getMessage());
-        }
 
-        System.out.println("ahahhaha---------------------------------------------");
 
     }
 
@@ -75,7 +63,7 @@ public class POSManager {
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         currentOrder.addProductToOrderItemList(new PedidoComanda(product));
-        System.out.println("Si jalo "+product.getName());
+
     }
 
 

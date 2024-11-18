@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
@@ -12,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="372.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnPaymentController">
+<AnchorPane prefHeight="372.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnPaymentController">
    <children>
       <AnchorPane prefHeight="372.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -60,7 +65,7 @@
                                     </Group>
                                     <Group layoutX="223.0" layoutY="217.0">
                                        <children>
-                                          <Button fx:id="btnPay" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                          <Button fx:id="btnPay" layoutX="9.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
                                           <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                        </children>
                                     </Group>
@@ -88,7 +93,7 @@
                                     </Group>
                                     <Group layoutX="223.0" layoutY="217.0">
                                        <children>
-                                          <Button fx:id="btnPaywCreditCard" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                          <Button fx:id="btnPaywCreditCard" layoutX="9.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
                                           <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                        </children>
                                     </Group>
@@ -112,7 +117,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Credito Tienda">
+                  <Tab fx:id="tabStoreCredit" text="Credito Tienda">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -149,7 +154,7 @@
                                     </Label>
                                     <Group layoutX="223.0" layoutY="217.0">
                                        <children>
-                                          <Button fx:id="btnPaywSC" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                          <Button fx:id="btnPaywSC" layoutX="9.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
                                           <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                        </children>
                                     </Group>
@@ -235,7 +240,7 @@
                                     </Group>
                                     <Group layoutX="223.0" layoutY="217.0">
                                        <children>
-                                          <Button fx:id="btnPayMP" layoutX="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
+                                          <Button fx:id="btnPayMP" layoutX="9.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="42.0" prefWidth="89.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Pagar" />
                                           <Button fx:id="btnCancel" layoutY="50.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="43.0" prefWidth="106.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Cancelar" />
                                        </children>
                                     </Group>

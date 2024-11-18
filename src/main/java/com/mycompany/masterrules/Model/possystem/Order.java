@@ -32,37 +32,46 @@ public class Order {
         pedidoComandaList = new ArrayList<>();
     }
 
-    public List<PedidoComanda> getPedidoComandaList(){
+    public List<PedidoComanda> getPedidoComandaList() {
         return pedidoComandaList;
     }
-    /*
-        public void calculateTotalAmount(){
-            BigDecimal total = new BigDecimal(0);
-            for(Product product: products){
-                total=total.add(product.getPrice());
+
+    public BigDecimal calculateTotalAmount() {
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (PedidoComanda p : pedidoComandaList) {
+            totalAmount = totalAmount.add(p.getTotalPrice());
+        }
+        return totalAmount;
+    }
+    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
+
+        boolean found = false;
+
+        if (!pedidoComandaList.isEmpty()) {
+            for (PedidoComanda p : pedidoComandaList) {
+                if (newPedidoComanda.getProduct().getId().equals(p.getProduct().getId())) {
+                    p.addQuantity();
+                    found = true;
+                    break; // Ya lo encontramos, no es necesario seguir iterando.
+                }
             }
-            for(Combo combo: combos){
-                total = total.add(combo.getPrice());
+            if (!found) {
+                pedidoComandaList.add(newPedidoComanda);
+
             }
-            totalAmount = total;
+        } else {
+            pedidoComandaList.add(newPedidoComanda);
+
         }
 
-     */
-    //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
-    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
-        pedidoComandaList.add(newPedidoComanda);
-//        for(PedidoComanda pedidoComanda : pedidoComandaList){
-//            if(newPedidoComanda.getProduct().equals(pedidoComanda.getProduct())){
-//                pedidoComanda.addQuantity();
-//            }else{
-//                pedidoComandaList.add(newPedidoComanda);
-//            }
-//        }
     }
 
-    public void setEmployeeName(String employeeName){
+
+
+    public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+
     public void removeProduct(Product product) {
         pedidoComandaList.remove(product);
     }
@@ -99,7 +108,7 @@ public class Order {
         this.date = date;
     }
 
-    public void setDateNow(){
+    public void setDateNow() {
         this.date = LocalDateTime.now();
     }
 
