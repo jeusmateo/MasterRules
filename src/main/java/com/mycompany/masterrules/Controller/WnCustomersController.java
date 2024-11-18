@@ -10,13 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 //TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
 public class WnCustomersController implements Initializable {
 
-    private CustomerManager customerManager;
+    private final CustomerManager customerManager;
 
     @FXML
     private Button btnAcceptCredit;
@@ -216,30 +210,37 @@ public class WnCustomersController implements Initializable {
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
+
         if (evt.equals(txtNewCustomerName)) {
-            if (event.getCharacter().equals("\r")) {
-                txtNewCustomerPhoneNumber.requestFocus();
-                event.consume();
-            }
-        } else if (evt.equals(txtEditCustomerStoreCredit)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            }
-        } else if (evt.equals(txtNewCustomerPhoneNumber)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
+            handleTextFieldEnterKey(event, txtNewCustomerPhoneNumber);
+        } else if (evt.equals(txtEditCustomerStoreCredit) || evt.equals(txtNewCustomerPhoneNumber)) {
+            handleNumericInput(event);
+            if (evt.equals(txtNewCustomerPhoneNumber) && isEnterKey(event)) {
                 txtNewCustomerLoyaltyPoints.requestFocus();
-                event.consume();
             }
         } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
-            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-                event.consume();
-            } else if (event.getCharacter().equals("\r")) {
+            handleNumericInput(event);
+            if (isEnterKey(event)) {
                 chkNewCustomerVipStatus.requestFocus();
-                event.consume();
             }
         }
+    }
+
+    private void handleTextFieldEnterKey(KeyEvent event, Control nextField) {
+        if (isEnterKey(event)) {
+            nextField.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleNumericInput(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !isEnterKey(event)) {
+            event.consume();
+        }
+    }
+
+    private boolean isEnterKey(KeyEvent event) {
+        return event.getCharacter().equals("\r");
     }
 
     private void showCustomerDetails(Customer customer) {

@@ -6,8 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TableColumn;
@@ -73,23 +71,14 @@ public class WnInventoryController implements Initializable {
     @FXML
     private TableColumn<Product, String> colProductMaxStock; // Objeto incorrecto, en productos no almacenamos esta informacion
 
-    //TODO esto
-    public void displaySelected(MouseEvent event) {
-    //Product productSelected =tblInventory.getSelectionModel().getSelectedItem();
-    //poner la logica de eso, se supone que esto te entrega el cosito seleciconado, igual seria bueno cambiar el de los demas metodos porque hay que hacerlo bien gggggggg
-    }
-    /**
-     * Muestra la ventana de edicion de informacion
-     */
+
+
     @FXML
     public void showScrEditInfo(){
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
     }
 
-    /**
-     * Muestra la ventana de ver cliente
-     */
     @FXML
     public void exit() {
         txtFieldMinInv.clear();
@@ -97,7 +86,6 @@ public class WnInventoryController implements Initializable {
         txtFieldMaxInv.clear();
         scrEditInfo.setVisible(false);
     }
-
 
     @FXML
     public void buttonSaveInfo(){
@@ -112,10 +100,11 @@ public class WnInventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        //Por implementar
     }
 
     @FXML
     private void displaySelected(javafx.scene.input.MouseEvent event) {
+        //Por implementar
     }
 }

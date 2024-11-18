@@ -12,7 +12,7 @@ public class LoginValidator {
     private final List<UserAccount> userAccounts;
 
     public LoginValidator() {
-        userAccounts = new ArrayList<UserAccount>();
+        userAccounts = new ArrayList<>();
     }
 
     public LoginValidator(List<UserAccount> userAccounts) {
@@ -23,7 +23,7 @@ public class LoginValidator {
         return username.equals("admin") && password.equals("admin") || username.isEmpty() && password.isEmpty();
     }
 
-    public boolean validateUser(String username, String password) throws Exception {//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
+    public boolean validateUser(String username, String password) throws Throwable {//agregue este nuevo metodo para validar si existe el usuario y de serlo, la vista debe abrir la pagina que le corresponde
         // hardcodeado el admin y el password
         if (isAdmin(username, password)) {
             return true;
@@ -41,7 +41,7 @@ public class LoginValidator {
 
     }
 
-    public UserAccount findUser(String username) throws Exception {
+    public UserAccount findUser(String username) throws Throwable {
         //aqui encuentra en la BD el usuario, de manera que la vista puede ver los permisos que tiene que operar
         for (UserAccount registeredUser : userAccounts) {
             if (username.equals(registeredUser.getUserName())) {

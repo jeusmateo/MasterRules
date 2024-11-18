@@ -41,7 +41,7 @@ public class WnUsersController implements Initializable {
         this.userEdit = userAccount;
     }
 
-    private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap();
+    private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
 
 
@@ -344,13 +344,9 @@ public class WnUsersController implements Initializable {
     private void syncCheckBoxesWithPermissions(UserAccount userAccount) {
         if (userAccount == null) return;
 
-        checkBoxPermissionMap2.forEach((checkBox, permission) -> {
-            checkBox.setSelected(userAccount.getPermissions().isEnabled(permission));
-        });
+        checkBoxPermissionMap2.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
 
-        checkBoxPermissionMap.forEach((checkBox, permission) -> {
-            System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission));
-        });
+        checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
     }
 
     @FXML

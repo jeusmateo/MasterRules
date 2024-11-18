@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import javafx.fxml.FXML;
@@ -21,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable {
 
-    private CafeteriaManager cafeteriaManager;
+
     @FXML
     private Button btnAddCategoryCustomeCombo;
 
@@ -281,15 +280,6 @@ public class WnProductsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
-        ObservableList<Product> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
-        TableColumnCashOutReason.setReorderable(false);
-        TableColumnCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
-        TableColumnCashOutDate.setReorderable(false);
-        TableColumnCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        TableColumnCashOutQuantity.setReorderable(false);
-        TableColumnCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
-        tableViewlOutFlowReport.setItems(cashOutReports);
-         */
+        //Por implementar
     }
 }
