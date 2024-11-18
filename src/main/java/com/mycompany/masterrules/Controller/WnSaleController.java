@@ -10,8 +10,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.cafeteria.Combo;
-import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.cafeteria.menu.Combo;
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.possystem.Order;
 import com.mycompany.masterrules.Model.possystem.PedidoComanda;

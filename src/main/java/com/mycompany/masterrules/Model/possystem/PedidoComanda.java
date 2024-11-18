@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
-import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

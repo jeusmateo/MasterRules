@@ -2,9 +2,9 @@
 //
 //import com.mycompany.masterrules.Database.CombosDBManager;
 //import com.mycompany.masterrules.Database.ProductDBManager;
-//import com.mycompany.masterrules.Model.cafeteria.Combo;
-//import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
-//import com.mycompany.masterrules.Model.cafeteria.Product;
+//import com.mycompany.masterrules.Model.cafeteria.menu.Combo;
+//import com.mycompany.masterrules.Model.cafeteria.menu.CustomComboCreator;
+//import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 //
 //import java.math.BigDecimal;
 //import java.util.List;
