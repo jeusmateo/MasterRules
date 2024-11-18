@@ -303,8 +303,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 Product product = new Product(id, name, type, price, vipPrice);
 
                 // Registrar el producto en el modelo
-
-                cafeteriaMenu.addProductToMenu(product);
+                cafeteriaMenu.registerNewProduct(product);
 
                 // Limpiar los campos de entrada después de crear el producto
                 clearTextFields(
