@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Database.CustomerDBManager;
-import com.mycompany.masterrules.Model.*;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -9,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mycompany.masterrules.model.cafeteria.Combo;
+import com.mycompany.masterrules.model.cafeteria.Product;
+import com.mycompany.masterrules.model.customers.Customer;
+import com.mycompany.masterrules.model.possystem.Order;
+import com.mycompany.masterrules.model.possystem.PedidoComanda;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +23,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -91,16 +94,16 @@ public class WnSaleController implements Initializable {
     private AnchorPane scrCustomCombo;
 
     @FXML
-    private TableView<OrderItem> tblOrder;
+    private TableView<PedidoComanda> tblOrder;
 
     @FXML
-    private TableColumn<OrderItem, String> colAmount;
+    private TableColumn<PedidoComanda, String> colAmount;
 
     @FXML
-    private TableColumn<OrderItem, String> colProduct;
+    private TableColumn<PedidoComanda, String> colProduct;
 
     @FXML
-    private TableColumn<OrderItem, String> colPrice; // este si es un String?
+    private TableColumn<PedidoComanda, String> colPrice; // este si es un String?
 
     @FXML
     private Button btnBack;
@@ -320,7 +323,7 @@ public class WnSaleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList();
+        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
 
         colAmount.setReorderable(false);
 
@@ -333,9 +336,9 @@ public class WnSaleController implements Initializable {
         Product p1 = new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15"));
         Product p2 = new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"));
         Product p3 = new Product("P3", "Soda", "Platillo", new BigDecimal("20"), new BigDecimal("10"));
-        OrderItem pI1 = new OrderItem(p1);
-        OrderItem pI2 = new OrderItem(p2);
-        OrderItem pI3 = new OrderItem(p3);
+        PedidoComanda pI1 = new PedidoComanda(p1);
+        PedidoComanda pI2 = new PedidoComanda(p2);
+        PedidoComanda pI3 = new PedidoComanda(p3);
 
         productOrderList.add(pI1);
         productOrderList.add(pI2);

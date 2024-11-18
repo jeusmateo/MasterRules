@@ -1,9 +1,8 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.CashFlowReport;
-import com.mycompany.masterrules.Model.CashRegisterAuditReportManager;
-import com.mycompany.masterrules.Model.Customer;
-import java.math.BigDecimal;
+import com.mycompany.masterrules.model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.model.finanzas.CashRegisterAuditReportManager;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

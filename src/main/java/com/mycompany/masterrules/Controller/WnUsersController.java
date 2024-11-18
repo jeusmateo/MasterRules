@@ -1,9 +1,9 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.UserAccount;
-import com.mycompany.masterrules.Model.UserManager;
-import com.mycompany.masterrules.Model.UserPermissions;
-import com.mycompany.masterrules.Model.UserPermissions.Permission;
+import com.mycompany.masterrules.model.users.UserAccount;
+import com.mycompany.masterrules.model.users.UserManager;
+import com.mycompany.masterrules.model.users.UserPermissions;
+import com.mycompany.masterrules.model.users.UserPermissions.Permission;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

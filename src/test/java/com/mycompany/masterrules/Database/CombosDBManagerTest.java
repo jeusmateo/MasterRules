@@ -1,8 +1,8 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.Combo;
-import com.mycompany.masterrules.Model.CustomCombo;
-import com.mycompany.masterrules.Model.Product;
+import com.mycompany.masterrules.model.cafeteria.Combo;
+import com.mycompany.masterrules.model.cafeteria.CustomCombo;
+import com.mycompany.masterrules.model.cafeteria.Product;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
