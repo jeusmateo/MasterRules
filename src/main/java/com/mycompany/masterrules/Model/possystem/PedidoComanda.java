@@ -24,6 +24,8 @@ public class PedidoComanda {
 
     public void addQuantity(){
         quantity++;
+        System.out.println("AQUI ESTOY EN PEDIDO COMANDA Y :");
+        System.out.println(quantity);
     }
     public int getQuantity() {
         return quantity;

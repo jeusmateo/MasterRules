@@ -32,9 +32,10 @@ public class Order {
         pedidoComandaList = new ArrayList<>();
     }
 
-    public List<PedidoComanda> getPedidoComandaList(){
+    public List<PedidoComanda> getPedidoComandaList() {
         return pedidoComandaList;
     }
+
     /*
         public void calculateTotalAmount(){
             BigDecimal total = new BigDecimal(0);
@@ -47,22 +48,57 @@ public class Order {
             totalAmount = total;
         }
 
-     */
-    //TODO no funciona, si deberiamos checar que sean iguales y acceder al index del array y editarlo
-    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
-        pedidoComandaList.add(newPedidoComanda);
-//        for(PedidoComanda pedidoComanda : pedidoComandaList){
-//            if(newPedidoComanda.getProduct().equals(pedidoComanda.getProduct())){
-//                pedidoComanda.addQuantity();
-//            }else{
+
+
+if (pedidoComandaList.isEmpty()) {
+//                System.out.println("Chepo comanda Vacia");
 //                pedidoComandaList.add(newPedidoComanda);
 //            }
-//        }
+
+
+
+
+if(newPedidoComanda==null){
+            System.out.println("ah ah ah ah ah  ah");
+        }
+
+
+
+int contadorDeRecorrido =0; contadorDeRecorrido< pedidoComandaList.spliterator().getExactSizeIfKnown(); contadorDeRecorrido++
+     */
+
+    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
+
+        boolean found = false;
+
+        if (!pedidoComandaList.isEmpty()) {
+            for (PedidoComanda p : pedidoComandaList) {
+                if (newPedidoComanda.getProduct().getId().equals(p.getProduct().getId())) {
+                    System.out.println("Encontramos uno");
+                    p.addQuantity();
+                    found = true;
+                    break; // Ya lo encontramos, no es necesario seguir iterando.
+                }
+            }
+            if (!found) {
+                pedidoComandaList.add(newPedidoComanda);
+                System.out.println("No encontramos coincidencias, agregado a la lista");
+            }
+        } else {
+            pedidoComandaList.add(newPedidoComanda);
+            System.out.println("Lista vacía, agregado a la lista");
+        }
+
     }
 
-    public void setEmployeeName(String employeeName){
+    public void recorrerListaPrueb(){
+
+    }
+
+    public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+
     public void removeProduct(Product product) {
         pedidoComandaList.remove(product);
     }
@@ -99,7 +135,7 @@ public class Order {
         this.date = date;
     }
 
-    public void setDateNow(){
+    public void setDateNow() {
         this.date = LocalDateTime.now();
     }
 

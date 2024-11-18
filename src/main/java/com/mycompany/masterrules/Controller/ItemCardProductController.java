@@ -67,7 +67,6 @@ public class ItemCardProductController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         imageProduct.setOnMouseClicked(event -> onProductImageClick());
     }
-
     @FXML
     private void onProductImageClick() {
         if (selectionListener != null && productData != null) {
@@ -75,13 +74,14 @@ public class ItemCardProductController implements Initializable {
         }
     }
 
+
     @FXML
     private void eventAction(ActionEvent event) {
         if (selectionListener != null && productData != null) {
             try {
-                Product selectedProduct = selectionListener.onProductSelected(productData);
+                 selectionListener.onProductSelected(productData);
             }catch (Exception e) {
-                System.out.println("Chepo "+e.getMessage());
+                System.out.println("ChepoEn el item "+e.getMessage());
             }
         }
     }

@@ -93,8 +93,8 @@
                   <TabPane fx:id="menuCategories" layoutX="-4.0" prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                      <tabs>
                         <Tab text="Alimentos">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="6.0" prefWidth="602.0">
                                  <children>
                                     <AnchorPane layoutY="-5.0" prefHeight="6.0" prefWidth="880.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -111,7 +111,7 @@
                                        </styleClass>
                                     </AnchorPane>
                                  </children></AnchorPane>
-                          </content>
+                           </content>
                         </Tab>
                         <Tab text="Combos">
                            <content>
