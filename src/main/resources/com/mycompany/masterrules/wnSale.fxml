@@ -49,7 +49,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblTotal" layoutX="69.0" layoutY="33.0" prefHeight="20.0" prefWidth="98.0" text="\$0.00">
+                        <Label fx:id="lblTotal" layoutX="73.0" layoutY="33.0" prefHeight="20.0" prefWidth="98.0" text="\$0.00">
                            <font>
                               <Font size="14.0" />
                            </font>
