@@ -1,5 +1,8 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
+import com.mycompany.masterrules.Database.ProductDBManager;
+import com.mycompany.masterrules.Model.users.UserAccount;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -9,7 +12,7 @@ public class CafeteriaMenu {
     private String title;
     private ArrayList<Product> products;//TODO cambie products a arraylist //no se si luego se requiera del conjunto de tipo de producto en un Set?
     private ArrayList<Combo> combos;//falta combos
-    
+    private final ProductDBManager productDBManager = new ProductDBManager();
 
     public CafeteriaMenu() {
         this.products = new ArrayList<Product>();
@@ -24,6 +27,9 @@ public class CafeteriaMenu {
         }
     }
 
+    public void registerNewProduct(Product product) {//cambie el nombre del parametro
+        productDBManager.save(product);
+    }
 
     public void removeProductOnMenu(String productID) {
         for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
@@ -130,7 +136,7 @@ public class CafeteriaMenu {
         throw new NoSuchElementException("ERROR: El combo no existe");
     }
 
-    
+
 
     public boolean isComboOnMenu(String comboID){
         for(Combo registeredCombo : combos){

@@ -1,5 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Database.ProductDBManager;
+import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import javafx.fxml.FXML;
@@ -15,11 +17,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
+import java.awt.event.ActionEvent;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable {
 
+private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     @FXML
     private Button btnAddCategoryCustomeCombo;
@@ -85,7 +90,6 @@ public class WnProductsController implements Initializable {
     private ScrollPane scrollPaneMenu;
 
 
-
     //Tabla para combos
     @FXML
     private Tab tabCombos;
@@ -98,7 +102,6 @@ public class WnProductsController implements Initializable {
 
     @FXML
     private Tab tabCreateFood;
-
 
 
     @FXML
@@ -245,6 +248,45 @@ public class WnProductsController implements Initializable {
     private Button btnAddCategoryCustomeCombo1;
     @FXML
     private Button btnContinueCustomCombo1;
+    @FXML
+    private TextField txtProductId_tabCreate;
+    @FXML
+    private TextField txtProductName_tabCreate;
+    @FXML
+    private TextField txtProductPrice_tabCreate;
+    @FXML
+    private TextField txtProductVipPrice_tabCreate;
+    @FXML
+    private TextField txtProductType_tabCreate;
+    @FXML
+    private Button btnCreateProduct;
+
+
+
+    @FXML
+    private void eventAction(ActionEvent event) {
+        Object source = event.getSource(); // Identifica la fuente del evento
+        try {
+            if (source.equals(btnCreateProduct)) {
+                // Si el evento proviene de btnCreateProduct
+
+                String id = txtProductId_tabCreate.getText();
+                String name = txtProductName_tabCreate.getText();
+                String type = txtProductType_tabCreate.getText();
+                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
+                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
+
+                // Crear el producto
+                Product product = new Product(id, name, type, price, vipPrice);
+
+                // Registrar el producto
+                cafeteriaMenu.registerNewProduct(product);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al registrar el producto: " + e.getMessage());
+        }
+    }
+
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
@@ -280,6 +322,6 @@ public class WnProductsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Por implementar
+
     }
 }
