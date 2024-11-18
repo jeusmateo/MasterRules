@@ -13,13 +13,12 @@ public class Combo extends Product {
     private List<Product> products;
 
     protected Combo() {
-        throw new IllegalArgumentException("No se puede crear un combo sin productos");
+
     }
 
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
         super(comboName, price, VIPPrice);
         this.products = products;
-
     }
 
     public List<Product> getProducts() {

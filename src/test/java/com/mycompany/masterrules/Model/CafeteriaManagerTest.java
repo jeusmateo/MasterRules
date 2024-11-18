@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
 import com.mycompany.masterrules.Model.cafeteria.Product;
-import com.mycompany.masterrules.Model.cafeteria.storage.StockInfo;
+import com.mycompany.masterrules.Model.storage.StockInfo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,9 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
 
-import com.mycompany.masterrules.Model.cafeteria.storage.StockInfo;
+import com.mycompany.masterrules.Model.storage.StockInfo;
 
+@Deprecated
 public class CafeteriaManager {
 
     private final CafeteriaMenu menu;
