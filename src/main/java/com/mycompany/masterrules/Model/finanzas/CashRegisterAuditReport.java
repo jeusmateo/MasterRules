@@ -13,7 +13,7 @@ public class CashRegisterAuditReport {
     private BigDecimal initialCashAmount;
 
 
-    private BigDecimal currentCashAmount;
+    private BigDecimal currentCashAmount; //TODO QUITAR POR REF
 
 
     private ArrayList<CashFlowReport> cashOutFlowReports;

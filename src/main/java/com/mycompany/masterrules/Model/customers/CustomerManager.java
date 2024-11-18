@@ -1,26 +1,26 @@
 package com.mycompany.masterrules.Model.customers;
 
-import com.mycompany.masterrules.Database.CustomerDBManager;
+import com.mycompany.masterrules.Database.CustomerDatabase;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
 public class CustomerManager {
-    private final CustomerDBManager customerDBManager = new CustomerDBManager();
+    private final CustomerDatabase customerDatabaseManager = new CustomerDatabase();
 
     public void removeCustomer(String id) {
-        Customer customer = customerDBManager.findById(id);
-        customerDBManager.delete(customer);
+        Customer customer = customerDatabaseManager.findById(id);
+        customerDatabaseManager.delete(customer);
     }
 
     public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
-        Customer customer = customerDBManager.findById(id);
+        Customer customer = customerDatabaseManager.findById(id);
         assert customer != null;
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
         customer.getCustomerAccount().setIsVIP(vipStatus);
         customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));
-        customerDBManager.update(customer);
+        customerDatabaseManager.update(customer);
     }
 
 
@@ -39,6 +39,9 @@ public class CustomerManager {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Puntos de fidelidad no válidos", e);
             }
+            Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
+            customerDatabaseManager.save(customer);
+
         } else {
             throw new IllegalArgumentException("Parametros Incorrectos: Nombre o teléfono vacío");
         }
@@ -46,7 +49,7 @@ public class CustomerManager {
 
 
     public List<Customer> getCustomers() {
-        return customerDBManager.readAll();
+        return customerDatabaseManager.readAll();
     }
 
 }

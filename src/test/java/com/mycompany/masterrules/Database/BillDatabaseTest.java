@@ -11,52 +11,52 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BillDBTest {
-    static final BillDBManager billDBManager = new BillDBManager();
+public class BillDatabaseTest {
+    static final BillDatabase BILL_DATABASE_MANAGER = new BillDatabase();
 
 
     @Test
     void saveBill() {
         var Product = new Product("1", "Coca cola", "Refresco", BigDecimal.valueOf(10.0), BigDecimal.valueOf(1.0));
-        var productDBManager = new ProductDBManager();
+        var productDBManager = new ProductDatabase();
         // Save the product
         assertTrue(productDBManager.save(Product));
         var order = new Order();
         var orderItem = new PedidoComanda(Product);
         order.addProductToOrderItemList(orderItem);
         var bill = new Bill(order, "David Torres");
-        assertTrue(billDBManager.save(bill));
+        assertTrue(BILL_DATABASE_MANAGER.save(bill));
         System.out.println("Bill saved successfully");
     }
 
     @Test
     void findBill() {
-        var Bill = billDBManager.findById(1L);
+        var Bill = BILL_DATABASE_MANAGER.findById(1L);
         assertNotNull(Bill);
         System.out.println("Bill found successfully");
     }
 
     @Test
     void updateBill() {
-        var Bill = billDBManager.findById(1L);
+        var Bill = BILL_DATABASE_MANAGER.findById(1L);
         assertNotNull(Bill);
         Bill.setAmount(BigDecimal.valueOf(20.0));
-        assertTrue(billDBManager.update(Bill));
+        assertTrue(BILL_DATABASE_MANAGER.update(Bill));
         System.out.println("Bill updated successfully");
     }
 
     @Test
     void getAllBills() {
-        var Bills = billDBManager.readAll();
+        var Bills = BILL_DATABASE_MANAGER.readAll();
         assertNotNull(Bills);
         System.out.println("All bills read successfully");
     }
 
     @Test
     void deleteBill() {
-        var Bill = billDBManager.findById(1L);
+        var Bill = BILL_DATABASE_MANAGER.findById(1L);
         assertNotNull(Bill);
-        assertTrue(billDBManager.delete(Bill));
+        assertTrue(BILL_DATABASE_MANAGER.delete(Bill));
         System.out.println("Bill deleted successfully");
     }
 }

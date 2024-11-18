@@ -15,12 +15,12 @@ import java.util.List;
  * @param <K> El tipo de dato de la llave primaria de la entidad
  * @author Mateo Ortiz
  */
-abstract class DatabaseManager<T, K> {
+abstract class Database<K, T> {
 
     /**
      * Constructor protegido para evitar que esta clase sea instanciada directamente
      */
-    DatabaseManager() {
+    Database() {
     }
 
     /**

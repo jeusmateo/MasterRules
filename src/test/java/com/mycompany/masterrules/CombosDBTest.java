@@ -1,7 +1,7 @@
 //package com.mycompany.masterrules;
 //
-//import com.mycompany.masterrules.Database.CombosDBManager;
-//import com.mycompany.masterrules.Database.ProductDBManager;
+//import com.mycompany.masterrules.Database.ComboDatabase;
+//import com.mycompany.masterrules.Database.ProductDatabase;
 //import com.mycompany.masterrules.Model.cafeteria.Combo;
 //import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 //import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -16,7 +16,7 @@
 //        Product product2 = new Product("2", "Product 2", "Type 2", BigDecimal.valueOf(20), BigDecimal.valueOf(10));
 //
 //        // nota: los productos deben estar guardados en la base de datos para que el combo pueda guardarse
-//        ProductDBManager productDBManager = new ProductDBManager();
+//        ProductDatabase productDBManager = new ProductDatabase();
 //        assert productDBManager.save(product1);
 //        assert productDBManager.save(product2);
 //
@@ -32,7 +32,7 @@
 //        System.out.println(customCombo.toString());
 //
 //        // Guardar el combo en la base de datos
-//        CombosDBManager combosDBManager = new CombosDBManager();
+//        ComboDatabase combosDBManager = new ComboDatabase();
 //
 //        assert combosDBManager.save(combo);
 //

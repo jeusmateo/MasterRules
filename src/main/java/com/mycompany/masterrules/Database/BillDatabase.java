@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Clase que administra la base de datos de facturas.
  */
-public final class BillDBManager extends DatabaseManager<Bill, Long>{
+public final class BillDatabase extends Database<Long, Bill> {
 
     /**
      * @param id La llave primaria de la entidad

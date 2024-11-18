@@ -1,12 +1,12 @@
 package com.mycompany.masterrules.Model.users;
 
-import com.mycompany.masterrules.Database.UserDBManager;
+import com.mycompany.masterrules.Database.UserDatabase;
 
 public class LoginValidator {
-    private final UserDBManager userDBManager;
+    private final UserDatabase userDatabaseManager;
 
     public LoginValidator() {
-        this.userDBManager = new UserDBManager();
+        this.userDatabaseManager = new UserDatabase();
     }
 
     private boolean isAdmin(String username, String password) {
@@ -23,7 +23,7 @@ public class LoginValidator {
         }
 
         // Verifica si el usuario existe usando findByUserName
-        UserAccount foundUser = userDBManager.findByUserName(username);
+        UserAccount foundUser = userDatabaseManager.findByUserName(username);
         if (foundUser == null) {
             System.out.println("Usuario no encontrado en la base de datos.");
             return false;
@@ -45,7 +45,7 @@ public class LoginValidator {
 
     public UserAccount findUser(String username) throws UserNotFoundException {
         // Obtiene al usuario directamente desde la base de datos
-        UserAccount foundUser = userDBManager.findById(username);
+        UserAccount foundUser = userDatabaseManager.findById(username);
         if (foundUser == null) {
             throw new UserNotFoundException(username + " no encontrado");
         }
@@ -54,6 +54,6 @@ public class LoginValidator {
 
     public boolean isUserRegistered(String username) {
         // Verifica si el usuario existe en la base de datos
-        return userDBManager.findById(username) != null;
+        return userDatabaseManager.findById(username) != null;
     }
 }
