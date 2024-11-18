@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Model.storage;
 
-import com.mycompany.masterrules.Database.ProductDB;
 import com.mycompany.masterrules.Database.StorageDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 

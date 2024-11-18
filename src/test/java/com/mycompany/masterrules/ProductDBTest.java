@@ -1,6 +1,6 @@
 package com.mycompany.masterrules;
 
-import com.mycompany.masterrules.Database.ProductDB;
+import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 
 import java.math.BigDecimal;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Clase de prueba para la clase ProductDB
+ * Clase de prueba para la clase ProductDatabase
  *
  * @author Mateo Ortiz
  */
@@ -17,24 +17,24 @@ public class ProductDBTest {
     public static void main(String[] args) {
         Product tmpProduct = new Product("1", "Boing de mango", "Bebida", BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
 
-        ProductDB productDB = new ProductDB();
-        assert productDB.save(tmpProduct);
+        ProductDatabase productDatabase = new ProductDatabase();
+        assert productDatabase.save(tmpProduct);
 
         Product tmpPapas = new Product("2", "Papas", "Snack", BigDecimal.valueOf(1.00), BigDecimal.valueOf(0.90));
 
-        assert productDB.save(tmpPapas);
+        assert productDatabase.save(tmpPapas);
 
         // Cambio de precio
         tmpPapas.setPrice(BigDecimal.valueOf(2.00));
-        assert productDB.update(tmpPapas);
+        assert productDatabase.update(tmpPapas);
 
         // Buscar un producto
-        Product searched = productDB.findById("2");
+        Product searched = productDatabase.findById("2");
         assert searched != null;
         assert searched.equals(tmpPapas); // Verifica que la información del producto sea la misma
 
         // Impression de todos los productos
-        List<Product> products = productDB.readAll();
+        List<Product> products = productDatabase.readAll();
         assert Objects.requireNonNull(products).size() == 2;
 
         System.out.println("Productos en la base de datos:");
@@ -44,9 +44,9 @@ public class ProductDBTest {
 
         // Borrado de un producto
 
-        assert productDB.delete(tmpProduct);
+        assert productDatabase.delete(tmpProduct);
 
-        products = productDB.readAll();
+        products = productDatabase.readAll();
         assert Objects.requireNonNull(products).size() == 1;
 
         for (Product p : products) {

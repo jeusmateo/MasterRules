@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Database.CustomerDB;
+import com.mycompany.masterrules.Database.CustomerDatabase;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -546,7 +546,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         displayMenuCards();
-        CustomerDB cdbm = new CustomerDB();
+        CustomerDatabase cdbm = new CustomerDatabase();
         //TODO CAMBIAR NOMBRE DE TODOS LOS CHEPOS
         List<Customer> chepo = cdbm.readAll();
         ObservableList<Customer> cutomersList = FXCollections.observableArrayList(chepo);

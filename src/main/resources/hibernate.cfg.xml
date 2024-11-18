@@ -8,14 +8,15 @@
 <!--        <property name="hibernate.connection.url">jdbc:sqlite::memory:</property>-->
 <!--        Lo comenté para hacer pruebas con una BD nueva cada vez que se ejecute el programa-->
         <property name="hibernate.connection.url">jdbc:sqlite:CafeteriaMasterRulesDB.sqlite</property>
+<!--        TODO:CAMBIAR ESTO POR UPDATE-->
         <property name="hibernate.hbm2ddl.auto">create</property>
 <!---->
 <!--        <property name="show_sql">true</property>-->
 <!--        <property name="format_sql">true</property>-->
 <!--        <property name="hibernate.highlight_sql">true</property>-->
         <!--       todo-->
-        <mapping class="com.mycompany.masterrules.Model.storage.CafeteriaStorage"/>
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Product"/>
+        <mapping class="com.mycompany.masterrules.Model.storage.StockInfo"/>
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Combo"/>
 
         <mapping class="com.mycompany.masterrules.Model.users.UserAccount"/>

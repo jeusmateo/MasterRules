@@ -1,23 +1,23 @@
 package com.mycompany.masterrules.Model.users;
 
-import com.mycompany.masterrules.Database.UserDB;
+import com.mycompany.masterrules.Database.UserDatabase;
 
 import java.util.List;
 
 
 public class UserManager {
 
-    private final UserDB userDBManager = new UserDB();
+    private final UserDatabase userDatabaseManager = new UserDatabase();
 
     // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
 
     public UserManager() {
 
-        // userDBManager.save(new UserAccount("Chepo", "Chepo", new UserPermissions(), "Chepito")); // todo: usuarios temporales
+        // userDatabaseManager.save(new UserAccount("Chepo", "Chepo", new UserPermissions(), "Chepito")); // todo: usuarios temporales
 
     }
     public void updateUserInformation(UserAccount editedUserAccount){
-        userDBManager.update(editedUserAccount);
+        userDatabaseManager.update(editedUserAccount);
     }
 
     public UserManager(List<UserAccount> userAccounts) {
@@ -26,7 +26,7 @@ public class UserManager {
 
 
     public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
-        userDBManager.save(newUser);
+        userDatabaseManager.save(newUser);
     }
 
     private boolean isValid(UserAccount newUser) {
@@ -35,16 +35,16 @@ public class UserManager {
 
 
     public void removeUser(String userID) throws Exception{
-        var findUser = userDBManager.findById(userID);
+        var findUser = userDatabaseManager.findById(userID);
         if(findUser==null){
             throw new UserNotFoundException(userID + " no encontrado");
         }
-        userDBManager.delete(findUser);
+        userDatabaseManager.delete(findUser);
     }
 
 
     private boolean isUserRegistered(UserAccount user){
-        return userDBManager.findById(user.getUserID()) != null;
+        return userDatabaseManager.findById(user.getUserID()) != null;
     }
 
     private boolean isUsernameValid(String username){//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
@@ -84,6 +84,6 @@ public class UserManager {
     }
 
     public List<UserAccount> getUserAccounts() {
-        return userDBManager.readAll();
+        return userDatabaseManager.readAll();
     }
 }

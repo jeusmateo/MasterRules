@@ -1,8 +1,8 @@
 package com.mycompany.masterrules;
 
+import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
-import com.mycompany.masterrules.Database.UserDB;
 import com.mycompany.masterrules.Model.users.UserPermissions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Clase para pruebas de la base de datos de usuarios
  */
-public class UserDBTest {
+public class UserDatabaseTest {
     @Test
     void general() {
         UserAccount user = new UserAccount("alex", "1234", "Alex S");
@@ -22,27 +22,27 @@ public class UserDBTest {
         user.setPermissions(permissions);
 
         // Insertar usuario
-        UserDB userDBManager = new UserDB();
-        assert userDBManager.save(user);
+        UserDatabase userDatabaseManager = new UserDatabase();
+        assert userDatabaseManager.save(user);
 
         // Leer usuario
-        UserAccount userFound = userDBManager.findById("1");
+        UserAccount userFound = userDatabaseManager.findById("1");
         assert userFound != null;
         assert userFound.equals(user); // Verificar que sea correcta la lectura
 
         // Actualizar usuario
         user.setPassword("4321");
-        assert userDBManager.update(user);
+        assert userDatabaseManager.update(user);
 
         // Leer todos los usuarios
-        assert !Objects.requireNonNull(userDBManager.readAll()).isEmpty();
+        assert !Objects.requireNonNull(userDatabaseManager.readAll()).isEmpty();
 
-        for(UserAccount userAccount : Objects.requireNonNull(userDBManager.readAll())){
+        for(UserAccount userAccount : Objects.requireNonNull(userDatabaseManager.readAll())){
             System.out.println(userAccount);
         }
 
         // Eliminar usuario
-        assert userDBManager.delete(user);
+        assert userDatabaseManager.delete(user);
 
     }
 }

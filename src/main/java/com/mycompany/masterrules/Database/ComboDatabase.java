@@ -5,7 +5,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public final class CombosDB extends Database<String, Combo> {
+public final class ComboDatabase extends Database<String, Combo> {
     /**
      *
      * @param id La llave primaria de la entidad

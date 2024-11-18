@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Clase que administra la base de datos de clientes.
  */
-public final class CustomerDB extends Database<String, Customer> {
+public final class CustomerDatabase extends Database<String, Customer> {
 
     /**
      * @param id La llave primaria de la entidad
