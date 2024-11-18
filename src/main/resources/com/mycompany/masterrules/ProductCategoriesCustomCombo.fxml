@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.ProductCategoriesCustomComboController">
+   <children>
+      <ScrollPane prefHeight="518.0" prefWidth="518.0">
+         <content>
+            <FlowPane fx:id="FlowPaneProductsOfCategory" prefHeight="516.0" prefWidth="510.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

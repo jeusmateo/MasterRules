@@ -2,9 +2,9 @@ package com.mycompany.masterrules.Model.possystem;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.CustomComboCreator;
+
+import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import com.mycompany.masterrules.Model.cafeteria.menu.CafeteriaManager;
@@ -19,7 +19,10 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
  */
 
 //Este wey se encarga de vender
-@Deprecated
+
+
+
+
 public class POSManager {
 
     private CustomerManager customerManager; //TODO No lo debe tener de atributo, debemos buscar cual sea la forma correcta de obtener la informacion.
@@ -56,30 +59,12 @@ public class POSManager {
     }
 
 
-    public void addCustomComboToOrder(CustomComboCreator customComboCreator) {
-        ArrayList<Product> products = new ArrayList();
-        for (String keyQuantity : customComboCreator.getAllowedQuantity().keySet()) {
-            int quantity = 0;
-            quantity = customComboCreator.getAllowedQuantity().get(quantity);
-            for (int iterationCounter = 0; iterationCounter < quantity; iterationCounter++) {
-//                Product product = new Product();
-//                products.add(product);
-
-            }
-
-        }
-
-//        if (customComboCreator.getAllProducts() != null) {
-//            for (Product product : customComboCreator.getAllProducts()) {
-//                products.add(product);
-//            }
-//        }
-//        Combo combo = new Combo(customComboCreator.getComboName(), products, customComboCreator.getPrice(), customComboCreator.getVIPPrice());
-//        this.addProductToOrder(combo);
-    }
+    //Ejemplo el constructor recibe el paymentMethod -> new DebitCard("TOTAL", "String")
+    //Aqui vas a llamar su procesador de pago y ya
+    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
 
-    public void configureOrder(Customer customer, String metodoDeEntrega, String comentario) {
+
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
@@ -94,146 +79,56 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
-    /*
-    public void sell("AQUI DEBERIA RECIBIR EL PARAMETRO QUE ESCOJE EL TIPO DE COBRO, YO PENSABA JUSTO EN EL ENUM, PERO PUEDE SER EL OBJETO ESCOGIDO){
+    private Bill2 createBill(PaymentDetails data) {
+        Bill2 newBill = new Bill2(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago());
 
-
-
-
-    }
-
-
-
-
-
-    public void sell(PaymentDetails paymentDetails, Order order) {
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            boolean paymentStatus;
-            switch (paymentDetails.getPaymentMethod()) {
-                case CARD -> {
-                    paymentStatus = this.processCardPayment(paymentDetails.getReference());
-
-                }
-                case CASH -> {
-                    paymentStatus = processCashPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerCashAmount());
-
-                }
-                case STORE_CREDIT -> {
-                   // paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
-                }
-                default -> paymentStatus = false;
-
-            }
-            if(paymentStatus){
-                Bill newBill = new Bill();
-
-            }
-        }
-    }
-
-     */
-
-    /*
-    private BigDecimal calculateTotalOrderAmount() {
-        BigDecimal amount = new BigDecimal("0");
-        if (currentOrder.getCustomer() == null) {
-
-            for (Product product : currentOrder.getProducts()) {
-                amount = amount.add(product.getPrice());
-            }
-        } else if (currentOrder.getCustomer().getCustomerAccount().isIsVIP()) {
-            for (Product product : currentOrder.getProducts()) {
-                amount = amount.add(product.getVIPPrice());
-            }
-        } else {
-            for (Product product : currentOrder.getProducts()) {
-                amount = amount.add(product.getPrice());
-            }
-        }
-
-        return amount;
-    }
-/*
-
-     */
-
-    /*
-
-    //TODO ESTO NO ESTA PARA NADA LISTO, ESTOY MUY CANSADO MENTALMENTE,POR FAVOR NO OLVIDEMOS CHECAR ESTO YA QUE TAMBIEN LOS BILL CAMBIAN SEGUN EL METODO DE PAGO YA QUE POR EJEMPLO EL DE TARJETA GUARDA LA REFERENCIA DEL METODO DE PAGO.
-    public void sell(PaymentDetails paymentDetails) {
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            boolean paymentStatus;
-            Bill newBill = new Bill();
-            newBill.setOrder(currentOrder);
-            switch (paymentDetails.getPaymentMethod()) {
-                case CARD -> {
-                    paymentStatus = this.processCardPayment(paymentDetails.getReference());
-                    newBill.setReference(paymentDetails.getReference());
-                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
-                }
-                case CASH -> {
-                    paymentStatus = processCashPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerCashAmount());
-                    newBill.setAmount(paymentDetails.getCustomerCashAmount());
-                    newBill.setPagadoEnEfectivo(paymentDetails.getCustomerCashAmount());
-
-                    newBill.setChange(paymentDetails.getCustomerCashAmount().subtract(currentOrder.getTotalAmount()));
-                }
-                case STORE_CREDIT -> {
-                    //paymentStatus = processStoreCreditPayment(this.currentOrder.getTotalAmount(), paymentDetails.getCustomerAccount(), paymentDetails.getCustomerAccountAccess());
+        switch (data.getMetodoDePago()) {
+            case "CASH":
+                newBill.setChange(data.getChangeAmount());
+                newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
+                break;
+            case "CARD":
+                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                newBill.setReference(data.getReference());
+                break;
+            case "STORE_CREDIT":
+                if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
                     newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-                    newBill.setCustomerName(this.currentOrder.getCustomer().getCustomerName());
                 }
-                default -> paymentStatus = false;
+                break;
 
-            }
-            newBill.setAmount(currentOrder.getTotalAmount());
-            newBill.setEmployeeName(currentUser.getFullEmployeeName());
-            if (paymentStatus) {
-                Printer printer = new Printer();
-                this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill); //TODO Se debe de cambiar por la entidad que guarda todas las facturas uwu
-                // printer.imprimirOrder(currentOrder); //TODO NO, QUE CREE LA INSTANCIA E IMPRIMA UWU
-                printer.imprimirBill(newBill);
-                currentOrder = new Order();
-            }
-        } else {
-            throw new IllegalArgumentException("No tiene permisos para vender");
+        }
+        return newBill;
+    }
+
+
+    public void sell(PaymentDetails paymentMethod) {
+        Bill2 bill = createBill(paymentMethod);
+        ArchiveInvoice ai = new ArchiveInvoice();
+        // ai.ArchiveBill(bill);
+    }
+
+    public void processPay(PaymentDetails data) {
+        switch (data.getMetodoDePago()) {
+            case "CASH":
+
+                break;
+            case "CARD":
+
+                break;
+            case "STORE_CREDIT":
+                if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
+
+                }
+                break;
+
         }
 
     }
 
-     */
 
 
-    private boolean processCardPayment(String reference) {
-        //Logica de la tajeta
-        return true;
-    }
 
-    private boolean processCashPayment(BigDecimal totalOrderAmount, BigDecimal cashReceived) {
-        if (cashReceived.compareTo(totalOrderAmount) >= 0) {
-            //cajaRegistradora.addCantidad
-            //abrir hardware de caja
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //TODO Checar el nombr ey orden de los parametros
-    private boolean processStoreCreditPayment(BigDecimal totalOrderAmount, CustomerAccount customer, String customerAccess) {
-        if (customer.getLoyaltyCard().getAccessCode().equals(customerAccess)) {
-            if (customer.getStoreCredit().compareTo(totalOrderAmount) >= 0) {
-                BigDecimal newCustomerStoreCredit = customer.getStoreCredit().subtract(totalOrderAmount);
-                customer.setStoreCredit(newCustomerStoreCredit);
-                return true;
-            } else {
-                //Excepcion
-            }
-        } else {
-            //Excepcion
-        }
-        return false;
-    }
 
 
     /*
@@ -263,27 +158,7 @@ public class POSManager {
         currentOrder = new Order();
     }
 
-     */
-    public void withdrawMoneyFromCashRegister() {//TODO estaba en español
-        if (currentUser.hasPermission(Permission.RECORD_CASHIN)) {
-            String reason = "";
-            BigDecimal amount = new BigDecimal("0");
-            //cashRegisterAuditReportManager.withdrawCash(reason, amount);
 
-        } else {
-            throw new IllegalArgumentException("No tiene permisos para retirar dinero de caja");
-        }
-    }
-
-    public void depositMoneyInCashRegister() {//TODO estaba en español
-        if (currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
-            String reason = "";
-            BigDecimal amount = new BigDecimal("0");
-            //cashRegisterAuditReportManager.depositCash(reason, amount);
-        } else {
-            throw new IllegalArgumentException("No tiene permisos para ingresar dinero en caja");
-        }
-    }
 
     public CustomerManager getCustomerManager() {
         return customerManager;

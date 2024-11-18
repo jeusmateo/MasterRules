@@ -94,7 +94,7 @@ public class Product {
         this.VIPPrice = VIPPrice;
     }
 
-    protected Product() {
+    public Product() {
     }
 
 
