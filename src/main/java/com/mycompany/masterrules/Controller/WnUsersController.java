@@ -186,19 +186,24 @@ public class WnUsersController implements Initializable {
                 String editUserPassword = pwfUserPassword.getText();
                 String confirmUserPassword = pwfUserPasswordConfirm.getText();
                 String confirUserAccountUserEdit = textEditUserName.getText();
+                this.userEdit.setFullEmployeeName(editUserName);
+                this.userEdit.setUserName(confirUserAccountUserEdit);
                 if (editUserPassword.equals(confirmUserPassword)) {
-                    this.userEdit.setFullEmployeeName(editUserName);
+
                     this.userEdit.setPassword(editUserPassword);
-                    this.userEdit.setUserName(confirUserAccountUserEdit);
-                    userManager.updateUserInformation(this.userEdit);
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts()); //todo NO DEBE SER ASI, EL CODIGO NO DEBERIA ESTAR LLENO DE LINEAS REPETIDAS DE ESTO
-                    tblUserAccount.setItems(userAccounts);
+                   ;
+
+
+
+                }  userManager.updateUserInformation(this.userEdit);
+
+                ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts()); //todo NO DEBE SER ASI, EL CODIGO NO DEBERIA ESTAR LLENO DE LINEAS REPETIDAS DE ESTO
+                tblUserAccount.setItems(userAccounts);
+                tblUserAccount.refresh();
 
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
                 }
-
-            }
 //            else if () {
 //
 //            }
