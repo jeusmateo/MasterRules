@@ -21,9 +21,10 @@ public class Order {
     private String tableNumber;
     private String comment;
     private String deliveryMethod;
+    @Column(name = "order_date")
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount;
-    @OneToMany
+    @ElementCollection
     private List<PedidoComanda> pedidoComandaList;
 
 

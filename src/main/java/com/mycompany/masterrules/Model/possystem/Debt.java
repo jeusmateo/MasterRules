@@ -16,7 +16,7 @@ public class Debt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Transient
+    @Embedded
     private Order order;
     private BigDecimal amount;
     private LocalDate date; //pensar en guardarlo como string
