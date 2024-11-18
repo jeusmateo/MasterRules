@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserManager;
+import com.mycompany.masterrules.Model.users.UserNotFoundException;
 import com.mycompany.masterrules.Model.users.UserPermissions;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import javafx.fxml.FXML;
@@ -185,6 +186,8 @@ public class WnUsersController implements Initializable {
     private TextField txtFieldCreateUserName;
     @FXML
     private Button btnCreateUserAccount;
+    @FXML
+    private Button btnDeleteUserAccount;
 
     @FXML
     private void eventAction(ActionEvent event) {
@@ -247,6 +250,26 @@ public class WnUsersController implements Initializable {
                     tblUserAccount.refresh();
                 } else {
                     //throw Exception chepo = new Exception("Chepo");
+                }
+            }
+            if (evt.equals(btnDeleteUserAccount)) {
+                try {
+                    // Verifica que `userEdit` no sea nulo y obtén el ID del usuario
+                    if (this.userEdit != null) {
+                        String userIdToDelete = this.userEdit.getUserID(); // Obtiene el ID del usuario
+                        userManager.removeUser(userIdToDelete); // Llama al método modificado que elimina por ID
+                        // Actualiza la tabla con los usuarios restantes
+                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                        tblUserAccount.setItems(userAccounts);
+                        tblUserAccount.refresh();
+                        clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+                    } else {
+                        System.out.println("No se seleccionó ningún usuario para eliminar.");
+                    }
+                } catch (UserNotFoundException e) {
+                    System.out.println("Error al eliminar usuario: " + e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Chepo " + e.getMessage());
                 }
             }
         } catch (Exception e) {

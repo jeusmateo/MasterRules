@@ -376,7 +376,7 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="btnEditUser" layoutX="486.0" layoutY="443.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Usuario" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="219.0" />
+                                          <Button fx:id="btnEditUser" layoutX="366.0" layoutY="447.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Usuario" AnchorPane.bottomAnchor="66.60000000000002" AnchorPane.rightAnchor="343.6" />
                                           <TabPane layoutX="287.0" layoutY="212.0" prefHeight="224.0" prefWidth="543.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="212.0">
                                              <tabs>
                                                 <Tab fx:id="tabSalePerm1" text="Ventas">
@@ -603,6 +603,7 @@
                                                 <TextField fx:id="textEditUserName" />
                                              </children>
                                           </HBox>
+                                          <Button fx:id="btnDeleteUserAccount" layoutX="556.0" layoutY="448.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Borrar Usuario" />
                                        </children>
                                     </AnchorPane>
                                  </children>

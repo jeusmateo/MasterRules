@@ -100,6 +100,7 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Label lbCustomerIdAuxiliar;
 
+
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
 
     @FXML
@@ -189,6 +190,23 @@ public class WnCustomersController implements Initializable {
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
 
+        }
+        else if (evt.equals(btnDeleteCustomer)) { // Nuevo bloque para eliminar clientes
+            try {
+                String customerIdToDelete = lbCustomerIdAuxiliar.getText(); // Obtén el ID del cliente desde la etiqueta auxiliar
+                if (customerIdToDelete == null || customerIdToDelete.isEmpty()) {
+                    logger.log(Level.WARNING, "No se seleccionó ningún cliente para eliminar.");
+                    return;
+                }
+                customerManager.removeCustomer(customerIdToDelete); // Elimina al cliente usando el ID
+                clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
+                lbCustomerIdAuxiliar.setText("");
+                chkEditCustomerVipStatus.setSelected(false);
+                scrEditCustomerAccount.setVisible(false);
+                scrMainViewCustomerAccount.setVisible(true);
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Error deleting customer", e);
+            }
         }
         ObservableList<Customer> customers = FXCollections.observableArrayList(customerManager.getCustomers());
         setItemsToAllTables(customers);
