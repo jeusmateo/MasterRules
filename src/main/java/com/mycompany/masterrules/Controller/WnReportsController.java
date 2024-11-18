@@ -66,19 +66,19 @@ public class WnReportsController implements Initializable {
     @FXML
     private TableView<CashFlowReport> tableViewlOutFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashOutReason;
+    private TableColumn<CashFlowReport, String> colCashOutReason;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashOutDate;
+    private TableColumn<CashFlowReport, String> colCashOutDate;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashOutQuantity;
+    private TableColumn<CashFlowReport, String> colCashOutQuantity;
     @FXML
     private TableView<CashFlowReport> tableViewlInFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashInReason;
+    private TableColumn<CashFlowReport, String> colCashInReason;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashInDate;
+    private TableColumn<CashFlowReport, String> colCashInDate;
     @FXML
-    private TableColumn<CashFlowReport, String> TableColumnCashInQuantity;
+    private TableColumn<CashFlowReport, String> colCashInQuantity;
 
 
     @FXML
@@ -172,14 +172,14 @@ public class WnReportsController implements Initializable {
                 cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports()
         );
 
-        TableColumnCashOutReason.setReorderable(false);
-        TableColumnCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        colCashOutReason.setReorderable(false);
+        colCashOutReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
 
-        TableColumnCashOutDate.setReorderable(false);
-        TableColumnCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colCashOutDate.setReorderable(false);
+        colCashOutDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        TableColumnCashOutQuantity.setReorderable(false);
-        TableColumnCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+        colCashOutQuantity.setReorderable(false);
+        colCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
         tableViewlOutFlowReport.setItems(cashOutReports);
     }
@@ -190,14 +190,14 @@ public class WnReportsController implements Initializable {
                 cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports()
         );
 
-        TableColumnCashInReason.setReorderable(false);
-        TableColumnCashInReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        colCashInReason.setReorderable(false);
+        colCashInReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
 
-        TableColumnCashInDate.setReorderable(false);
-        TableColumnCashInDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colCashInDate.setReorderable(false);
+        colCashInDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        TableColumnCashInQuantity.setReorderable(false);
-        TableColumnCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
+        colCashInQuantity.setReorderable(false);
+        colCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
         tableViewlInFlowReport.setItems(cashInReports);
     }
