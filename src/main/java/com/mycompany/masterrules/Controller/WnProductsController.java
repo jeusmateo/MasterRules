@@ -1,9 +1,10 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Database.ProductDBManager;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,12 +13,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -167,7 +168,8 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private TextField txtProductName_tabCreate;
     @FXML
     private TextField txtProductPrice_tabCreate;
-    private TextField txtProductVipPrice_tabCreate;
+    @FXML
+    private TextField txtProductVIpPrice_tabCreate;
     @FXML
     private TextField txtProductType_tabCreate;
     @FXML
@@ -186,15 +188,15 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnSearch_tabCreate;
     @FXML
-    private TableColumn<?, ?> colProductId_tabCreate;
+    private TableColumn<Product, String> colProductId_tabCreate;
     @FXML
-    private TableColumn<?, ?> colProductName_tabCreate;
+    private TableColumn<Product, String> colProductName_tabCreate;
     @FXML
-    private TableColumn<?, ?> colProductType_tabCreate;
+    private TableColumn<Product, String> colProductType_tabCreate;
     @FXML
-    private TableColumn<?, ?> colProductPrice_tabCreate;
+    private TableColumn<Product, BigDecimal> colProductPrice_tabCreate;
     @FXML
-    private TableColumn<?, ?> colProductVipPrice_tabCreate;
+    private TableColumn<Product, BigDecimal> colProductVipPrice_tabCreate;
     @FXML
     private Tab tabEditProduct;
     @FXML
@@ -223,31 +225,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private TextField txtProductVipPrice_tabEdit;
     @FXML
     private TextField txtProductPrice_tabEdit;
-
-
-
-    private void eventAction(ActionEvent event) {
-//        Object source = event.getSource(); // Identifica la fuente del evento
-//        try {
-//            if (source.equals(btnCreateProduct)) {
-//                // Si el evento proviene de btnCreateProduct
-//
-//                String id = txtProductId_tabCreate.getText();
-//                String name = txtProductName_tabCreate.getText();
-//                String type = txtProductType_tabCreate.getText();
-//                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
-//                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
-//
-//                // Crear el producto
-//                Product product = new Product(id, name, type, price, vipPrice);
-//
-//                // Registrar el producto
-//                cafeteriaMenu.registerNewProduct(product);
-//            }
-//        } catch (Exception e) {
-//            System.err.println("Error al registrar el producto: " + e.getMessage());
-//        }
-    }
 
 
     @FXML
@@ -282,33 +259,70 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     }
 
+    private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Configurar las columnas de la tabla
+        colProductId_tabCreate.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProductName_tabCreate.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
 
+        // Cargar productos del modelo al ObservableList
+        observableProductList.addAll(cafeteriaMenu.getProducts());  // Suponiendo que tienes un método que obtiene todos los productos
+
+        // Asignar el ObservableList a la tabla
+        tblFood.setItems(observableProductList);
+
+        // Añadir listener para la selección de productos en la tabla
+        tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displaySelection());
     }
+
 
     @FXML
     private void eventAction(javafx.event.ActionEvent event) {
-        Object source = event.getSource(); // Identifica la fuente del evento
+        Object source = event.getSource();
         try {
             if (source.equals(btnCreateProduct)) {
-                // Si el evento proviene de btnCreateProduct
-
+                // Obtener datos del formulario
                 String id = txtProductId_tabCreate.getText();
                 String name = txtProductName_tabCreate.getText();
                 String type = txtProductType_tabCreate.getText();
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
-                System.out.println("CHEPO IMPRESION : "+ txtProductVipPrice_tabCreate);
-                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
+                BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
 
                 // Crear el producto
                 Product product = new Product(id, name, type, price, vipPrice);
 
-                // Registrar el producto
+                // Registrar el producto en el modelo
+                cafeteriaMenu.addProductToMenu(product);
                 cafeteriaMenu.registerNewProduct(product);
+
+                // Agregar el producto al ObservableList
+                observableProductList.add(product);
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void displaySelection() {
+        // Obtener el producto seleccionado
+        Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
+
+        // Verificar que hay un producto seleccionado
+        if (selectedProduct != null) {
+            // Establecer los valores en los campos de edición
+            txtProductName_tabEdit.setText(selectedProduct.getName());
+            txtProductType_tabEdit.setText(selectedProduct.getType());
+            txtProductPrice_tabEdit.setText(selectedProduct.getPrice().toString());
+            txtProductVipPrice_tabEdit.setText(selectedProduct.getVIPPrice().toString());
+        }
+    }
+
+
 }
