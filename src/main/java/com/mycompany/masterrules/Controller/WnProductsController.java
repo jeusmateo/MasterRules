@@ -35,8 +35,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnContinueDefinedCombo;
 
-    @FXML
-    private Button btnCreateFood;
 
     @FXML
     private Button btnCustomCombo;
@@ -47,8 +45,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnImportImage;
 
-    @FXML
-    private Button btnImportImageFood;
 
     @FXML
     private Button buttonConfirmCombo;
@@ -59,14 +55,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button buttonIconSearchFood;
 
-    @FXML
-    private Button buttonSearchFood;
 
     @FXML
     private FlowPane flowPaneMenuCards;
 
-    @FXML
-    private ImageView imageViewFood;
 
     @FXML
     private ImageView imgCombo;
@@ -97,27 +89,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Tab tabCreateCombo;
 
-    @FXML
-    private Tab tabCreateDrinks;
-
-    @FXML
-    private Tab tabCreateFood;
-
-
-    @FXML
-    private Tab tabDrinks;
 
     @FXML
     private Tab tabEditCombo;
 
-    @FXML
-    private Tab tabEditDrinks;
-
-    @FXML
-    private Tab tabEditFood;
-
-    @FXML
-    private Tab tabFood;
 
     @FXML
     private TableView<?> tableComboProducts;
@@ -125,32 +100,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private TableColumn<?, ?> tableProductCombo;
 
-    @FXML
-    private TextField textFieldIDFood;
-
-    @FXML
-    private TextField textFieldName1;
 
     @FXML
     private TextField textFieldName111;
 
-    @FXML
-    private TextField textFieldNameDrinks;
-
-    @FXML
-    private TextField textFieldNameFood;
-
-    @FXML
-    private TextField textFieldPriceFood;
-
-    @FXML
-    private TextField textFieldSearchFood;
-
-    @FXML
-    private TextField textFieldType;
-
-    @FXML
-    private TextField textFieldVIPPriceFood;
 
     @FXML
     private TextField txtFieldIDCombo;
@@ -167,8 +120,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private AnchorPane wnCreateComboStepOne;
 
-    @FXML
-    private AnchorPane wnCreateDrinks;
 
     @FXML
     private AnchorPane wnCreateFood;
@@ -176,8 +127,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private AnchorPane wnEditCombo;
 
-    @FXML
-    private AnchorPane wnEditDrinks;
 
     @FXML
     private AnchorPane wnEditFood;
@@ -187,43 +136,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private TableView<Product> tblFood;
     @FXML
-    private TableColumn<Product, String> colFoodID;
-    @FXML
-    private TableColumn<Product, String> colFoodName;
-    @FXML
-    private TableColumn<Product, String> colFoodCategory;
-    @FXML
-    private TableColumn<Product, String> colFoodPrice;
-    @FXML
-    private TableColumn<Product, String> colFoodVipPrice;
-    @FXML
     private TableView<Product> tblFood2;
-    @FXML
-    private TableColumn<Product, String> colFoodID2;
-    @FXML
-    private TableColumn<Product, String> colFoodName2;
-    @FXML
-    private TableColumn<Product, String> colFoodCategory2;
-    @FXML
-    private TableView<Product> tblBeverages;
-    @FXML
-    private TableColumn<Product, String> colBeveragesID;
-    @FXML
-    private TableColumn<Product, String> colBeveragesName;
-    @FXML
-    private TableColumn<Product, String> colBeveragesCategory;
-    @FXML
-    private TableColumn<Product, String> colBeveragesPrice;
-    @FXML
-    private TableColumn<Product, String> colBeveragesVipPrice;
-    @FXML
-    private TableView<Product> tblBeverages2;
-    @FXML
-    private TableColumn<Product, String> colBeveragesID2;
-    @FXML
-    private TableColumn<Product, String> colBeveragesName2;
-    @FXML
-    private TableColumn<Product, String> colBeveragesCategory2;
     @FXML
     private TableView<Combo> tblCombos;
     @FXML
@@ -254,37 +167,86 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private TextField txtProductName_tabCreate;
     @FXML
     private TextField txtProductPrice_tabCreate;
-    @FXML
     private TextField txtProductVipPrice_tabCreate;
     @FXML
     private TextField txtProductType_tabCreate;
     @FXML
     private Button btnCreateProduct;
-
-
+    @FXML
+    private Tab tabProduct;
+    @FXML
+    private Tab tabCreateProduct;
+    @FXML
+    private ImageView imgProduct_tabCreate;
+    @FXML
+    private Button btnImportImage_tabCreate;
 
     @FXML
+    private TextField txtSearchProduct_tabCreate;
+    @FXML
+    private Button btnSearch_tabCreate;
+    @FXML
+    private TableColumn<?, ?> colProductId_tabCreate;
+    @FXML
+    private TableColumn<?, ?> colProductName_tabCreate;
+    @FXML
+    private TableColumn<?, ?> colProductType_tabCreate;
+    @FXML
+    private TableColumn<?, ?> colProductPrice_tabCreate;
+    @FXML
+    private TableColumn<?, ?> colProductVipPrice_tabCreate;
+    @FXML
+    private Tab tabEditProduct;
+    @FXML
+    private TextField txtSearchProduct_tabEdit;
+    @FXML
+    private Button btnSearch2;
+    @FXML
+    private TableColumn<?, ?> colProductId_tabEdit;
+    @FXML
+    private TableColumn<?, ?> colProductName_tabEdit;
+    @FXML
+    private TableColumn<?, ?> colProductType_tabEdit;
+    @FXML
+    private TableColumn<?, ?> colProductPrice_tabEdit;
+    @FXML
+    private TableColumn<?, ?> colProductVipPrice_tabEdit;
+    @FXML
+    private TextField txtProductName_tabEdit;
+    @FXML
+    private TextField txtProductType_tabEdit;
+    @FXML
+    private ImageView imgProduct_tabEdit;
+    @FXML
+    private Button btnImporImage_tabEdit;
+    @FXML
+    private TextField txtProductVipPrice_tabEdit;
+    @FXML
+    private TextField txtProductPrice_tabEdit;
+
+
+
     private void eventAction(ActionEvent event) {
-        Object source = event.getSource(); // Identifica la fuente del evento
-        try {
-            if (source.equals(btnCreateProduct)) {
-                // Si el evento proviene de btnCreateProduct
-
-                String id = txtProductId_tabCreate.getText();
-                String name = txtProductName_tabCreate.getText();
-                String type = txtProductType_tabCreate.getText();
-                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
-                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
-
-                // Crear el producto
-                Product product = new Product(id, name, type, price, vipPrice);
-
-                // Registrar el producto
-                cafeteriaMenu.registerNewProduct(product);
-            }
-        } catch (Exception e) {
-            System.err.println("Error al registrar el producto: " + e.getMessage());
-        }
+//        Object source = event.getSource(); // Identifica la fuente del evento
+//        try {
+//            if (source.equals(btnCreateProduct)) {
+//                // Si el evento proviene de btnCreateProduct
+//
+//                String id = txtProductId_tabCreate.getText();
+//                String name = txtProductName_tabCreate.getText();
+//                String type = txtProductType_tabCreate.getText();
+//                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
+//                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
+//
+//                // Crear el producto
+//                Product product = new Product(id, name, type, price, vipPrice);
+//
+//                // Registrar el producto
+//                cafeteriaMenu.registerNewProduct(product);
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Error al registrar el producto: " + e.getMessage());
+//        }
     }
 
 
@@ -323,5 +285,30 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @FXML
+    private void eventAction(javafx.event.ActionEvent event) {
+        Object source = event.getSource(); // Identifica la fuente del evento
+        try {
+            if (source.equals(btnCreateProduct)) {
+                // Si el evento proviene de btnCreateProduct
+
+                String id = txtProductId_tabCreate.getText();
+                String name = txtProductName_tabCreate.getText();
+                String type = txtProductType_tabCreate.getText();
+                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
+                System.out.println("CHEPO IMPRESION : "+ txtProductVipPrice_tabCreate);
+                BigDecimal vipPrice = new BigDecimal(txtProductVipPrice_tabCreate.getText());
+
+                // Crear el producto
+                Product product = new Product(id, name, type, price, vipPrice);
+
+                // Registrar el producto
+                cafeteriaMenu.registerNewProduct(product);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al registrar el producto: " + e.getMessage());
+        }
     }
 }
