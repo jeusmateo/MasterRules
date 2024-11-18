@@ -375,13 +375,17 @@ public class WnSaleController implements Initializable, ProductSelectionListener
      * Mostrar formulario que aparece al continuar la orden
      */
     @FXML
-    public void showOrderForm() {
-        continueOrderWindow.setVisible(true);
-        continueOrderOptionsBox.setVisible(true);
+    public void showOrderForm(ActionEvent event) {
+        Object evt = event.getSource();
+        if(evt.equals(btnContinue)) {
 
-        menuWindow.setVisible(false);
-        menuOrderOptionsBox.setVisible(false);
+            continueOrderWindow.setVisible(true);
+            continueOrderOptionsBox.setVisible(true);
 
+            menuWindow.setVisible(false);
+            menuOrderOptionsBox.setVisible(false);
+
+        }
     }
 
     /**
@@ -463,6 +467,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         displayCategoriesForCustomCombo(currentCategoryIndex);
         List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
         ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(chepo1);
+        System.out.println("ahahhaha");
+        try {
+            for(PedidoComanda pc: productOrderList){
+                System.out.println(pc.getProduct().getName());
+
+            }
+            System.out.println("ahahhaha------");
+        }catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+
+        System.out.println("ahahhaha---------------------------------------------");
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));

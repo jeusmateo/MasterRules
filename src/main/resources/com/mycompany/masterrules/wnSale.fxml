@@ -305,7 +305,7 @@
                   </VBox>
                   <HBox layoutX="34.0" layoutY="305.0" spacing="15.0" AnchorPane.bottomAnchor="227.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0">
                      <children>
-                        <Button fx:id="btnAdd1" mnemonicParsing="false" onAction="#showOrderForm" prefHeight="35.0" prefWidth="108.0" styleClass="btn" stylesheets="@viewTemplate.css" text="AÑADIR" />
+                        <Button fx:id="btnAdd1" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="btn" stylesheets="@viewTemplate.css" text="AÑADIR" />
                         <Button fx:id="btnRemove1" mnemonicParsing="false" onAction="#showOrderForm" prefHeight="35.0" prefWidth="108.0" styleClass="btn" stylesheets="@viewTemplate.css" text="QUITAR" />
                      </children>
                   </HBox>

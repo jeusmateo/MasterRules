@@ -44,18 +44,7 @@ public class POSManager {
         PedidoComanda pI2 = new PedidoComanda(p2);
         currentOrder = new Order();
         currentOrder.addProductToOrderItemList(pI2);
-        System.out.println("ahahhaha");
-        try {
-            for(PedidoComanda pc: currentOrder.getPedidoComandaList()){
-                System.out.println(pc.getProduct().getName());
 
-            }
-            System.out.println("ahahhaha------");
-        }catch (Exception e) {
-            System.out.println("error" + e.getMessage());
-        }
-
-        System.out.println("ahahhaha---------------------------------------------");
 
     }
 
