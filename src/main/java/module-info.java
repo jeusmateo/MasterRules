@@ -19,6 +19,6 @@ module com.mycompany.masterrules {
     opens com.mycompany.masterrules.Model.customers to javafx.base, org.hibernate.orm.core;
     opens com.mycompany.masterrules.Model.finanzas to javafx.base, org.hibernate.orm.core;
     opens com.mycompany.masterrules.Model.users to javafx.base, org.hibernate.orm.core;
-    opens com.mycompany.masterrules.Model.cafeteria.storage to javafx.base, org.hibernate.orm.core;
-    opens com.mycompany.masterrules.Model.cafeteria.menu to javafx.base, org.hibernate.orm.core;
+    opens com.mycompany.masterrules.Model.storage to javafx.base, org.hibernate.orm.core;
+    opens com.mycompany.masterrules.Model.cafeteria to javafx.base, org.hibernate.orm.core;
 }

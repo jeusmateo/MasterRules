@@ -1,8 +1,8 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.Combo;
-import com.mycompany.masterrules.Model.cafeteria.menu.CustomComboCreator;
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Combo;
+import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

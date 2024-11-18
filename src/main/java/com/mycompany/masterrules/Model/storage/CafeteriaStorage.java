@@ -1,7 +1,7 @@
-package com.mycompany.masterrules.Model.cafeteria.storage;
+package com.mycompany.masterrules.Model.storage;
 
 import com.mycompany.masterrules.Database.ProductDBManager;
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,16 +17,18 @@ public class CafeteriaStorage {
         this.productDBManager = new ProductDBManager();
     }
 
-    public void addProduct(Product product, StockInfo stockInfo) throws Exception {
+    public boolean addProduct(Product product, StockInfo stockInfo) {
         if (isProductStored(product)) {
-            return;
-        }
-        if (isStockInfoValid(stockInfo)) {
-            products.put(product, stockInfo);
-        } else {
-            throw new Exception("ERROR: La informacion del Stock es incorrecta");
+            return false;
         }
 
+        if (!isStockInfoValid(stockInfo)) {
+            return false;
+        }
+
+        products.put(product, stockInfo);
+
+        return true;
     }
 
     public boolean isStockInfoValid(StockInfo stockInfo) {

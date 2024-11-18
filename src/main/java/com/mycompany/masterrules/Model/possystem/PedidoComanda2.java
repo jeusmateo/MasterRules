@@ -1,9 +1,8 @@
 package com.mycompany.masterrules.Model.possystem;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 import java.math.BigDecimal;
 

@@ -1,8 +1,8 @@
 package com.mycompany.masterrules.Model;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.CafeteriaManager;
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
-import com.mycompany.masterrules.Model.cafeteria.storage.StockInfo;
+import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
+import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.storage.StockInfo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

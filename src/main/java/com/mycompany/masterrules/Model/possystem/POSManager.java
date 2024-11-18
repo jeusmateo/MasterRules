@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 
 
 import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
+import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
-import com.mycompany.masterrules.Model.cafeteria.menu.CafeteriaManager;
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.CafeteriaManager;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerAccount;
 import com.mycompany.masterrules.Model.customers.CustomerManager;

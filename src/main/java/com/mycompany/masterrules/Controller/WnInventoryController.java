@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
