@@ -9,7 +9,7 @@
 <!--        Lo comenté para hacer pruebas con una BD nueva cada vez que se ejecute el programa-->
         <property name="hibernate.connection.url">jdbc:sqlite:CafeteriaMasterRulesDB.sqlite</property>
 <!--        TODO:CAMBIAR ESTO POR UPDATE-->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 <!---->
 <!--        <property name="show_sql">true</property>-->
 <!--        <property name="format_sql">true</property>-->
