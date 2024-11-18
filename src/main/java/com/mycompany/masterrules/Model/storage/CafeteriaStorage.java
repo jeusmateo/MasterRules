@@ -2,13 +2,19 @@ package com.mycompany.masterrules.Model.storage;
 
 import com.mycompany.masterrules.Database.ProductDBManager;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import jakarta.persistence.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Entity
 public class CafeteriaStorage {
+    @Transient
     private final ProductDBManager productDBManager;
+
+    @Id
+    @Lob
+    @Convert
     private Map<Product, StockInfo> products;
 
 
