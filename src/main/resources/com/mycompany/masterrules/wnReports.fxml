@@ -63,9 +63,9 @@
                   </Button>
                   <TableView fx:id="tableViewlOutFlowReport" prefHeight="351.0" prefWidth="399.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <columns>
-                        <TableColumn fx:id="TableColumnCashOutReason" prefWidth="88.0" text="Razon" />
-                        <TableColumn fx:id="TableColumnCashOutDate" minWidth="0.0" prefWidth="171.0" text="Fecha" />
-                        <TableColumn fx:id="TableColumnCashOutQuantity" prefWidth="87.0" text="Cantidad" />
+                        <TableColumn fx:id="colCashOutReason" prefWidth="88.0" text="Razon" />
+                        <TableColumn fx:id="colCashOutDate" minWidth="0.0" prefWidth="171.0" text="Fecha" />
+                        <TableColumn fx:id="colCashOutQuantity" prefWidth="87.0" text="Cantidad" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -86,9 +86,9 @@
                   </Button>
                   <TableView fx:id="tableViewlInFlowReport" prefHeight="351.0" prefWidth="399.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <columns>
-                        <TableColumn fx:id="TableColumnCashInReason" prefWidth="88.0" text="Razon" />
-                        <TableColumn fx:id="TableColumnCashInDate" prefWidth="145.0" text="Fecha" />
-                        <TableColumn fx:id="TableColumnCashInQuantity" prefWidth="116.0" text="Cantidad" />
+                        <TableColumn fx:id="colCashInReason" prefWidth="88.0" text="Razon" />
+                        <TableColumn fx:id="colCashInDate" prefWidth="145.0" text="Fecha" />
+                        <TableColumn fx:id="colCashInQuantity" prefWidth="116.0" text="Cantidad" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
