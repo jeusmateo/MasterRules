@@ -36,6 +36,12 @@ public class POSManager {
     // DAR BIENES
     //DAR FACTURA
 
+
+    //FLUJO CHEPIL 2
+    //identificar producto
+    //REALIZAR TRANSACCION
+    //CONFIRMAR ENTREGA
+    //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         currentOrder.addProductToOrderItemList(new OrderItem(product));
     }
