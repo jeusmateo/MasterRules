@@ -15,7 +15,7 @@ public class CashPaymentProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails("PAGADO EN EFECTIVO",this.getTotalAmount());
+        PaymentDetails paymentDetails = new PaymentDetails("CASH",this.getTotalAmount());
         paymentDetails.setCustomerCashAmount(this.customerCashAmount);
         paymentDetails.setChangeAmount(changeAmount);
         paymentDetails.setPaymentDescription(paymentDescription());
