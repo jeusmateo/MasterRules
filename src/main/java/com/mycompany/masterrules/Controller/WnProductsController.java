@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -21,6 +22,7 @@ import javafx.scene.layout.FlowPane;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable {
@@ -259,7 +261,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     }
 
-    private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
+    //private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
 
 
     @Override
@@ -270,7 +272,9 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
         colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
         colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
         colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
-
+        ProductDatabase chepobd = new ProductDatabase();
+        List<Product> chepo = chepobd.readAll();
+        ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
         // Cargar productos del modelo al ObservableList
         observableProductList.addAll(cafeteriaMenu.getProducts());  // Suponiendo que tienes un método que obtiene todos los productos
 
@@ -293,7 +297,9 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 String type = txtProductType_tabCreate.getText();
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
                 BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
-
+                ProductDatabase chepobd = new ProductDatabase();
+                List<Product> chepo = chepobd.readAll();
+                ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
                 // Crear el producto
                 Product product = new Product(id, name, type, price, vipPrice);
 
@@ -303,6 +309,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
                 // Agregar el producto al ObservableList
                 observableProductList.add(product);
+                chepobd.save(product);
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
