@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
-import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 public class PedidoComanda2 {
     private int quantity;
     @Id
-    @OneToOne
     private String product;
     private BigDecimal amount;
 

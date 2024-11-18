@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.cafeteria;
+package com.mycompany.masterrules.Model.cafeteria.menu;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,8 +7,6 @@ import jakarta.persistence.InheritanceType;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.UUID;
-
 
 
 /*

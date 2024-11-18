@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.cafeteria;
+package com.mycompany.masterrules.Model.cafeteria.menu;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

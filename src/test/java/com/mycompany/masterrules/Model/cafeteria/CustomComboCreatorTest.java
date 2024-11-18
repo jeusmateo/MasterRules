@@ -1,5 +1,7 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
+import com.mycompany.masterrules.Model.cafeteria.menu.CustomComboCreator;
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

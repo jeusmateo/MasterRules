@@ -5,15 +5,18 @@
 package com.mycompany.masterrules.Model.cafeteria.storage;
 
 
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
+
 public class StockInfo {
+    private Product ProductID;
     private int currentStock;
     private int minStock;
     private int maxStock;
 
     public StockInfo() {
-        this.currentStock=0;
-        this.minStock=0;
-        this.maxStock=0;
+        this.currentStock = 0;
+        this.minStock = 0;
+        this.maxStock = 0;
     }
 
     public StockInfo(int currentStock, int minStock, int maxStock) {
@@ -26,24 +29,24 @@ public class StockInfo {
         return currentStock;
     }
 
-    public int getMinStock() {
-        return minStock;
-    }
-
-    public int getMaxStock() {
-        return maxStock;
-    }
-
     public void setCurrentStock(int currentStock) {
         this.currentStock = currentStock;
+    }
+
+    public int getMinStock() {
+        return minStock;
     }
 
     public void setMinStock(int minStock) {
         this.minStock = minStock;
     }
 
+    public int getMaxStock() {
+        return maxStock;
+    }
+
     public void setMaxStock(int maxStock) {
         this.maxStock = maxStock;
     }
-    
+
 }

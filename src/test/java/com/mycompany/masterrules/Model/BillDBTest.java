@@ -2,7 +2,7 @@ package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Database.BillDBManager;
 import com.mycompany.masterrules.Database.ProductDBManager;
-import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.cafeteria.menu.Product;
 import com.mycompany.masterrules.Model.possystem.Bill;
 import com.mycompany.masterrules.Model.possystem.Order;
 import com.mycompany.masterrules.Model.possystem.PedidoComanda;
