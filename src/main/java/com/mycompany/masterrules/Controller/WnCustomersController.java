@@ -24,9 +24,6 @@ public class WnCustomersController implements Initializable {
     @FXML
     private Button btnAcceptCredit;
 
-    // @FXML
-    //private PasswordField psswrdFieldAccesstoStoreCredit;
-
     @FXML
     private Button btnSaveNewCustomer;
 
@@ -207,11 +204,51 @@ public class WnCustomersController implements Initializable {
         customerManager.updateCustomerData(customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity);
     }
 
+
+    //Esto se factorizo, revbisen si lo hizo gpt bien
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
 
         if (evt.equals(txtNewCustomerName)) {
+            handleNewCustomerName(event);
+        } else if (evt.equals(txtEditCustomerStoreCredit)) {
+            handleEditCustomerStoreCredit(event);
+        } else if (evt.equals(txtNewCustomerPhoneNumber)) {
+            handleNewCustomerPhoneNumber(event);
+        } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
+            handleLoyaltyPoints(event);
+        }
+    }
+
+    private void handleNewCustomerName(KeyEvent event) {
+        if (event.getCharacter().equals("\r")) {
+            txtNewCustomerPhoneNumber.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleEditCustomerStoreCredit(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        }
+    }
+
+    private void handleNewCustomerPhoneNumber(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        } else if (event.getCharacter().equals("\r")) {
+            txtNewCustomerLoyaltyPoints.requestFocus();
+            event.consume();
+        }
+    }
+
+    private void handleLoyaltyPoints(KeyEvent event) {
+        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+            event.consume();
+        } else if (event.getCharacter().equals("\r")) {
+            chkNewCustomerVipStatus.requestFocus();
+            event.consume();
             handleTextFieldEnterKey(event, txtNewCustomerPhoneNumber);
         } else if (evt.equals(txtEditCustomerStoreCredit) || evt.equals(txtNewCustomerPhoneNumber)) {
             handleNumericInput(event);
@@ -225,6 +262,7 @@ public class WnCustomersController implements Initializable {
             }
         }
     }
+// hasta aqui es lo q se factorizo
 
     private void handleTextFieldEnterKey(KeyEvent event, Control nextField) {
         if (isEnterKey(event)) {
@@ -251,8 +289,7 @@ public class WnCustomersController implements Initializable {
             lbStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkCustomerVip.setSelected(customer.getCustomerAccount().isIsVIP());
             lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
-            //txtAreaCustomerNote.setText(customer.getCustomerNote());
-            //heckboxCustomerVip.setSelected(customer.isCustomerVip());
+            //checkboxCustomerVip.setSelected(customer.isCustomerVip());
         } else {
             clearTextFields();
         }
