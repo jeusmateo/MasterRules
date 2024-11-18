@@ -111,7 +111,7 @@ public class WnReportsController implements Initializable {
         try {
             String cashAmount = txtFieldAmountInflow.getText();
             String reason = txtReasonInflow.getText();
-            cashRegisterAuditReportManager.depositCash(reason, cashAmount);
+           // cashRegisterAuditReportManager.depositCash(reason, cashAmount);
             ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
             tableViewlInFlowReport.setItems(cashInReports);
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
@@ -129,7 +129,7 @@ public class WnReportsController implements Initializable {
         try {
             String cashAmount = txtFieldAmountOutflow.getText();
             String reason = txtOutflowReason.getText();
-            cashRegisterAuditReportManager.withdrawCash(reason, cashAmount);
+           // cashRegisterAuditReportManager.withdrawCash(reason, cashAmount);
             txtFieldAmountOutflow.setText("00.0");
             txtOutflowReason.setText("");
             ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
