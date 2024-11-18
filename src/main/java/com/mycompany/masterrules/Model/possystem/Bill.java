@@ -30,12 +30,13 @@ public class Bill {
     private String paymentMethod;
     private LocalDateTime date;
 
-    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod) {
+    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod,Order order) {
         this.employeeName = employeeName;
         this.customerName = customer;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.date = LocalDateTime.now();
+        this.order = order;
 
 
     }
