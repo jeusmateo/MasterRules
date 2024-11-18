@@ -32,7 +32,7 @@ public class Product {
         this.VIPPrice = VIPPrice;
     }
 
-    public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
+    public Product(String productName,  BigDecimal price, BigDecimal VIPPrice) {
         // id generado automaticamente
         this.id = String.valueOf(hashCode());
         this.name = productName;

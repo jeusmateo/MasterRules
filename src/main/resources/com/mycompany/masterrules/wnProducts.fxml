@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
    <children>
       <TabPane prefHeight="600.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -94,7 +94,7 @@
                                                             <Insets left="25.0" />
                                                          </GridPane.margin>
                                                       </VBox>
-                                                      <Button fx:id="btnCreateProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                      <Button fx:id="btnCreateProduct" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Alimento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                                          <GridPane.margin>
                                                             <Insets />
                                                          </GridPane.margin>
@@ -130,7 +130,7 @@
                                                                         <Font size="15.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField fx:id="txtProductPrice_tabCreate" layoutX="152.0" promptText="\$00.0" />
+                                                                  <TextField fx:id="txtProductVIpPrice_tabCreate" layoutX="152.0" promptText="\$00.0" />
                                                                </children>
                                                             </Group>
                                                             <Group>
@@ -140,7 +140,7 @@
                                                                         <Font size="15.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField fx:id="txtVipPrice_tabCreate" layoutX="134.0" promptText="\$00.00" />
+                                                                  <TextField fx:id="txtProductPrice_tabCreate" layoutX="134.0" promptText="\$00.00" />
                                                                </children>
                                                             </Group>
                                                          </children>
