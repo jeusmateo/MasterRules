@@ -3,7 +3,7 @@ package com.mycompany.masterrules.Database;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.possystem.Bill;
 import com.mycompany.masterrules.Model.possystem.Order;
-import com.mycompany.masterrules.Model.possystem.PedidoComanda;
+import com.mycompany.masterrules.Model.possystem.OrderDetail;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ public class BillDatabaseTest {
         // Save the product
         assertTrue(productDBManager.save(Product));
         var order = new Order();
-        var orderItem = new PedidoComanda(Product);
+        var orderItem = new OrderDetail(Product);
         order.addProductToOrderItemList(orderItem);
         var bill = new Bill(order, "David Torres");
         assertTrue(BILL_DATABASE_MANAGER.save(bill));

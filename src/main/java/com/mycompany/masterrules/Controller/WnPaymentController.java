@@ -158,7 +158,7 @@ public class WnPaymentController implements Initializable {
             stage.close();
         } else if (evt.equals(btnPaywSC)) {
             if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
-                PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, totalAmount, customer);
+                PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
                 this.resultPayementDetails= processor.paymentProcess();
                 Stage stage = (Stage) btnPaywSC.getScene().getWindow();
                 stage.close();

@@ -25,42 +25,42 @@ public class Order {
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount;
     @ElementCollection
-    private List<PedidoComanda> pedidoComandaList;
+    private List<OrderDetail> orderDetailList;
 
 
     public Order() {
-        pedidoComandaList = new ArrayList<>();
+        orderDetailList = new ArrayList<>();
     }
 
-    public List<PedidoComanda> getPedidoComandaList() {
-        return pedidoComandaList;
+    public List<OrderDetail> getPedidoComandaList() {
+        return orderDetailList;
     }
 
     public BigDecimal calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-        for (PedidoComanda currentProduct : pedidoComandaList) {
+        for (OrderDetail currentProduct : orderDetailList) {
             calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
         }
         return calculatedTotalAmount;
     }
-    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
+    public void addProductToOrderItemList(OrderDetail newOrderDetail) {
 
         boolean found = false;
 
-        if (!pedidoComandaList.isEmpty()) {
-            for (PedidoComanda p : pedidoComandaList) {
-                if (newPedidoComanda.getProduct().getId().equals(p.getProduct().getId())) {
+        if (!orderDetailList.isEmpty()) {
+            for (OrderDetail p : orderDetailList) {
+                if (newOrderDetail.getProduct().getId().equals(p.getProduct().getId())) {
                     p.addQuantity();
                     found = true;
                     break; // Ya lo encontramos, no es necesario seguir iterando.
                 }
             }
             if (!found) {
-                pedidoComandaList.add(newPedidoComanda);
+                orderDetailList.add(newOrderDetail);
 
             }
         } else {
-            pedidoComandaList.add(newPedidoComanda);
+            orderDetailList.add(newOrderDetail);
 
         }
 
@@ -138,7 +138,7 @@ public class Order {
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
                 ", totalAmount=" + totalAmount +
-                ", products=" + pedidoComandaList +
+                ", products=" + orderDetailList +
                 '}';
     }
 
@@ -155,12 +155,12 @@ public class Order {
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(totalAmount, order.totalAmount) &&
-                Objects.equals(pedidoComandaList, order.pedidoComandaList);
+                Objects.equals(orderDetailList, order.orderDetailList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, pedidoComandaList);
+        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderDetailList);
     }
 }
 
