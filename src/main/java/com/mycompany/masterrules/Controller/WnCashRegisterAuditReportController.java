@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -68,8 +67,6 @@ public class WnCashRegisterAuditReportController implements Initializable{
 
 
 
-//    private final ObservableList<CashFlowReport> cashInFlowReports = FXCollections.observableArrayList(this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
-//    private final ObservableList<CashFlowReport> cashOutFlowReports = FXCollections.observableArrayList( this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
     private final ObservableList<CashFlowReport> cashInFlowReports=null;
     private final ObservableList<CashFlowReport> cashOutFlowReports = null;
     @FXML
@@ -82,27 +79,10 @@ public class WnCashRegisterAuditReportController implements Initializable{
     public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
         this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
 
-        // Use the manager to get the current cash flow reports
-//        cashInFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashInFlowReports());
-//        cashOutFlowReports.setAll(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashOutFlowReports());
 
-        // Update tables with new data
         tblCashInFlowReport.setItems(cashInFlowReports);
         tblCashOutFlowReport.setItems(cashOutFlowReports);
     }
-
-//    public void updateCashRegisterAuditReport() {
-//        // Update the text fields with the current cash register audit report data
-//        txtCashFunds.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCurrentCashAmount().toString());
-//        txtCashSales.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalSales().toString());
-//        txtInFlowCash.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalCashInFlow().toString());
-//        txtOutFlowCash.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalCashOutFlow().toString());
-//        txtTSCash.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalCash().toString());
-//        txtTSCreditCard.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalCreditCard().toString());
-//        txtTSStoreCard.setText(cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getTotalStoreCard().toString());
-//    }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
