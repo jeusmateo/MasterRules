@@ -145,7 +145,7 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkCreateComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo">
+                                                            <CheckBox fx:id="chkCreateComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo" visible="false">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>
@@ -153,7 +153,7 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkEditComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo">
+                                                            <CheckBox fx:id="chkEditComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo" visible="false">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>
@@ -161,7 +161,7 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkDeleteComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo">
+                                                            <CheckBox fx:id="chkDeleteComboPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo" visible="false">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>
