@@ -3,7 +3,7 @@ package com.mycompany.masterrules.Model.cafeteria;
 
 import com.mycompany.masterrules.Model.storage.StockInfo;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CafeteriaManager {
 
     private final CafeteriaMenu menu;
