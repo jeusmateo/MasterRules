@@ -64,7 +64,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
 
     @FXML
-    private FlowPane flowPaneMenuCards;
+    private FlowPane flowPaneMenuCards = new FlowPane();
 
 
     @FXML
@@ -143,8 +143,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private TableView<Product> tblFood;
     @FXML
-    private TableView<Product> tblFood2;
-    @FXML
     private TableView<Combo> tblCombos;
     @FXML
     private TableColumn<Combo, String> colComboID;
@@ -206,20 +204,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Tab tabEditProduct;
     @FXML
-    private TextField txtSearchProduct_tabEdit;
-    @FXML
-    private Button btnSearch2;
-    @FXML
-    private TableColumn<?, ?> colProductId_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductName_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductType_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductPrice_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductVipPrice_tabEdit;
-    @FXML
     private TextField txtProductName_tabEdit;
     @FXML
     private TextField txtProductType_tabEdit;
@@ -256,7 +240,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 cardController.setProductDataToCard(currentProduct);
                 cardController.setSelectionListener(this);
 
-                scrollPaneMenuCreatorCombo.getChildren().add(pane);
+                flowPaneMenuCards.getChildren().add(pane);
 
                 /*
                 pane.setOnMousePressed(event -> {
@@ -326,7 +310,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Configurar las columnas de la tabla
-
+        displayMenuCards();
         configColumns();
         // Obtener los productos de la base de datos
         ProductDatabase chepobd = new ProductDatabase();
@@ -337,7 +321,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
         // Asignar la lista observable a la tabla
         tblFood.setItems(observableProductList);
-
+        flowPaneMenuCards.prefWidthProperty().bind(scrollPaneMenuCreatorCombo.widthProperty());
         // Añadir listener para la selección de productos en la tabla
         tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displaySelection());
     }
@@ -412,7 +396,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     }
 
 
-    @FXML
     private void displaySelection() {
         // Obtener el producto seleccionado
         Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
