@@ -4,23 +4,34 @@ import com.mycompany.masterrules.Database.BillDatabase;
 import com.mycompany.masterrules.Model.possystem.Bill;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArchiveInvoice{
+    private List<Bill> savedBills;
 
-    BillDatabase customerDBManager = new BillDatabase();
+    public ArchiveInvoice(){
+        BillDatabase customerDBManager = new BillDatabase();
+        savedBills = new ArrayList<>();
+
+
+    }
 
     // Rename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.
     public boolean ArchiveBill(Bill bill) {
+        BillDatabase customerDBManager = new BillDatabase();
         return customerDBManager.save(bill);
     }
 
 
     public List<Bill> getAllBills() {
-        return customerDBManager.readAll();
+        BillDatabase customerDBManager = new BillDatabase();
+        savedBills =customerDBManager.readAll();
+        return savedBills;
     }
 
     public List<Bill> getBillsByDateRange(LocalDate beginDate, LocalDate endDate){
+        BillDatabase customerDBManager = new BillDatabase();
         var bills = customerDBManager.readAll();
 
         return bills.stream()

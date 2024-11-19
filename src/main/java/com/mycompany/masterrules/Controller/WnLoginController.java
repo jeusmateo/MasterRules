@@ -19,18 +19,28 @@ import javafx.stage.Stage;
 
 public class WnLoginController implements Initializable {
 
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
     private final LoginValidator loginValidator = new LoginValidator();
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private Button btnLogin;
+
     @FXML
     private TextField txtFieldUserName;
+
     @FXML
     private PasswordField txtFieldPassword;
+
     @FXML
     private Label lbIncorrectCredential;
 
-
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private void eventKey(KeyEvent event) {
@@ -70,7 +80,7 @@ public class WnLoginController implements Initializable {
 
         try {
             if (loginValidator.validateUser(user, pass)) {
-                System.out.println("Usuario y contraseña correctos");
+
                 loadStage(event);
             }
         } catch (Throwable e) {
@@ -91,7 +101,7 @@ public class WnLoginController implements Initializable {
             String pass = txtFieldPassword.getText();
             try {
                 if (loginValidator.validateUser(user, pass)) {
-                    System.out.println("Usuario y contraseña correctos");
+
                     loadStage(event);
                 } else {
                     lbIncorrectCredential.setVisible(true);

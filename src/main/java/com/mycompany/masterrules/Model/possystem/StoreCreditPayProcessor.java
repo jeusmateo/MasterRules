@@ -6,12 +6,12 @@ import com.mycompany.masterrules.Model.customers.Customer;
 import java.math.BigDecimal;
 
 public class StoreCreditPayProcessor extends PaymentProcessor {
-    private BigDecimal recibido;
+    private BigDecimal storeCreditAmount;
     private Customer customer;
 
     public StoreCreditPayProcessor(BigDecimal totalAmount, BigDecimal customerStoreCredit, Customer customer){
         super(totalAmount);
-        this.recibido = customerStoreCredit;
+        this.storeCreditAmount = customerStoreCredit;
         this.customer =  customer;
 
     }

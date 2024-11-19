@@ -12,14 +12,14 @@ import java.util.Objects;
 @Embeddable
 public class Order {
     @Column(name = "order_id")
-    private long id; //Chepo necesidad: Este es el numero de la comanda
+    private long orderId; //Chepo necesidad: Este es el numero de la comanda
     @ManyToOne
     private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
     // @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "order_employee_name")
     private String employeeName;
     private String tableNumber;
-    private String comment;
+    private String additionalComment;
     private String deliveryMethod;
     @Column(name = "order_date")
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
@@ -83,11 +83,11 @@ public class Order {
     }
 
     public String getComment() {
-        return comment;
+        return additionalComment;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.additionalComment = comment;
     }
 
     public String getDeliveryMethod() {
@@ -111,11 +111,11 @@ public class Order {
     }
 
     public Long getId() {
-        return id;
+        return orderId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.orderId = id;
     }
 
     public BigDecimal getTotalAmount() {
@@ -130,11 +130,11 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
+                "id=" + orderId +
                 ", customer=" + customer +
                 ", employeeName='" + employeeName + '\'' +
                 ", numeroDeMesa='" + tableNumber + '\'' +
-                ", comment='" + comment + '\'' +
+                ", comment='" + additionalComment + '\'' +
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
                 ", totalAmount=" + totalAmount +
@@ -147,11 +147,11 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id &&
+        return orderId == order.orderId &&
                 Objects.equals(customer, order.customer) &&
                 Objects.equals(employeeName, order.employeeName) &&
                 Objects.equals(tableNumber, order.tableNumber) &&
-                Objects.equals(comment, order.comment) &&
+                Objects.equals(additionalComment, order.additionalComment) &&
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(totalAmount, order.totalAmount) &&
@@ -160,7 +160,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, employeeName, tableNumber, comment, deliveryMethod, date, totalAmount, pedidoComandaList);
+        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, pedidoComandaList);
     }
 }
 

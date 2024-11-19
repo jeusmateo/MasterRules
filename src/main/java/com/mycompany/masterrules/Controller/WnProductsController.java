@@ -4,6 +4,7 @@ import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.possystem.PedidoComanda;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
 import com.mycompany.masterrules.Model.storage.StockInfo;
 import javafx.collections.FXCollections;
@@ -32,7 +33,11 @@ import java.util.ResourceBundle;
 public class WnProductsController implements Initializable, ProductSelectionListener {
 
 private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
+private ObservableList<Product> selectedProductsForCombo;
 
+
+    @FXML
+    private TableView<Product> tblSelectedProductsForCombo;
     @FXML
     private Button btnAddCategoryCustomeCombo;
 
@@ -64,7 +69,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
 
     @FXML
-    private FlowPane flowPaneMenuCards;
+    private FlowPane flowPaneMenuCards = new FlowPane();
 
 
     @FXML
@@ -143,8 +148,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private TableView<Product> tblFood;
     @FXML
-    private TableView<Product> tblFood2;
-    @FXML
     private TableView<Combo> tblCombos;
     @FXML
     private TableColumn<Combo, String> colComboID;
@@ -206,20 +209,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Tab tabEditProduct;
     @FXML
-    private TextField txtSearchProduct_tabEdit;
-    @FXML
-    private Button btnSearch2;
-    @FXML
-    private TableColumn<?, ?> colProductId_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductName_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductType_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductPrice_tabEdit;
-    @FXML
-    private TableColumn<?, ?> colProductVipPrice_tabEdit;
-    @FXML
     private TextField txtProductName_tabEdit;
     @FXML
     private TextField txtProductType_tabEdit;
@@ -236,8 +225,21 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnDeleteProduct;
 
+    @FXML
+    private AnchorPane scrComboTable;
+    @FXML
+    private AnchorPane scrMenuCards;
+
 
     private CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
+    @FXML
+    private TableColumn<Product, String> colProductSelectedName;
+    @FXML
+    private TableColumn<Product, BigDecimal> colProductSelectedPrice;
+    @FXML
+    private TableColumn<Product, BigDecimal> colProductSelectedVipPrice;
+    @FXML
+    private Button btnDeleteProduct_CreateCombo;
 
     public void displayMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
@@ -256,7 +258,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 cardController.setProductDataToCard(currentProduct);
                 cardController.setSelectionListener(this);
 
-                scrollPaneMenuCreatorCombo.getChildren().add(pane);
+                flowPaneMenuCards.getChildren().add(pane);
 
                 /*
                 pane.setOnMousePressed(event -> {
@@ -278,11 +280,21 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
+        scrComboTable.setVisible(true);
+        scrMenuCards.setVisible(false);
 
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
-        scrCreateDefinedCombo.setVisible(false);
+        scrCreateDefinedCombo.setVisible(true);
         scrCreateComboFinalStep.setVisible(true);
+
+    }
+
+    @FXML
+    void setBtnBackToScrMenuCard(){
+        scrCreateComboFinalStep.setVisible(false);
+        scrComboTable.setVisible(true);
+        scrMenuCards.setVisible(true);
 
     }
 
@@ -325,8 +337,22 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Configurar las columnas de la tabla
+        selectedProductsForCombo=FXCollections.observableArrayList();
+        tblSelectedProductsForCombo.setItems(selectedProductsForCombo);
 
+        colProductSelectedName.setReorderable(false);
+        colProductSelectedName.setResizable(false);
+
+        colProductSelectedName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colProductSelectedPrice.setReorderable(false);
+        colProductSelectedPrice.setResizable(false);
+        colProductSelectedPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colProductSelectedVipPrice.setReorderable(false);
+        colProductSelectedVipPrice.setResizable(false);
+        colProductSelectedVipPrice.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+
+        // Configurar las columnas de la tabla
+        displayMenuCards();
         configColumns();
         // Obtener los productos de la base de datos
         ProductDatabase chepobd = new ProductDatabase();
@@ -337,7 +363,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
         // Asignar la lista observable a la tabla
         tblFood.setItems(observableProductList);
-
+        flowPaneMenuCards.prefWidthProperty().bind(scrollPaneMenuCreatorCombo.widthProperty());
         // Añadir listener para la selección de productos en la tabla
         tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displaySelection());
     }
@@ -412,7 +438,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     }
 
 
-    @FXML
     private void displaySelection() {
         // Obtener el producto seleccionado
         Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
@@ -436,6 +461,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     @Override
     public void onProductSelected(Product product) {
-
+        selectedProductsForCombo.add(product);
     }
 }
