@@ -42,6 +42,7 @@ public class CashFlowReportManager {
     }
 
     public List<CashFlowReport> getCashInFlowReports() {
+
         return cashInFlowReports;
     }
 

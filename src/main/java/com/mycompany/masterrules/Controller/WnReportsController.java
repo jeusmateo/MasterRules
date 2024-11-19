@@ -170,6 +170,7 @@ public class WnReportsController implements Initializable {
 
     // Configura la tabla y los datos para Cash Out Flow
     private void initializeCashOutFlowTable() {
+
         ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(
                 cashFlowReportManager.getCashOutFlowReports()
         );

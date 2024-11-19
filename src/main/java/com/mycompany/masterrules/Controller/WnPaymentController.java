@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.beans.value.ChangeListener;
+
 
 
 /**
@@ -92,23 +94,32 @@ public class WnPaymentController implements Initializable {
     private TextField txtFieldRemainingPayment;
     @FXML
     private Tab tabStoreCredit;
+    @FXML
+    private TextField txtFieldCardIncomeMP;
+    @FXML
+    private TextField txtFieldStoreCreditIncomeMP;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtFieldCashIncome.setTextFormatter(new TextFormatter<>(change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("\\d*\\.?\\d*")) { // Permite solo dígitos y un punto
-                return change;
-            }
-            return null; // Rechaza el cambio si no cumple la expresión regular
-        }));
+
+        configureNumericField(txtFieldCashIncome);
+        configureNumericField(txtFieldCashIncomeMP);
+        configureNumericField(txtFieldCardIncomeMP);
+        configureNumericField(txtFieldStoreCreditIncomeMP);
 
         txtFieldCashIncome.textProperty().addListener((observable, oldValue, newValue) -> {
             calcularCambio(newValue);
         });
+        ChangeListener<String> mixedPaymentListener = (observable, oldValue, newValue) -> calcularFaltanteMixto();
+
+        txtFieldCashIncomeMP.textProperty().addListener(mixedPaymentListener);
+        txtFieldCardIncomeMP.textProperty().addListener(mixedPaymentListener);
+        txtFieldStoreCreditIncomeMP.textProperty().addListener(mixedPaymentListener);
+
+
     }
 
     public void setOrderData(BigDecimal totalAmount, Customer customerInfo) {
@@ -160,7 +171,25 @@ public class WnPaymentController implements Initializable {
                 stage.close();
             }
         } else if (evt.equals(btnPayMP)) {
+            BigDecimal remainingPayment = new BigDecimal(txtFieldRemainingPayment.getText());
+            if (remainingPayment.compareTo(BigDecimal.ZERO) > 0) {
+                // Mostrar error: falta cubrir el monto total
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error de Pago");
+                alert.setHeaderText(null);
+                alert.setContentText("El monto total no ha sido cubierto.");
+                alert.showAndWait();
+            } else {
+                BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText());
+                BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText());
+                BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText());
 
+                PaymentProcessor processor = new MixPaymentProcessor(totalAmount);
+                this.resultPayementDetails = processor.paymentProcess();
+
+                Stage stage = (Stage) btnPayMP.getScene().getWindow();
+                stage.close();
+            }
         }
 
     }
@@ -178,5 +207,31 @@ public class WnPaymentController implements Initializable {
             txtFieldChange.setText("0.00"); // Si el input no es un número válido, mostrar 0.00
         }
     }
+
+    private void calcularFaltanteMixto() {
+        try {
+            BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText().isEmpty() ? "0" : txtFieldCashIncomeMP.getText());
+            BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText().isEmpty() ? "0" : txtFieldCardIncomeMP.getText());
+            BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText().isEmpty() ? "0" : txtFieldStoreCreditIncomeMP.getText());
+
+            BigDecimal totalPaid = cashIncome.add(cardIncome).add(storeCreditIncome);
+            BigDecimal remainingPayment = totalAmount.subtract(totalPaid);
+
+            txtFieldRemainingPayment.setText(remainingPayment.compareTo(BigDecimal.ZERO) >= 0 ? remainingPayment.toString() : "0.00");
+        } catch (NumberFormatException e) {
+            txtFieldRemainingPayment.setText("0.00"); // Si hay un error en el formato, se muestra 0.00 como faltante
+        }
+    }
+
+    private void configureNumericField(TextField textField) {
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*\\.?\\d*")) { // Permite solo dígitos y un punto
+                return change;
+            }
+            return null; // Rechaza el cambio si no cumple la expresión regular
+        }));
+    }
+
 
 }
