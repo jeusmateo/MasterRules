@@ -287,11 +287,11 @@ private ObservableList<Product> selectedProductsForCombo;
             }
 
         }
-        List<Product> prueba = new ArrayList<>();
-        BigDecimal prueba1 = new BigDecimal("30");
-        BigDecimal prueba2 = new BigDecimal("15");
-        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
-        comboDataList.add(combo);
+//        List<Product> prueba = new ArrayList<>();
+//        BigDecimal prueba1 = new BigDecimal("30");
+//        BigDecimal prueba2 = new BigDecimal("15");
+//        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
+//        comboDataList.add(combo);
     }
 
     @FXML
@@ -356,6 +356,24 @@ private ObservableList<Product> selectedProductsForCombo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<Combo> combosList = cafeteriaMenu.getCombos();
+        ObservableList<Combo> comboDataList = FXCollections.observableArrayList(combosList);
+
+        colComboID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colComboID.setReorderable(false);
+        colComboID.setResizable(false);
+        colComboName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colComboName.setReorderable(false);
+        colComboName.setResizable(false);
+        colComboPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colComboPrice.setReorderable(false);
+        colComboVipPrice.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+        colComboVipPrice.setReorderable(false);
+
+
+        tblCombos.setItems(comboDataList);
+
+
         selectedProductsForCombo=FXCollections.observableArrayList();
         tblSelectedProductsForCombo.setItems(selectedProductsForCombo);
 
