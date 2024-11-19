@@ -227,6 +227,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private TextField txtProductVipPrice_tabEdit;
     @FXML
     private TextField txtProductPrice_tabEdit;
+    @FXML
+    private Button btnEditProduct;
+    @FXML
+    private Button btnDeleteProduct;
 
 
     @FXML
@@ -263,16 +267,24 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
     //private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
 
+    private void configColumns() {
+        colProductId_tabCreate.setReorderable(false);
+        colProductId_tabCreate.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProductName_tabCreate.setReorderable(false);
+        colProductName_tabCreate.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colProductType_tabCreate.setReorderable(false);
+        colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colProductPrice_tabCreate.setReorderable(false);
+        colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colProductVipPrice_tabCreate.setReorderable(false);
+        colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Configurar las columnas de la tabla
-        colProductId_tabCreate.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colProductName_tabCreate.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
-        colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
 
+        configColumns();
         // Obtener los productos de la base de datos
         ProductDatabase chepobd = new ProductDatabase();
         List<Product> chepo = chepobd.readAll();
@@ -292,20 +304,14 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
         Object source = event.getSource();
         try {
             if (source.equals(btnCreateProduct)) {
-                // Obtener datos del formulario
                 String id = txtProductId_tabCreate.getText();
                 String name = txtProductName_tabCreate.getText();
                 String type = txtProductType_tabCreate.getText();
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
                 BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
 
-                // Crear el producto
                 Product product = new Product(id, name, type, price, vipPrice);
-
-                // Registrar el producto en el modelo
                 cafeteriaMenu.addProductToMenu(product);
-
-                // Limpiar los campos de entrada después de crear el producto
                 clearTextFields(
                         txtProductId_tabCreate,
                         txtProductName_tabCreate,
@@ -313,13 +319,31 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                         txtProductPrice_tabCreate,
                         txtProductVIpPrice_tabCreate
                 );
-
-                // Actualizar la tabla con los productos más recientes
                 updateProductTable();
-
                 //List<Product> chepo = cafeteriaMenu.getProducts();
                 //ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
-  
+            }else if (source.equals(btnDeleteProduct)) {
+                String selectedProductId = tblFood.getSelectionModel().getSelectedItem().getId();
+                if (selectedProductId != null) {
+                    cafeteriaMenu.removeProductOnMenu(selectedProductId);
+                    updateProductTable();
+                }
+            } else if (source.equals(btnEditProduct)) {
+                Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
+                if (selectedProduct != null) {
+                    String newName = txtProductName_tabEdit.getText();
+                    String newType = txtProductType_tabEdit.getText();
+                    BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
+                    BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
+
+                    selectedProduct.setName(newName);
+                    selectedProduct.setType(newType);
+                    selectedProduct.setPrice(newPrice);
+                    selectedProduct.setVIPPrice(newVipPrice);
+
+                    cafeteriaMenu.editProduct(selectedProduct);
+                    updateProductTable();
+                }
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
@@ -337,6 +361,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
         // Asignar la nueva lista observable a la tabla
         tblFood.setItems(observableProductList);
+        tblFood.refresh();
     }
 
 
