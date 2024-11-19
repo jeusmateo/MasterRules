@@ -38,37 +38,14 @@ public class CafeteriaMenu {
         return productDatabase.findById(productID) != null;
     }
 
-    public boolean isProductNameTaken(String productName) { // TODO cambiar a isProductTaken es demasialdo informal
-//        for(Product registeredProduct : products){
-//            if(productName.equals(registeredProduct.getName())){
-//                return true;
-//            }
-//        }
-
+    public boolean isProductNameTaken(String productName) {
         return productDatabase.findByName(productName) != null;
     }
 
     public void editProduct(Product product) {
-//        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
-//            if (product.getId().equals(products.get(registeredProductCount).getId())) {
-//                if (!product.getName().equals(products.get(registeredProductCount).getName())) {
-//                    if (!isProductNameTaken(product.getName())) {
-//                        products.get(registeredProductCount).setName(product.getName());
-//                    } else {
-//                        throw new IllegalArgumentException("ERROR: El nombre del producto ya está tomado");
-//                    }
-//                }
-//                products.get(registeredProductCount).setType(product.getType());
-//                products.get(registeredProductCount).setPrice(product.getPrice());
-//                products.get(registeredProductCount).setVIPPrice(product.getVIPPrice());
-//                return;
-//            }
-//        }
-
         if (productDatabase.update(product)) {
             return;
         }
-
         throw new IllegalArgumentException("ERROR: El producto no existe");
     }
 
@@ -86,12 +63,6 @@ public class CafeteriaMenu {
 
 
     public void addComboToMenu(Combo combo) {
-//        if (!isComboOnMenu(combo.getId() + "")) {
-//            combos.add(combo);
-//        } else {
-//            throw new IllegalArgumentException("ERROR: El combo ya existe");
-//        }
-
         if (!isComboOnMenu(combo)) {
             comboDatabase.save(combo);
         } else {
@@ -105,14 +76,6 @@ public class CafeteriaMenu {
 
 
     public void removeComboOnMenu(String comboID) {
-//        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
-//            if (comboID.equals(combos.get(registeredComboCount).getId())) {
-//                combos.remove(registeredComboCount);
-//                return;
-//            }
-//        }
-//        throw new NoSuchElementException("ERROR: El combo no existe");
-
         if (comboDatabase.delete(comboDatabase.findById(comboID))) {
             return;
         }
@@ -123,23 +86,6 @@ public class CafeteriaMenu {
 
 
     public void editCombo(Combo combo) {
-//        for (int registeredComboCount = 0; registeredComboCount < combos.size(); registeredComboCount++) {
-//            if (combo.getId().equals(combos.get(registeredComboCount).getId())) {
-//                if (!combo.getName().equals(combos.get(registeredComboCount).getName())) {
-//                    if (!isComboNameTaken(combo.getName())) {
-//                        combos.get(registeredComboCount).setName(combo.getName());
-//                    } else {
-//                        throw new IllegalArgumentException("ERROR: El nombre del combo ya existe");
-//                    }
-//                }
-//                combos.get(registeredComboCount).setProducts(combo.getProducts());
-//                combos.get(registeredComboCount).setPrice(combo.getPrice());
-//                combos.get(registeredComboCount).setVIPPrice(combo.getVIPPrice());
-//                return;
-//            }
-//        }
-//        throw new NoSuchElementException("ERROR: El combo no existe");
-
         if (comboDatabase.update(combo)) {
             return;
         }
@@ -148,14 +94,7 @@ public class CafeteriaMenu {
 
     }
 
-    private boolean isComboNameTaken(String comboName) { //TODO cambiar a isComboTaken es demasialdo informal
-//        for(Combo registeredProduct : combos){
-//            if(comboName.equals(registeredProduct.getName())){
-//                return true;
-//            }
-//        }
-
-
+    private boolean isComboNameTaken(String comboName) { //TODO no esta implemenmtado
         return false;
     }
 
@@ -172,6 +111,7 @@ public class CafeteriaMenu {
         return productDatabase.readAll();
     }
 
+    //TODO: esto tiene uso?
     public void setProducts(List<Product> products) {
         for (Product product : products) {
             addProductToMenu(product);

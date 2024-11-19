@@ -42,8 +42,7 @@ public class CustomComboCreator {
         }
     }
 
-    //TODO: esto va aqui? como q añadir un producto a una categoria? no sería de cafeteriamanager?
-    public void addProductToCategory(String categoryKey, Product product) {
+       public void addProductToCategory(String categoryKey, Product product) {
         if (canAddProductToCategory(categoryKey)) {
             productsPerCategory.get(categoryKey).add(product);
         }
