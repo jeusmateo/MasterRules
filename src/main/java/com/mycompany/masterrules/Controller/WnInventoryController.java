@@ -108,18 +108,7 @@ public class WnInventoryController implements Initializable {
         }
     }
 
-    @FXML
-    private void eventAction(ActionEvent event) {
-        if (event.equals(btnEditStockInfo)) {
-            showScrEditInfo();
-        } else if (event.equals(btnExit)) {
-            exit();
-        } else if (event.equals(btnSave)) {
-            buttonSaveInfo();
-        } else if (event.equals(btnScanProduct)) {
-            displaySelected(null);
-        }
-    }
+
 
 
 
@@ -136,13 +125,11 @@ public class WnInventoryController implements Initializable {
     }
 
 
-    @FXML
     public void showScrEditInfo(){
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
     }
 
-    @FXML
     public void exit() {
         txtFieldMinInv.clear();
         txtFieldStock.clear();
@@ -206,6 +193,19 @@ public class WnInventoryController implements Initializable {
             // Asegurarse de que el producto esté seleccionado para editarlo
             scrEditInfo.setVisible(true);
             scrEditInfo.toFront();
+        }
+    }
+
+    @FXML
+    private void eventAction(javafx.event.ActionEvent event) {
+        if (event.equals(btnEditStockInfo)) {
+            showScrEditInfo();
+        } else if (event.equals(btnExit)) {
+            exit();
+        } else if (event.equals(btnSave)) {
+            buttonSaveInfo();
+        } else if (event.equals(btnScanProduct)) {
+            displaySelected(null);
         }
     }
 
