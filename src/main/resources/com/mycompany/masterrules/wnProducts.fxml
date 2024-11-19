@@ -401,7 +401,7 @@
                                                 </GridPane>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="scrCreateDefinedCombo" prefHeight="542.0" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AnchorPane fx:id="scrCreateDefinedCombo" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <AnchorPane prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
@@ -417,7 +417,7 @@
                                                             <VBox layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" spacing="15.0" AnchorPane.bottomAnchor="32.66666666666663">
                                                                <children>
                                                                   <Button fx:id="btnContinueDefinedCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
-                                                                  <Button fx:id="btnDeleteProduct_CreateCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="ELIMINAR COMBO" />
+                                                                  <Button fx:id="btnDeleteProduct_CreateCombo" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="ELIMINAR COMBO" />
                                                                </children>
                                                             </VBox>
                                                             <Label layoutX="111.0" layoutY="3.0" text="Combo">
