@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReportController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReportController">
    <children>
       <AnchorPane prefHeight="551.0" prefWidth="837.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="38.0">
          <children>
@@ -234,7 +234,8 @@
                   </Label>
                </children>
             </GridPane>
-            <Button fx:id="btnDoCashRegisterAuditReport" layoutX="586.0" layoutY="43.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="166.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer corte de venta" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="43.0" />
+            <Button fx:id="btnDoCashRegisterAuditReport" layoutX="394.0" layoutY="43.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="166.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Hacer corte de venta" AnchorPane.rightAnchor="276.4000000000001" AnchorPane.topAnchor="43.0" />
+            <Button layoutX="621.0" layoutY="43.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="174.0" styleClass="btn" text="Confirmar corte de venta" />
          </children>
          <styleClass>
             <String fx:value="radius" />
