@@ -59,7 +59,7 @@ private ObservableList<Product> selectedProductsForCombo;
 
 
     @FXML
-    private Button buttonConfirmCombo;
+    private Button btnConfirmCombo;
 
     @FXML
     private Button buttonCreateCombo;
@@ -241,6 +241,22 @@ private ObservableList<Product> selectedProductsForCombo;
     @FXML
     private Button btnDeleteProduct_CreateCombo;
 
+
+    @FXML
+    void mouseClickedConfirmEvent(MouseEvent event) {
+
+
+        String comboId=txtFieldIDCombo.getText();
+        String comboName=txtFieldNameCombo.getText();
+        String comboVipPrice= txtFieldVIPPriceCombo.getText();
+        String comboPrice=txtFieldPriceCombo.getText();
+        Combo newCombo = new Combo(comboId,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
+        cafeteriaMenu.addComboToMenu(newCombo);
+
+    }
+
+
+
     public void displayMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
@@ -283,10 +299,12 @@ private ObservableList<Product> selectedProductsForCombo;
         scrComboTable.setVisible(true);
         scrMenuCards.setVisible(false);
 
+
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(true);
         scrCreateComboFinalStep.setVisible(true);
+        btnContinueDefinedCombo.setVisible(false);
 
     }
 
@@ -296,6 +314,7 @@ private ObservableList<Product> selectedProductsForCombo;
         scrComboTable.setVisible(true);
         scrMenuCards.setVisible(true);
 
+        btnContinueDefinedCombo.setVisible(true);
     }
 
     @FXML
