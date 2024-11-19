@@ -25,7 +25,6 @@ public class CashRegisterAuditReport {
 
     private LocalDateTime finalCutofDate;
 
-
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
         this.initialCutofDate = LocalDateTime.now();
@@ -39,8 +38,8 @@ public class CashRegisterAuditReport {
 
     public void configCashRegisterAuditReport(){
         CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
-        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReports(); //todo que tengan el mismo comportamiento de dia a dia.
-        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReports();
+        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now()); //todo que tengan el mismo comportamiento de dia a dia.
+        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now());
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
         this.bills= archiveInvoice.getBillsByDateRange(this.initialCutofDate.toLocalDate(), LocalDate.now());
     }

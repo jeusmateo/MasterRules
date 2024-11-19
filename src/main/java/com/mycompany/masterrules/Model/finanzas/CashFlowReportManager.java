@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model.finanzas;
 
 import com.mycompany.masterrules.Database.CashFlowReportDatabase;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,34 @@ public class CashFlowReportManager {
     public List<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
+
+    public List<CashFlowReport> getCashOutFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+        return cashOutFlowReports.stream()
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
+                        cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
+                .toList();
+    }
+
+    public List<CashFlowReport> getCashInFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+        return cashInFlowReports.stream()
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
+                        cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
+                .toList();
+    }
+
+    public BigDecimal calculateTotalCashOutFlow(List<CashFlowReport> cashOutFlowReports){
+        return cashOutFlowReports.stream()
+                .map(CashFlowReport::getCashAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal calculateTotalCashInFlot(List<CashFlowReport> cashInFlowReports){
+        return cashInFlowReports.stream()
+                .map(CashFlowReport::getCashAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+
 
     public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         for(CashFlowReport cashFlowReport : cashOutFlowReports){
@@ -52,4 +82,5 @@ public class CashFlowReportManager {
         }
         this.cashInFlowReports = cashInFlowReports;
     }
+
 }
