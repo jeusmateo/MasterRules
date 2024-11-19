@@ -15,13 +15,17 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-        if(customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount())>=0){
+        if(hasEnoughCredit()){
             customer.getCustomerAccount().setStoreCredit(customer.getCustomerAccount().getStoreCredit().subtract(this.getTotalAmount()));
         }
         PaymentDetails paymentDetails= new PaymentDetails("STORE_CREDIT",this.getTotalAmount());
         paymentDetails.setCustomer(customer);
         paymentDetails.setPaymentDescription(paymentDescription());;
         return paymentDetails;
+    }
+
+    private boolean hasEnoughCredit() {
+        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount()) >= 0;
     }
 
     @Override
