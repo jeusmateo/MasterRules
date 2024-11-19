@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Model.finanzas;
 
 import com.mycompany.masterrules.Model.possystem.Bill;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,21 +9,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Entity
 public class CashRegisterAuditReport {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany
     private List<CashFlowReport> cashFlowInReport;
+
+    @OneToMany
     private List<CashFlowReport> cashFlowOutReport;
     private BigDecimal initialCashAmount;
-
+    @OneToMany
     private List<Bill> bills;
     private BigDecimal cashBalance;
     private BigDecimal cashRevenue;
     private BigDecimal cardRevenue;
     private BigDecimal storeCreditRevenue;
     private LocalDateTime initialCutofDate;
-
-
     private LocalDateTime finalCutofDate;
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
@@ -68,6 +74,9 @@ public class CashRegisterAuditReport {
         }
     }
 
+    protected CashRegisterAuditReport() {
+    }
+
     public BigDecimal getInitialCashAmount() {
         return initialCashAmount;
     }
@@ -75,9 +84,6 @@ public class CashRegisterAuditReport {
     public void setInitialCashAmount(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
     }
-
-
-
 
     public List<Bill> getBills() {
         return bills;
