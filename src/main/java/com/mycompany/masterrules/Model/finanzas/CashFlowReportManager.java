@@ -54,7 +54,11 @@ public class CashFlowReportManager {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-
+    public void makeCashRegisterAuditReport(BigDecimal initialCashAmount){
+        CashRegisterAuditReport cashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
+        cashRegisterAuditReport.configCashRegisterAuditReport();
+        cashRegisterAuditReport.calculateCashRevenue();
+    }
 
     public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
         for (CashFlowReport cashFlowReport : cashOutFlowReports) {
