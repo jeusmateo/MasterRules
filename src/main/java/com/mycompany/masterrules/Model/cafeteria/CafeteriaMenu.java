@@ -3,7 +3,6 @@ package com.mycompany.masterrules.Model.cafeteria;
 import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,29 +27,14 @@ public class CafeteriaMenu {
     }
 
     public void removeProductOnMenu(String productID) {
-//        for (int registeredProductCount = 0; registeredProductCount < products.size(); registeredProductCount++) {
-//            if (productID.equals(products.get(registeredProductCount).getId())) {
-//                products.remove(registeredProductCount);
-//                productDatabase.delete(productDatabase.findById(productID));
-//                return;
-//            }
-//        }
-
         if (productDatabase.delete(productDatabase.findById(productID))) {
             return;
         }
-
         throw new IllegalArgumentException("El producto con ID " + productID + " no existe en el menú.");
     }
 
 
-    public boolean isProductOnMenu(String productID) {//continuo trabajando con esto
-//        for(Product registeredProduct : products){
-//            if(productID.equals(registeredProduct.getId())){
-//                return true;
-//            }
-//        }
-
+    public boolean isProductOnMenu(String productID) {
         return productDatabase.findById(productID) != null;
     }
 

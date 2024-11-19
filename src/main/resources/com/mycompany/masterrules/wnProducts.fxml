@@ -409,9 +409,12 @@
                                                          <children>
                                                             <TableView fx:id="tblSelectedProductsForCombo" layoutX="10.0" layoutY="35.0" prefHeight="309.0" prefWidth="261.0" AnchorPane.bottomAnchor="173.0" AnchorPane.topAnchor="35.0">
                                                                <columns>
-                                                                  <TableColumn fx:id="colProductSelectedName" prefWidth="70.00000286102295" text="Cantidad" />
-                                                                  <TableColumn fx:id="colProductSelectedPrice" prefWidth="81.33324432373047" text="Producto" />
-                                                                  <TableColumn fx:id="colProductSelectedVipPrice" prefWidth="101.99983215332031" text="Precio($)" />
+
+
+                                                                  <TableColumn prefWidth="70.00000286102295" text="NOMBRE" />
+                                                                  <TableColumn prefWidth="81.33324432373047" text="PRECIO($)" />
+                                                                  <TableColumn prefWidth="101.99983215332031" text="Precio VIP ($)" />
+
                                                                </columns>
                                                             </TableView>
                                                             <VBox layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" spacing="15.0" AnchorPane.bottomAnchor="32.66666666666663">
