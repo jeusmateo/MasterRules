@@ -12,35 +12,35 @@ public class CashFlowReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String reason;
+    private long reportId;
+    private String reasonForReport;
     @Enumerated(EnumType.STRING)
     private FlowType flowType;
     private BigDecimal cashAmount;
-    private LocalDateTime date;
+    private LocalDateTime cashFlowDate;
 
     public CashFlowReport(String reason, BigDecimal cashAmount) {
-        this.reason = reason;
+        this.reasonForReport = reason;
         this.cashAmount = cashAmount;
-        this.date = LocalDateTime.now();
+        this.cashFlowDate = LocalDateTime.now();
     }
 
     public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return date.format(formatter);
+        return cashFlowDate.format(formatter);
     }
 
     public long getId() {
-        return id;
+        return reportId;
     }
 
     public String getReason() {
-        return reason;
+        return reasonForReport;
     }
 
 
     public void setReason(String reason) {
-        this.reason = reason;
+        this.reasonForReport = reason;
     }
 
 
@@ -54,11 +54,11 @@ public class CashFlowReport {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return cashFlowDate;
     }
 
     public void setDate(LocalDateTime date) {
-        this.date = date;
+        this.cashFlowDate = date;
     }
 
     public FlowType getFlowType() {

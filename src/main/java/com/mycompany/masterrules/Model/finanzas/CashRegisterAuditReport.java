@@ -14,7 +14,7 @@ public class CashRegisterAuditReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long CashRegisterAuditReportId;
 
     @OneToMany
     private List<CashFlowReport> cashFlowInReport;
@@ -137,11 +137,11 @@ public class CashRegisterAuditReport {
     }
 
     public Long getId() {
-        return id;
+        return CashRegisterAuditReportId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.CashRegisterAuditReportId = id;
     }
 
     public List<CashFlowReport> getCashFlowInReport() {

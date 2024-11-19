@@ -93,9 +93,9 @@ public class POSManager {
                     newBill.setReference(data.getReference());
                     break;
                 case "STORE_CREDIT":
-                    if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
+
                         newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-                    }
+
                     break;
                 default:
                     break;
@@ -114,9 +114,9 @@ public class POSManager {
                     newBill.setReference(data.getReference());
                     break;
                 case "STORE_CREDIT":
-                    if (data.getCustomer().getCustomerAccount().getLoyaltyCard().getAccessCode().equals(data.getAccessCustomerCode())) {
+
                         newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-                    }
+
                     break;
                 default:
                     break;
