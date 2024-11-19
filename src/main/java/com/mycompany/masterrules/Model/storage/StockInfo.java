@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+import java.util.Objects;
+
 @Entity
 public class StockInfo {
     @Id
@@ -54,4 +56,19 @@ public class StockInfo {
         this.maxStock = maxStock;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StockInfo stockInfo = (StockInfo) o;
+        return currentStock == stockInfo.currentStock &&
+                minStock == stockInfo.minStock &&
+                maxStock == stockInfo.maxStock &&
+                Objects.equals(product, stockInfo.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, currentStock, minStock, maxStock);
+    }
 }
