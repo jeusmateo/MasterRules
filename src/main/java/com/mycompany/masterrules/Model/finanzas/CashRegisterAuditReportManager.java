@@ -25,6 +25,7 @@ public class CashRegisterAuditReportManager {
     public void generateEndOfDaySalesReport(){ //todo nombre mal puesto
         currentCashRegisterAuditReport.configCashRegisterAuditReport();
 
+
     }
 
 

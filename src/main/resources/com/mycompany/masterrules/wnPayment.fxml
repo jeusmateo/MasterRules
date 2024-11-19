@@ -215,12 +215,12 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="72.0" promptText="\$00.00" />
+                                          <TextField fx:id="txtFieldCardIncomeMP" layoutX="72.0" promptText="\$00.00" />
                                        </children>
                                     </Group>
                                     <Group layoutX="115.0" layoutY="147.0">
                                        <children>
-                                          <TextField layoutX="122.0" promptText="\$00.00" />
+                                          <TextField fx:id="txtFieldStoreCreditIncomeMP" layoutX="122.0" promptText="\$00.00" />
                                           <Label layoutY="2.0" text="Credito Tienda:">
                                              <font>
                                                 <Font size="15.0" />
