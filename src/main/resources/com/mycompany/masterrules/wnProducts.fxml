@@ -414,9 +414,10 @@
                                                                   <TableColumn prefWidth="101.99983215332031" text="Precio($)" />
                                                                </columns>
                                                             </TableView>
-                                                            <VBox layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" AnchorPane.bottomAnchor="32.66666666666663">
+                                                            <VBox layoutX="54.0" layoutY="452.0" prefHeight="90.0" prefWidth="174.0" spacing="15.0" AnchorPane.bottomAnchor="32.66666666666663">
                                                                <children>
                                                                   <Button fx:id="btnContinueDefinedCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
+                                                                  <Button fx:id="btnDeleteProduct_CreateCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="ELIMINAR COMBO" />
                                                                </children>
                                                             </VBox>
                                                             <Label layoutX="111.0" layoutY="3.0" text="Combo">
@@ -603,7 +604,7 @@
                                                                </columnResizePolicy>
                                                             </TableView>
                                                             <ComboBox layoutX="213.0" layoutY="74.0" prefWidth="150.0" />
-                                                            <Label layoutX="196.0" layoutY="14.0" text="Combo Personalizado">
+                                                            <Label layoutX="220.0" layoutY="14.0" text="Combo Personalizado">
                                                                <font>
                                                                   <Font name="System Bold" size="18.0" />
                                                                </font>
