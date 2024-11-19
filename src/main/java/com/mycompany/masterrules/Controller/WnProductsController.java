@@ -9,6 +9,7 @@ import com.mycompany.masterrules.Model.storage.StockInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,10 +25,11 @@ import javafx.scene.layout.FlowPane;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class WnProductsController implements Initializable {
+public class WnProductsController implements Initializable, ProductSelectionListener {
 
 private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
@@ -84,7 +86,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private AnchorPane scrCreateDefinedCombo;
 
     @FXML
-    private ScrollPane scrollPaneMenu;
+    protected ScrollPane scrollPaneMenuCreatorCombo;
 
 
     //Tabla para combos
@@ -234,7 +236,45 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnDeleteProduct;
 
+
     private CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
+
+    public void displayMenuCards() {
+        CafeteriaMenu menu = new CafeteriaMenu();
+        List<Product> productsOnMenu = menu.getProducts();
+        ObservableList<Product> productDataList = FXCollections.observableArrayList(productsOnMenu);
+        ObservableList<Product> comboDataList = FXCollections.observableArrayList();
+
+
+        for (Product currentProduct : productDataList) {
+            try {
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
+                AnchorPane pane = load.load();
+                ItemCardProductController cardController = load.getController();
+
+                cardController.setProductDataToCard(currentProduct);
+                cardController.setSelectionListener(this);
+
+                scrollPaneMenuCreatorCombo.getChildren().add(pane);
+
+                /*
+                pane.setOnMousePressed(event -> {
+                    pane.setStyle("-fx-background-color: lightgray");
+                    //pane.setStyle("-fx-background-color: white");
+                });
+                */
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        List<Product> prueba = new ArrayList<>();
+        BigDecimal prueba1 = new BigDecimal("30");
+        BigDecimal prueba2 = new BigDecimal("15");
+        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
+        comboDataList.add(combo);
+    }
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
@@ -394,4 +434,8 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     }
 
 
+    @Override
+    public void onProductSelected(Product product) {
+
+    }
 }
