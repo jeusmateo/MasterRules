@@ -3,18 +3,23 @@ package com.mycompany.masterrules.Model.finanzas;
 import com.mycompany.masterrules.Model.possystem.Bill;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CashRegisterAuditReport {
 
-
+    private List<CashFlowReport> cashFlowInReport;
+    private List<CashFlowReport> cashFlowOutReport;
     private BigDecimal initialCashAmount;
 
-    private ArrayList<Bill> bills;
-
-
+    private List<Bill> bills;
+    private BigDecimal cashBalance;
+    private BigDecimal cashRevenue;
+    private BigDecimal cardRevenue;
+    private BigDecimal storeCreditRevenue;
     private LocalDateTime initialCutofDate;
 
 
@@ -23,51 +28,45 @@ public class CashRegisterAuditReport {
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
-
         this.initialCutofDate = LocalDateTime.now();
-//        this.cashOutFlowReports = new ArrayList<>();
-//        this.cashInFlowReports = new ArrayList<>();
         this.bills = new ArrayList<>();
-        
-        
+        this.cashFlowInReport = new ArrayList<>();
+        this.cashFlowOutReport = new ArrayList<>();
+        this.cashRevenue = BigDecimal.ZERO;
+        this.cardRevenue = BigDecimal.ZERO;
+        this.storeCreditRevenue = BigDecimal.ZERO;
     }
 
-    public void addBill(Bill bill){ //TODO ESTA COSA TIENE QUE ABSTRAERSE A TRAVES DE LA LISTA DE INVOICE
-
-        bills.add(bill);
-        System.out.println("Bill added");
+    public void configCashRegisterAuditReport(){
+        CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
+        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReports(); //todo que tengan el mismo comportamiento de dia a dia.
+        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReports();
+        ArchiveInvoice archiveInvoice = new ArchiveInvoice();
+        this.bills= archiveInvoice.getBillsByDateRange(this.initialCutofDate.toLocalDate(), LocalDate.now());
     }
 
-    private BigDecimal calculateTotalCashIn(){
-        BigDecimal totalCashIn =  BigDecimal.ZERO;
-//        for (CashFlowReport cashInFlowReport : cashInFlowReports) {
-//            totalCashIn.add(cashInFlowReport.getCashAmount());
-//        }
-        return totalCashIn;
-    }
-
-    private BigDecimal calculateTotalCashOut(){
-        BigDecimal totalCashOut =  BigDecimal.ZERO;
-//        for (CashFlowReport cashOutFlowReport : cashOutFlowReports) {
-//            totalCashOut.add(cashOutFlowReport.getCashAmount());
-//        }
-        return totalCashOut;
-    }
-
-    private BigDecimal calculateTotalBills(){
-        BigDecimal totalBills =  BigDecimal.ZERO;
-        for (Bill bill : bills) {
-            totalBills.add(bill.getAmount());
+    public void calculateCashRevenue(){
+        for(Bill currentBill: this.bills){
+            if(currentBill.getPaymentMethod().equals("CASH") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnEfectivo().compareTo(BigDecimal.ZERO)!=0){
+                cashRevenue = cashRevenue.add(currentBill.getAmount());
+            }
         }
-        return totalBills;
     }
 
-    public void calculateFinalCashAmount(){
-        BigDecimal totalCashIn = calculateTotalCashIn();
-        BigDecimal totalCashOut = calculateTotalCashOut();
-        BigDecimal totalSellAmount = calculateTotalBills();
+    public void calculateCardhRevenue(){
+        for(Bill currentBill: this.bills){
+            if(currentBill.getPaymentMethod().equals("CARD") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnTajeta().compareTo(BigDecimal.ZERO)!=0){
+                cardRevenue = cardRevenue.add(currentBill.getAmount());
+            }
+        }
+    }
 
-        
+    public void calculateStoreCreditRevenue(){
+        for(Bill currentBill: this.bills){
+            if(currentBill.getPaymentMethod().equals("STORE_CREDIT") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnCreditoDeTienda().compareTo(BigDecimal.ZERO)!=0){
+                storeCreditRevenue = storeCreditRevenue.add(currentBill.getAmount());
+            }
+        }
     }
 
     public BigDecimal getInitialCashAmount() {
@@ -81,7 +80,7 @@ public class CashRegisterAuditReport {
 
 
 
-    public ArrayList<Bill> getBills() {
+    public List<Bill> getBills() {
         return bills;
     }
 

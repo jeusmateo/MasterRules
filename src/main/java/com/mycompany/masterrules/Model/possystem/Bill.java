@@ -40,6 +40,12 @@ public class Bill {
 
     }
 
+    public String getReference() {
+        return reference;
+    }
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
     public BigDecimal getPagadoEnEfectivo() {
         return pagadoEnEfectivo;
     }
