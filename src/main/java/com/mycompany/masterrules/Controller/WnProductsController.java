@@ -225,6 +225,11 @@ private ObservableList<Product> selectedProductsForCombo;
     @FXML
     private Button btnDeleteProduct;
 
+    @FXML
+    private AnchorPane scrComboTable;
+    @FXML
+    private AnchorPane scrMenuCards;
+
 
     private CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
     @FXML
@@ -275,11 +280,21 @@ private ObservableList<Product> selectedProductsForCombo;
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
+        scrComboTable.setVisible(true);
+        scrMenuCards.setVisible(false);
 
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
-        scrCreateDefinedCombo.setVisible(false);
+        scrCreateDefinedCombo.setVisible(true);
         scrCreateComboFinalStep.setVisible(true);
+
+    }
+
+    @FXML
+    void setBtnBackToScrMenuCard(){
+        scrCreateComboFinalStep.setVisible(false);
+        scrComboTable.setVisible(true);
+        scrMenuCards.setVisible(true);
 
     }
 
