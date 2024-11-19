@@ -16,7 +16,7 @@ class StorageDatabaseTest {
     @Test
     void save() {
         var product = new Product("test", BigDecimal.valueOf(10),BigDecimal.valueOf(10));
-        var stockInfo = new StockInfo(10, 5, 15);
+        Product stockInfo = new StockInfo(10, 5, 15);
 
         var cafeteriaStorage = new CafeteriaStorage();
         cafeteriaStorage.addProduct(product, stockInfo);

@@ -40,6 +40,7 @@ public class Product {
         this.type = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
+        this.stockInfo = new StockInfo();
     }
 
     public String getId() {
