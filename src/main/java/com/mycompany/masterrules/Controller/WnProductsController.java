@@ -272,19 +272,20 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
         colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
         colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
         colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+
+        // Obtener los productos de la base de datos
         ProductDatabase chepobd = new ProductDatabase();
         List<Product> chepo = chepobd.readAll();
-        ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
-        // Cargar productos del modelo al ObservableList
-        observableProductList.addAll(cafeteriaMenu.getProducts());  // Suponiendo que tienes un método que obtiene todos los productos
 
-        // Asignar el ObservableList a la tabla
+        // Crear una lista observable con los productos de la base de datos
+        ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
+
+        // Asignar la lista observable a la tabla
         tblFood.setItems(observableProductList);
 
         // Añadir listener para la selección de productos en la tabla
         tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displaySelection());
     }
-
 
     @FXML
     private void eventAction(javafx.event.ActionEvent event) {
@@ -297,7 +298,6 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 String type = txtProductType_tabCreate.getText();
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
                 BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
-                ProductDatabase chepobd = new ProductDatabase();
 
                 // Crear el producto
                 Product product = new Product(id, name, type, price, vipPrice);
@@ -305,16 +305,40 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 // Registrar el producto en el modelo
                 cafeteriaMenu.addProductToMenu(product);
 
-                List<Product> chepo = cafeteriaMenu.getProducts();
-                ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
-                // Agregar el producto al ObservableList
-               // observableProductList.add(product);
-                //chepobd.save(product);
+                // Limpiar los campos de entrada después de crear el producto
+                clearTextFields(
+                        txtProductId_tabCreate,
+                        txtProductName_tabCreate,
+                        txtProductType_tabCreate,
+                        txtProductPrice_tabCreate,
+                        txtProductVIpPrice_tabCreate
+                );
+
+                // Actualizar la tabla con los productos más recientes
+                updateProductTable();
+
+                //List<Product> chepo = cafeteriaMenu.getProducts();
+                //ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
+  
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
         }
     }
+
+
+
+    private void updateProductTable() {
+        // Obtener la lista actualizada de productos desde el modelo
+        List<Product> updatedProducts = cafeteriaMenu.getProducts();
+
+        // Crear una nueva lista observable con los productos actualizados
+        ObservableList<Product> observableProductList = FXCollections.observableArrayList(updatedProducts);
+
+        // Asignar la nueva lista observable a la tabla
+        tblFood.setItems(observableProductList);
+    }
+
 
     @FXML
     private void displaySelection() {
@@ -328,6 +352,12 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
             txtProductType_tabEdit.setText(selectedProduct.getType());
             txtProductPrice_tabEdit.setText(selectedProduct.getPrice().toString());
             txtProductVipPrice_tabEdit.setText(selectedProduct.getVIPPrice().toString());
+        }
+    }
+
+    private void clearTextFields(TextField... textFields) {
+        for (TextField textField : textFields) {
+            textField.clear();  // Limpia el contenido de cada TextField
         }
     }
 
