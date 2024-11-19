@@ -22,43 +22,15 @@ public class CashRegisterAuditReportManager {
         cashRegisterAuditReports.remove(cashRegisterAuditReport);
     }
 
+    public void generateEndOfDaySalesReport(){ //todo nombre mal puesto
+        currentCashRegisterAuditReport.configCashRegisterAuditReport();
 
-    public void addSaleToCashRegisterAuditReport(Bill sale) {
-        currentCashRegisterAuditReport.addBill(sale);
     }
 
 
 
-    /**
-     * Metodo para finalizar el corte actual.
-     *
-     * @param initialCashAmount Monto con el cual iniciara el siguiente corte.
-     */
-    public void finalizeCashRegisterAuditReport(BigDecimal initialCashAmount) {
-        currentCashRegisterAuditReport.calculateFinalCashAmount();
-        currentCashRegisterAuditReport.setFinalCutofDate(LocalDateTime.now());
-        cashRegisterAuditReports.add(currentCashRegisterAuditReport);
-        currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
-    }
 
-    public void startCashRegisterAuditReport(BigDecimal initialCashAmount) {
-        currentCashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
-    }
 
-    public ArrayList<CashRegisterAuditReport> getCashRegisterAuditReports() {
-        return cashRegisterAuditReports;
-    }
 
-    public void setCashRegisterAuditReports(ArrayList<CashRegisterAuditReport> cashRegisterAuditReports) {
-        this.cashRegisterAuditReports = cashRegisterAuditReports;
-    }
-
-    public CashRegisterAuditReport getCurrentCashRegisterAuditReport() {
-        return currentCashRegisterAuditReport;
-    }
-
-    public void setCurrentCashRegisterAuditReport(CashRegisterAuditReport currentCashRegisterAuditReport) {
-        this.currentCashRegisterAuditReport = currentCashRegisterAuditReport;
-    }
 
 }
