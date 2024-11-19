@@ -30,6 +30,7 @@ public class Product {
         this.type = productType;
         this.price = price;
         this.VIPPrice = VIPPrice;
+        this.stockInfo = new StockInfo();
     }
 
     public Product(String productName,  BigDecimal price, BigDecimal VIPPrice) {
