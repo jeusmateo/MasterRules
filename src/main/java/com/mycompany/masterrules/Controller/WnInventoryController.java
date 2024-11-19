@@ -99,14 +99,25 @@ public class WnInventoryController implements Initializable {
         // Obtén todos los productos de la base de datos
         List<Product> products = cafeteriaMenu.getProducts();
 
-        // Crea StockInfo para cada producto y añádelo a la lista observable
+        // Revisa cada producto para inicializar su StockInfo correctamente
         for (Product product : products) {
-            StockInfo stockInfo = new StockInfo(0, 0, 0);
-            stockInfo.setProduct(product);
-            cafeteriaStorage.addProduct(product, stockInfo);
-            stockData.add(stockInfo);
+            // Busca si ya existe StockInfo asociado al producto
+            StockInfo stockInfo = cafeteriaStorage.getStockInfo(product);
+
+            if (stockInfo == null) {
+                // Si no existe, inicializa un nuevo StockInfo
+                stockInfo = new StockInfo(0, 0, 0); // Valores iniciales predeterminados
+                stockInfo.setProduct(product);
+                cafeteriaStorage.addProduct(product, stockInfo);
+            }
+
+            // Asegúrate de que la tabla de datos muestre este StockInfo
+            if (!stockData.contains(stockInfo)) {
+                stockData.add(stockInfo);
+            }
         }
     }
+
 
 
 
@@ -131,9 +142,6 @@ public class WnInventoryController implements Initializable {
     }
 
     public void exit() {
-        txtFieldMinInv.clear();
-        txtFieldStock.clear();
-        txtFieldMaxInv.clear();
         scrEditInfo.setVisible(false);
     }
 
@@ -148,6 +156,9 @@ public class WnInventoryController implements Initializable {
                 int newStock = Integer.parseInt(txtFieldStock.getText());
                 int newMinStock = Integer.parseInt(txtFieldMinInv.getText());
                 int newMaxStock = Integer.parseInt(txtFieldMaxInv.getText());
+
+                // Validar los valores del stock
+                stockValidation(newStock, newMinStock, newMaxStock);
 
                 // Actualizar el StockInfo con los nuevos valores
                 selectedStockInfo.setCurrentStock(newStock);
@@ -167,6 +178,8 @@ public class WnInventoryController implements Initializable {
                 scrSeeClient.setVisible(true);
             } catch (NumberFormatException e) {
                 showAlert("Error", "Por favor, ingresa datos válidos en todos los campos.");
+            } catch (IllegalArgumentException e) {
+                showAlert("Error", e.getMessage());
             }
         }
     }
@@ -177,6 +190,15 @@ public class WnInventoryController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
+        // Validar que el stock actual esté dentro del rango permitido
+        if (newStock < newMinStock || newStock > newMaxStock) {
+            throw new IllegalArgumentException(
+                    "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
+            );
+        }
     }
 
     @FXML

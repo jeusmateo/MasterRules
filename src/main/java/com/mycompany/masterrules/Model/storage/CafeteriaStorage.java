@@ -117,4 +117,8 @@ public class CafeteriaStorage {
     public void setProducts(HashMap<Product, StockInfo> products) {
         this.products = products;
     }
+
+    public StockInfo getStockInfo(Product product) {
+        return products.get(product);
+    }
 }
