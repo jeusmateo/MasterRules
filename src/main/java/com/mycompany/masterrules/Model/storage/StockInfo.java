@@ -8,6 +8,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import javafx.beans.binding.BooleanExpression;
 
 @Entity
 public class StockInfo {
@@ -54,4 +55,12 @@ public class StockInfo {
         this.maxStock = maxStock;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
