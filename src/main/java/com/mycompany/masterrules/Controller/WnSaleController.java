@@ -58,7 +58,21 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private Button btnContinue;
     @FXML
     private Button btnPay;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Button btnNextCategory;
+    @FXML
+    private Button btnPreviousCategory;
+    @FXML
+    private Button btnAdd1;
+    @FXML
+    private Button btnRemove1;
 
+    @FXML
+    private Label lblTotal;
+    @FXML
+    private Label lbCategory;
 
     @FXML
     private AnchorPane continueOrderWindow;
@@ -80,11 +94,15 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private AnchorPane scrCustomCombo11;
 
     @FXML
+    private TabPane menuCategories;
+
+    @FXML
     private VBox continueOrderOptionsBox;
     @FXML
     private VBox menuOrderOptionsBox;
     @FXML
     private VBox navigationCategory;
+
     @FXML
     private HBox tableNumberBox;
 
@@ -95,34 +113,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private ScrollPane menuCardsScroller;
     @FXML
     private ScrollPane menuCardsScroller1;
+
     @FXML
     private FlowPane productCardsScroller = new FlowPane();
-    @FXML
-    private TabPane menuCategories;
-
     @FXML
     private FlowPane comboCardsScroller;
 
     @FXML
     private TextArea txtAdittionalComments;
+
     @FXML
     private TextField inputClientName;
 
-    @FXML
-    private Label lblTotal;
-    @FXML
-    private Label lbCategory;
-
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnNextCategory;
-    @FXML
-    private Button btnPreviousCategory;
-    @FXML
-    private Button btnAdd1;
-    @FXML
-    private Button btnRemove1;
 
     @FXML
     private ToggleGroup deliveryMethod;

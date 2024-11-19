@@ -34,42 +34,78 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class WnUsersController implements Initializable {
 
+    //Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
-
-
-    private void setUserEdit(UserAccount userAccount) {
-        this.userEdit = userAccount;
-    }
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
 
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
+
+    @FXML
+    private Button btnEditUser;
+    @FXML
+    private Button btnCreateUserAccount;
+    @FXML
+    private Button btnDeleteUserAccount;
+
 
     @FXML
     private TextField textEditUserName;
+    @FXML
+    private TextField txtEditUserCompleteName;
+    @FXML
+    private TextField txtFieldCreateUserCompleteName;
+    @FXML
+    private TextField txtFieldCreateUserName;
 
     @FXML
     private AnchorPane verCliente;
-
     @FXML
     private AnchorPane verCliente1;
+
     @FXML
     private TableView<UserAccount> tblUserAccount;
     @FXML
     private TableColumn<UserAccount, String> colUserID;
     @FXML
     private TableColumn<UserAccount, String> colUserName;
+
     @FXML
     private Tab tabSalePerm;
+    @FXML
+    private Tab tabProductsPerm;
+    @FXML
+    private Tab tabInventoryPerm;
+    @FXML
+    private Tab tabCustomerPerm;
+    @FXML
+    private Tab tabReportPerm;
+    @FXML
+    private Tab tabUserPerm;
+    @FXML
+    private Tab tabSalePerm1;
+    @FXML
+    private Tab tabProductsPerm1;
+    @FXML
+    private Tab tabInventoryPerm1;
+    @FXML
+    private Tab tabCustomerPerm1;
+    @FXML
+    private Tab tabReportPerm1;
+    @FXML
+    private Tab tabUserPerm1;
+
     @FXML
     private CheckBox chkMakeSalePerm; //Ya estufas
     @FXML
     private CheckBox chkCancelSalePerm; //Ya estufas 2
     @FXML
     private CheckBox chkReviewSaleHistoryPerm; //Ya estufas 3
-    @FXML
-    private Tab tabProductsPerm;
     @FXML
     private CheckBox chkCreateProductPerrm; //Ya estufas 4
     @FXML
@@ -83,13 +119,9 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkDeleteComboPerm;
     @FXML
-    private Tab tabInventoryPerm;
-    @FXML
     private CheckBox chkEditStockPerm;//Ya estufas8
     @FXML
     private CheckBox chkEditStockMinMaxPerm;//Ya estufas9
-    @FXML
-    private Tab tabCustomerPerm;
     @FXML
     private CheckBox chkCreateNewCustomerPerm;//Ya estufas10
     @FXML
@@ -99,15 +131,11 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkEditStoreCreditPerm;//Ya estufas13
     @FXML
-    private Tab tabReportPerm;
-    @FXML
     private CheckBox chkReviewCashRegisterAduitReportPerm; //Ya estufas14
     @FXML
     private CheckBox chkCreateCashInReportPerm;//Ya estufas15
     @FXML
     private CheckBox chkCreateCashOutReportPerm; //Ya estufas 16
-    @FXML
-    private Tab tabUserPerm;
     @FXML
     private CheckBox chkCreateUserPerm;//Ya estufas 17
     @FXML
@@ -115,15 +143,11 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkDeleteUserPerm;//Ya estufas 19
     @FXML
-    private Tab tabSalePerm1;
-    @FXML
     private CheckBox chkMakeSalePerm2;
     @FXML
     private CheckBox chkCancelSalePerm2;
     @FXML
     private CheckBox chkReviewSaleHistoryPerm2;
-    @FXML
-    private Tab tabProductsPerm1;
     @FXML
     private CheckBox chkCreateProductPerrm2;
     @FXML
@@ -137,10 +161,6 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkDeleteComboPerm2;
     @FXML
-    private Tab tabInventoryPerm1;
-    @FXML
-    private Tab tabCustomerPerm1;
-    @FXML
     private CheckBox chkCreateNewCustomerPerm2;
     @FXML
     private CheckBox chkEditCustomerPerm2;
@@ -149,15 +169,11 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkEditStoreCreditPerm2;
     @FXML
-    private Tab tabReportPerm1;
-    @FXML
     private CheckBox chkReviewCashRegisterAduitReportPerm2;
     @FXML
     private CheckBox chkCreateCashInReportPerm2;
     @FXML
     private CheckBox chkCreateCashOutReportPerm2;
-    @FXML
-    private Tab tabUserPerm1;
     @FXML
     private CheckBox chkCreateUserPerm2;
     @FXML
@@ -168,8 +184,7 @@ public class WnUsersController implements Initializable {
     private CheckBox chkEditStockPerm2;
     @FXML
     private CheckBox chkEditStockMinMaxPerm2;
-    @FXML
-    private TextField txtEditUserCompleteName;
+
     @FXML
     private PasswordField pswdFieldCreateUserAccount;
     @FXML
@@ -178,16 +193,13 @@ public class WnUsersController implements Initializable {
     private PasswordField pswdFieldEditUserPasswordConfirm;
     @FXML
     private PasswordField pswdFieldEditUserAccount;
-    @FXML
-    private Button btnEditUser;
-    @FXML
-    private TextField txtFieldCreateUserCompleteName;
-    @FXML
-    private TextField txtFieldCreateUserName;
-    @FXML
-    private Button btnCreateUserAccount;
-    @FXML
-    private Button btnDeleteUserAccount;
+
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
+
+    private void setUserEdit(UserAccount userAccount) {
+        this.userEdit = userAccount;
+    }
 
     @FXML
     private void eventAction(ActionEvent event) {
