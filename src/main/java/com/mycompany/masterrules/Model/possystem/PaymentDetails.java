@@ -7,16 +7,15 @@ import java.math.BigDecimal;
 public class PaymentDetails {
 
     private String paymentDescription;
-    private String metodoDePago;
+    private String paymentMethod;
     private BigDecimal totalAmount;
     private BigDecimal customerCashAmount;
-    private String accessCustomerCode;
-    private String reference;
+    private String CardTransactionReference;
     private BigDecimal changeAmount;
     private Customer customer;
 
     public PaymentDetails(String metodoDePago, BigDecimal totalAmount){
-        this.metodoDePago = metodoDePago;
+        this.paymentMethod = metodoDePago;
         this.totalAmount = totalAmount;
     }
 
@@ -28,19 +27,11 @@ public class PaymentDetails {
         this.paymentDescription = paymentDescription;
     }
     public String getMetodoDePago() {
-        return metodoDePago;
+        return paymentMethod;
     }
 
     public void setMetodoDePago(String metodoDePago) {
-        this.metodoDePago = metodoDePago;
-    }
-
-    public String getAccessCustomerCode() {
-        return accessCustomerCode;
-    }
-
-    public void setAccessCustomerCode(String accessCustomerCode) {
-        this.accessCustomerCode = accessCustomerCode;
+        this.paymentMethod = metodoDePago;
     }
 
     public void setCustomer(Customer customer) {
@@ -55,7 +46,7 @@ public class PaymentDetails {
         return changeAmount;
     }
     public String getReference() {
-        return reference;
+        return CardTransactionReference;
     }
 
 

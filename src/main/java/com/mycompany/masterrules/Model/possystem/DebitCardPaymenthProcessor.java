@@ -3,11 +3,11 @@ package com.mycompany.masterrules.Model.possystem;
 import java.math.BigDecimal;
 
 public class DebitCardPaymenthProcessor extends PaymentProcessor {
-    private String reference;
+    private String CardTransactionReference;
     private BigDecimal recibido;
     public DebitCardPaymenthProcessor(BigDecimal totalAmount, BigDecimal recibido, String reference){
         super(totalAmount);
-        this.reference = reference;
+        this.CardTransactionReference = reference;
         this.recibido = recibido;
     }
 
@@ -15,7 +15,7 @@ public class DebitCardPaymenthProcessor extends PaymentProcessor {
     public PaymentDetails paymentProcess() {
         PaymentDetails paymentDetails = new PaymentDetails("CARD", this.getTotalAmount());
 
-        paymentDetails.setReference(reference);
+        paymentDetails.setReference(CardTransactionReference);
         paymentDetails.setPaymentDescription(paymentDescription());
         return paymentDetails;
     }
@@ -24,7 +24,7 @@ public class DebitCardPaymenthProcessor extends PaymentProcessor {
     public String paymentDescription() {
         StringBuilder description = new StringBuilder("PAGADO CON TARJETA: $");
         description.append(String.valueOf(this.getTotalAmount()));
-        description.append("\n").append("REFERENCIA : "+this.reference).append("\n");
+        description.append("\n").append("REFERENCIA : "+this.CardTransactionReference).append("\n");
         return description.toString();
     }
 }
