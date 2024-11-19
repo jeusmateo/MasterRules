@@ -46,9 +46,9 @@ public final class ComboDatabase extends Database<String, Combo> {
                 session.getTransaction().rollback();
             }
             System.err.println("Error al buscar todos los combos");
-            return null;
         } finally {
             session.close();
         }
+        return List.of();
     }
 }
