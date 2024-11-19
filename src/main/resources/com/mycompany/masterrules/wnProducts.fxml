@@ -406,7 +406,10 @@
                                              <children>
                                                 <AnchorPane prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
+
                                                       <AnchorPane layoutX="8.0" layoutY="4.0" prefHeight="527.0" prefWidth="576.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="296.0" AnchorPane.topAnchor="4.0">
+
+                                                   
                                                          <children>
                                                             <ScrollPane fx:id="scrollPaneMenuCreatorCombo" layoutX="13.0" layoutY="13.0" prefHeight="523.0" prefWidth="559.0" styleClass="radius" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                                                                <content>
