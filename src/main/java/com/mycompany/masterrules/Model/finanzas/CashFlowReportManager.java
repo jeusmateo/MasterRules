@@ -22,10 +22,12 @@ public class CashFlowReportManager {
     }
 
     public List<CashFlowReport> getCashOutFlowReports() {
-        return cashOutFlowReports;
+
+        readAllFromDatabase();return cashOutFlowReports;
     }
 
     public List<CashFlowReport> getCashOutFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+        readAllFromDatabase();
         return cashOutFlowReports.stream()
                 .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
                         cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
@@ -33,6 +35,7 @@ public class CashFlowReportManager {
     }
 
     public List<CashFlowReport> getCashInFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+        readAllFromDatabase();
         return cashInFlowReports.stream()
                 .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
                         cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
@@ -78,7 +81,7 @@ public class CashFlowReportManager {
     }
 
     public List<CashFlowReport> getCashInFlowReports() {
-
+        readAllFromDatabase();
         return cashInFlowReports;
     }
 

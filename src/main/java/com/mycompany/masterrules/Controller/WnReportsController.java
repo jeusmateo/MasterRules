@@ -114,8 +114,8 @@ public class WnReportsController implements Initializable {
             String cashAmount = txtFieldAmountInflow.getText();
             String reason = txtReasonInflow.getText();
            cashRegister.depositCash(reason, cashAmount);
-            ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(cashFlowReportManager.getCashInFlowReports());
-            tableViewlInFlowReport.setItems(cashInReports);
+
+            initializeCashInFlowTable();
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
         } catch (Exception e) {
@@ -134,8 +134,8 @@ public class WnReportsController implements Initializable {
             cashRegister.withdrawCash(reason, cashAmount);
             txtFieldAmountOutflow.setText("00.0");
             txtOutflowReason.setText("");
-            ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(cashFlowReportManager.getCashOutFlowReports());
-            tableViewlOutFlowReport.setItems(cashOutReports);
+
+            initializeCashOutFlowTable();
 
             scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
@@ -185,6 +185,7 @@ public class WnReportsController implements Initializable {
         colCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
         tableViewlOutFlowReport.setItems(cashOutReports);
+        tableViewlOutFlowReport.refresh();
     }
 
     // Configura la tabla y los datos para Cash In Flow
@@ -203,6 +204,7 @@ public class WnReportsController implements Initializable {
         colCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
         tableViewlInFlowReport.setItems(cashInReports);
+        tableViewlInFlowReport.refresh();
     }
 
 
