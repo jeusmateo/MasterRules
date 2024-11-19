@@ -24,48 +24,42 @@ import javafx.beans.value.ChangeListener;
  */
 public class WnPaymentController implements Initializable {
 
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
     private Customer customer;
     private BigDecimal totalAmount;
     private PaymentDetails resultPayementDetails;
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
     @FXML
     private Button btnCancel;
-
     @FXML
     private Button btnPay;
-
     @FXML
     private Button btnPayMP;
-
     @FXML
     private Button btnPaywCreditCard;
-
     @FXML
     private Button btnPaywSC;
 
     @FXML
     private Label labelCashIncome;
-
     @FXML
     private Label labelChange;
-
     @FXML
     private Label labelReferenceNum;
-
     @FXML
     private Label labelTotal;
-
     @FXML
     private Label labelTotal1;
-
     @FXML
     private Label labelTotalPrice;
-
     @FXML
     private Label labelTotalPriceC;
-
     @FXML
     private Label labelTotalPriceCC;
-
     @FXML
     private Label labelTotalPriceSC;
 
@@ -77,27 +71,26 @@ public class WnPaymentController implements Initializable {
 
     @FXML
     private Tab tabCash;
+    @FXML
+    private Tab tabStoreCredit;
 
     @FXML
     private TextField txtFieldCashIncome;
-
     @FXML
     private TextField txtFieldCashIncomeMP;
-
     @FXML
     private TextField txtFieldChange;
-
     @FXML
     private TextField txtFieldReferenceNum;
-
     @FXML
     private TextField txtFieldRemainingPayment;
-    @FXML
-    private Tab tabStoreCredit;
     @FXML
     private TextField txtFieldCardIncomeMP;
     @FXML
     private TextField txtFieldStoreCreditIncomeMP;
+
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     /**
      * Initializes the controller class.

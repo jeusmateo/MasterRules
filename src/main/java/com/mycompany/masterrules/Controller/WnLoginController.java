@@ -19,18 +19,28 @@ import javafx.stage.Stage;
 
 public class WnLoginController implements Initializable {
 
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
     private final LoginValidator loginValidator = new LoginValidator();
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private Button btnLogin;
+
     @FXML
     private TextField txtFieldUserName;
+
     @FXML
     private PasswordField txtFieldPassword;
+
     @FXML
     private Label lbIncorrectCredential;
 
-
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private void eventKey(KeyEvent event) {

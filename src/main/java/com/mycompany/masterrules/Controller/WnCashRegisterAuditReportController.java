@@ -17,34 +17,36 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 public class WnCashRegisterAuditReportController implements Initializable{
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
 
     private CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
+    private final ObservableList<CashFlowReport> cashInFlowReports=null;
+    private final ObservableList<CashFlowReport> cashOutFlowReports = null;
+
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private Label labelHourFrom;
-
     @FXML
     private Label labelHourTo;
-
+    @FXML
+    private Label lbTotalSale;
 
     @FXML
     private Text txtCashFunds;
-
     @FXML
     private Text txtCashSales;
-
     @FXML
     private Text txtInFlowCash;
-
     @FXML
     private Text txtOutFlowCash;
-
     @FXML
     private Text txtTSCash;
-
     @FXML
     private Text txtTSCreditCard;
-
     @FXML
     private Text txtTSStoreCard;
 
@@ -65,21 +67,16 @@ public class WnCashRegisterAuditReportController implements Initializable{
     @FXML
     private TableColumn<CashFlowReport, String> colAmountCashOutFlow;
 
-
-
-    private final ObservableList<CashFlowReport> cashInFlowReports=null;
-    private final ObservableList<CashFlowReport> cashOutFlowReports = null;
     @FXML
-    private Label lbTotalSale;
-    @FXML
-    private Button btnConfirmPart1;
+    private Button btnCloseCashRegisterAuditReport;
     @FXML
     private Button btnRealizarCorteDeVenta;
 
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
+
     public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
         this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-
-
         tblCashInFlowReport.setItems(cashInFlowReports);
         tblCashOutFlowReport.setItems(cashOutFlowReports);
     }
@@ -91,26 +88,27 @@ public class WnCashRegisterAuditReportController implements Initializable{
         initializeTableData();
     }
 
-    // Método para configurar la tabla de Cash In Flow
+    // Métod0 para configurar la tabla de Cash In Flow
     private void setupCashInFlowTable() {
         colReasonCashInFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashInFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashInFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
     }
 
-    // Método para configurar la tabla de Cash Out Flow
+    // Métod0 para configurar la tabla de Cash Out Flow
     private void setupCashOutFlowTable() {
         colReasonCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
     }
 
-    // Método para inicializar los datos de las tablas
+    // Métod0 para inicializar los datos de las tablas
     private void initializeTableData() {
         tblCashInFlowReport.setItems(cashInFlowReports);
         tblCashOutFlowReport.setItems(cashOutFlowReports);
     }
 
+    // Métod0 para actualizar los datos de las tablas
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();

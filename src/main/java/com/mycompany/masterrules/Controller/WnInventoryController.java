@@ -28,38 +28,36 @@ import java.util.ResourceBundle;
 //TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
 public class WnInventoryController implements Initializable {
 
-    //COMPONENTES DE LA VENTANA DE INVENTARIO
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
+    private CafeteriaStorage cafeteriaStorage;
+    private ObservableList<StockInfo> stockData;
+
+    //Componentes de la vista
     //-------------------------------------------------------------------------------------------
 
     @FXML
     private Button btnEditStockInfo;
-
     @FXML
     private Button btnExit;
-
     @FXML
     private Button btnSave;
-
     @FXML
     private Button btnScanProduct;
 
     @FXML
     private AnchorPane scrEditInfo;
-
     @FXML
     private AnchorPane scrSeeClient;
 
     @FXML
     private TextField txtFieldMinInv;
-
     @FXML
     private TextField txtFieldStock;
-
     @FXML
     private TextField txtFieldMaxInv;
 
-    // metodos de la ventana de inventario
-    //-------------------------------------------------------------------------------------------
     @FXML
     private TableView<StockInfo> tblInventory;
     @FXML
@@ -79,9 +77,8 @@ public class WnInventoryController implements Initializable {
     @FXML
     private TableColumn<StockInfo, Integer> colProductMaxStockInventory;
 
-
-    private CafeteriaStorage cafeteriaStorage;
-    private ObservableList<StockInfo> stockData;
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
