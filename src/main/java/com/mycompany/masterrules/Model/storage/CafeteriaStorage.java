@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Model.storage;
 
-import com.mycompany.masterrules.Database.StorageDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 
 import java.util.HashMap;
@@ -9,20 +8,16 @@ import java.util.Map;
 public class CafeteriaStorage {
 
     private Map<Product, StockInfo> products;
-    private StorageDatabase storageDatabase;
 
     public CafeteriaStorage() {
         this.products = new HashMap<>();
-        this.storageDatabase = new StorageDatabase();
     }
 
     public boolean addProduct(Product product, StockInfo stockInfo) {
         if (!canAddProduct(product, stockInfo)) {
             return false;
         }
-
         products.put(product, stockInfo);
-        storageDatabase.save(stockInfo);
         return true;
     }
 
@@ -104,7 +99,6 @@ public class CafeteriaStorage {
         return quantity <= currentStock;
     }
 
-
     public boolean isProductStored(Product product) {
         return products.containsKey(product);
     }
@@ -114,7 +108,7 @@ public class CafeteriaStorage {
     }
 
     //The type of "products" should be an interface such as "Map" rather than the implementation "HashMap".
-    public void setProducts(HashMap<Product, StockInfo> products) {
+    public void setProducts(Map<Product, StockInfo> products) {
         this.products = products;
     }
 }

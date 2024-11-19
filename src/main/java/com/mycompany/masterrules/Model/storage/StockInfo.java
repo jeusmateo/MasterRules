@@ -4,18 +4,9 @@
  */
 package com.mycompany.masterrules.Model.storage;
 
-import com.mycompany.masterrules.Model.cafeteria.Product;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
 import java.util.Objects;
 
-@Entity
 public class StockInfo {
-    @Id
-    @OneToOne
-    private Product product;
     private int currentStock;
     private int minStock;
     private int maxStock;
@@ -56,6 +47,7 @@ public class StockInfo {
         this.maxStock = maxStock;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,12 +55,11 @@ public class StockInfo {
         StockInfo stockInfo = (StockInfo) o;
         return currentStock == stockInfo.currentStock &&
                 minStock == stockInfo.minStock &&
-                maxStock == stockInfo.maxStock &&
-                Objects.equals(product, stockInfo.product);
+                maxStock == stockInfo.maxStock;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(product, currentStock, minStock, maxStock);
+        return Objects.hash(currentStock, minStock, maxStock);
     }
 }

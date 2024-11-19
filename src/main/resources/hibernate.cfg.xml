@@ -16,7 +16,6 @@
 <!--        <property name="hibernate.highlight_sql">true</property>-->
         <!--       todo-->
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Product"/>
-        <mapping class="com.mycompany.masterrules.Model.storage.StockInfo"/>
         <mapping class="com.mycompany.masterrules.Model.cafeteria.Combo"/>
 
         <mapping class="com.mycompany.masterrules.Model.users.UserAccount"/>
