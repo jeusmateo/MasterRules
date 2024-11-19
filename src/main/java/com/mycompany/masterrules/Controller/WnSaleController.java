@@ -225,32 +225,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
 
-    /**
-     * Agregar nueva categoria de menu en las pestañas
-     */
-    public void addMenuCategory() {
-        /*
-        //Dependiendo de la categoria de menu seleccionada, se cambiaran los productos en pantalla
-        newMenuCategory.setOnSelectionChanged(event -> {
-            if (newMenuCategory.isSelected()) {
-                //nombreTab.setText(newMenuCategory.getText());
-
-            }
-        });
-
-        menuCategories.getTabs().add(newMenuCategory);
-
-
-
-         */
-    }
-
-    /*
-    public ObservableList<ProductTest> getProductCardData(){
-
-    }
-    */
-
     public void displayCategoriesForCustomCombo(int categoryIndex) {
         try {
             if (categoryIndex < 0 || categoryIndex >= categories.size()) {
@@ -375,9 +349,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
     */
 
-    /**
-     * Mostrar formulario que aparece al continuar la orden
-     */
     @FXML
     public void showOrderForm() {
         continueOrderWindow.setVisible(true);
@@ -422,8 +393,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String deliveryMethod="";
         if (selected != null) {
             deliveryMethod=selected.getText();
-        } else {
-            System.out.println("No hay ninguna opción seleccionada");
         }
         String comments = txtAdittionalComments.getText();
         //TODO validaciones para null
@@ -485,12 +454,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
 
-    /**
-     * Inicializar el controllador de la ventana de Venta
-     *
-     * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz
-     * @param rb  Recursos utilizados para localizar el objeto raíz
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -505,18 +469,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         displayCategoriesForCustomCombo(currentCategoryIndex);
         List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
         ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
-        System.out.println("ahahhaha");
-        try {
-            for(PedidoComanda pc: productOrderList){
-                System.out.println(pc.getProduct().getName());
-
-            }
-            System.out.println("ahahhaha------");
-        }catch (Exception e) {
-            System.out.println("error" + e.getMessage());
-        }
-
-        System.out.println("ahahhaha---------------------------------------------");
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));

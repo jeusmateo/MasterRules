@@ -14,9 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * @author campv
- */
+
 public class ItemCardProductController implements Initializable {
     //Atributos de la clase
     //-------------------------------------------------------------------------------------------
