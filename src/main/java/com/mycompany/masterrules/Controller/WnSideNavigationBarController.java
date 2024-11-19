@@ -16,40 +16,10 @@ import java.util.ResourceBundle;
 
 public class WnSideNavigationBarController implements Initializable {
 
-    @FXML
-    private Button btnCashRegisterAuditReportSection;
+    //Atributos de la clase
+    // --------------------------------------------------------------------------------------------
 
-    @FXML
-    private Button btnCustomersSection;
-
-    @FXML
-    private Button btnInventorySection;
-
-    @FXML
-    private Button btnProductsSection;
-
-    @FXML
-    private Button btnReportsSection;
-
-    @FXML
-    private Button btnSalesSection;
-
-    @FXML
-    private Button btnSignOut;
-
-    @FXML
-    private Button btnUsersSection;
-
-    @FXML
-    private Label labelUserName;
-
-    @FXML
-    private Label lbllSignOut;
-
-    @FXML
-    private AnchorPane scrPane;
-
-    // Definir constantes para las rutas FXML
+    // Constantes para las rutas FXML
     private static final String PRODUCTS_VIEW = "/com/mycompany/masterrules/wnProducts.fxml";
     private static final String CASH_REGISTER_AUDIT_REPORT_VIEW = "/com/mycompany/masterrules/wnCashRegisterAuditReport.fxml";
     private static final String CUSTOMERS_VIEW = "/com/mycompany/masterrules/wnCustomers.fxml";
@@ -58,8 +28,39 @@ public class WnSideNavigationBarController implements Initializable {
     private static final String SALES_VIEW = "/com/mycompany/masterrules/wnSale.fxml";
     private static final String USERS_VIEW = "/com/mycompany/masterrules/wnUsers.fxml";
 
-    // Variable para almacenar la vista activa
+    // Variables
     private String activeView = null;
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
+
+    @FXML
+    private Button btnCashRegisterAuditReportSection;
+    @FXML
+    private Button btnCustomersSection;
+    @FXML
+    private Button btnInventorySection;
+    @FXML
+    private Button btnProductsSection;
+    @FXML
+    private Button btnReportsSection;
+    @FXML
+    private Button btnSalesSection;
+    @FXML
+    private Button btnSignOut;
+    @FXML
+    private Button btnUsersSection;
+
+    @FXML
+    private Label labelUserName;
+    @FXML
+    private Label lbllSignOut;
+
+    @FXML
+    private AnchorPane scrPane;
+
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
