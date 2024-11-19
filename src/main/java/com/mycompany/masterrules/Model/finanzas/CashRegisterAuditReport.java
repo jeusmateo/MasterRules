@@ -30,6 +30,8 @@ public class CashRegisterAuditReport {
     private BigDecimal storeCreditRevenue;
     private LocalDateTime initialCutofDate;
     private LocalDateTime finalCutofDate;
+    private BigDecimal cashFlowInTotalAmount;
+    private BigDecimal cashFlowOutTotalAmount;
 
     public CashRegisterAuditReport(BigDecimal initialCashAmount){
         this.initialCashAmount = initialCashAmount;
@@ -40,12 +42,37 @@ public class CashRegisterAuditReport {
         this.cashRevenue = BigDecimal.ZERO;
         this.cardRevenue = BigDecimal.ZERO;
         this.storeCreditRevenue = BigDecimal.ZERO;
+        this.cashBalance = BigDecimal.ZERO;
+        this.cashFlowInTotalAmount = BigDecimal.ZERO;
+        this.cashFlowOutTotalAmount = BigDecimal.ZERO;
+
+    }
+
+    public void calculateCashFlowInTotalAmount(){
+        for(CashFlowReport cashFlowReport : cashFlowInReport){
+            this.cashFlowInTotalAmount = this.cashFlowInTotalAmount.add(cashFlowReport.getCashAmount());
+        }
+    }
+
+    public void calculateCashFlowOutTotalAmount(){
+        for(CashFlowReport cashFlowReport : cashFlowOutReport){
+            this.cashFlowOutTotalAmount = this.cashFlowOutTotalAmount.add(cashFlowReport.getCashAmount());
+        }
+    }
+    public void calculateCashBalance(){
+        this.cashBalance=this.cashBalance.add(this.initialCashAmount);
+        this.cashBalance = this.cashBalance.add(this.cashRevenue);
+        this.cashBalance=this.cashBalance.add(this.cashFlowInTotalAmount);
+        this.cashBalance = this.cashBalance.subtract(this.cashFlowOutTotalAmount);
+
+
+
     }
 
     public void configCashRegisterAuditReport(){
         CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
-        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReports(); //todo que tengan el mismo comportamiento de dia a dia.
-        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReports();
+        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now());
+        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now());
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
         this.bills= archiveInvoice.getBillsByDateRange(this.initialCutofDate.toLocalDate(), LocalDate.now());
     }
@@ -107,6 +134,78 @@ public class CashRegisterAuditReport {
 
     public void setFinalCutofDate(LocalDateTime finalCutofDate) {
         this.finalCutofDate = finalCutofDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<CashFlowReport> getCashFlowInReport() {
+        return cashFlowInReport;
+    }
+
+    public void setCashFlowInReport(List<CashFlowReport> cashFlowInReport) {
+        this.cashFlowInReport = cashFlowInReport;
+    }
+
+    public List<CashFlowReport> getCashFlowOutReport() {
+        return cashFlowOutReport;
+    }
+
+    public void setCashFlowOutReport(List<CashFlowReport> cashFlowOutReport) {
+        this.cashFlowOutReport = cashFlowOutReport;
+    }
+
+    public BigDecimal getCashBalance() {
+        return cashBalance;
+    }
+
+    public void setCashBalance(BigDecimal cashBalance) {
+        this.cashBalance = cashBalance;
+    }
+
+    public BigDecimal getCashRevenue() {
+        return cashRevenue;
+    }
+
+    public void setCashRevenue(BigDecimal cashRevenue) {
+        this.cashRevenue = cashRevenue;
+    }
+
+    public BigDecimal getCardRevenue() {
+        return cardRevenue;
+    }
+
+    public void setCardRevenue(BigDecimal cardRevenue) {
+        this.cardRevenue = cardRevenue;
+    }
+
+    public BigDecimal getStoreCreditRevenue() {
+        return storeCreditRevenue;
+    }
+
+    public void setStoreCreditRevenue(BigDecimal storeCreditRevenue) {
+        this.storeCreditRevenue = storeCreditRevenue;
+    }
+
+    public BigDecimal getCashFlowInTotalAmount() {
+        return cashFlowInTotalAmount;
+    }
+
+    public void setCashFlowInTotalAmount(BigDecimal cashFlowInTotalAmount) {
+        this.cashFlowInTotalAmount = cashFlowInTotalAmount;
+    }
+
+    public BigDecimal getCashFlowOutTotalAmount() {
+        return cashFlowOutTotalAmount;
+    }
+
+    public void setCashFlowOutTotalAmount(BigDecimal cashFlowOutTotalAmount) {
+        this.cashFlowOutTotalAmount = cashFlowOutTotalAmount;
     }
 
     

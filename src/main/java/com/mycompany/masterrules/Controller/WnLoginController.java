@@ -70,7 +70,7 @@ public class WnLoginController implements Initializable {
 
         try {
             if (loginValidator.validateUser(user, pass)) {
-                System.out.println("Usuario y contraseña correctos");
+
                 loadStage(event);
             }
         } catch (Throwable e) {
@@ -91,7 +91,7 @@ public class WnLoginController implements Initializable {
             String pass = txtFieldPassword.getText();
             try {
                 if (loginValidator.validateUser(user, pass)) {
-                    System.out.println("Usuario y contraseña correctos");
+
                     loadStage(event);
                 } else {
                     lbIncorrectCredential.setVisible(true);

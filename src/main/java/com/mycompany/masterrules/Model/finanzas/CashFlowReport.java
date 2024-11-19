@@ -3,6 +3,7 @@ package com.mycompany.masterrules.Model.finanzas;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,22 +17,17 @@ public class CashFlowReport {
     @Enumerated(EnumType.STRING)
     private FlowType flowType;
     private BigDecimal cashAmount;
-    private String date;
-
-    protected CashFlowReport() {
-
-    }
+    private LocalDateTime date;
 
     public CashFlowReport(String reason, BigDecimal cashAmount) {
         this.reason = reason;
         this.cashAmount = cashAmount;
-        LocalDateTime actualDateTime = LocalDateTime.now();
+        this.date = LocalDateTime.now();
+    }
 
-        // Define el formato deseado, por ejemplo, "dd-MM-yyyy HH:mm:ss"
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
-        // Formatea la fecha y hora actual
-        this.date = actualDateTime.format(format);
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return date.format(formatter);
     }
 
     public long getId() {
@@ -57,11 +53,11 @@ public class CashFlowReport {
         this.cashAmount = cashAmount;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -72,4 +68,9 @@ public class CashFlowReport {
     public void setFlowType(FlowType flowType) {
         this.flowType = flowType;
     }
+
+    protected CashFlowReport() {
+
+    }
 }
+

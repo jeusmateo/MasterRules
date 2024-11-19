@@ -5,6 +5,7 @@
 package com.mycompany.masterrules.Model.storage;
 
 import java.util.Objects;
+import javafx.beans.binding.BooleanExpression;
 
 public class StockInfo {
     private int currentStock;
