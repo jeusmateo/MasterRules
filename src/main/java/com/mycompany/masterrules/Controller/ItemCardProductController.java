@@ -19,9 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-/**
- * @author campv
- */
+
 public class ItemCardProductController implements Initializable {
     private ProductSelectionListener selectionListener;
 
