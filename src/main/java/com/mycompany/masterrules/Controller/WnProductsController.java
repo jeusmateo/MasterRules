@@ -416,7 +416,7 @@ private ObservableList<Product> selectedProductsForCombo;
             }else if (source.equals(btnDeleteProduct)) {
                 Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
                 if (selectedProduct != null) {
-                    cafeteriaMenu.removeProductOnMenu(selectedProduct.getId());
+                    cafeteriaMenu.removeProductOnMenu(selectedProduct);
                     //cafeteriaStorage.removeProduct(selectedProduct);
                     updateProductTable();
                 }
