@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Model.finanzas;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +13,8 @@ public class CashFlowReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String reason;
+    @Enumerated(EnumType.STRING)
+    private FlowType flowType;
     private BigDecimal cashAmount;
     private String date;
 
@@ -27,10 +26,10 @@ public class CashFlowReport {
         this.reason = reason;
         this.cashAmount = cashAmount;
         LocalDateTime actualDateTime = LocalDateTime.now();
-        
+
         // Define el formato deseado, por ejemplo, "dd-MM-yyyy HH:mm:ss"
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        
+
         // Formatea la fecha y hora actual
         this.date = actualDateTime.format(format);
     }
@@ -65,5 +64,12 @@ public class CashFlowReport {
     public void setDate(String date) {
         this.date = date;
     }
-    
+
+    public FlowType getFlowType() {
+        return flowType;
+    }
+
+    public void setFlowType(FlowType flowType) {
+        this.flowType = flowType;
+    }
 }

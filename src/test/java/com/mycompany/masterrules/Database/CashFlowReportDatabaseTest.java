@@ -13,7 +13,7 @@ class CashFlowReportDatabaseTest {
 
     @Test
     void save() {
-        var cashFlowReport = new CashFlowReport("reason", new BigDecimal(100));
+        var cashFlowReport = new CashFlowReport("reason",new BigDecimal(100));
         assertTrue(cashFlowReportDatabase.save(cashFlowReport));
     }
 

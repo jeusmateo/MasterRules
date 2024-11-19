@@ -1,15 +1,14 @@
 package com.mycompany.masterrules.Model.finanzas;
 
 import com.mycompany.masterrules.Database.CashFlowReportDatabase;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CashFlowReportManager {
 
-    private ArrayList<CashFlowReport> cashOutFlowReports;
-    private ArrayList<CashFlowReport> cashInFlowReports;
+    private List<CashFlowReport> cashOutFlowReports;
+    private List<CashFlowReport> cashInFlowReports;
     private final CashFlowReportDatabase cashFlowReportDatabase;
 
     public CashFlowReportManager() {
@@ -18,35 +17,39 @@ public class CashFlowReportManager {
         this.cashFlowReportDatabase = new CashFlowReportDatabase();
     }
 
-    public ArrayList<CashFlowReport> getCashOutFlowReports() {
+    public List<CashFlowReport> getCashOutFlowReports() {
         return cashOutFlowReports;
     }
 
     public void setCashOutFlowReports(ArrayList<CashFlowReport> cashOutFlowReports) {
-        this.cashOutFlowReports = cashOutFlowReports;
         for(CashFlowReport cashFlowReport : cashOutFlowReports){
+            cashFlowReport.setFlowType(FlowType.CASH_OUT);
             cashFlowReportDatabase.save(cashFlowReport);
         }
+        this.cashOutFlowReports = cashOutFlowReports;
     }
 
     public void addNewCashOutFlowReport(CashFlowReport cashOutFlowReport) {
+        cashOutFlowReport.setFlowType(FlowType.CASH_OUT);
         this.cashOutFlowReports.add(cashOutFlowReport);
         cashFlowReportDatabase.save(cashOutFlowReport);
     }
 
     public void addNewCashInFlowReport(CashFlowReport cashInFlowReport) {
+        cashInFlowReport.setFlowType(FlowType.CASH_IN);
         cashInFlowReports.add(cashInFlowReport);
         cashFlowReportDatabase.save(cashInFlowReport);
     }
 
-    public ArrayList<CashFlowReport> getCashInFlowReports() {
+    public List<CashFlowReport> getCashInFlowReports() {
         return cashInFlowReports;
     }
 
     public void setCashInFlowReports(ArrayList<CashFlowReport> cashInFlowReports) {
-        this.cashInFlowReports = cashInFlowReports;
         for(CashFlowReport cashFlowReport : cashInFlowReports){
+            cashFlowReport.setFlowType(FlowType.CASH_IN);
             cashFlowReportDatabase.save(cashFlowReport);
         }
+        this.cashInFlowReports = cashInFlowReports;
     }
 }
