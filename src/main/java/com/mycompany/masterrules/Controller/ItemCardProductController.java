@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -17,11 +13,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 
 public class ItemCardProductController implements Initializable {
+    //Atributos de la clase
+    //-------------------------------------------------------------------------------------------
+
+    private Product productData; //probablemente luego se necesite el productID en cardProduct para el Inventario
     private ProductSelectionListener selectionListener;
+
+    //Componentes de la vista de la tarjeta de producto
+    //-------------------------------------------------------------------------------------------
 
     @FXML
     private Button productName;
@@ -32,10 +34,6 @@ public class ItemCardProductController implements Initializable {
     @FXML
     private Label productPrice;
 
-
-    //OTROS OBJETOS
-    //-------------------------------------------------------------------------------------------
-    private Product productData; //probablemente luego se necesite el productID en cardProduct para el Inventario
 
     public void setProductDataToCard(Product productData) {
         this.productData = productData;
@@ -60,7 +58,6 @@ public class ItemCardProductController implements Initializable {
         imageProduct.setImage(image);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         imageProduct.setOnMouseClicked(event -> onProductImageClick());
@@ -71,7 +68,6 @@ public class ItemCardProductController implements Initializable {
             selectionListener.onProductSelected(productData);
         }
     }
-
 
     @FXML
     private void eventAction(ActionEvent event) {

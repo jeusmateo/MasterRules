@@ -42,94 +42,44 @@ import javafx.stage.StageStyle;
  * @author campv
  */
 public class WnSaleController implements Initializable, ProductSelectionListener {
+
+    // ATRIBUTOS
+    //-------------------------------------------------------------------------------------------
+
     private POSManager posManager;
     private ToggleGroup group;
-    //COMPONENTES DE LA VENTANA DE LA CARTILLA DE MENU QUE MUESTRA LOS PRODUCTOS
+    private WnSaleController wnSaleSection;
+    private int currentCategoryIndex = 0;
+
+    //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
     //-------------------------------------------------------------------------------------------
 
     @FXML
     private Button btnContinue;
-
     @FXML
     private Button btnPay;
-
-    @FXML
-    private AnchorPane menuWindow;
-
-    @FXML
-    private VBox menuOrderOptionsBox;
-
-    @FXML
-    private ScrollPane menuCardsScroller;
-
-    @FXML
-    private FlowPane productCardsScroller = new FlowPane();
-
-    @FXML
-    private TabPane menuCategories;
-
-
-    //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
-    //-------------------------------------------------------------------------------------------
-    @FXML
-    private AnchorPane continueOrderWindow;
-
-    @FXML
-    private VBox continueOrderOptionsBox;
-
-    @FXML
-    private HBox tableNumberBox;
-
-    @FXML
-    private TextField inputClientName;
-    @FXML
-    private ComboBox<Customer> cboCustomers;
-    @FXML
-    private TextArea txtAdittionalComments;
-
-
-    //OTROS OBJETOS
-    //-------------------------------------------------------------------------------------------
-
-
-    private WnSaleController wnSaleSection;
-
-
-
-    @FXML
-    private TableView<PedidoComanda> tblOrder;
-
-    @FXML
-    private TableColumn<PedidoComanda, String> colAmount;
-
-    @FXML
-    private TableColumn<PedidoComanda, String> colProduct;
-
-    @FXML
-    private TableColumn<PedidoComanda, String> colPrice; // este si es un String?
-
-    @FXML
-    private Label lblTotal;
-
     @FXML
     private Button btnCancel;
-
-    @FXML
-    private ToggleGroup deliveryMethod;
-    @FXML
-    private ScrollPane menuCardsScroller1;
-    @FXML
-    private FlowPane comboCardsScroller;
     @FXML
     private Button btnNextCategory;
     @FXML
     private Button btnPreviousCategory;
     @FXML
-    private AnchorPane AnchorPaneCategoriesProductsCombo;
+    private Button btnAdd1;
+    @FXML
+    private Button btnRemove1;
+
+    @FXML
+    private Label lblTotal;
     @FXML
     private Label lbCategory;
 
-    private int currentCategoryIndex = 0;
+    @FXML
+    private AnchorPane continueOrderWindow;
+    @FXML
+    private AnchorPane menuWindow;
+    @FXML
+    private AnchorPane AnchorPaneCategoriesProductsCombo;
     @FXML
     private AnchorPane main;
     @FXML
@@ -141,21 +91,44 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     @FXML
     private AnchorPane scrCustomCombo1;
     @FXML
-    private TableView<?> tblAuxiliarCustomCombo;
+    private AnchorPane scrCustomCombo11;
+
     @FXML
-    private TableColumn<?, ?> colAmount1;
+    private TabPane menuCategories;
+
     @FXML
-    private TableColumn<?, ?> colProduct1;
+    private VBox continueOrderOptionsBox;
     @FXML
-    private TableColumn<?, ?> colPrice1;
+    private VBox menuOrderOptionsBox;
     @FXML
     private VBox navigationCategory;
+
     @FXML
-    private Button btnAdd1;
+    private HBox tableNumberBox;
+
     @FXML
-    private Button btnRemove1;
+    private ComboBox<Customer> cboCustomers;
+
     @FXML
-    private AnchorPane scrCustomCombo11;
+    private ScrollPane menuCardsScroller;
+    @FXML
+    private ScrollPane menuCardsScroller1;
+
+    @FXML
+    private FlowPane productCardsScroller = new FlowPane();
+    @FXML
+    private FlowPane comboCardsScroller;
+
+    @FXML
+    private TextArea txtAdittionalComments;
+
+    @FXML
+    private TextField inputClientName;
+
+
+    @FXML
+    private ToggleGroup deliveryMethod;
+
     @FXML
     private RadioButton paraMostradoMetodo;
     @FXML
@@ -163,7 +136,25 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     @FXML
     private RadioButton paraMesaMetodo;
 
+    @FXML
+    private TableView<PedidoComanda> tblOrder;
+    @FXML
+    private TableColumn<PedidoComanda, String> colAmount;
+    @FXML
+    private TableColumn<PedidoComanda, String> colProduct;
+    @FXML
+    private TableColumn<PedidoComanda, String> colPrice; // este si es un String?
+    @FXML
+    private TableView<?> tblAuxiliarCustomCombo;
+    @FXML
+    private TableColumn<?, ?> colAmount1;
+    @FXML
+    private TableColumn<?, ?> colProduct1;
+    @FXML
+    private TableColumn<?, ?> colPrice1;
 
+    // MÉTODOS
+    //-------------------------------------------------------------------------------------------
 
     @FXML
     private void handleCategoryNavigation(ActionEvent evt) {

@@ -19,37 +19,37 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 
-//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
+
 public class WnCustomersController implements Initializable {
 
-    private CustomerManager customerManager;
+    // Atributos de la clase
+    // --------------------------------------------------------------------------------------------
 
+    private CustomerManager customerManager;
+    private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
+
+
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
     @FXML
     private Button btnAcceptCredit;
-
     @FXML
     private Button btnSaveNewCustomer;
-
     @FXML
     private Button btnUpdateCustomerAccount;
-
     @FXML
     private Button btnDeleteCustomer;
 
     @FXML
     private AnchorPane guardarClienteNvo;
-
     @FXML
     private AnchorPane scrCustomerAccount;
-
     @FXML
     private AnchorPane scrEditCustomerAccount;
-
     @FXML
     private AnchorPane scrMainViewCustomerAccount;
     @FXML
     private AnchorPane scrViewInfoCustomer;
-
     @FXML
     private AnchorPane scrWarningCredit;
 
@@ -57,8 +57,6 @@ public class WnCustomersController implements Initializable {
     private Tab tabNewCustomer;
     @FXML
     private Tab tabCustomerAccount;
-    @FXML
-    private TextField txtFieldSearch;
 
     @FXML
     private Label lbLoyaltyPoints;
@@ -70,11 +68,15 @@ public class WnCustomersController implements Initializable {
     private Label lbStoreCredit;
     @FXML
     private Label lbCustomerPhoneNumber;
+    @FXML
+    private Label lbCustomerIdAuxiliar;
 
     @FXML
     private CheckBox chkCustomerVip;
     @FXML
     private CheckBox chkNewCustomerVipStatus;
+    @FXML
+    private CheckBox chkEditCustomerVipStatus;
 
     @FXML
     private TextField txtNewCustomerName;
@@ -82,13 +84,13 @@ public class WnCustomersController implements Initializable {
     private TextField txtNewCustomerPhoneNumber;
     @FXML
     private TextField txtNewCustomerLoyaltyPoints;
-
+    @FXML
+    private TextField txtFieldSearch;
     @FXML
     private TextField txtEditCustomerStoreCredit;
     @FXML
     private TextField txtEditCustomerLoyaltyPoints;
-    @FXML
-    private CheckBox chkEditCustomerVipStatus;
+
 
     @FXML
     private TableView<Customer> tblCustomers;
@@ -97,11 +99,8 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TableColumn<Customer, String> colCustomerName;
 
-    @FXML
-    private Label lbCustomerIdAuxiliar;
-
-
-    private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
     @FXML
     private void searchCustomers() {
@@ -129,7 +128,6 @@ public class WnCustomersController implements Initializable {
         scrMainViewCustomerAccount.setVisible(true);
         scrViewInfoCustomer.setVisible(false);
 
-        // esto creo que esta mal usado, debería ser clearTextFields(txtFieldDebt, textFieldEditCustomerStoreCredit, textFieldEditCustomerLoyaltyPoints ) o lgo parecido
         clearTextFields(new TextField());
     }
 
