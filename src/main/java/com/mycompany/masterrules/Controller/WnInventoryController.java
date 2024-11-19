@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
@@ -32,7 +31,7 @@ public class WnInventoryController implements Initializable {
     // --------------------------------------------------------------------------------------------
 
     private CafeteriaStorage cafeteriaStorage;
-    private ObservableList<StockInfo> stockData;
+    private ObservableList<Product> productData;
 
     //Componentes de la vista
     //-------------------------------------------------------------------------------------------
@@ -59,23 +58,23 @@ public class WnInventoryController implements Initializable {
     private TextField txtFieldMaxInv;
 
     @FXML
-    private TableView<StockInfo> tblInventory;
+    private TableView<Product> tblInventory;
     @FXML
-    private TableColumn<StockInfo, String> colProductIDInventory;
+    private TableColumn<Product, String> colProductIDInventory;
     @FXML
-    private TableColumn<StockInfo, String> colProductNameInventory;
+    private TableColumn<Product, String> colProductNameInventory;
     @FXML
-    private TableColumn<StockInfo, String> colProductCategoryInventory;
+    private TableColumn<Product, String> colProductCategoryInventory;
     @FXML
-    private TableColumn<StockInfo, BigDecimal> colProductPriceInventory;
+    private TableColumn<Product, BigDecimal> colProductPriceInventory;
     @FXML
-    private TableColumn<StockInfo, BigDecimal> colProductVipPriceInventory;
+    private TableColumn<Product, BigDecimal> colProductVipPriceInventory;
     @FXML
-    private TableColumn<StockInfo, String> colProductStockInventory;
+    private TableColumn<Product, Integer> colProductStockInventory;
     @FXML
-    private TableColumn<StockInfo, Integer> colProductMinStockInventory;
+    private TableColumn<Product, Integer> colProductMinStockInventory;
     @FXML
-    private TableColumn<StockInfo, Integer> colProductMaxStockInventory;
+    private TableColumn<Product, Integer> colProductMaxStockInventory;
 
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
@@ -83,11 +82,11 @@ public class WnInventoryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cafeteriaStorage = new CafeteriaStorage();
-        stockData = FXCollections.observableArrayList();
+        productData = FXCollections.observableArrayList();
 
         configureTableColumns();
         loadProductsToInventory();
-        tblInventory.setItems(stockData);
+        tblInventory.setItems(productData);
     }
 
     private void loadProductsToInventory() {
@@ -98,38 +97,37 @@ public class WnInventoryController implements Initializable {
 
         // Revisa cada producto para inicializar su StockInfo correctamente
         for (Product product : products) {
-            // Busca si ya existe StockInfo asociado al producto
-            StockInfo stockInfo = cafeteriaStorage.getStockInfo(product);
-
-            if (stockInfo == null) {
-                // Si no existe, inicializa un nuevo StockInfo
-                stockInfo = new StockInfo(0, 0, 0); // Valores iniciales predeterminados
-                stockInfo.setProduct(product);
-                cafeteriaStorage.addProduct(product, stockInfo);
-            }
-
-            // Asegúrate de que la tabla de datos muestre este StockInfo
-            if (!stockData.contains(stockInfo)) {
-                stockData.add(stockInfo);
+//            // Busca si ya existe StockInfo asociado al producto
+//            Product stockInfo = cafeteriaStorage.getStockInfo(product);
+//
+//            if (stockInfo == null) {
+//                // Si no existe, inicializa un nuevo StockInfo
+//                stockInfo = new StockInfo(0, 0, 0); // Valores iniciales predeterminados
+//                stockInfo.setProduct(product);
+//                cafeteriaStorage.addProduct(product, stockInfo);
+//            }
+//
+//            // Asegúrate de que la tabla de datos muestre este StockInfo
+//            if (!productData.contains(stockInfo)) {
+//                productData.add(stockInfo);
+//            }
+            if(!productData.contains(product)){
+                productData.add(product);
             }
         }
     }
 
 
-
-
-
-
     private void configureTableColumns() {
         // Configurar las columnas para obtener datos de los métodos getter
-        colProductIDInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getProduct().getId()));
-        colProductNameInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getProduct().getName()));
-        colProductCategoryInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getProduct().getType()));
-        colProductPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getProduct().getPrice()));
-        colProductVipPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getProduct().getVIPPrice()));
-        colProductStockInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(String.valueOf(data.getValue().getCurrentStock())));
-        colProductMinStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getMinStock()));
-        colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getMaxStock()));
+        colProductIDInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getId()));
+        colProductNameInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
+        colProductCategoryInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getType()));
+        colProductPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getPrice()));
+        colProductVipPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getVIPPrice()));
+        colProductStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getCurrentStock()));
+        colProductMinStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMinStock()));
+        colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
 
 
@@ -144,40 +142,41 @@ public class WnInventoryController implements Initializable {
 
     @FXML
     public void buttonSaveInfo() {
-        // Obtener el stockInfo seleccionado desde la tabla
-        StockInfo selectedStockInfo = tblInventory.getSelectionModel().getSelectedItem();
+        // Obtener el producto actual seleccionado desde la tabla
+        Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
 
-        if (selectedStockInfo != null) {
-            try {
-                // Obtener los valores ingresados en los campos de texto
-                int newStock = Integer.parseInt(txtFieldStock.getText());
-                int newMinStock = Integer.parseInt(txtFieldMinInv.getText());
-                int newMaxStock = Integer.parseInt(txtFieldMaxInv.getText());
+        if (selectedProduct == null) {
+            return;
+        }
+        try {
+            // Obtener los valores ingresados en los campos de texto
+            int newStock = Integer.parseInt(txtFieldStock.getText());
+            int newMinStock = Integer.parseInt(txtFieldMinInv.getText());
+            int newMaxStock = Integer.parseInt(txtFieldMaxInv.getText());
 
-                // Validar los valores del stock
-                stockValidation(newStock, newMinStock, newMaxStock);
+            // Validar los valores del stock
+            stockValidation(newStock, newMinStock, newMaxStock);
 
-                // Actualizar el StockInfo con los nuevos valores
-                selectedStockInfo.setCurrentStock(newStock);
-                selectedStockInfo.setMinStock(newMinStock);
-                selectedStockInfo.setMaxStock(newMaxStock);
+            // Actualizar el StockInfo con los nuevos valores
+            selectedProduct.getStockInfo().setCurrentStock(newStock);
+            selectedProduct.getStockInfo().setMinStock(newMinStock);
+            selectedProduct.getStockInfo().setMaxStock(newMaxStock);
 
-                // Refrescar la tabla para mostrar los nuevos valores
-                tblInventory.refresh();
+            // Refrescar la tabla para mostrar los nuevos valores
+            tblInventory.refresh();
 
-                // Ocultar la pantalla de edición y limpiar los campos
-                scrEditInfo.setVisible(false);
-                txtFieldStock.clear();
-                txtFieldMinInv.clear();
-                txtFieldMaxInv.clear();
+            // Ocultar la pantalla de edición y limpiar los campos
+            scrEditInfo.setVisible(false);
+            txtFieldStock.clear();
+            txtFieldMinInv.clear();
+            txtFieldMaxInv.clear();
 
-                // Volver a la vista de clientes
-                scrSeeClient.setVisible(true);
-            } catch (NumberFormatException e) {
-                showAlert("Error", "Por favor, ingresa datos válidos en todos los campos.");
-            } catch (IllegalArgumentException e) {
-                showAlert("Error", e.getMessage());
-            }
+            // Volver a la vista de clientes
+            scrSeeClient.setVisible(true);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Por favor, ingresa datos válidos en todos los campos.");
+        } catch (IllegalArgumentException e) {
+            showAlert("Error", e.getMessage());
         }
     }
 
@@ -201,18 +200,19 @@ public class WnInventoryController implements Initializable {
     @FXML
     private void displaySelected(javafx.scene.input.MouseEvent event) {
         // Obtener el producto seleccionado desde la tabla
-        StockInfo selectedStockInfo = tblInventory.getSelectionModel().getSelectedItem();
+        Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
 
-        if (selectedStockInfo != null) {
-            // Mostrar la información de StockInfo en los campos editables
-            txtFieldStock.setText(String.valueOf(selectedStockInfo.getCurrentStock()));
-            txtFieldMinInv.setText(String.valueOf(selectedStockInfo.getMinStock()));
-            txtFieldMaxInv.setText(String.valueOf(selectedStockInfo.getMaxStock()));
-
-            // Asegurarse de que el producto esté seleccionado para editarlo
-            scrEditInfo.setVisible(true);
-            scrEditInfo.toFront();
+        if (selectedProduct == null) {
+            return;
         }
+        // Mostrar la información de StockInfo en los campos editables
+        txtFieldStock.setText(String.valueOf(selectedProduct.getStockInfo().getCurrentStock()));
+        txtFieldMinInv.setText(String.valueOf(selectedProduct.getStockInfo().getMinStock()));
+        txtFieldMaxInv.setText(String.valueOf(selectedProduct.getStockInfo().getMaxStock()));
+
+        // Asegurarse de que el producto esté seleccionado para editarlo
+        scrEditInfo.setVisible(true);
+        scrEditInfo.toFront();
     }
 
     @FXML
