@@ -21,50 +21,47 @@ import javafx.scene.layout.AnchorPane;
 
 public class WnReportsController implements Initializable {
 
+    //Atributos de la clase
+    // --------------------------------------------------------------------------------------------
+
     private final CashRegister cashRegister = new CashRegister();
     CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
 
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
+
     @FXML
     private Button btnAcceptInflow;
-
     @FXML
     private Button btnAcceptOutflow;
-
     @FXML
     private Button btnDoInFlowReport;
-
     @FXML
     private Button btnDoOutFlowReport;
-
     @FXML
     private Button btnExitDoInflow;
-
     @FXML
     private Button btnExitDoOutflow;
 
     @FXML
     private AnchorPane scrDoInflowCash;
-
     @FXML
     private AnchorPane scrDoOutflowReport;
-
     @FXML
     private AnchorPane scrDoReport;
-
     @FXML
     private AnchorPane scrReports;
 
     @FXML
     private TextField txtFieldAmountInflow;
-
     @FXML
     private TextField txtFieldAmountOutflow;
 
     @FXML
     private TextArea txtOutflowReason;
-
     @FXML
     private TextArea txtReasonInflow;
+
     @FXML
     private TableView<CashFlowReport> tableViewlOutFlowReport;
     @FXML
@@ -81,6 +78,9 @@ public class WnReportsController implements Initializable {
     private TableColumn<CashFlowReport, String> colCashInDate;
     @FXML
     private TableColumn<CashFlowReport, String> colCashInQuantity;
+
+    // Métodos de la clase
+    // --------------------------------------------------------------------------------------------
 
 
     @FXML
