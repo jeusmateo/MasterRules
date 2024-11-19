@@ -4,6 +4,8 @@ import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
+import com.mycompany.masterrules.Model.storage.StockInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -232,6 +234,7 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     @FXML
     private Button btnDeleteProduct;
 
+    private CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
@@ -312,6 +315,9 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 
                 Product product = new Product(id, name, type, price, vipPrice);
                 cafeteriaMenu.addProductToMenu(product);
+
+                //StockInfo stockInfo = new StockInfo(0, 0, 0);
+                //cafeteriaStorage.addProduct(product, stockInfo);
                 clearTextFields(
                         txtProductId_tabCreate,
                         txtProductName_tabCreate,
@@ -323,9 +329,10 @@ private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
                 //List<Product> chepo = cafeteriaMenu.getProducts();
                 //ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
             }else if (source.equals(btnDeleteProduct)) {
-                String selectedProductId = tblFood.getSelectionModel().getSelectedItem().getId();
-                if (selectedProductId != null) {
-                    cafeteriaMenu.removeProductOnMenu(selectedProductId);
+                Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
+                if (selectedProduct != null) {
+                    cafeteriaMenu.removeProductOnMenu(selectedProduct.getId());
+                    //cafeteriaStorage.removeProduct(selectedProduct);
                     updateProductTable();
                 }
             } else if (source.equals(btnEditProduct)) {
