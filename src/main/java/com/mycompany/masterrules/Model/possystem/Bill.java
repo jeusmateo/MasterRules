@@ -18,8 +18,8 @@ public class Bill {
     private long id;
     private String employeeName;
     private BigDecimal amount;
-
-    @Embedded private Order order;
+    @Embedded
+    private Order order;
     private String reference;
     private BigDecimal pagadoEnEfectivo;
     private BigDecimal pagadoEnTajeta;
