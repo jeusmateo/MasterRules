@@ -17,6 +17,7 @@ public class CafeteriaStorage {
         if (!canAddProduct(product, stockInfo)) {
             return false;
         }
+        product.setStockInfo(stockInfo);
         products.put(product, stockInfo);
         return true;
     }
@@ -33,6 +34,7 @@ public class CafeteriaStorage {
         if (!isProductStored(product)) {
             return false;
         }
+        product.setStockInfo(null);
         products.remove(product);
         return true;
     }

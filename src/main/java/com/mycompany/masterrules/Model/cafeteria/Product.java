@@ -1,9 +1,7 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import com.mycompany.masterrules.Model.storage.StockInfo;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -23,6 +21,8 @@ public class Product {
     private BigDecimal price;
     private BigDecimal VIPPrice;
 
+    @Embedded
+    private StockInfo stockInfo;
 
     public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
         this.id = productID;
@@ -76,11 +76,9 @@ public class Product {
     }
      */
 
-
     public BigDecimal getPrice() {
         return price;
     }
-
 
     public void setPrice(BigDecimal price) {
         this.price = price;
@@ -94,9 +92,17 @@ public class Product {
         this.VIPPrice = VIPPrice;
     }
 
-    public Product() {
+    protected Product() {
+
     }
 
+    public StockInfo getStockInfo() {
+        return stockInfo;
+    }
+
+    public void setStockInfo(StockInfo stockInfo) {
+        this.stockInfo = stockInfo;
+    }
 
     @Override
     public String toString() {

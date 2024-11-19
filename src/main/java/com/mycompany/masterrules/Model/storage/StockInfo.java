@@ -5,8 +5,11 @@
 package com.mycompany.masterrules.Model.storage;
 
 import java.util.Objects;
-import javafx.beans.binding.BooleanExpression;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
+import javafx.beans.binding.BooleanExpression;
+@Embeddable
 public class StockInfo {
     private int currentStock;
     private int minStock;
