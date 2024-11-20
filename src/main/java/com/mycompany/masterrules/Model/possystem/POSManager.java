@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 
 public class POSManager {
 
-    private final UserAccount currentUser;
+    private UserAccount currentUser;
     private Order currentOrder;
     private static POSManager instance;
 
@@ -193,5 +193,9 @@ public class POSManager {
 
     public UserAccount getCurrentUser() {
         return currentUser;
+    }
+
+    public void setCurrentUser(UserAccount currentUser) {
+        this.currentUser = currentUser;
     }
 }

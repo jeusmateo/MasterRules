@@ -2,89 +2,105 @@ package com.mycompany.masterrules.Model.users;
 
 import com.mycompany.masterrules.Database.UserDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 public class UserManager {
 
+    private final List<UserAccount> allUsers = new ArrayList<>();
     private final UserDatabase userDatabaseManager = new UserDatabase();
 
-    // TODO: dos constructores, uno sin parámetros y otro con un ArrayList de UserAccount?
-
     public UserManager() {
-
-        // userDatabaseManager.save(new UserAccount("Chepo", "Chepo", new UserPermissions(), "Chepito")); // todo: usuarios temporales
-
-    }
-    public void updateUserInformation(UserAccount editedUserAccount){
-        userDatabaseManager.update(editedUserAccount);
+        readFromDatabase();
     }
 
-    public UserManager(List<UserAccount> userAccounts) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private void readFromDatabase() {
+        allUsers.addAll(userDatabaseManager.readAll());
     }
-
 
     public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
+        if (!isValid(newUser)) {
+            throw new IllegalArgumentException("Usuario no valido");
+        }
+        allUsers.add(newUser);
         userDatabaseManager.save(newUser);
     }
 
-    private boolean isValid(UserAccount newUser) {
-        return !isUserRegistered(newUser) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
+    public Optional<UserAccount> getUser(String username, String password) throws Exception {
+        if(!isUserRegistered(username)){
+            throw new Exception("Usuario no registrado");
+        }
+        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username) && user.getPassword().equals(password));
+        if (findUser.isEmpty()) {
+            throw new UserNotFoundException("Usuario no encontrado");
+        }
+        return findUser;
     }
 
+//    public Optional<UserAccount> getUser(String username) throws UserNotFoundException {
+//        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username));
+//
+//        if (findUser.isEmpty()) {
+//            throw new UserNotFoundException(username + " no encontrado");
+//        }
+//        return findUser;
+//    }
 
-    public void removeUser(String userID) throws UserNotFoundException{
-        var findUser = userDatabaseManager.findById(userID);
+    public void updateUserInformation(UserAccount editedUserAccount) {
+        if (!isValid(editedUserAccount)) {
+            throw new IllegalArgumentException("Usuario no valido");
+        }
+        allUsers.set(allUsers.indexOf(editedUserAccount), editedUserAccount);
+        userDatabaseManager.update(editedUserAccount);
+    }
 
-        if(findUser==null){
+    private boolean isValid(UserAccount newUser) {
+        return !isUserRegistered(newUser.getUserName()) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
+    }
+
+    public void removeUser(String userID) throws UserNotFoundException {
+        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(userID));
+
+        if (findUser.isEmpty()) {
             throw new UserNotFoundException(userID + " no encontrado");
         }
-        userDatabaseManager.delete(findUser);
+        allUsers.remove(findUser.get());
+        userDatabaseManager.delete(findUser.get());
     }
 
-
-    private boolean isUserRegistered(UserAccount user){
-        return userDatabaseManager.findById(user.getUserID()) != null;
+    private boolean isUserRegistered(String user) {
+        return allUsers.stream().anyMatch(userAccount -> userAccount.getUserName().equals(user));
     }
 
-    private boolean isUsernameValid(String username){//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
+    private boolean isUsernameValid(String username) {//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
         return !username.contains(" ") && username.length() >= 6 && username.length() <= 20 && !isUsernameTaken(username);
     }
 
-
-    private boolean isUsernameTaken(String username){//cambie el param por username
-        for(UserAccount registeredUser : getUserAccounts()){
-            if(username.equals(registeredUser.getUserName())){
-                return true;
-            }
-        }
-        return false;
+    private boolean isUsernameTaken(String username) {//cambie el param por username
+        return allUsers.stream().anyMatch(user -> user.getUserName().equals(username));
     }
 
-    private boolean isPasswordValid(String password){
+    private boolean isPasswordValid(String password) {
         return !password.contains(" ") && password.length() >= 8 && password.length() <= 20 && !hasMoreThanTwoConsecutiveChars(password);
     }
 
-    private boolean hasMoreThanTwoConsecutiveChars(String input){
-        String threeRepeatedConsecutiveChars=".*(.)\\1\\1.*";
+    private boolean hasMoreThanTwoConsecutiveChars(String input) {
+        String threeRepeatedConsecutiveChars = ".*(.)\\1\\1.*";
         return input.matches(threeRepeatedConsecutiveChars);
     }
 
-    //movi los metodos FindUser y ValidateUser a la clase LoginValidator
+    public void changeUserPermissons(String username, UserPermissions newPermissions) throws UserNotFoundException {
+        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username));
 
-
-    public void changeUserPermissons(String userID, UserPermissions newPermissions) throws UserNotFoundException{//cambie el nombre del parametro permissions  newPermission//antes se llamaba changeUserRole, tambien creo que se debe poner como parametro los permisos actualizados
-        for (UserAccount userAccount : getUserAccounts()) {
-            if (userAccount.getUserID().equals(userID)) {
-                userAccount.setPermissions(newPermissions);
-                return;
-            }
+        if (findUser.isEmpty()) {
+            throw new UserNotFoundException(username + " no encontrado");
         }
-        throw new UserNotFoundException(userID + " no encontrado");
+        findUser.get().setPermissions(newPermissions);
+        userDatabaseManager.update(findUser.get());
     }
 
-    public List<UserAccount> getUserAccounts() {
-        return userDatabaseManager.readAll();
+    public List<UserAccount> getAllUsers() {
+        return allUsers;
     }
 }
