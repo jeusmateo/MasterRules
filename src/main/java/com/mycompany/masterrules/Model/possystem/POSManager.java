@@ -24,12 +24,9 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private UserAccount currentUser;
-<<<<<<< HEAD
-    private Order currentOrder;
-=======
+
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
-    private final Order currentOrder;
->>>>>>> 97d3c4bd88e94c533f5e5ee801e527d31cde4017
+    private  Order currentOrder;
     private static POSManager instance;
 
     public static synchronized POSManager getInstance() {
@@ -163,6 +160,7 @@ public class POSManager {
         Bill bill = createBill(paymentMethod);
         ArchiveInvoice ai = new ArchiveInvoice();
         ai.ArchiveBill(bill);
+        currentOrder=new Order();
     }
 
     /*

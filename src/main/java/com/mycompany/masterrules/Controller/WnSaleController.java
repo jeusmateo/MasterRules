@@ -426,6 +426,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 if (paymentResult != null) {
                     System.out.println("Pago realizado:");
                     posManager.sell(paymentResult);
+                    showMenuWindow();
 
                 } else {
                     System.out.println("Pago cancelado.");
