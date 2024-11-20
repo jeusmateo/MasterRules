@@ -3,56 +3,78 @@ package com.mycompany.masterrules.Model.cafeteria;
 import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class CafeteriaMenu {
 
+    private final List<Product> availableProducts;
+    private final List<Combo> availableCombos;
 
     private final ProductDatabase productDatabase;
     private final ComboDatabase comboDatabase;
+
     private String title;
 
     public CafeteriaMenu() {
+        availableProducts = new ArrayList<>();
+        availableCombos = new ArrayList<>();
+
         productDatabase = new ProductDatabase();
         comboDatabase = new ComboDatabase();
+
+        readFromDatabase();
     }
 
+    private void readFromDatabase() {
+        availableProducts.addAll(productDatabase.readAll());
+        availableCombos.addAll(comboDatabase.readAll());
+    }
+
+
     public void addProductToMenu(Product product) {
-        if (!isProductOnMenu(product.getId())) {
+        if (!isProductOnMenu(product)) {
+            availableProducts.add(product);
             productDatabase.save(product);
         } else {
             throw new IllegalArgumentException("ERROR: El producto ya existe");
         }
     }
 
-    public void removeProductOnMenu(String productID) {
-        if (productDatabase.delete(productDatabase.findById(productID))) {
-            return;
+    public void removeProductOnMenu(Product product) {
+        if (!isProductOnMenu(product)) {
+            throw new IllegalArgumentException("El producto con ID " + product + " no existe en el menú.");
         }
-        throw new IllegalArgumentException("El producto con ID " + productID + " no existe en el menú.");
+        availableProducts.remove(product);
+        productDatabase.delete(product);
     }
 
 
-    public boolean isProductOnMenu(String productID) {
-        return productDatabase.findById(productID) != null;
+    private boolean isProductOnMenu(Product product) {
+        return availableProducts.contains(product);
     }
 
-    public boolean isProductNameTaken(String productName) {
-        return productDatabase.findByName(productName) != null;
+    private boolean isProductNameTaken(String productName) {
+        return availableProducts.stream().anyMatch(product -> product.getName().equals(productName));
     }
 
     public void editProduct(Product product) {
-        if (productDatabase.update(product)) {
-            return;
+        if (!isProductOnMenu(product)) {
+            throw new IllegalArgumentException("ERROR: El producto no existe");
         }
-        throw new IllegalArgumentException("ERROR: El producto no existe");
+
+        availableProducts.set(availableProducts.indexOf(product), product);
+        productDatabase.update(product);
     }
 
 
     public List<Product> getProductsByType(String productType) {
 
-        List<Product> productsWithType = productDatabase.findByType(productType);
+        List<Product> productsWithType = availableProducts.stream()
+                .filter(product -> product.getType().equals(productType))
+                .collect(Collectors.toList());
 
         if (productsWithType.isEmpty()) {
             throw new IllegalArgumentException("ERROR: El tipo de producto no existe en el menú");
@@ -64,6 +86,7 @@ public class CafeteriaMenu {
 
     public void addComboToMenu(Combo combo) {
         if (!isComboOnMenu(combo)) {
+            availableCombos.add(combo);
             comboDatabase.save(combo);
         } else {
             throw new IllegalArgumentException("ERROR: El combo ya existe");
@@ -71,31 +94,30 @@ public class CafeteriaMenu {
     }
 
     private boolean isComboOnMenu(Combo combo) {
-        return comboDatabase.findById(combo.getId()) != null;
+        return availableCombos.contains(combo);
     }
 
 
-    public void removeComboOnMenu(String comboID) {
-        if (comboDatabase.delete(comboDatabase.findById(comboID))) {
-            return;
+    public void removeComboOnMenu(Combo combo) {
+        if (!isComboOnMenu(combo)) {
+            throw new IllegalArgumentException("El combo con ID " + combo + " no existe en el menú.");
         }
-
-        throw new IllegalArgumentException("El combo con ID " + comboID + " no existe en el menú.");
-
+        availableCombos.remove(combo);
+        comboDatabase.delete(combo);
     }
 
 
     public void editCombo(Combo combo) {
-        if (comboDatabase.update(combo)) {
-            return;
+        if (!isComboOnMenu(combo)) {
+            throw new IllegalArgumentException("ERROR: El combo no existe");
         }
 
-        throw new IllegalArgumentException("ERROR: El combo no existe");
-
+        availableCombos.set(availableCombos.indexOf(combo), combo);
+        comboDatabase.update(combo);
     }
 
     private boolean isComboNameTaken(String comboName) { //TODO no esta implemenmtado
-        return false;
+        return availableCombos.stream().anyMatch(combo -> combo.getName().equals(comboName));
     }
 
 
@@ -108,10 +130,9 @@ public class CafeteriaMenu {
     }
 
     public List<Product> getProducts() {
-        return productDatabase.readAll();
+        return availableProducts;
     }
 
-    //TODO: esto tiene uso?
     public void setProducts(List<Product> products) {
         for (Product product : products) {
             addProductToMenu(product);
