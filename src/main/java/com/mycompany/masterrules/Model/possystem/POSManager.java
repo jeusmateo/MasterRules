@@ -58,7 +58,7 @@ public class POSManager {
     //CONFIRMAR ENTREGA
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
-        currentOrder.addProductToOrderItemList(new OrderDetail(product));
+        currentOrder.addProductToOrderItemList(new OrderItem(product));
 
     }
 

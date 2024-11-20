@@ -47,9 +47,7 @@ abstract class Database<K, T> {
     }
 
     private static void sqliteExceptionHandler(GenericJDBCException e) {
-        if(e.getMessage().contains("SQLITE_CONSTRAINT_PRIMARYKEY")) {
-            throw new DuplicatePrimaryKeyException("La llave primaria de la entidad ya existe en la base de datos");
-        }
+        var errorCode = e.getSQLException();
     }
 
     public abstract T findById(K id);
