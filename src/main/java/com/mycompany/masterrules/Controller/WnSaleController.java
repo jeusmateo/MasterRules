@@ -229,10 +229,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     public void displayCategoriesForCustomCombo(int categoryIndex) {
         try {
-            if (categoryIndex < 0 || categoryIndex >= categories.size()) {
-                System.err.println("Índice de categoría fuera de rango: " + categoryIndex);
-                return;
-            }
 
             // Cargar el diseño de la vista de categorías
             FXMLLoader loader = new FXMLLoader();
@@ -319,12 +315,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
                 comboCardsScroller.getChildren().add(pane);
 
-                /*
-                pane.setOnMousePressed(event -> {
-                    pane.setStyle("-fx-background-color: lightgray");
-                    //pane.setStyle("-fx-background-color: white");
-                });
-                */
             } catch (Exception e) {
                 e.printStackTrace();
             }
