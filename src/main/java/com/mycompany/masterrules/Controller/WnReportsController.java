@@ -6,6 +6,8 @@ import com.mycompany.masterrules.Model.finanzas.CashRegister;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.mycompany.masterrules.Model.possystem.POSManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -164,6 +166,8 @@ public class WnReportsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        var posManager = POSManager.getInstance();
+        System.out.println(posManager.getCurrentUser());
         initializeCashOutFlowTable();
         initializeCashInFlowTable();
     }

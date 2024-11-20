@@ -46,7 +46,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     // ATRIBUTOS
     //-------------------------------------------------------------------------------------------
 
-    private POSManager posManager;
+    private POSManager posManager = POSManager.getInstance();
     private ToggleGroup group;
     private WnSaleController wnSaleSection;
     private int currentCategoryIndex = 0;
@@ -464,7 +464,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         paraLlevarMetodo.setToggleGroup(group);
         paraMesaMetodo.setToggleGroup(group);
 
-        posManager = new POSManager();
+        posManager = POSManager.getInstance();
+        System.out.println(posManager.getCurrentUser());
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
