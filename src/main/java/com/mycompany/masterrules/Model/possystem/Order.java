@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
+import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;
 
@@ -25,42 +26,44 @@ public class Order {
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount;
     @ElementCollection
-    private List<PedidoComanda> pedidoComandaList;
+    private List<OrderItem> orderItemList;
 
 
     public Order() {
-        pedidoComandaList = new ArrayList<>();
+        orderItemList = new ArrayList<>();
     }
 
-    public List<PedidoComanda> getPedidoComandaList() {
-        return pedidoComandaList;
+    public List<OrderItem> getPedidoComandaList() {
+        return orderItemList;
     }
+    //public List<Combo> combos;
 
     public BigDecimal calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-        for (PedidoComanda currentProduct : pedidoComandaList) {
+        for (OrderItem currentProduct : orderItemList) {
             calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
         }
         return calculatedTotalAmount;
     }
-    public void addProductToOrderItemList(PedidoComanda newPedidoComanda) {
+    public void addProductToOrderItemList(OrderItem newOrderItem) {
 
         boolean found = false;
 
-        if (!pedidoComandaList.isEmpty()) {
-            for (PedidoComanda p : pedidoComandaList) {
-                if (newPedidoComanda.getProduct().getId().equals(p.getProduct().getId())) {
-                    p.addQuantity();
+        if (!orderItemList.isEmpty()) {
+            for (OrderItem orderItem : orderItemList) {
+                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+
+                    orderItem.addQuantity();
                     found = true;
                     break; // Ya lo encontramos, no es necesario seguir iterando.
                 }
             }
             if (!found) {
-                pedidoComandaList.add(newPedidoComanda);
+                orderItemList.add(newOrderItem);
 
             }
         } else {
-            pedidoComandaList.add(newPedidoComanda);
+            orderItemList.add(newOrderItem);
 
         }
 
@@ -138,7 +141,7 @@ public class Order {
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
                 ", totalAmount=" + totalAmount +
-                ", products=" + pedidoComandaList +
+                ", products=" + orderItemList +
                 '}';
     }
 
@@ -155,12 +158,12 @@ public class Order {
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(totalAmount, order.totalAmount) &&
-                Objects.equals(pedidoComandaList, order.pedidoComandaList);
+                Objects.equals(orderItemList, order.orderItemList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, pedidoComandaList);
+        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderItemList);
     }
 }
 

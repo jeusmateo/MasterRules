@@ -1,25 +1,22 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-public class Combo extends Product {
 
-    @OneToMany(fetch = FetchType.EAGER)
+public class ComboCT  {
+    private String name;
+    private BigDecimal price;
+    private BigDecimal VIPPrice;
     private List<Product> products;
 
-    protected Combo() {
 
-    }
 
-    public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
-        super(comboName, price, VIPPrice);
-        this.products = products;
-    }
 
     public List<Product> getProducts() {
         return products;
@@ -34,7 +31,7 @@ public class Combo extends Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Combo combo = (Combo) o;
+        ComboCT combo = (ComboCT) o;
         return Objects.equals(products, combo.products);
     }
 

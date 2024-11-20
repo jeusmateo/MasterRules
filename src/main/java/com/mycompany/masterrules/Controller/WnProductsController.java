@@ -4,9 +4,7 @@ import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
-import com.mycompany.masterrules.Model.possystem.PedidoComanda;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
-import com.mycompany.masterrules.Model.storage.StockInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +24,6 @@ import javafx.scene.layout.FlowPane;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

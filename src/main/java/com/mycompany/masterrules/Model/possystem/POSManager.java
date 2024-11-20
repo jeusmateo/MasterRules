@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
@@ -18,18 +19,15 @@ import com.mycompany.masterrules.Model.customers.Customer;
 //Este wey se encarga de vender
 
 
-
-
 public class POSManager {
 
 
     private UserAccount currentUser;
     private Order currentOrder;
 
-    public POSManager( UserAccount userAccount) {
+    public POSManager(UserAccount userAccount) {
 
         currentUser = userAccount;
-
 
 
         currentOrder = new Order();
@@ -58,12 +56,17 @@ public class POSManager {
     //CONFIRMAR ENTREGA
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
-        currentOrder.addProductToOrderItemList(new PedidoComanda(product));
+        if (product instanceof InventoriableProduct && ((InventoriableProduct) product).isStockAvailable()) {
+
+            currentOrder.addProductToOrderItemList(new OrderItem(product));
+            ((InventoriableProduct) product).removeFromInventory();
+
+        }
+        currentOrder.addProductToOrderItemList(new OrderItem(product));
 
     }
 
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
-
 
 
         currentOrder.setCustomer(customer);
@@ -81,7 +84,7 @@ public class POSManager {
     }
 
     private Bill createBill(PaymentDetails data) {
-        if(data.getCustomer() != null){
+        if (data.getCustomer() != null) {
             Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
@@ -94,7 +97,7 @@ public class POSManager {
                     break;
                 case "STORE_CREDIT":
 
-                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
 
                     break;
                 default:
@@ -102,7 +105,7 @@ public class POSManager {
 
             }
             return newBill;
-        }else{
+        } else {
             Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
@@ -115,7 +118,7 @@ public class POSManager {
                     break;
                 case "STORE_CREDIT":
 
-                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
 
                     break;
                 default:
@@ -123,8 +126,6 @@ public class POSManager {
             }
             return newBill;
         }
-
-
 
 
     }
@@ -170,6 +171,8 @@ public class POSManager {
     }
 */
 
-public Order getCurrentOrder() {return currentOrder;}
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
 
 }

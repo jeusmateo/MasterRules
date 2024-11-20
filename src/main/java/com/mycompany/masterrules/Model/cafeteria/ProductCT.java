@@ -1,60 +1,33 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
 import com.mycompany.masterrules.Model.storage.StockInfo;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 
-/*
- * TODO: Mapear correctamente la tabla de la base de datos con la clase Product
- *  y modificarlo segun los requerimientos
- * */
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Product {
-    @Id
-    private String id;
+
+public class ProductCT {
     private String name;
-    private String type;
+    private String category;
     private BigDecimal price;
     private BigDecimal VIPPrice;
 
-    @Embedded
-    private StockInfo stockInfo;
 
-    public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
-        this.id = productID;
+    public ProductCT(String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
         this.name = productName;
-        this.type = productType;
+        this.category = productType;
         this.price = price;
         this.VIPPrice = VIPPrice;
-        this.stockInfo = new StockInfo();
     }
 
-    public Product(String productName,  BigDecimal price, BigDecimal VIPPrice) {
-        // id generado automaticamente
-        this.id = String.valueOf(hashCode());
+    public ProductCT(String productName, BigDecimal price, BigDecimal VIPPrice) {
         this.name = productName;
-        this.type = "combo";
+        this.category = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
-        this.stockInfo = new StockInfo();
     }
 
-    public String getId() {
-        return id;
-    }
-    /*
-    public long getID() {
-    return ID;
-    }
-     */
-
-    public void setId(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
-        this.id = productID;
-    }
 
     public String getName() {
         return name;
@@ -64,19 +37,15 @@ public class Product {
         this.name = productName;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String productType) {
-        this.type = productType;
+    public void setCategory(String productType) {
+        this.category = productType;
     }
 
-    /*
-    public void setID(long ID) {//creo que este se debe eliminar junto con los otros setters de ids
-    this.ID = ID;
-    }
-     */
+
 
     public BigDecimal getPrice() {
         return price;
@@ -94,43 +63,8 @@ public class Product {
         this.VIPPrice = VIPPrice;
     }
 
-    protected Product() {
+    protected ProductCT() {
 
     }
 
-    public StockInfo getStockInfo() {
-        return stockInfo;
-    }
-
-    public void setStockInfo(StockInfo stockInfo) {
-        this.stockInfo = stockInfo;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productID='" + id + '\'' +
-                ", productName='" + name + '\'' +
-                ", productType='" + type + '\'' +
-                ", price=" + price +
-                ", VIPPrice=" + VIPPrice +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(type, product.type) &&
-                price.compareTo(product.price) == 0 &&
-                VIPPrice.compareTo(product.VIPPrice) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, type, price, VIPPrice);
-    }
 }

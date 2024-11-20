@@ -15,7 +15,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.possystem.POSManager;
 import com.mycompany.masterrules.Model.possystem.PaymentDetails;
-import com.mycompany.masterrules.Model.possystem.PedidoComanda;
+import com.mycompany.masterrules.Model.possystem.OrderItem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -137,13 +137,13 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private RadioButton paraMesaMetodo;
 
     @FXML
-    private TableView<PedidoComanda> tblOrder;
+    private TableView<OrderItem> tblOrder;
     @FXML
-    private TableColumn<PedidoComanda, String> colAmount;
+    private TableColumn<OrderItem, String> colAmount;
     @FXML
-    private TableColumn<PedidoComanda, String> colProduct;
+    private TableColumn<OrderItem, String> colProduct;
     @FXML
-    private TableColumn<PedidoComanda, String> colPrice; // este si es un String?
+    private TableColumn<OrderItem, String> colPrice; // este si es un String?
     @FXML
     private TableView<?> tblAuxiliarCustomCombo;
     @FXML
@@ -469,8 +469,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
-        List<PedidoComanda> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
-        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList();
+        List<OrderItem> chepo1 = posManager.getCurrentOrder().getPedidoComandaList();
+        ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList();
         colAmount.setReorderable(false);
 
         colAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity())));
@@ -520,9 +520,9 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
 
     @Override
-    public void onProductSelected(Product product) {
+        public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
-        ObservableList<PedidoComanda> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
+        ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
