@@ -59,6 +59,8 @@ public class WnCustomersController implements Initializable {
     private Tab tabCustomerAccount;
 
     @FXML
+    private Label lbEditCustomerName;
+    @FXML
     private Label lbLoyaltyPoints;
     @FXML
     private Label lbCustomerName;
@@ -90,6 +92,10 @@ public class WnCustomersController implements Initializable {
     private TextField txtEditCustomerStoreCredit;
     @FXML
     private TextField txtEditCustomerLoyaltyPoints;
+    @FXML
+    private TextField txtEditCustomerPhoneNumber;
+    @FXML
+    private TextField txtFieldEditCustomerName;
 
 
     @FXML
@@ -222,52 +228,23 @@ public class WnCustomersController implements Initializable {
     // TODO: REFACTORIZAR LEGIBILIDAD POR QUE ESA MADRE DE ULTIMO TA LARGA
     private void editCustomerInfo() {
         String customerId = lbCustomerIdAuxiliar.getText();
+        String newCustomerName = txtFieldEditCustomerName.getText();
         String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
-        customerManager.updateCustomerData(customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity);
+        String newCustomerPhoneNumber = txtEditCustomerPhoneNumber.getText();
+        customerManager.updateCustomerData( newCustomerName,customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity, newCustomerPhoneNumber);
     }
 
-
-    //Esto se factorizo, revbisen si lo hizo gpt bien
-//    @FXML
-//    private void eventKey(KeyEvent event) {
-//        Object evt = event.getSource();
-//        if (evt.equals(txtNewCustomerName)) {
-//            if (event.getCharacter().equals("\r")) {
-//                txtNewCustomerPhoneNumber.requestFocus();
-//                event.consume();
-//            }
-//        } else if (evt.equals(txtEditCustomerStoreCredit)) {
-//            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-//                event.consume();
-//            }
-//        } else if (evt.equals(txtNewCustomerPhoneNumber)) {
-//            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-//                event.consume();
-//            } else if (event.getCharacter().equals("\r")) {
-//                txtNewCustomerLoyaltyPoints.requestFocus();
-//                event.consume();
-//            }
-//        } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
-//            if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
-//                event.consume();
-//            } else if (event.getCharacter().equals("\r")) {
-//                chkNewCustomerVipStatus.requestFocus();
-//                event.consume();
-//            }
-//        }
-//    }
 
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
-
         if (evt.equals(txtNewCustomerName)) {
             handleNewCustomerName(event);
         } else if (evt.equals(txtEditCustomerStoreCredit)) {
             handleEditCustomerStoreCredit(event);
-        } else if (evt.equals(txtNewCustomerPhoneNumber)) {
+        } else if (evt.equals(txtNewCustomerPhoneNumber) || evt.equals(txtEditCustomerPhoneNumber)) {
             handleNewCustomerPhoneNumber(event);
         } else if (evt.equals(txtNewCustomerLoyaltyPoints) || evt.equals(txtEditCustomerLoyaltyPoints)) {
             handleLoyaltyPoints(event);
@@ -275,7 +252,9 @@ public class WnCustomersController implements Initializable {
     }
 
     private void handleNewCustomerName(KeyEvent event) {
-        if (event.getCharacter().equals("\r")) {
+        if ( !event.getCharacter().matches("[\\p{L} ]")) {
+            event.consume();
+        } else if (event.getCharacter().equals("\r")) {
             txtNewCustomerPhoneNumber.requestFocus();
             event.consume();
         }
@@ -327,14 +306,19 @@ public class WnCustomersController implements Initializable {
         txtNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtEditCustomerStoreCredit.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtEditCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }
 
     private void configTableColumns() {
         colCustomerId.setReorderable(false);
+        colCustomerId.setReorderable(false);
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colCustomerName.setReorderable(false);
+        colCustomerName.setResizable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
+
+
 
     private void configTableSelection() {
         tblCustomers.getSelectionModel().selectedItemProperty().addListener(
@@ -369,12 +353,13 @@ public class WnCustomersController implements Initializable {
 
     private void showCustomerDetailsForUpdate(Customer customer) {
         if (customer != null) {
-            //lbCustomerName.setText(customer.getCustomerName());
+            lbEditCustomerName.setText(customer.getCustomerName());
+            txtFieldEditCustomerName.setText(customer.getCustomerName());
             lbCustomerIdAuxiliar.setText(customer.getID());
             txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
-            //lbCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
+            txtEditCustomerPhoneNumber.setText(String.valueOf(customer.getCustomerPhoneNumber()));
         } else {
             clearTextFields();
         }
