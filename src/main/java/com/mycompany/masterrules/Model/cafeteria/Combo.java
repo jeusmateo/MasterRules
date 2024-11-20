@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Combo extends Product {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> products;
 
     protected Combo() {
@@ -19,6 +19,7 @@ public class Combo extends Product {
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
         super(comboName, price, VIPPrice);
         this.products = products;
+        this.setId(String.valueOf(hashCode()));
     }
 
     public List<Product> getProducts() {

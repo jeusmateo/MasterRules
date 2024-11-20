@@ -1,15 +1,13 @@
 package com.mycompany.masterrules.Model.possystem;
 
 
-import java.time.LocalDateTime;
-
-
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
-import com.mycompany.masterrules.Model.cafeteria.Product;
-import com.mycompany.masterrules.Model.customers.Customer;
+import java.time.LocalDateTime;
 
 /**
  * @author David Torres
@@ -18,20 +16,29 @@ import com.mycompany.masterrules.Model.customers.Customer;
 //Este wey se encarga de vender
 
 
-
-
 public class POSManager {
 
+    private final UserAccount currentUser;
+    private final Order currentOrder;
+    private static POSManager instance;
 
-    private UserAccount currentUser;
-    private Order currentOrder;
+    public static synchronized POSManager getInstance() {
+        if (instance == null) {
+            instance = new POSManager();
+        }
+        return instance;
+    }
 
-    public POSManager( UserAccount userAccount) {
+    // initialize the POSManager with a userAccount
+    public static synchronized POSManager getInstance(UserAccount userAccount) {
+        if (instance == null) {
+            instance = new POSManager(userAccount);
+        }
+        return instance;
+    }
 
+    public POSManager(UserAccount userAccount) {
         currentUser = userAccount;
-
-
-
         currentOrder = new Order();
     }
 
@@ -39,7 +46,6 @@ public class POSManager {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
         currentUser = bd.findById("1");
-
 
     }
 
@@ -65,7 +71,6 @@ public class POSManager {
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
 
-
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
@@ -81,7 +86,7 @@ public class POSManager {
     }
 
     private Bill createBill(PaymentDetails data) {
-        if(data.getCustomer() != null){
+        if (data.getCustomer() != null) {
             Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
@@ -94,7 +99,7 @@ public class POSManager {
                     break;
                 case "STORE_CREDIT":
 
-                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
 
                     break;
                 default:
@@ -102,7 +107,7 @@ public class POSManager {
 
             }
             return newBill;
-        }else{
+        } else {
             Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
             switch (data.getMetodoDePago()) {
                 case "CASH":
@@ -115,7 +120,7 @@ public class POSManager {
                     break;
                 case "STORE_CREDIT":
 
-                        newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
 
                     break;
                 default:
@@ -123,8 +128,6 @@ public class POSManager {
             }
             return newBill;
         }
-
-
 
 
     }
@@ -135,12 +138,6 @@ public class POSManager {
         ArchiveInvoice ai = new ArchiveInvoice();
         ai.ArchiveBill(bill);
     }
-
-
-
-
-
-
 
     /*
     public void collectDebt(Customer customerArg, Debt debtArg) {
@@ -170,6 +167,8 @@ public class POSManager {
     }
 */
 
-public Order getCurrentOrder() {return currentOrder;}
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
 
 }

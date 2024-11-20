@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Random;
-
 
 /*
  * TODO: Mapear correctamente la tabla de la base de datos con la clase Product
@@ -35,13 +33,12 @@ public class Product {
     }
 
     public Product(String productName,  BigDecimal price, BigDecimal VIPPrice) {
-        // id generado automaticamente
-        this.id = String.valueOf(hashCode());
         this.name = productName;
         this.type = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
         this.stockInfo = new StockInfo();
+        this.id = String.valueOf(hashCode());
     }
 
     public String getId() {
