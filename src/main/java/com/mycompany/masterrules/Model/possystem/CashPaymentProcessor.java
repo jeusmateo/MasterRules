@@ -3,8 +3,8 @@ package com.mycompany.masterrules.Model.possystem;
 import java.math.BigDecimal;
 
 public class CashPaymentProcessor extends PaymentProcessor {
-    private BigDecimal customerCashAmount;
-    private BigDecimal changeAmount;
+    private final BigDecimal customerCashAmount;
+    private final BigDecimal changeAmount;
 
     public CashPaymentProcessor(BigDecimal totalAmount, BigDecimal customerCashAmount){
         super(totalAmount);

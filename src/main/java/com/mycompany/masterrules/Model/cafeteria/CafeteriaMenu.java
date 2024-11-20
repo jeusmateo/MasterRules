@@ -29,8 +29,16 @@ public class CafeteriaMenu {
     }
 
     private void readFromDatabase() {
-        availableProducts.addAll(productDatabase.readAll());
-        availableCombos.addAll(comboDatabase.readAll());
+
+        var allProducts = productDatabase.readAll();
+
+        for (var actualProduct : allProducts) {
+            if (actualProduct.getClass() == Combo.class) {
+                availableCombos.add((Combo) actualProduct);
+            } else {
+                availableProducts.add(actualProduct);
+            }
+        }
     }
 
 
@@ -140,7 +148,7 @@ public class CafeteriaMenu {
     }
 
     public List<Combo> getCombos() {
-        return comboDatabase.readAll();
+        return availableCombos;
     }
 
     public void setCombos(List<Combo> combos) {

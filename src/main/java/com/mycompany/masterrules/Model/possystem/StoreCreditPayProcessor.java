@@ -6,25 +6,26 @@ import com.mycompany.masterrules.Model.customers.Customer;
 import java.math.BigDecimal;
 
 public class StoreCreditPayProcessor extends PaymentProcessor {
-    private BigDecimal storeCreditAmount;
     private Customer customer;
 
-    public StoreCreditPayProcessor(BigDecimal totalAmount, BigDecimal customerStoreCredit, Customer customer){
+    public StoreCreditPayProcessor(BigDecimal totalAmount, Customer customer){
         super(totalAmount);
-        this.storeCreditAmount = customerStoreCredit;
         this.customer =  customer;
-
     }
 
     @Override
     public PaymentDetails paymentProcess() {
-        if(customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount())>=0){
+        if(hasEnoughCredit()){
             customer.getCustomerAccount().setStoreCredit(customer.getCustomerAccount().getStoreCredit().subtract(this.getTotalAmount()));
         }
         PaymentDetails paymentDetails= new PaymentDetails("STORE_CREDIT",this.getTotalAmount());
         paymentDetails.setCustomer(customer);
         paymentDetails.setPaymentDescription(paymentDescription());;
         return paymentDetails;
+    }
+
+    private boolean hasEnoughCredit() {
+        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount()) >= 0;
     }
 
     @Override

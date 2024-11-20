@@ -12,20 +12,16 @@ public abstract class PaymentProcessor {
         this.totalAmount = totalAmount;
     }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    protected void processPayment(){}
-
     public abstract PaymentDetails paymentProcess();
 
     public abstract String paymentDescription();
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 }
 
