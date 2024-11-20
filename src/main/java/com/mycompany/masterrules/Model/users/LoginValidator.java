@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Model.users;
 
 import com.mycompany.masterrules.Database.UserDatabase;
 
+@Deprecated
 public class LoginValidator {
     private final UserDatabase userDatabaseManager;
 

@@ -8,6 +8,7 @@ import com.mycompany.masterrules.Model.possystem.POSManager;
 import com.mycompany.masterrules.Model.users.LoginValidator;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserManager;
+import com.mycompany.masterrules.Model.users.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ public class WnLoginController implements Initializable {
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
-    private final LoginValidator loginValidator = new LoginValidator();
+    private final UserManager userManager = new UserManager();
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
@@ -54,6 +55,7 @@ public class WnLoginController implements Initializable {
         } else if (evt.equals(txtFieldPassword)) {
             handlePasswordInput(event);
         } else if (evt.equals(btnLogin) && isEnterKey(event)) {
+            event.consume();
             handleLogin(event);
         }
     }
@@ -76,21 +78,21 @@ public class WnLoginController implements Initializable {
         }
     }
 
-    private void handleLogin(KeyEvent event) {
-        event.consume();
-        String user = txtFieldUserName.getText();
-        String pass = txtFieldPassword.getText();
-
-        try {
-            if (loginValidator.validateUser(user, pass)) {
-
-                loadStage(event);
-            }
-        } catch (Throwable e) {
-            System.err.println("Error al validar usuario: " + e.getMessage());
-            lbIncorrectCredential.setVisible(true); // Muestra mensaje de error
-        }
-    }
+//    private void handleLogin(KeyEvent event) {
+//        event.consume();
+//        String user = txtFieldUserName.getText();
+//        String pass = txtFieldPassword.getText();
+//
+//        try {
+//            if (loginValidator.validateUser(user, pass)) {
+//
+//                loadStage(event);
+//            }
+//        } catch (Throwable e) {
+//            System.err.println("Error al validar usuario: " + e.getMessage());
+//            lbIncorrectCredential.setVisible(true); // Muestra mensaje de error
+//        }
+//    }
 
     private boolean isEnterKey(KeyEvent event) {
         return event.getCharacter().equals("\r");
@@ -100,25 +102,23 @@ public class WnLoginController implements Initializable {
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
         if (evt.equals(btnLogin)) {
-            String user = txtFieldUserName.getText();
-            String pass = txtFieldPassword.getText();
-            try {
-                if (loginValidator.validateUser(user, pass)) {
-                    var userManager = new UserManager();
-                    var userAccount = userManager.getUser(user);
-                    var posManager = POSManager.getInstance();
-                    posManager.setCurrentUser(userAccount);
-                    loadStage(event);
-                } else {
-                    lbIncorrectCredential.setVisible(true);
-                }
-            } catch (Exception e) {
-                System.err.println("Error al validar usuario: " + e);
-                lbIncorrectCredential.setVisible(true);
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
+            event.consume();
+            handleLogin(event);
+        }
+    }
 
+    private void handleLogin(Event event) {
+        var obtainedUsername = txtFieldUserName.getText();
+        var obtainedPassword = txtFieldPassword.getText();
+        try {
+            var foundUser = userManager.getUser(obtainedUsername, obtainedPassword);
+            if(foundUser.isPresent()){
+                POSManager.getInstance().setCurrentUser(foundUser.get());
+                loadStage(event);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al validar usuario: " + e);
+            lbIncorrectCredential.setVisible(true);
         }
     }
 

@@ -4,6 +4,7 @@ import com.mycompany.masterrules.Database.UserDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserManager {
 
@@ -26,14 +27,25 @@ public class UserManager {
         userDatabaseManager.save(newUser);
     }
 
-    public UserAccount getUser(String username) throws UserNotFoundException {
-        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username));
-
-        if (findUser.isEmpty()) {
-            throw new UserNotFoundException(username + " no encontrado");
+    public Optional<UserAccount> getUser(String username, String password) throws Exception {
+        if(!isUserRegistered(username)){
+            throw new Exception("Usuario no registrado");
         }
-        return findUser.get();
+        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username) && user.getPassword().equals(password));
+        if (findUser.isEmpty()) {
+            throw new UserNotFoundException("Usuario no encontrado");
+        }
+        return findUser;
     }
+
+//    public Optional<UserAccount> getUser(String username) throws UserNotFoundException {
+//        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username));
+//
+//        if (findUser.isEmpty()) {
+//            throw new UserNotFoundException(username + " no encontrado");
+//        }
+//        return findUser;
+//    }
 
     public void updateUserInformation(UserAccount editedUserAccount) {
         if (!isValid(editedUserAccount)) {
@@ -44,7 +56,7 @@ public class UserManager {
     }
 
     private boolean isValid(UserAccount newUser) {
-        return !isUserRegistered(newUser) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
+        return !isUserRegistered(newUser.getUserName()) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
     }
 
     public void removeUser(String userID) throws UserNotFoundException {
@@ -57,8 +69,8 @@ public class UserManager {
         userDatabaseManager.delete(findUser.get());
     }
 
-    private boolean isUserRegistered(UserAccount user) {
-        return allUsers.contains(user);
+    private boolean isUserRegistered(String user) {
+        return allUsers.stream().anyMatch(userAccount -> userAccount.getUserName().equals(user));
     }
 
     private boolean isUsernameValid(String username) {//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
