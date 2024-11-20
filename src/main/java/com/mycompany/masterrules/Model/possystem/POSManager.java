@@ -37,12 +37,12 @@ public class POSManager {
         return instance;
     }
 
-    public POSManager(UserAccount userAccount) {
+    private POSManager(UserAccount userAccount) {
         currentUser = userAccount;
         currentOrder = new Order();
     }
 
-    public POSManager() {
+    private POSManager() {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
         currentUser = bd.findById("1");

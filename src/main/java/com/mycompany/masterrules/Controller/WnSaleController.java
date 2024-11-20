@@ -465,7 +465,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         paraLlevarMetodo.setToggleGroup(group);
         paraMesaMetodo.setToggleGroup(group);
 
-        posManager = new POSManager();
+        posManager = POSManager.getInstance();
 
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
