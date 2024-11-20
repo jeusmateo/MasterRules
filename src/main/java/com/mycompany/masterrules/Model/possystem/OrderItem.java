@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
+import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import jakarta.persistence.*;
 
@@ -7,6 +8,8 @@ import java.math.BigDecimal;
 
 @Embeddable
 public class OrderItem {
+    private String itemName;
+
     private int quantity;
     @OneToOne
     private Product product;
@@ -15,7 +18,9 @@ public class OrderItem {
     protected OrderItem() {
     }
 
+
     public OrderItem(Product product) {
+        this.itemName = product.getName();
         this.quantity = 1;
         this.product = product;
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));

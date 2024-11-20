@@ -277,7 +277,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
         ObservableList<Product> productDataList = FXCollections.observableArrayList(productsOnMenu);
-        ObservableList<Product> comboDataList = FXCollections.observableArrayList();
+
 
 
         for (Product currentProduct : productDataList) {
@@ -303,12 +303,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
 
         }
-        List<Product> prueba = new ArrayList<>();
-        BigDecimal prueba1 = new BigDecimal("30");
-        BigDecimal prueba2 = new BigDecimal("15");
-        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
-        comboDataList.add(combo);
+        List<Combo> prueba = new ArrayList<>();
+        prueba = menu.getCombos();
 
+        ObservableList<Product> comboDataList = FXCollections.observableArrayList(prueba);
         for (Product currentProductCombo : comboDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
@@ -317,6 +315,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 ItemCardProductController cardController = load.getController();
 
                 cardController.setProductDataToCard(currentProductCombo);
+                cardController.setSelectionListener(this);
 
                 comboCardsScroller.getChildren().add(pane);
 
@@ -520,7 +519,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
 
     @Override
-    public void onProductSelected(Product product) {
+        public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
