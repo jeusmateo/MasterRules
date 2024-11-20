@@ -1,13 +1,13 @@
 package com.mycompany.masterrules.Model.customers;
 
 
+import com.mycompany.masterrules.Model.possystem.Debt;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import com.mycompany.masterrules.Model.possystem.Debt;
-import jakarta.persistence.*;
 
 // TODO: Clase temporal para que no de errores (antiguo)
 @Embeddable
@@ -24,7 +24,7 @@ public class CustomerAccount {
 
     //TODO: DOS CONSTRUCTORES?
 
-    public CustomerAccount(){
+    public CustomerAccount() {
         this.loyaltyPoints = 0;
         this.storeCredit = BigDecimal.ZERO;
         this.isVIP = false;
@@ -32,7 +32,8 @@ public class CustomerAccount {
         this.loyaltyCard = new LoyaltyCard(); //Debemos generar su ID
 
     }
-     public CustomerAccount(int loyaltyPoints, boolean vipStatus){
+
+    public CustomerAccount(int loyaltyPoints, boolean vipStatus) {
         this.loyaltyPoints = loyaltyPoints;
         this.storeCredit = BigDecimal.ZERO;
         this.isVIP = vipStatus;
@@ -66,7 +67,7 @@ public class CustomerAccount {
         this.totalDebt = totalDebt;
     }
 
-    public void addDebt(Debt debt){
+    public void addDebt(Debt debt) {
         this.totalDebt.add(debt);
     }
 
@@ -87,7 +88,6 @@ public class CustomerAccount {
     }
 
 
-
     @Override
     public String toString() {
         return "CustomerAccount{" +
@@ -99,21 +99,20 @@ public class CustomerAccount {
                 '}';
     }
 
-    // TODO: This class overrides "hashCode()" and should therefore also override "equals()".
-//    @Override
-//    todo ESTA COSA ES LO Q ME DA COPILOT, PERO HAY QUE VERIFICARLO
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        CustomerAccount that = (CustomerAccount) o;
-//        return loyaltyPoints == that.loyaltyPoints &&
-//                isVIP == that.isVIP &&
-//                Objects.equals(storeCredit, that.storeCredit) &&
-//                Objects.equals(totalDebt, that.totalDebt) &&
-//                Objects.equals(loyaltyCard, that.loyaltyCard);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerAccount that = (CustomerAccount) o;
+        return loyaltyPoints == that.loyaltyPoints &&
+                isVIP == that.isVIP &&
+                storeCredit.compareTo(that.storeCredit) == 0 &&
+                Objects.equals(totalDebt, that.totalDebt) &&
+                Objects.equals(loyaltyCard, that.loyaltyCard);
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt);
+        return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt, loyaltyCard);
     }
 }

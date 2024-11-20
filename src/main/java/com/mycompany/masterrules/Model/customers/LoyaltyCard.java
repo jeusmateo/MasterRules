@@ -3,7 +3,7 @@ package com.mycompany.masterrules.Model.customers;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
-
+// TODO ELIMINAR ESTA CLASE SUBIRLA COMO ATRIBUTO DE LA CUENTA
 @Embeddable
 public class LoyaltyCard {
     @Column(name = "LoayltyCardID")
