@@ -39,7 +39,7 @@ class UserManagerTest {
         userManager.registerNewUser(new UserAccount("Chepo", "Chepo", "Josue David Torres Tec"));
         userManager.registerNewUser(new UserAccount("Chepo", "Chepo", "Josue David Torres Tec"));
 
-        assertNotNull(userManager.getUserAccounts());
+        assertNotNull(userManager.getAllUsers());
     }
 
 }

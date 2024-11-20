@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.mycompany.masterrules.Model.possystem.POSManager;
 import com.mycompany.masterrules.Model.users.LoginValidator;
 import com.mycompany.masterrules.Model.users.UserAccount;
+import com.mycompany.masterrules.Model.users.UserManager;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -98,13 +99,15 @@ public class WnLoginController implements Initializable {
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        var posManager = POSManager.getInstance(new UserAccount("admin", "admin","admin"));
         if (evt.equals(btnLogin)) {
             String user = txtFieldUserName.getText();
             String pass = txtFieldPassword.getText();
             try {
                 if (loginValidator.validateUser(user, pass)) {
-
+                    var userManager = new UserManager();
+                    var userAccount = userManager.getUser(user);
+                    var posManager = POSManager.getInstance();
+                    posManager.setCurrentUser(userAccount);
                     loadStage(event);
                 } else {
                     lbIncorrectCredential.setVisible(true);
