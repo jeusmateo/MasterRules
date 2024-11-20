@@ -18,6 +18,9 @@ public class OrderItem {
     protected OrderItem() {
     }
 
+    public void removeQuantity() {
+        this.quantity--;
+    }
 
     public OrderItem(Product product) {
         this.itemName = product.getName();
