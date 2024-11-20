@@ -165,6 +165,7 @@ public class WnPaymentController implements Initializable {
             }
         } else if (evt.equals(btnPayMP)) {
             BigDecimal remainingPayment = new BigDecimal(txtFieldRemainingPayment.getText());
+            PaymentProcessor processor = new MixPaymentProcessor(totalAmount);
             if (remainingPayment.compareTo(BigDecimal.ZERO) > 0) {
                 // Mostrar error: falta cubrir el monto total
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -173,11 +174,30 @@ public class WnPaymentController implements Initializable {
                 alert.setContentText("El monto total no ha sido cubierto.");
                 alert.showAndWait();
             } else {
-                BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText());
-                BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText());
-                BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText());
 
-                PaymentProcessor processor = new MixPaymentProcessor(totalAmount);
+                if(txtFieldCardIncomeMP.getText()==null ||txtFieldCardIncomeMP.getText().isEmpty() ){
+                    BigDecimal cardIncome= BigDecimal.ZERO;
+                }else{
+                    BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText());
+                    ((MixPaymentProcessor) processor).addPaymentMethod(new DebitCardPaymenthProcessor(cardIncome, cardIncome, ""));
+                }
+                if(txtFieldCashIncomeMP.getText()==null|| txtFieldCashIncomeMP.getText().isEmpty()){
+                    BigDecimal cashIncome= BigDecimal.ZERO;
+                }
+                else{
+                    BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText());
+                    ((MixPaymentProcessor) processor).addPaymentMethod(new CashPaymentProcessor(cashIncome, cashIncome));
+                }
+                if(txtFieldStoreCreditIncomeMP.getText()==null|| txtFieldStoreCreditIncomeMP.getText().isEmpty()){
+                    BigDecimal storeCreditIncome= BigDecimal.ZERO;
+                }else{
+                    BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText());
+                    ((MixPaymentProcessor) processor).addPaymentMethod(new StoreCreditPayProcessor(storeCreditIncome,customer));
+                }
+
+
+
+
                 this.resultPayementDetails = processor.paymentProcess();
 
                 Stage stage = (Stage) btnPayMP.getScene().getWindow();
