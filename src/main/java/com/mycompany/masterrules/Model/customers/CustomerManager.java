@@ -14,12 +14,17 @@ public class CustomerManager {
         customerDatabase.delete(customer);
     }
 
-    public void updateCustomerData(String id, String loyaltyPoints, boolean vipStatus, String storeCredit) {
+    public void updateCustomerData(String id, String newName, String loyaltyPoints, boolean vipStatus, String storeCredit, String newPhoneNumber) {
         Customer customer = customerDatabase.findById(id);
         assert customer != null;
+        if(customer == null){
+            System.out.println("No se encontró el cliente");
+        }
+        customer.setCustomerName(newName);
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
         customer.getCustomerAccount().setIsVIP(vipStatus);
         customer.getCustomerAccount().setStoreCredit(new BigDecimal(storeCredit));
+        customer.setCustomerPhoneNumber(newPhoneNumber);
         customerDatabase.update(customer);
     }
 

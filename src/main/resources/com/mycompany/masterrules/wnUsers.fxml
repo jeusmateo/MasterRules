@@ -13,7 +13,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -47,8 +46,8 @@
                                              <children>
                                                 <Group>
                                                    <children>
-                                                      <TextField fx:id="txtFieldCreateUserCompleteName" layoutX="163.0" prefHeight="25.0" prefWidth="333.0" />
-                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="137.0" text="Nombre de usuario:">
+                                                      <TextField fx:id="txtFieldCreateUserCompleteName" layoutX="163.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="333.0" />
+                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="137.0" text="Nombre completo">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -308,7 +307,7 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txtFieldCreateUserName" layoutX="450.0" layoutY="154.0" prefHeight="26.0" prefWidth="146.0" />
+                                          <TextField fx:id="txtFieldCreateUserName" layoutX="450.0" layoutY="154.0" onKeyTyped="#eventKey" prefHeight="26.0" prefWidth="146.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -342,7 +341,7 @@
                                                 <Group>
                                                    <children>
                                                       <TextField fx:id="txtEditUserCompleteName" layoutX="163.0" prefHeight="25.0" prefWidth="333.0" />
-                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="137.0" text="Nombre de usuario:">
+                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="137.0" text="Nombre completo:">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -597,12 +596,12 @@
                                                 </Tab>
                                              </tabs>
                                           </TabPane>
-                                          <HBox layoutX="287.0" layoutY="157.0" spacing="130.0" AnchorPane.bottomAnchor="373.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="157.0">
+                                          <Group layoutX="290.0" layoutY="156.8000030517578">
                                              <children>
-                                                <Label text="User" />
-                                                <TextField fx:id="textEditUserName" />
+                                                <Label layoutY="0.1999969482421875" prefHeight="20.0" prefWidth="130.0" text="Nombre de usuario:" />
+                                                <TextField fx:id="textEditUserName" layoutX="158.79998779296875" />
                                              </children>
-                                          </HBox>
+                                          </Group>
                                           <Button fx:id="btnDeleteUserAccount" layoutX="556.0" layoutY="448.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="41.0" prefWidth="156.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Borrar Usuario" />
                                        </children>
                                     </AnchorPane>
