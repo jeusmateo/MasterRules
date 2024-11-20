@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class WnReportsController implements Initializable {
@@ -111,6 +112,7 @@ public class WnReportsController implements Initializable {
 
     }
 
+
     /**
      * Muestra la ventana principal de reportes. Sale de la ventana DoInflow.
      * Acepta la entrada de efectivo
@@ -174,6 +176,7 @@ public class WnReportsController implements Initializable {
         System.out.println(posManager.getCurrentUser());
         initializeCashOutFlowTable();
         initializeCashInFlowTable();
+        configTextFields();
     }
 
     // Configura la tabla y los datos para Cash Out Flow
@@ -215,5 +218,19 @@ public class WnReportsController implements Initializable {
         tableViewlInFlowReport.refresh();
     }
 
+    private void configTextFields(){
+        txtFieldAmountInflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtFieldAmountOutflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(txtFieldAmountInflow) || evt.equals(txtFieldAmountOutflow)) {
+            if (!event.getCharacter().matches("\\d")) {
+                event.consume();
+            }
+        }
+    }
 
 }

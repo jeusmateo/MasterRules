@@ -7,29 +7,17 @@ import java.util.Objects;
 @Entity
 public class Customer {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String ID;
-    private String customerName;
-    @Column(unique = true, length = 16)
+    @Column(length = 16)
     private String customerPhoneNumber;
+    private String customerName;
     @Embedded
     private CustomerAccount customerAccount;
-
 
     public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public String getCustomerName() {
@@ -56,32 +44,20 @@ public class Customer {
         this.customerAccount = customerAccount;
     }
 
+    protected Customer() {}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(ID, customer.ID) && Objects.equals(customerName, customer.customerName) && Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) && Objects.equals(customerAccount, customer.customerAccount);
-    }
-
-
-
-    protected Customer() {
+        return Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) &&
+                Objects.equals(customerName, customer.customerName) &&
+                Objects.equals(customerAccount, customer.customerAccount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, customerName, customerPhoneNumber, customerAccount);
-    }
-
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "ID=" + ID +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
-                ", customerAccount=" + customerAccount +
-                '}';
+        return Objects.hash(customerPhoneNumber, customerName, customerAccount);
     }
 }
