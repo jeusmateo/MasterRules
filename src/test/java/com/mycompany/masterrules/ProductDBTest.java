@@ -1,10 +1,13 @@
 package com.mycompany.masterrules;
 
+import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
+import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,4 +61,20 @@ public class ProductDBTest {
 
     }
 
+    @Test
+    void readProductOnly() {
+        var productDatabase = new ProductDatabase();
+        var comboDatabase = new ComboDatabase();
+        var combo = new Combo("combo1", new ArrayList<>(), BigDecimal.valueOf(1000), BigDecimal.valueOf(900));
+        assert comboDatabase.save(combo);
+
+        var products = productDatabase.readAll();
+        for(var p: products) {
+            assert !(p instanceof Combo);
+        }
+
+
+
+
+    }
 }
