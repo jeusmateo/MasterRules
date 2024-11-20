@@ -25,42 +25,42 @@ public class Order {
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount;
     @ElementCollection
-    private List<OrderDetail> orderDetailList;
+    private List<OrderItem> orderItemList;
 
 
     public Order() {
-        orderDetailList = new ArrayList<>();
+        orderItemList = new ArrayList<>();
     }
 
-    public List<OrderDetail> getPedidoComandaList() {
-        return orderDetailList;
+    public List<OrderItem> getPedidoComandaList() {
+        return orderItemList;
     }
 
     public BigDecimal calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-        for (OrderDetail currentProduct : orderDetailList) {
+        for (OrderItem currentProduct : orderItemList) {
             calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
         }
         return calculatedTotalAmount;
     }
-    public void addProductToOrderItemList(OrderDetail newOrderDetail) {
+    public void addProductToOrderItemList(OrderItem newOrderItem) {
 
         boolean found = false;
 
-        if (!orderDetailList.isEmpty()) {
-            for (OrderDetail p : orderDetailList) {
-                if (newOrderDetail.getProduct().getId().equals(p.getProduct().getId())) {
+        if (!orderItemList.isEmpty()) {
+            for (OrderItem p : orderItemList) {
+                if (newOrderItem.getProduct().getId().equals(p.getProduct().getId())) {
                     p.addQuantity();
                     found = true;
                     break; // Ya lo encontramos, no es necesario seguir iterando.
                 }
             }
             if (!found) {
-                orderDetailList.add(newOrderDetail);
+                orderItemList.add(newOrderItem);
 
             }
         } else {
-            orderDetailList.add(newOrderDetail);
+            orderItemList.add(newOrderItem);
 
         }
 
@@ -138,7 +138,7 @@ public class Order {
                 ", deliveryMethod='" + deliveryMethod + '\'' +
                 ", date=" + date +
                 ", totalAmount=" + totalAmount +
-                ", products=" + orderDetailList +
+                ", products=" + orderItemList +
                 '}';
     }
 
@@ -155,12 +155,12 @@ public class Order {
                 Objects.equals(deliveryMethod, order.deliveryMethod) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(totalAmount, order.totalAmount) &&
-                Objects.equals(orderDetailList, order.orderDetailList);
+                Objects.equals(orderItemList, order.orderItemList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderDetailList);
+        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderItemList);
     }
 }
 

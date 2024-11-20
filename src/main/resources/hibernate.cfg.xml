@@ -23,7 +23,7 @@
         <mapping class="com.mycompany.masterrules.Model.customers.Customer"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.Debt"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.Bill"/>
-        <mapping class="com.mycompany.masterrules.Model.possystem.OrderDetail"/>
+        <mapping class="com.mycompany.masterrules.Model.possystem.OrderItem"/>
         <mapping class="com.mycompany.masterrules.Model.finanzas.CashFlowReport"/>
 
         <mapping class="com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReport"/>

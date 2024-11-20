@@ -6,16 +6,16 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Embeddable
-public class OrderDetail {
+public class OrderItem {
     private int quantity;
     @OneToOne
     private Product product;
     private BigDecimal amount;
 
-    protected OrderDetail() {
+    protected OrderItem() {
     }
 
-    public OrderDetail(Product product) {
+    public OrderItem(Product product) {
         this.quantity = 1;
         this.product = product;
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));
