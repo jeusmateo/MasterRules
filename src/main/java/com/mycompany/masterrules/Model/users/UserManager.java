@@ -38,15 +38,6 @@ public class UserManager {
         return findUser;
     }
 
-//    public Optional<UserAccount> getUser(String username) throws UserNotFoundException {
-//        var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username));
-//
-//        if (findUser.isEmpty()) {
-//            throw new UserNotFoundException(username + " no encontrado");
-//        }
-//        return findUser;
-//    }
-
     public void updateUserInformation(UserAccount editedUserAccount) {
         if (!isValid(editedUserAccount)) {
             throw new IllegalArgumentException("Usuario no valido");
