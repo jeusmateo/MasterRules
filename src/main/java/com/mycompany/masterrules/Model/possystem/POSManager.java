@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private final UserAccount currentUser;
-    private final Order currentOrder;
+    private Order currentOrder;
     private static POSManager instance;
 
     public static synchronized POSManager getInstance() {
@@ -77,6 +77,13 @@ public class POSManager {
 
     }
 
+
+    public void removeProductFromOrder(Product product) {
+        currentOrder.removeProductFromOrderItemList(new OrderItem(product));
+
+        System.out.println("holis");
+    }
+
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
 
@@ -92,6 +99,10 @@ public class POSManager {
     public void configureOrder(String eleccion, String comentario) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
+    }
+
+    public void cancelOrder(){
+        currentOrder = new Order();
     }
 
     private Bill createBill(PaymentDetails data) {

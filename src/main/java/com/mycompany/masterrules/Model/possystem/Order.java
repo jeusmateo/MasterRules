@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -67,6 +68,24 @@ public class Order {
 
         }
 
+    }
+
+    public void removeProductFromOrderItemList(OrderItem newOrderItem) {
+        if (!orderItemList.isEmpty()) {
+            Iterator<OrderItem> iterator = orderItemList.iterator();
+            while (iterator.hasNext()) {
+                OrderItem orderItem = iterator.next();
+                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+                    if (orderItem.getQuantity() > 0) {
+                        orderItem.removeQuantity();
+                    }
+                    if (orderItem.getQuantity() == 0) {
+                        iterator.remove(); // Elimina directamente el elemento de la lista
+                    }
+                    break; // No es necesario seguir iterando
+                }
+            }
+        }
     }
 
 

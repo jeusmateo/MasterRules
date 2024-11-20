@@ -451,6 +451,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         colProduct.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductName()));
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();
+
+        tblOrder.setOnMouseClicked(event -> {
+            if (event.getClickCount() > 1) {
+                event.consume();
+            }
+        });
+        tblOrder.getSelectionModel().getSelectedItem();
+
     }
 
     @Override
@@ -497,6 +505,31 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     }
 
+
+    @FXML
+    void removeProductToOrden(ActionEvent event) {
+        try {
+            Product selectedProduct = tblOrder.getSelectionModel().getSelectedItem().getProduct();
+            posManager.removeProductFromOrder(selectedProduct);
+            ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
+            tblOrder.setItems(productOrderList);
+            tblOrder.refresh();
+            lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+        }catch (Exception e){
+            //todo algo debe tener yo creo
+        }
+
+    }
+
+
+    @FXML
+    void cancelOrder(ActionEvent event) {
+        posManager.cancelOrder();
+        ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
+        tblOrder.setItems(productOrderList);
+        tblOrder.refresh();
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+    }
 
     @Override
         public void onProductSelected(Product product) {
