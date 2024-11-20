@@ -5,10 +5,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.possystem.POSManager;
-import com.mycompany.masterrules.Model.users.LoginValidator;
-import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserManager;
-import com.mycompany.masterrules.Model.users.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
