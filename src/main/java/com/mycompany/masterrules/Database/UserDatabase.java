@@ -7,10 +7,6 @@ import java.util.List;
 
 public final class UserDatabase extends Database<String, UserAccount> {
 
-    /**
-     * @param id La llave primaria de la entidad
-     * @return El usuario con la llave primaria dada, de lo contrario null
-     */
     @Override
     public UserAccount findById(String id) {
         Session session = HibernateUtil.getOpenSession();
@@ -25,57 +21,27 @@ public final class UserDatabase extends Database<String, UserAccount> {
             }
             System.err.println("Error al buscar el usuario: " + ex);
             return null;
-        }
-        finally {
-            session.close();
-        }
-    }
-
-    /**
-     * Busca un usuario por su nombre de usuario.
-     *
-     * @param userName El nombre de usuario.
-     * @return El usuario con el nombre de usuario dado, o null si no existe.
-     */
-    public UserAccount findByUserName(String userName) {
-        Session session = HibernateUtil.getOpenSession();
-        try {
-            session.beginTransaction();
-            // Consulta HQL para buscar el usuario por userName
-            UserAccount user = session.createQuery("FROM UserAccount WHERE userName = :userName", UserAccount.class)
-                    .setParameter("userName", userName)
-                    .uniqueResult();
-            session.getTransaction().commit();
-            return user;
-        } catch (Exception ex) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
-            }
-            System.err.println("Error al buscar el usuario por nombre de usuario: " + ex);
-            return null;
         } finally {
             session.close();
         }
     }
 
-
-
-    /**
-     * @return Todos los usuarios en la base de datos
-     */
     @Override
     public List<UserAccount> readAll() {
         Session session = HibernateUtil.getOpenSession();
         try {
-            return session.createQuery("from UserAccount", UserAccount.class).list();
+            session.beginTransaction();
+            List<UserAccount> users = session.createQuery("from UserAccount", UserAccount.class).list();
+            session.getTransaction().commit();
+            return users;
         } catch (Exception ex) {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
             System.err.println("Error al leer los usuarios: " + ex);
-            return null;
         } finally {
             session.close();
         }
+        return List.of();
     }
 }

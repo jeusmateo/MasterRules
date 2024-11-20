@@ -2,6 +2,11 @@ package com.mycompany.masterrules.Model.possystem;
 
 
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
+import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.users.UserAccount;
+
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
@@ -18,8 +23,10 @@ import java.time.LocalDateTime;
 
 public class POSManager {
 
-    private final UserAccount currentUser;
-    private final Order currentOrder;
+    private UserAccount currentUser;
+
+    private CashRegisterAuditReportManager cashRegisterAuditReportManager;
+    private  Order currentOrder;
     private static POSManager instance;
 
     public static synchronized POSManager getInstance() {
@@ -37,16 +44,15 @@ public class POSManager {
         return instance;
     }
 
-    public POSManager(UserAccount userAccount) {
+    private POSManager(UserAccount userAccount) {
         currentUser = userAccount;
         currentOrder = new Order();
     }
 
-    public POSManager() {
+    private POSManager() {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
         currentUser = bd.findById("1");
-
     }
 
     //Flujo Chepil para vender.
@@ -64,8 +70,21 @@ public class POSManager {
     //CONFIRMAR ENTREGA
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
+        if (product instanceof InventoriableProduct && ((InventoriableProduct) product).isStockAvailable()) {
+
+            currentOrder.addProductToOrderItemList(new OrderItem(product));
+            ((InventoriableProduct) product).removeFromInventory();
+
+        }
         currentOrder.addProductToOrderItemList(new OrderItem(product));
 
+    }
+
+
+    public void removeProductFromOrder(Product product) {
+        currentOrder.removeProductFromOrderItemList(new OrderItem(product));
+
+        System.out.println("holis");
     }
 
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
@@ -83,6 +102,10 @@ public class POSManager {
     public void configureOrder(String eleccion, String comentario) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
+    }
+
+    public void cancelOrder(){
+        currentOrder = new Order();
     }
 
     private Bill createBill(PaymentDetails data) {
@@ -137,6 +160,7 @@ public class POSManager {
         Bill bill = createBill(paymentMethod);
         ArchiveInvoice ai = new ArchiveInvoice();
         ai.ArchiveBill(bill);
+        currentOrder=new Order();
     }
 
     /*
@@ -171,4 +195,19 @@ public class POSManager {
         return currentOrder;
     }
 
+    public UserAccount getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserAccount currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public CashRegisterAuditReportManager getCashRegisterAuditReportManager() {
+        return cashRegisterAuditReportManager;
+    }
+
+    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
+        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
+    }
 }

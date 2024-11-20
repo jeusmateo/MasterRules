@@ -1,11 +1,13 @@
 package com.mycompany.masterrules.Model.possystem;
 
+import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,6 +37,7 @@ public class Order {
     public List<OrderItem> getPedidoComandaList() {
         return orderItemList;
     }
+    //public List<Combo> combos;
 
     public BigDecimal calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
@@ -48,9 +51,10 @@ public class Order {
         boolean found = false;
 
         if (!orderItemList.isEmpty()) {
-            for (OrderItem p : orderItemList) {
-                if (newOrderItem.getProduct().getId().equals(p.getProduct().getId())) {
-                    p.addQuantity();
+            for (OrderItem orderItem : orderItemList) {
+                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+
+                    orderItem.addQuantity();
                     found = true;
                     break; // Ya lo encontramos, no es necesario seguir iterando.
                 }
@@ -64,6 +68,24 @@ public class Order {
 
         }
 
+    }
+
+    public void removeProductFromOrderItemList(OrderItem newOrderItem) {
+        if (!orderItemList.isEmpty()) {
+            Iterator<OrderItem> iterator = orderItemList.iterator();
+            while (iterator.hasNext()) {
+                OrderItem orderItem = iterator.next();
+                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+                    if (orderItem.getQuantity() > 0) {
+                        orderItem.removeQuantity();
+                    }
+                    if (orderItem.getQuantity() == 0) {
+                        iterator.remove(); // Elimina directamente el elemento de la lista
+                    }
+                    break; // No es necesario seguir iterando
+                }
+            }
+        }
     }
 
 

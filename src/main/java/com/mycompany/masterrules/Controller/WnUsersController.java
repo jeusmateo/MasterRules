@@ -216,7 +216,7 @@ public class WnUsersController implements Initializable {
                     });
                     this.userEdit.getPermissions().setGrantedPermissions(selectedPermissions);
                     userManager.updateUserInformation(this.userEdit);
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
                     clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
@@ -246,7 +246,7 @@ public class WnUsersController implements Initializable {
                             new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount},
                             checkBoxPermissionMap
                     );
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
                 } else {
@@ -337,7 +337,7 @@ public class WnUsersController implements Initializable {
         configColumns();
         configTextFields();
 
-        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
         tblUserAccount.setItems(userAccounts);
     }
 

@@ -353,6 +353,7 @@ public class WnCustomersController implements Initializable {
 
     private void showCustomerDetailsForUpdate(Customer customer) {
         if (customer != null) {
+
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
             lbCustomerIdAuxiliar.setText(customer.getID());
