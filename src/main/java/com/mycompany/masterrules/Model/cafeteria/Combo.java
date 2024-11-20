@@ -19,7 +19,6 @@ public class Combo extends Product {
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
         super(comboName, price, VIPPrice);
         this.products = products;
-        this.setId(String.valueOf(hashCode()));
     }
 
     public List<Product> getProducts() {
