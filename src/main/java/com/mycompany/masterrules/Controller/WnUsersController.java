@@ -227,7 +227,7 @@ public class WnUsersController implements Initializable {
                     });
                     this.userEdit.getPermissions().setGrantedPermissions(selectedPermissions);
                     userManager.updateUserInformation(this.userEdit);
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
                     clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
@@ -257,7 +257,7 @@ public class WnUsersController implements Initializable {
                             new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount},
                             checkBoxPermissionMap
                     );
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
                     tblUserAccount.setItems(userAccounts);
                     tblUserAccount.refresh();
                 } else {
@@ -268,10 +268,10 @@ public class WnUsersController implements Initializable {
                 try {
                     // Verifica que `userEdit` no sea nulo y obtén el ID del usuario
                     if (this.userEdit != null) {
-                        String userIdToDelete = this.userEdit.getUserID(); // Obtiene el ID del usuario
+                        String userIdToDelete = this.userEdit.getUserName(); // Obtiene el ID del usuario
                         userManager.removeUser(userIdToDelete); // Llama al método modificado que elimina por ID
                         // Actualiza la tabla con los usuarios restantes
-                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
                         tblUserAccount.setItems(userAccounts);
                         tblUserAccount.refresh();
                         clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
@@ -354,7 +354,7 @@ public class WnUsersController implements Initializable {
         configCheckBox2();
         configColumns();
 
-        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
         tblUserAccount.setItems(userAccounts);
         // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
         // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));

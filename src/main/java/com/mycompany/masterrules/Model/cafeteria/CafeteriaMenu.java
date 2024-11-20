@@ -29,9 +29,7 @@ public class CafeteriaMenu {
     }
 
     private void readFromDatabase() {
-
         var allProducts = productDatabase.readAll();
-
         for (var actualProduct : allProducts) {
             if (actualProduct.getClass() == Combo.class) {
                 availableCombos.add((Combo) actualProduct);
