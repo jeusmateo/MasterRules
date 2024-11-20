@@ -339,16 +339,24 @@ private ObservableList<Product> selectedProductsForCombo;
     //private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
 
     private void configColumns() {
+        //
+
         colProductId_tabCreate.setReorderable(false);
+        colProductId_tabCreate.setResizable(false);
         colProductId_tabCreate.setCellValueFactory(new PropertyValueFactory<>("id"));
         colProductName_tabCreate.setReorderable(false);
+        colProductName_tabCreate.setResizable(false);
         colProductName_tabCreate.setCellValueFactory(new PropertyValueFactory<>("name"));
         colProductType_tabCreate.setReorderable(false);
+       colProductType_tabCreate.setResizable(false);
         colProductType_tabCreate.setCellValueFactory(new PropertyValueFactory<>("type"));
         colProductPrice_tabCreate.setReorderable(false);
+        colProductPrice_tabCreate.setResizable(false);
         colProductPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("price"));
         colProductVipPrice_tabCreate.setReorderable(false);
+        colProductVipPrice_tabCreate.setResizable(false);
         colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
+        tblFood.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @Override
