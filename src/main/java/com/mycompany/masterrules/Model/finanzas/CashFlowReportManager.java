@@ -42,17 +42,7 @@ public class CashFlowReportManager {
                 .toList();
     }
 
-    public BigDecimal calculateTotalCashOutFlow(List<CashFlowReport> cashOutFlowReports){
-        return cashOutFlowReports.stream()
-                .map(CashFlowReport::getCashAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
 
-    public BigDecimal calculateTotalCashInFlot(List<CashFlowReport> cashInFlowReports){
-        return cashInFlowReports.stream()
-                .map(CashFlowReport::getCashAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
 
     public void makeCashRegisterAuditReport(BigDecimal initialCashAmount){
         CashRegisterAuditReport cashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);

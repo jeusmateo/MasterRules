@@ -2,6 +2,10 @@ package com.mycompany.masterrules.Model.possystem;
 
 
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
+import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+import com.mycompany.masterrules.Model.users.UserAccount;
+
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
@@ -63,6 +67,12 @@ public class POSManager {
     //CONFIRMAR ENTREGA
     //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
+        if (product instanceof InventoriableProduct && ((InventoriableProduct) product).isStockAvailable()) {
+
+            currentOrder.addProductToOrderItemList(new OrderItem(product));
+            ((InventoriableProduct) product).removeFromInventory();
+
+        }
         currentOrder.addProductToOrderItemList(new OrderItem(product));
 
     }

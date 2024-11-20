@@ -24,7 +24,6 @@ import javafx.scene.layout.FlowPane;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
