@@ -46,7 +46,6 @@ public class POSManager {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
         currentUser = bd.findById("1");
-
     }
 
     //Flujo Chepil para vender.
@@ -171,4 +170,7 @@ public class POSManager {
         return currentOrder;
     }
 
+    public UserAccount getCurrentUser() {
+        return currentUser;
+    }
 }
