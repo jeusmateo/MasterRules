@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
 
-import java.time.LocalDateTime;
-
-
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
@@ -11,6 +8,10 @@ import com.mycompany.masterrules.Model.users.UserAccount;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+import com.mycompany.masterrules.Model.users.UserAccount;
+
+import java.time.LocalDateTime;
 
 /**
  * @author David Torres
@@ -21,15 +22,27 @@ import com.mycompany.masterrules.Model.customers.Customer;
 
 public class POSManager {
 
+    private final UserAccount currentUser;
+    private final Order currentOrder;
+    private static POSManager instance;
 
-    private UserAccount currentUser;
-    private Order currentOrder;
+    public static synchronized POSManager getInstance() {
+        if (instance == null) {
+            instance = new POSManager();
+        }
+        return instance;
+    }
+
+    // initialize the POSManager with a userAccount
+    public static synchronized POSManager getInstance(UserAccount userAccount) {
+        if (instance == null) {
+            instance = new POSManager(userAccount);
+        }
+        return instance;
+    }
 
     public POSManager(UserAccount userAccount) {
-
         currentUser = userAccount;
-
-
         currentOrder = new Order();
     }
 
@@ -37,7 +50,6 @@ public class POSManager {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
         currentUser = bd.findById("1");
-
 
     }
 
@@ -136,12 +148,6 @@ public class POSManager {
         ArchiveInvoice ai = new ArchiveInvoice();
         ai.ArchiveBill(bill);
     }
-
-
-
-
-
-
 
     /*
     public void collectDebt(Customer customerArg, Debt debtArg) {

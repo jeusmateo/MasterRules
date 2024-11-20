@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Combo extends Product {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> products;
 
     protected Combo() {
