@@ -30,6 +30,7 @@ public class WnReportsController implements Initializable {
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
 
+    // Botones relacionados con inflow y outflow
     @FXML
     private Button btnAcceptInflow;
     @FXML
@@ -43,6 +44,7 @@ public class WnReportsController implements Initializable {
     @FXML
     private Button btnExitDoOutflow;
 
+    // Contenedores (AnchorPanes)
     @FXML
     private AnchorPane scrDoInflowCash;
     @FXML
@@ -52,16 +54,17 @@ public class WnReportsController implements Initializable {
     @FXML
     private AnchorPane scrReports;
 
+    // Campos de texto
     @FXML
     private TextField txtFieldAmountInflow;
     @FXML
     private TextField txtFieldAmountOutflow;
-
     @FXML
     private TextArea txtOutflowReason;
     @FXML
     private TextArea txtReasonInflow;
 
+    // Tablas y columnas
     @FXML
     private TableView<CashFlowReport> tableViewlOutFlowReport;
     @FXML
@@ -70,6 +73,7 @@ public class WnReportsController implements Initializable {
     private TableColumn<CashFlowReport, String> colCashOutDate;
     @FXML
     private TableColumn<CashFlowReport, String> colCashOutQuantity;
+
     @FXML
     private TableView<CashFlowReport> tableViewlInFlowReport;
     @FXML
