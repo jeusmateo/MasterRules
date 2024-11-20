@@ -334,7 +334,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
     */
 
+
     @FXML
+    public void hideTxtFieldClientName(MouseEvent event) {
+        inputClientName.setVisible(false);
+    }
     public void showOrderForm() {
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
