@@ -105,12 +105,12 @@
                                                 </Group>
                                                 <Group GridPane.rowIndex="4">
                                                    <children>
-                                                      <Label fx:id="lbDebt" layoutX="166.0" prefHeight="20.0" prefWidth="94.0" text="\$00.00">
+                                                      <Label fx:id="lbDebt" layoutX="166.0" prefHeight="20.0" prefWidth="94.0" text="\$00.00" visible="false">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label prefHeight="21.0" prefWidth="50.0" text="Deuda:">
+                                                      <Label prefHeight="21.0" prefWidth="50.0" text="Deuda:" visible="false">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -191,8 +191,8 @@
                                              <children>
                                                 <Group>
                                                    <children>
-                                                      <TextField fx:id="txtFieldDebt" layoutX="143.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
-                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="50.0" text="Deuda:">
+                                                      <TextField fx:id="txtFieldEditCustomerName" layoutX="143.0" prefHeight="25.0" prefWidth="133.0" />
+                                                      <Label layoutY="2.0" prefHeight="21.0" prefWidth="108.0" text="Nombre usuario:">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -385,7 +385,7 @@
                      </rowConstraints>
                      <children>
                         <TextField fx:id="txtFieldSearch" prefHeight="25.0" prefWidth="142.0" promptText="Buscar cliente " GridPane.columnIndex="1" />
-                        <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Buscar" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                         <Button mnemonicParsing="false" stylesheets="@viewTemplate.css" text="SOI" textFill="#fcfcfc">
                            <styleClass>
                               <String fx:value="logout" />
