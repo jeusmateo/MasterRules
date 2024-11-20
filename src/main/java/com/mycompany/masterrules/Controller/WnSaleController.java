@@ -431,6 +431,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     System.out.println("Pago realizado:");
                     posManager.sell(paymentResult);
                     showMenuWindow();
+                    ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
+                    tblOrder.setItems(productOrderList);
+                    tblOrder.refresh();
+                    lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
 
                 } else {
                     System.out.println("Pago cancelado.");
