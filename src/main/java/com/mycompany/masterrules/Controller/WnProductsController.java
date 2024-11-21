@@ -21,7 +21,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
@@ -359,11 +361,7 @@ private ObservableList<Product> selectedProductsForCombo;
         tblFood.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        List<Combo> combosList = cafeteriaMenu.getCombos();
-        ObservableList<Combo> comboDataList = FXCollections.observableArrayList(combosList);
-
+    private void configTableColumnsCombo() {
         colComboID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colComboID.setReorderable(false);
         colComboID.setResizable(false);
@@ -374,8 +372,33 @@ private ObservableList<Product> selectedProductsForCombo;
         colComboPrice.setReorderable(false);
         colComboVipPrice.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
         colComboVipPrice.setReorderable(false);
+    }
+
+    private void importProductImage() {
+        FileChooser fileChooser = new FileChooser();
+        String imagePath = "";
+        // Establecer filtro para imágenes
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Abrir archivo de imagen", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        // Mostrar el cuadro de diálogo de selección de archivo
+        File chosenImage = fileChooser.showOpenDialog(null);
+        if (chosenImage != null) {
+            // Guardar el path de la imagen seleccionada
+            imagePath = chosenImage.getAbsolutePath();
+
+            // Establecer la imagen en el ImageView
+            imgProduct_tabCreate.setImage(new javafx.scene.image.Image(chosenImage.toURI().toString()));
+        }
+    }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        List<Combo> combosList = cafeteriaMenu.getCombos();
+        ObservableList<Combo> comboDataList = FXCollections.observableArrayList(combosList);
+        configTableColumnsCombo();
         tblCombos.setItems(comboDataList);
 
 
@@ -451,6 +474,7 @@ private ObservableList<Product> selectedProductsForCombo;
                     BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
                     BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
 
+
                     selectedProduct.setName(newName);
                     selectedProduct.setType(newType);
                     selectedProduct.setPrice(newPrice);
@@ -459,6 +483,8 @@ private ObservableList<Product> selectedProductsForCombo;
                     cafeteriaMenu.editProduct(selectedProduct);
                     updateProductTable();
                 }
+            } else if (source.equals(btnImportImage_tabCreate)) {
+                importProductImage();
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());

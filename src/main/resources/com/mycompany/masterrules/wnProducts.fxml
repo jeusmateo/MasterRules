@@ -113,7 +113,7 @@
                                                                         <String fx:value="white-bg" />
                                                                      </styleClass>
                                                                   </AnchorPane>
-                                                                  <Button fx:id="btnImportImage_tabCreate" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                  <Button fx:id="btnImportImage_tabCreate" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                </children>
                                                             </VBox>
                                                          </children>
