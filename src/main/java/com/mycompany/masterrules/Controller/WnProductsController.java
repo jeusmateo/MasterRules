@@ -253,6 +253,8 @@ private String selectedImagePath;
         Combo newCombo = new Combo(comboName,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
         cafeteriaMenu.addComboToMenu(newCombo);
 
+        btnBackToCreateCombo();
+
     }
 
 
@@ -318,6 +320,8 @@ private String selectedImagePath;
 
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(false);
+
+        clearTextFields(txtFieldNameCombo,txtFieldPriceCombo,txtFieldVIPPriceCombo);
     }
 
     @FXML
