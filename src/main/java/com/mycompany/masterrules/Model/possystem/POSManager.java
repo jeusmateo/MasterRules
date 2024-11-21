@@ -10,8 +10,6 @@ import com.mycompany.masterrules.Model.users.UserAccount;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
-import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
 
@@ -25,8 +23,8 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private UserAccount currentUser;
-    private CashRegister cashRegister = new CashRegister();
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager;
+    private final CashRegister cashRegister = new CashRegister();
+    private final CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
     private  Order currentOrder;
     private static POSManager instance;
 
@@ -162,8 +160,8 @@ public class POSManager {
 
     public void sell(PaymentDetails paymentMethod) {
         Bill bill = createBill(paymentMethod);
-        ArchiveInvoice ai = new ArchiveInvoice();
-        ai.ArchiveBill(bill);
+        ArchiveInvoice archiveInvoice = new ArchiveInvoice();
+        archiveInvoice.archiveBill(bill);
         currentOrder=new Order();
     }
 
@@ -211,7 +209,4 @@ public class POSManager {
         return cashRegisterAuditReportManager;
     }
 
-    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
-        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-    }
 }

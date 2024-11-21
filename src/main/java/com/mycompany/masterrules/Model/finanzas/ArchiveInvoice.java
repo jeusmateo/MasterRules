@@ -3,7 +3,6 @@ package com.mycompany.masterrules.Model.finanzas;
 import com.mycompany.masterrules.Database.BillDatabase;
 import com.mycompany.masterrules.Model.possystem.Bill;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class ArchiveInvoice{
     }
 
     // Rename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.
-    public boolean ArchiveBill(Bill bill) {
+    public boolean archiveBill(Bill bill) {
         BillDatabase customerDBManager = new BillDatabase();
         return customerDBManager.save(bill);
     }

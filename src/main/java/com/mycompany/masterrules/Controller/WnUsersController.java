@@ -7,6 +7,7 @@ import com.mycompany.masterrules.Model.users.UserPermissions;
 import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -18,13 +19,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -33,15 +27,19 @@ import javafx.scene.input.KeyEvent;
  */
 public class WnUsersController implements Initializable {
 
+    // --------------------------------------------------------------------------------------------
+
+    // Atributos
+
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
 
-    // Componentes de la vista
     // --------------------------------------------------------------------------------------------
-//Comentario para hacer push
+
+    // Componentes de la vista
 
     @FXML
     private Button btnEditUser;
@@ -190,97 +188,231 @@ public class WnUsersController implements Initializable {
     @FXML
     private PasswordField pswdFieldEditUserAccount;
 
-    private void setUserEdit(UserAccount userAccount) {
-        this.userEdit = userAccount;
-    }
+    // --------------------------------------------------------------------------------------------
+
 
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
+
         try {
             if (evt.equals(btnEditUser)) {
-                String editUserName = txtEditUserCompleteName.getText();
-                String editUserPassword = pswdFieldEditUserAccount.getText();
-                String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
-                String confirUserAccountUserEdit = textEditUserName.getText();
-                if (editUserPassword.equals(confirmUserPassword)) {
-                    this.userEdit.setFullEmployeeName(editUserName);
-                    this.userEdit.setPassword(editUserPassword);
-                    this.userEdit.setUserName(confirUserAccountUserEdit);
-                    EnumSet<Permission> selectedPermissions = EnumSet.noneOf(Permission.class);
-                    checkBoxPermissionMap.forEach((checkBox, permission) -> {
-                        if (checkBox.isSelected()) {
-                            selectedPermissions.add(permission);
-                        }
-                    });
-                    checkBoxPermissionMap2.forEach((checkBox, permission) -> {
-                        if (checkBox.isSelected()) {
-                            selectedPermissions.add(permission);
-                        }
-                    });
-                    this.userEdit.getPermissions().setGrantedPermissions(selectedPermissions);
-                    userManager.updateUserInformation(this.userEdit);
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
-                    tblUserAccount.setItems(userAccounts);
-                    tblUserAccount.refresh();
-                    clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-                } else {
-                    //throw Exception chepo = new Exception("Chepo");
-                }
-
-            }
-            if (evt.equals(btnCreateUserAccount)) {
-                String createUserCompleteName = txtFieldCreateUserCompleteName.getText();
-                String createUserName = txtFieldCreateUserName.getText();
-                String createUserPassword = pswdFieldCreateUserAccount.getText();
-                String createUserPasswordConfirm = pswdFieldConfirmCreateUserAccount.getText();
-                if (createUserPassword.equals(createUserPasswordConfirm)) {
-
-                    EnumSet<Permission> selectedPermissions = EnumSet.noneOf(Permission.class);
-                    checkBoxPermissionMap.forEach((checkBox, permission) -> {
-                        if (checkBox.isSelected()) {
-                            selectedPermissions.add(permission);
-                        }
-                    });
-                    UserPermissions permissions = new UserPermissions(selectedPermissions);
-                    UserAccount newUser = new UserAccount(createUserName, createUserPassword, permissions, createUserCompleteName);
-                    userManager.registerNewUser(newUser);
-                    clearFields(
-                            new TextField[]{txtFieldCreateUserCompleteName, txtFieldCreateUserName},
-                            new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount},
-                            checkBoxPermissionMap
-                    );
-                    ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
-                    tblUserAccount.setItems(userAccounts);
-                    tblUserAccount.refresh();
-                } else {
-                    //throw Exception chepo = new Exception("Chepo");
-                }
-            }
-            if (evt.equals(btnDeleteUserAccount)) {
-                try {
-                    if (this.userEdit != null) {
-                        String userIdToDelete = this.userEdit.getUserName();
-                        userManager.removeUser(userIdToDelete);
-                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
-                        tblUserAccount.setItems(userAccounts);
-                        tblUserAccount.refresh();
-                        clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-                    } else {
-                        System.out.println("No se seleccionó ningún usuario para eliminar.");
-                    }
-                } catch (UserNotFoundException e) {
-                    System.out.println("Error al eliminar usuario: " + e.getMessage());
-                } catch (Exception e) {
-                    System.out.println("Chepo " + e.getMessage());
-                }
+                handleEditUser();
+            } else if (evt.equals(btnCreateUserAccount)) {
+                handleCreateUserAccount();
+            } else if (evt.equals(btnDeleteUserAccount)) {
+                handleDeleteUserAccount();
             }
         } catch (Exception e) {
-            System.out.println("Chepo " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
-    private void configCheckBox() {
+    private void handleEditUser() throws Exception {
+        String editUserName = txtEditUserCompleteName.getText();
+        String editUserPassword = pswdFieldEditUserAccount.getText();
+        String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
+        String confirUserAccountUserEdit = textEditUserName.getText();
+
+        if (!editUserPassword.equals(confirmUserPassword)) {
+            System.out.println("Error: Las contraseñas no coinciden.");
+            return;
+        }
+
+        updateUser(editUserName, editUserPassword, confirUserAccountUserEdit);
+        refreshUserTable();
+        clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+    }
+
+
+    private void handleCreateUserAccount() throws Exception {
+        String createUserCompleteName = txtFieldCreateUserCompleteName.getText();
+        String createUserName = txtFieldCreateUserName.getText();
+        String createUserPassword = pswdFieldCreateUserAccount.getText();
+        String createUserPasswordConfirm = pswdFieldConfirmCreateUserAccount.getText();
+
+        if (!createUserPassword.equals(createUserPasswordConfirm)) {
+            System.out.println("Error: Las contraseñas no coinciden.");
+            return;
+        }
+
+        createNewUser(createUserCompleteName, createUserName, createUserPassword);
+        refreshUserTable();
+        clearTextFields(new TextField[]{txtFieldCreateUserCompleteName, txtFieldCreateUserName});
+        clearPasswordFields(new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount});
+        clearCheckBoxes(checkBoxPermissionMap);
+    }
+
+    private void createNewUser(String fullName, String userName, String password) {
+        EnumSet<Permission> selectedPermissions = getSelectedPermissions();
+        UserPermissions permissions = new UserPermissions(selectedPermissions);
+        UserAccount newUser = new UserAccount(userName, password, permissions, fullName);
+        userManager.registerNewUser(newUser);
+    }
+
+    private void updateUser(String name, String password, String userName) {
+        this.userEdit.setFullEmployeeName(name);
+        this.userEdit.setPassword(password);
+        this.userEdit.setUserName(userName);
+
+        EnumSet<Permission> selectedPermissions = getSelectedPermissions();
+        this.userEdit.getPermissions().setGrantedPermissions(selectedPermissions);
+        userManager.updateUserInformation(this.userEdit);
+    }
+
+    private void handleDeleteUserAccount() {
+        if (this.userEdit == null) {
+            System.out.println("No se seleccionó ningún usuario para eliminar.");
+            return;
+        }
+
+        try {
+            String userIdToDelete = this.userEdit.getUserName();
+            userManager.removeUser(userIdToDelete);
+            refreshUserTable();
+            clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+        } catch (UserNotFoundException e) {
+            System.out.println("Error al eliminar usuario: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+
+        if (evt.equals(txtFieldCreateUserCompleteName)) {
+            handleTextFieldKeyEvent(event, txtFieldCreateUserName);
+        } else if (evt.equals(txtEditUserCompleteName)) {
+            handleTextFieldKeyEvent(event, textEditUserName);
+        }
+    }
+
+    private void handleTextFieldKeyEvent(KeyEvent event, TextField nextField) {
+        String character = event.getCharacter();
+        if (isInvalidCharacter(character)) {
+            event.consume();
+        } else if (character.equals("\r")) { // Maneja la tecla Enter
+            nextField.requestFocus();
+            event.consume();
+        }
+    }
+
+    private boolean isInvalidCharacter(String character) {
+        // Permite letras, espacios y retroceso (borrar)
+        return !character.matches("[\\p{L} ]") && !character.equals("\b");
+    }
+
+
+    private EnumSet<Permission> getSelectedPermissions() {
+        EnumSet<Permission> selectedPermissions = EnumSet.noneOf(Permission.class);
+        checkBoxPermissionMap.forEach((checkBox, permission) -> {
+            if (checkBox.isSelected()) {
+                selectedPermissions.add(permission);
+            }
+        });
+        checkBoxPermissionMap2.forEach((checkBox, permission) -> {
+            if (checkBox.isSelected()) {
+                selectedPermissions.add(permission);
+            }
+        });
+        return selectedPermissions;
+    }
+
+    private void refreshUserTable() {
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
+        tblUserAccount.setItems(userAccounts);
+        tblUserAccount.refresh();
+    }
+
+
+        @Override
+        public void initialize (URL location, ResourceBundle resources){
+            configCheckBoxToCreate();
+            configCheckBoxToUpdate();
+            configColumnsOnUserTable();
+            configTextFields();
+
+            ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
+            tblUserAccount.setItems(userAccounts);
+        }
+
+    private void displayUserAccountInfoForEdit(UserAccount userAccount) {
+        this.userEdit = userAccount;
+
+        if (userAccount == null) {
+            System.out.println("Chepo23");
+            return;
+        }
+
+        try {
+            txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
+            textEditUserName.setText(userAccount.getUserName());
+            pswdFieldEditUserAccount.setText(userAccount.getPassword());
+            clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm}); // Reemplazo aquí
+            syncCheckBoxesWithPermissions(userAccount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    private void syncCheckBoxesWithPermissions (UserAccount userAccount){
+            if (userAccount == null) return;
+
+            checkBoxPermissionMap2.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
+
+            checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
+        }
+
+        @FXML
+        private void displaySelected (javafx.scene.input.MouseEvent event){
+            UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
+            displayUserAccountInfoForEdit(userAccount);
+        }
+
+    private void clearTextFields(TextField[] textFields) {
+        if (textFields != null) {
+            for (TextField textField : textFields) {
+                textField.clear();
+            }
+        }
+    }
+
+    private void clearPasswordFields(PasswordField[] passwordFields) {
+        if (passwordFields != null) {
+            for (PasswordField passwordField : passwordFields) {
+                passwordField.clear();
+            }
+        }
+    }
+
+    private void clearCheckBoxes(Map<CheckBox, Permission> checkBoxMap) {
+        if (checkBoxMap != null) {
+            checkBoxMap.keySet().forEach(checkBox -> checkBox.setSelected(false));
+        }
+    }
+
+
+    private void configTextFields () {
+        txtEditUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtFieldCreateUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+    }
+
+    private void configColumnsOnUserTable() {
+        colUserID.setReorderable(false);
+        colUserID.setResizable(false);
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
+        colUserName.setReorderable(false);
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+
+        colUserID.setReorderable(false);
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
+    }
+
+    private void configCheckBoxToCreate() {
         checkBoxPermissionMap.put(chkMakeSalePerm, Permission.MAKE_SALE);
         checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
         checkBoxPermissionMap.put(chkReviewSaleHistoryPerm, Permission.LOOK_SALES_HISTORY);
@@ -301,7 +433,7 @@ public class WnUsersController implements Initializable {
         checkBoxPermissionMap.put(chkDeleteUserPerm, Permission.DELETE_USER);
     }
 
-    private void configCheckBox2() {
+    private void configCheckBoxToUpdate() {
         checkBoxPermissionMap2.put(chkMakeSalePerm2, Permission.MAKE_SALE);
         checkBoxPermissionMap2.put(chkCancelSalePerm2, Permission.CANCEL_SALE);
         checkBoxPermissionMap2.put(chkReviewSaleHistoryPerm2, Permission.LOOK_SALES_HISTORY);
@@ -322,108 +454,11 @@ public class WnUsersController implements Initializable {
         checkBoxPermissionMap2.put(chkDeleteUserPerm2, Permission.DELETE_USER);
     }
 
-    private void configColumns() {
-        colUserID.setReorderable(false);
-        colUserID.setResizable(false);
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
-        colUserName.setReorderable(false);
-
-        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-
-
-        colUserID.setReorderable(false);
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
-
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
-        @Override
-        public void initialize (URL location, ResourceBundle resources){
-            configCheckBox();
-            configCheckBox2();
-            configColumns();
-            configTextFields();
-
-            ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
-            tblUserAccount.setItems(userAccounts);
-        }
-
-        private void showUserAccountInfoForEditButtonHolaJajajChepo (UserAccount userAccount){
-            this.userEdit = userAccount;
-            if (userAccount == null) {
-                System.out.println("Chepo23");
-            }
-            try {
-                txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
-                textEditUserName.setText(userAccount.getUserName());
-                pswdFieldEditUserAccount.setText(userAccount.getPassword());
-                clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-                syncCheckBoxesWithPermissions(userAccount);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-        private void syncCheckBoxesWithPermissions (UserAccount userAccount){
-            if (userAccount == null) return;
-
-            checkBoxPermissionMap2.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
-
-            checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
-        }
-
-        @FXML
-        private void displaySelected (javafx.scene.input.MouseEvent event){
-            UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
-            showUserAccountInfoForEditButtonHolaJajajChepo(userAccount);
-        }
-
-        private void clearFields (TextField[]textFields, PasswordField[]passwordFields, Map < CheckBox, Permission >...
-        checkBoxMaps){
-            if (textFields != null) {
-                for (TextField textField : textFields) {
-                    textField.clear();
-                }
-            }
-
-            if (passwordFields != null) {
-                for (PasswordField passwordField : passwordFields) {
-                    passwordField.clear();
-                }
-            }
-
-            if (checkBoxMaps != null) {
-                for (Map<CheckBox, Permission> checkBoxMap : checkBoxMaps) {
-                    checkBoxMap.keySet().forEach(checkBox -> checkBox.setSelected(false));
-                }
-            }
-        }
-
-        private void configTextFields () {
-            txtEditUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-            txtFieldCreateUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
-        }
-
-        @FXML
-        private void eventKey (KeyEvent event){
-            Object evt = event.getSource();
-
-            if (evt.equals(txtFieldCreateUserCompleteName)) {
-                String character = event.getCharacter();
-                if (!character.matches("[\\p{L} ]") && !character.equals("\b")) { // Permite letras y espacios
-                    event.consume();
-                } else if (character.equals("\r")) { // Si es Enter
-                    txtFieldCreateUserName.requestFocus();
-                    event.consume();
-                }
-            } else if (evt.equals(txtEditUserCompleteName)) {
-                String character = event.getCharacter();
-                if (!character.matches("[\\p{L} ]") && !character.equals("\b")) { // Permite letras y espacios
-                    event.consume();
-                } else if (character.equals("\r")) { // Si es Enter
-                    textEditUserName.requestFocus();
-                    event.consume();
-                }
-            }
-        }
-    }
+}

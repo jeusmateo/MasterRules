@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,9 +50,17 @@ public class ItemCardProductController implements Initializable {
 
         setCardProductName(productData.getName());
         setCardPrice(productData.getPrice());
-
-        // Se debe poner la imagen, pero por ahora no lo hare
-        // String path="File:"+productData.getImage();
+        String imagePath = productData.getProductImage();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File imageFile = new File("src/main/resources/" + imagePath);
+            if (imageFile.exists()) {
+                imageProduct.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
+            } else {
+                System.err.println("La imagen no existe: " + imagePath);
+            }
+        }
+        //Se debe poner la imagen, pero por ahora no lo hare
+        //String path="File:"+productData.getImage();
     }
 
     /**
