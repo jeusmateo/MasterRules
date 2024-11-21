@@ -36,7 +36,7 @@ RESEÑA CafeteriaStorage
   - addToStock
   - falta implementar searchProduct, o es el searchProduct?
 
-RESEÑA cashFlowReport
+RESEÑA cashFlow
 lo veo bien :DDDD
 
 RESEÑA CASHREGISTERAUDITREPORT

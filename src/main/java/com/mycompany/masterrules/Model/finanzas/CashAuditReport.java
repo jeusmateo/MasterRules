@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class CashRegisterAuditReport {
+public class CashAuditReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long CashRegisterAuditReportId;
 
     @OneToMany
-    private List<CashFlowReport> cashFlowInReport;
+    private List<CashFlow> cashFlowInReport;
 
     @OneToMany
-    private List<CashFlowReport> cashFlowOutReport;
+    private List<CashFlow> cashFlowOutReport;
     private BigDecimal initialCashAmount;
     @OneToMany
     private List<Bill> bills;
@@ -32,7 +32,7 @@ public class CashRegisterAuditReport {
     private BigDecimal cashFlowInTotalAmount;
     private BigDecimal cashFlowOutTotalAmount;
 
-    public CashRegisterAuditReport(BigDecimal initialCashAmount) {
+    public CashAuditReport(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
         this.initialCutofDate = LocalDateTime.now();
         this.bills = new ArrayList<>();
@@ -47,18 +47,18 @@ public class CashRegisterAuditReport {
 
     }
 
-    protected CashRegisterAuditReport() {
+    protected CashAuditReport() {
     }
 
     public void calculateCashFlowInTotalAmount() {
-        for (CashFlowReport cashFlowReport : cashFlowInReport) {
-            this.cashFlowInTotalAmount = this.cashFlowInTotalAmount.add(cashFlowReport.getCashAmount());
+        for (CashFlow cashFlow : cashFlowInReport) {
+            this.cashFlowInTotalAmount = this.cashFlowInTotalAmount.add(cashFlow.getCashAmount());
         }
     }
 
     public void calculateCashFlowOutTotalAmount() {
-        for (CashFlowReport cashFlowReport : cashFlowOutReport) {
-            this.cashFlowOutTotalAmount = this.cashFlowOutTotalAmount.add(cashFlowReport.getCashAmount());
+        for (CashFlow cashFlow : cashFlowOutReport) {
+            this.cashFlowOutTotalAmount = this.cashFlowOutTotalAmount.add(cashFlow.getCashAmount());
         }
     }
 
@@ -72,9 +72,9 @@ public class CashRegisterAuditReport {
     }
 
     public void configCashRegisterAuditReport() {
-        CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
-        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReportsByDateRange(initialCutofDate, LocalDateTime.now());
-        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReportsByDateRange(initialCutofDate, LocalDateTime.now());
+        CashierSupervisor cashierSupervisor = new CashierSupervisor();
+        this.cashFlowInReport = cashierSupervisor.getCashInFlowsByDateRange(initialCutofDate, LocalDateTime.now());
+        this.cashFlowOutReport = cashierSupervisor.getCashOutFlowsByDateRange(initialCutofDate, LocalDateTime.now());
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
         this.bills = archiveInvoice.getBillsByDateRange(initialCutofDate, LocalDateTime.now());
     }
@@ -143,19 +143,19 @@ public class CashRegisterAuditReport {
         this.CashRegisterAuditReportId = id;
     }
 
-    public List<CashFlowReport> getCashFlowInReport() {
+    public List<CashFlow> getCashFlowInReport() {
         return cashFlowInReport;
     }
 
-    public void setCashFlowInReport(List<CashFlowReport> cashFlowInReport) {
+    public void setCashFlowInReport(List<CashFlow> cashFlowInReport) {
         this.cashFlowInReport = cashFlowInReport;
     }
 
-    public List<CashFlowReport> getCashFlowOutReport() {
+    public List<CashFlow> getCashFlowOutReport() {
         return cashFlowOutReport;
     }
 
-    public void setCashFlowOutReport(List<CashFlowReport> cashFlowOutReport) {
+    public void setCashFlowOutReport(List<CashFlow> cashFlowOutReport) {
         this.cashFlowOutReport = cashFlowOutReport;
     }
 
