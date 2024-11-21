@@ -27,8 +27,11 @@ public class MixPaymentProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-
-        return null;
+        PaymentDetails paymentDetails=null;
+        for (PaymentProcessor paymentProcessor : paymentProcessors) {
+             paymentDetails = paymentProcessor.paymentProcess();
+        }
+        return paymentDetails;
     }
 
     @Override

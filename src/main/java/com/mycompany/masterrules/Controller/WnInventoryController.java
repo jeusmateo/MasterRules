@@ -83,7 +83,11 @@ public class WnInventoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cafeteriaStorage = new CafeteriaStorage();
         productData = FXCollections.observableArrayList();
-
+        tblInventory.setOnMouseClicked(event -> {
+            if (event.getClickCount() > 1) {
+                event.consume();
+            }
+        });
         configureTableColumns();
         loadProductsToInventory();
         tblInventory.setItems(productData);
@@ -120,18 +124,47 @@ public class WnInventoryController implements Initializable {
 
     private void configureTableColumns() {
         // Configurar las columnas para obtener datos de los métodos getter
+        colProductIDInventory.setReorderable(false);
+        colProductIDInventory.setResizable(false);
         colProductIDInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getId()));
+        colProductNameInventory.setReorderable(false);
+        colProductNameInventory.setResizable(false);
         colProductNameInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
+        colProductCategoryInventory.setReorderable(false);
+        colProductCategoryInventory.setResizable(false);
         colProductCategoryInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getType()));
+        colProductPriceInventory.setReorderable(false);
+        colProductPriceInventory.setResizable(false);
         colProductPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getPrice()));
+        colProductVipPriceInventory.setReorderable(false);
+        colProductVipPriceInventory.setResizable(false);
         colProductVipPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getVIPPrice()));
+        colProductStockInventory.setReorderable(false);
+        colProductStockInventory.setResizable(false);
         colProductStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getCurrentStock()));
+        colProductMinStockInventory.setReorderable(false);
+        colProductMinStockInventory.setResizable(false);
         colProductMinStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMinStock()));
+        colProductMaxStockInventory.setReorderable(false);
+        colProductMaxStockInventory.setResizable(false);
         colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
 
 
-    public void showScrEditInfo(){
+    public void showScrEditInfo() {
+        Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct == null) {
+            showAlert("Error", "Por favor, selecciona un producto para editar.");
+            return;
+        }
+
+        // Mostrar la información de StockInfo en los campos editables
+        txtFieldStock.setText(String.valueOf(selectedProduct.getStockInfo().getCurrentStock()));
+        txtFieldMinInv.setText(String.valueOf(selectedProduct.getStockInfo().getMinStock()));
+        txtFieldMaxInv.setText(String.valueOf(selectedProduct.getStockInfo().getMaxStock()));
+
+        // Mostrar la pantalla de edición
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
     }
@@ -191,6 +224,7 @@ public class WnInventoryController implements Initializable {
     private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
         // Validar que el stock actual esté dentro del rango permitido
         if (newStock < newMinStock || newStock > newMaxStock) {
+            System.out.println("El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo.");
             throw new IllegalArgumentException(
                     "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
             );
@@ -217,13 +251,15 @@ public class WnInventoryController implements Initializable {
 
     @FXML
     private void eventAction(javafx.event.ActionEvent event) {
-        if (event.equals(btnEditStockInfo)) {
+        Object source = event.getSource();
+
+        if (source.equals(btnEditStockInfo)) {
             showScrEditInfo();
-        } else if (event.equals(btnExit)) {
+        } else if (source.equals(btnExit)) {
             exit();
-        } else if (event.equals(btnSave)) {
+        } else if (source.equals(btnSave)) {
             buttonSaveInfo();
-        } else if (event.equals(btnScanProduct)) {
+        } else if (source.equals(btnScanProduct)) {
             displaySelected(null);
         }
     }

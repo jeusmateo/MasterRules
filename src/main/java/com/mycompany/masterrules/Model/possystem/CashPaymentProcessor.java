@@ -15,11 +15,19 @@ public class CashPaymentProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails("CASH",this.getTotalAmount());
-        paymentDetails.setCustomerCashAmount(this.customerCashAmount);
-        paymentDetails.setChangeAmount(changeAmount);
-        paymentDetails.setPaymentDescription(paymentDescription());
-        return paymentDetails;
+        if(getTotalAmount().compareTo(customerCashAmount) < 0){
+            PaymentDetails paymentDetails = new PaymentDetails("CASH",this.getTotalAmount());
+            paymentDetails.setCustomerCashAmount(this.customerCashAmount);
+            paymentDetails.setChangeAmount(changeAmount);
+            paymentDetails.setPaymentDescription(paymentDescription());
+            var posManager = POSManager.getInstance();
+            posManager.getCashRegister().setCurrentCashAmount(posManager.getCashRegister().getCurrentCashAmount().add(this.getTotalAmount()));
+            return paymentDetails;
+        }
+        else{
+            return null;
+        }
+
     }
 
     @Override

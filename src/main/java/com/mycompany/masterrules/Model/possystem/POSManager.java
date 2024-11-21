@@ -4,6 +4,7 @@ package com.mycompany.masterrules.Model.possystem;
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+import com.mycompany.masterrules.Model.finanzas.CashRegister;
 import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
@@ -24,8 +25,9 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private UserAccount currentUser;
+    private CashRegister cashRegister = new CashRegister();
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
-    private final Order currentOrder;
+    private  Order currentOrder;
     private static POSManager instance;
 
     public static synchronized POSManager getInstance() {
@@ -35,10 +37,18 @@ public class POSManager {
         return instance;
     }
 
-//    private POSManager(UserAccount userAccount) {
-//        currentUser = userAccount;
-//        currentOrder = new Order();
-//    }
+    // initialize the POSManager with a userAccount
+    public static synchronized POSManager getInstance(UserAccount userAccount) {
+        if (instance == null) {
+            instance = new POSManager(userAccount);
+        }
+        return instance;
+    }
+
+    private POSManager(UserAccount userAccount) {
+        currentUser = userAccount;
+        currentOrder = new Order();
+    }
 
     private POSManager() {
         UserDatabase bd = new UserDatabase();
@@ -71,6 +81,13 @@ public class POSManager {
 
     }
 
+
+    public void removeProductFromOrder(Product product) {
+        currentOrder.removeProductFromOrderItemList(new OrderItem(product));
+
+        System.out.println("holis");
+    }
+
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
 
 
@@ -86,6 +103,10 @@ public class POSManager {
     public void configureOrder(String eleccion, String comentario) {
         currentOrder.setDeliveryMethod(eleccion);
         currentOrder.setComment(comentario);
+    }
+
+    public void cancelOrder(){
+        currentOrder = new Order();
     }
 
     private Bill createBill(PaymentDetails data) {
@@ -135,11 +156,15 @@ public class POSManager {
 
     }
 
+    public CashRegister getCashRegister(){
+        return cashRegister;
+    }
 
     public void sell(PaymentDetails paymentMethod) {
         Bill bill = createBill(paymentMethod);
         ArchiveInvoice ai = new ArchiveInvoice();
         ai.ArchiveBill(bill);
+        currentOrder=new Order();
     }
 
     /*

@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class WnReportsController implements Initializable {
@@ -26,12 +27,13 @@ public class WnReportsController implements Initializable {
     //Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
-    private final CashRegister cashRegister = new CashRegister();
+    private CashRegister cashRegister;
     CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
 
+    // Botones relacionados con inflow y outflow
     @FXML
     private Button btnAcceptInflow;
     @FXML
@@ -45,6 +47,7 @@ public class WnReportsController implements Initializable {
     @FXML
     private Button btnExitDoOutflow;
 
+    // Contenedores (AnchorPanes)
     @FXML
     private AnchorPane scrDoInflowCash;
     @FXML
@@ -54,16 +57,17 @@ public class WnReportsController implements Initializable {
     @FXML
     private AnchorPane scrReports;
 
+    // Campos de texto
     @FXML
     private TextField txtFieldAmountInflow;
     @FXML
     private TextField txtFieldAmountOutflow;
-
     @FXML
     private TextArea txtOutflowReason;
     @FXML
     private TextArea txtReasonInflow;
 
+    // Tablas y columnas
     @FXML
     private TableView<CashFlowReport> tableViewlOutFlowReport;
     @FXML
@@ -72,6 +76,7 @@ public class WnReportsController implements Initializable {
     private TableColumn<CashFlowReport, String> colCashOutDate;
     @FXML
     private TableColumn<CashFlowReport, String> colCashOutQuantity;
+
     @FXML
     private TableView<CashFlowReport> tableViewlInFlowReport;
     @FXML
@@ -106,6 +111,7 @@ public class WnReportsController implements Initializable {
         }
 
     }
+
 
     /**
      * Muestra la ventana principal de reportes. Sale de la ventana DoInflow.
@@ -167,9 +173,11 @@ public class WnReportsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var posManager = POSManager.getInstance();
+        this.cashRegister = posManager.getCashRegister();
         System.out.println(posManager.getCurrentUser());
         initializeCashOutFlowTable();
         initializeCashInFlowTable();
+        configTextFields();
     }
 
     // Configura la tabla y los datos para Cash Out Flow
@@ -211,5 +219,19 @@ public class WnReportsController implements Initializable {
         tableViewlInFlowReport.refresh();
     }
 
+    private void configTextFields(){
+        txtFieldAmountInflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtFieldAmountOutflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(txtFieldAmountInflow) || evt.equals(txtFieldAmountOutflow)) {
+            if (!event.getCharacter().matches("\\d")) {
+                event.consume();
+            }
+        }
+    }
 
 }

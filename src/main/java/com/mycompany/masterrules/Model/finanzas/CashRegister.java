@@ -9,6 +9,14 @@ public class CashRegister {
         currentCashAmount = BigDecimal.ZERO;
     }
 
+    public BigDecimal getCurrentCashAmount() {
+        return currentCashAmount;
+    }
+
+    public void setCurrentCashAmount(BigDecimal currentCashAmount) {
+        this.currentCashAmount = currentCashAmount;
+    }
+
     public void withdrawCash(String reason, String amount) throws Exception {
 
 
