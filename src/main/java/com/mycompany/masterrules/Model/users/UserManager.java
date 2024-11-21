@@ -58,7 +58,7 @@ public class UserManager {
     }
 
     private boolean isValid(UserAccount newUser) {
-        return !isUserRegistered(newUser.getUserName()) && isUsernameValid(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
+        return !isUserRegistered(newUser.getUserName())  && isPasswordValid(newUser.getPassword());
     }
 
     public void removeUser(String userID) throws UserNotFoundException {
@@ -75,9 +75,6 @@ public class UserManager {
         return allUsers.stream().anyMatch(userAccount -> userAccount.getUserName().equals(user));
     }
 
-    private boolean isUsernameValid(String username) {//se agrego este nuevo mateodo para validar el username bajo ciertos estandares
-        return !username.contains(" ") && username.length() >= 6 && username.length() <= 20 && !isUsernameTaken(username);
-    }
 
     private boolean isUsernameTaken(String username) {//cambie el param por username
         return allUsers.stream().anyMatch(user -> user.getUserName().equals(username));
