@@ -55,7 +55,7 @@ private String selectedImagePath;
     private Button btnDefinedCombo;
 
     @FXML
-    private Button btnImportImage;
+    private Button btnImportComboImageCreate;
 
 
     @FXML
@@ -74,7 +74,7 @@ private String selectedImagePath;
     private Button btnEditCombo;
 
     @FXML
-    private Button btnImportComboImage;
+    private Button btnImportComboImageEdit;
 
     @FXML
     private Button btnDeleteCombo;
@@ -85,7 +85,10 @@ private String selectedImagePath;
 
 
     @FXML
-    private ImageView imgCombo;
+    private ImageView imgComboCreate;
+
+    @FXML
+    private ImageView imgComboEdit;
 
     @FXML
     private AnchorPane scrCreateComboFinalStep;
@@ -490,6 +493,10 @@ private String selectedImagePath;
                 importProductImage(imgProduct_tabCreate);
             } else if (source.equals(btnImportImage_tabEdit)) {
                 importProductImage(imgProduct_tabEdit);
+            }else if (source.equals(btnImportComboImageEdit)) {
+                importProductImage(imgComboEdit);
+            } else if (source.equals(btnImportComboImageCreate)) {
+                importProductImage(imgComboCreate);
             } else if (source.equals(btnCreateCombo)) {
                 handleCreateCombo();
             } else if (source.equals(btnDeleteCombo)) {
@@ -564,7 +571,14 @@ private String selectedImagePath;
         String comboName = txtFieldNameCombo.getText();
         String comboVipPrice = txtFieldVIPPriceCombo.getText();
         String comboPrice = txtFieldPriceCombo.getText();
+
+        if (selectedImagePath == null || selectedImagePath.isEmpty()) {
+            System.err.println("No se ha seleccionado una imagen para el producto.");
+            return;
+        }
+
         Combo newCombo = new Combo(comboName, selectedProductsForCombo, new BigDecimal(comboPrice), new BigDecimal(comboVipPrice));
+        newCombo.setComboImage(selectedImagePath);
         cafeteriaMenu.addComboToMenu(newCombo);
         btnBackToCreateCombo();
         updateComboTable(); // Asegúrate de actualizar la tabla después de crear un combo
@@ -589,6 +603,7 @@ private String selectedImagePath;
             selectedCombo.setName(newName);
             selectedCombo.setPrice(newPrice);
             selectedCombo.setVIPPrice(newVipPrice);
+            selectedCombo.setProducts(selectedProductsForCombo);
 
             cafeteriaMenu.editCombo(selectedCombo);
             updateProductTable();
@@ -629,7 +644,18 @@ private String selectedImagePath;
             txtFieldEditComboName.setText(selectedCombo.getName());
             txtFieldEditComboPrice.setText(selectedCombo.getPrice().toString());
             txtFieldEditComboVipPrice.setText(selectedCombo.getVIPPrice().toString());
+            String imagePath = selectedCombo.getProductImage();
+            if (imagePath != null && !imagePath.isEmpty()) {
+                File imageFile = new File("src/main/resources/" + imagePath);
+                if (imageFile.exists()) {
+                    imgProduct_tabEdit.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
+                } else {
+                    System.err.println("La imagen no existe: " + imagePath);
+                }
+            }
         }
+
+
     }
 
     private void displayProductSelection() {

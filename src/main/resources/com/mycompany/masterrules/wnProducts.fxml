@@ -105,7 +105,7 @@
                                                                <children>
                                                                   <AnchorPane prefHeight="158.0" prefWidth="147.0" stylesheets="@viewTemplate.css">
                                                                      <children>
-                                                                        <ImageView fx:id="imgProduct_tabCreate" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                        <ImageView fx:id="imgProduct_tabCreate" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
                                                                      </children>
                                                                      <styleClass>
                                                                         <String fx:value="radius" />
@@ -225,7 +225,7 @@
                                                                <children>
                                                                   <AnchorPane prefHeight="158.0" prefWidth="147.0" stylesheets="@viewTemplate.css">
                                                                      <children>
-                                                                        <ImageView fx:id="imgProduct_tabEdit" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                        <ImageView fx:id="imgProduct_tabEdit" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
                                                                      </children>
                                                                      <styleClass>
                                                                         <String fx:value="radius" />
@@ -431,7 +431,7 @@
                                                                <children>
                                                                   <AnchorPane prefHeight="165.0" prefWidth="170.0" stylesheets="@viewTemplate.css">
                                                                      <children>
-                                                                        <ImageView fx:id="imgCombo" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                        <ImageView fx:id="imgComboCreate" fitHeight="128.0" fitWidth="153.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0" />
                                                                      </children>
                                                                      <styleClass>
                                                                         <String fx:value="radius" />
@@ -439,7 +439,7 @@
                                                                         <String fx:value="white-bg" />
                                                                      </styleClass>
                                                                   </AnchorPane>
-                                                                  <Button fx:id="btnImportImage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="137.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                  <Button fx:id="btnImportComboImageCreate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="137.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                </children>
                                                             </VBox>
                                                             <Button fx:id="btnCreateCombo" layoutX="355.0" layoutY="442.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="37.0" prefWidth="155.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Confirmar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="60.0" />
@@ -652,7 +652,7 @@
                                                                      <children>
                                                                         <AnchorPane prefHeight="190.0" prefWidth="147.0" stylesheets="@viewTemplate.css">
                                                                            <children>
-                                                                              <ImageView fx:id="comboImage" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                              <ImageView fx:id="imgComboEdit" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
                                                                            </children>
                                                                            <styleClass>
                                                                               <String fx:value="radius" />
@@ -660,7 +660,7 @@
                                                                               <String fx:value="white-bg" />
                                                                            </styleClass>
                                                                         </AnchorPane>
-                                                                        <Button fx:id="btnImportComboImage" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                        <Button fx:id="btnImportComboImageEdit" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                      </children>
                                                                   </VBox>
                                                                </children>
