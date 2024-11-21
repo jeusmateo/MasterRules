@@ -144,67 +144,96 @@ public class WnPaymentController implements Initializable {
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        if (evt.equals(btnPay)) {
-            BigDecimal cashIncome = new BigDecimal(txtFieldCashIncome.getText());
-            PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
-            this.resultPayementDetails= processor.paymentProcess();
-            Stage stage = (Stage) btnPay.getScene().getWindow();
-            stage.close();
-        } else if (evt.equals(btnPaywCreditCard)) {
-            String transactionReferenceNum = txtFieldReferenceNum.getText();
-            PaymentProcessor processor = new DebitCardPaymenthProcessor(totalAmount, totalAmount, transactionReferenceNum);
-            this.resultPayementDetails= processor.paymentProcess();
-            Stage stage = (Stage) btnPaywCreditCard.getScene().getWindow();
-            stage.close();
-        } else if (evt.equals(btnPaywSC)) {
-            if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
-                PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
-                this.resultPayementDetails= processor.paymentProcess();
-                Stage stage = (Stage) btnPaywSC.getScene().getWindow();
-                stage.close();
+
+        try {
+            if (evt.equals(btnPay)) {
+                handleCashPayment();
+            } else if (evt.equals(btnPaywCreditCard)) {
+                handleDebitCardPayment();
+            } else if (evt.equals(btnPaywSC)) {
+                handleStoreCreditPayment();
+            } else if (evt.equals(btnPayMP)) {
+                handleMixedPayment();
             }
-        } else if (evt.equals(btnPayMP)) {
-            BigDecimal remainingPayment = new BigDecimal(txtFieldRemainingPayment.getText());
-            PaymentProcessor processor = new MixPaymentProcessor(totalAmount);
-            if (remainingPayment.compareTo(BigDecimal.ZERO) > 0) {
-                // Mostrar error: falta cubrir el monto total
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error de Pago");
-                alert.setHeaderText(null);
-                alert.setContentText("El monto total no ha sido cubierto.");
-                alert.showAndWait();
-            } else {
-
-                if(txtFieldCardIncomeMP.getText()==null ||txtFieldCardIncomeMP.getText().isEmpty() ){
-                    BigDecimal cardIncome= BigDecimal.ZERO;
-                }else{
-                    BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText());
-                    ((MixPaymentProcessor) processor).addPaymentMethod(new DebitCardPaymenthProcessor(cardIncome, cardIncome, ""));
-                }
-                if(txtFieldCashIncomeMP.getText()==null|| txtFieldCashIncomeMP.getText().isEmpty()){
-                    BigDecimal cashIncome= BigDecimal.ZERO;
-                }
-                else{
-                    BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText());
-                    ((MixPaymentProcessor) processor).addPaymentMethod(new CashPaymentProcessor(cashIncome, cashIncome));
-                }
-                if(txtFieldStoreCreditIncomeMP.getText()==null|| txtFieldStoreCreditIncomeMP.getText().isEmpty()){
-                    BigDecimal storeCreditIncome= BigDecimal.ZERO;
-                }else{
-                    BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText());
-                    ((MixPaymentProcessor) processor).addPaymentMethod(new StoreCreditPayProcessor(storeCreditIncome,customer));
-                }
-
-
-
-
-                this.resultPayementDetails = processor.paymentProcess();
-
-                Stage stage = (Stage) btnPayMP.getScene().getWindow();
-                stage.close();
-            }
+        } catch (Exception e) {
+            showAlert("Error de Pago", "Ocurrió un error al procesar el pago.");
         }
+    }
 
+    private void handleCashPayment() {
+        BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncome.getText());
+        PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
+        this.resultPayementDetails = processor.paymentProcess();
+        closePaymentWindow(btnPay);
+    }
+
+    private void handleDebitCardPayment() {
+        String transactionReferenceNum = txtFieldReferenceNum.getText();
+        PaymentProcessor processor = new DebitCardPaymenthProcessor(totalAmount, totalAmount, transactionReferenceNum);
+        this.resultPayementDetails = processor.paymentProcess();
+        closePaymentWindow(btnPaywCreditCard);
+    }
+
+    private void handleStoreCreditPayment() {
+        if (customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
+            PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
+            this.resultPayementDetails = processor.paymentProcess();
+            closePaymentWindow(btnPaywSC);
+        } else {
+            showAlert("Acceso Denegado", "El código de acceso es incorrecto.");
+        }
+    }
+
+    private void handleMixedPayment() {
+        BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncomeMP.getText());
+        BigDecimal cardIncome = parseBigDecimal(txtFieldCardIncomeMP.getText());
+        BigDecimal storeCreditIncome = parseBigDecimal(txtFieldStoreCreditIncomeMP.getText());
+
+        BigDecimal totalPaid = cashIncome.add(cardIncome).add(storeCreditIncome);
+        BigDecimal remainingPayment = totalAmount.subtract(totalPaid);
+
+        if (remainingPayment.compareTo(BigDecimal.ZERO) > 0) {
+            showAlert("Error de Pago", "El monto total no ha sido cubierto.");
+            txtFieldRemainingPayment.setText(remainingPayment.toString());
+        } else {
+            MixPaymentProcessor processor = new MixPaymentProcessor(totalAmount);
+            addPaymentMethodToProcessor(processor, cashIncome, cardIncome, storeCreditIncome);
+            this.resultPayementDetails = processor.paymentProcess();
+            closePaymentWindow(btnPayMP);
+        }
+    }
+
+    private BigDecimal parseBigDecimal(String text) {
+        try {
+            return text == null || text.isEmpty() ? BigDecimal.ZERO : new BigDecimal(text);
+        } catch (NumberFormatException e) {
+            return BigDecimal.ZERO;
+        }
+    }
+
+    private void addPaymentMethodToProcessor(MixPaymentProcessor processor, BigDecimal cashIncome, BigDecimal cardIncome, BigDecimal storeCreditIncome) {
+        if (cardIncome.compareTo(BigDecimal.ZERO) > 0) {
+            processor.addPaymentMethod(new DebitCardPaymenthProcessor(cardIncome, cardIncome, ""));
+        }
+        if (cashIncome.compareTo(BigDecimal.ZERO) > 0) {
+            processor.addPaymentMethod(new CashPaymentProcessor(cashIncome, cashIncome));
+        }
+        if (storeCreditIncome.compareTo(BigDecimal.ZERO) > 0) {
+            processor.addPaymentMethod(new StoreCreditPayProcessor(storeCreditIncome, customer));
+        }
+    }
+
+    private void closePaymentWindow(Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public PaymentDetails getPaymentDetails(){
@@ -223,9 +252,9 @@ public class WnPaymentController implements Initializable {
 
     private void calcularFaltanteMixto() {
         try {
-            BigDecimal cashIncome = new BigDecimal(txtFieldCashIncomeMP.getText().isEmpty() ? "0" : txtFieldCashIncomeMP.getText());
-            BigDecimal cardIncome = new BigDecimal(txtFieldCardIncomeMP.getText().isEmpty() ? "0" : txtFieldCardIncomeMP.getText());
-            BigDecimal storeCreditIncome = new BigDecimal(txtFieldStoreCreditIncomeMP.getText().isEmpty() ? "0" : txtFieldStoreCreditIncomeMP.getText());
+            BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncomeMP.getText());
+            BigDecimal cardIncome = parseBigDecimal(txtFieldCardIncomeMP.getText());
+            BigDecimal storeCreditIncome = parseBigDecimal(txtFieldStoreCreditIncomeMP.getText());
 
             BigDecimal totalPaid = cashIncome.add(cardIncome).add(storeCreditIncome);
             BigDecimal remainingPayment = totalAmount.subtract(totalPaid);
