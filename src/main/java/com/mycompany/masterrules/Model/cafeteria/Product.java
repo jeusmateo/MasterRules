@@ -7,10 +7,6 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-/*
- * TODO: Mapear correctamente la tabla de la base de datos con la clase Product
- *  y modificarlo segun los requerimientos
- * */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Product {

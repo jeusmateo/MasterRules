@@ -45,7 +45,6 @@ public class POSManager {
         return instance;
     }
 
-    // initialize the POSManager with a userAccount
     public static synchronized POSManager getInstance(UserAccount userAccount) {
         if (instance == null) {
             instance = new POSManager(userAccount);
@@ -53,19 +52,6 @@ public class POSManager {
         return instance;
     }
 
-    //Flujo Chepil para vender.
-    //-Primero tomamos la orden para añadir
-    //Configuramos la orden
-    //PAGAR
-    // CREAR FACTURA
-    // DAR BIENES
-    //DAR FACTURA
-
-    //FLUJO CHEPIL 2
-    //identificar producto
-    //REALIZAR TRANSACCION
-    //CONFIRMAR ENTREGA
-    //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         if (product instanceof InventoriableProduct && ((InventoriableProduct) product).isStockAvailable()) {
 
@@ -76,7 +62,6 @@ public class POSManager {
         currentOrder.addProductToOrderItemList(new OrderItem(product));
 
     }
-
 
     public void removeProductFromOrder(Product product) {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
@@ -144,34 +129,6 @@ public class POSManager {
         archiveInvoice.archiveBill(bill);
         currentOrder = new Order();
     }
-
-    /*
-    public void collectDebt(Customer customerArg, Debt debtArg) {
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getFullEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
-            printer.imprimirBill(newBill);
-            currentOrder = new Order();
-            //customerArg.getCustomerAccount().removeDebt(debtArg);
-
-        } else {
-            throw new IllegalArgumentException("No tiene permisos para vender");
-        }
-
-    }
-
-     */
-
-
-    /*
-    public void buyNowPayLater(Customer customer) {
-        BigDecimal amount = calculateTotalOrderAmount();
-        Debt tempDebt = new Debt(currentOrder, amount);
-        customer.getCustomerAccount().addDebt(tempDebt);
-        printer.imprimirOrder(currentOrder);
-        currentOrder = new Order();
-    }
-*/
 
     public Order getCurrentOrder() {
         return currentOrder;
