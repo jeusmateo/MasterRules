@@ -391,7 +391,7 @@ public class WnCustomersController implements Initializable {
         if (customer != null) {
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
-            //lbCustomerIdAuxiliar.setText("customer.getID()");
+            lbCustomerIdAuxiliar.setText(customer.getId());
             txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
