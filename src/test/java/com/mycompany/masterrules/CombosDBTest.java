@@ -3,7 +3,6 @@ package com.mycompany.masterrules;
 import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
-import com.mycompany.masterrules.Model.cafeteria.CustomComboCreator;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import org.junit.jupiter.api.Test;
 
