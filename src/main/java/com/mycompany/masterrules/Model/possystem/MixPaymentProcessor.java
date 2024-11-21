@@ -8,6 +8,7 @@ public class MixPaymentProcessor extends PaymentProcessor {
     private List<PaymentProcessor> paymentProcessors;
     private BigDecimal recibido;
     private BigDecimal faltante;
+
     public MixPaymentProcessor(BigDecimal totalAmount){
         super(totalAmount);
         paymentProcessors = new ArrayList();
