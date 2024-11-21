@@ -131,21 +131,21 @@ private String selectedImagePath;
     private TextField txtFieldVIPPriceCombo;
 
     @FXML
-    private AnchorPane wnCreateComboStepOne;
+    private AnchorPane scrCreateComboStepOne;
 
 
     @FXML
-    private AnchorPane wnCreateFood;
+    private AnchorPane scrCreateFood;
 
     @FXML
-    private AnchorPane wnEditCombo;
+    private AnchorPane scrEditCombo;
 
 
     @FXML
-    private AnchorPane wnEditFood;
+    private AnchorPane scrEditFood;
 
     @FXML
-    private AnchorPane wnFood;
+    private AnchorPane scrFood;
     @FXML
     private TableView<Product> tblFood;
     @FXML
@@ -294,9 +294,8 @@ private String selectedImagePath;
 
     @FXML
     void setScrCreateComboFinalStep(MouseEvent event) {
-        scrComboTable.setVisible(true);
+        scrComboTable.setVisible(false);
         scrMenuCards.setVisible(false);
-
 
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
@@ -309,10 +308,18 @@ private String selectedImagePath;
     @FXML
     void setBtnBackToScrMenuCard(){
         scrCreateComboFinalStep.setVisible(false);
-        scrComboTable.setVisible(true);
+        scrComboTable.setVisible(false);
         scrMenuCards.setVisible(true);
-
         btnContinueDefinedCombo.setVisible(true);
+    }
+
+    @FXML
+    private void btnBackToCreateCombo(){
+        scrCreateComboStart.setVisible(true);
+        scrComboTable.setVisible(true);
+
+        scrCreateComboStepTwo.setVisible(false);
+        scrCreateDefinedCombo.setVisible(false);
     }
 
     @FXML
@@ -331,6 +338,7 @@ private String selectedImagePath;
 
     @FXML
     void setScrCreateDefinedCombo(MouseEvent event) {
+        scrComboTable.setVisible(false);
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(true);
