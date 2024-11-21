@@ -12,7 +12,7 @@ public class CashRegisterAuditReportManager {
 
     private final List<CashAuditReport> cashAuditReports;
     private final CashAuditReportDatabase cashAuditReportDatabase;
-    private CashAuditReport currentCashAuditReport;
+    private LocalDateTime lastDate;
 
     public CashRegisterAuditReportManager() {
         cashAuditReportDatabase = new CashAuditReportDatabase();
@@ -20,10 +20,9 @@ public class CashRegisterAuditReportManager {
         readFromDatabase();
 
         if (cashAuditReports.isEmpty()) {
-            currentCashAuditReport = new CashAuditReport(BigDecimal.ZERO, LocalDateTime.now());
+            lastDate = LocalDateTime.now();
         } else {
-            var lastDate = cashAuditReports.getLast().getFinalCutofDate();
-            currentCashAuditReport = new CashAuditReport(BigDecimal.ZERO, lastDate);
+            lastDate = cashAuditReports.getLast().getFinalCutofDate();
         }
     }
 
@@ -32,30 +31,26 @@ public class CashRegisterAuditReportManager {
         cashAuditReports.addAll(cashAuditReportDatabase.readAll());
     }
 
-    public CashAuditReport getCurrentCashRegisterAuditReport() {
-        return currentCashAuditReport;
-    }
-
     public void removeCashRegisterAuditReport(CashAuditReport cashAuditReport) {
         cashAuditReports.remove(cashAuditReport);
     }
 
-    public void generateEndOfDaySalesReport() { //todo nombre mal puesto
-        currentCashAuditReport.configCashRegisterAuditReport();
-        currentCashAuditReport.calculateCashFlowInTotalAmount();
-        currentCashAuditReport.calculateCashFlowOutTotalAmount();
-        currentCashAuditReport.calculateCashRevenue();
-        currentCashAuditReport.calculateCardhRevenue();
-        currentCashAuditReport.calculateStoreCreditRevenue();
-        currentCashAuditReport.calculateCashBalance();
+    public CashAuditReport generateEndOfDaySalesReport() { //todo nombre mal puesto
+        var endOfDaySalesReport = new CashAuditReport(BigDecimal.ZERO, lastDate);
+        endOfDaySalesReport.configCashRegisterAuditReport();
+        endOfDaySalesReport.calculateCashFlowInTotalAmount();
+        endOfDaySalesReport.calculateCashFlowOutTotalAmount();
+        endOfDaySalesReport.calculateCashRevenue();
+        endOfDaySalesReport.calculateCardhRevenue();
+        endOfDaySalesReport.calculateStoreCreditRevenue();
+        endOfDaySalesReport.calculateCashBalance();
+
+        return endOfDaySalesReport;
     }
 
-    public void endCashRegisterAuditReport() {
+    public void endCashRegisterAuditReport(CashAuditReport currentCashAuditReport) {
         currentCashAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashAuditReports.add(currentCashAuditReport);
-
-        currentCashAuditReport = new CashAuditReport(new BigDecimal("0"), LocalDateTime.now());
-
     }
 
 }

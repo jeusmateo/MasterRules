@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Controller;
 
+import com.mycompany.masterrules.Model.finanzas.CashAuditReport;
 import com.mycompany.masterrules.Model.finanzas.CashFlow;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ public class WnCashRegisterAuditReportController implements Initializable{
     private final ObservableList<CashFlow> cashInFlowReports=null;
     private final ObservableList<CashFlow> cashOutFlowReports = null;
 
+    private CashAuditReport currentCashAuditReport;
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
@@ -119,18 +121,17 @@ public class WnCashRegisterAuditReportController implements Initializable{
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
         if(evt.equals(btnConfirmPart1)){
-            cashRegisterAuditReportManager.generateEndOfDaySalesReport();
-            var currentCashRegisterAuditReport = cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport();
-            txtTSCash.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashRevenue()));
-            txtTSCreditCard.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCardRevenue()));
-            txtTSStoreCard.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getStoreCreditRevenue()));
-            txtCashFunds.setText(String.valueOf("+  "+currentCashRegisterAuditReport.getCashBalance()));
-            txtCashSales.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashRevenue()));
-            txtInFlowCash.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashFlowInTotalAmount()));
-            txtOutFlowCash.setText(String.valueOf("- $ "+currentCashRegisterAuditReport.getCashFlowOutTotalAmount()));
+            currentCashAuditReport = cashRegisterAuditReportManager.generateEndOfDaySalesReport();
+            txtTSCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
+            txtTSCreditCard.setText(String.valueOf("+ $ "+currentCashAuditReport.getCardRevenue()));
+            txtTSStoreCard.setText(String.valueOf("+ $ "+currentCashAuditReport.getStoreCreditRevenue()));
+            txtCashFunds.setText(String.valueOf("+  "+currentCashAuditReport.getCashBalance()));
+            txtCashSales.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
+            txtInFlowCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashFlowInTotalAmount()));
+            txtOutFlowCash.setText(String.valueOf("- $ "+currentCashAuditReport.getCashFlowOutTotalAmount()));
         }
         else if(evt.equals(btnRealizarCorteDeVenta)){
-            cashRegisterAuditReportManager.endCashRegisterAuditReport();
+            cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
         }
 
     }
