@@ -3,12 +3,11 @@ package com.mycompany.masterrules.Model.finanzas;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-public class CashFlowReport {
+public class CashFlow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +18,7 @@ public class CashFlowReport {
     private BigDecimal cashAmount;
     private LocalDateTime cashFlowDate;
 
-    public CashFlowReport(String reason, BigDecimal cashAmount) {
+    public CashFlow(String reason, BigDecimal cashAmount) {
         this.reasonForReport = reason;
         this.cashAmount = cashAmount;
         this.cashFlowDate = LocalDateTime.now();
@@ -69,7 +68,7 @@ public class CashFlowReport {
         this.flowType = flowType;
     }
 
-    protected CashFlowReport() {
+    protected CashFlow() {
 
     }
 }

@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.Model.finanzas.CashFlow;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,8 +22,8 @@ public class WnCashRegisterAuditReportController implements Initializable{
     // --------------------------------------------------------------------------------------------
 
     private CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
-    private final ObservableList<CashFlowReport> cashInFlowReports=null;
-    private final ObservableList<CashFlowReport> cashOutFlowReports = null;
+    private final ObservableList<CashFlow> cashInFlowReports=null;
+    private final ObservableList<CashFlow> cashOutFlowReports = null;
 
 
     // Componentes de la vista
@@ -51,21 +52,21 @@ public class WnCashRegisterAuditReportController implements Initializable{
     private Text txtTSStoreCard;
 
     @FXML
-    private TableView<CashFlowReport> tblCashInFlowReport;
+    private TableView<CashFlow> tblCashInFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> colReasonCashInFlow;
+    private TableColumn<CashFlow, String> colReasonCashInFlow;
     @FXML
-    private TableColumn<CashFlowReport, String> colDateTimeCashInFlow;
+    private TableColumn<CashFlow, String> colDateTimeCashInFlow;
     @FXML
-    private TableColumn<CashFlowReport, String> colAmountCashInFlow;
+    private TableColumn<CashFlow, String> colAmountCashInFlow;
     @FXML
-    private TableView<CashFlowReport> tblCashOutFlowReport;
+    private TableView<CashFlow> tblCashOutFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> colReasonCashOutFlow;
+    private TableColumn<CashFlow, String> colReasonCashOutFlow;
     @FXML
-    private TableColumn<CashFlowReport, String> colDateTimeCashOutFlow;
+    private TableColumn<CashFlow, String> colDateTimeCashOutFlow;
     @FXML
-    private TableColumn<CashFlowReport, String> colAmountCashOutFlow;
+    private TableColumn<CashFlow, String> colAmountCashOutFlow;
 
     @FXML
     private Button btnCloseCashRegisterAuditReport;
