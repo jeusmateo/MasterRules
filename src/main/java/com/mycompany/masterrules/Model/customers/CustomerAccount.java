@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-// TODO: Clase temporal para que no de errores (antiguo)
 @Embeddable
 public class CustomerAccount {
 
@@ -18,11 +17,8 @@ public class CustomerAccount {
     private boolean isVIP;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Debt> totalDebt;
-    @Embedded // TODO: Revisar si es necesario (antiguo)
+    @Embedded
     private LoyaltyCard loyaltyCard;
-
-
-    //TODO: DOS CONSTRUCTORES?
 
     public CustomerAccount() {
         this.loyaltyPoints = 0;
