@@ -70,9 +70,14 @@ public class POSManager {
         System.out.println("holis");
     }
 
-    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
+    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer, String customerName) {
 
-
+//        if(customer!= null){
+//            currentOrder.setCustomerName(customer.getCustomerName());
+//        }
+//        else{
+//            currentOrder.setCustomerName(customerName);
+//        }
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
@@ -128,9 +133,12 @@ public class POSManager {
 
 
         Customer customer= this.currentOrder.getCustomer();
-        customer.getCustomerAccount().accumulatePoints();
-        CustomerDatabase bd = new CustomerDatabase();
-        bd.update(customer);
+        if(customer!=null){
+            customer.getCustomerAccount().accumulatePoints();
+            CustomerDatabase bd = new CustomerDatabase();
+            bd.update(customer);
+        }
+
         Bill bill = createBill(paymentMethod);
 
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();

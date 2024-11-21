@@ -331,9 +331,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 //TODO FALTA EL DEL CLIENTRES
     private void configOrderInfo() {
         Customer customerInfo = cboCustomers.getValue();
-       // if(customerInfo == null) {
-            System.out.println("Customer Info: " + customerInfo);
-       // }
+        String customerName="";
+        if(customerInfo == null) {
+            customerName= inputClientName.getText();
+        }
+
         RadioButton selected = (RadioButton) group.getSelectedToggle();
         String deliveryMethod = "";
         if (selected != null) {
@@ -342,7 +344,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String comments = txtAdittionalComments.getText();
         //TODO validaciones para null
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
-        posManager.configureOrder(deliveryMethod, comments, customerInfo);
+        posManager.configureOrder(deliveryMethod, comments, customerInfo,customerName);
     }
 
 
@@ -443,6 +445,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         initializeCategories();
         displayCategoriesForCustomCombo(currentCategoryIndex);
         initializeTableOrder();
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
 
         cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
