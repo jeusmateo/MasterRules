@@ -4,7 +4,6 @@ import com.mycompany.masterrules.Model.possystem.Bill;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class CashRegisterAuditReport {
     private BigDecimal cashFlowInTotalAmount;
     private BigDecimal cashFlowOutTotalAmount;
 
-    public CashRegisterAuditReport(BigDecimal initialCashAmount){
+    public CashRegisterAuditReport(BigDecimal initialCashAmount) {
         this.initialCashAmount = initialCashAmount;
         this.initialCutofDate = LocalDateTime.now();
         this.bills = new ArrayList<>();
@@ -48,60 +47,60 @@ public class CashRegisterAuditReport {
 
     }
 
-    public void calculateCashFlowInTotalAmount(){
-        for(CashFlowReport cashFlowReport : cashFlowInReport){
+    protected CashRegisterAuditReport() {
+    }
+
+    public void calculateCashFlowInTotalAmount() {
+        for (CashFlowReport cashFlowReport : cashFlowInReport) {
             this.cashFlowInTotalAmount = this.cashFlowInTotalAmount.add(cashFlowReport.getCashAmount());
         }
     }
 
-    public void calculateCashFlowOutTotalAmount(){
-        for(CashFlowReport cashFlowReport : cashFlowOutReport){
+    public void calculateCashFlowOutTotalAmount() {
+        for (CashFlowReport cashFlowReport : cashFlowOutReport) {
             this.cashFlowOutTotalAmount = this.cashFlowOutTotalAmount.add(cashFlowReport.getCashAmount());
         }
     }
-    public void calculateCashBalance(){
-        this.cashBalance=this.cashBalance.add(this.initialCashAmount);
+
+    public void calculateCashBalance() {
+        this.cashBalance = this.cashBalance.add(this.initialCashAmount);
         this.cashBalance = this.cashBalance.add(this.cashRevenue);
-        this.cashBalance=this.cashBalance.add(this.cashFlowInTotalAmount);
+        this.cashBalance = this.cashBalance.add(this.cashFlowInTotalAmount);
         this.cashBalance = this.cashBalance.subtract(this.cashFlowOutTotalAmount);
 
 
-
     }
 
-    public void configCashRegisterAuditReport(){
+    public void configCashRegisterAuditReport() {
         CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
-        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now());
-        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReportsByDateRange(initialCutofDate.toLocalDate(), LocalDate.now());
+        this.cashFlowInReport = cashFlowReportManager.getCashInFlowReportsByDateRange(initialCutofDate, LocalDateTime.now());
+        this.cashFlowOutReport = cashFlowReportManager.getCashOutFlowReportsByDateRange(initialCutofDate, LocalDateTime.now());
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
-        this.bills= archiveInvoice.getBillsByDateRange(this.initialCutofDate.toLocalDate(), LocalDate.now());
+        this.bills = archiveInvoice.getBillsByDateRange(initialCutofDate, LocalDateTime.now());
     }
 
-    public void calculateCashRevenue(){
-        for(Bill currentBill: this.bills){
-            if(currentBill.getPaymentMethod().equals("CASH") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnEfectivo().compareTo(BigDecimal.ZERO)!=0){
+    public void calculateCashRevenue() {
+        for (Bill currentBill : this.bills) {
+            if (currentBill.getPaymentMethod().equals("CASH") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnEfectivo().compareTo(BigDecimal.ZERO) != 0) {
                 cashRevenue = cashRevenue.add(currentBill.getAmount());
             }
         }
     }
 
-    public void calculateCardhRevenue(){
-        for(Bill currentBill: this.bills){
-            if(currentBill.getPaymentMethod().equals("CARD") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnTajeta().compareTo(BigDecimal.ZERO)!=0){
+    public void calculateCardhRevenue() {
+        for (Bill currentBill : this.bills) {
+            if (currentBill.getPaymentMethod().equals("CARD") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnTajeta().compareTo(BigDecimal.ZERO) != 0) {
                 cardRevenue = cardRevenue.add(currentBill.getAmount());
             }
         }
     }
 
-    public void calculateStoreCreditRevenue(){
-        for(Bill currentBill: this.bills){
-            if(currentBill.getPaymentMethod().equals("STORE_CREDIT") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnCreditoDeTienda().compareTo(BigDecimal.ZERO)!=0){
+    public void calculateStoreCreditRevenue() {
+        for (Bill currentBill : this.bills) {
+            if (currentBill.getPaymentMethod().equals("STORE_CREDIT") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnCreditoDeTienda().compareTo(BigDecimal.ZERO) != 0) {
                 storeCreditRevenue = storeCreditRevenue.add(currentBill.getAmount());
             }
         }
-    }
-
-    protected CashRegisterAuditReport() {
     }
 
     public BigDecimal getInitialCashAmount() {
@@ -128,7 +127,7 @@ public class CashRegisterAuditReport {
         this.initialCutofDate = initialCutofDate;
     }
 
-    public  LocalDateTime  getFinalCutofDate() {
+    public LocalDateTime getFinalCutofDate() {
         return finalCutofDate;
     }
 
@@ -208,6 +207,5 @@ public class CashRegisterAuditReport {
         this.cashFlowOutTotalAmount = cashFlowOutTotalAmount;
     }
 
-    
-    
+
 }

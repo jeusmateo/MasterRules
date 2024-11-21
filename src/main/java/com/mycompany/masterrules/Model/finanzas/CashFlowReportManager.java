@@ -4,6 +4,7 @@ import com.mycompany.masterrules.Database.CashFlowReportDatabase;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,27 +23,23 @@ public class CashFlowReportManager {
     }
 
     public List<CashFlowReport> getCashOutFlowReports() {
-
-        readAllFromDatabase();return cashOutFlowReports;
+        readAllFromDatabase();
+        return cashOutFlowReports;
     }
 
-    public List<CashFlowReport> getCashOutFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+    public List<CashFlowReport> getCashOutFlowReportsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
         readAllFromDatabase();
         return cashOutFlowReports.stream()
-                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
-                        cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
                 .toList();
     }
 
-    public List<CashFlowReport> getCashInFlowReportsByDateRange(LocalDate beginDate, LocalDate endDate){
+    public List<CashFlowReport> getCashInFlowReportsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
         readAllFromDatabase();
         return cashInFlowReports.stream()
-                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate.atStartOfDay()) &&
-                        cashFlowReport.getDate().isBefore(endDate.atStartOfDay()))
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
                 .toList();
     }
-
-
 
     public void makeCashRegisterAuditReport(BigDecimal initialCashAmount){
         CashRegisterAuditReport cashRegisterAuditReport = new CashRegisterAuditReport(initialCashAmount);
