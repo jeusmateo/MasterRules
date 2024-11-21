@@ -23,12 +23,19 @@ class CashRegisterAuditReportManagerTest {
 
     @Test
     void generateEndOfDaySalesReport() {
-        var cashAuditReport = new CashAuditReport(BigDecimal.TEN);
-
 
     }
 
     @Test
     void endCashRegisterAuditReport() {
+    }
+
+    @Test
+    void simulateCashRegisterAuditReport() {
+
+        var cashRegisterAuditReport = new CashRegisterAuditReportManager();
+        cashRegisterAuditReport.generateEndOfDaySalesReport();
+        cashRegisterAuditReport.endCashRegisterAuditReport();
+        ;
     }
 }

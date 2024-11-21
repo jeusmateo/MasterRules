@@ -11,20 +11,23 @@ import java.util.List;
 public class CashRegisterAuditReportManager {
 
     private final List<CashAuditReport> cashAuditReports;
+    private final CashAuditReportDatabase cashAuditReportDatabase;
     private CashAuditReport currentCashAuditReport;
-    private final CashAuditReportDatabase cashAuditReportDatabase = new CashAuditReportDatabase();
 
     public CashRegisterAuditReportManager() {
+        cashAuditReportDatabase = new CashAuditReportDatabase();
         cashAuditReports = new ArrayList<>();
         readFromDatabase();
-        currentCashAuditReport = new CashAuditReport(new BigDecimal("0"));
-        if(cashAuditReports.isEmpty())
-            currentCashAuditReport.setInitialCutofDate(LocalDateTime.now());
-        else
-            currentCashAuditReport.setInitialCutofDate(cashAuditReports.getLast().getFinalCutofDate());
+
+        if (cashAuditReports.isEmpty()) {
+            currentCashAuditReport = new CashAuditReport(BigDecimal.ZERO, LocalDateTime.now());
+        } else {
+            var lastDate = cashAuditReports.getLast().getFinalCutofDate();
+            currentCashAuditReport = new CashAuditReport(BigDecimal.ZERO, lastDate);
+        }
     }
 
-    private void readFromDatabase(){
+    private void readFromDatabase() {
         var cashAuditReportDatabase = new CashAuditReportDatabase();
         cashAuditReports.addAll(cashAuditReportDatabase.readAll());
     }
@@ -51,7 +54,7 @@ public class CashRegisterAuditReportManager {
         currentCashAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashAuditReports.add(currentCashAuditReport);
 
-        currentCashAuditReport = new CashAuditReport(new BigDecimal("0"));
+        currentCashAuditReport = new CashAuditReport(new BigDecimal("0"), LocalDateTime.now());
 
     }
 

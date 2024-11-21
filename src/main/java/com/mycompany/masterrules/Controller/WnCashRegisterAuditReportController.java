@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.possystem.POSManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,7 +22,7 @@ public class WnCashRegisterAuditReportController implements Initializable{
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
+    private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
     private final ObservableList<CashFlow> cashInFlowReports=null;
     private final ObservableList<CashFlow> cashOutFlowReports = null;
 
@@ -73,14 +74,18 @@ public class WnCashRegisterAuditReportController implements Initializable{
     @FXML
     private Button btnRealizarCorteDeVenta;
 
+    @FXML
+    private Button btnConfirmPart1;
+
+
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
 
-    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
-        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-        tblCashInFlowReport.setItems(cashInFlowReports);
-        tblCashOutFlowReport.setItems(cashOutFlowReports);
-    }
+//    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
+//        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
+//        tblCashInFlowReport.setItems(cashInFlowReports);
+//        tblCashOutFlowReport.setItems(cashOutFlowReports);
+//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,15 +118,19 @@ public class WnCashRegisterAuditReportController implements Initializable{
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        if(evt.equals(btnRealizarCorteDeVenta)){
+        if(evt.equals(btnConfirmPart1)){
             cashRegisterAuditReportManager.generateEndOfDaySalesReport();
-            txtTSCash.setText(String.valueOf("+ $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashRevenue()));
-            txtTSCreditCard.setText(String.valueOf("+ $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCardRevenue()));
-            txtTSStoreCard.setText(String.valueOf("+ $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getStoreCreditRevenue()));
-            txtCashFunds.setText(String.valueOf("+  "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashBalance()));
-            txtCashSales.setText(String.valueOf("+ $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashRevenue()));
-            txtInFlowCash.setText(String.valueOf("+ $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashFlowInTotalAmount()));
-            txtOutFlowCash.setText(String.valueOf("- $ "+cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().getCashFlowOutTotalAmount()));
+            var currentCashRegisterAuditReport = cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport();
+            txtTSCash.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashRevenue()));
+            txtTSCreditCard.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCardRevenue()));
+            txtTSStoreCard.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getStoreCreditRevenue()));
+            txtCashFunds.setText(String.valueOf("+  "+currentCashRegisterAuditReport.getCashBalance()));
+            txtCashSales.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashRevenue()));
+            txtInFlowCash.setText(String.valueOf("+ $ "+currentCashRegisterAuditReport.getCashFlowInTotalAmount()));
+            txtOutFlowCash.setText(String.valueOf("- $ "+currentCashRegisterAuditReport.getCashFlowOutTotalAmount()));
+        }
+        else if(evt.equals(btnRealizarCorteDeVenta)){
+            cashRegisterAuditReportManager.endCashRegisterAuditReport();
         }
 
     }

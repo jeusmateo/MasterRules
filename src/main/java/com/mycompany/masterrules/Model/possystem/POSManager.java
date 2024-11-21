@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private UserAccount currentUser;
-    private CashRegister cashRegister = new CashRegister();
-    private CashRegisterAuditReportManager cashRegisterAuditReportManager;
+    private final CashRegister cashRegister = new CashRegister();
+    private final CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
     private  Order currentOrder;
     private static POSManager instance;
 
@@ -211,7 +211,4 @@ public class POSManager {
         return cashRegisterAuditReportManager;
     }
 
-    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
-        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-    }
 }

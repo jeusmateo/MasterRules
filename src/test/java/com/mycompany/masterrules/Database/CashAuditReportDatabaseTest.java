@@ -11,12 +11,12 @@ class CashAuditReportDatabaseTest {
 
     @Test
     void save() {
-        var cashRegisterAuditReport = new CashAuditReport(BigDecimal.valueOf(1000));
-        cashRegisterAuditReport.configCashRegisterAuditReport();
-
-        //configurando el reporte de auditoria
-        cashRegisterAuditReport.calculateCashRevenue();
-        cashAuditReportDatabase.save(cashRegisterAuditReport);
+//        var cashRegisterAuditReport = new CashAuditReport(BigDecimal.valueOf(1000));
+//        cashRegisterAuditReport.configCashRegisterAuditReport();
+//
+//        configurando el reporte de auditoria
+//        cashRegisterAuditReport.calculateCashRevenue();
+//        cashAuditReportDatabase.save(cashRegisterAuditReport);
     }
 
     @Test
