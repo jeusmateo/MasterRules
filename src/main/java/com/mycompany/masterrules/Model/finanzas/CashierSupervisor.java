@@ -10,11 +10,12 @@ import java.util.List;
 public class CashierSupervisor {
 
     private final CashFlowDatabase cashFlowDatabase;
-    private List<CashFlow> cashFlows;
+    private List<CashFlow> cashOutFlows;
+
     private List<CashFlow> cashInFlows;
 
     public CashierSupervisor() {
-        this.cashFlows = new ArrayList<>();
+        this.cashOutFlows = new ArrayList<>();
         this.cashInFlows = new ArrayList<>();
         this.cashFlowDatabase = new CashFlowDatabase();
 
@@ -23,12 +24,12 @@ public class CashierSupervisor {
 
     public List<CashFlow> getCashFlows() {
         readAllFromDatabase();
-        return cashFlows;
+        return cashOutFlows;
     }
 
     public List<CashFlow> getCashOutFlowsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
         readAllFromDatabase();
-        return cashFlows.stream()
+        return cashOutFlows.stream()
                 .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
                 .toList();
     }
@@ -45,12 +46,12 @@ public class CashierSupervisor {
             cashFlow.setFlowType(FlowType.CASH_OUT);
             cashFlowDatabase.save(cashFlow);
         }
-        this.cashFlows = cashFlows;
+        this.cashOutFlows = cashFlows;
     }
 
     public void addNewCashOutFlow(CashFlow cashOutFlowReport) {
         cashOutFlowReport.setFlowType(FlowType.CASH_OUT);
-        this.cashFlows.add(cashOutFlowReport);
+        this.cashOutFlows.add(cashOutFlowReport);
         cashFlowDatabase.save(cashOutFlowReport);
     }
 
@@ -74,12 +75,17 @@ public class CashierSupervisor {
     }
 
     private void readAllFromDatabase() {
+        this.cashOutFlows = new ArrayList<>();
+        this.cashInFlows = new ArrayList<>();
         var databaseReports = cashFlowDatabase.readAll();
-        for (CashFlow cashFlow : databaseReports) {
-            if (cashFlow.getFlowType() == FlowType.CASH_OUT) {
-                this.cashFlows.add(cashFlow);
+        for (CashFlow currentCashFlow : databaseReports) {
+            if (currentCashFlow.getFlowType() == FlowType.CASH_OUT && !this.cashOutFlows.contains(currentCashFlow)) {
+                this.cashOutFlows.add(currentCashFlow);
             } else {
-                this.cashInFlows.add(cashFlow);
+                if(!this.cashOutFlows.contains(currentCashFlow)) {
+                    this.cashInFlows.add(currentCashFlow);
+                }
+
             }
         }
     }
