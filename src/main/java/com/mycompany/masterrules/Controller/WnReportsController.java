@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
-import com.mycompany.masterrules.Model.finanzas.CashFlowReportManager;
+import com.mycompany.masterrules.Model.finanzas.CashFlow;
+import com.mycompany.masterrules.Model.finanzas.CashierSupervisor;
 import com.mycompany.masterrules.Model.finanzas.CashRegister;
 
 import java.net.URL;
@@ -28,7 +28,7 @@ public class WnReportsController implements Initializable {
     // --------------------------------------------------------------------------------------------
 
     private CashRegister cashRegister;
-    CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
+    CashierSupervisor cashierSupervisor = new CashierSupervisor();
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
@@ -69,22 +69,22 @@ public class WnReportsController implements Initializable {
 
     // Tablas y columnas
     @FXML
-    private TableView<CashFlowReport> tableViewlOutFlowReport;
+    private TableView<CashFlow> tableViewlOutFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashOutReason;
+    private TableColumn<CashFlow, String> colCashOutReason;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashOutDate;
+    private TableColumn<CashFlow, String> colCashOutDate;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashOutQuantity;
+    private TableColumn<CashFlow, String> colCashOutQuantity;
 
     @FXML
-    private TableView<CashFlowReport> tableViewlInFlowReport;
+    private TableView<CashFlow> tableViewlInFlowReport;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashInReason;
+    private TableColumn<CashFlow, String> colCashInReason;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashInDate;
+    private TableColumn<CashFlow, String> colCashInDate;
     @FXML
-    private TableColumn<CashFlowReport, String> colCashInQuantity;
+    private TableColumn<CashFlow, String> colCashInQuantity;
 
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
@@ -183,8 +183,8 @@ public class WnReportsController implements Initializable {
     // Configura la tabla y los datos para Cash Out Flow
     private void initializeCashOutFlowTable() {
 
-        ObservableList<CashFlowReport> cashOutReports = FXCollections.observableArrayList(
-                cashFlowReportManager.getCashOutFlowReports()
+        ObservableList<CashFlow> cashOutReports = FXCollections.observableArrayList(
+                cashierSupervisor.getCashFlows()
         );
 
         colCashOutReason.setReorderable(false);
@@ -202,8 +202,8 @@ public class WnReportsController implements Initializable {
 
     // Configura la tabla y los datos para Cash In Flow
     private void initializeCashInFlowTable() {
-        ObservableList<CashFlowReport> cashInReports = FXCollections.observableArrayList(
-                cashFlowReportManager.getCashInFlowReports()
+        ObservableList<CashFlow> cashInReports = FXCollections.observableArrayList(
+                cashierSupervisor.getCashInFlows()
         );
 
         colCashInReason.setReorderable(false);

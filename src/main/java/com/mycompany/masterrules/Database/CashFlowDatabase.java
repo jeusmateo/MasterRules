@@ -1,17 +1,17 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.Model.finanzas.CashFlow;
 
 import java.util.List;
 
-public class CashFlowReportDatabase extends Database<Long, CashFlowReport>{
+public class CashFlowDatabase extends Database<Long, CashFlow>{
 
     @Override
-    public CashFlowReport findById(Long id) {
+    public CashFlow findById(Long id) {
         var session = HibernateUtil.getOpenSession();
         try{
             session.beginTransaction();
-            var cashFlowReport = session.get(CashFlowReport.class, id);
+            var cashFlowReport = session.get(CashFlow.class, id);
             session.getTransaction().commit();
             return cashFlowReport;
         }catch (Exception e) {
@@ -24,17 +24,17 @@ public class CashFlowReportDatabase extends Database<Long, CashFlowReport>{
     }
 
     @Override
-    public List<CashFlowReport> readAll() {
+    public List<CashFlow> readAll() {
         var session = HibernateUtil.getOpenSession();
         try{
             session.beginTransaction();
-            var cashFlowReports = session.createQuery("from CashFlowReport", CashFlowReport.class).list();
+            var cashFlowReports = session.createQuery("from CashFlow", CashFlow.class).list();
             session.getTransaction().commit();
             return cashFlowReports;
         }catch (Exception e) {
             if(session.getTransaction()!=null)
                 session.getTransaction().rollback();
-            return null;
+            return List.of();
         }finally {
             session.close();
         }

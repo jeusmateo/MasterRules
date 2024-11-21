@@ -1,20 +1,20 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlowReport;
+import com.mycompany.masterrules.Model.finanzas.CashFlow;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CashFlowReportDatabaseTest {
+class CashFlowDatabaseTest {
 
-    static CashFlowReportDatabase cashFlowReportDatabase = new CashFlowReportDatabase();
+    static CashFlowDatabase cashFlowDatabase = new CashFlowDatabase();
 
     @Test
     void save() {
-        var cashFlowReport = new CashFlowReport("reason",new BigDecimal(100));
-        assertTrue(cashFlowReportDatabase.save(cashFlowReport));
+        var cashFlowReport = new CashFlow("reason",new BigDecimal(100));
+        assertTrue(cashFlowDatabase.save(cashFlowReport));
     }
 
     @Test

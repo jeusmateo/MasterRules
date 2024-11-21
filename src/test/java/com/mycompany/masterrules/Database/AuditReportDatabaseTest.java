@@ -1,11 +1,9 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReport;
+import com.mycompany.masterrules.Model.finanzas.CashAuditReport;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuditReportDatabaseTest {
 
@@ -13,7 +11,7 @@ class AuditReportDatabaseTest {
 
     @Test
     void save() {
-        var cashRegisterAuditReport = new CashRegisterAuditReport(BigDecimal.valueOf(1000));
+        var cashRegisterAuditReport = new CashAuditReport(BigDecimal.valueOf(1000));
         cashRegisterAuditReport.configCashRegisterAuditReport();
 
         //configurando el reporte de auditoria

@@ -1,17 +1,17 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReport;
+import com.mycompany.masterrules.Model.finanzas.CashAuditReport;
 
 import java.util.List;
 
-public class AuditReportDatabase extends Database<Long, CashRegisterAuditReport> {
+public class AuditReportDatabase extends Database<Long, CashAuditReport> {
 
     @Override
-    public CashRegisterAuditReport findById(Long id) {
+    public CashAuditReport findById(Long id) {
         var session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
-            var result = session.get(CashRegisterAuditReport.class, id);
+            var result = session.get(CashAuditReport.class, id);
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
@@ -23,11 +23,11 @@ public class AuditReportDatabase extends Database<Long, CashRegisterAuditReport>
     }
 
     @Override
-    public List<CashRegisterAuditReport> readAll() {
+    public List<CashAuditReport> readAll() {
         var session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
-            var result = session.createQuery("from CashRegisterAuditReport", CashRegisterAuditReport.class).list();
+            var result = session.createQuery("from CashAuditReport", CashAuditReport.class).list();
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
