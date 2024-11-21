@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.customers.CustomerManager;
+import com.mycompany.masterrules.Model.possystem.POSManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,7 +78,8 @@ public class WnSideNavigationBarController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setCustomerName(currentUser);
+        POSManager posManager = POSManager.getInstance();
+        setCustomerName(posManager.getCurrentUser());
     }
 
     @FXML

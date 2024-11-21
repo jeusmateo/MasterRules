@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Model.possystem;
 
 
+import com.mycompany.masterrules.Database.CustomerDatabase;
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -124,7 +125,14 @@ public class POSManager {
     }
 
     public void sell(PaymentDetails paymentMethod) {
+
+
+        Customer customer= this.currentOrder.getCustomer();
+        customer.getCustomerAccount().accumulatePoints();
+        CustomerDatabase bd = new CustomerDatabase();
+        bd.update(customer);
         Bill bill = createBill(paymentMethod);
+
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
         archiveInvoice.archiveBill(bill);
         currentOrder = new Order();

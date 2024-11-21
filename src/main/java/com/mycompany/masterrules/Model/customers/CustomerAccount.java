@@ -38,6 +38,9 @@ public class CustomerAccount {
 
     }
 
+    public void accumulatePoints(){
+        this.loyaltyPoints++;
+    }
 
     public boolean isIsVIP() {
         return isVIP;

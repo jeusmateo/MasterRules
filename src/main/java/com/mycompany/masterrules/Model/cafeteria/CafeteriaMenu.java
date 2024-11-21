@@ -27,6 +27,9 @@ public class CafeteriaMenu {
     }
 
     private void readFromDatabase() {
+
+        availableProducts.clear();
+        availableCombos.clear();
         var allProducts = productDatabase.readAll();
         for (var actualProduct : allProducts) {
             if (actualProduct instanceof Combo combo) {
