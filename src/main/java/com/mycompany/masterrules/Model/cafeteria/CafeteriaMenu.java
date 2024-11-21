@@ -109,21 +109,30 @@ public class CafeteriaMenu {
 
 
     public void removeComboOnMenu(Combo combo) {
-        if (!isComboOnMenu(combo)) {
-            throw new IllegalArgumentException("El combo con ID " + combo + " no existe en el menú.");
-        }
-        availableCombos.remove(combo);
+//        if (!isComboOnMenu(combo)) {
+//            throw new IllegalArgumentException("El combo con ID " + combo + " no existe en el menú.");
+//        }
+//        availableCombos.remove(combo);
         comboDatabase.delete(combo);
     }
 
 
     public void editCombo(Combo combo) {
+//        if (!isComboOnMenu(combo)) {
+//            throw new IllegalArgumentException("ERROR: El combo no existe");
+//        }
+//
+//        availableCombos.set(availableCombos.indexOf(combo), combo);
+        comboDatabase.update(combo);
+    }
+
+    public void removeComboFromMenu(Combo combo) {
         if (!isComboOnMenu(combo)) {
             throw new IllegalArgumentException("ERROR: El combo no existe");
         }
 
-        availableCombos.set(availableCombos.indexOf(combo), combo);
-        comboDatabase.update(combo);
+        availableCombos.remove(combo);
+        comboDatabase.delete(combo);
     }
 
     public List<Product> getProducts() {

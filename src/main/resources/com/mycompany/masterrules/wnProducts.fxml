@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnProductsController">
    <children>
       <TabPane prefHeight="600.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -442,7 +442,7 @@
                                                                   <Button fx:id="btnImportImage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="137.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                </children>
                                                             </VBox>
-                                                            <Button fx:id="buttonConfirmCombo" layoutX="355.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#mouseClickedConfirmEvent" prefHeight="37.0" prefWidth="155.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Confirmar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="60.0" />
+                                                            <Button fx:id="btnCreateCombo" layoutX="355.0" layoutY="442.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="37.0" prefWidth="155.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Confirmar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="60.0" />
                                                             <VBox alignment="CENTER" fillWidth="false" layoutX="122.0" layoutY="132.0" prefHeight="192.0" prefWidth="81.0" spacing="15.0" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="132.0">
                                                                <children>
                                                                   <Group>
@@ -607,7 +607,7 @@
                                                                               <Font size="15.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <TextField fx:id="textFieldName111" layoutX="110.0" />
+                                                                        <TextField fx:id="txtFieldEditComboName" layoutX="110.0" />
                                                                      </children>
                                                                   </Group>
                                                                   <Group>
@@ -617,7 +617,7 @@
                                                                               <Font size="15.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <TextField layoutX="152.0" promptText="\$00.0" />
+                                                                        <TextField fx:id="txtFieldEditComboVipPrice" layoutX="152.0" promptText="\$00.0" />
                                                                      </children>
                                                                   </Group>
                                                                   <Group>
@@ -627,7 +627,7 @@
                                                                               <Font size="15.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <TextField layoutX="124.0" promptText="\$00.00" />
+                                                                        <TextField fx:id="txtFieldEditComboPrice" layoutX="124.0" promptText="\$00.00" />
                                                                      </children>
                                                                   </Group>
                                                                </children>
@@ -652,7 +652,7 @@
                                                                      <children>
                                                                         <AnchorPane prefHeight="190.0" prefWidth="147.0" stylesheets="@viewTemplate.css">
                                                                            <children>
-                                                                              <ImageView fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
+                                                                              <ImageView fx:id="comboImage" fitHeight="128.0" fitWidth="134.0" layoutX="7.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="15.0" />
                                                                            </children>
                                                                            <styleClass>
                                                                               <String fx:value="radius" />
@@ -660,25 +660,13 @@
                                                                               <String fx:value="white-bg" />
                                                                            </styleClass>
                                                                         </AnchorPane>
-                                                                        <Button contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
+                                                                        <Button fx:id="btnImportComboImage" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="126.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Importar Imagen" />
                                                                      </children>
                                                                   </VBox>
                                                                </children>
                                                             </VBox>
-                                                            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Combo" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                            <VBox fillWidth="false" prefHeight="145.0" prefWidth="174.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                                               <children>
-                                                                  <TableView prefHeight="190.0" prefWidth="174.0">
-                                                                     <columns>
-                                                                        <TableColumn prefWidth="56.0" text="Nombre" />
-                                                                        <TableColumn prefWidth="75.0" text="Cantidad" />
-                                                                     </columns>
-                                                                     <columnResizePolicy>
-                                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                                     </columnResizePolicy>
-                                                                  </TableView>
-                                                               </children>
-                                                            </VBox>
+                                                            <Button fx:id="btnEditCombo" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar Combo" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                            <VBox fillWidth="false" prefHeight="145.0" prefWidth="174.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                                             <Label prefHeight="7.0" prefWidth="286.0" text="¡Selecciona el combo a editar en la tabla!" GridPane.halignment="CENTER">
                                                                <font>
                                                                   <Font size="15.0" />
@@ -687,6 +675,7 @@
                                                                   <Insets top="3.0" />
                                                                </GridPane.margin>
                                                             </Label>
+                                                            <Button fx:id="btnDeleteCombo" mnemonicParsing="false" onAction="#eventAction" prefHeight="30.0" prefWidth="238.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Eliminar Combo" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                                          </children>
                                                       </GridPane>
                                                    </children>
