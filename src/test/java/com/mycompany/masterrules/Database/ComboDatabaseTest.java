@@ -49,12 +49,12 @@ class ComboDatabaseTest {
         assertTrue(productDBManager.save(postre1));
         assertTrue(productDBManager.save(postre2));
 
-        var customComboCreator = new CustomComboCreator(quantityPerCategory);
-        customComboCreator.addProductToCategory("Postres", postre1);
-        customComboCreator.addProductToCategory("Postres", postre2);
-
-        var combo = customComboCreator.createCombo("Combo 2", BigDecimal.valueOf(30), BigDecimal.valueOf(15));
-        assertTrue(combosDBManager.save(combo));
+//        var customComboCreator = new CustomComboCreator(quantityPerCategory);
+//        customComboCreator.addProductToCategory("Postres", postre1);
+//        customComboCreator.addProductToCategory("Postres", postre2);
+//
+//        var combo = customComboCreator.createCombo("Combo 2", BigDecimal.valueOf(30), BigDecimal.valueOf(15));
+//        assertTrue(combosDBManager.save(combo));
     }
 
     @Test

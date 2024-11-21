@@ -3,11 +3,9 @@ package com.mycompany.masterrules.Model.possystem;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- *
  * @author David Torres
  */
 @Entity
@@ -27,25 +25,37 @@ public class Bill {
     private BigDecimal change;
     private String customerName;
     private String paymentMethod;
-    private LocalDateTime date; //TODO Remove this unused "date" private field.
 
     public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod, Order order) {
         this.employeeName = employeeName;
         this.customerName = customer;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
-        this.date = LocalDateTime.now();
         this.order = order;
+    }
 
+    public Bill(Order orderArg, String employeeNameArg) {
+        order = orderArg;
+        employeeName = employeeNameArg;
+    }
+
+    // Necesario para Hibernate
+    protected Bill() {
 
     }
 
     public String getReference() {
         return reference;
     }
-    public String getPaymentMethod(){
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getPaymentMethod() {
         return paymentMethod;
     }
+
     public BigDecimal getPagadoEnEfectivo() {
         return pagadoEnEfectivo;
     }
@@ -78,52 +88,33 @@ public class Bill {
         this.change = change;
     }
 
-
-    public Bill(Order orderArg, String employeeNameArg) {
-        order = orderArg;
-        employeeName = employeeNameArg;
-    }
-
-
-    
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
     public long getId() {
         return id;
     }
-
 
     public void setId(long id) {
         this.id = id;
     }
 
-
     public Order getOrder() {
         return order;
     }
-
 
     public void setOrder(Order order) {
         this.order = order;
     }
 
-
     public BigDecimal getAmount() {
         return amount;
     }
-
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-
     public String getEmployeeName() {
         return employeeName;
     }
-
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
@@ -136,13 +127,6 @@ public class Bill {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
-
-
-    // Necesario para Hibernate
-    protected Bill(){
-
-    }
-
 
     @Override
     public boolean equals(Object o) {

@@ -10,7 +10,6 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    @Column(length = 16)
     private String customerPhoneNumber;
     private String customerName;
     @Embedded
