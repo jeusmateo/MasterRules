@@ -2,6 +2,7 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerManager;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-
 
 
 public class WnCustomersController implements Initializable {
@@ -122,21 +122,6 @@ public class WnCustomersController implements Initializable {
         tblCustomers.setItems(filteredObservableList);
     }
 
-    //TODO: ESTO DEBE QUITARSE PORQUE NO SE USA
-    public void setBtnShowInformation() {
-        scrViewInfoCustomer.setVisible(true);
-        scrMainViewCustomerAccount.setVisible(false);
-
-    }
-
-    //TODO: ESTO DEBE QUITARSE PORQUE NO SE USA
-    public void setBtnBackViewInfoCustomer() {
-        scrMainViewCustomerAccount.setVisible(true);
-        scrViewInfoCustomer.setVisible(false);
-
-        clearTextFields(new TextField());
-    }
-
     @FXML
     public void setBtnEditAccount() {
         scrEditCustomerAccount.setVisible(true);
@@ -152,7 +137,6 @@ public class WnCustomersController implements Initializable {
 
     }
 
-
     // falta que lo de atras no sea editable y se desenfoque
     @FXML
     private void setScrWarningCredit() {
@@ -164,13 +148,19 @@ public class WnCustomersController implements Initializable {
         scrWarningCredit.setVisible(false);
     }
 
-
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
             textField.clear(); // Limpia cada campo de texto proporcionado
         }
     }
 
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     // checar si customer es nullo
     @FXML
@@ -178,51 +168,101 @@ public class WnCustomersController implements Initializable {
         Object evt = event.getSource();
 
         if (evt.equals(btnSaveNewCustomer)) {
-            try {
-                registerNewCustomer();
-                clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
-                chkNewCustomerVipStatus.setSelected(false);
-            } catch (Exception e) {
-                // esto decia que se hiciera con sonar lint, se cambio *System.out.println(e.getMessage());* al logger
-                logger.log(Level.SEVERE, "Error registering new customer", e);
-            }
+            handleSaveNewCustomer();
         } else if (evt.equals(btnUpdateCustomerAccount)) {
+            handleUpdateCustomerAccount();
+        } else if (evt.equals(btnDeleteCustomer)) {
+            handleDeleteCustomer();
+        }
+
+        // Actualizar la lista de clientes en la tabla
+        ObservableList<Customer> customers = FXCollections.observableArrayList(customerManager.getCustomers());
+        setItemsToAllTables(customers);
+    }
+
+    private void handleSaveNewCustomer() {
+        try {
+            // Intentar registrar un nuevo cliente
+            registerNewCustomer();
+
+            // Limpiar los campos de texto y restablecer el estado del checkbox
+            clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
+            chkNewCustomerVipStatus.setSelected(false);
+        } catch (Exception e) {
+            // Registrar el error en el logger
+            logger.log(Level.SEVERE, "Error registrando un nuevo cliente", e);
+
+            // Mostrar un mensaje de error al usuario
+            showAlert("Error", "Ocurrió un error al registrar el nuevo cliente. Por favor, inténtalo nuevamente.");
+        }
+    }
+
+
+
+
+    private void handleUpdateCustomerAccount() {
+        try {
+            // Intentar editar la información del cliente
             editCustomerInfo();
+
+            // Limpiar los campos de texto y restablecer elementos de la interfaz
+            clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
+            lbCustomerIdAuxiliar.setText("");
+            chkEditCustomerVipStatus.setSelected(false);
+
+            // Cambiar la visibilidad de las pantallas
+            scrEditCustomerAccount.setVisible(false);
+            scrMainViewCustomerAccount.setVisible(true);
+        } catch (Exception e) {
+            // Registrar el error en el logger
+            logger.log(Level.SEVERE, "Error actualizando la cuenta del cliente", e);
+
+            // Mostrar un mensaje de error al usuario
+            showAlert("Error", "Ocurrió un problema al actualizar la cuenta del cliente. Por favor, inténtalo de nuevo.");
+        }
+    }
+
+    //TODO: aqui al leiminar le tengo que dar click dos veces para que salga el showalert
+    private void handleDeleteCustomer() {
+        try {
+            // Obtener el ID del cliente desde la etiqueta auxiliar
+            String customerIdToDelete = lbCustomerIdAuxiliar.getText();
+
+            if (customerIdToDelete == null || customerIdToDelete.isEmpty()) {
+                // Mostrar alerta si no se seleccionó ningún cliente
+                showAlert("Advertencia", "Por favor, selecciona un cliente para eliminar.");
+                logger.log(Level.WARNING, "No se seleccionó ningún cliente para eliminar.");
+                return;
+            }
+
+            // Eliminar al cliente usando el ID
+            customerManager.removeCustomer(customerIdToDelete);
+
+            // Limpiar los campos y restablecer la vista
             clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
             lbCustomerIdAuxiliar.setText("");
             chkEditCustomerVipStatus.setSelected(false);
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
 
+        } catch (Exception e) {
+            // Registrar el error en el logger
+            logger.log(Level.SEVERE, "Error eliminando cliente", e);
+
+            // Mostrar un mensaje de error al usuario
+            showAlert("Error", "Ocurrió un problema al eliminar el cliente. Por favor, inténtalo nuevamente.");
         }
-        else if (evt.equals(btnDeleteCustomer)) { // Nuevo bloque para eliminar clientes
-            try {
-                String customerIdToDelete = lbCustomerIdAuxiliar.getText(); // Obtén el ID del cliente desde la etiqueta auxiliar
-                if (customerIdToDelete == null || customerIdToDelete.isEmpty()) {
-                    logger.log(Level.WARNING, "No se seleccionó ningún cliente para eliminar.");
-                    return;
-                }
-                customerManager.removeCustomer(customerIdToDelete); // Elimina al cliente usando el ID
-                clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
-                lbCustomerIdAuxiliar.setText("");
-                chkEditCustomerVipStatus.setSelected(false);
-                scrEditCustomerAccount.setVisible(false);
-                scrMainViewCustomerAccount.setVisible(true);
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Error deleting customer", e);
-            }
-        }
-        ObservableList<Customer> customers = FXCollections.observableArrayList(customerManager.getCustomers());
-        setItemsToAllTables(customers);
     }
+
+
     // TODO: Recordatorio chepil; Aqui algo esta mal. Aqui no de este metodo, en la clase de actualizar informacion de cliente. Clase de actualizar que no es clase es metodo. UWU
-    private void registerNewCustomer() throws Exception {
+    private void registerNewCustomer(){
         String newCustomerName = txtNewCustomerName.getText();
         String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
         String newCustomerLoyaltyPoints = txtNewCustomerLoyaltyPoints.getText();
         boolean newCustomerVipStatus = chkNewCustomerVipStatus.isSelected();
-        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus);
-
+        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints,
+                newCustomerVipStatus);
     }
 
     // TODO: REFACTORIZAR LEGIBILIDAD POR QUE ESA MADRE DE ULTIMO TA LARGA
@@ -233,9 +273,9 @@ public class WnCustomersController implements Initializable {
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
         String newCustomerPhoneNumber = txtEditCustomerPhoneNumber.getText();
-        customerManager.updateCustomerData( newCustomerName,customerId, updateCustomerLoyaltyPoints, updateCustomerVipStatus, newCustomerStoreCreditQuantity, newCustomerPhoneNumber);
+        customerManager.updateCustomerData(newCustomerName, customerId, updateCustomerLoyaltyPoints,
+                updateCustomerVipStatus, newCustomerStoreCreditQuantity, newCustomerPhoneNumber);
     }
-
 
     @FXML
     private void eventKey(KeyEvent event) {
@@ -252,7 +292,7 @@ public class WnCustomersController implements Initializable {
     }
 
     private void handleNewCustomerName(KeyEvent event) {
-        if ( !event.getCharacter().matches("[\\p{L} ]")) {
+        if (!event.getCharacter().matches("[\\p{L} ]")) {
             event.consume();
         } else if (event.getCharacter().equals("\r")) {
             txtNewCustomerPhoneNumber.requestFocus();
@@ -268,7 +308,8 @@ public class WnCustomersController implements Initializable {
 
     private void handleNewCustomerPhoneNumber(KeyEvent event) {
         String phoneNumber = txtNewCustomerPhoneNumber.getText();
-        if (!event.getCharacter().matches("\\d{0,10}") && !event.getCharacter().equals("\r") || phoneNumber.length() >= 10) {
+        if (!event.getCharacter().matches("\\d{0,10}") &&
+                !event.getCharacter().equals("\r") || phoneNumber.length() >= 10) {
             event.consume();
         } else if (event.getCharacter().equals("\r")) {
             txtNewCustomerLoyaltyPoints.requestFocus();
@@ -300,8 +341,7 @@ public class WnCustomersController implements Initializable {
         }
     }
 
-
-    private void configTextFields(){
+    private void configTextFields() {
         txtNewCustomerName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerPhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtNewCustomerLoyaltyPoints.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
@@ -317,8 +357,6 @@ public class WnCustomersController implements Initializable {
         colCustomerName.setResizable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
-
-
 
     private void configTableSelection() {
         tblCustomers.getSelectionModel().selectedItemProperty().addListener(
@@ -347,13 +385,10 @@ public class WnCustomersController implements Initializable {
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {
         tblCustomers.setItems(customers);
-
-
     }
 
     private void showCustomerDetailsForUpdate(Customer customer) {
         if (customer != null) {
-
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
             //lbCustomerIdAuxiliar.setText("customer.getID()");
@@ -368,11 +403,6 @@ public class WnCustomersController implements Initializable {
 
     public WnCustomersController(CustomerManager cm) {
         this.customerManager = cm;
-
     }
-
-
-
-
 
 }
