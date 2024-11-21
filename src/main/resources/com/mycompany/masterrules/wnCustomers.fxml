@@ -367,8 +367,8 @@
                   <Label fx:id="lbCustomerIdAuxiliar" prefHeight="47.0" prefWidth="33.0" text="Label" visible="false" />
                   <TableView fx:id="tblCustomers" layoutX="10.0" layoutY="58.0" prefHeight="533.0" prefWidth="300.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="58.0">
                      <columns>
-                        <TableColumn fx:id="colCustomerId" editable="false" prefWidth="88.0" text="ID CLIENTE" />
-                        <TableColumn fx:id="colCustomerName" editable="false" prefWidth="145.0" text="NOMBRE" />
+                        <TableColumn fx:id="colCustomerId" editable="false" prefWidth="119.20001065731049" text="NUMERO TEL." />
+                        <TableColumn fx:id="colCustomerName" editable="false" prefWidth="167.99994659423828" text="NOMBRE" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
