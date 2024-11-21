@@ -21,6 +21,14 @@ public class StockInfo {
         this.maxStock = 0;
     }
 
+    public void reduceStocck(){
+        currentStock--;
+    }
+
+    public void increaseStock(){
+        currentStock++;
+    }
+
     public StockInfo(int currentStock, int minStock, int maxStock) {
         this.currentStock = currentStock;
         this.minStock = minStock;

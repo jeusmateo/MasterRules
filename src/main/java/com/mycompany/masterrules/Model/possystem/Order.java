@@ -1,6 +1,8 @@
 package com.mycompany.masterrules.Model.possystem;
 
+import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
+import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;
 
@@ -53,71 +55,78 @@ public class Order {
         this.totalAmount= calculatedTotalAmount;
     }
     public void addProductToOrderItemList(OrderItem newOrderItem) {
-        if(newOrderItem.getProduct().getStockInfo().getCurrentStock()>0){
-            boolean found = false;
-
-            if (!orderItemList.isEmpty()) {
-                for (OrderItem orderItem : orderItemList) {
-                    if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
-
-                        orderItem.addQuantity();
-                        found = true;
-                        break; // Ya lo encontramos, no es necesario seguir iterando.
-                    }
-                }
-                if (!found) {
-                    orderItemList.add(newOrderItem);
-
-                }
-            } else {
-                orderItemList.add(newOrderItem);
-
-            }
-
+        if (isProductInStock(newOrderItem)) {
+            addOrUpdateOrderItem(newOrderItem);
+            updateStockAndMenu(newOrderItem);
+        } else if (newOrderItem.getProduct().getStockInfo() == null) {
+            addOrUpdateOrderItem(newOrderItem);
         }
-
-        if(newOrderItem.getProduct().getStockInfo() == null){
-            boolean found = false;
-
-            if (!orderItemList.isEmpty()) {
-                for (OrderItem orderItem : orderItemList) {
-                    if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
-
-                        orderItem.addQuantity();
-                        found = true;
-                        break; // Ya lo encontramos, no es necesario seguir iterando.
-                    }
-                }
-                if (!found) {
-                    orderItemList.add(newOrderItem);
-
-                }
-            } else {
-                orderItemList.add(newOrderItem);
-
-            }
-        }
-
-
     }
+
+    private boolean isProductInStock(OrderItem newOrderItem) {
+        return newOrderItem.getProduct().getStockInfo() != null
+                && newOrderItem.getProduct().getStockInfo().getCurrentStock() > 0;
+    }
+
+    private void addOrUpdateOrderItem(OrderItem newOrderItem) {
+        boolean found = false;
+
+        for (OrderItem orderItem : orderItemList) {
+            if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+                orderItem.addQuantity();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            orderItemList.add(newOrderItem);
+        }
+    }
+
+    private void updateStockAndMenu(OrderItem newOrderItem) {
+        newOrderItem.getProduct().reduceStock();
+        CafeteriaMenu cf = new CafeteriaMenu();
+        cf.editProduct(newOrderItem.getProduct());
+    }
+
 
     public void removeProductFromOrderItemList(OrderItem newOrderItem) {
-        if (!orderItemList.isEmpty()) {
-            Iterator<OrderItem> iterator = orderItemList.iterator();
-            while (iterator.hasNext()) {
-                OrderItem orderItem = iterator.next();
-                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
-                    if (orderItem.getQuantity() > 0) {
-                        orderItem.removeQuantity();
-                    }
-                    if (orderItem.getQuantity() == 0) {
-                        iterator.remove(); // Elimina directamente el elemento de la lista
-                    }
-                    break; // No es necesario seguir iterando
+        if (orderItemList.isEmpty()) {
+            return;
+        }
+
+        Iterator<OrderItem> iterator = orderItemList.iterator();
+        while (iterator.hasNext()) {
+            OrderItem orderItem = iterator.next();
+
+            if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+                if (orderItem.getQuantity() > 0) {
+                    orderItem.removeQuantity();
+                    updateProductStock(newOrderItem);
                 }
+
+                if (orderItem.getQuantity() == 0) {
+                    iterator.remove();
+                }
+
+                break; // No es necesario seguir iterando
             }
         }
     }
+
+    private void updateProductStock(OrderItem orderItem) {
+        if (orderItem.getProduct().getStockInfo() != null) {
+            orderItem.getProduct().addStock();
+            updateMenu(orderItem.getProduct());
+        }
+    }
+
+    private void updateMenu(Product product) {
+        CafeteriaMenu cf = new CafeteriaMenu();
+        cf.editProduct(product);
+    }
+
 
     public void calculateVipTotalAmount(){
         if(customer.getCustomerAccount().isIsVIP()){

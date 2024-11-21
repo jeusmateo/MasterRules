@@ -48,6 +48,14 @@ public class Product {
     }
      */
 
+    public void reduceStock(){
+        this.stockInfo.reduceStocck();
+    }
+
+    public void addStock(){
+        this.stockInfo.increaseStock();
+    }
+
     public void setId(String productID) {//creo que este se debe eliminar junto con los otros setters de ids
         this.id = productID;
     }
