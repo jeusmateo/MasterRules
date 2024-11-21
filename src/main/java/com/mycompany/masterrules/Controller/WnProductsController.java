@@ -455,11 +455,10 @@ private String selectedImagePath;
         displayMenuCards();
         configColumns();
         // Obtener los productos de la base de datos
-        ProductDatabase chepobd = new ProductDatabase();
-        List<Product> chepo = chepobd.readAll();
+        List<Product> productsForTable = cafeteriaMenu.getProducts();
 
         // Crear una lista observable con los productos de la base de datos
-        ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
+        ObservableList<Product> observableProductList = FXCollections.observableArrayList(productsForTable);
 
         // Asignar la lista observable a la tabla
         tblFood.setItems(observableProductList);
