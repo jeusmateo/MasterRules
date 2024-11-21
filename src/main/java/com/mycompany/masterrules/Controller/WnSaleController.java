@@ -339,6 +339,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void hideTxtFieldClientName(MouseEvent event) {
         inputClientName.setVisible(false);
     }
+
+
     public void showOrderForm() {
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
@@ -492,21 +494,32 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         displayMenuCards();
         CustomerDatabase cdbm = new CustomerDatabase();
         //TODO CAMBIAR NOMBRE DE TODOS LOS CHEPOS
-        List<Customer> chepo = cdbm.readAll();
-        ObservableList<Customer> cutomersList = FXCollections.observableArrayList(chepo);
-        cboCustomers.setItems(cutomersList);
-        //TODO ChepoEmergencia se tuvo que hacer feo uwur
-        cboCustomers.setCellFactory(lv -> new ListCell<Customer>() {
+        List<Customer> chepo = cdbm.readAll(); // Lee todos los datos
+        ObservableList<Customer> customersList = FXCollections.observableArrayList(chepo);
+        cboCustomers.setItems(customersList);
 
-        });
-        cboCustomers.setButtonCell(new ListCell<Customer>() {
+// Personaliza cómo se muestran las celdas desplegables del ComboBox
+        cboCustomers.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Customer customer, boolean empty) {
                 super.updateItem(customer, empty);
                 if (empty || customer == null) {
                     setText(null);
                 } else {
-                    setText(customer.getCustomerName());
+                    setText(customer.getCustomerName()); // Muestra el nombre del cliente
+                }
+            }
+        });
+
+// Personaliza la celda visible del ComboBox (cuando no está desplegado)
+        cboCustomers.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Customer customer, boolean empty) {
+                super.updateItem(customer, empty);
+                if (empty || customer == null) {
+                    setText("Seleccione un cliente"); // Texto por defecto cuando no hay selección
+                } else {
+                    setText(customer.getCustomerName()); // Muestra el nombre del cliente seleccionado
                 }
             }
         });
