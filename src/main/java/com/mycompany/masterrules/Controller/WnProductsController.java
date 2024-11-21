@@ -578,7 +578,7 @@ private String selectedImagePath;
         }
 
         Combo newCombo = new Combo(comboName, selectedProductsForCombo, new BigDecimal(comboPrice), new BigDecimal(comboVipPrice));
-        newCombo.setComboImage(selectedImagePath);
+        newCombo.setProductImage(selectedImagePath);
         cafeteriaMenu.addComboToMenu(newCombo);
         btnBackToCreateCombo();
         updateComboTable(); // Asegúrate de actualizar la tabla después de crear un combo
@@ -648,7 +648,7 @@ private String selectedImagePath;
             if (imagePath != null && !imagePath.isEmpty()) {
                 File imageFile = new File("src/main/resources/" + imagePath);
                 if (imageFile.exists()) {
-                    imgProduct_tabEdit.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
+                    imgComboEdit.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
                 } else {
                     System.err.println("La imagen no existe: " + imagePath);
                 }
