@@ -10,6 +10,10 @@ public class LoyaltyCard {
     @Column(name = "LoayltyCardID")
     private long ID;
 
+
+    public LoyaltyCard() {
+        this.accessCode = "";
+    }
     public String getAccessCode() {
         return accessCode;
     }
