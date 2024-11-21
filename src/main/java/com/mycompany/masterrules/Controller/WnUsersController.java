@@ -342,7 +342,7 @@ public class WnUsersController implements Initializable {
 
 
         colUserID.setReorderable(false);
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
         colUserName.setReorderable(false);
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));

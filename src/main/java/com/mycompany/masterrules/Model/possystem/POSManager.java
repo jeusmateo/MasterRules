@@ -4,6 +4,7 @@ package com.mycompany.masterrules.Model.possystem;
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
+import com.mycompany.masterrules.Model.finanzas.CashRegister;
 import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
 public class POSManager {
 
     private UserAccount currentUser;
-
+    private CashRegister cashRegister = new CashRegister();
     private CashRegisterAuditReportManager cashRegisterAuditReportManager;
     private  Order currentOrder;
     private static POSManager instance;
@@ -155,6 +156,9 @@ public class POSManager {
 
     }
 
+    public CashRegister getCashRegister(){
+        return cashRegister;
+    }
 
     public void sell(PaymentDetails paymentMethod) {
         Bill bill = createBill(paymentMethod);
