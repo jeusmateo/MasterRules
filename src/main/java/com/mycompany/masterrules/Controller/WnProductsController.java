@@ -118,8 +118,6 @@ private String selectedImagePath;
     private TextField textFieldName111;
 
 
-    @FXML
-    private TextField txtFieldIDCombo;
 
     @FXML
     private TextField txtFieldNameCombo;
@@ -248,11 +246,11 @@ private String selectedImagePath;
     void mouseClickedConfirmEvent(MouseEvent event) {
 
 
-        String comboId=txtFieldIDCombo.getText();
+
         String comboName=txtFieldNameCombo.getText();
         String comboVipPrice= txtFieldVIPPriceCombo.getText();
         String comboPrice=txtFieldPriceCombo.getText();
-        Combo newCombo = new Combo(comboId,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
+        Combo newCombo = new Combo(comboName,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
         cafeteriaMenu.addComboToMenu(newCombo);
 
     }
