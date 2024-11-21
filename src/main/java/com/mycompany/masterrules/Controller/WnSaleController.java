@@ -493,6 +493,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         displayCategoriesForCustomCombo(currentCategoryIndex);
         initializeTableOrder();
 
+        cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                System.out.println("Seleccionado: " + newValue.getCustomerName());
+                lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+            }
+        });
+
+               //
 
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
