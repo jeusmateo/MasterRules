@@ -56,7 +56,6 @@ public class UserManager {
         }else{
             throw new IllegalArgumentException("Usuario no valido");
         }
-
     }
 
     private boolean isValid(UserAccount newUser) {
