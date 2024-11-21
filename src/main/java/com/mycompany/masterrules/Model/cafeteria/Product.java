@@ -3,6 +3,7 @@ package com.mycompany.masterrules.Model.cafeteria;
 import com.mycompany.masterrules.Model.storage.StockInfo;
 import jakarta.persistence.*;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -19,6 +20,7 @@ public class Product {
     private String type;
     private BigDecimal price;
     private BigDecimal VIPPrice;
+    private String productImage;
 
     @Embedded
     private StockInfo stockInfo;
@@ -102,6 +104,14 @@ public class Product {
 
     public void setStockInfo(StockInfo stockInfo) {
         this.stockInfo = stockInfo;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     @Override

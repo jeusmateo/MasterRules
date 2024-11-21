@@ -16,8 +16,6 @@ public class CafeteriaMenu {
     private final ProductDatabase productDatabase;
     private final ComboDatabase comboDatabase;
 
-    private String title;
-
     public CafeteriaMenu() {
         availableProducts = new ArrayList<>();
         availableCombos = new ArrayList<>();
@@ -32,9 +30,15 @@ public class CafeteriaMenu {
         var allProducts = productDatabase.readAll();
         for (var actualProduct : allProducts) {
             if (actualProduct.getClass() == Combo.class) {
-                availableCombos.add((Combo) actualProduct);
+                if(!availableCombos.contains((Combo) actualProduct)){
+                    availableCombos.add((Combo) actualProduct);
+                }
+
             } else {
-                availableProducts.add(actualProduct);
+                if(!availableProducts.contains(actualProduct)){
+                    availableProducts.add(actualProduct);
+                }
+
             }
         }
     }
@@ -42,7 +46,7 @@ public class CafeteriaMenu {
 
     public void addProductToMenu(Product product) {
         if (!isProductOnMenu(product)) {
-            availableProducts.add(product);
+            //availableProducts.add(product);
             productDatabase.save(product);
         } else {
             throw new IllegalArgumentException("ERROR: El producto ya existe");
@@ -92,7 +96,6 @@ public class CafeteriaMenu {
 
     public void addComboToMenu(Combo combo) {
         if (!isComboOnMenu(combo)) {
-            availableCombos.add(combo);
             comboDatabase.save(combo);
         } else {
             throw new IllegalArgumentException("ERROR: El combo ya existe");
@@ -127,15 +130,9 @@ public class CafeteriaMenu {
     }
 
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public List<Product> getProducts() {
+        readFromDatabase();
         return availableProducts;
     }
 
@@ -146,13 +143,10 @@ public class CafeteriaMenu {
     }
 
     public List<Combo> getCombos() {
+        readFromDatabase();
         return availableCombos;
     }
 
-    public void setCombos(List<Combo> combos) {
-        for (Combo combo : combos) {
-            addComboToMenu(combo);
-        }
-    }
+
 
 }
