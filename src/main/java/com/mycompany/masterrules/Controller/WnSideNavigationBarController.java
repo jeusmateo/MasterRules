@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -156,6 +157,23 @@ public class WnSideNavigationBarController implements Initializable {
     private void setPaneToFitScrPane(AnchorPane pane) {
         pane.prefWidthProperty().bind(scrPane.widthProperty());
         pane.prefHeightProperty().bind(scrPane.heightProperty());
+    }
+
+    @FXML
+    private void btnOnClickSelected(MouseEvent event) {
+        resetButtonStyles();
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #000000");
+    }
+
+    private void resetButtonStyles() {
+        btnSalesSection.setStyle("");
+        btnProductsSection.setStyle("");
+        btnCustomersSection.setStyle("");
+        btnInventorySection.setStyle("");
+        btnReportsSection.setStyle("");
+        btnUsersSection.setStyle("");
+        btnCashRegisterAuditReportSection.setStyle("");
     }
 
     @FXML
