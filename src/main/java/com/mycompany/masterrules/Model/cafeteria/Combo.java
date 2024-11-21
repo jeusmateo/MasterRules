@@ -11,7 +11,6 @@ public class Combo extends Product {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> products;
-    private String comboImage;
 
     protected Combo() {
 
@@ -30,13 +29,6 @@ public class Combo extends Product {
         this.products = products;
     }
 
-    public String getComboImage() {
-        return comboImage;
-    }
-
-    public void setComboImage(String comboImage) {
-        this.comboImage = comboImage;
-    }
 
     @Override
     public boolean equals(Object o) {
