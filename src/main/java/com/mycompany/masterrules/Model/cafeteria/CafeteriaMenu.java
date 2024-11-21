@@ -123,12 +123,6 @@ public class CafeteriaMenu {
         comboDatabase.update(combo);
     }
 
-    private boolean isComboNameTaken(String comboName) { //TODO no esta implemenmtado
-        return availableCombos.stream().anyMatch(combo -> combo.getName().equals(comboName));
-    }
-
-
-
     public List<Product> getProducts() {
         readFromDatabase();
         return availableProducts;

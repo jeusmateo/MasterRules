@@ -3,13 +3,12 @@ package com.mycompany.masterrules.Model.possystem;
 
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
+import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.finanzas.CashRegister;
 import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
-
-import com.mycompany.masterrules.Model.cafeteria.Product;
-import com.mycompany.masterrules.Model.customers.Customer;
 
 import java.time.LocalDateTime;
 
@@ -22,26 +21,11 @@ import java.time.LocalDateTime;
 
 public class POSManager {
 
-    private UserAccount currentUser;
+    private static POSManager instance;
     private final CashRegister cashRegister = new CashRegister();
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = new CashRegisterAuditReportManager();
-    private  Order currentOrder;
-    private static POSManager instance;
-
-    public static synchronized POSManager getInstance() {
-        if (instance == null) {
-            instance = new POSManager();
-        }
-        return instance;
-    }
-
-    // initialize the POSManager with a userAccount
-    public static synchronized POSManager getInstance(UserAccount userAccount) {
-        if (instance == null) {
-            instance = new POSManager(userAccount);
-        }
-        return instance;
-    }
+    private UserAccount currentUser;
+    private Order currentOrder;
 
     private POSManager(UserAccount userAccount) {
         currentUser = userAccount;
@@ -54,20 +38,20 @@ public class POSManager {
         currentUser = bd.findById("1");
     }
 
-    //Flujo Chepil para vender.
-    //-Primero tomamos la orden para añadir
-    //Configuramos la orden
-    //PAGAR
-    // CREAR FACTURA
-    // DAR BIENES
-    //DAR FACTURA
+    public static synchronized POSManager getInstance() {
+        if (instance == null) {
+            instance = new POSManager();
+        }
+        return instance;
+    }
 
+    public static synchronized POSManager getInstance(UserAccount userAccount) {
+        if (instance == null) {
+            instance = new POSManager(userAccount);
+        }
+        return instance;
+    }
 
-    //FLUJO CHEPIL 2
-    //identificar producto
-    //REALIZAR TRANSACCION
-    //CONFIRMAR ENTREGA
-    //REGISTRAR VENTA
     public void addProductToOrder(Product product) {
         if (product instanceof InventoriableProduct && ((InventoriableProduct) product).isStockAvailable()) {
 
@@ -78,7 +62,6 @@ public class POSManager {
         currentOrder.addProductToOrderItemList(new OrderItem(product));
 
     }
-
 
     public void removeProductFromOrder(Product product) {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
@@ -103,58 +86,40 @@ public class POSManager {
         currentOrder.setComment(comentario);
     }
 
-    public void cancelOrder(){
+    public void cancelOrder() {
         currentOrder = new Order();
     }
 
     private Bill createBill(PaymentDetails data) {
-        if (data.getCustomer() != null) {
-            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
-            switch (data.getMetodoDePago()) {
-                case "CASH":
-                    newBill.setChange(data.getChangeAmount());
-                    newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
-                    break;
-                case "CARD":
-                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
-                    newBill.setReference(data.getReference());
-                    break;
-                case "STORE_CREDIT":
-
-                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-
-                    break;
-                default:
-                    break;
-
-            }
-            return newBill;
+        Bill newBill;
+        if (data.getCustomer() == null) {
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getPaymentMethod().toString(), currentOrder);
         } else {
-            Bill newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getMetodoDePago(), currentOrder);
-            switch (data.getMetodoDePago()) {
-                case "CASH":
-                    newBill.setChange(data.getChangeAmount());
-                    newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
-                    break;
-                case "CARD":
-                    newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
-                    newBill.setReference(data.getReference());
-                    break;
-                case "STORE_CREDIT":
-
-                    newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
-
-                    break;
-                default:
-                    break;
-            }
-            return newBill;
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getPaymentMethod().toString(), currentOrder);
         }
-
-
+        setPaymentMethod(data, newBill);
+        return newBill;
     }
 
-    public CashRegister getCashRegister(){
+    private void setPaymentMethod(PaymentDetails data, Bill newBill) {
+        switch (data.getPaymentMethod()) {
+            case PaymentType.CASH:
+                newBill.setChange(data.getChangeAmount());
+                newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
+                break;
+            case PaymentType.CARD:
+                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                newBill.setReference(data.getReference());
+                break;
+            case PaymentType.STORE_CREDIT:
+                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                break;
+            default:
+                break;
+        }
+    }
+
+    public CashRegister getCashRegister() {
         return cashRegister;
     }
 
@@ -162,36 +127,8 @@ public class POSManager {
         Bill bill = createBill(paymentMethod);
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
         archiveInvoice.archiveBill(bill);
-        currentOrder=new Order();
-    }
-
-    /*
-    public void collectDebt(Customer customerArg, Debt debtArg) {
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
-            Bill newBill = new Bill(debtArg.getOrder(), debtArg.getAmount(), currentUser.getFullEmployeeName());
-            this.cashRegisterAuditReportManager.getCurrentCashRegisterAuditReport().addBill(newBill);
-            printer.imprimirBill(newBill);
-            currentOrder = new Order();
-            //customerArg.getCustomerAccount().removeDebt(debtArg);
-
-        } else {
-            throw new IllegalArgumentException("No tiene permisos para vender");
-        }
-
-    }
-
-     */
-
-
-    /*
-    public void buyNowPayLater(Customer customer) {
-        BigDecimal amount = calculateTotalOrderAmount();
-        Debt tempDebt = new Debt(currentOrder, amount);
-        customer.getCustomerAccount().addDebt(tempDebt);
-        printer.imprimirOrder(currentOrder);
         currentOrder = new Order();
     }
-*/
 
     public Order getCurrentOrder() {
         return currentOrder;
