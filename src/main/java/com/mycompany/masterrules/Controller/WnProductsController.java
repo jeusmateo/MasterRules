@@ -252,6 +252,7 @@ private String selectedImagePath;
         String comboPrice=txtFieldPriceCombo.getText();
         Combo newCombo = new Combo(comboName,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
         cafeteriaMenu.addComboToMenu(newCombo);
+        btnBackToCreateCombo();
 
         btnBackToCreateCombo();
 
@@ -525,12 +526,11 @@ private String selectedImagePath;
                     selectedProduct.setVIPPrice(newVipPrice);
                     selectedProduct.setProductImage(selectedImagePath);
 
-
-
                     cafeteriaMenu.editProduct(selectedProduct);
-
-
                     updateProductTable();
+
+                    clearTextFields(txtProductName_tabEdit, txtProductType_tabEdit, txtProductPrice_tabEdit, txtProductVipPrice_tabEdit);
+
                 }
             } else if (source.equals(btnImportImage_tabCreate)) {
                 importProductImage(imgProduct_tabCreate);
