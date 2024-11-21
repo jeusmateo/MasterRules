@@ -10,8 +10,6 @@ import com.mycompany.masterrules.Model.users.UserAccount;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
-import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
 
@@ -162,8 +160,8 @@ public class POSManager {
 
     public void sell(PaymentDetails paymentMethod) {
         Bill bill = createBill(paymentMethod);
-        ArchiveInvoice ai = new ArchiveInvoice();
-        ai.ArchiveBill(bill);
+        ArchiveInvoice archiveInvoice = new ArchiveInvoice();
+        archiveInvoice.archiveBill(bill);
         currentOrder=new Order();
     }
 
