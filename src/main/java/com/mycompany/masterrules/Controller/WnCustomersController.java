@@ -264,7 +264,7 @@ public class WnCustomersController implements Initializable {
         customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints,
                 newCustomerVipStatus);
     }
-
+    //TODO ESTO URGE MUCHISIMO
     // TODO: REFACTORIZAR LEGIBILIDAD POR QUE ESA MADRE DE ULTIMO TA LARGA
     private void editCustomerInfo() {
         String customerId = lbCustomerIdAuxiliar.getText();

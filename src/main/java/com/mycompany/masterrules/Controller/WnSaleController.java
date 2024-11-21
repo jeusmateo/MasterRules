@@ -361,6 +361,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                         System.out.println(posManager.getCurrentOrder().getCustomer());
                     }
                     paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
+                    System.out.println("Cuesto :"+posManager.getCurrentOrder().getTotalAmount());
                 } catch (Exception e) {
                     System.out.println("Chepipi " + e.getMessage());
                 }
@@ -447,9 +448,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             if (newValue != null) {
 
                 posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
+                Customer test = cboCustomers.getValue();
+                System.out.println("Soy "+ test.getCustomerName()+ "y soy ");
+                if(test.getCustomerAccount().isIsVIP()){
+                    System.out.println("vip");
+                }
                 updateOrderInfo();
                 //TODO chepo arregla esto
-                if(posManager.getCurrentOrder().getCustomer()!=null){
+                if(posManager.getCurrentOrder().getCustomer()!=null && posManager.getCurrentOrder().getCustomer().getCustomerAccount().isIsVIP()){
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
                 }else{
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));

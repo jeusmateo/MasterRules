@@ -289,11 +289,7 @@ private String selectedImagePath;
             }
 
         }
-//        List<Product> prueba = new ArrayList<>();
-//        BigDecimal prueba1 = new BigDecimal("30");
-//        BigDecimal prueba2 = new BigDecimal("15");
-//        Combo combo = new Combo("Chepo", prueba, prueba1, prueba2);
-//        comboDataList.add(combo);
+//
     }
 
     @FXML
@@ -361,7 +357,7 @@ private String selectedImagePath;
         colProductVipPrice_tabCreate.setReorderable(false);
 
         colProductVipPrice_tabCreate.setCellValueFactory(new PropertyValueFactory<>("VIPPrice"));
-        tblFood.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     }
 
     private void configTableColumnsCombo() {
