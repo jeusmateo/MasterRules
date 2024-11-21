@@ -153,92 +153,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     //-------------------------------------------------------------------------------------------
 
 
-    private void displayCategory(int index) {
-        if (index >= 0 && index < categories.size()) {
-            List<Product> selectedCategory = categories.get(index);
-            // Lógica para actualizar la vista con los productos de la categoría
-            productCardsScroller.getChildren().clear(); // Limpiar productos anteriores
-            for (Product product : selectedCategory) {
-                try {
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
-                    AnchorPane productPane = loader.load();
-                    ItemCardProductController controller = loader.getController();
-                    controller.setProductDataToCard(product);
-                    productCardsScroller.getChildren().add(productPane);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            System.err.println("Índice de categoría fuera de rango: " + index);
-        }
-    }
-
-    private List<List<Product>> categories = new ArrayList<>();
-
-    private void initializeCategories() {
-        // Crear categorías con productos de prueba
-        List<Product> category1 = List.of(
-                new Product("P1", "Burger", "Platillo", new BigDecimal("20"), new BigDecimal("15")),
-                new Product("P2", "Fries", "Platillo", new BigDecimal("15"), new BigDecimal("10"))
-        );
-        List<Product> category2 = List.of(
-                new Product("P3", "Ice Cream", "Postre", new BigDecimal("25"), new BigDecimal("20")),
-                new Product("P4", "Cake", "Postre", new BigDecimal("35"), new BigDecimal("30"))
-        );
-        List<Product> category3 = List.of(
-                new Product("P5", "Coffee", "Bebida", new BigDecimal("10"), new BigDecimal("5")),
-                new Product("P6", "Tea", "Bebida", new BigDecimal("15"), new BigDecimal("8"))
-        );
-
-        categories.add(category1);
-        categories.add(category2);
-        categories.add(category3);
-    }
 
 
-    public void displayCategoriesForCustomCombo(int categoryIndex) {
-        try {
-
-            // Cargar el diseño de la vista de categorías
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/com/mycompany/masterrules/ProductCategoriesCustomCombo.fxml"));
-            AnchorPane categoryPane = loader.load();
-
-            // Obtener el controlador de la vista cargada
-            ProductCategoriesCustomComboController categoryController = loader.getController();
-
-            // Limpiar la vista actual y agregar la nueva
-            AnchorPaneCategoriesProductsCombo.getChildren().clear();
-            AnchorPaneCategoriesProductsCombo.getChildren().add(categoryPane);
-
-            // Obtener productos de la categoría actual
-            List<Product> selectedCategory = categories.get(categoryIndex);
-            ObservableList<Product> categoryProducts = FXCollections.observableArrayList(selectedCategory);
-
-            // Cargar productos dentro de la categoría seleccionada
-            for (Product product : categoryProducts) {
-                try {
-                    FXMLLoader productLoader = new FXMLLoader();
-                    productLoader.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
-                    AnchorPane productPane = productLoader.load();
-
-                    // Configurar datos del producto en la tarjeta
-                    ItemCardProductController productController = productLoader.getController();
-                    productController.setProductDataToCard(product);
-
-                    // Agregar la tarjeta de producto al contenedor de productos
-                    categoryController.getProductContainer().getChildren().add(productPane);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void displayMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
@@ -440,8 +356,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         posManager = POSManager.getInstance();
         System.out.println(posManager.getCurrentUser());
 
-        initializeCategories();
-        displayCategoriesForCustomCombo(currentCategoryIndex);
+
+
         initializeTableOrder();
 
         cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -502,7 +418,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 }
             }
         });
-
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
 
     }
 
