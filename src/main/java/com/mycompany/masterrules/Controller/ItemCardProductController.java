@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -22,6 +21,7 @@ public class ItemCardProductController implements Initializable {
 
     private Product productData; //probablemente luego se necesite el productID en cardProduct para el Inventario
     private ProductSelectionListener selectionListener;
+
 
     //Componentes de la vista de la tarjeta de producto
     //-------------------------------------------------------------------------------------------
@@ -33,7 +33,10 @@ public class ItemCardProductController implements Initializable {
     private ImageView imageProduct;
 
     @FXML
-    private Label productPrice;
+    private Label lbProductPrice;
+
+    @FXML
+    private Label lbProductVipPrice;
 
 
     public void setProductDataToCard(Product productData) {
@@ -41,30 +44,31 @@ public class ItemCardProductController implements Initializable {
 
         setCardProductName(productData.getName());
         setCardPrice(productData.getPrice());
-        String imagePath = productData.getProductImage();
-        if (imagePath != null && !imagePath.isEmpty()) {
-            File imageFile = new File("src/main/resources/" + imagePath);
-            if (imageFile.exists()) {
-                imageProduct.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
-            } else {
-                System.err.println("La imagen no existe: " + imagePath);
-            }
-        }
-        //Se debe poner la imagen, pero por ahora no lo hare
-        //String path="File:"+productData.getImage();
+        setCardVipPrice(productData.getVIPPrice());
+        setCardProductImage(productData.getProductImage());
     }
+
 
     public void setCardProductName(String productName) {
         this.productName.setText(productName);
     }
 
     public void setCardPrice(BigDecimal price) {
-        productPrice.setText("$" + price);
+        lbProductPrice.setText("Precio: $" + price);
     }
 
-    public void setCardProductImage(String path) {
-        Image image = new Image(path, 192, 139, false, true);//CAMBIAR EL TAMAÑO DE IMAGEN
-        imageProduct.setImage(image);
+    public void setCardVipPrice(BigDecimal vipPrice) {
+        lbProductVipPrice.setText("Precio Vip: $" + vipPrice);
+    }
+
+    public void setCardProductImage(String productImage) {
+        String imagePath = productImage;
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File imageFile = new File("src/main/resources/" + imagePath);
+            if (imageFile.exists()) {
+                imageProduct.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
+            }
+        }
     }
 
     @Override
