@@ -15,7 +15,7 @@ public class CustomerManager {
     }
 
     public void updateCustomerData(String id, String newName, String loyaltyPoints, boolean vipStatus, String storeCredit, String newPhoneNumber) {
-        Customer customer = customerDatabase.findById(id);
+        Customer customer = customerDatabase.findById(newPhoneNumber);
 
         if (customer == null) {
             System.out.println("No se encontró el cliente");
