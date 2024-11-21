@@ -26,6 +26,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -33,7 +35,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
 
 private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
 private ObservableList<Product> selectedProductsForCombo;
-
+private String selectedImagePath;
 
     @FXML
     private TableView<Product> tblSelectedProductsForCombo;
@@ -374,9 +376,34 @@ private ObservableList<Product> selectedProductsForCombo;
         colComboVipPrice.setReorderable(false);
     }
 
+    private String copyImageToResources(File chosenImage) {
+        try {
+            // Ruta del directorio destino dentro de los recursos
+            String resourcesPath = "src/main/resources/productImages";
+            File directory = new File(resourcesPath);
+
+            // Crear el directorio si no existe
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            // Generar un nombre único para la imagen
+            String imageName = System.currentTimeMillis() + "_" + chosenImage.getName();
+            File destinationFile = new File(directory, imageName);
+
+            // Copiar la imagen al directorio destino
+            Files.copy(chosenImage.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Retornar el path relativo para almacenamiento
+            return "productImages/" + imageName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private void importProductImage() {
         FileChooser fileChooser = new FileChooser();
-        String imagePath = "";
         // Establecer filtro para imágenes
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Abrir archivo de imagen", "*.png", "*.jpg", "*.jpeg")
@@ -385,11 +412,16 @@ private ObservableList<Product> selectedProductsForCombo;
         // Mostrar el cuadro de diálogo de selección de archivo
         File chosenImage = fileChooser.showOpenDialog(null);
         if (chosenImage != null) {
-            // Guardar el path de la imagen seleccionada
-            imagePath = chosenImage.getAbsolutePath();
+            // Copiar la imagen a resources/productImages y obtener el path relativo
+            String relativePath = copyImageToResources(chosenImage);
+            if (relativePath != null) {
+                selectedImagePath = relativePath;
 
-            // Establecer la imagen en el ImageView
-            imgProduct_tabCreate.setImage(new javafx.scene.image.Image(chosenImage.toURI().toString()));
+                // Establecer la imagen en el ImageView
+                imgProduct_tabCreate.setImage(new javafx.scene.image.Image(chosenImage.toURI().toString()));
+            } else {
+                System.err.println("Error al copiar la imagen.");
+            }
         }
     }
 
@@ -444,11 +476,16 @@ private ObservableList<Product> selectedProductsForCombo;
                 BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
                 BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
 
+                // Asegurarse de que el path de la imagen esté disponible
+                if (selectedImagePath == null || selectedImagePath.isEmpty()) {
+                    System.err.println("No se ha seleccionado una imagen para el producto.");
+                    return;
+                }
+
                 Product product = new Product(id, name, type, price, vipPrice);
+                product.setProductImage(selectedImagePath); // Método que debes agregar en Product
                 cafeteriaMenu.addProductToMenu(product);
 
-                //StockInfo stockInfo = new StockInfo(0, 0, 0);
-                //cafeteriaStorage.addProduct(product, stockInfo);
                 clearTextFields(
                         txtProductId_tabCreate,
                         txtProductName_tabCreate,
@@ -457,8 +494,6 @@ private ObservableList<Product> selectedProductsForCombo;
                         txtProductVIpPrice_tabCreate
                 );
                 updateProductTable();
-                //List<Product> chepo = cafeteriaMenu.getProducts();
-                //ObservableList<Product> observableProductList = FXCollections.observableArrayList(chepo);
             }else if (source.equals(btnDeleteProduct)) {
                 Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
                 if (selectedProduct != null) {
@@ -473,6 +508,7 @@ private ObservableList<Product> selectedProductsForCombo;
                     String newType = txtProductType_tabEdit.getText();
                     BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
                     BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
+
 
 
                     selectedProduct.setName(newName);
@@ -507,18 +543,27 @@ private ObservableList<Product> selectedProductsForCombo;
 
 
     private void displaySelection() {
-        // Obtener el producto seleccionado
         Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
 
-        // Verificar que hay un producto seleccionado
         if (selectedProduct != null) {
-            // Establecer los valores en los campos de edición
             txtProductName_tabEdit.setText(selectedProduct.getName());
             txtProductType_tabEdit.setText(selectedProduct.getType());
             txtProductPrice_tabEdit.setText(selectedProduct.getPrice().toString());
             txtProductVipPrice_tabEdit.setText(selectedProduct.getVIPPrice().toString());
+
+            // Mostrar la imagen desde el path almacenado
+            String imagePath = selectedProduct.getProductImage();
+            if (imagePath != null && !imagePath.isEmpty()) {
+                File imageFile = new File("src/main/resources/" + imagePath);
+                if (imageFile.exists()) {
+                    imgProduct_tabEdit.setImage(new javafx.scene.image.Image(imageFile.toURI().toString()));
+                } else {
+                    System.err.println("La imagen no existe: " + imagePath);
+                }
+            }
         }
     }
+
 
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {

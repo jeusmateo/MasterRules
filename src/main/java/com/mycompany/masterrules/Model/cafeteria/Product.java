@@ -20,9 +20,7 @@ public class Product {
     private String type;
     private BigDecimal price;
     private BigDecimal VIPPrice;
-    private File image;
-    @Lob
-    private byte[] productImage;
+    private String productImage;
 
     @Embedded
     private StockInfo stockInfo;
@@ -108,20 +106,12 @@ public class Product {
         this.stockInfo = stockInfo;
     }
 
-    public byte[] getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(byte[] productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
-    }
-
-    public File getImage() {
-        return image;
-    }
-
-    public void setImage(File image) {
-        this.image = image;
     }
 
     @Override
