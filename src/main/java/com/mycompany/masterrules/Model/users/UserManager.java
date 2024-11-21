@@ -21,7 +21,7 @@ public class UserManager {
     }
 
     public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
-        if (!isValid(newUser)) {
+        if (!isValidForRegister(newUser)) {
             throw new IllegalArgumentException("Usuario no valido");
         }
         allUsers.add(newUser);
@@ -35,7 +35,7 @@ public class UserManager {
             return Optional.of(new UserAccount("admin", "admin", new UserPermissions(EnumSet.allOf(UserPermissions.Permission.class)), "admin"));
         }
 
-        if(!isUserRegistered(username)){
+        if (!isUserRegistered(username)) {
             throw new Exception("Usuario no registrado");
         }
         var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(username) && user.getPassword().equals(password));
@@ -53,13 +53,13 @@ public class UserManager {
         if (isUserRegistered(editedUserAccount.getUserName())) {
             allUsers.set(allUsers.indexOf(editedUserAccount), editedUserAccount);
             userDatabaseManager.update(editedUserAccount);
-        }else{
+        } else {
             throw new IllegalArgumentException("Usuario no valido");
         }
     }
 
-    private boolean isValid(UserAccount newUser) {
-        return !isUserRegistered(newUser.getUserName())  && isPasswordValid(newUser.getPassword());
+    private boolean isValidForRegister(UserAccount newUser) {
+        return !isUserRegistered(newUser.getUserName()) && isPasswordValid(newUser.getPassword());
     }
 
     public void removeUser(String userID) throws UserNotFoundException {
