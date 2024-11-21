@@ -274,8 +274,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         List<Product> productsOnMenu = menu.getProducts();
         ObservableList<Product> productDataList = FXCollections.observableArrayList(productsOnMenu);
 
-
-
         for (Product currentProduct : productDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
@@ -293,10 +291,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
 
         }
-        List<Combo> prueba = new ArrayList<>();
-        prueba = menu.getCombos();
+        List<Combo> combosOnMenu = new ArrayList<>();
+        combosOnMenu = menu.getCombos();
 
-        ObservableList<Product> comboDataList = FXCollections.observableArrayList(prueba);
+        ObservableList<Product> comboDataList = FXCollections.observableArrayList(combosOnMenu);
         for (Product currentProductCombo : comboDataList) {
             try {
                 FXMLLoader load = new FXMLLoader();
@@ -377,29 +375,38 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void hideTableNumber() {
         tableNumberBox.setVisible(false);
     }
-
-    private void configOrderInfo(){
-        Customer customerInfo=cboCustomers.getValue();
+//TODO FALTA EL DEL CLIENTRES
+    private void configOrderInfo() {
+        Customer customerInfo = cboCustomers.getValue();
+       // if(customerInfo == null) {
+            System.out.println("Customer Info: " + customerInfo);
+       // }
         RadioButton selected = (RadioButton) group.getSelectedToggle();
-        String deliveryMethod="";
+        String deliveryMethod = "";
         if (selected != null) {
-            deliveryMethod=selected.getText();
+            deliveryMethod = selected.getText();
         }
         String comments = txtAdittionalComments.getText();
         //TODO validaciones para null
-        posManager.configureOrder(deliveryMethod,comments,customerInfo);
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+        posManager.configureOrder(deliveryMethod, comments, customerInfo);
     }
 
 
     @FXML
     private void handlePayAction(MouseEvent event) {
-        if(group.getSelectedToggle()!=null && posManager.getCurrentOrder().getTotalAmount().compareTo(BigDecimal.ZERO)!=0) {
+        if (group.getSelectedToggle() != null && posManager.getCurrentOrder().getTotalAmount().compareTo(BigDecimal.ZERO) != 0) {
             try {
+                configOrderInfo();
+
                 // Cargar la vista de pago desde el archivo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
                 Parent paymentView = loader.load();
                 WnPaymentController paymentController = loader.getController();
                 try {
+                    if(posManager.getCurrentOrder().getCustomer()==null){
+                        System.out.println(posManager.getCurrentOrder().getCustomer());
+                    }
                     paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
                 } catch (Exception e) {
                     System.out.println("Chepipi " + e.getMessage());
@@ -426,7 +433,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 // Mostrar el modal
                 paymentStage.showAndWait();
 
-                configOrderInfo();
 
                 PaymentDetails paymentResult = paymentController.getPaymentDetails();
                 if (paymentResult != null) {
@@ -449,7 +455,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         }
     }
 
-    private void initializeTableOrder(){
+    private void initializeTableOrder() {
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         colAmount.setReorderable(false);
         colAmount.setResizable(false);
@@ -537,7 +543,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             tblOrder.setItems(productOrderList);
             tblOrder.refresh();
             lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
-        }catch (Exception e){
+        } catch (Exception e) {
             //todo algo debe tener yo creo
         }
 
@@ -554,7 +560,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
     @Override
-        public void onProductSelected(Product product) {
+    public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
