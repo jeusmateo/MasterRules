@@ -3,7 +3,6 @@ package com.mycompany.masterrules.Controller;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
-import com.mycompany.masterrules.Model.storage.StockInfo;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -24,7 +23,7 @@ import java.util.ResourceBundle;
  * @author Jimena Garcia
  */
 
-//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?
+//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?, 2. cafeteriaStorage se quita?
 public class WnInventoryController implements Initializable {
 
     // Atributos de la clase
@@ -121,7 +120,6 @@ public class WnInventoryController implements Initializable {
         }
     }
 
-
     private void configureTableColumns() {
         // Configurar las columnas para obtener datos de los métodos getter
         colProductIDInventory.setReorderable(false);
@@ -149,6 +147,7 @@ public class WnInventoryController implements Initializable {
         colProductMaxStockInventory.setResizable(false);
         colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
+
 
 
     public void showScrEditInfo() {
