@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -68,6 +67,18 @@ private String selectedImagePath;
     @FXML
     private Button buttonIconSearchFood;
 
+    @FXML
+    private Button btnCreateCombo;
+
+    @FXML
+    private Button btnEditCombo;
+
+    @FXML
+    private Button btnImportComboImage;
+
+    @FXML
+    private Button btnDeleteCombo;
+
 
     @FXML
     private FlowPane flowPaneMenuCards = new FlowPane();
@@ -127,6 +138,15 @@ private String selectedImagePath;
 
     @FXML
     private TextField txtFieldVIPPriceCombo;
+
+    @FXML
+    private TextField txtFieldEditComboName;
+
+    @FXML
+    private TextField txtFieldEditComboVipPrice;
+
+    @FXML
+    private TextField txtFieldEditComboPrice;
 
     @FXML
     private AnchorPane scrCreateComboStepOne;
@@ -239,24 +259,9 @@ private String selectedImagePath;
     @FXML
     private TableColumn<Product, BigDecimal> colProductSelectedVipPrice;
     @FXML
-    private Button btnDeleteProduct_CreateCombo;
+    private Button btnRemoveProductOnCombo;
 
 
-    @FXML
-    void mouseClickedConfirmEvent(MouseEvent event) {
-
-
-
-        String comboName=txtFieldNameCombo.getText();
-        String comboVipPrice= txtFieldVIPPriceCombo.getText();
-        String comboPrice=txtFieldPriceCombo.getText();
-        Combo newCombo = new Combo(comboName,selectedProductsForCombo, new BigDecimal(comboPrice),new BigDecimal(comboVipPrice));
-        cafeteriaMenu.addComboToMenu(newCombo);
-        btnBackToCreateCombo();
-
-        btnBackToCreateCombo();
-
-    }
 
 
 
@@ -441,13 +446,11 @@ private String selectedImagePath;
         configTableColumnsCombo();
         tblCombos.setItems(comboDataList);
 
-
-        selectedProductsForCombo=FXCollections.observableArrayList();
+        selectedProductsForCombo = FXCollections.observableArrayList();
         tblSelectedProductsForCombo.setItems(selectedProductsForCombo);
 
         colProductSelectedName.setReorderable(false);
         colProductSelectedName.setResizable(false);
-
         colProductSelectedName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colProductSelectedPrice.setReorderable(false);
         colProductSelectedPrice.setResizable(false);
@@ -469,7 +472,8 @@ private String selectedImagePath;
         tblFood.setItems(observableProductList);
         flowPaneMenuCards.prefWidthProperty().bind(scrollPaneMenuCreatorCombo.widthProperty());
         // Añadir listener para la selección de productos en la tabla
-        tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displaySelection());
+        tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displayProductSelection());
+        tblCombos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displayComboSelection());
     }
 
     @FXML
@@ -477,72 +481,134 @@ private String selectedImagePath;
         Object source = event.getSource();
         try {
             if (source.equals(btnCreateProduct)) {
-                String id = txtProductId_tabCreate.getText();
-                String name = txtProductName_tabCreate.getText();
-                String type = txtProductType_tabCreate.getText();
-                BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
-                BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
-
-                // Asegurarse de que el path de la imagen esté disponible
-                if (selectedImagePath == null || selectedImagePath.isEmpty()) {
-                    System.err.println("No se ha seleccionado una imagen para el producto.");
-                    return;
-                }
-
-                Product product = new Product(id, name, type, price, vipPrice);
-                product.setProductImage(selectedImagePath); // Método que debes agregar en Product
-                cafeteriaMenu.addProductToMenu(product);
-
-                clearTextFields(
-                        txtProductId_tabCreate,
-                        txtProductName_tabCreate,
-                        txtProductType_tabCreate,
-                        txtProductPrice_tabCreate,
-                        txtProductVIpPrice_tabCreate
-                );
-
-                selectedImagePath = null;
-                imgProduct_tabCreate.setImage(null);
-                updateProductTable();
-            }else if (source.equals(btnDeleteProduct)) {
-                Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
-                if (selectedProduct != null) {
-                    cafeteriaMenu.removeProductOnMenu(selectedProduct);
-                    //cafeteriaStorage.removeProduct(selectedProduct);
-                    updateProductTable();
-                }
+                handleCreateProduct();
+            } else if (source.equals(btnDeleteProduct)) {
+                handleDeleteProduct();
             } else if (source.equals(btnEditProduct)) {
-                Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
-                if (selectedProduct != null) {
-                    String newName = txtProductName_tabEdit.getText();
-                    String newType = txtProductType_tabEdit.getText();
-                    BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
-                    BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
-
-
-                    selectedProduct.setName(newName);
-                    selectedProduct.setType(newType);
-                    selectedProduct.setPrice(newPrice);
-                    selectedProduct.setVIPPrice(newVipPrice);
-                    selectedProduct.setProductImage(selectedImagePath);
-
-                    cafeteriaMenu.editProduct(selectedProduct);
-                    updateProductTable();
-
-                    clearTextFields(txtProductName_tabEdit, txtProductType_tabEdit, txtProductPrice_tabEdit, txtProductVipPrice_tabEdit);
-
-                }
+                handleEditProduct();
             } else if (source.equals(btnImportImage_tabCreate)) {
                 importProductImage(imgProduct_tabCreate);
             } else if (source.equals(btnImportImage_tabEdit)) {
                 importProductImage(imgProduct_tabEdit);
+            } else if (source.equals(btnCreateCombo)) {
+                handleCreateCombo();
+            } else if (source.equals(btnDeleteCombo)) {
+                handleDeleteCombo();
+            } else if (source.equals(btnEditCombo)) {
+                handleEditCombo();
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
         }
     }
 
+    private void handleCreateProduct() {
+        String id = txtProductId_tabCreate.getText();
+        String name = txtProductName_tabCreate.getText();
+        String type = txtProductType_tabCreate.getText();
+        BigDecimal price = new BigDecimal(txtProductPrice_tabCreate.getText());
+        BigDecimal vipPrice = new BigDecimal(txtProductVIpPrice_tabCreate.getText());
 
+        if (selectedImagePath == null || selectedImagePath.isEmpty()) {
+            System.err.println("No se ha seleccionado una imagen para el producto.");
+            return;
+        }
+
+        Product product = new Product(id, name, type, price, vipPrice);
+        product.setProductImage(selectedImagePath);
+        cafeteriaMenu.addProductToMenu(product);
+
+        clearTextFields(
+                txtProductId_tabCreate,
+                txtProductName_tabCreate,
+                txtProductType_tabCreate,
+                txtProductPrice_tabCreate,
+                txtProductVIpPrice_tabCreate
+        );
+
+        selectedImagePath = null;
+        imgProduct_tabCreate.setImage(null);
+        updateProductTable();
+    }
+
+    private void handleDeleteProduct() {
+        Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            cafeteriaMenu.removeProductOnMenu(selectedProduct);
+            updateProductTable();
+        }
+    }
+
+    private void handleEditProduct() {
+        Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            String newName = txtProductName_tabEdit.getText();
+            String newType = txtProductType_tabEdit.getText();
+            BigDecimal newPrice = new BigDecimal(txtProductPrice_tabEdit.getText());
+            BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
+
+            selectedProduct.setName(newName);
+            selectedProduct.setType(newType);
+            selectedProduct.setPrice(newPrice);
+            selectedProduct.setVIPPrice(newVipPrice);
+            selectedProduct.setProductImage(selectedImagePath);
+
+            cafeteriaMenu.editProduct(selectedProduct);
+            updateProductTable();
+
+            clearTextFields(txtProductName_tabEdit, txtProductType_tabEdit, txtProductPrice_tabEdit, txtProductVipPrice_tabEdit);
+        }
+    }
+
+    private void handleCreateCombo() {
+        String comboName = txtFieldNameCombo.getText();
+        String comboVipPrice = txtFieldVIPPriceCombo.getText();
+        String comboPrice = txtFieldPriceCombo.getText();
+        Combo newCombo = new Combo(comboName, selectedProductsForCombo, new BigDecimal(comboPrice), new BigDecimal(comboVipPrice));
+        cafeteriaMenu.addComboToMenu(newCombo);
+        btnBackToCreateCombo();
+        updateComboTable(); // Asegúrate de actualizar la tabla después de crear un combo
+    }
+
+    private void handleDeleteCombo() {
+        Combo selectedCombo = tblCombos.getSelectionModel().getSelectedItem();
+        if (selectedCombo != null) {
+            cafeteriaMenu.removeComboOnMenu(selectedCombo);
+            updateProductTable();
+            updateComboTable(); // Asegúrate de actualizar la tabla después de eliminar un combo
+        }
+    }
+
+    private void handleEditCombo() {
+        Combo selectedCombo = tblCombos.getSelectionModel().getSelectedItem();
+        if (selectedCombo != null) {
+            String newName = txtFieldEditComboName.getText();
+            BigDecimal newPrice = new BigDecimal(txtFieldEditComboPrice.getText());
+            BigDecimal newVipPrice = new BigDecimal(txtFieldEditComboVipPrice.getText());
+
+            selectedCombo.setName(newName);
+            selectedCombo.setPrice(newPrice);
+            selectedCombo.setVIPPrice(newVipPrice);
+
+            cafeteriaMenu.editCombo(selectedCombo);
+            updateProductTable();
+            updateComboTable(); // Asegúrate de actualizar la tabla después de editar un combo
+
+            clearTextFields(txtFieldEditComboName, txtFieldEditComboPrice, txtFieldEditComboVipPrice);
+        }
+    }
+
+    private void updateComboTable() {
+        // Obtener la lista actualizada de combos desde el modelo
+        List<Combo> updatedCombos = cafeteriaMenu.getCombos();
+
+        // Crear una nueva lista observable con los combos actualizados
+        ObservableList<Combo> observableComboList = FXCollections.observableArrayList(updatedCombos);
+
+        // Asignar la nueva lista observable a la tabla
+        tblCombos.setItems(observableComboList);
+        tblCombos.refresh();
+    }
 
     private void updateProductTable() {
         // Obtener la lista actualizada de productos desde el modelo
@@ -556,8 +622,17 @@ private String selectedImagePath;
         tblFood.refresh();
     }
 
+    private void displayComboSelection() {
+        Combo selectedCombo = tblCombos.getSelectionModel().getSelectedItem();
 
-    private void displaySelection() {
+        if (selectedCombo != null) {
+            txtFieldEditComboName.setText(selectedCombo.getName());
+            txtFieldEditComboPrice.setText(selectedCombo.getPrice().toString());
+            txtFieldEditComboVipPrice.setText(selectedCombo.getVIPPrice().toString());
+        }
+    }
+
+    private void displayProductSelection() {
         Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
 
         if (selectedProduct != null) {
@@ -579,13 +654,11 @@ private String selectedImagePath;
         }
     }
 
-
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
             textField.clear();  // Limpia el contenido de cada TextField
         }
     }
-
 
     @Override
     public void onProductSelected(Product product) {
