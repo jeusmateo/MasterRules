@@ -53,26 +53,51 @@ public class Order {
         this.totalAmount= calculatedTotalAmount;
     }
     public void addProductToOrderItemList(OrderItem newOrderItem) {
+        if(newOrderItem.getProduct().getStockInfo().getCurrentStock()>0){
+            boolean found = false;
 
-        boolean found = false;
+            if (!orderItemList.isEmpty()) {
+                for (OrderItem orderItem : orderItemList) {
+                    if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
 
-        if (!orderItemList.isEmpty()) {
-            for (OrderItem orderItem : orderItemList) {
-                if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
-
-                    orderItem.addQuantity();
-                    found = true;
-                    break; // Ya lo encontramos, no es necesario seguir iterando.
+                        orderItem.addQuantity();
+                        found = true;
+                        break; // Ya lo encontramos, no es necesario seguir iterando.
+                    }
                 }
-            }
-            if (!found) {
+                if (!found) {
+                    orderItemList.add(newOrderItem);
+
+                }
+            } else {
                 orderItemList.add(newOrderItem);
 
             }
-        } else {
-            orderItemList.add(newOrderItem);
 
         }
+
+        if(newOrderItem.getProduct().getStockInfo() == null){
+            boolean found = false;
+
+            if (!orderItemList.isEmpty()) {
+                for (OrderItem orderItem : orderItemList) {
+                    if (newOrderItem.getProduct().getId().equals(orderItem.getProduct().getId())) {
+
+                        orderItem.addQuantity();
+                        found = true;
+                        break; // Ya lo encontramos, no es necesario seguir iterando.
+                    }
+                }
+                if (!found) {
+                    orderItemList.add(newOrderItem);
+
+                }
+            } else {
+                orderItemList.add(newOrderItem);
+
+            }
+        }
+
 
     }
 
