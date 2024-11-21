@@ -411,4 +411,25 @@ public class WnUsersController implements Initializable {
         }
     }
 
+    private void clearFields2(TextField[] textFields, PasswordField[] passwordFields, Map<CheckBox, Permission>... checkBoxMaps) {
+        if (textFields != null) {
+            for (TextField textField : textFields) {
+                textField.clear();
+            }
+        }
+
+        if (passwordFields != null) {
+            for (PasswordField passwordField : passwordFields) {
+                passwordField.clear();
+            }
+        }
+
+        if (checkBoxMaps != null) {
+            for (Map<CheckBox, Permission> checkBoxMap : checkBoxMaps) {
+                checkBoxMap.keySet().forEach(checkBox -> checkBox.setSelected(false));
+            }
+        }
+    }
+
+
 }
