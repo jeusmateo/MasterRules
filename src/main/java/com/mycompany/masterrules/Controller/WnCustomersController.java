@@ -311,7 +311,7 @@ public class WnCustomersController implements Initializable {
 
     private void configTableColumns() {
         colCustomerId.setReorderable(false);
-        colCustomerId.setReorderable(false);
+
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colCustomerName.setReorderable(false);
         colCustomerName.setResizable(false);
@@ -356,7 +356,7 @@ public class WnCustomersController implements Initializable {
 
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
-            lbCustomerIdAuxiliar.setText(customer.getID());
+            //lbCustomerIdAuxiliar.setText(customer.getID());
             txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
