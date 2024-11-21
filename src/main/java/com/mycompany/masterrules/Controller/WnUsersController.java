@@ -335,7 +335,7 @@ public class WnUsersController implements Initializable {
         colUserID.setReorderable(false);
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
-}
+    }
 
 
     @Override
