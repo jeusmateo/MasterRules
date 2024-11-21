@@ -60,10 +60,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private Button btnPay;
     @FXML
     private Button btnCancel;
-    @FXML
-    private Button btnNextCategory;
-    @FXML
-    private Button btnPreviousCategory;
+
     @FXML
     private Button btnAdd1;
     @FXML
@@ -100,8 +97,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private VBox continueOrderOptionsBox;
     @FXML
     private VBox menuOrderOptionsBox;
-    @FXML
-    private VBox navigationCategory;
+
 
     @FXML
     private HBox tableNumberBox;
@@ -156,31 +152,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     // MÉTODOS
     //-------------------------------------------------------------------------------------------
 
-    @FXML
-    private void handleCategoryNavigation(ActionEvent evt) {
-        try {
-            if (evt.getSource().equals(btnNextCategory)) {
-                if (currentCategoryIndex < categories.size() - 1) {
-                    currentCategoryIndex++;
-                    displayCategoriesForCustomCombo(currentCategoryIndex); // Actualizar vista
-                } else {
-                    System.out.println("Ya estás en la última categoría");
-                }
-            }
-            if (evt.getSource().equals(btnPreviousCategory)) {
-                if (currentCategoryIndex > 0) {
-                    currentCategoryIndex--;
-                    displayCategoriesForCustomCombo(currentCategoryIndex); // Actualizar vista
-                } else {
-                    System.out.println("Ya estás en la primera categoría");
-                }
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error al navegar entre categorías: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 
     private void displayCategory(int index) {
         if (index >= 0 && index < categories.size()) {
@@ -476,7 +447,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             if (newValue != null) {
 
                 posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
-
+                updateOrderInfo();
+                //TODO chepo arregla esto
+                if(posManager.getCurrentOrder().getCustomer()!=null){
+                    colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
+                }else{
+                    colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
+                    updateOrderInfo();
+                }
                 lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
             }
         });

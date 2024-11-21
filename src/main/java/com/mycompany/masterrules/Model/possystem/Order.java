@@ -41,8 +41,14 @@ public class Order {
 
     public void calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-        for (OrderItem currentProduct : orderItemList) {
-            calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
+        if(customer!= null && customer.getCustomerAccount().isIsVIP()){
+            for (OrderItem currentProduct : orderItemList) {
+                calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalVipPrice());
+            }
+        }else{
+            for (OrderItem currentProduct : orderItemList) {
+                calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
+            }
         }
         this.totalAmount= calculatedTotalAmount;
     }

@@ -352,7 +352,7 @@ public class WnCustomersController implements Initializable {
 
     private void configTableColumns() {
         colCustomerId.setReorderable(false);
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCustomerName.setReorderable(false);
         colCustomerName.setResizable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
