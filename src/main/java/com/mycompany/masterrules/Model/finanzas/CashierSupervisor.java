@@ -74,6 +74,8 @@ public class CashierSupervisor {
     }
 
     private void readAllFromDatabase() {
+        this.cashFlows.clear();
+        this.cashInFlows.clear();
         var databaseReports = cashFlowDatabase.readAll();
         for (CashFlow cashFlow : databaseReports) {
             if (cashFlow.getFlowType() == FlowType.CASH_OUT) {
