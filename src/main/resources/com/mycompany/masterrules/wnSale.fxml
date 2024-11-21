@@ -34,9 +34,9 @@
                   </Label>
                   <TableView fx:id="tblOrder" layoutX="10.0" layoutY="43.0" prefHeight="269.0" prefWidth="270.0" AnchorPane.bottomAnchor="264.3333333333333" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
                      <columns>
-                        <TableColumn fx:id="colAmount" prefWidth="58.66662883758545" text="Cantidad" />
-                        <TableColumn fx:id="colProduct" prefWidth="108.66661834716797" text="Producto" />
-                        <TableColumn fx:id="colPrice" prefWidth="82.00007629394531" text="Precio($)" />
+                        <TableColumn fx:id="colAmount" prefWidth="85.0" resizable="false" text="Cantidad" />
+                        <TableColumn fx:id="colProduct" prefWidth="116.0" resizable="false" text="Producto" />
+                        <TableColumn fx:id="colPrice" prefWidth="75.0" resizable="false" text="Precio($)" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
