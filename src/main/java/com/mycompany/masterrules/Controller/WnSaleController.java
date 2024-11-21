@@ -476,7 +476,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             if (newValue != null) {
 
                 posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
-
+                updateOrderInfo();
+                //TODO chepo arregla esto
+                if(posManager.getCurrentOrder().getCustomer()!=null){
+                    colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
+                }else{
+                    colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
+                    updateOrderInfo();
+                }
                 lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
             }
         });
