@@ -15,6 +15,8 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -204,36 +206,36 @@ public class WnUsersController implements Initializable {
                 handleDeleteUserAccount();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            Logger.getLogger(WnUsersController.class.getName()).log(Level.SEVERE, "Error: " + e.getMessage(), e);
+            showAlert("Error", "Ocurrió un error: " + e.getMessage());
         }
     }
 
-    private void handleEditUser() throws Exception {
-        String editUserName = txtEditUserCompleteName.getText();
-        String editUserPassword = pswdFieldEditUserAccount.getText();
-        String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
-        String confirUserAccountUserEdit = textEditUserName.getText();
+    private void handleEditUser() {
+    String editUserName = txtEditUserCompleteName.getText();
+    String editUserPassword = pswdFieldEditUserAccount.getText();
+    String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
+    String confirUserAccountUserEdit = textEditUserName.getText();
 
-        if (!editUserPassword.equals(confirmUserPassword)) {
-            System.out.println("Error: Las contraseñas no coinciden.");
-            return;
-        }
-
-        updateUser(editUserName, editUserPassword, confirUserAccountUserEdit);
-        refreshUserTable();
-        clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+    if (!editUserPassword.equals(confirmUserPassword)) {
+        throw new IllegalArgumentException("Error: Las contraseñas no coinciden.");
     }
 
+    updateUser(editUserName, editUserPassword, confirUserAccountUserEdit);
+    refreshUserTable();
+    clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+}
 
-    private void handleCreateUserAccount() throws Exception {
+
+
+    private void handleCreateUserAccount() throws IllegalArgumentException {
         String createUserCompleteName = txtFieldCreateUserCompleteName.getText();
         String createUserName = txtFieldCreateUserName.getText();
         String createUserPassword = pswdFieldCreateUserAccount.getText();
         String createUserPasswordConfirm = pswdFieldConfirmCreateUserAccount.getText();
 
         if (!createUserPassword.equals(createUserPasswordConfirm)) {
-            System.out.println("Error: Las contraseñas no coinciden.");
-            return;
+            throw new IllegalArgumentException("Error: Las contraseñas no coinciden.");
         }
 
         createNewUser(createUserCompleteName, createUserName, createUserPassword);
@@ -242,6 +244,7 @@ public class WnUsersController implements Initializable {
         clearPasswordFields(new PasswordField[]{pswdFieldCreateUserAccount, pswdFieldConfirmCreateUserAccount});
         clearCheckBoxes(checkBoxPermissionMap);
     }
+
 
     private void createNewUser(String fullName, String userName, String password) {
         EnumSet<Permission> selectedPermissions = getSelectedPermissions();
@@ -260,23 +263,25 @@ public class WnUsersController implements Initializable {
         userManager.updateUserInformation(this.userEdit);
     }
 
-    private void handleDeleteUserAccount() {
-        if (this.userEdit == null) {
-            System.out.println("No se seleccionó ningún usuario para eliminar.");
-            return;
-        }
-
-        try {
-            String userIdToDelete = this.userEdit.getUserName();
-            userManager.removeUser(userIdToDelete);
-            refreshUserTable();
-            clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-        } catch (UserNotFoundException e) {
-            System.out.println("Error al eliminar usuario: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+private void handleDeleteUserAccount() {
+    if (this.userEdit == null) {
+        Logger.getLogger(WnUsersController.class.getName()).log(Level.INFO, "No se seleccionó ningún usuario para eliminar.");
+        showAlert("Error", "No se seleccionó ningún usuario para eliminar.");
+        return;
     }
+
+    try {
+        String userIdToDelete = this.userEdit.getUserName();
+        userManager.removeUser(userIdToDelete);
+        refreshUserTable();
+        clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+        showAlert("Éxito", "Usuario eliminado correctamente.");
+    } catch (UserNotFoundException e) {
+        showAlert("Error", "Error al eliminar usuario: " + e.getMessage());
+    } catch (Exception e) {
+        showAlert("Error", "Error: " + e.getMessage());
+    }
+}
 
     @FXML
     private void eventKey(KeyEvent event) {
