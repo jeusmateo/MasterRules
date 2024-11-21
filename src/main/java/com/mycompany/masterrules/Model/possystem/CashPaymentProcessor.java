@@ -15,8 +15,10 @@ public class CashPaymentProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-        if(getTotalAmount().compareTo(customerCashAmount) < 0){
+
+        if(getTotalAmount().compareTo(customerCashAmount) <= 0){
             PaymentDetails paymentDetails = new PaymentDetails("CASH",this.getTotalAmount());
+
             paymentDetails.setCustomerCashAmount(this.customerCashAmount);
             paymentDetails.setChangeAmount(changeAmount);
             paymentDetails.setPaymentDescription(paymentDescription());

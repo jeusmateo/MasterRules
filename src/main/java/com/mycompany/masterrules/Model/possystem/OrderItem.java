@@ -33,6 +33,8 @@ public class OrderItem {
         return product.getVIPPrice().multiply(new BigDecimal(quantity));
     }
 
+
+
     public void addQuantity(){
         quantity++;
     }

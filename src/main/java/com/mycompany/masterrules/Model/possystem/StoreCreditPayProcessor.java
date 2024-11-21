@@ -18,7 +18,7 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
         if(hasEnoughCredit()){
             customer.getCustomerAccount().setStoreCredit(customer.getCustomerAccount().getStoreCredit().subtract(this.getTotalAmount()));
         }
-        PaymentDetails paymentDetails= new PaymentDetails("STORE_CREDIT",this.getTotalAmount());
+        PaymentDetails paymentDetails= new PaymentDetails(PaymentType.STORE_CREDIT,this.getTotalAmount());
         paymentDetails.setCustomer(customer);
         paymentDetails.setPaymentDescription(paymentDescription());;
         return paymentDetails;

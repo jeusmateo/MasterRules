@@ -403,13 +403,10 @@ public class WnUsersController implements Initializable {
     private void configColumnsOnUserTable() {
         colUserID.setReorderable(false);
         colUserID.setResizable(false);
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         colUserName.setReorderable(false);
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-
-        colUserID.setReorderable(false);
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
     }
 
     private void configCheckBoxToCreate() {

@@ -3,6 +3,7 @@ package com.mycompany.masterrules.Controller;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerManager;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -264,17 +265,31 @@ public class WnCustomersController implements Initializable {
         customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints,
                 newCustomerVipStatus);
     }
-
+    //TODO ESTO URGE MUCHISIMO
     // TODO: REFACTORIZAR LEGIBILIDAD POR QUE ESA MADRE DE ULTIMO TA LARGA
     private void editCustomerInfo() {
+
+
         String customerId = lbCustomerIdAuxiliar.getText();
         String newCustomerName = txtFieldEditCustomerName.getText();
         String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
         String newCustomerPhoneNumber = txtEditCustomerPhoneNumber.getText();
-        customerManager.updateCustomerData(newCustomerName, customerId, updateCustomerLoyaltyPoints,
-                updateCustomerVipStatus, newCustomerStoreCreditQuantity, newCustomerPhoneNumber);
+
+        var customer = customerManager.findCustomerById(customerId);
+        if (newCustomerName.isEmpty() || newCustomerStoreCreditQuantity.isEmpty() || updateCustomerLoyaltyPoints.isEmpty() || newCustomerPhoneNumber.isEmpty()) {
+            showAlert("Error", "Por favor, llena todos los campos.");
+            return;
+        }
+
+        customer.setCustomerName(newCustomerName);
+        customer.getCustomerAccount().setStoreCredit(new BigDecimal(newCustomerStoreCreditQuantity));
+        customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(updateCustomerLoyaltyPoints));
+        customer.getCustomerAccount().setIsVIP(updateCustomerVipStatus);
+        customer.setCustomerPhoneNumber(newCustomerPhoneNumber);
+
+        customerManager.updateCustomerData(customer);
     }
 
     @FXML
@@ -352,7 +367,7 @@ public class WnCustomersController implements Initializable {
 
     private void configTableColumns() {
         colCustomerId.setReorderable(false);
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCustomerName.setReorderable(false);
         colCustomerName.setResizable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -391,7 +406,7 @@ public class WnCustomersController implements Initializable {
         if (customer != null) {
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
-            //lbCustomerIdAuxiliar.setText("customer.getID()");
+            lbCustomerIdAuxiliar.setText(customer.getId());
             txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());

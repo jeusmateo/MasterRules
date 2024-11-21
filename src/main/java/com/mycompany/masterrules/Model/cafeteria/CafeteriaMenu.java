@@ -29,16 +29,14 @@ public class CafeteriaMenu {
     private void readFromDatabase() {
         var allProducts = productDatabase.readAll();
         for (var actualProduct : allProducts) {
-            if (actualProduct.getClass() == Combo.class) {
-                if(!availableCombos.contains((Combo) actualProduct)){
-                    availableCombos.add((Combo) actualProduct);
+            if (actualProduct instanceof Combo combo) {
+                if (!availableCombos.contains(combo)) {
+                    availableCombos.add(combo);
                 }
-
             } else {
-                if(!availableProducts.contains(actualProduct)){
+                if (!availableProducts.contains(actualProduct)) {
                     availableProducts.add(actualProduct);
                 }
-
             }
         }
     }
@@ -125,12 +123,6 @@ public class CafeteriaMenu {
         comboDatabase.update(combo);
     }
 
-    private boolean isComboNameTaken(String comboName) { //TODO no esta implemenmtado
-        return availableCombos.stream().anyMatch(combo -> combo.getName().equals(comboName));
-    }
-
-
-
     public List<Product> getProducts() {
         readFromDatabase();
         return availableProducts;
@@ -143,7 +135,7 @@ public class CafeteriaMenu {
     }
 
     public List<Combo> getCombos() {
-        readFromDatabase();
+        //readFromDatabase();
         return availableCombos;
     }
 

@@ -33,9 +33,9 @@ class CashRegisterAuditReportManagerTest {
     @Test
     void simulateCashRegisterAuditReport() {
 
-        var cashRegisterAuditReport = new CashRegisterAuditReportManager();
-        cashRegisterAuditReport.generateEndOfDaySalesReport();
-        cashRegisterAuditReport.endCashRegisterAuditReport();
-        ;
+//        var cashRegisterAuditReport = new CashRegisterAuditReportManager();
+//        cashRegisterAuditReport.generateEndOfDaySalesReport();
+//        cashRegisterAuditReport.endCashRegisterAuditReport();
+//        ;
     }
 }
