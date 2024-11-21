@@ -50,9 +50,9 @@ public class UserManager {
     }
 
     public void updateUserInformation(UserAccount editedUserAccount) {
-        if (!isValid(editedUserAccount)) {
-            throw new IllegalArgumentException("Usuario no valido");
-        }
+//        if (!isValid(editedUserAccount)) {
+//            throw new IllegalArgumentException("Usuario no valido");
+//        }
         allUsers.set(allUsers.indexOf(editedUserAccount), editedUserAccount);
         userDatabaseManager.update(editedUserAccount);
     }

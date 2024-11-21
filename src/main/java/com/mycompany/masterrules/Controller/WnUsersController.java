@@ -367,7 +367,7 @@ public class WnUsersController implements Initializable {
         }
 
         @FXML
-        private void displaySelected (javafx.scene.input.MouseEvent event){
+        private void displaySelected(javafx.scene.input.MouseEvent event){
             UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
             displayUserAccountInfoForEdit(userAccount);
         }
