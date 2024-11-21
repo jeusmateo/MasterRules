@@ -39,6 +39,10 @@ public class WnUsersController implements Initializable {
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
 
+    // Componentes de la vista
+    // --------------------------------------------------------------------------------------------
+//Comentario para hacer push
+
     @FXML
     private Button btnEditUser;
     @FXML
@@ -330,6 +334,7 @@ public class WnUsersController implements Initializable {
 
         colUserID.setReorderable(false);
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
+
     }
 
         @Override
