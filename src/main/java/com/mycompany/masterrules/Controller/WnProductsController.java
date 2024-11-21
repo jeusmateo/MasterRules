@@ -215,8 +215,9 @@ private String selectedImagePath;
     private TextField txtProductType_tabEdit;
     @FXML
     private ImageView imgProduct_tabEdit;
+
     @FXML
-    private Button btnImporImage_tabEdit;
+    private Button btnImportImage_tabEdit;
     @FXML
     private TextField txtProductVipPrice_tabEdit;
     @FXML
@@ -402,7 +403,7 @@ private String selectedImagePath;
         }
     }
 
-    private void importProductImage() {
+    private void importProductImage(ImageView productImage) {
         FileChooser fileChooser = new FileChooser();
         // Establecer filtro para imágenes
         fileChooser.getExtensionFilters().add(
@@ -418,7 +419,7 @@ private String selectedImagePath;
                 selectedImagePath = relativePath;
 
                 // Establecer la imagen en el ImageView
-                imgProduct_tabCreate.setImage(new javafx.scene.image.Image(chosenImage.toURI().toString()));
+                productImage.setImage(new javafx.scene.image.Image(chosenImage.toURI().toString()));
             } else {
                 System.err.println("Error al copiar la imagen.");
             }
@@ -493,6 +494,9 @@ private String selectedImagePath;
                         txtProductPrice_tabCreate,
                         txtProductVIpPrice_tabCreate
                 );
+
+                selectedImagePath = null;
+                imgProduct_tabCreate.setImage(null);
                 updateProductTable();
             }else if (source.equals(btnDeleteProduct)) {
                 Product selectedProduct = tblFood.getSelectionModel().getSelectedItem();
@@ -510,17 +514,23 @@ private String selectedImagePath;
                     BigDecimal newVipPrice = new BigDecimal(txtProductVipPrice_tabEdit.getText());
 
 
-
                     selectedProduct.setName(newName);
                     selectedProduct.setType(newType);
                     selectedProduct.setPrice(newPrice);
                     selectedProduct.setVIPPrice(newVipPrice);
+                    selectedProduct.setProductImage(selectedImagePath);
+
+
 
                     cafeteriaMenu.editProduct(selectedProduct);
+
+
                     updateProductTable();
                 }
             } else if (source.equals(btnImportImage_tabCreate)) {
-                importProductImage();
+                importProductImage(imgProduct_tabCreate);
+            } else if (source.equals(btnImportImage_tabEdit)) {
+                importProductImage(imgProduct_tabEdit);
             }
         } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());

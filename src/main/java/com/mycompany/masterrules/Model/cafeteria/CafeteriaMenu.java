@@ -42,7 +42,7 @@ public class CafeteriaMenu {
 
     public void addProductToMenu(Product product) {
         if (!isProductOnMenu(product)) {
-            availableProducts.add(product);
+            //availableProducts.add(product);
             productDatabase.save(product);
         } else {
             throw new IllegalArgumentException("ERROR: El producto ya existe");
@@ -136,6 +136,7 @@ public class CafeteriaMenu {
     }
 
     public List<Product> getProducts() {
+        readFromDatabase();
         return availableProducts;
     }
 
