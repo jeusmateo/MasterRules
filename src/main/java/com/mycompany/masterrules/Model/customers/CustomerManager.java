@@ -16,9 +16,10 @@ public class CustomerManager {
 
     public void updateCustomerData(String id, String newName, String loyaltyPoints, boolean vipStatus, String storeCredit, String newPhoneNumber) {
         Customer customer = customerDatabase.findById(id);
-        assert customer != null;
-        if(customer == null){
+
+        if (customer == null) {
             System.out.println("No se encontró el cliente");
+            return;
         }
         customer.setCustomerName(newName);
         customer.getCustomerAccount().setLoyaltyPoints(Integer.parseInt(loyaltyPoints));
@@ -29,8 +30,7 @@ public class CustomerManager {
     }
 
 
-
-    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus){
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) {
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;
             try {
@@ -44,14 +44,10 @@ public class CustomerManager {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Puntos de fidelidad no válidos", e);
             }
-            Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
-            customerDatabase.save(customer);
-
         } else {
             throw new IllegalArgumentException("Parametros Incorrectos: Nombre o teléfono vacío");
         }
     }
-
 
     public List<Customer> getCustomers() {
         return customerDatabase.readAll();
