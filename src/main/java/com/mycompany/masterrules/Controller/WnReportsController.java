@@ -27,7 +27,7 @@ public class WnReportsController implements Initializable {
     //Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
-    private final CashRegister cashRegister = new CashRegister();
+    private CashRegister cashRegister;
     CashFlowReportManager cashFlowReportManager = new CashFlowReportManager();
 
     // Componentes de la vista
@@ -173,6 +173,7 @@ public class WnReportsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var posManager = POSManager.getInstance();
+        this.cashRegister = posManager.getCashRegister();
         System.out.println(posManager.getCurrentUser());
         initializeCashOutFlowTable();
         initializeCashInFlowTable();

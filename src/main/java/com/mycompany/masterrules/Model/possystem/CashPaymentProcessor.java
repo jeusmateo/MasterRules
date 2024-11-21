@@ -19,6 +19,8 @@ public class CashPaymentProcessor extends PaymentProcessor {
         paymentDetails.setCustomerCashAmount(this.customerCashAmount);
         paymentDetails.setChangeAmount(changeAmount);
         paymentDetails.setPaymentDescription(paymentDescription());
+        var posManager = POSManager.getInstance();
+        posManager.getCashRegister().setCurrentCashAmount(posManager.getCashRegister().getCurrentCashAmount().add(this.getTotalAmount()));
         return paymentDetails;
     }
 
