@@ -26,16 +26,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Controlador de la ventana de Usuarios
- *
- * @author Jimena Garcia
  */
 public class WnUsersController implements Initializable {
-
-    //Atributos de la clase
-    // --------------------------------------------------------------------------------------------
 
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
@@ -43,16 +39,12 @@ public class WnUsersController implements Initializable {
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
 
-    // Componentes de la vista
-    // --------------------------------------------------------------------------------------------
-
     @FXML
     private Button btnEditUser;
     @FXML
     private Button btnCreateUserAccount;
     @FXML
     private Button btnDeleteUserAccount;
-
 
     @FXML
     private TextField textEditUserName;
@@ -101,47 +93,47 @@ public class WnUsersController implements Initializable {
     private Tab tabUserPerm1;
 
     @FXML
-    private CheckBox chkMakeSalePerm; //Ya estufas
+    private CheckBox chkMakeSalePerm;
     @FXML
-    private CheckBox chkCancelSalePerm; //Ya estufas 2
+    private CheckBox chkCancelSalePerm;
     @FXML
-    private CheckBox chkReviewSaleHistoryPerm; //Ya estufas 3
+    private CheckBox chkReviewSaleHistoryPerm;
     @FXML
-    private CheckBox chkCreateProductPerrm; //Ya estufas 4
+    private CheckBox chkCreateProductPerrm;
     @FXML
-    private CheckBox chkEditProductPerm;//Ya estufas 5
+    private CheckBox chkEditProductPerm;
     @FXML
-    private CheckBox chkDeleteProductPerm;//Ya estufas 6
+    private CheckBox chkDeleteProductPerm;
     @FXML
-    private CheckBox chkCreateComboPerm;//Ya estufas7
+    private CheckBox chkCreateComboPerm;
     @FXML
     private CheckBox chkEditComboPerm;
     @FXML
     private CheckBox chkDeleteComboPerm;
     @FXML
-    private CheckBox chkEditStockPerm;//Ya estufas8
+    private CheckBox chkEditStockPerm;
     @FXML
-    private CheckBox chkEditStockMinMaxPerm;//Ya estufas9
+    private CheckBox chkEditStockMinMaxPerm;
     @FXML
-    private CheckBox chkCreateNewCustomerPerm;//Ya estufas10
+    private CheckBox chkCreateNewCustomerPerm;
     @FXML
-    private CheckBox chkEditCustomerPerm;//Ya estufas11
+    private CheckBox chkEditCustomerPerm;
     @FXML
-    private CheckBox chkDeleteCustomerPerm; //Ya estufas12
+    private CheckBox chkDeleteCustomerPerm;
     @FXML
-    private CheckBox chkEditStoreCreditPerm;//Ya estufas13
+    private CheckBox chkEditStoreCreditPerm;
     @FXML
-    private CheckBox chkReviewCashRegisterAduitReportPerm; //Ya estufas14
+    private CheckBox chkReviewCashRegisterAduitReportPerm;
     @FXML
-    private CheckBox chkCreateCashInReportPerm;//Ya estufas15
+    private CheckBox chkCreateCashInReportPerm;
     @FXML
-    private CheckBox chkCreateCashOutReportPerm; //Ya estufas 16
+    private CheckBox chkCreateCashOutReportPerm;
     @FXML
-    private CheckBox chkCreateUserPerm;//Ya estufas 17
+    private CheckBox chkCreateUserPerm;
     @FXML
-    private CheckBox chkEditUserPerm;//Ya estufas 18
+    private CheckBox chkEditUserPerm;
     @FXML
-    private CheckBox chkDeleteUserPerm;//Ya estufas 19
+    private CheckBox chkDeleteUserPerm;
     @FXML
     private CheckBox chkMakeSalePerm2;
     @FXML
@@ -193,9 +185,6 @@ public class WnUsersController implements Initializable {
     private PasswordField pswdFieldEditUserPasswordConfirm;
     @FXML
     private PasswordField pswdFieldEditUserAccount;
-
-    // Métodos de la clase
-    // --------------------------------------------------------------------------------------------
 
     private void setUserEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
@@ -266,12 +255,10 @@ public class WnUsersController implements Initializable {
             }
             if (evt.equals(btnDeleteUserAccount)) {
                 try {
-                    // Verifica que `userEdit` no sea nulo y obtén el ID del usuario
                     if (this.userEdit != null) {
-                        String userIdToDelete = this.userEdit.getUserName(); // Obtiene el ID del usuario
-                        userManager.removeUser(userIdToDelete); // Llama al método modificado que elimina por ID
-                        // Actualiza la tabla con los usuarios restantes
-                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
+                        String userIdToDelete = this.userEdit.getUserID();
+                        userManager.removeUser(userIdToDelete);
+                        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getUserAccounts());
                         tblUserAccount.setItems(userAccounts);
                         tblUserAccount.refresh();
                         clearFields(null, new PasswordField[]{pswdFieldEditUserPasswordConfirm});
@@ -289,7 +276,6 @@ public class WnUsersController implements Initializable {
         }
     }
 
-
     private void configCheckBox() {
         checkBoxPermissionMap.put(chkMakeSalePerm, Permission.MAKE_SALE);
         checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
@@ -297,7 +283,6 @@ public class WnUsersController implements Initializable {
         checkBoxPermissionMap.put(chkCreateProductPerrm, Permission.CREATE_PRODUCT);
         checkBoxPermissionMap.put(chkEditProductPerm, Permission.EDIT_PRODUCT);
         checkBoxPermissionMap.put(chkDeleteProductPerm, Permission.DELETE_PRODUCT);
-//        checkBoxPermissionMap.put(chkCreateComboPerm, Permission.CREATE_COMBO); //todo NO OLVIDAR QUITARLOS PORQUE USARA EL MISMO PERMISO PARA COMBO
         checkBoxPermissionMap.put(chkEditStockPerm, Permission.EDIT_STOCK);
         checkBoxPermissionMap.put(chkEditStockMinMaxPerm, Permission.EDIT_MAX_MIN);
         checkBoxPermissionMap.put(chkCreateNewCustomerPerm, Permission.CREATE_CUSTOMER);
@@ -335,29 +320,29 @@ public class WnUsersController implements Initializable {
 
     private void configColumns() {
         colUserID.setReorderable(false);
+        colUserID.setResizable(false);
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         colUserName.setReorderable(false);
+
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
 
         colUserID.setReorderable(false);
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
-        colUserName.setReorderable(false);
-        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configCheckBox();
         configCheckBox2();
         configColumns();
+        configTextFields();
 
         ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
         tblUserAccount.setItems(userAccounts);
-        // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserAccountInfoForEditButtonHolaJajajChepo(newValue));
-        // tblUserAccount.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setUserEdit(oldValue));
     }
 
     private void showUserAccountInfoForEditButtonHolaJajajChepo(UserAccount userAccount) {
@@ -410,4 +395,31 @@ public class WnUsersController implements Initializable {
         }
     }
 
+    private void configTextFields(){
+        txtEditUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+        txtFieldCreateUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+
+        if (evt.equals(txtFieldCreateUserCompleteName)) {
+            String character = event.getCharacter();
+            if (!character.matches("[\\p{L} ]") && !character.equals("\b")) { // Permite letras y espacios
+                event.consume();
+            } else if (character.equals("\r")) { // Si es Enter
+                txtFieldCreateUserName.requestFocus();
+                event.consume();
+            }
+        } else if (evt.equals(txtEditUserCompleteName)) {
+            String character = event.getCharacter();
+            if (!character.matches("[\\p{L} ]") && !character.equals("\b")) { // Permite letras y espacios
+                event.consume();
+            } else if (character.equals("\r")) { // Si es Enter
+                textEditUserName.requestFocus();
+                event.consume();
+            }
+        }
+    }
 }

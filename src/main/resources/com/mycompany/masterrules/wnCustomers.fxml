@@ -53,7 +53,7 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="lbCustomerName" prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                <Label fx:id="lbCustomerName" prefHeight="20.0" prefWidth="207.0" text="Nombre cliente">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -167,7 +167,7 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
+                                                <Label fx:id="lbEditCustomerName" prefHeight="17.0" prefWidth="109.0" text="Nombre cliente">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
@@ -206,12 +206,12 @@
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="txtEditCustomerStoreCredit" layoutX="143.0" onMouseClicked="#setScrWarningCredit" prefHeight="25.0" prefWidth="133.0" />
+                                                      <TextField fx:id="txtEditCustomerStoreCredit" layoutX="143.0" onMouseClicked="#setScrWarningCredit" prefHeight="25.0" prefWidth="133.0" promptText="\$0.00" />
                                                    </children>
                                                 </Group>
                                                 <Group GridPane.rowIndex="2">
                                                    <children>
-                                                      <TextField fx:id="txtEditCustomerLoyaltyPoints" layoutX="144.0" prefHeight="25.0" prefWidth="133.0" promptText="\$00.00" />
+                                                      <TextField fx:id="txtEditCustomerLoyaltyPoints" layoutX="144.0" prefHeight="25.0" prefWidth="133.0" />
                                                       <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
                                                          <font>
                                                             <Font size="15.0" />
@@ -226,7 +226,7 @@
                                                 </CheckBox>
                                                 <Group GridPane.rowIndex="3">
                                                    <children>
-                                                      <TextField fx:id="txtEditCustomerLoyaltyPoints1" layoutX="144.0" prefHeight="25.0" prefWidth="133.0" promptText="9991234567" />
+                                                      <TextField fx:id="txtEditCustomerPhoneNumber" layoutX="144.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                       <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Número de teléfono:">
                                                          <font>
                                                             <Font size="15.0" />
@@ -331,7 +331,7 @@
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="txtNewCustomerPhoneNumber" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" promptText="123456789" />
+                                                      <TextField fx:id="txtNewCustomerPhoneNumber" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                    </children>
                                                 </Group>
                                                 <Group GridPane.rowIndex="2">
