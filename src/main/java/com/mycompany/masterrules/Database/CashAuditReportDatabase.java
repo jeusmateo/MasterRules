@@ -4,7 +4,7 @@ import com.mycompany.masterrules.Model.finanzas.CashAuditReport;
 
 import java.util.List;
 
-public class AuditReportDatabase extends Database<Long, CashAuditReport> {
+public class CashAuditReportDatabase extends Database<Long, CashAuditReport> {
 
     @Override
     public CashAuditReport findById(Long id) {

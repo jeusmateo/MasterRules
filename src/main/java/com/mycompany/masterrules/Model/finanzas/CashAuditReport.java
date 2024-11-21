@@ -67,8 +67,6 @@ public class CashAuditReport {
         this.cashBalance = this.cashBalance.add(this.cashRevenue);
         this.cashBalance = this.cashBalance.add(this.cashFlowInTotalAmount);
         this.cashBalance = this.cashBalance.subtract(this.cashFlowOutTotalAmount);
-
-
     }
 
     public void configCashRegisterAuditReport() {

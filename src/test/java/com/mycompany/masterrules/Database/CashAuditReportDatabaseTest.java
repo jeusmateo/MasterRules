@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-class AuditReportDatabaseTest {
+class CashAuditReportDatabaseTest {
 
-    static AuditReportDatabase auditReportDatabase = new AuditReportDatabase();
+    static CashAuditReportDatabase cashAuditReportDatabase = new CashAuditReportDatabase();
 
     @Test
     void save() {
@@ -16,7 +16,7 @@ class AuditReportDatabaseTest {
 
         //configurando el reporte de auditoria
         cashRegisterAuditReport.calculateCashRevenue();
-        auditReportDatabase.save(cashRegisterAuditReport);
+        cashAuditReportDatabase.save(cashRegisterAuditReport);
     }
 
     @Test
