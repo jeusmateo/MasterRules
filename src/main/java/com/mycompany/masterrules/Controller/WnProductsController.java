@@ -377,7 +377,7 @@ private String selectedImagePath;
         colComboVipPrice.setReorderable(false);
     }
 
-    private String copyImageToResources(File chosenImage) {
+    public String copyImageToResources(File chosenImage) {
         try {
             // Ruta del directorio destino dentro de los recursos
             String resourcesPath = "src/main/resources/productImages";

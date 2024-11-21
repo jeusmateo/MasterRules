@@ -8,6 +8,8 @@ import java.util.Objects;
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
     @Column(length = 16)
     private String customerPhoneNumber;
     private String customerName;
@@ -18,6 +20,14 @@ public class Customer {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCustomerName() {
@@ -51,15 +61,14 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) &&
+        return Objects.equals(id, customer.id) &&
+                Objects.equals(customerPhoneNumber, customer.customerPhoneNumber) &&
                 Objects.equals(customerName, customer.customerName) &&
                 Objects.equals(customerAccount, customer.customerAccount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerPhoneNumber, customerName, customerAccount);
+        return Objects.hash(id, customerPhoneNumber, customerName, customerAccount);
     }
-
-
 }
