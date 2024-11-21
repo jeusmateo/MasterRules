@@ -390,7 +390,7 @@
                                                       <VBox layoutX="54.0" layoutY="372.0" prefHeight="90.0" prefWidth="174.0" spacing="15.0" AnchorPane.bottomAnchor="34.0">
                                                          <children>
                                                             <Button fx:id="btnContinueDefinedCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateComboFinalStep" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="CONTINUAR" />
-                                                            <Button fx:id="btnDeleteProduct_CreateCombo" mnemonicParsing="false" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="QUITAR PRODUCTO" />
+                                                            <Button fx:id="btnDeleteProduct_CreateCombo" mnemonicParsing="false" onAction="#removeProductToCombo" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="QUITAR PRODUCTO" />
                                                             <Button fx:id="btnBackToCreateCombo" mnemonicParsing="false" onMouseClicked="#btnBackToCreateCombo" prefHeight="35.0" prefWidth="179.0" styleClass="btn" text="ATRAS" />
                                                          </children>
                                                       </VBox>

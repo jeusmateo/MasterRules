@@ -6,6 +6,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -635,6 +636,17 @@ private String selectedImagePath;
         // Asignar la nueva lista observable a la tabla
         tblFood.setItems(observableProductList);
         tblFood.refresh();
+    }
+    @FXML
+    void removeProductToCombo(ActionEvent event) {
+        try {
+            Product selectedProduct = tblSelectedProductsForCombo.getSelectionModel().getSelectedItem();
+            selectedProductsForCombo.remove(selectedProduct);
+            updateProductTable();
+        } catch (Exception e) {
+            //todo algo debe tener yo creo
+        }
+
     }
 
     private void displayComboSelection() {
