@@ -29,7 +29,7 @@ public class Bill {
     private String paymentMethod;
     private LocalDateTime date; //TODO Remove this unused "date" private field.
 
-    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod,Order order) {
+    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod, Order order) {
         this.employeeName = employeeName;
         this.customerName = customer;
         this.amount = amount;
