@@ -32,9 +32,9 @@ public class CashAuditReport {
     private BigDecimal cashFlowInTotalAmount;
     private BigDecimal cashFlowOutTotalAmount;
 
-    public CashAuditReport(BigDecimal initialCashAmount) {
+    public CashAuditReport(BigDecimal initialCashAmount, LocalDateTime initialCutofDate) {
         this.initialCashAmount = initialCashAmount;
-        this.initialCutofDate = LocalDateTime.now();
+        this.initialCutofDate = initialCutofDate;
         this.bills = new ArrayList<>();
         this.cashFlowInReport = new ArrayList<>();
         this.cashFlowOutReport = new ArrayList<>();
@@ -67,8 +67,6 @@ public class CashAuditReport {
         this.cashBalance = this.cashBalance.add(this.cashRevenue);
         this.cashBalance = this.cashBalance.add(this.cashFlowInTotalAmount);
         this.cashBalance = this.cashBalance.subtract(this.cashFlowOutTotalAmount);
-
-
     }
 
     public void configCashRegisterAuditReport() {

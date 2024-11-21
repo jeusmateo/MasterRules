@@ -40,12 +40,6 @@ public class CashierSupervisor {
                 .toList();
     }
 
-    public void makeCashRegisterAuditReport(BigDecimal initialCashAmount){
-        CashAuditReport cashAuditReport = new CashAuditReport(initialCashAmount);
-        cashAuditReport.configCashRegisterAuditReport();
-        cashAuditReport.calculateCashRevenue();
-    }
-
     public void setCashFlows(ArrayList<CashFlow> cashFlows) {
         for (CashFlow cashFlow : cashFlows) {
             cashFlow.setFlowType(FlowType.CASH_OUT);
