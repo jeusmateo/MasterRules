@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Model.storage;
 
 import com.mycompany.masterrules.Database.ProductDatabase;
+import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 
 import java.util.HashMap;
@@ -20,7 +21,10 @@ public class CafeteriaStorage {
     private void readFromDatabase() {
         var productsFromDatabase = productDatabase.readAll();
         for (var product : productsFromDatabase) {
-            this.productStockTable.put(product, product.getStockInfo());
+            if(!(product instanceof Combo)){
+                this.productStockTable.put(product, product.getStockInfo());
+            }
+
         }
     }
 
