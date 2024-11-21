@@ -474,6 +474,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
         cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+
+                posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
                 System.out.println("Seleccionado: " + newValue.getCustomerName());
                 lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
             }
