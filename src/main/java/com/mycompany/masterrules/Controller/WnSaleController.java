@@ -398,7 +398,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 Parent paymentView = loader.load();
                 WnPaymentController paymentController = loader.getController();
                 try {
-                    paymentController.setOrderData(posManager.getCurrentOrder().calculateTotalAmount(), posManager.getCurrentOrder().getCustomer());
+                    paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
                 } catch (Exception e) {
                     System.out.println("Chepipi " + e.getMessage());
                 }
@@ -434,7 +434,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
                     tblOrder.setItems(productOrderList);
                     tblOrder.refresh();
-                    lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+                    lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
 
                 } else {
                     System.out.println("Pago cancelado.");
@@ -523,7 +523,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
             tblOrder.setItems(productOrderList);
             tblOrder.refresh();
-            lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+            lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
         }catch (Exception e){
             //todo algo debe tener yo creo
         }
@@ -537,7 +537,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
     }
 
     @Override
@@ -546,6 +546,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().calculateTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
     }
 }

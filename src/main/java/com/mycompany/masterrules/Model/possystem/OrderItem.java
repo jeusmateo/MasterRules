@@ -29,6 +29,10 @@ public class OrderItem {
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));
     }
 
+    public BigDecimal getTotalVipPrice(){
+        return product.getVIPPrice().multiply(new BigDecimal(quantity));
+    }
+
     public void addQuantity(){
         quantity++;
     }

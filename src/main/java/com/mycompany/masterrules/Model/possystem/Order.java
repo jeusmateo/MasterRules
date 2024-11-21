@@ -39,12 +39,12 @@ public class Order {
     }
     //public List<Combo> combos;
 
-    public BigDecimal calculateTotalAmount() {
+    public void calculateTotalAmount() {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
         for (OrderItem currentProduct : orderItemList) {
             calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
         }
-        return calculatedTotalAmount;
+        this.totalAmount= calculatedTotalAmount;
     }
     public void addProductToOrderItemList(OrderItem newOrderItem) {
 
@@ -88,6 +88,19 @@ public class Order {
         }
     }
 
+    public void calculateVipTotalAmount(){
+        if(customer.getCustomerAccount().isIsVIP()){
+                BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
+                for (OrderItem currentProduct : orderItemList) {
+                    calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalVipPrice());
+                }
+
+            totalAmount= calculatedTotalAmount;
+        }else{
+            calculateTotalAmount();
+        }
+
+    }
 
 
     public void setEmployeeName(String employeeName) {
@@ -141,7 +154,15 @@ public class Order {
     }
 
     public BigDecimal getTotalAmount() {
-        return calculateTotalAmount();
+        if(customer==null){
+            calculateTotalAmount();
+        }else{
+            calculateVipTotalAmount();
+        }
+
+
+
+        return this.totalAmount;
     }
 
     public void setTotalAmount(BigDecimal totalAmount) {
