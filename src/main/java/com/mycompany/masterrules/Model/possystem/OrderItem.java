@@ -11,7 +11,7 @@ public class OrderItem {
     private String itemName;
 
     private int quantity;
-    @OneToOne
+    @ManyToOne
     private Product product;
     private BigDecimal amount;
 

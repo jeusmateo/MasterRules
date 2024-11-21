@@ -267,7 +267,8 @@ public class WnCustomersController implements Initializable {
     }
 
     private void handleNewCustomerPhoneNumber(KeyEvent event) {
-        if (!event.getCharacter().matches("\\d") && !event.getCharacter().equals("\r")) {
+        String phoneNumber = txtNewCustomerPhoneNumber.getText();
+        if (!event.getCharacter().matches("\\d{0,10}") && !event.getCharacter().equals("\r") || phoneNumber.length() >= 10) {
             event.consume();
         } else if (event.getCharacter().equals("\r")) {
             txtNewCustomerLoyaltyPoints.requestFocus();
@@ -311,8 +312,7 @@ public class WnCustomersController implements Initializable {
 
     private void configTableColumns() {
         colCustomerId.setReorderable(false);
-
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
         colCustomerName.setReorderable(false);
         colCustomerName.setResizable(false);
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -356,7 +356,7 @@ public class WnCustomersController implements Initializable {
 
             lbEditCustomerName.setText(customer.getCustomerName());
             txtFieldEditCustomerName.setText(customer.getCustomerName());
-            //lbCustomerIdAuxiliar.setText(customer.getID());
+            //lbCustomerIdAuxiliar.setText("customer.getID()");
             txtEditCustomerLoyaltyPoints.setText(String.valueOf(customer.getCustomerAccount().getLoyaltyPoints()));
             txtEditCustomerStoreCredit.setText((String.valueOf(customer.getCustomerAccount().getStoreCredit())));
             chkEditCustomerVipStatus.setSelected(customer.getCustomerAccount().isIsVIP());
