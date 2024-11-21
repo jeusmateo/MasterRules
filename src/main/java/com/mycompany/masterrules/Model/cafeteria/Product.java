@@ -35,7 +35,7 @@ public class Product {
         this.type = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
-        this.stockInfo = new StockInfo();
+        this.stockInfo = null;
         this.id = String.valueOf(hashCode());
     }
 

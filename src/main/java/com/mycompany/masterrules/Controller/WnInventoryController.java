@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  */
 
 //TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?, 2. cafeteriaStorage se quita?
-public class WnInventoryController implements Initializable {
+public class  WnInventoryController implements Initializable {
 
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
@@ -193,7 +193,8 @@ public class WnInventoryController implements Initializable {
             selectedProduct.getStockInfo().setCurrentStock(newStock);
             selectedProduct.getStockInfo().setMinStock(newMinStock);
             selectedProduct.getStockInfo().setMaxStock(newMaxStock);
-
+            CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
+            cafeteriaMenu.editProduct(selectedProduct);
             // Refrescar la tabla para mostrar los nuevos valores
             tblInventory.refresh();
 
@@ -222,7 +223,7 @@ public class WnInventoryController implements Initializable {
 
     private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
         // Validar que el stock actual esté dentro del rango permitido
-        if (newStock < newMinStock || newStock > newMaxStock) {
+        if (0 > newMinStock || 0> newStock ||  0> newMaxStock) {
             System.out.println("El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo.");
             throw new IllegalArgumentException(
                     "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
