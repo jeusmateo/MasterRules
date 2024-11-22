@@ -1,23 +1,17 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Database.CustomerDatabase;
-
-import java.math.BigDecimal;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.retailsystem.OrderItem;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import com.mycompany.masterrules.Model.retailsystem.PaymentDetails;
-import com.mycompany.masterrules.Model.retailsystem.OrderItem;
+import com.mycompany.masterrules.Model.users.Permission;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +28,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 /**
@@ -227,8 +226,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String customerName = "";
         if (customerInfo != null) {
             customerName = customerInfo.getCustomerName();
-        }else{
-            customerName= inputClientName.getText();
+        } else {
+            customerName = inputClientName.getText();
         }
 
         RadioButton selectedDeliveryMethod = (RadioButton) group.getSelectedToggle();
@@ -248,6 +247,12 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     @FXML
     private void handlePayAction(MouseEvent event) {
+
+        var currentUser = posManager.getCurrentUser();
+        if (!currentUser.hasPermission(Permission.MAKE_SALE)) {
+            showAlert("Error", "No tienes permisos para realizar ventas");
+        }
+
         if (group.getSelectedToggle() != null && posManager.getCurrentOrder().getTotalAmount(customerSelected).compareTo(BigDecimal.ZERO) != 0) {
             try {
                 configOrderInfo();
@@ -257,7 +262,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 Parent paymentView = loader.load();
                 WnPaymentController paymentController = loader.getController();
 
-                paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(customerSelected),customerSelected);
+                paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(customerSelected), customerSelected);
 
                 // Crear una nueva escena y un nuevo Stage para la vista de pago
                 Scene paymentScene = new Scene(paymentView);
@@ -285,7 +290,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 PaymentDetails paymentResult = paymentController.getPaymentDetails();
                 if (paymentResult != null) {
                     System.out.println("Pago realizado:");
-                    posManager.sell(paymentResult,cboCustomers.getValue());
+                    posManager.sell(paymentResult, cboCustomers.getValue());
                     showMenuWindow();
                     updateOrderInfo();
                     inputClientName.setVisible(true);
@@ -294,9 +299,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 } else {
                     System.out.println("Pago cancelado.");
                 }
+            }catch (IllegalArgumentException e) {
+                showAlert("Error", e.getMessage());
             } catch (Exception e) {
 
-                System.err.println("Error al cargar la vista de pago: " + e.getStackTrace());
+                System.err.println("Error al cargar la vista de pago: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -436,5 +443,13 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         if (!event.getCharacter().matches("\\d")) {
             event.consume();
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

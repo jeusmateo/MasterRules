@@ -191,6 +191,8 @@ public class WnCustomersController implements Initializable {
             registerNewCustomer();
             clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
             chkNewCustomerVipStatus.setSelected(false);
+        }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error registrando un nuevo cliente", e);
             showAlert("Error", "Ocurrió un error al registrar el nuevo cliente. Por favor, inténtalo nuevamente.");
@@ -204,7 +206,9 @@ public class WnCustomersController implements Initializable {
             chkEditCustomerVipStatus.setSelected(false);
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
-            accessCodeRequested =false;
+            accessCodeRequested = false;
+        }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error actualizando la cuenta del cliente", e);
             showAlert("Error", "Ocurrió un problema al actualizar la cuenta del cliente. Por favor, inténtalo de nuevo.");
@@ -224,6 +228,8 @@ public class WnCustomersController implements Initializable {
             chkEditCustomerVipStatus.setSelected(false);
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
+        }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error eliminando cliente", e);
             showAlert("Error", "Ocurrió un problema al eliminar el cliente. Por favor, inténtalo nuevamente.");

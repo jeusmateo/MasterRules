@@ -43,7 +43,7 @@ public class CashRegisterAuditReportManager {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.RECORD_CASH_AUDIT_REPORT)) {
-            throw new IllegalStateException("User does not have permission to record cash audit reports");
+            throw new IllegalArgumentException("El usuario no tiene permisos para registrar el corte de caja");
         }
 
         var endOfDaySalesReport = new CashAuditReport(BigDecimal.ZERO, lastDate);
@@ -62,7 +62,7 @@ public class CashRegisterAuditReportManager {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.RECORD_CASH_AUDIT_REPORT)) {
-            throw new IllegalStateException("User does not have permission to record cash audit reports");
+            throw new IllegalArgumentException("El usuario no tiene permisos para registrar el corte de caja");
         }
 
         currentCashAuditReport.setFinalCutofDate(LocalDateTime.now());

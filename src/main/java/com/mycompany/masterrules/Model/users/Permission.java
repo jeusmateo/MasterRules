@@ -3,8 +3,8 @@ package com.mycompany.masterrules.Model.users;
 public enum Permission {
     //Sales
     MAKE_SALE,
-    CANCEL_SALE,
-    LOOK_SALES_HISTORY,
+//    CANCEL_SALE,
+//    LOOK_SALES_HISTORY,
 
     //Products
     CREATE_PRODUCT,
