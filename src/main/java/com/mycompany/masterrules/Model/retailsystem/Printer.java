@@ -48,23 +48,22 @@ public class Printer {
             System.out.println("  Precio : "+product.getTotalPrice());
 
         }
-        StringBuilder description = new StringBuilder("");
+        StringBuilder description = new StringBuilder();
         switch (bill.getPaymentMethod()) { //todo cambiar por el enum
-            case "Efectivo":
+            case PaymentMethod.CASH:
                 description.append("PARADO CON EFECTIVO: ");
                 description.append(String.valueOf(bill.getAmount()));
                 description.append("\n");
                 description.append("CAMBIO: $"+ bill.getChange());
                 description.append("\n");
                 break;
-
-            case "PaymentType.CARD":
+            case PaymentMethod.CARD:
                description.append("PARADO CON TARJETA: ");
                 description.append(String.valueOf(bill.getAmount()));
                 description.append("\n").append("REFERENCIA : "+bill.getPaymentReferenceNumber()).append("\n");
                 break;
 
-            case "PaymentType.STORE_CREDIT":
+            case PaymentMethod.STORE_CREDIT:
                 description.append("PARADO CON TARJETA: ");
                 description.append(String.valueOf(bill.getAmount()));
                 description.append("\n").append("USUARIO : "+bill.getOrder().getCustomerName()).append("\n");
