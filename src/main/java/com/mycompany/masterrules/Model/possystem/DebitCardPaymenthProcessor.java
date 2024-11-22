@@ -13,7 +13,7 @@ public class DebitCardPaymenthProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails = new PaymentDetails(PaymentType.CARD, this.getTotalAmount());
+        PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CARD, this.getTotalAmount());
 
         paymentDetails.setReference(CardTransactionReference);
         paymentDetails.setPaymentDescription(paymentDescription());

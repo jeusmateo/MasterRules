@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
-public enum PaymentType {
+public enum PaymentMethod {
     CASH,
     CARD,
     STORE_CREDIT

@@ -8,14 +8,14 @@ public class PaymentDetails {
 
     private Customer customer;
     private String paymentDescription;
-    private PaymentType paymentMethod;
+    private PaymentMethod paymentMethod;
     private BigDecimal totalAmount;
     private BigDecimal customerCashAmount;
     private String CardTransactionReference;
     private BigDecimal changeAmount;
 
 
-    public PaymentDetails(PaymentType metodoDePago, BigDecimal totalAmount){
+    public PaymentDetails(PaymentMethod metodoDePago, BigDecimal totalAmount){
         this.paymentMethod = metodoDePago;
         this.totalAmount = totalAmount;
     }
@@ -27,11 +27,11 @@ public class PaymentDetails {
     public void setPaymentDescription(String paymentDescription) {
         this.paymentDescription = paymentDescription;
     }
-    public PaymentType getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentType metodoDePago) {
+    public void setPaymentMethod(PaymentMethod metodoDePago) {
         this.paymentMethod = metodoDePago;
     }
 
