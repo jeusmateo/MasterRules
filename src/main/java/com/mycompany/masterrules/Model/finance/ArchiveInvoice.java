@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArchiveInvoice{
+public class ArchiveInvoice {
     private List<Bill> savedBills;
 
-    public ArchiveInvoice(){
+    public ArchiveInvoice() {
         BillDatabase customerDBManager = new BillDatabase();
         savedBills = new ArrayList<>();
 
@@ -24,11 +24,11 @@ public class ArchiveInvoice{
 
     public List<Bill> getAllBills() {
         BillDatabase customerDBManager = new BillDatabase();
-        savedBills =customerDBManager.readAll();
+        savedBills = customerDBManager.readAll();
         return savedBills;
     }
 
-    public List<Bill> getBillsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
+    public List<Bill> getBillsByDateRange(LocalDateTime beginDate, LocalDateTime endDate) {
         BillDatabase customerDBManager = new BillDatabase();
         var bills = customerDBManager.readAll();
 

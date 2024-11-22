@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class CafeteriaStorage {
 
-    private Map<Product, StockInfo> productStockTable;
     private final ProductDatabase productDatabase;
+    private Map<Product, StockInfo> productStockTable;
 
     public CafeteriaStorage() {
         this.productStockTable = new HashMap<>();
@@ -23,7 +23,7 @@ public class CafeteriaStorage {
     private void readFromDatabase() {
         var productsFromDatabase = productDatabase.readAll();
         for (var product : productsFromDatabase) {
-            if(!(product instanceof Combo)){
+            if (!(product instanceof Combo)) {
                 this.productStockTable.put(product, product.getStockInfo());
             }
 
@@ -55,6 +55,7 @@ public class CafeteriaStorage {
         productStockTable.remove(product);
         return productDatabase.update(product);
     }
+
     public boolean editCurrentStock(Product product, int newQuantity) {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
@@ -146,7 +147,7 @@ public class CafeteriaStorage {
     //The type of "products" should be an interface such as "Map" rather than the implementation "HashMap".
     public void setProductStockTable(Map<Product, StockInfo> productStockTable) {
         this.productStockTable = productStockTable;
-        for(Product product : productStockTable.keySet()){
+        for (Product product : productStockTable.keySet()) {
             productDatabase.update(product);
         }
     }

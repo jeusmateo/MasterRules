@@ -7,7 +7,7 @@ import java.util.List;
 public class MixPaymentProcessor extends PaymentProcessor {
     private final List<PaymentProcessor> paymentProcessors;
     //    private BigDecimal amountReceived;
-    private BigDecimal amountToPay;
+    private final BigDecimal amountToPay;
 
     public MixPaymentProcessor(BigDecimal totalAmountToPay) {
         super(totalAmountToPay);

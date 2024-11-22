@@ -3,7 +3,6 @@ package com.mycompany.masterrules.Model.cafeteria;
 import com.mycompany.masterrules.Model.storage.StockInfo;
 import jakarta.persistence.*;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -27,11 +26,11 @@ public class Product {
     /**
      * Constructor que inicializa un producto con su ID, nombre, tipo, precio y precio VIP.
      *
-     * @param productID El ID del producto.
+     * @param productID   El ID del producto.
      * @param productName El nombre del producto.
      * @param productType El tipo de producto.
-     * @param price El precio del producto.
-     * @param VIPPrice El precio VIP del producto.
+     * @param price       El precio del producto.
+     * @param VIPPrice    El precio VIP del producto.
      */
     public Product(String productID, String productName, String productType, BigDecimal price, BigDecimal VIPPrice) {
         this.id = productID;
@@ -46,16 +45,23 @@ public class Product {
      * Constructor que inicializa un producto con su nombre, precio y precio VIP.
      *
      * @param productName El nombre del producto.
-     * @param price El precio del producto.
-     * @param VIPPrice El precio VIP del producto.
+     * @param price       El precio del producto.
+     * @param VIPPrice    El precio VIP del producto.
      */
-    public Product(String productName,  BigDecimal price, BigDecimal VIPPrice) {
+    public Product(String productName, BigDecimal price, BigDecimal VIPPrice) {
         this.name = productName;
         this.type = "combo";
         this.price = price;
         this.VIPPrice = VIPPrice;
         this.stockInfo = null;
         this.id = String.valueOf(hashCode());
+    }
+
+    /**
+     * Constructor protegido sin argumentos requerido por JPA.
+     */
+    protected Product() {
+
     }
 
     /**
@@ -68,26 +74,26 @@ public class Product {
     }
 
     /**
-     * Reduce el stock del producto.
-     */
-    public void reduceStock(){
-        this.stockInfo.reduceStocck();
-    }
-
-    /**
-     * Aumenta el stock del producto.
-     */
-    public void addStock(){
-        this.stockInfo.increaseStock();
-    }
-
-    /**
      * Establece el ID del producto.
      *
      * @param productID El nuevo ID del producto.
      */
     public void setId(String productID) {
         this.id = productID;
+    }
+
+    /**
+     * Reduce el stock del producto.
+     */
+    public void reduceStock() {
+        this.stockInfo.reduceStocck();
+    }
+
+    /**
+     * Aumenta el stock del producto.
+     */
+    public void addStock() {
+        this.stockInfo.increaseStock();
     }
 
     /**
@@ -160,13 +166,6 @@ public class Product {
      */
     public void setVIPPrice(BigDecimal VIPPrice) {
         this.VIPPrice = VIPPrice;
-    }
-
-    /**
-     * Constructor protegido sin argumentos requerido por JPA.
-     */
-    protected Product() {
-
     }
 
     /**

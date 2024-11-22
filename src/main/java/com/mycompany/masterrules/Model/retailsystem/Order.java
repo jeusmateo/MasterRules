@@ -3,7 +3,9 @@ package com.mycompany.masterrules.Model.retailsystem;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embeddable;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +18,23 @@ import java.util.Objects;
 public class Order {
     @Column(name = "order_id")
     private long orderId;
+    @Column(name = "order_customer_name")
+    private String customerName;
+    // @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "order_employee_name")
+    private String employeeName;
+    private String tableNumber;
+    private String additionalComment;
+    private String deliveryMethod;
+    // private String customerName;
+    @Column(name = "order_date")
+    private LocalDateTime date;
+    private BigDecimal totalAmount;
+    @ElementCollection
+    private List<OrderItem> orderItemList;
+    public Order() {
+        orderItemList = new ArrayList<>();
+    }
 
     public String getCustomerName() {
         return customerName;
@@ -25,26 +44,6 @@ public class Order {
         this.customerName = customerName;
     }
 
-    @Column(name="order_customer_name")
-    private String customerName;
-    // @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name = "order_employee_name")
-    private String employeeName;
-    private String tableNumber;
-    private String additionalComment;
-    private String deliveryMethod;
-   // private String customerName;
-    @Column(name = "order_date")
-    private LocalDateTime date;
-    private BigDecimal totalAmount;
-    @ElementCollection
-    private List<OrderItem> orderItemList;
-
-
-    public Order() {
-        orderItemList = new ArrayList<>();
-    }
-
     public List<OrderItem> getPedidoComandaList() {
         return orderItemList;
     }
@@ -52,17 +51,18 @@ public class Order {
 
     public void calculateTotalAmount(Customer customer) {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-        if(customer!= null && customer.getCustomerAccount().isIsVIP()){
+        if (customer != null && customer.getCustomerAccount().isIsVIP()) {
             for (OrderItem currentProduct : orderItemList) {
                 calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalVipPrice());
             }
-        }else{
+        } else {
             for (OrderItem currentProduct : orderItemList) {
                 calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalPrice());
             }
         }
-        this.totalAmount= calculatedTotalAmount;
+        this.totalAmount = calculatedTotalAmount;
     }
+
     public void addProductToOrderItemList(OrderItem newOrderItem) {
         if (isProductInStock(newOrderItem)) {
             addOrUpdateOrderItem(newOrderItem);
@@ -191,7 +191,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + orderId +
-             //   ", customer=" + customer +
+                //   ", customer=" + customer +
                 ", employeeName='" + employeeName + '\'' +
                 ", numeroDeMesa='" + tableNumber + '\'' +
                 ", comment='" + additionalComment + '\'' +
@@ -208,7 +208,7 @@ public class Order {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return orderId == order.orderId &&
-            //    Objects.equals(customer, order.customer) &&
+                //    Objects.equals(customer, order.customer) &&
                 Objects.equals(employeeName, order.employeeName) &&
                 Objects.equals(tableNumber, order.tableNumber) &&
                 Objects.equals(additionalComment, order.additionalComment) &&

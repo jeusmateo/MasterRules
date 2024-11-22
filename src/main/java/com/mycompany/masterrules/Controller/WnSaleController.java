@@ -43,13 +43,13 @@ import java.util.ResourceBundle;
  */
 public class WnSaleController implements Initializable, ProductSelectionListener {
 
-    // ATRIBUTOS
+    // Atributos
     //-------------------------------------------------------------------------------------------
     private Customer customerSelected;
     private POSManager posManager = POSManager.getInstance();
     private ToggleGroup group; // TODO: RENOMBRAR ESTO PERO NO PUDE PQ NO SUPE QUE RAYOS ERA
 
-    //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
+    //Componentes de la vista
     //-------------------------------------------------------------------------------------------
 
     @FXML
@@ -126,7 +126,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private TableColumn<OrderItem, String> colPrice; // este si es un String?
 
 
-    // MÉTODOS
+    // Metodos
     //-------------------------------------------------------------------------------------------
 
 
@@ -300,7 +300,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 } else {
                     showAlert("ATENCION","PAGO CANCELADO");
                 }
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 showAlert("Error", e.getMessage());
             } catch (Exception e) {
 
@@ -414,7 +414,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         tblOrder.refresh();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
-
 
 
     @Override

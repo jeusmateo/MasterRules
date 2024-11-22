@@ -1,18 +1,17 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
-
-import java.io.File;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+
+import java.io.File;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Controlador para la tarjeta de producto en la interfaz de usuario.
@@ -46,6 +45,7 @@ public class ItemCardProductController implements Initializable {
 
     /**
      * Establece los datos del producto en la tarjeta.
+     *
      * @param productData Los datos del producto.
      */
     public void setProductDataToCard(Product productData) {
@@ -82,8 +82,9 @@ public class ItemCardProductController implements Initializable {
 
     /**
      * Inicializa los componentes de la vista.
+     *
      * @param url La URL de la vista.
-     * @param rb El recurso de la vista.
+     * @param rb  El recurso de la vista.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -102,6 +103,7 @@ public class ItemCardProductController implements Initializable {
 
     /**
      * Maneja el evento de acción en la tarjeta de producto.
+     *
      * @param event El evento de acción.
      */
     @FXML
@@ -117,6 +119,7 @@ public class ItemCardProductController implements Initializable {
 
     /**
      * Establece el listener de selección de producto.
+     *
      * @param listener El listener de selección de producto.
      */
     public void setSelectionListener(ProductSelectionListener listener) {

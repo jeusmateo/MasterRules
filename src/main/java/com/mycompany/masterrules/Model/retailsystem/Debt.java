@@ -27,6 +27,12 @@ public class Debt {
         this.date = LocalDate.now();
     }
 
+    /**
+     * Constructor por defecto para JPA
+     */
+    protected Debt() {
+    }
+
     public Order getOrder() {
         return order;
     }
@@ -57,12 +63,6 @@ public class Debt {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * Constructor por defecto para JPA
-     * */
-    protected Debt() {
     }
 
     @Override
