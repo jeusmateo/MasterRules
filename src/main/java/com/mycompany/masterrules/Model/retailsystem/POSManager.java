@@ -147,6 +147,7 @@ public class POSManager {
 
         archiveInvoice.archiveBill(bill);
         printer.imprimirOrder(currentOrder);
+
         currentOrder = new Order();
 
         printer.imprimirBill(bill);
