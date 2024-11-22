@@ -93,7 +93,7 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TextField txtFieldEditCustomerName;
     @FXML
-    private TextField txtFieldAccesCode;
+    private TextField txtFieldAccessCode;
 
     @FXML
     private TableView<Customer> tblCustomers;
@@ -148,7 +148,7 @@ public class WnCustomersController implements Initializable {
         //Si logica de el codgio es verdadero el access se vuelve verdadero;
        String password = String.valueOf(pswFieldAccesCode.getText());
        if(selectedCustomer!= null){
-           if(selectedCustomer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(password)){
+           if(selectedCustomer.getCustomerAccount().getAccessCode().equals(password)){
                accessCodeRequested = true;
            }
        }
@@ -235,7 +235,9 @@ public class WnCustomersController implements Initializable {
         String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
         String newCustomerLoyaltyPoints = txtNewCustomerLoyaltyPoints.getText();
         boolean newCustomerVipStatus = chkNewCustomerVipStatus.isSelected();
-        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus);
+        String acessCode=txtFieldAccessCode.getText();
+
+        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus,acessCode);
     }
 
     private void editCustomerInfo() {

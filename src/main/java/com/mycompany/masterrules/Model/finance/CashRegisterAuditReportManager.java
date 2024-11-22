@@ -16,6 +16,8 @@ public class CashRegisterAuditReportManager {
     private final CashAuditReportDatabase cashAuditReportDatabase;
     private LocalDateTime lastDate;
 
+
+
     public CashRegisterAuditReportManager() {
         cashAuditReportDatabase = new CashAuditReportDatabase();
         cashAuditReports = new ArrayList<>();

@@ -18,10 +18,10 @@ public class CustomerAccount {
     private int loyaltyPoints;
     private BigDecimal storeCredit;
     private boolean isVIP;
+    private String accessCode;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Debt> totalDebt;
-    @Embedded
-    private LoyaltyCard loyaltyCard;
+
 
     /**
      * Constructor por defecto que inicializa una cuenta de cliente con valores predeterminados.
@@ -31,7 +31,7 @@ public class CustomerAccount {
         this.storeCredit = BigDecimal.ZERO;
         this.isVIP = false;
         this.totalDebt = new ArrayList<>();
-        this.loyaltyCard = new LoyaltyCard(); // Debemos generar su ID
+        this.accessCode = ""; // Debemos generar su ID
     }
 
     /**
@@ -40,12 +40,12 @@ public class CustomerAccount {
      * @param loyaltyPoints Los puntos de lealtad del cliente.
      * @param vipStatus El estado VIP del cliente.
      */
-    public CustomerAccount(int loyaltyPoints, boolean vipStatus) {
+    public CustomerAccount(int loyaltyPoints, boolean vipStatus, String accessCode) {
         this.loyaltyPoints = loyaltyPoints;
         this.storeCredit = BigDecimal.ZERO;
         this.isVIP = vipStatus;
         this.totalDebt = new ArrayList<>();
-        this.loyaltyCard = new LoyaltyCard(); // Debemos generar su ID
+        this.accessCode = accessCode; // Debemos generar su ID
     }
 
     /**
@@ -73,24 +73,10 @@ public class CustomerAccount {
         this.isVIP = isVIP;
     }
 
-    /**
-     * Obtiene la tarjeta de lealtad del cliente.
-     *
-     * @return La tarjeta de lealtad del cliente.
-     */
-    public LoyaltyCard getLoyaltyCard() {
-        return loyaltyCard;
-    }
 
-    /**
-     * Establece la tarjeta de lealtad del cliente.
-     *
-     * @param loyaltyCard La nueva tarjeta de lealtad del cliente.
-     */
-    public void setLoyaltyCard(LoyaltyCard loyaltyCard) {
-        this.loyaltyCard = loyaltyCard;
+    public String getAccessCode() {
+        return accessCode;
     }
-
     /**
      * Obtiene la lista de deudas del cliente.
      *
@@ -166,35 +152,20 @@ public class CustomerAccount {
                 ", storeCredit=" + storeCredit +
                 ", isVIP=" + isVIP +
                 ", totalDebt=" + totalDebt +
-                ", loyaltyCard=" + loyaltyCard +
                 '}';
     }
 
-    /**
-     * Compara esta cuenta de cliente con otro objeto para verificar si son iguales.
-     *
-     * @param o El objeto a comparar.
-     * @return true si los objetos son iguales, false en caso contrario.
-     */
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerAccount that = (CustomerAccount) o;
-        return loyaltyPoints == that.loyaltyPoints &&
-                isVIP == that.isVIP &&
-                storeCredit.compareTo(that.storeCredit) == 0 &&
-                Objects.equals(totalDebt, that.totalDebt) &&
-                Objects.equals(loyaltyCard, that.loyaltyCard);
+        return loyaltyPoints == that.loyaltyPoints && isVIP == that.isVIP && Objects.equals(storeCredit, that.storeCredit) && Objects.equals(accessCode, that.accessCode) && Objects.equals(totalDebt, that.totalDebt);
     }
 
-    /**
-     * Calcula el código hash para esta cuenta de cliente.
-     *
-     * @return El código hash.
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(loyaltyPoints, storeCredit, isVIP, totalDebt, loyaltyCard);
+        return Objects.hash(loyaltyPoints, storeCredit, isVIP, accessCode, totalDebt);
     }
 }

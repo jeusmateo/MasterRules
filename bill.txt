@@ -133,12 +133,12 @@ CAMBIO: $0
 
 =====================================
 =====================================
-Imprimiendo factura :13
+Imprimiendo factura :1
 Nombre del empleado: admin
 Nombre del cliente: Publico General
 Productos:
-Nombre: 1   Cantidad: 2  Precio: 2
+Nombre: 4   Cantidad: 1  Precio: 2
 PAGADO CON EFECTIVO: 2
-CAMBIO: $9
+CAMBIO: $10
 
 =====================================

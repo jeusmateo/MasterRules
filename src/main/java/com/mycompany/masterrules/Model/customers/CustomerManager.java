@@ -60,14 +60,14 @@ public class CustomerManager {
      * @param vipStatus El estado VIP del cliente.
      * @throws IllegalArgumentException Si los puntos de lealtad no son válidos o si el nombre o teléfono están vacíos.
      */
-    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) {
+
+    public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus, String accessCode) {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.CREATE_CUSTOMER)) {
             System.out.println("No tienes permiso para crear clientes");
             return;
         }
-
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;
             try {
@@ -76,7 +76,7 @@ public class CustomerManager {
                 } else {
                     loyaltyPointsInt = 0;
                 }
-                Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus);
+                Customer customer = new Customer(name, phone, loyaltyPointsInt, vipStatus, accessCode);
                 customerDatabase.save(customer);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Puntos de fidelidad no válidos", e);
