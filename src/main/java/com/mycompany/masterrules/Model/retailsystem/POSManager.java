@@ -130,7 +130,7 @@ public class POSManager {
 
     public void sell(PaymentDetails paymentMethod, Customer customer) {
 
-        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
+        if (!currentUser.hasPermission(Permission.MAKE_SALE)) {
             throw new IllegalArgumentException("ERROR: No tienes permisos para realizar ventas");
         }
 
