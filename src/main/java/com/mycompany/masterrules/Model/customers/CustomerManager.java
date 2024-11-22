@@ -1,6 +1,8 @@
 package com.mycompany.masterrules.Model.customers;
 
 import com.mycompany.masterrules.Database.CustomerDatabase;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.users.Permission;
 
 import java.util.List;
 
@@ -16,6 +18,13 @@ public class CustomerManager {
      * @param id El ID del cliente a eliminar.
      */
     public void removeCustomer(String id) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.DELETE_CUSTOMER)) {
+            System.out.println("No tienes permiso para eliminar clientes");
+            return;
+        }
+
         Customer customer = customerDatabase.findById(id);
         customerDatabase.delete(customer);
     }
@@ -26,6 +35,13 @@ public class CustomerManager {
      * @param customer El cliente con los datos actualizados.
      */
     public void updateCustomerData(Customer customer) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_CUSTOMER)) {
+            System.out.println("No tienes permiso para editar clientes");
+            return;
+        }
+
         var foundUser = customerDatabase.findById(customer.getId());
 
         if (foundUser == null) {
@@ -45,6 +61,13 @@ public class CustomerManager {
      * @throws IllegalArgumentException Si los puntos de lealtad no son válidos o si el nombre o teléfono están vacíos.
      */
     public void registerCustomer(String name, String phone, String loyaltyPoints, boolean vipStatus) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.CREATE_CUSTOMER)) {
+            System.out.println("No tienes permiso para crear clientes");
+            return;
+        }
+
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;
             try {

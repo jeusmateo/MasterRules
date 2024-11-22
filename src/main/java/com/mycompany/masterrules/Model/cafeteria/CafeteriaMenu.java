@@ -2,6 +2,8 @@ package com.mycompany.masterrules.Model.cafeteria;
 
 import com.mycompany.masterrules.Database.ComboDatabase;
 import com.mycompany.masterrules.Database.ProductDatabase;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.users.Permission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +57,16 @@ public class CafeteriaMenu {
 
     /**
      * Añade un producto al menú.
+     *
      * @param product El producto a añadir.
      * @throws IllegalArgumentException si el producto ya existe en el menú.
      */
     public void addProductToMenu(Product product) {
 
-
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.CREATE_PRODUCT)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para crear productos");
+        }
 
         if (isProductNotOnMenu(product)) {
             productDatabase.save(product);
@@ -71,10 +77,17 @@ public class CafeteriaMenu {
 
     /**
      * Elimina un producto del menú.
+     *
      * @param product El producto a eliminar.
      * @throws IllegalArgumentException si el producto no existe en el menú.
      */
     public void removeProductOnMenu(Product product) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.DELETE_PRODUCT)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para eliminar productos");
+        }
+
         if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("El producto con ID " + product + " no existe en el menú.");
         }
@@ -84,6 +97,7 @@ public class CafeteriaMenu {
 
     /**
      * Verifica si un producto está en el menú.
+     *
      * @param product El producto a verificar.
      * @return true si el producto está en el menú, false en caso contrario.
      */
@@ -93,10 +107,17 @@ public class CafeteriaMenu {
 
     /**
      * Edita un producto en el menú.
+     *
      * @param product El producto a editar.
      * @throws IllegalArgumentException si el producto no existe en el menú.
      */
     public void editProduct(Product product) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_PRODUCT)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para editar productos");
+        }
+
         if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("ERROR: El producto no existe");
         }
@@ -107,6 +128,7 @@ public class CafeteriaMenu {
 
     /**
      * Obtiene una lista de productos por tipo.
+     *
      * @param productType El tipo de producto a buscar.
      * @return Una lista de productos del tipo especificado.
      * @throws IllegalArgumentException si no existen productos del tipo especificado en el menú.
@@ -125,10 +147,17 @@ public class CafeteriaMenu {
 
     /**
      * Añade un combo al menú.
+     *
      * @param combo El combo a añadir.
      * @throws IllegalArgumentException si el combo ya existe en el menú.
      */
     public void addComboToMenu(Combo combo) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.CREATE_COMBO)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para crear combos");
+        }
+
         if (isComboNotOnMenu(combo)) {
             comboDatabase.save(combo);
         } else {
@@ -138,6 +167,7 @@ public class CafeteriaMenu {
 
     /**
      * Verifica si un combo está en el menú.
+     *
      * @param combo El combo a verificar.
      * @return true si el combo está en el menú, false en caso contrario.
      */
@@ -147,23 +177,38 @@ public class CafeteriaMenu {
 
     /**
      * Elimina un combo del menú.
+     *
      * @param combo El combo a eliminar.
      * @throws IllegalArgumentException si el combo no existe en el menú.
      */
     public void removeComboOnMenu(Combo combo) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.DELETE_COMBO)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para eliminar combos");
+        }
+
         comboDatabase.delete(combo);
     }
 
     /**
      * Edita un combo en el menú.
+     *
      * @param combo El combo a editar.
      */
     public void editCombo(Combo combo) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_COMBO)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para editar combos");
+        }
+
         comboDatabase.update(combo);
     }
 
     /**
      * Obtiene la lista de productos disponibles en el menú.
+     *
      * @return Una lista de productos disponibles.
      */
     public List<Product> getProducts() {
@@ -173,6 +218,7 @@ public class CafeteriaMenu {
 
     /**
      * Establece la lista de productos en el menú.
+     *
      * @param products La lista de productos a establecer.
      */
     public void setProducts(List<Product> products) {
@@ -183,6 +229,7 @@ public class CafeteriaMenu {
 
     /**
      * Obtiene la lista de combos disponibles en el menú.
+     *
      * @return Una lista de combos disponibles.
      */
     public List<Combo> getCombos() {

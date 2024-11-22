@@ -27,7 +27,7 @@ public enum Permission {
     EDIT_MAX_MIN,
 
     //Reports
-    LOOK_SALE_REPORT,
+//    LOOK_SALE_REPORT,
     // REVIEW_INVENTORY_REPORT, // Pendiente para implementar
     RECORD_CASHIN,
     RECORD_CASHOUT,

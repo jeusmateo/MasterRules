@@ -1,6 +1,8 @@
 package com.mycompany.masterrules.Model.finance;
 
 import com.mycompany.masterrules.Database.CashAuditReportDatabase;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.users.Permission;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -36,6 +38,12 @@ public class CashRegisterAuditReportManager {
     }
 
     public CashAuditReport generateEndOfDaySalesReport() { //todo nombre mal puesto
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.RECORD_CASH_AUDIT_REPORT)) {
+            throw new IllegalStateException("User does not have permission to record cash audit reports");
+        }
+
         var endOfDaySalesReport = new CashAuditReport(BigDecimal.ZERO, lastDate);
         endOfDaySalesReport.configCashRegisterAuditReport();
         endOfDaySalesReport.calculateCashFlowInTotalAmount();
@@ -49,6 +57,12 @@ public class CashRegisterAuditReportManager {
     }
 
     public void endCashRegisterAuditReport(CashAuditReport currentCashAuditReport) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.RECORD_CASH_AUDIT_REPORT)) {
+            throw new IllegalStateException("User does not have permission to record cash audit reports");
+        }
+
         currentCashAuditReport.setFinalCutofDate(LocalDateTime.now());
         cashAuditReports.add(currentCashAuditReport);
     }
