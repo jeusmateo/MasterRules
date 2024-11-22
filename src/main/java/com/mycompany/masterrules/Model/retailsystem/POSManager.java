@@ -12,6 +12,7 @@ import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 
 /**
  * @author David Torres
@@ -84,14 +85,10 @@ public class POSManager {
     }
 
 
-    public void cancelOrder() {
 
-        while (!currentOrder.getPedidoComandaList().isEmpty())
-            for (OrderItem item : currentOrder.getPedidoComandaList()) {
-                currentOrder.removeProductFromOrderItemList(item);
-            }
-        currentOrder = new Order();
-    }
+
+
+
     private Bill createBill(PaymentDetails data) {
         Bill newBill;
         if (data.getCustomer() == null) {
