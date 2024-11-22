@@ -131,4 +131,37 @@ public class Printer {
     }
 
 
+        System.out.println("Productos: ");
+        for (OrderItem product : bill.getOrder().getPedidoComandaList()) {
+            System.out.print("Nombre : "+product.getProductName());
+            System.out.print("   Cantidad: "+product.getQuantity());
+            System.out.println("  Precio : "+product.getTotalPrice());
+
+        }
+        StringBuilder description = new StringBuilder();
+        switch (bill.getPaymentMethod()) { //todo cambiar por el enum
+            case PaymentMethod.CASH:
+                description.append("PARADO CON EFECTIVO: ");
+                description.append(String.valueOf(bill.getAmount()));
+                description.append("\n");
+                description.append("CAMBIO: $"+ bill.getChange());
+                description.append("\n");
+                break;
+            case PaymentMethod.CARD:
+               description.append("PARADO CON TARJETA: ");
+                description.append(String.valueOf(bill.getAmount()));
+                description.append("\n").append("REFERENCIA : "+bill.getPaymentReferenceNumber()).append("\n");
+                break;
+
+            case PaymentMethod.STORE_CREDIT:
+                description.append("PARADO CON TARJETA: ");
+                description.append(String.valueOf(bill.getAmount()));
+                description.append("\n").append("USUARIO : "+bill.getOrder().getCustomerName()).append("\n");
+                break;
+
+            default:
+                break;
+        }
+
+
 }

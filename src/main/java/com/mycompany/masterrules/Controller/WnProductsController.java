@@ -6,6 +6,7 @@ import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,9 +34,11 @@ import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable, ProductSelectionListener {
 
-private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
-private ObservableList<Product> selectedProductsForCombo;
-private String selectedImagePath;
+    private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
+    private ObservableList<Product> selectedProductsForCombo;
+    private FilteredList<Product> filteredProductList;
+    private FilteredList<Combo> filteredComboList;
+    private String selectedImagePath;
 
     @FXML
     private TableView<Product> tblSelectedProductsForCombo;
@@ -133,7 +136,6 @@ private String selectedImagePath;
     private TextField textFieldName111;
 
 
-
     @FXML
     private TextField txtFieldNameCombo;
 
@@ -216,7 +218,9 @@ private String selectedImagePath;
     private Button btnImportImage_tabCreate;
 
     @FXML
-    private TextField txtSearchProduct_tabCreate;
+    private TextField txtSearchProduct;
+    @FXML
+    private TextField txtSearchCombo;
     @FXML
     private Button btnSearch_tabCreate;
     @FXML
@@ -266,9 +270,6 @@ private String selectedImagePath;
     private Button btnRemoveProductOnCombo;
 
 
-
-
-
     public void displayMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
@@ -316,7 +317,7 @@ private String selectedImagePath;
     }
 
     @FXML
-    void setBtnBackToScrMenuCard(){
+    void setBtnBackToScrMenuCard() {
         scrCreateComboFinalStep.setVisible(false);
         scrComboTable.setVisible(false);
         scrMenuCards.setVisible(true);
@@ -324,7 +325,7 @@ private String selectedImagePath;
     }
 
     @FXML
-    private void btnBackToCreateCombo(){
+    private void btnBackToCreateCombo() {
         scrCreateComboStart.setVisible(true);
         scrComboTable.setVisible(true);
 
@@ -332,7 +333,7 @@ private String selectedImagePath;
         scrCreateDefinedCombo.setVisible(false);
         tabEditCombo.setDisable(false);
 
-        clearTextFields(txtFieldNameCombo,txtFieldPriceCombo,txtFieldVIPPriceCombo);
+        clearTextFields(txtFieldNameCombo, txtFieldPriceCombo, txtFieldVIPPriceCombo);
     }
 
     @FXML
@@ -480,6 +481,7 @@ private String selectedImagePath;
         // Añadir listener para la selección de productos en la tabla
         tblFood.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displayProductSelection());
         tblCombos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> displayComboSelection());
+        setupSearchFilters();
     }
 
     @FXML
@@ -496,7 +498,7 @@ private String selectedImagePath;
                 importProductImage(imgProduct_tabCreate);
             } else if (source.equals(btnImportImage_tabEdit)) {
                 importProductImage(imgProduct_tabEdit);
-            }else if (source.equals(btnImportComboImageEdit)) {
+            } else if (source.equals(btnImportComboImageEdit)) {
                 importProductImage(imgComboEdit);
             } else if (source.equals(btnImportComboImageCreate)) {
                 importProductImage(imgComboCreate);
@@ -642,6 +644,7 @@ private String selectedImagePath;
         tblFood.setItems(observableProductList);
         tblFood.refresh();
     }
+
     @FXML
     void removeProductToCombo(ActionEvent event) {
         try {
@@ -652,6 +655,39 @@ private String selectedImagePath;
             //todo algo debe tener yo creo
         }
 
+    }
+
+    private void setupSearchFilters() {
+        // Productos
+        ObservableList<Product> productList = FXCollections.observableArrayList(cafeteriaMenu.getProducts());
+        filteredProductList = new FilteredList<>(productList, p -> true);
+
+        txtSearchProduct.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredProductList.setPredicate(product -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Mostrar todos si no hay filtro
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return product.getName().toLowerCase().contains(lowerCaseFilter) ||
+                        product.getType().toLowerCase().contains(lowerCaseFilter);
+            });
+            tblFood.setItems(filteredProductList);
+        });
+
+        // Combos
+        ObservableList<Combo> comboList = FXCollections.observableArrayList(cafeteriaMenu.getCombos());
+        filteredComboList = new FilteredList<>(comboList, c -> true);
+
+        txtSearchCombo.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredComboList.setPredicate(combo -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Mostrar todos si no hay filtro
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return combo.getName().toLowerCase().contains(lowerCaseFilter);
+            });
+            tblCombos.setItems(filteredComboList);
+        });
     }
 
     private void displayComboSelection() {

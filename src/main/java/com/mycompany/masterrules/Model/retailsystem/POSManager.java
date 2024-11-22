@@ -96,9 +96,11 @@ public class POSManager {
     private Bill createBill(PaymentDetails data) {
         Bill newBill;
         if (data.getCustomer() == null) {
+
             newBill = new Bill(this.currentUser.getFullEmployeeName(), currentOrder.getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
+
         } else {
-            newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod(), currentOrder);
         }
         setPaymentMethod(data, newBill);
         return newBill;
@@ -109,16 +111,16 @@ public class POSManager {
             case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
                 newBill.setPaidInCash(data.getCustomerCashAmount());
-                newBill.setPaymentMethod("PaymentType.CAS");
+//                newBill.setPaymentMethod(PaymentMethod.CASH);
                 break;
             case PaymentMethod.CARD:
                 newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setPaymentReferenceNumber(data.getReference());
-                newBill.setPaymentMethod("PaymentType.CARD");
+//                newBill.setPaymentMethod(PaymentMethod.CARD);
                 break;
             case PaymentMethod.STORE_CREDIT:
                 newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
-                newBill.setPaymentMethod("PaymentType.STORE_CREDIT");
+//                newBill.setPaymentMethod(PaymentMethod.STORE_CREDIT);
                 break;
             default:
                 break;
