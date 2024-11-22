@@ -43,7 +43,7 @@ public class CustomerManager {
         var foundUser = customerDatabase.findById(customer.getId());
 
         if (foundUser == null) {
-            System.out.println("No se encontró el cliente");
+
             return;
         }
         customerDatabase.update(customer);

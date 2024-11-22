@@ -192,7 +192,6 @@ public class WnInventoryController implements Initializable {
     private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
         // Validar que el stock actual esté dentro del rango permitido
         if (0 > newMinStock || 0 > newStock || 0 > newMaxStock) {
-            System.out.println("El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo.");
             throw new IllegalArgumentException(
                     "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
             );

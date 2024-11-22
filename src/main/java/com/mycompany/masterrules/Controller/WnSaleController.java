@@ -5,6 +5,7 @@ import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.customers.CustomerManager;
 import com.mycompany.masterrules.Model.retailsystem.OrderItem;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import com.mycompany.masterrules.Model.retailsystem.PaymentDetails;
@@ -289,7 +290,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
                 PaymentDetails paymentResult = paymentController.getPaymentDetails();
                 if (paymentResult != null) {
-                    System.out.println("Pago realizado:");
+
                     posManager.sell(paymentResult, cboCustomers.getValue());
                     showMenuWindow();
                     updateOrderInfo();
@@ -297,17 +298,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     cboCustomers.setValue(null);
 
                 } else {
-                    System.out.println("Pago cancelado.");
+                    showAlert("ATENCION","PAGO CANCELADO");
                 }
             } catch (IllegalArgumentException e) {
                 showAlert("Error", e.getMessage());
             } catch (Exception e) {
 
-                System.err.println("Error al cargar la vista de pago: " + e.getMessage());
                 e.printStackTrace();
             }
         }
     }
+
+
 
     private void initializeTableOrder() {
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
@@ -341,7 +343,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         paraMesaMetodo.setToggleGroup(group);
 
         posManager = POSManager.getInstance();
-        System.out.println(posManager.getCurrentUser());
 
         initializeTableOrder();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
@@ -350,10 +351,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             if (newValue != null) {
                 customerSelected = cboCustomers.getValue();
                 Customer test = cboCustomers.getValue();
-                System.out.println("Soy " + test.getCustomerName() + " y soy ");
-                if (test.getCustomerAccount().isIsVIP()) {
-                    System.out.println("vip");
-                }
                 updateOrderInfo();
                 if (customerSelected != null && customerSelected.getCustomerAccount().isIsVIP()) {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
@@ -369,9 +366,9 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         displayProductMenuCards();
         displayComboMenuCards();
-        CustomerDatabase cdbm = new CustomerDatabase();
-        List<Customer> chepo = cdbm.readAll();
-        ObservableList<Customer> customersList = FXCollections.observableArrayList(chepo);
+        CustomerManager manager = new CustomerManager();
+        List<Customer> clientes = manager.getCustomers();
+        ObservableList<Customer> customersList = FXCollections.observableArrayList(clientes);
         cboCustomers.setItems(customersList);
 
         cboCustomers.setCellFactory(lv -> new ListCell<>() {
@@ -407,7 +404,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             posManager.removeProductFromOrder(selectedProduct);
             updateOrderInfo();
         } catch (Exception e) {
-            //todo algo debe tener yo creo
         }
 
     }
