@@ -420,6 +420,7 @@ private void handleDeleteUserAccount() {
         checkBoxPermissionMap.put(chkCreateUserPerm, Permission.CREATE_USER);
         checkBoxPermissionMap.put(chkEditUserPerm, Permission.EDIT_USER);
         checkBoxPermissionMap.put(chkDeleteUserPerm, Permission.DELETE_USER);
+
     }
 
     private void configCheckBoxToEdit() {
