@@ -18,14 +18,32 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la ventana de reporte de auditoría de caja registradora.
+ * Gestiona la visualización y generación de reportes de flujo de caja.
+ */
 public class WnCashRegisterAuditReportController implements Initializable {
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Gestor de reportes de auditoría de caja registradora.
+     */
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
+
+    /**
+     * Lista observable de reportes de flujo de entrada de efectivo.
+     */
     private ObservableList<CashFlow> cashInFlowReports = FXCollections.observableArrayList();
+
+    /**
+     * Lista observable de reportes de flujo de salida de efectivo.
+     */
     private ObservableList<CashFlow> cashOutFlowReports = FXCollections.observableArrayList();
 
+    /**
+     * Reporte de auditoría de caja actual.
+     */
     private CashAuditReport currentCashAuditReport;
 
     // Componentes de la vista
@@ -35,8 +53,6 @@ public class WnCashRegisterAuditReportController implements Initializable {
     private Label labelHourFrom;
     @FXML
     private Label labelHourTo;
-    @FXML
-    private Label lbTotalSale;
 
     @FXML
     private Text txtCashFunds;
@@ -71,23 +87,19 @@ public class WnCashRegisterAuditReportController implements Initializable {
     private TableColumn<CashFlow, String> colAmountCashOutFlow;
 
     @FXML
-    private Button btnCloseCashRegisterAuditReport;
-    @FXML
     private Button btnRealizarCorteDeVenta;
-
     @FXML
     private Button btnConfirmPart1;
-
 
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
 
-//    public void setCashRegisterAuditReportManager(CashRegisterAuditReportManager cashRegisterAuditReportManager) {
-//        this.cashRegisterAuditReportManager = cashRegisterAuditReportManager;
-//        tblCashInFlowReport.setItems(cashInFlowReports);
-//        tblCashOutFlowReport.setItems(cashOutFlowReports);
-//    }
-
+    /**
+     * Inicializa el controlador después de que su raíz haya sido procesada.
+     *
+     * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupCashInFlowTable();
@@ -95,27 +107,37 @@ public class WnCashRegisterAuditReportController implements Initializable {
         initializeTableData();
     }
 
-    // Métod0 para configurar la tabla de Cash In Flow
+    /**
+     * Configura la tabla de flujo de entrada de efectivo.
+     */
     private void setupCashInFlowTable() {
         colReasonCashInFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashInFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashInFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
     }
 
-    // Métod0 para configurar la tabla de Cash Out Flow
+    /**
+     * Configura la tabla de flujo de salida de efectivo.
+     */
     private void setupCashOutFlowTable() {
         colReasonCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("reason"));
         colDateTimeCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmountCashOutFlow.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
     }
 
-    // Métod0 para inicializar los datos de las tablas
+    /**
+     * Inicializa los datos de las tablas de flujo de efectivo.
+     */
     private void initializeTableData() {
         tblCashInFlowReport.setItems(cashInFlowReports);
         tblCashOutFlowReport.setItems(cashOutFlowReports);
     }
 
-    // Métod0 para actualizar los datos de las tablas
+    /**
+     * Maneja las acciones de los botones en la interfaz de usuario.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
@@ -151,6 +173,12 @@ public class WnCashRegisterAuditReportController implements Initializable {
         }
     }
 
+    /**
+     * Muestra una alerta con un mensaje de error.
+     *
+     * @param title El título de la alerta.
+     * @param message El mensaje de la alerta.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -158,7 +186,4 @@ public class WnCashRegisterAuditReportController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
-
-
