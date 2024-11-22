@@ -14,8 +14,7 @@ public class CashRegisterAuditReportManager {
 
     private final List<CashAuditReport> cashAuditReports;
     private final CashAuditReportDatabase cashAuditReportDatabase;
-    private LocalDateTime lastDate;
-
+    private final LocalDateTime lastDate;
 
 
     public CashRegisterAuditReportManager() {

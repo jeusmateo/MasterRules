@@ -4,11 +4,10 @@
  */
 package com.mycompany.masterrules.Model.storage;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.Objects;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
-import javafx.beans.binding.BooleanExpression;
 @Embeddable
 public class StockInfo {
     private int currentStock;
@@ -21,18 +20,18 @@ public class StockInfo {
         this.maxStock = 0;
     }
 
-    public void reduceStocck(){
-        currentStock--;
-    }
-
-    public void increaseStock(){
-        currentStock++;
-    }
-
     public StockInfo(int currentStock, int minStock, int maxStock) {
         this.currentStock = currentStock;
         this.minStock = minStock;
         this.maxStock = maxStock;
+    }
+
+    public void reduceStocck() {
+        currentStock--;
+    }
+
+    public void increaseStock() {
+        currentStock++;
     }
 
     public int getCurrentStock() {

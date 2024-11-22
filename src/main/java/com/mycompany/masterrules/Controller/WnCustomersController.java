@@ -2,14 +2,6 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerManager;
-
-import java.math.BigDecimal;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,21 +12,69 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class WnCustomersController implements Initializable {
 
-    //Atributos de la clase
-    //--------------------------------------------------------------------------------------------
-
-    private CustomerManager customerManager;
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
+    private final CustomerManager customerManager;
     private boolean accessCodeRequested;
 
-    //Componentes de la vista
-    //--------------------------------------------------------------------------------------------
-
-    //Campos de texto
     @FXML
     private PasswordField pswFieldAccesCode;
+
+    @FXML
+    private Button btnAcceptCredit;
+    @FXML
+    private Button btnSaveNewCustomer;
+    @FXML
+    private Button btnUpdateCustomerAccount;
+    @FXML
+    private Button btnDeleteCustomer;
+
+    @FXML
+    private AnchorPane guardarClienteNvo;
+    @FXML
+    private AnchorPane scrCustomerAccount;
+    @FXML
+    private AnchorPane scrEditCustomerAccount;
+    @FXML
+    private AnchorPane scrMainViewCustomerAccount;
+    @FXML
+    private AnchorPane scrViewInfoCustomer;
+    @FXML
+    private AnchorPane scrWarningCredit;
+
+    @FXML
+    private Tab tabNewCustomer;
+    @FXML
+    private Tab tabCustomerAccount;
+
+    @FXML
+    private Label lbEditCustomerName;
+    @FXML
+    private Label lbLoyaltyPoints;
+    @FXML
+    private Label lbCustomerName;
+    @FXML
+    private Label lbDebt;
+    @FXML
+    private Label lbStoreCredit;
+    @FXML
+    private Label lbCustomerPhoneNumber;
+
+    @FXML
+    private CheckBox chkCustomerVip;
+    @FXML
+    private CheckBox chkNewCustomerVipStatus;
+    @FXML
+    private CheckBox chkEditCustomerVipStatus;
+
     @FXML
     private TextField txtNewCustomerName;
     @FXML
@@ -54,59 +94,6 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TextField txtFieldAccessCode;
 
-    //Botones
-    @FXML
-    private Button btnAcceptCredit;
-    @FXML
-    private Button btnSaveNewCustomer;
-    @FXML
-    private Button btnUpdateCustomerAccount;
-    @FXML
-    private Button btnDeleteCustomer;
-
-    //Paneles
-    @FXML
-    private AnchorPane guardarClienteNvo;
-    @FXML
-    private AnchorPane scrCustomerAccount;
-    @FXML
-    private AnchorPane scrEditCustomerAccount;
-    @FXML
-    private AnchorPane scrMainViewCustomerAccount;
-    @FXML
-    private AnchorPane scrViewInfoCustomer;
-    @FXML
-    private AnchorPane scrWarningCredit;
-
-    //Tablas y columnas
-    @FXML
-    private Tab tabNewCustomer;
-    @FXML
-    private Tab tabCustomerAccount;
-
-    //Etiquetas
-    @FXML
-    private Label lbEditCustomerName;
-    @FXML
-    private Label lbLoyaltyPoints;
-    @FXML
-    private Label lbCustomerName;
-    @FXML
-    private Label lbDebt;
-    @FXML
-    private Label lbStoreCredit;
-    @FXML
-    private Label lbCustomerPhoneNumber;
-
-    //CheckBox
-    @FXML
-    private CheckBox chkCustomerVip;
-    @FXML
-    private CheckBox chkNewCustomerVipStatus;
-    @FXML
-    private CheckBox chkEditCustomerVipStatus;
-
-    //Tablas y columnas
     @FXML
     private TableView<Customer> tblCustomers;
     @FXML
@@ -114,8 +101,9 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TableColumn<Customer, String> colCustomerName;
 
-    //Métodos de la clase
-    //--------------------------------------------------------------------------------------------
+    public WnCustomersController(CustomerManager cm) {
+        this.customerManager = cm;
+    }
 
     @FXML
     private void searchCustomers() {
@@ -134,38 +122,42 @@ public class WnCustomersController implements Initializable {
 
     }
 
+
+    //--------------------------------------------- QUE FUNCIONE LA SOLICITUD DEL CODIGO DE ACCESO SE HAGA A LO LOCO
+
     @FXML
     public void setBtnBackEditCustomerAccount() {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
         clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
-        accessCodeRequested =false;
+        accessCodeRequested = false;
     }
 
     @FXML
     private void setScrWarningCredit() {
-        if(!accessCodeRequested){
+        if (!accessCodeRequested) {
             scrWarningCredit.setVisible(true);
             pswFieldAccesCode.requestFocus();
         }
 
     }
 
+    //--------------------------------------------- EN DISPLAY SELECTED HAY UN accessCodeRequested = false;
+
     @FXML
     private void setButtonAcceptCredit() {
 
         Customer selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
         //Si logica de el codgio es verdadero el access se vuelve verdadero;
-       String password = String.valueOf(pswFieldAccesCode.getText());
-       if(selectedCustomer!= null){
-           if(selectedCustomer.getCustomerAccount().getAccessCode().equals(password)){
-               accessCodeRequested = true;
-           }
-       }
+        String password = String.valueOf(pswFieldAccesCode.getText());
+        if (selectedCustomer != null) {
+            if (selectedCustomer.getCustomerAccount().getAccessCode().equals(password)) {
+                accessCodeRequested = true;
+            }
+        }
 
         scrWarningCredit.setVisible(false);
     }
-
 
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
@@ -200,7 +192,7 @@ public class WnCustomersController implements Initializable {
             registerNewCustomer();
             clearTextFields(txtNewCustomerName, txtNewCustomerPhoneNumber, txtNewCustomerLoyaltyPoints);
             chkNewCustomerVipStatus.setSelected(false);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error registrando un nuevo cliente", e);
@@ -216,7 +208,7 @@ public class WnCustomersController implements Initializable {
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
             accessCodeRequested = false;
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error actualizando la cuenta del cliente", e);
@@ -237,7 +229,7 @@ public class WnCustomersController implements Initializable {
             chkEditCustomerVipStatus.setSelected(false);
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error eliminando cliente", e);
@@ -250,9 +242,9 @@ public class WnCustomersController implements Initializable {
         String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
         String newCustomerLoyaltyPoints = txtNewCustomerLoyaltyPoints.getText();
         boolean newCustomerVipStatus = chkNewCustomerVipStatus.isSelected();
-        String acessCode=txtFieldAccessCode.getText();
+        String acessCode = txtFieldAccessCode.getText();
 
-        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus,acessCode);
+        customerManager.registerCustomer(newCustomerName, newCustomerPhoneNumber, newCustomerLoyaltyPoints, newCustomerVipStatus, acessCode);
     }
 
     private void editCustomerInfo() {
@@ -262,9 +254,9 @@ public class WnCustomersController implements Initializable {
             return;
         }
         String newCustomerName = txtFieldEditCustomerName.getText();
-        String newCustomerStoreCreditQuantity=String.valueOf(selectedCustomer.getCustomerAccount().getStoreCredit());;
-        if(accessCodeRequested=true){
-             newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        String newCustomerStoreCreditQuantity = String.valueOf(selectedCustomer.getCustomerAccount().getStoreCredit());
+        if (accessCodeRequested = true) {
+            newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
         }
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
@@ -378,7 +370,7 @@ public class WnCustomersController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        accessCodeRequested =false;
+        accessCodeRequested = false;
         configTextFields();
         configTableColumns();
         configTableSelection();
@@ -408,10 +400,6 @@ public class WnCustomersController implements Initializable {
     private void displaySelected(javafx.scene.input.MouseEvent event) {
         Customer selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
         showCustomerDetailsForUpdate(selectedCustomer);
-        accessCodeRequested =false;
-    }
-
-    public WnCustomersController(CustomerManager cm) {
-        this.customerManager = cm;
+        accessCodeRequested = false;
     }
 }

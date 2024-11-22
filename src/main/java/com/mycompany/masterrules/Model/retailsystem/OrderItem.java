@@ -1,7 +1,8 @@
 package com.mycompany.masterrules.Model.retailsystem;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.ManyToOne;
 
 import java.math.BigDecimal;
 
@@ -17,10 +18,6 @@ public class OrderItem {
     protected OrderItem() {
     }
 
-    public void removeQuantity() {
-        this.quantity--;
-    }
-
     public OrderItem(Product product) {
         this.itemName = product.getName();
         this.quantity = 1;
@@ -28,25 +25,29 @@ public class OrderItem {
         this.amount = product.getPrice().multiply(new BigDecimal(quantity));
     }
 
-    public BigDecimal getTotalVipPrice(){
+    public void removeQuantity() {
+        this.quantity--;
+    }
+
+    public BigDecimal getTotalVipPrice() {
         return product.getVIPPrice().multiply(new BigDecimal(quantity));
     }
 
 
-
-    public void addQuantity(){
+    public void addQuantity() {
         quantity++;
     }
+
     public int getQuantity() {
         return quantity;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public void setProduct(Product product) {

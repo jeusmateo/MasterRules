@@ -1,20 +1,18 @@
-
 package com.mycompany.masterrules.Controller;
-
-import java.math.BigDecimal;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.retailsystem.*;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
 
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 /**
@@ -251,7 +249,7 @@ public class WnPaymentController implements Initializable {
         alert.showAndWait();
     }
 
-    public PaymentDetails getPaymentDetails(){
+    public PaymentDetails getPaymentDetails() {
         return resultPayementDetails;
     }
 

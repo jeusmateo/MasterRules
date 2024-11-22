@@ -12,12 +12,12 @@ public class UserPermissions {
     //falta probar si funciona con la gran cantidad de permisos que puse
     //probablemente Permissions se ponga en un archivo separado de esta clase?
 
-    public UserPermissions() {
-        grantedPermissions= EnumSet.noneOf(Permission.class);
-    }
-
-
     private EnumSet<Permission> grantedPermissions;//lo cambie por GrantedPermissions
+
+
+    public UserPermissions() {
+        grantedPermissions = EnumSet.noneOf(Permission.class);
+    }
 
     //The type of "grantedPermissions" should be an interface such as "Set" rather than the implementation "EnumSet".
     public UserPermissions(EnumSet<Permission> grantedPermissions) {
@@ -25,16 +25,16 @@ public class UserPermissions {
     }
 
 
-    public void givePermission(Permission permission){
+    public void givePermission(Permission permission) {
         grantedPermissions.add(permission);
     }
 
 
-    public void removePermission(Permission permission){
+    public void removePermission(Permission permission) {
         grantedPermissions.remove(permission);
     }
 
-    public boolean isEnabled(Permission permission){
+    public boolean isEnabled(Permission permission) {
         return (grantedPermissions.contains(permission));
     }
 

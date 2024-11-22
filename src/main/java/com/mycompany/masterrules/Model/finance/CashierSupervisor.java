@@ -26,26 +26,26 @@ public class CashierSupervisor {
         return cashOutFlows;
     }
 
-    public List<CashFlow> getCashOutFlowsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
-        readAllFromDatabase();
-        return cashOutFlows.stream()
-                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
-                .toList();
-    }
-
-    public List<CashFlow> getCashInFlowsByDateRange(LocalDateTime beginDate, LocalDateTime endDate){
-        readAllFromDatabase();
-        return cashInFlows.stream()
-                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
-                .toList();
-    }
-
     public void setCashFlows(ArrayList<CashFlow> cashFlows) {
         for (CashFlow cashFlow : cashFlows) {
             cashFlow.setFlowType(FlowType.CASH_OUT);
             cashFlowDatabase.save(cashFlow);
         }
         this.cashOutFlows = cashFlows;
+    }
+
+    public List<CashFlow> getCashOutFlowsByDateRange(LocalDateTime beginDate, LocalDateTime endDate) {
+        readAllFromDatabase();
+        return cashOutFlows.stream()
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
+                .toList();
+    }
+
+    public List<CashFlow> getCashInFlowsByDateRange(LocalDateTime beginDate, LocalDateTime endDate) {
+        readAllFromDatabase();
+        return cashInFlows.stream()
+                .filter(cashFlowReport -> cashFlowReport.getDate().isAfter(beginDate) && cashFlowReport.getDate().isBefore(endDate))
+                .toList();
     }
 
     public void addNewCashOutFlow(CashFlow cashOutFlowReport) {
@@ -83,7 +83,7 @@ public class CashierSupervisor {
             if (currentCashFlow.getFlowType() == FlowType.CASH_OUT && !this.cashOutFlows.contains(currentCashFlow)) {
                 this.cashOutFlows.add(currentCashFlow);
             } else {
-                if(!this.cashOutFlows.contains(currentCashFlow)) {
+                if (!this.cashOutFlows.contains(currentCashFlow)) {
                     this.cashInFlows.add(currentCashFlow);
                 }
 

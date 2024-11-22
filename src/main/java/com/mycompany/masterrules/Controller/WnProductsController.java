@@ -29,85 +29,57 @@ import java.util.ResourceBundle;
 
 public class WnProductsController implements Initializable, ProductSelectionListener {
 
-    private CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
+    @FXML
+    protected ScrollPane scrollPaneMenuCreatorCombo;
+    private final CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
     private ObservableList<Product> selectedProductsForCombo;
     private FilteredList<Product> filteredProductList;
     private FilteredList<Combo> filteredComboList;
     private String selectedImagePath;
-
     @FXML
     private TableView<Product> tblSelectedProductsForCombo;
     @FXML
     private Button btnAddCategoryCustomeCombo;
-
     @FXML
     private Button btnContinueCustomCombo;
-
     @FXML
     private Button btnContinueDefinedCombo;
-
-
     @FXML
     private Button btnCustomCombo;
-
     @FXML
     private Button btnDefinedCombo;
-
     @FXML
     private Button btnImportComboImageCreate;
-
-
     @FXML
     private Button btnConfirmCombo;
-
     @FXML
     private Button btnProcessCreateCombo;
-
     @FXML
     private Button buttonIconSearchFood;
-
     @FXML
     private Button btnCreateCombo;
-
     @FXML
     private Button btnEditCombo;
-
     @FXML
     private Button btnImportComboImageEdit;
-
     @FXML
     private Button btnDeleteCombo;
-
-
     @FXML
     private FlowPane flowPaneMenuCards = new FlowPane();
-
-
     @FXML
     private ImageView imgComboCreate;
-
     @FXML
     private ImageView imgComboEdit;
-
     @FXML
     private AnchorPane scrCreateComboFinalStep;
-
     @FXML
     private AnchorPane scrCreateComboStart;
-
     @FXML
     private AnchorPane scrCreateComboStepTwo;
-
     @FXML
     private AnchorPane scrCreateCustomeCombo;
-
     @FXML
     private AnchorPane scrCreateDefinedCombo;
-
-    @FXML
-    protected ScrollPane scrollPaneMenuCreatorCombo;
-
-
     //Tabla para combos
     @FXML
     private Tab tabCombos;
@@ -254,7 +226,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
     private AnchorPane scrMenuCards;
 
 
-    private CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
+    private final CafeteriaStorage cafeteriaStorage = new CafeteriaStorage();
     @FXML
     private TableColumn<Product, String> colProductSelectedName;
     @FXML
@@ -503,10 +475,9 @@ public class WnProductsController implements Initializable, ProductSelectionList
             } else if (source.equals(btnEditCombo)) {
                 handleEditCombo();
             }
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
         }
     }

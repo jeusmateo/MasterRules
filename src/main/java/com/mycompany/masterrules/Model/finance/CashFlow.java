@@ -24,6 +24,10 @@ public class CashFlow {
         this.cashFlowDate = LocalDateTime.now();
     }
 
+    protected CashFlow() {
+
+    }
+
     public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return cashFlowDate.format(formatter);
@@ -37,16 +41,13 @@ public class CashFlow {
         return reasonForReport;
     }
 
-
     public void setReason(String reason) {
         this.reasonForReport = reason;
     }
 
-
     public BigDecimal getCashAmount() {
         return cashAmount;
     }
-
 
     public void setCashAmount(BigDecimal cashAmount) {
         this.cashAmount = cashAmount;
@@ -66,10 +67,6 @@ public class CashFlow {
 
     public void setFlowType(FlowType flowType) {
         this.flowType = flowType;
-    }
-
-    protected CashFlow() {
-
     }
 }
 

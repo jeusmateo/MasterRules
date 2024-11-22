@@ -1,9 +1,5 @@
 package com.mycompany.masterrules.Controller;
 
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import com.mycompany.masterrules.Model.users.UserManager;
 import javafx.event.ActionEvent;
@@ -17,6 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class WnLoginController implements Initializable {
 
@@ -109,7 +109,7 @@ public class WnLoginController implements Initializable {
         var obtainedPassword = txtFieldPassword.getText();
         try {
             var foundUser = userManager.getUser(obtainedUsername, obtainedPassword);
-            if(foundUser.isPresent()){
+            if (foundUser.isPresent()) {
                 POSManager.getInstance().setCurrentUser(foundUser.get());
                 loadStage(event);
             }

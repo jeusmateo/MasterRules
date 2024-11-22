@@ -2,12 +2,6 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.finance.CashAuditReport;
 import com.mycompany.masterrules.Model.finance.CashFlow;
-
-import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import javafx.collections.FXCollections;
@@ -20,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class WnCashRegisterAuditReportController implements Initializable {
@@ -127,32 +123,33 @@ public class WnCashRegisterAuditReportController implements Initializable {
         try {
             if (evt.equals(btnConfirmPart1)) {
                 currentCashAuditReport = cashRegisterAuditReportManager.generateEndOfDaySalesReport();
-                txtTSCash.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashRevenue()));
-                txtTSCreditCard.setText(String.valueOf("+ $ " + currentCashAuditReport.getCardRevenue()));
-                txtTSStoreCard.setText(String.valueOf("+ $ " + currentCashAuditReport.getStoreCreditRevenue()));
-                txtCashFunds.setText(String.valueOf("+  " + currentCashAuditReport.getCashBalance()));
-                txtCashSales.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashRevenue()));
-                txtInFlowCash.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashFlowInTotalAmount()));
-                txtOutFlowCash.setText(String.valueOf("- $ " + currentCashAuditReport.getCashFlowOutTotalAmount()));
+                txtTSCash.setText("+ $ " + currentCashAuditReport.getCashRevenue());
+                txtTSCreditCard.setText("+ $ " + currentCashAuditReport.getCardRevenue());
+                txtTSStoreCard.setText("+ $ " + currentCashAuditReport.getStoreCreditRevenue());
+                txtCashFunds.setText("+  " + currentCashAuditReport.getCashBalance());
+                txtCashSales.setText("+ $ " + currentCashAuditReport.getCashRevenue());
+                txtInFlowCash.setText("+ $ " + currentCashAuditReport.getCashFlowInTotalAmount());
+                txtOutFlowCash.setText("- $ " + currentCashAuditReport.getCashFlowOutTotalAmount());
 
                 cashInFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
                 cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
                 tblCashInFlowReport.setItems(cashInFlowReports);
                 tblCashOutFlowReport.setItems(cashOutFlowReports);
                 tblCashInFlowReport.refresh();
-                tblCashOutFlowReport.refresh();DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a");
-            String formattedDate = (currentCashAuditReport.getInitialCutofDate()).format(formatter);
-            labelHourFrom.setText(formattedDate);
-            LocalDateTime local= LocalDateTime.now();
-            String formattedDateFinal = local.format(formatter);
-            labelHourTo.setText(formattedDateFinal);
+                tblCashOutFlowReport.refresh();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a");
+                String formattedDate = (currentCashAuditReport.getInitialCutofDate()).format(formatter);
+                labelHourFrom.setText(formattedDate);
+                LocalDateTime local = LocalDateTime.now();
+                String formattedDateFinal = local.format(formatter);
+                labelHourTo.setText(formattedDateFinal);
             } else if (evt.equals(btnRealizarCorteDeVenta)) {
                 cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
             }
         } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         }
-            }
+    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

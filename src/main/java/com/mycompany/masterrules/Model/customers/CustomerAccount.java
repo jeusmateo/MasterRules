@@ -1,7 +1,10 @@
 package com.mycompany.masterrules.Model.customers;
 
 import com.mycompany.masterrules.Model.retailsystem.Debt;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class CustomerAccount {
      * Constructor que inicializa una cuenta de cliente con puntos de lealtad y estado VIP especificados.
      *
      * @param loyaltyPoints Los puntos de lealtad del cliente.
-     * @param vipStatus El estado VIP del cliente.
+     * @param vipStatus     El estado VIP del cliente.
      */
     public CustomerAccount(int loyaltyPoints, boolean vipStatus, String accessCode) {
         this.loyaltyPoints = loyaltyPoints;
@@ -77,6 +80,7 @@ public class CustomerAccount {
     public String getAccessCode() {
         return accessCode;
     }
+
     /**
      * Obtiene la lista de deudas del cliente.
      *

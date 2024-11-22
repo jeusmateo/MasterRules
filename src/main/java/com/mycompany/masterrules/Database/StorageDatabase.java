@@ -6,7 +6,7 @@ import com.mycompany.masterrules.Model.storage.StockInfo;
 import java.util.List;
 
 
-public class StorageDatabase extends Database<Product,StockInfo> {
+public class StorageDatabase extends Database<Product, StockInfo> {
 
     @Override
     public StockInfo findById(Product id) {

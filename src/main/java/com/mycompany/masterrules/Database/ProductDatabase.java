@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * Clase que administra la base de datos de productos.
- *
  */
 public final class ProductDatabase extends Database<String, Product> {
 
@@ -23,14 +22,13 @@ public final class ProductDatabase extends Database<String, Product> {
             Product product = session.get(Product.class, id);
             session.getTransaction().commit();
             return product;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
             System.err.println("Error al buscar el producto: " + ex);
             return null;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -50,13 +48,12 @@ public final class ProductDatabase extends Database<String, Product> {
             }
             System.err.println("Error al buscar el producto: " + ex);
             return List.of();
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
 
-    public List<Product> findByType(String type){
+    public List<Product> findByType(String type) {
         Session session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
@@ -71,8 +68,7 @@ public final class ProductDatabase extends Database<String, Product> {
             }
             System.err.println("Error al buscar el producto: " + ex);
             return List.of();
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -94,8 +90,7 @@ public final class ProductDatabase extends Database<String, Product> {
             }
             System.err.println("Error al leer los productos: " + ex);
             return List.of();
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
