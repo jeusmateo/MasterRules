@@ -24,7 +24,7 @@ public class WnCustomersController implements Initializable {
 
     private CustomerManager customerManager;
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
-
+    private boolean accessCodeRequested;
 
     @FXML
     private PasswordField pswFieldAccesCode;
@@ -92,6 +92,8 @@ public class WnCustomersController implements Initializable {
     private TextField txtEditCustomerPhoneNumber;
     @FXML
     private TextField txtFieldEditCustomerName;
+    @FXML
+    private TextField txtFieldAccesCode;
 
     @FXML
     private TableView<Customer> tblCustomers;
@@ -114,6 +116,7 @@ public class WnCustomersController implements Initializable {
     public void setBtnEditAccount() {
         scrEditCustomerAccount.setVisible(true);
         scrMainViewCustomerAccount.setVisible(false);
+
     }
 
     @FXML
@@ -121,29 +124,35 @@ public class WnCustomersController implements Initializable {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
         clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
+        accessCodeRequested =false;
     }
 
 
     //--------------------------------------------- QUE FUNCIONE LA SOLICITUD DEL CODIGO DE ACCESO SE HAGA A LO LOCO
 
-    private Customer customer;
-    private boolean accessCodeRequested;
+
 
     @FXML
     private void setScrWarningCredit() {
         if(!accessCodeRequested){
             scrWarningCredit.setVisible(true);
+            pswFieldAccesCode.requestFocus();
         }
 
     }
 
     @FXML
     private void setButtonAcceptCredit() {
+
+        Customer selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
         //Si logica de el codgio es verdadero el access se vuelve verdadero;
        String password = String.valueOf(pswFieldAccesCode.getText());
-        if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(password)){
-            accessCodeRequested = true;
-        }
+       if(selectedCustomer!= null){
+           if(selectedCustomer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(password)){
+               accessCodeRequested = true;
+           }
+       }
+
         scrWarningCredit.setVisible(false);
     }
 
@@ -236,7 +245,10 @@ public class WnCustomersController implements Initializable {
             return;
         }
         String newCustomerName = txtFieldEditCustomerName.getText();
-        String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        String newCustomerStoreCreditQuantity=String.valueOf(selectedCustomer.getCustomerAccount().getStoreCredit());;
+        if(accessCodeRequested=true){
+             newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        }
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
         String newCustomerPhoneNumber = txtEditCustomerPhoneNumber.getText();
@@ -355,6 +367,7 @@ public class WnCustomersController implements Initializable {
         configTableSelection();
         loadCustomerData();
         txtFieldSearch.textProperty().addListener((observable, oldValue, newValue) -> searchCustomers());
+
     }
 
     private void setItemsToAllTables(ObservableList<Customer> customers) {

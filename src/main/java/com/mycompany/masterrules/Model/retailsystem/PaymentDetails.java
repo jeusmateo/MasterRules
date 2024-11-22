@@ -13,6 +13,7 @@ public class PaymentDetails {
     private BigDecimal customerCashAmount = BigDecimal.ZERO;
     private String CardTransactionReference;
     private BigDecimal changeAmount = BigDecimal.ZERO;
+    private String noRegisterCustomer;
 
 
     public PaymentDetails(PaymentMethod metodoDePago, BigDecimal totalAmount) {

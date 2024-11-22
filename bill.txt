@@ -1,0 +1,134 @@
+=====================================
+Imprimiendo factura:
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+
+=====================================
+=====================================
+Imprimiendo factura:
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 2  Precio: 2
+
+=====================================
+=====================================
+Imprimiendo factura:
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+
+=====================================
+=====================================
+Imprimiendo factura :0
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+PAGADO CON EFECTIVO: 3
+CAMBIO: $51
+
+=====================================
+=====================================
+Imprimiendo factura :0
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 2  Precio: 2
+PAGADO CON EFECTIVO: 2
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :0
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+PAGADO CON EFECTIVO: 3
+CAMBIO: $2
+
+=====================================
+=====================================
+Imprimiendo factura :10
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 4  Precio: 4
+PAGADO CON EFECTIVO: 4
+CAMBIO: $2309
+
+=====================================
+=====================================
+Imprimiendo factura :11
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 4  Precio: 4
+PAGADO CON EFECTIVO: 4
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :12
+Nombre del empleado: admin
+Nombre del cliente: PublicoGeneral
+Productos:
+Nombre: 1   Cantidad: 1  Precio: 1
+PAGADO CON EFECTIVO: 1
+CAMBIO: $1
+
+=====================================
+=====================================
+Imprimiendo factura :13
+Nombre del empleado: admin
+Nombre del cliente: 3
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+PAGADO CON EFECTIVO: 3
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :14
+Nombre del empleado: Chepo
+Nombre del cliente: wd
+Productos:
+Nombre: Hamburguesa   Cantidad: 1  Precio: 200
+PAGADO CON EFECTIVO: 200
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :15
+Nombre del empleado: admin
+Nombre del cliente: dsd
+Productos:
+Nombre: Hamburguesa   Cantidad: 1  Precio: 200
+PAGADO CON EFECTIVO: 200
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :16
+Nombre del empleado: admin
+Nombre del cliente: Publico General
+Productos:
+Nombre: Hamburguesa   Cantidad: 3  Precio: 600
+PAGADO CON EFECTIVO: 600
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :17
+Nombre del empleado: admin
+Nombre del cliente: wd
+Productos:
+Nombre: Hamburguesa   Cantidad: 3  Precio: 600
+PAGADO CON EFECTIVO: 600
+CAMBIO: $0
+
+=====================================

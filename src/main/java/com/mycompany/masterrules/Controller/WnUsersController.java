@@ -37,7 +37,7 @@ public class WnUsersController implements Initializable {
     private UserAccount userEdit;
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
-    private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
+    private Map<CheckBox, Permission> checkBoxPermissionMapToEdit = new HashMap<>();
 
     // --------------------------------------------------------------------------------------------
 
@@ -51,6 +51,8 @@ public class WnUsersController implements Initializable {
     private Button btnDeleteUserAccount;
 
     @FXML
+    private TextField txtFieldSearchUser;
+    @FXML
     private TextField textEditUserName;
     @FXML
     private TextField txtEditUserCompleteName;
@@ -58,11 +60,7 @@ public class WnUsersController implements Initializable {
     private TextField txtFieldCreateUserCompleteName;
     @FXML
     private TextField txtFieldCreateUserName;
-
-    @FXML
-    private AnchorPane verCliente;
-    @FXML
-    private AnchorPane verCliente1;
+    
 
     @FXML
     private TableView<UserAccount> tblUserAccount;
@@ -70,32 +68,7 @@ public class WnUsersController implements Initializable {
     private TableColumn<UserAccount, String> colUserID;
     @FXML
     private TableColumn<UserAccount, String> colUserName;
-
-    @FXML
-    private Tab tabSalePerm;
-    @FXML
-    private Tab tabProductsPerm;
-    @FXML
-    private Tab tabInventoryPerm;
-    @FXML
-    private Tab tabCustomerPerm;
-    @FXML
-    private Tab tabReportPerm;
-    @FXML
-    private Tab tabUserPerm;
-    @FXML
-    private Tab tabSalePerm1;
-    @FXML
-    private Tab tabProductsPerm1;
-    @FXML
-    private Tab tabInventoryPerm1;
-    @FXML
-    private Tab tabCustomerPerm1;
-    @FXML
-    private Tab tabReportPerm1;
-    @FXML
-    private Tab tabUserPerm1;
-
+    
     @FXML
     private CheckBox chkMakeSalePerm;
     @FXML
@@ -103,7 +76,7 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkReviewSaleHistoryPerm;
     @FXML
-    private CheckBox chkCreateProductPerrm;
+    private CheckBox chkCreateProductPerm;
     @FXML
     private CheckBox chkEditProductPerm;
     @FXML
@@ -139,47 +112,41 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkDeleteUserPerm;
     @FXML
-    private CheckBox chkMakeSalePerm2;
+    private CheckBox chkMakeSaleEditPerm;
     @FXML
-    private CheckBox chkCancelSalePerm2;
+    private CheckBox chkCancelSaleEditPerm;
     @FXML
-    private CheckBox chkReviewSaleHistoryPerm2;
+    private CheckBox chkReviewSaleHistoryEditPerm;
     @FXML
-    private CheckBox chkCreateProductPerrm2;
+    private CheckBox chkCreateProductEditPerm;
     @FXML
-    private CheckBox chkEditProductPerm2;
+    private CheckBox chkEditProductEditPerm;
     @FXML
-    private CheckBox chkDeleteProductPerm2;
+    private CheckBox chkDeleteProductEditPerm;
     @FXML
-    private CheckBox chkCreateComboPerm2;
+    private CheckBox chkCreateNewCustomerEditPerm;
     @FXML
-    private CheckBox chkEditComboPerm2;
+    private CheckBox chkEditCustomerEditPerm;
     @FXML
-    private CheckBox chkDeleteComboPerm2;
+    private CheckBox chkDeleteCustomerEditPerm;
     @FXML
-    private CheckBox chkCreateNewCustomerPerm2;
+    private CheckBox chkEditStoreCreditEditPerm;
     @FXML
-    private CheckBox chkEditCustomerPerm2;
+    private CheckBox chkReviewCashRegisterAduitReportEditPerm;
     @FXML
-    private CheckBox chkDeleteCustomerPerm2;
+    private CheckBox chkCreateCashInReportEditPerm;
     @FXML
-    private CheckBox chkEditStoreCreditPerm2;
+    private CheckBox chkCreateCashOutReportEditPerm;
     @FXML
-    private CheckBox chkReviewCashRegisterAduitReportPerm2;
+    private CheckBox chkCreateUserEditPerm;
     @FXML
-    private CheckBox chkCreateCashInReportPerm2;
+    private CheckBox chkEditUserEditPerm;
     @FXML
-    private CheckBox chkCreateCashOutReportPerm2;
+    private CheckBox chkDeleteUserEditPerm;
     @FXML
-    private CheckBox chkCreateUserPerm2;
+    private CheckBox chkEditStockEditPerm;
     @FXML
-    private CheckBox chkEditUserPerm2;
-    @FXML
-    private CheckBox chkDeleteUserPerm2;
-    @FXML
-    private CheckBox chkEditStockPerm2;
-    @FXML
-    private CheckBox chkEditStockMinMaxPerm2;
+    private CheckBox chkEditStockMinMaxEditPerm;
 
     @FXML
     private PasswordField pswdFieldCreateUserAccount;
@@ -317,7 +284,7 @@ private void handleDeleteUserAccount() {
                 selectedPermissions.add(permission);
             }
         });
-        checkBoxPermissionMap2.forEach((checkBox, permission) -> {
+        checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> {
             if (checkBox.isSelected()) {
                 selectedPermissions.add(permission);
             }
@@ -335,9 +302,10 @@ private void handleDeleteUserAccount() {
         @Override
         public void initialize (URL location, ResourceBundle resources){
             configCheckBoxToCreate();
-            configCheckBoxToUpdate();
+            configCheckBoxToEdit();
             configColumnsOnUserTable();
             configTextFields();
+            configSearchField();
 
             ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
             tblUserAccount.setItems(userAccounts);
@@ -366,7 +334,7 @@ private void handleDeleteUserAccount() {
     private void syncCheckBoxesWithPermissions (UserAccount userAccount){
             if (userAccount == null) return;
 
-            checkBoxPermissionMap2.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
+            checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
 
             checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
         }
@@ -376,6 +344,26 @@ private void handleDeleteUserAccount() {
             UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
             displayUserAccountInfoForEdit(userAccount);
         }
+
+    private void configSearchField() {
+        txtFieldSearchUser.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterUserTable(newValue);
+        });
+    }
+
+    private void filterUserTable(String searchText) {
+        ObservableList<UserAccount> allUsers = FXCollections.observableArrayList(userManager.getAllUsers());
+        if (searchText == null || searchText.isEmpty()) {
+            tblUserAccount.setItems(allUsers);
+        } else {
+            String lowerCaseSearchText = searchText.toLowerCase();
+            ObservableList<UserAccount> filteredUsers = allUsers.filtered(user ->
+                    user.getUserName().toLowerCase().contains(lowerCaseSearchText) ||
+                            user.getFullEmployeeName().toLowerCase().contains(lowerCaseSearchText)
+            );
+            tblUserAccount.setItems(filteredUsers);
+        }
+    }
 
     private void clearTextFields(TextField[] textFields) {
         if (textFields != null) {
@@ -418,7 +406,7 @@ private void handleDeleteUserAccount() {
         checkBoxPermissionMap.put(chkMakeSalePerm, Permission.MAKE_SALE);
         checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
         checkBoxPermissionMap.put(chkReviewSaleHistoryPerm, Permission.LOOK_SALES_HISTORY);
-        checkBoxPermissionMap.put(chkCreateProductPerrm, Permission.CREATE_PRODUCT);
+        checkBoxPermissionMap.put(chkCreateProductPerm, Permission.CREATE_PRODUCT);
         checkBoxPermissionMap.put(chkEditProductPerm, Permission.EDIT_PRODUCT);
         checkBoxPermissionMap.put(chkDeleteProductPerm, Permission.DELETE_PRODUCT);
         checkBoxPermissionMap.put(chkEditStockPerm, Permission.EDIT_STOCK);
@@ -435,25 +423,25 @@ private void handleDeleteUserAccount() {
         checkBoxPermissionMap.put(chkDeleteUserPerm, Permission.DELETE_USER);
     }
 
-    private void configCheckBoxToUpdate() {
-        checkBoxPermissionMap2.put(chkMakeSalePerm2, Permission.MAKE_SALE);
-        checkBoxPermissionMap2.put(chkCancelSalePerm2, Permission.CANCEL_SALE);
-        checkBoxPermissionMap2.put(chkReviewSaleHistoryPerm2, Permission.LOOK_SALES_HISTORY);
-        checkBoxPermissionMap2.put(chkCreateProductPerrm2, Permission.CREATE_PRODUCT);
-        checkBoxPermissionMap2.put(chkEditProductPerm2, Permission.EDIT_PRODUCT);
-        checkBoxPermissionMap2.put(chkDeleteProductPerm2, Permission.DELETE_PRODUCT);
-        checkBoxPermissionMap2.put(chkEditStockPerm2, Permission.EDIT_STOCK);
-        checkBoxPermissionMap2.put(chkEditStockMinMaxPerm2, Permission.EDIT_MAX_MIN);
-        checkBoxPermissionMap2.put(chkCreateNewCustomerPerm2, Permission.CREATE_CUSTOMER);
-        checkBoxPermissionMap2.put(chkEditCustomerPerm2, Permission.EDIT_CUSTOMER);
-        checkBoxPermissionMap2.put(chkDeleteCustomerPerm2, Permission.DELETE_CUSTOMER);
-        checkBoxPermissionMap2.put(chkEditStoreCreditPerm2, Permission.EDIT_CREDITS);
-        checkBoxPermissionMap2.put(chkReviewCashRegisterAduitReportPerm2, Permission.RECORD_CASH_AUDIT_REPORT);
-        checkBoxPermissionMap2.put(chkCreateCashInReportPerm2, Permission.RECORD_CASHIN);
-        checkBoxPermissionMap2.put(chkCreateCashOutReportPerm2, Permission.RECORD_CASHOUT);
-        checkBoxPermissionMap2.put(chkCreateUserPerm2, Permission.CREATE_USER);
-        checkBoxPermissionMap2.put(chkEditUserPerm2, Permission.EDIT_USER);
-        checkBoxPermissionMap2.put(chkDeleteUserPerm2, Permission.DELETE_USER);
+    private void configCheckBoxToEdit() {
+        checkBoxPermissionMapToEdit.put(chkMakeSaleEditPerm, Permission.MAKE_SALE);
+        checkBoxPermissionMapToEdit.put(chkCancelSaleEditPerm, Permission.CANCEL_SALE);
+        checkBoxPermissionMapToEdit.put(chkReviewSaleHistoryEditPerm, Permission.LOOK_SALES_HISTORY);
+        checkBoxPermissionMapToEdit.put(chkCreateProductEditPerm, Permission.CREATE_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkEditProductEditPerm, Permission.EDIT_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkDeleteProductEditPerm, Permission.DELETE_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkEditStockEditPerm, Permission.EDIT_STOCK);
+        checkBoxPermissionMapToEdit.put(chkEditStockMinMaxEditPerm, Permission.EDIT_MAX_MIN);
+        checkBoxPermissionMapToEdit.put(chkCreateNewCustomerEditPerm, Permission.CREATE_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkEditCustomerEditPerm, Permission.EDIT_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkDeleteCustomerEditPerm, Permission.DELETE_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkEditStoreCreditEditPerm, Permission.EDIT_CREDITS);
+        checkBoxPermissionMapToEdit.put(chkReviewCashRegisterAduitReportEditPerm, Permission.RECORD_CASH_AUDIT_REPORT);
+        checkBoxPermissionMapToEdit.put(chkCreateCashInReportEditPerm, Permission.RECORD_CASHIN);
+        checkBoxPermissionMapToEdit.put(chkCreateCashOutReportEditPerm, Permission.RECORD_CASHOUT);
+        checkBoxPermissionMapToEdit.put(chkCreateUserEditPerm, Permission.CREATE_USER);
+        checkBoxPermissionMapToEdit.put(chkEditUserEditPerm, Permission.EDIT_USER);
+        checkBoxPermissionMapToEdit.put(chkDeleteUserEditPerm, Permission.DELETE_USER);
     }
 
     private void showAlert(String title, String message) {
