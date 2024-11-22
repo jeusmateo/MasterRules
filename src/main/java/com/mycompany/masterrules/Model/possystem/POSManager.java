@@ -110,13 +110,16 @@ public class POSManager {
             case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
                 newBill.setPaidInCash(data.getCustomerCashAmount());
+                newBill.setPaymentMethod("PaymentType.CAS");
                 break;
             case PaymentMethod.CARD:
                 newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setPaymentReferenceNumber(data.getReference());
+                newBill.setPaymentMethod("PaymentType.CARD");
                 break;
             case PaymentMethod.STORE_CREDIT:
                 newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
+                newBill.setPaymentMethod("PaymentType.STORE_CREDIT");
                 break;
             default:
                 break;
@@ -134,10 +137,12 @@ public class POSManager {
             CustomerManager manager = new CustomerManager();
             manager.updateCustomerData(customer);
         }
-
+        Printer printer = new Printer();
+        printer.imprimirOrder(currentOrder);
         Bill bill = createBill(paymentMethod);
 
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
+        printer.imprimirBill(bill);
         archiveInvoice.archiveBill(bill);
         currentOrder = new Order();
     }

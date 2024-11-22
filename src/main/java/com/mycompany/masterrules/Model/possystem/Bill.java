@@ -44,6 +44,10 @@ public class Bill {
 
     }
 
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     public String getPaymentReferenceNumber() {
         return paymentReferenceNumber;
     }
