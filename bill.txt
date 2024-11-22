@@ -162,3 +162,13 @@ PAGADO CON CRÉDITO DE LA TIENDA: 1
 USUARIO: a
 
 =====================================
+=====================================
+Imprimiendo factura :3
+Nombre del empleado: Chepo David
+Nombre del cliente: Publico General
+Productos:
+Nombre: 1   Cantidad: 12  Precio: 12
+PAGADO CON EFECTIVO: 12
+CAMBIO: $0
+
+=====================================

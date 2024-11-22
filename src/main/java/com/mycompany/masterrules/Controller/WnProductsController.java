@@ -584,6 +584,13 @@ public class WnProductsController implements Initializable, ProductSelectionList
         btnBackToCreateCombo();
         updateProductTable();
         updateComboTable();
+        selectedProductsForCombo.clear();
+        scrCreateComboFinalStep.setVisible(false);
+        scrComboTable.setVisible(true);
+        scrMenuCards.setVisible(true);
+        btnContinueDefinedCombo.setVisible(true);
+        imgComboCreate.setImage(null);
+
         showAlert("Combo registrado", "El combo ha sido registrado correctamente.");
     }
 
