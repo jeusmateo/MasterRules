@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -31,6 +32,7 @@ public class  WnInventoryController implements Initializable {
 
     private CafeteriaStorage cafeteriaStorage;
     private ObservableList<Product> productData;
+    private FilteredList<Product> filteredData;
 
     //Componentes de la vista
     //-------------------------------------------------------------------------------------------
@@ -41,14 +43,15 @@ public class  WnInventoryController implements Initializable {
     private Button btnExit;
     @FXML
     private Button btnSave;
-    @FXML
-    private Button btnScanProduct;
+
 
     @FXML
     private AnchorPane scrEditInfo;
     @FXML
     private AnchorPane scrSeeClient;
 
+    @FXML
+    private TextField txtFieldSearchProduct;
     @FXML
     private TextField txtFieldMinInv;
     @FXML
@@ -82,6 +85,7 @@ public class  WnInventoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cafeteriaStorage = new CafeteriaStorage();
         productData = FXCollections.observableArrayList();
+        filteredData = new FilteredList<>(productData, p -> true);
         tblInventory.setOnMouseClicked(event -> {
             if (event.getClickCount() > 1) {
                 event.consume();
@@ -89,62 +93,34 @@ public class  WnInventoryController implements Initializable {
         });
         configureTableColumns();
         loadProductsToInventory();
-        tblInventory.setItems(productData);
+        tblInventory.setItems(filteredData);
+        setupSearchFilter();
+
     }
 
     private void loadProductsToInventory() {
         CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
-
-        // Obtén todos los productos de la base de datos
         List<Product> products = cafeteriaMenu.getProducts();
-
-        // Revisa cada producto para inicializar su StockInfo correctamente
-        for (Product product : products) {
-//            // Busca si ya existe StockInfo asociado al producto
-//            Product stockInfo = cafeteriaStorage.getStockInfo(product);
-//
-//            if (stockInfo == null) {
-//                // Si no existe, inicializa un nuevo StockInfo
-//                stockInfo = new StockInfo(0, 0, 0); // Valores iniciales predeterminados
-//                stockInfo.setProduct(product);
-//                cafeteriaStorage.addProduct(product, stockInfo);
-//            }
-//
-//            // Asegúrate de que la tabla de datos muestre este StockInfo
-//            if (!productData.contains(stockInfo)) {
-//                productData.add(stockInfo);
-//            }
-            if(!productData.contains(product)){
-                productData.add(product);
-            }
-        }
+        productData.setAll(products); // Cargar todos los productos en la lista observable
     }
 
     private void configureTableColumns() {
         // Configurar las columnas para obtener datos de los métodos getter
         colProductIDInventory.setReorderable(false);
-        colProductIDInventory.setResizable(false);
         colProductIDInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getId()));
         colProductNameInventory.setReorderable(false);
-        colProductNameInventory.setResizable(false);
         colProductNameInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
         colProductCategoryInventory.setReorderable(false);
-        colProductCategoryInventory.setResizable(false);
         colProductCategoryInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getType()));
         colProductPriceInventory.setReorderable(false);
-        colProductPriceInventory.setResizable(false);
         colProductPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getPrice()));
         colProductVipPriceInventory.setReorderable(false);
-        colProductVipPriceInventory.setResizable(false);
         colProductVipPriceInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getVIPPrice()));
         colProductStockInventory.setReorderable(false);
-        colProductStockInventory.setResizable(false);
         colProductStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getCurrentStock()));
         colProductMinStockInventory.setReorderable(false);
-        colProductMinStockInventory.setResizable(false);
         colProductMinStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMinStock()));
         colProductMaxStockInventory.setReorderable(false);
-        colProductMaxStockInventory.setResizable(false);
         colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
 
@@ -231,6 +207,27 @@ public class  WnInventoryController implements Initializable {
         }
     }
 
+    private void setupSearchFilter() {
+        txtFieldSearchProduct.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(product -> {
+                // Si no hay texto, mostrar todos los productos
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (product.getType().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (product.getId().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false; // No coincide
+            });
+            tblInventory.refresh();
+        });
+    }
+
     @FXML
     private void displaySelected(javafx.scene.input.MouseEvent event) {
         // Obtener el producto seleccionado desde la tabla
@@ -259,8 +256,6 @@ public class  WnInventoryController implements Initializable {
             exit();
         } else if (source.equals(btnSave)) {
             buttonSaveInfo();
-        } else if (source.equals(btnScanProduct)) {
-            displaySelected(null);
         }
     }
 
