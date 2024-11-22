@@ -126,7 +126,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private TableColumn<OrderItem, String> colPrice; // este si es un String?
 
 
-    // MÉTODOS
+    // Metodos
     //-------------------------------------------------------------------------------------------
 
 
