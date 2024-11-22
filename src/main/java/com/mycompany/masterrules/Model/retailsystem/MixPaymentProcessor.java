@@ -7,23 +7,23 @@ import java.util.List;
 public class MixPaymentProcessor extends PaymentProcessor {
     private final List<PaymentProcessor> paymentProcessors;
     private BigDecimal cashReceived;
-    private BigDecimal faltante;
+    private BigDecimal cashToPay;
 
     public MixPaymentProcessor(BigDecimal totalAmount) {
         super(totalAmount);
         paymentProcessors = new ArrayList<>();
         cashReceived = BigDecimal.ZERO;
-        faltante = totalAmount;
+        cashToPay = totalAmount;
     }
 
     public void addPaymentMethod(PaymentProcessor paymentProcessor) {
         paymentProcessors.add(paymentProcessor);
-        this.cashReceived = (this.getTotalAmount().add(paymentProcessor.getTotalAmount()));
-        faltante = faltante.subtract(paymentProcessor.getTotalAmount());
+        cashReceived = this.getTotalAmount().add(paymentProcessor.getTotalAmount());
+        cashToPay = cashToPay.subtract(paymentProcessor.getTotalAmount());
     }
 
-    public BigDecimal getFaltante() {
-        return faltante;
+    public BigDecimal getCashToPay() {
+        return cashToPay;
     }
 
     @Override
