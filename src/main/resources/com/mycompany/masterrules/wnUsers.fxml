@@ -28,7 +28,7 @@
                            <children>
                               <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <AnchorPane fx:id="verCliente" layoutX="3.0" layoutY="8.0" prefHeight="559.0" prefWidth="867.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                    <AnchorPane fx:id="scrCreateUserAccount" layoutX="3.0" layoutY="8.0" prefHeight="559.0" prefWidth="867.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                        <styleClass>
                                           <String fx:value="radius" />
                                           <String fx:value="shadow" />
@@ -315,7 +315,7 @@
                            <children>
                               <AnchorPane layoutX="38.0" layoutY="14.0" prefHeight="542.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <AnchorPane fx:id="verCliente1" layoutX="4.0" layoutY="8.0" prefHeight="555.0" prefWidth="866.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                    <AnchorPane fx:id="scrEditUserAccount" layoutX="4.0" layoutY="8.0" prefHeight="555.0" prefWidth="866.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
                                        <styleClass>
                                           <String fx:value="radius" />
                                           <String fx:value="shadow" />
@@ -374,7 +374,7 @@
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
-                                                            <CheckBox fx:id="chkMakeSalePerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
+                                                            <CheckBox fx:id="chkMakeSaleEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="122.0" text="Hacer Venta" AnchorPane.topAnchor="14.0">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>
@@ -382,7 +382,7 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkCancelSalePerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Cancelar venta">
+                                                            <CheckBox fx:id="chkCancelSaleEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Cancelar venta">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>
@@ -390,7 +390,7 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkReviewSaleHistoryPerm2" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="232.0" text="Consultar Historial de Ventas">
+                                                            <CheckBox fx:id="chkReviewSaleHistoryEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="232.0" text="Consultar Historial de Ventas">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>

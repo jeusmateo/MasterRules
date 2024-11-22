@@ -37,7 +37,7 @@ public class WnUsersController implements Initializable {
     private UserAccount userEdit;
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
-    private Map<CheckBox, Permission> checkBoxPermissionMap2 = new HashMap<>();
+    private Map<CheckBox, Permission> checkBoxPermissionMapToEdit = new HashMap<>();
 
     // --------------------------------------------------------------------------------------------
 
@@ -60,11 +60,7 @@ public class WnUsersController implements Initializable {
     private TextField txtFieldCreateUserCompleteName;
     @FXML
     private TextField txtFieldCreateUserName;
-
-    @FXML
-    private AnchorPane verCliente;
-    @FXML
-    private AnchorPane verCliente1;
+    
 
     @FXML
     private TableView<UserAccount> tblUserAccount;
@@ -72,33 +68,7 @@ public class WnUsersController implements Initializable {
     private TableColumn<UserAccount, String> colUserID;
     @FXML
     private TableColumn<UserAccount, String> colUserName;
-
-    @FXML
-    private Tab tabSalePerm;
-    @FXML
-    private Tab tabProductsPerm;
-    @FXML
-    private Tab tabInventoryPerm;
-    @FXML
-    private Tab tabCustomerPerm;
-    @FXML
-    private Tab tabReportPerm;
-    @FXML
-    private Tab tabUserPerm;
-    @FXML
-    private Tab tabSaleEditPerm;
-    @FXML
-    private Tab tabProductsEditPerm;
-    @FXML
-    private Tab tabInventoryEditPerm;
-    @FXML
-    private Tab tabCustomerEditPerm;
-    @FXML
-    private Tab tabReportEditPerm;
-
-    @FXML
-    private Tab tabUserEditPerm;
-
+    
     @FXML
     private CheckBox chkMakeSalePerm;
     @FXML
@@ -106,7 +76,7 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkReviewSaleHistoryPerm;
     @FXML
-    private CheckBox chkCreateProductPerrm;
+    private CheckBox chkCreateProductPerm;
     @FXML
     private CheckBox chkEditProductPerm;
     @FXML
@@ -153,12 +123,6 @@ public class WnUsersController implements Initializable {
     private CheckBox chkEditProductEditPerm;
     @FXML
     private CheckBox chkDeleteProductEditPerm;
-    @FXML
-    private CheckBox chkCreateComboEditPerm;
-    @FXML
-    private CheckBox chkEditComboEditPerm;
-    @FXML
-    private CheckBox chkDeleteComboEditPerm;
     @FXML
     private CheckBox chkCreateNewCustomerEditPerm;
     @FXML
@@ -320,7 +284,7 @@ private void handleDeleteUserAccount() {
                 selectedPermissions.add(permission);
             }
         });
-        checkBoxPermissionMap2.forEach((checkBox, permission) -> {
+        checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> {
             if (checkBox.isSelected()) {
                 selectedPermissions.add(permission);
             }
@@ -338,7 +302,7 @@ private void handleDeleteUserAccount() {
         @Override
         public void initialize (URL location, ResourceBundle resources){
             configCheckBoxToCreate();
-            configCheckBoxToUpdate();
+            configCheckBoxToEdit();
             configColumnsOnUserTable();
             configTextFields();
             configSearchField();
@@ -370,7 +334,7 @@ private void handleDeleteUserAccount() {
     private void syncCheckBoxesWithPermissions (UserAccount userAccount){
             if (userAccount == null) return;
 
-            checkBoxPermissionMap2.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
+            checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
 
             checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
         }
@@ -442,7 +406,7 @@ private void handleDeleteUserAccount() {
         checkBoxPermissionMap.put(chkMakeSalePerm, Permission.MAKE_SALE);
         checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
         checkBoxPermissionMap.put(chkReviewSaleHistoryPerm, Permission.LOOK_SALES_HISTORY);
-        checkBoxPermissionMap.put(chkCreateProductPerrm, Permission.CREATE_PRODUCT);
+        checkBoxPermissionMap.put(chkCreateProductPerm, Permission.CREATE_PRODUCT);
         checkBoxPermissionMap.put(chkEditProductPerm, Permission.EDIT_PRODUCT);
         checkBoxPermissionMap.put(chkDeleteProductPerm, Permission.DELETE_PRODUCT);
         checkBoxPermissionMap.put(chkEditStockPerm, Permission.EDIT_STOCK);
@@ -459,25 +423,25 @@ private void handleDeleteUserAccount() {
         checkBoxPermissionMap.put(chkDeleteUserPerm, Permission.DELETE_USER);
     }
 
-    private void configCheckBoxToUpdate() {
-        checkBoxPermissionMap2.put(chkMakeSaleEditPerm, Permission.MAKE_SALE);
-        checkBoxPermissionMap2.put(chkCancelSaleEditPerm, Permission.CANCEL_SALE);
-        checkBoxPermissionMap2.put(chkReviewSaleHistoryEditPerm, Permission.LOOK_SALES_HISTORY);
-        checkBoxPermissionMap2.put(chkCreateProductEditPerm, Permission.CREATE_PRODUCT);
-        checkBoxPermissionMap2.put(chkEditProductEditPerm, Permission.EDIT_PRODUCT);
-        checkBoxPermissionMap2.put(chkDeleteProductEditPerm, Permission.DELETE_PRODUCT);
-        checkBoxPermissionMap2.put(chkEditStockEditPerm, Permission.EDIT_STOCK);
-        checkBoxPermissionMap2.put(chkEditStockMinMaxEditPerm, Permission.EDIT_MAX_MIN);
-        checkBoxPermissionMap2.put(chkCreateNewCustomerEditPerm, Permission.CREATE_CUSTOMER);
-        checkBoxPermissionMap2.put(chkEditCustomerEditPerm, Permission.EDIT_CUSTOMER);
-        checkBoxPermissionMap2.put(chkDeleteCustomerEditPerm, Permission.DELETE_CUSTOMER);
-        checkBoxPermissionMap2.put(chkEditStoreCreditEditPerm, Permission.EDIT_CREDITS);
-        checkBoxPermissionMap2.put(chkReviewCashRegisterAduitReportEditPerm, Permission.RECORD_CASH_AUDIT_REPORT);
-        checkBoxPermissionMap2.put(chkCreateCashInReportEditPerm, Permission.RECORD_CASHIN);
-        checkBoxPermissionMap2.put(chkCreateCashOutReportEditPerm, Permission.RECORD_CASHOUT);
-        checkBoxPermissionMap2.put(chkCreateUserEditPerm, Permission.CREATE_USER);
-        checkBoxPermissionMap2.put(chkEditUserEditPerm, Permission.EDIT_USER);
-        checkBoxPermissionMap2.put(chkDeleteUserEditPerm, Permission.DELETE_USER);
+    private void configCheckBoxToEdit() {
+        checkBoxPermissionMapToEdit.put(chkMakeSaleEditPerm, Permission.MAKE_SALE);
+        checkBoxPermissionMapToEdit.put(chkCancelSaleEditPerm, Permission.CANCEL_SALE);
+        checkBoxPermissionMapToEdit.put(chkReviewSaleHistoryEditPerm, Permission.LOOK_SALES_HISTORY);
+        checkBoxPermissionMapToEdit.put(chkCreateProductEditPerm, Permission.CREATE_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkEditProductEditPerm, Permission.EDIT_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkDeleteProductEditPerm, Permission.DELETE_PRODUCT);
+        checkBoxPermissionMapToEdit.put(chkEditStockEditPerm, Permission.EDIT_STOCK);
+        checkBoxPermissionMapToEdit.put(chkEditStockMinMaxEditPerm, Permission.EDIT_MAX_MIN);
+        checkBoxPermissionMapToEdit.put(chkCreateNewCustomerEditPerm, Permission.CREATE_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkEditCustomerEditPerm, Permission.EDIT_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkDeleteCustomerEditPerm, Permission.DELETE_CUSTOMER);
+        checkBoxPermissionMapToEdit.put(chkEditStoreCreditEditPerm, Permission.EDIT_CREDITS);
+        checkBoxPermissionMapToEdit.put(chkReviewCashRegisterAduitReportEditPerm, Permission.RECORD_CASH_AUDIT_REPORT);
+        checkBoxPermissionMapToEdit.put(chkCreateCashInReportEditPerm, Permission.RECORD_CASHIN);
+        checkBoxPermissionMapToEdit.put(chkCreateCashOutReportEditPerm, Permission.RECORD_CASHOUT);
+        checkBoxPermissionMapToEdit.put(chkCreateUserEditPerm, Permission.CREATE_USER);
+        checkBoxPermissionMapToEdit.put(chkEditUserEditPerm, Permission.EDIT_USER);
+        checkBoxPermissionMapToEdit.put(chkDeleteUserEditPerm, Permission.DELETE_USER);
     }
 
     private void showAlert(String title, String message) {
