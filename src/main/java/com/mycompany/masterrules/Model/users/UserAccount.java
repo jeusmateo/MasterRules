@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Model.users;
 
-import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import jakarta.persistence.*;
 
 import java.util.Objects;
