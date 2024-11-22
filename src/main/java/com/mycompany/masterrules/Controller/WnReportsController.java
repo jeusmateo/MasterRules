@@ -113,14 +113,14 @@ public class WnReportsController implements Initializable {
         } else if (evt.equals(btnAcceptOutflow)) {
             setBtnAcceptOutflow();
         } else if (evt.equals(btnAcceptInflow)) {
-            setBtnAcceptInflow();
+            acceptInflowCash();
         }
     }
 
     /**
      * Acepta la entrada de efectivo y actualiza la tabla de flujo de entrada de efectivo.
      */
-    public void setBtnAcceptInflow() {
+    public void acceptInflowCash() {
         try {
             String cashAmount = txtFieldAmountInflow.getText();
             String reason = txtReasonInflow.getText();
