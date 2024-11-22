@@ -7,7 +7,7 @@ import com.mycompany.masterrules.Model.finance.CashRegister;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

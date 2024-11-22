@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Model;
 
 import com.mycompany.masterrules.Model.finance.ArchiveInvoice;
-import com.mycompany.masterrules.Model.possystem.Order;
+import com.mycompany.masterrules.Model.retailsystem.Order;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -21,9 +21,9 @@
         <mapping class="com.mycompany.masterrules.Model.users.UserAccount"/>
 
         <mapping class="com.mycompany.masterrules.Model.customers.Customer"/>
-        <mapping class="com.mycompany.masterrules.Model.possystem.Debt"/>
-        <mapping class="com.mycompany.masterrules.Model.possystem.Bill"/>
-        <mapping class="com.mycompany.masterrules.Model.possystem.OrderItem"/>
+        <mapping class="com.mycompany.masterrules.Model.retailsystem.Debt"/>
+        <mapping class="com.mycompany.masterrules.Model.retailsystem.Bill"/>
+        <mapping class="com.mycompany.masterrules.Model.retailsystem.OrderItem"/>
         <mapping class="com.mycompany.masterrules.Model.finance.CashFlow"/>
 
         <mapping class="com.mycompany.masterrules.Model.finance.CashAuditReport"/>

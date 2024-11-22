@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

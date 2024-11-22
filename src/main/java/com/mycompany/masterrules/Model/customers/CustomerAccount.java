@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Model.customers;
 
 
-import com.mycompany.masterrules.Model.possystem.Debt;
+import com.mycompany.masterrules.Model.retailsystem.Debt;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
