@@ -39,7 +39,7 @@ public class UserDatabaseTest {
         assert !Objects.requireNonNull(userDatabaseManager.readAll()).isEmpty();
 
         for(UserAccount userAccount : Objects.requireNonNull(userDatabaseManager.readAll())){
-            System.out.println(userAccount);
+
         }
 
         // Eliminar usuario
