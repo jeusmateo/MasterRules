@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controlador de la ventana de Inventario
+ * Gestiona la visualización y edición de productos en el inventario.
  *
  * @author Jimena Garcia
  */
@@ -26,13 +27,25 @@ public class WnInventoryController implements Initializable {
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Almacenamiento de la cafetería.
+     */
     private CafeteriaStorage cafeteriaStorage;
+
+    /**
+     * Lista observable de productos.
+     */
     private ObservableList<Product> productData;
+
+    /**
+     * Lista filtrada de productos.
+     */
     private FilteredList<Product> filteredData;
 
     //Componentes de la vista
     //-------------------------------------------------------------------------------------------
 
+    // Botones
     @FXML
     private Button btnEditStockInfo;
     @FXML
@@ -40,11 +53,13 @@ public class WnInventoryController implements Initializable {
     @FXML
     private Button btnSave;
 
+    // Paneles
     @FXML
     private AnchorPane scrEditInfo;
     @FXML
     private AnchorPane scrSeeClient;
 
+    // Campos de texto
     @FXML
     private TextField txtFieldSearchProduct;
     @FXML
@@ -54,6 +69,7 @@ public class WnInventoryController implements Initializable {
     @FXML
     private TextField txtFieldMaxInv;
 
+    // Tabla
     @FXML
     private TableView<Product> tblInventory;
     @FXML
@@ -76,6 +92,12 @@ public class WnInventoryController implements Initializable {
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Inicializa el controlador después de que su raíz haya sido procesada.
+     *
+     * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cafeteriaStorage = new CafeteriaStorage();
@@ -92,12 +114,17 @@ public class WnInventoryController implements Initializable {
         setupSearchFilter();
     }
 
+    /**
+     * Carga los productos en el inventario desde el almacenamiento de la cafetería.
+     */
     private void loadProductsToInventory() {
         productData.setAll(cafeteriaStorage.getProductStockTable().keySet());
     }
 
+    /**
+     * Configura las columnas de la tabla para mostrar los datos de los productos.
+     */
     private void configureTableColumns() {
-        // Configurar las columnas para obtener datos de los métodos getter
         colProductIDInventory.setReorderable(false);
         colProductIDInventory.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getId()));
         colProductNameInventory.setReorderable(false);
@@ -116,6 +143,9 @@ public class WnInventoryController implements Initializable {
         colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
 
+    /**
+     * Muestra la pantalla de edición de información de stock.
+     */
     public void showScrEditInfo() {
         Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
 
@@ -124,38 +154,38 @@ public class WnInventoryController implements Initializable {
             return;
         }
 
-        // Mostrar la información de StockInfo en los campos editables
         txtFieldStock.setText(String.valueOf(selectedProduct.getStockInfo().getCurrentStock()));
         txtFieldMinInv.setText(String.valueOf(selectedProduct.getStockInfo().getMinStock()));
         txtFieldMaxInv.setText(String.valueOf(selectedProduct.getStockInfo().getMaxStock()));
 
-        // Mostrar la pantalla de edición
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
     }
 
+    /**
+     * Oculta la pantalla de edición.
+     */
     public void exit() {
         scrEditInfo.setVisible(false);
     }
 
+    /**
+     * Guarda la información de stock editada.
+     */
     @FXML
     public void buttonSaveInfo() {
-        // Obtener el producto actual seleccionado desde la tabla
         Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
             return;
         }
         try {
-            // Obtener los valores ingresados en los campos de texto
             int newStock = Integer.parseInt(txtFieldStock.getText());
             int newMinStock = Integer.parseInt(txtFieldMinInv.getText());
             int newMaxStock = Integer.parseInt(txtFieldMaxInv.getText());
 
-            // Validar los valores del stock
             stockValidation(newStock, newMinStock, newMaxStock);
 
-            // Actualizar el StockInfo con los nuevos valores
             selectedProduct.getStockInfo().setCurrentStock(newStock);
             selectedProduct.getStockInfo().setMinStock(newMinStock);
             selectedProduct.getStockInfo().setMaxStock(newMaxStock);
@@ -163,16 +193,13 @@ public class WnInventoryController implements Initializable {
             cafeteriaStorage.editMinStock(selectedProduct, newMinStock);
             cafeteriaStorage.editMaxStock(selectedProduct, newMaxStock);
 
-            // Refrescar la tabla para mostrar los nuevos valores
             tblInventory.refresh();
 
-            // Ocultar la pantalla de edición y limpiar los campos
             scrEditInfo.setVisible(false);
             txtFieldStock.clear();
             txtFieldMinInv.clear();
             txtFieldMaxInv.clear();
 
-            // Volver a la vista de clientes
             scrSeeClient.setVisible(true);
         } catch (NumberFormatException e) {
             showAlert("Error", "Por favor, ingresa datos válidos en todos los campos.");
@@ -181,6 +208,12 @@ public class WnInventoryController implements Initializable {
         }
     }
 
+    /**
+     * Muestra una alerta con un mensaje de error.
+     *
+     * @param title El título de la alerta.
+     * @param message El mensaje de la alerta.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -189,8 +222,15 @@ public class WnInventoryController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Valida los valores de stock ingresados.
+     *
+     * @param newStock El nuevo valor de stock.
+     * @param newMinStock El nuevo valor de stock mínimo.
+     * @param newMaxStock El nuevo valor de stock máximo.
+     * @throws IllegalArgumentException Si los valores de stock no son válidos.
+     */
     private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
-        // Validar que el stock actual esté dentro del rango permitido
         if (0 > newMinStock || 0 > newStock || 0 > newMaxStock) {
             throw new IllegalArgumentException(
                     "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
@@ -198,42 +238,52 @@ public class WnInventoryController implements Initializable {
         }
     }
 
+    /**
+     * Configura el filtro de búsqueda para la tabla de inventario.
+     */
     private void setupSearchFilter() {
         txtFieldSearchProduct.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
-                // Si no hay texto, mostrar todos los productos
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
+                if (product.getName().toLowerCase().contains(lowerCaseFilter) ||
+                    product.getType().toLowerCase().contains(lowerCaseFilter) ||
+                    product.getId().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (product.getType().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else return product.getId().toLowerCase().contains(lowerCaseFilter);// No coincide
+                }
+                return false;
             });
             tblInventory.refresh();
         });
     }
 
+    /**
+     * Muestra la información del producto seleccionado en los campos editables.
+     *
+     * @param event El evento de selección.
+     */
     @FXML
     private void displaySelected(javafx.scene.input.MouseEvent event) {
-        // Obtener el producto seleccionado desde la tabla
         Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
             return;
         }
-        // Mostrar la información de StockInfo en los campos editables
         txtFieldStock.setText(String.valueOf(selectedProduct.getStockInfo().getCurrentStock()));
         txtFieldMinInv.setText(String.valueOf(selectedProduct.getStockInfo().getMinStock()));
         txtFieldMaxInv.setText(String.valueOf(selectedProduct.getStockInfo().getMaxStock()));
 
-        // Asegurarse de que el producto esté seleccionado para editarlo
         scrEditInfo.setVisible(true);
         scrEditInfo.toFront();
     }
 
+    /**
+     * Maneja las acciones de los botones en la interfaz de usuario.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     private void eventAction(javafx.event.ActionEvent event) {
         Object source = event.getSource();
