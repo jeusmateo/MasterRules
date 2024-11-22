@@ -36,6 +36,7 @@ public class Order {
     private String tableNumber;
     private String additionalComment;
     private String deliveryMethod;
+   // private String customerName;
     @Column(name = "order_date")
     private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
     private BigDecimal totalAmount;
@@ -94,6 +95,14 @@ public class Order {
             orderItemList.add(newOrderItem);
         }
     }
+
+//    public String getCustomerName(){
+//        return customerName;
+//    }
+//
+//    public void setCustomerName(String customerName){
+//        this.customerName = customerName;
+//    }
 
     private void updateStockAndMenu(OrderItem newOrderItem) {
         newOrderItem.getProduct().reduceStock();

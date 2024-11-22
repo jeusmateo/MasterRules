@@ -70,9 +70,14 @@ public class POSManager {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
     }
 
-    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
+    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer, String customerName) {
 
-
+//        if(customer!= null){
+//            currentOrder.setCustomerName(customer.getCustomerName());
+//        }
+//        else{
+//            currentOrder.setCustomerName(customerName);
+//        }
         currentOrder.setCustomer(customer);
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
@@ -125,12 +130,14 @@ public class POSManager {
     }
 
 
+
     public void sell(PaymentDetails paymentMethod, Customer customer) {
         if(customer!= null){
             customer.getCustomerAccount().accumulatePoints();
             CustomerManager manager =new CustomerManager();
             manager.updateCustomerData(customer);
         }
+
         Bill bill = createBill(paymentMethod);
 
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
