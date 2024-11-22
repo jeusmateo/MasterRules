@@ -46,9 +46,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     //-------------------------------------------------------------------------------------------
     private Customer customerSelected;
     private POSManager posManager = POSManager.getInstance();
-    private ToggleGroup group;
-    private WnSaleController wnSaleSection;
-    private int currentCategoryIndex = 0;
+    private ToggleGroup group; // TODO: RENOMBRAR ESTO PERO NO PUDE PQ NO SUPE QUE RAYOS ERA
 
     //COMPONENTES DE LA VENTANA QUE SE MUESTRA AL CONTINUAR LA ORDEN
     //-------------------------------------------------------------------------------------------
@@ -61,9 +59,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private Button btnCancel;
 
     @FXML
-    private Button btnAdd1;
-    @FXML
-    private Button btnRemove1;
+    private TextField txtFieldTableNumber;
 
     @FXML
     private Label lblTotal;
@@ -104,7 +100,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private FlowPane comboCardsScroller;
 
     @FXML
-    private TextArea txtAdittionalComments;
+    private TextArea txtAdditionalComments;
 
     @FXML
     private TextField inputClientName;
@@ -114,11 +110,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private ToggleGroup deliveryMethod;
 
     @FXML
-    private RadioButton paraMostradoMetodo;
+    private RadioButton deliveryMethodCounter;
     @FXML
-    private RadioButton paraLlevarMetodo;
+    private RadioButton deliveryMethodTakeAway;
     @FXML
-    private RadioButton paraMesaMetodo;
+    private RadioButton paraMesaMetodo; // TODO RENOMBRAR ESTO
 
     @FXML
     private TableView<OrderItem> tblOrder;
@@ -227,20 +223,23 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private void configOrderInfo() {
         Customer customerInfo = cboCustomers.getValue();
 
-        String customerName="";
-        if(customerInfo == null) {
-            customerName= inputClientName.getText();
+        String customerName = "";
+        if (customerInfo == null) {
+            customerName = inputClientName.getText();
         }
 
-        RadioButton selected = (RadioButton) group.getSelectedToggle();
+        RadioButton selectedDeliveryMethod = (RadioButton) group.getSelectedToggle();
         String deliveryMethod = "";
-        if (selected != null) {
-            deliveryMethod = selected.getText();
+        if (selectedDeliveryMethod != null) {
+            deliveryMethod = selectedDeliveryMethod.getText();
+            if (selectedDeliveryMethod.equals(paraMesaMetodo)) {
+                deliveryMethod += " - Mesa: " + txtFieldTableNumber.getText();
+            }
         }
-        String comments = txtAdittionalComments.getText();
+        String comments = txtAdditionalComments.getText();
         //TODO validaciones para null
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
-        posManager.configureOrder(deliveryMethod, comments, customerInfo,customerName);
+        posManager.configureOrder(deliveryMethod, comments, customerInfo, customerName);
     }
 
 
@@ -325,8 +324,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void initialize(URL url, ResourceBundle rb) {
         //TODO este configura
         group = new ToggleGroup();
-        paraMostradoMetodo.setToggleGroup(group);
-        paraLlevarMetodo.setToggleGroup(group);
+        deliveryMethodCounter.setToggleGroup(group);
+        deliveryMethodTakeAway.setToggleGroup(group);
         paraMesaMetodo.setToggleGroup(group);
 
         posManager = POSManager.getInstance();
