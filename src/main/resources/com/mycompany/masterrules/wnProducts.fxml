@@ -343,7 +343,7 @@
                                                             <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <Button fx:id="buttonCreateCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateDefinedCombo" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                            <Button fx:id="btnProcessCreateCombo" mnemonicParsing="false" onMouseClicked="#setScrCreateDefinedCombo" prefHeight="86.0" prefWidth="329.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Crear Combo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                                                <GridPane.margin>
                                                                   <Insets />
                                                                </GridPane.margin>
