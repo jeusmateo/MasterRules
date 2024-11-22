@@ -22,60 +22,19 @@ import javafx.scene.layout.AnchorPane;
 
 public class WnCustomersController implements Initializable {
 
+    //Atributos de la clase
+    //--------------------------------------------------------------------------------------------
+
     private CustomerManager customerManager;
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
     private boolean accessCodeRequested;
 
+    //Componentes de la vista
+    //--------------------------------------------------------------------------------------------
+
+    //Campos de texto
     @FXML
     private PasswordField pswFieldAccesCode;
-
-    @FXML
-    private Button btnAcceptCredit;
-    @FXML
-    private Button btnSaveNewCustomer;
-    @FXML
-    private Button btnUpdateCustomerAccount;
-    @FXML
-    private Button btnDeleteCustomer;
-
-    @FXML
-    private AnchorPane guardarClienteNvo;
-    @FXML
-    private AnchorPane scrCustomerAccount;
-    @FXML
-    private AnchorPane scrEditCustomerAccount;
-    @FXML
-    private AnchorPane scrMainViewCustomerAccount;
-    @FXML
-    private AnchorPane scrViewInfoCustomer;
-    @FXML
-    private AnchorPane scrWarningCredit;
-
-    @FXML
-    private Tab tabNewCustomer;
-    @FXML
-    private Tab tabCustomerAccount;
-
-    @FXML
-    private Label lbEditCustomerName;
-    @FXML
-    private Label lbLoyaltyPoints;
-    @FXML
-    private Label lbCustomerName;
-    @FXML
-    private Label lbDebt;
-    @FXML
-    private Label lbStoreCredit;
-    @FXML
-    private Label lbCustomerPhoneNumber;
-
-    @FXML
-    private CheckBox chkCustomerVip;
-    @FXML
-    private CheckBox chkNewCustomerVipStatus;
-    @FXML
-    private CheckBox chkEditCustomerVipStatus;
-
     @FXML
     private TextField txtNewCustomerName;
     @FXML
@@ -95,12 +54,68 @@ public class WnCustomersController implements Initializable {
     @FXML
     private TextField txtFieldAccessCode;
 
+    //Botones
+    @FXML
+    private Button btnAcceptCredit;
+    @FXML
+    private Button btnSaveNewCustomer;
+    @FXML
+    private Button btnUpdateCustomerAccount;
+    @FXML
+    private Button btnDeleteCustomer;
+
+    //Paneles
+    @FXML
+    private AnchorPane guardarClienteNvo;
+    @FXML
+    private AnchorPane scrCustomerAccount;
+    @FXML
+    private AnchorPane scrEditCustomerAccount;
+    @FXML
+    private AnchorPane scrMainViewCustomerAccount;
+    @FXML
+    private AnchorPane scrViewInfoCustomer;
+    @FXML
+    private AnchorPane scrWarningCredit;
+
+    //Tablas y columnas
+    @FXML
+    private Tab tabNewCustomer;
+    @FXML
+    private Tab tabCustomerAccount;
+
+    //Etiquetas
+    @FXML
+    private Label lbEditCustomerName;
+    @FXML
+    private Label lbLoyaltyPoints;
+    @FXML
+    private Label lbCustomerName;
+    @FXML
+    private Label lbDebt;
+    @FXML
+    private Label lbStoreCredit;
+    @FXML
+    private Label lbCustomerPhoneNumber;
+
+    //CheckBox
+    @FXML
+    private CheckBox chkCustomerVip;
+    @FXML
+    private CheckBox chkNewCustomerVipStatus;
+    @FXML
+    private CheckBox chkEditCustomerVipStatus;
+
+    //Tablas y columnas
     @FXML
     private TableView<Customer> tblCustomers;
     @FXML
     private TableColumn<Customer, String> colCustomerId;
     @FXML
     private TableColumn<Customer, String> colCustomerName;
+
+    //Métodos de la clase
+    //--------------------------------------------------------------------------------------------
 
     @FXML
     private void searchCustomers() {
@@ -127,11 +142,6 @@ public class WnCustomersController implements Initializable {
         accessCodeRequested =false;
     }
 
-
-    //--------------------------------------------- QUE FUNCIONE LA SOLICITUD DEL CODIGO DE ACCESO SE HAGA A LO LOCO
-
-
-
     @FXML
     private void setScrWarningCredit() {
         if(!accessCodeRequested){
@@ -156,7 +166,6 @@ public class WnCustomersController implements Initializable {
         scrWarningCredit.setVisible(false);
     }
 
-    //--------------------------------------------- EN DISPLAY SELECTED HAY UN accessCodeRequested = false;
 
     private void clearTextFields(TextField... textFields) {
         for (TextField textField : textFields) {
