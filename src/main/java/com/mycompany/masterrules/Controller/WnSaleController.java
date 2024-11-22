@@ -4,7 +4,6 @@ import com.mycompany.masterrules.Database.CustomerDatabase;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -419,5 +419,20 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         updateOrderInfo();
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(txtFieldTableNumber)) {
+            handleTextFieldTableNumber(event);
+        }
+    }
+
+    private void handleTextFieldTableNumber(KeyEvent event) {
+        String character = event.getText();
+        if (!character.matches("\\d")) {
+            event.consume();
+        }
     }
 }
