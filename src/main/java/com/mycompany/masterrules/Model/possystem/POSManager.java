@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model.possystem;
 
 
-import com.mycompany.masterrules.Database.CustomerDatabase;
 import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -13,7 +12,6 @@ import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
-import java.util.Iterator;
 
 /**
  * @author David Torres
@@ -89,10 +87,10 @@ public class POSManager {
 
     public void cancelOrder() {
 
-        while(!currentOrder.getPedidoComandaList().isEmpty())
-        for(OrderItem item:currentOrder.getPedidoComandaList()){
-            currentOrder.removeProductFromOrderItemList(item);
-        }
+        while (!currentOrder.getPedidoComandaList().isEmpty())
+            for (OrderItem item : currentOrder.getPedidoComandaList()) {
+                currentOrder.removeProductFromOrderItemList(item);
+            }
         currentOrder = new Order();
     }
 
@@ -109,18 +107,18 @@ public class POSManager {
 
     private void setPaymentMethod(PaymentDetails data, Bill newBill) {
         switch (data.getPaymentMethod()) {
-            case PaymentType.CASH:
+            case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
-                newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
+                newBill.setPaidInCash(data.getCustomerCashAmount());
                 newBill.setPaymentMethod("PaymentType.CAS");
                 break;
-            case PaymentType.CARD:
-                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount(data.getCustomer()));
-                newBill.setReference(data.getReference());
+            case PaymentMethod.CARD:
+                newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
+                newBill.setPaymentReferenceNumber(data.getReference());
                 newBill.setPaymentMethod("PaymentType.CARD");
                 break;
-            case PaymentType.STORE_CREDIT:
-                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount(data.getCustomer()));
+            case PaymentMethod.STORE_CREDIT:
+                newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setPaymentMethod("PaymentType.STORE_CREDIT");
                 break;
             default:
@@ -133,11 +131,10 @@ public class POSManager {
     }
 
 
-
     public void sell(PaymentDetails paymentMethod, Customer customer) {
-        if(customer!= null){
+        if (customer != null) {
             customer.getCustomerAccount().accumulatePoints();
-            CustomerManager manager =new CustomerManager();
+            CustomerManager manager = new CustomerManager();
             manager.updateCustomerData(customer);
         }
         Printer printer = new Printer();
