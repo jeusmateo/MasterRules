@@ -16,21 +16,21 @@ public class Printer {
         String fileName= "order.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             LocalDateTime now = order.getDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a"+"\n");
             String formattedDate = now.format(formatter);
-            writer.write("Fecha: "+formattedDate);
-            writer.write("=====================================");
-            writer.write("Imprimiendo orden: " + order.getId());
-            writer.write("Productos: ");
+            writer.write("Fecha: "+formattedDate+"\n");
+            writer.write("====================================="+"\n");
+            writer.write("Imprimiendo orden: " + order.getId()+"\n");
+            writer.write("Productos: "+"\n");
             for (OrderItem product : order.getPedidoComandaList()) {
-                writer.write("Nombre : "+product.getProductName());
-                writer.write("   Cantidad: "+product.getQuantity());
+                writer.write("Nombre : "+product.getProductName()+"                 ");
+                writer.write("   Cantidad: "+product.getQuantity()+"\n");
 
             }
-            writer.write("Comentarios adicionales: "+order.getComment());
-            writer.write("Para: "+order.getCustomerName());
-            writer.write("Entregar en: "+order.getDeliveryMethod());
-            writer.write("=====================================");
+            writer.write("Comentarios adicionales: "+order.getComment()+"\n");
+            writer.write("Para: "+order.getCustomerName()+"\n");
+            writer.write("Entregar en: "+order.getDeliveryMethod()+"\n");
+            writer.write("====================================="+"\n");
         }catch (IOException e) {
             e.printStackTrace();
         }
