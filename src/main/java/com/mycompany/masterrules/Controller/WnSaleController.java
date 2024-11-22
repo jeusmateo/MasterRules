@@ -300,7 +300,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 } else {
                     showAlert("ATENCION","PAGO CANCELADO");
                 }
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 showAlert("Error", e.getMessage());
             } catch (Exception e) {
 
@@ -414,7 +414,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         tblOrder.refresh();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
-
 
 
     @Override

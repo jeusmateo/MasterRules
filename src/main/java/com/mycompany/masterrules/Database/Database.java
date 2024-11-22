@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Database;
 
 import org.hibernate.Session;
-import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.exception.GenericJDBCException;
 
 import java.util.List;
@@ -22,6 +21,10 @@ abstract class Database<K, T> {
     Database() {
     }
 
+    private static void sqliteExceptionHandler(GenericJDBCException e) {
+        var errorCode = e.getSQLException();
+    }
+
     public boolean save(T entity) throws DuplicatePrimaryKeyException {
         Session session = HibernateUtil.getOpenSession();
         try {
@@ -35,8 +38,7 @@ abstract class Database<K, T> {
             }
             sqliteExceptionHandler(e);
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
@@ -44,10 +46,6 @@ abstract class Database<K, T> {
         } finally {
             session.close();
         }
-    }
-
-    private static void sqliteExceptionHandler(GenericJDBCException e) {
-        var errorCode = e.getSQLException();
     }
 
     public abstract T findById(K id);

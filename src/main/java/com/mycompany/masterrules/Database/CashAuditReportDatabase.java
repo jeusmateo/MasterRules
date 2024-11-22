@@ -15,7 +15,7 @@ public class CashAuditReportDatabase extends Database<Long, CashAuditReport> {
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
-            if(session.getTransaction()!=null) session.getTransaction().rollback();
+            if (session.getTransaction() != null) session.getTransaction().rollback();
             return null;
         } finally {
             session.close();
@@ -31,7 +31,7 @@ public class CashAuditReportDatabase extends Database<Long, CashAuditReport> {
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
-            if(session.getTransaction()!=null) session.getTransaction().rollback();
+            if (session.getTransaction() != null) session.getTransaction().rollback();
             return List.of();
         } finally {
             session.close();

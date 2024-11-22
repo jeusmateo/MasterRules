@@ -13,7 +13,6 @@ import com.mycompany.masterrules.Model.users.Permission;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
-import java.util.Iterator;
 
 /**
  * @author David Torres
@@ -70,11 +69,11 @@ public class POSManager {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
     }
 
-    public void configureOrder(String metodoDeEntrega, String comentario,  String customerName) {
+    public void configureOrder(String metodoDeEntrega, String comentario, String customerName) {
 
-        if(!customerName.isEmpty()) {
+        if (!customerName.isEmpty()) {
             currentOrder.setCustomerName(customerName);
-        }else{
+        } else {
             currentOrder.setCustomerName("Publico General");
         }
 
@@ -84,10 +83,6 @@ public class POSManager {
         currentOrder.setComment(comentario);
         currentOrder.setDate(LocalDateTime.now());
     }
-
-
-
-
 
 
     private Bill createBill(PaymentDetails data) {
@@ -135,7 +130,7 @@ public class POSManager {
 
     public void sell(PaymentDetails paymentMethod, Customer customer) {
 
-        if(currentUser.hasPermission(Permission.MAKE_SALE)) {
+        if (currentUser.hasPermission(Permission.MAKE_SALE)) {
             throw new IllegalArgumentException("ERROR: No tienes permisos para realizar ventas");
         }
 

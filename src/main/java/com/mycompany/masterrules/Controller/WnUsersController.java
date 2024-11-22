@@ -1,13 +1,14 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.users.UserAccount;
-import com.mycompany.masterrules.Model.users.UserManager;
-import com.mycompany.masterrules.Model.users.UserNotFoundException;
-import com.mycompany.masterrules.Model.users.UserPermissions;
-import com.mycompany.masterrules.Model.users.Permission;
+import com.mycompany.masterrules.Model.users.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.EnumSet;
@@ -16,12 +17,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 
 /**
  * Controlador de la ventana de Usuarios
@@ -32,12 +27,11 @@ public class WnUsersController implements Initializable {
 
     // Atributos
 
-    private UserManager userManager = new UserManager();
-    private UserAccount userEdit;
     private static final String ERROR_TITLE = "Error:";
-
-    private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
-    private Map<CheckBox, Permission> checkBoxPermissionMapToEdit = new HashMap<>();
+    private final UserManager userManager = new UserManager();
+    private UserAccount userEdit;
+    private final Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
+    private final Map<CheckBox, Permission> checkBoxPermissionMapToEdit = new HashMap<>();
 
     // --------------------------------------------------------------------------------------------
 
@@ -68,7 +62,7 @@ public class WnUsersController implements Initializable {
     private TableColumn<UserAccount, String> colUserID;
     @FXML
     private TableColumn<UserAccount, String> colUserName;
-    
+
     @FXML
     private CheckBox chkMakeSalePerm;
     @FXML
@@ -164,20 +158,19 @@ public class WnUsersController implements Initializable {
     }
 
     private void handleEditUser() {
-    String editUserName = txtEditUserCompleteName.getText();
-    String editUserPassword = pswdFieldEditUserAccount.getText();
-    String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
-    String confirUserAccountUserEdit = textEditUserName.getText();
+        String editUserName = txtEditUserCompleteName.getText();
+        String editUserPassword = pswdFieldEditUserAccount.getText();
+        String confirmUserPassword = pswdFieldEditUserPasswordConfirm.getText();
+        String confirUserAccountUserEdit = textEditUserName.getText();
 
-    if (!editUserPassword.equals(confirmUserPassword)) {
-        throw new IllegalArgumentException("Error: Las contraseñas no coinciden.");
+        if (!editUserPassword.equals(confirmUserPassword)) {
+            throw new IllegalArgumentException("Error: Las contraseñas no coinciden.");
+        }
+
+        updateUser(editUserName, editUserPassword, confirUserAccountUserEdit);
+        refreshUserTable();
+        clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
     }
-
-    updateUser(editUserName, editUserPassword, confirUserAccountUserEdit);
-    refreshUserTable();
-    clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-}
-
 
 
     private void handleCreateUserAccount() throws IllegalArgumentException {
@@ -215,25 +208,25 @@ public class WnUsersController implements Initializable {
         userManager.updateUserInformation(this.userEdit);
     }
 
-private void handleDeleteUserAccount() {
-    if (this.userEdit == null) {
-        Logger.getLogger(WnUsersController.class.getName()).log(Level.INFO, "No se seleccionó ningún usuario para eliminar.");
-        showAlert(ERROR_TITLE, "No se seleccionó ningún usuario para eliminar.");
-        return;
-    }
+    private void handleDeleteUserAccount() {
+        if (this.userEdit == null) {
+            Logger.getLogger(WnUsersController.class.getName()).log(Level.INFO, "No se seleccionó ningún usuario para eliminar.");
+            showAlert(ERROR_TITLE, "No se seleccionó ningún usuario para eliminar.");
+            return;
+        }
 
-    try {
-        String userIdToDelete = this.userEdit.getUserName();
-        userManager.removeUser(userIdToDelete);
-        refreshUserTable();
-        clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
-        showAlert("Éxito", "Usuario eliminado correctamente.");
-    } catch (UserNotFoundException e) {
-        showAlert(ERROR_TITLE, "Error al eliminar usuario: " + e.getMessage());
-    } catch (Exception e) {
-        showAlert(ERROR_TITLE, "Error" + e.getMessage());
+        try {
+            String userIdToDelete = this.userEdit.getUserName();
+            userManager.removeUser(userIdToDelete);
+            refreshUserTable();
+            clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
+            showAlert("Éxito", "Usuario eliminado correctamente.");
+        } catch (UserNotFoundException e) {
+            showAlert(ERROR_TITLE, "Error al eliminar usuario: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert(ERROR_TITLE, "Error" + e.getMessage());
+        }
     }
-}
 
     @FXML
     private void eventKey(KeyEvent event) {
@@ -284,17 +277,17 @@ private void handleDeleteUserAccount() {
     }
 
 
-        @Override
-        public void initialize (URL location, ResourceBundle resources){
-            configCheckBoxToCreate();
-            configCheckBoxToEdit();
-            configColumnsOnUserTable();
-            configTextFields();
-            configSearchField();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        configCheckBoxToCreate();
+        configCheckBoxToEdit();
+        configColumnsOnUserTable();
+        configTextFields();
+        configSearchField();
 
-            ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
-            tblUserAccount.setItems(userAccounts);
-        }
+        ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
+        tblUserAccount.setItems(userAccounts);
+    }
 
     private void displayUserAccountInfoForEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
@@ -311,19 +304,19 @@ private void handleDeleteUserAccount() {
     }
 
 
-    private void syncCheckBoxesWithPermissions (UserAccount userAccount){
-            if (userAccount == null) return;
+    private void syncCheckBoxesWithPermissions(UserAccount userAccount) {
+        if (userAccount == null) return;
 
-            checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
+        checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
 
-            checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
-        }
+        checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
+    }
 
-        @FXML
-        private void displaySelected(javafx.scene.input.MouseEvent event){
-            UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
-            displayUserAccountInfoForEdit(userAccount);
-        }
+    @FXML
+    private void displaySelected(javafx.scene.input.MouseEvent event) {
+        UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
+        displayUserAccountInfoForEdit(userAccount);
+    }
 
     private void configSearchField() {
         txtFieldSearchUser.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -368,7 +361,7 @@ private void handleDeleteUserAccount() {
     }
 
 
-    private void configTextFields () {
+    private void configTextFields() {
         txtEditUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtFieldCreateUserCompleteName.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }

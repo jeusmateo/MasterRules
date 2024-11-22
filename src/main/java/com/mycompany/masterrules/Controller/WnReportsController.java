@@ -1,12 +1,8 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.finance.CashFlow;
-import com.mycompany.masterrules.Model.finance.CashierSupervisor;
 import com.mycompany.masterrules.Model.finance.CashRegister;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import com.mycompany.masterrules.Model.finance.CashierSupervisor;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Controlador para la ventana de reportes de caja en la aplicación.
  */
@@ -27,18 +26,16 @@ public class WnReportsController implements Initializable {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * Supervisor de cajeros que gestiona los flujos de efectivo.
+     */
+    CashierSupervisor cashierSupervisor = new CashierSupervisor();
+    /**
      * Registro de caja utilizado para las operaciones de flujo de efectivo.
      */
     private CashRegister cashRegister;
 
-    /**
-     * Supervisor de cajeros que gestiona los flujos de efectivo.
-     */
-    CashierSupervisor cashierSupervisor = new CashierSupervisor();
-
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
-
     // Botones relacionados con inflow y outflow
     @FXML
     private Button btnAcceptInflow;
@@ -129,36 +126,34 @@ public class WnReportsController implements Initializable {
             initializeCashInFlowTable();
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
-        }
-        catch (Exception e) {
-          showAlert("Error de entrada de efectivo", "Ocurrió un error al procesar la entrada de efectivo: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert("Error de entrada de efectivo", "Ocurrió un error al procesar la entrada de efectivo: " + e.getMessage());
         }
     }
 
     /**
      * Acepta la salida de efectivo y actualiza la tabla de flujo de salida de efectivo.
      */
-public void setBtnAcceptOutflow() {
-    try {
-        String cashAmount = txtFieldAmountOutflow.getText();
-        String reason = txtOutflowReason.getText();
-        cashRegister.withdrawCash(reason, cashAmount);
-        txtFieldAmountOutflow.setText("00.0");
-        txtOutflowReason.setText("");
+    public void setBtnAcceptOutflow() {
+        try {
+            String cashAmount = txtFieldAmountOutflow.getText();
+            String reason = txtOutflowReason.getText();
+            cashRegister.withdrawCash(reason, cashAmount);
+            txtFieldAmountOutflow.setText("00.0");
+            txtOutflowReason.setText("");
 
-        initializeCashOutFlowTable();
+            initializeCashOutFlowTable();
 
-        scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-  }catch (IllegalArgumentException e){
+            scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
+            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
-    showAlert("Error de salida de efectivo", "Ocurrió un error al procesar la salida de efectivo: " + e.getMessage());
-}
-}
+            showAlert("Error de salida de efectivo", "Ocurrió un error al procesar la salida de efectivo: " + e.getMessage());
+        }
+    }
 
     /**
      * Sale de la ventana de reportes de salida de efectivo y muestra la ventana principal de reportes.
@@ -184,7 +179,7 @@ public void setBtnAcceptOutflow() {
     /**
      * Inicializa el controlador después de que su raíz haya sido procesada.
      *
-     * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param location  La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
      * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
      */
     @Override

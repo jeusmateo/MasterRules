@@ -44,10 +44,6 @@ public class Bill {
 
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
     public String getPaymentReferenceNumber() {
         return paymentReferenceNumber;
     }
@@ -58,6 +54,10 @@ public class Bill {
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public BigDecimal getPaidInCash() {
