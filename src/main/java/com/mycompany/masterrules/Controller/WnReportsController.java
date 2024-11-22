@@ -129,7 +129,11 @@ public class WnReportsController implements Initializable {
             initializeCashInFlowTable();
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-        } catch (Exception e) {
+        }
+        catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
+        }
+        catch (Exception e) {
           showAlert("Error de entrada de efectivo", "Ocurrió un error al procesar la entrada de efectivo: " + e.getMessage());
         }
     }
@@ -149,7 +153,9 @@ public void setBtnAcceptOutflow() {
 
         scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
         scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-  } catch (Exception e) {
+  }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
+        } catch (Exception e) {
     showAlert("Error de salida de efectivo", "Ocurrió un error al procesar la salida de efectivo: " + e.getMessage());
 }
 }
@@ -263,4 +269,5 @@ public void setBtnAcceptOutflow() {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

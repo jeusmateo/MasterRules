@@ -21,8 +21,7 @@ public class CustomerManager {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.DELETE_CUSTOMER)) {
-            System.out.println("No tienes permiso para eliminar clientes");
-            return;
+            throw new IllegalArgumentException("No tienes permiso para eliminar clientes");
         }
 
         Customer customer = customerDatabase.findById(id);
@@ -38,14 +37,13 @@ public class CustomerManager {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.EDIT_CUSTOMER)) {
-            System.out.println("No tienes permiso para editar clientes");
-            return;
+            throw new IllegalArgumentException("No tienes permiso para editar clientes");
         }
 
         var foundUser = customerDatabase.findById(customer.getId());
 
         if (foundUser == null) {
-            System.out.println("No se encontró el cliente");
+
             return;
         }
         customerDatabase.update(customer);
@@ -65,8 +63,7 @@ public class CustomerManager {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.CREATE_CUSTOMER)) {
-            System.out.println("No tienes permiso para crear clientes");
-            return;
+            throw new IllegalArgumentException("No tienes permiso para crear clientes");
         }
         if (!name.trim().isEmpty() && !phone.trim().isEmpty()) {
             int loyaltyPointsInt;

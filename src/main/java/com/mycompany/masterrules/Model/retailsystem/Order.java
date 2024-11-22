@@ -15,7 +15,7 @@ import java.util.Objects;
 @Embeddable
 public class Order {
     @Column(name = "order_id")
-    private long orderId; //Chepo necesidad: Este es el numero de la comanda
+    private long orderId;
 
     public String getCustomerName() {
         return customerName;
@@ -35,7 +35,7 @@ public class Order {
     private String deliveryMethod;
    // private String customerName;
     @Column(name = "order_date")
-    private LocalDateTime date; //Chepo necesidad: TODO NO DEBERIA SER DATE SINO QUE LA FECHA DE ENVIADO A COCINA.
+    private LocalDateTime date;
     private BigDecimal totalAmount;
     @ElementCollection
     private List<OrderItem> orderItemList;

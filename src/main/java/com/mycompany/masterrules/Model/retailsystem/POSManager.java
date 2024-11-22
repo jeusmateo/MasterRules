@@ -9,6 +9,7 @@ import com.mycompany.masterrules.Model.customers.CustomerManager;
 import com.mycompany.masterrules.Model.finance.ArchiveInvoice;
 import com.mycompany.masterrules.Model.finance.CashRegister;
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.users.Permission;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
@@ -133,6 +134,11 @@ public class POSManager {
 
 
     public void sell(PaymentDetails paymentMethod, Customer customer) {
+
+        if(currentUser.hasPermission(Permission.MAKE_SALE)) {
+            throw new IllegalArgumentException("ERROR: No tienes permisos para realizar ventas");
+        }
+
         if (customer != null) {
             customer.getCustomerAccount().accumulatePoints();
             CustomerManager manager = new CustomerManager();
