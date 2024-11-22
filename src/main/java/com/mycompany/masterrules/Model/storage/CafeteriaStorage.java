@@ -55,9 +55,14 @@ public class CafeteriaStorage {
         productStockTable.remove(product);
         return productDatabase.update(product);
     }
+    public boolean editCurrentStock(Product product, int newQuantity) {
 
-    public boolean editCurrentStock(Product product, int newQuantity) {//cambiae el nombre a editCurrentStock
-        //*****Implementar funcion despues de acabar ventas
+        var currentUser = POSManager.getInstance().getCurrentUser();
+
+        if (!currentUser.hasPermission(Permission.EDIT_STOCK)) {
+            throw new IllegalArgumentException("No tienes permisos para editar el stock");
+        }
+
         if (!canEditStock(product, newQuantity)) {
             return false;
         }
@@ -68,15 +73,14 @@ public class CafeteriaStorage {
     }
 
     private boolean canEditStock(Product product, int newQuantity) {
-        var currentUser = POSManager.getInstance().getCurrentUser();
-        return isProductStored(product) && newQuantity >= 0 && currentUser.hasPermission(Permission.EDIT_STOCK);
+        return isProductStored(product) && newQuantity >= 0;
     }
 
     public boolean editMinStock(Product product, int newQuantity) {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.EDIT_MAX_MIN)) {
-            return false;
+            throw new IllegalArgumentException("No tienes permisos para editar el stock");
         }
 
         if (!canEditStock(product, newQuantity)) {
@@ -92,7 +96,7 @@ public class CafeteriaStorage {
 
         var currentUser = POSManager.getInstance().getCurrentUser();
         if (!currentUser.hasPermission(Permission.EDIT_MAX_MIN)) {
-            return false;
+            throw new IllegalArgumentException("No tienes permisos para editar el stock");
         }
 
         if (!canEditStock(product, newQuantity)) {

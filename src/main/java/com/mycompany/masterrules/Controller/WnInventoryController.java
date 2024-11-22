@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.storage.CafeteriaStorage;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -15,17 +14,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
 
 /**
  * Controlador de la ventana de Inventario
+ *
  * @author Jimena Garcia
  */
-
-//TODO ¿Todos los atributos se usan? ¿Cuales se pueden eliminar?, 2. cafeteriaStorage se quita?
-public class  WnInventoryController implements Initializable {
+public class WnInventoryController implements Initializable {
 
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
@@ -43,7 +39,6 @@ public class  WnInventoryController implements Initializable {
     private Button btnExit;
     @FXML
     private Button btnSave;
-
 
     @FXML
     private AnchorPane scrEditInfo;
@@ -95,13 +90,10 @@ public class  WnInventoryController implements Initializable {
         loadProductsToInventory();
         tblInventory.setItems(filteredData);
         setupSearchFilter();
-
     }
 
     private void loadProductsToInventory() {
-        CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
-        List<Product> products = cafeteriaMenu.getProducts();
-        productData.setAll(products); // Cargar todos los productos en la lista observable
+        productData.setAll(cafeteriaStorage.getProductStockTable().keySet());
     }
 
     private void configureTableColumns() {
@@ -123,8 +115,6 @@ public class  WnInventoryController implements Initializable {
         colProductMaxStockInventory.setReorderable(false);
         colProductMaxStockInventory.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getStockInfo().getMaxStock()));
     }
-
-
 
     public void showScrEditInfo() {
         Product selectedProduct = tblInventory.getSelectionModel().getSelectedItem();
@@ -169,8 +159,10 @@ public class  WnInventoryController implements Initializable {
             selectedProduct.getStockInfo().setCurrentStock(newStock);
             selectedProduct.getStockInfo().setMinStock(newMinStock);
             selectedProduct.getStockInfo().setMaxStock(newMaxStock);
-            CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
-            cafeteriaMenu.editProduct(selectedProduct);
+            cafeteriaStorage.editCurrentStock(selectedProduct, newStock);
+            cafeteriaStorage.editMinStock(selectedProduct, newMinStock);
+            cafeteriaStorage.editMaxStock(selectedProduct, newMaxStock);
+
             // Refrescar la tabla para mostrar los nuevos valores
             tblInventory.refresh();
 
@@ -199,7 +191,7 @@ public class  WnInventoryController implements Initializable {
 
     private void stockValidation(int newStock, int newMinStock, int newMaxStock) throws IllegalArgumentException {
         // Validar que el stock actual esté dentro del rango permitido
-        if (0 > newMinStock || 0> newStock ||  0> newMaxStock) {
+        if (0 > newMinStock || 0 > newStock || 0 > newMaxStock) {
             System.out.println("El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo.");
             throw new IllegalArgumentException(
                     "El stock actual no puede ser menor que el stock mínimo ni mayor que el stock máximo."
@@ -258,5 +250,4 @@ public class  WnInventoryController implements Initializable {
             buttonSaveInfo();
         }
     }
-
 }
