@@ -1,6 +1,8 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,9 +29,9 @@ public class Combo extends Product {
      * Constructor que inicializa un combo con su nombre, lista de productos, precio y precio VIP.
      *
      * @param comboName El nombre del combo.
-     * @param products La lista de productos que componen el combo.
-     * @param price El precio del combo.
-     * @param VIPPrice El precio VIP del combo.
+     * @param products  La lista de productos que componen el combo.
+     * @param price     El precio del combo.
+     * @param VIPPrice  El precio VIP del combo.
      */
     public Combo(String comboName, List<Product> products, BigDecimal price, BigDecimal VIPPrice) {
         super(comboName, price, VIPPrice);

@@ -7,7 +7,6 @@ import java.util.List;
 
 public final class ComboDatabase extends Database<String, Combo> {
     /**
-     *
      * @param id La llave primaria de la entidad
      * @return La entidad Combo con la llave primaria dada
      */
@@ -38,7 +37,7 @@ public final class ComboDatabase extends Database<String, Combo> {
         Session session = HibernateUtil.getOpenSession();
         try {
             session.beginTransaction();
-            List<Combo> combos = session.createQuery("from Combo",Combo.class).getResultList();
+            List<Combo> combos = session.createQuery("from Combo", Combo.class).getResultList();
             session.getTransaction().commit();
             return combos;
         } catch (Exception ex) {

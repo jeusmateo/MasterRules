@@ -1,10 +1,6 @@
 package com.mycompany.masterrules.Model.cafeteria;
 
-import com.mycompany.masterrules.Model.storage.StockInfo;
-
 import java.math.BigDecimal;
-import java.util.Objects;
-
 
 
 public class ProductCT {
@@ -29,6 +25,10 @@ public class ProductCT {
     }
 
 
+    protected ProductCT() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -45,8 +45,6 @@ public class ProductCT {
         this.category = productType;
     }
 
-
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -61,10 +59,6 @@ public class ProductCT {
 
     public void setVIPPrice(BigDecimal VIPPrice) {
         this.VIPPrice = VIPPrice;
-    }
-
-    protected ProductCT() {
-
     }
 
 }

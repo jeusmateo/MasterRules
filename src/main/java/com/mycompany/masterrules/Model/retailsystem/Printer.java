@@ -1,4 +1,5 @@
 package com.mycompany.masterrules.Model.retailsystem;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,32 +7,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-
 public class Printer {
 
 
-
-    public void imprimirOrder(Order order){
+    public void imprimirOrder(Order order) {
         LocalDateTime now = order.getDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a");
         String formattedDate = now.format(formatter);
-        System.out.println("Fecha: "+formattedDate);
+        System.out.println("Fecha: " + formattedDate);
         System.out.println("=====================================");
         System.out.println("Imprimiendo orden: " + order.getId());
         System.out.println("Productos: ");
         for (OrderItem product : order.getPedidoComandaList()) {
-            System.out.print("Nombre : "+product.getProductName());
-            System.out.println("   Cantidad: "+product.getQuantity());
+            System.out.print("Nombre : " + product.getProductName());
+            System.out.println("   Cantidad: " + product.getQuantity());
 
         }
-        System.out.println("Comentarios adicionales: "+order.getComment());
-        System.out.println("Para: "+order.getCustomerName());
-        System.out.println("Entregar en: "+order.getDeliveryMethod());
+        System.out.println("Comentarios adicionales: " + order.getComment());
+        System.out.println("Para: " + order.getCustomerName());
+        System.out.println("Entregar en: " + order.getDeliveryMethod());
         System.out.println("=====================================");
 
     }
-
-
 
 
 //    public void imprimirBill(Bill bill) {
@@ -83,7 +80,7 @@ public class Printer {
         String fileName = "bill.txt"; // Nombre del archivo donde se guardará la factura
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             writer.write("=====================================\n");
-            writer.write("Imprimiendo factura :" +bill.getId() + "\n");
+            writer.write("Imprimiendo factura :" + bill.getId() + "\n");
             writer.write("Nombre del empleado: " + bill.getEmployeeName() + "\n");
             if (bill.getCustomerName() != null) {
                 writer.write("Nombre del cliente: " + bill.getCustomerName() + "\n");

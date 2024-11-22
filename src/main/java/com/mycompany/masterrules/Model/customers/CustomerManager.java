@@ -52,10 +52,10 @@ public class CustomerManager {
     /**
      * Registra un nuevo cliente en la base de datos.
      *
-     * @param name El nombre del cliente.
-     * @param phone El número de teléfono del cliente.
+     * @param name          El nombre del cliente.
+     * @param phone         El número de teléfono del cliente.
      * @param loyaltyPoints Los puntos de lealtad del cliente.
-     * @param vipStatus El estado VIP del cliente.
+     * @param vipStatus     El estado VIP del cliente.
      * @throws IllegalArgumentException Si los puntos de lealtad no son válidos o si el nombre o teléfono están vacíos.
      */
 

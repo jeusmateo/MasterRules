@@ -21,15 +21,21 @@ public class Customer {
     /**
      * Constructor que inicializa un cliente con su nombre, número de teléfono, puntos de lealtad y estado VIP.
      *
-     * @param customerName El nombre del cliente.
+     * @param customerName        El nombre del cliente.
      * @param customerPhoneNumber El número de teléfono del cliente.
-     * @param loyaltyPoints Los puntos de lealtad del cliente.
-     * @param vipStatus El estado VIP del cliente.
+     * @param loyaltyPoints       Los puntos de lealtad del cliente.
+     * @param vipStatus           El estado VIP del cliente.
      */
     public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus, String accessCode) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus, accessCode);
+    }
+
+    /**
+     * Constructor protegido sin argumentos requerido por JPA.
+     */
+    protected Customer() {
     }
 
     /**
@@ -103,11 +109,6 @@ public class Customer {
     public void setCustomerAccount(CustomerAccount customerAccount) {
         this.customerAccount = customerAccount;
     }
-
-    /**
-     * Constructor protegido sin argumentos requerido por JPA.
-     */
-    protected Customer() {}
 
     /**
      * Compara este cliente con otro objeto para verificar si son iguales.

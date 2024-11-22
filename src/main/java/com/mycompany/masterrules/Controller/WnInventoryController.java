@@ -211,10 +211,7 @@ public class WnInventoryController implements Initializable {
                     return true;
                 } else if (product.getType().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (product.getId().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false; // No coincide
+                } else return product.getId().toLowerCase().contains(lowerCaseFilter);// No coincide
             });
             tblInventory.refresh();
         });

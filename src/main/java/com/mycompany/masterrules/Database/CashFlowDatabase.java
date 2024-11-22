@@ -4,21 +4,21 @@ import com.mycompany.masterrules.Model.finance.CashFlow;
 
 import java.util.List;
 
-public class CashFlowDatabase extends Database<Long, CashFlow>{
+public class CashFlowDatabase extends Database<Long, CashFlow> {
 
     @Override
     public CashFlow findById(Long id) {
         var session = HibernateUtil.getOpenSession();
-        try{
+        try {
             session.beginTransaction();
             var cashFlowReport = session.get(CashFlow.class, id);
             session.getTransaction().commit();
             return cashFlowReport;
-        }catch (Exception e) {
-            if(session.getTransaction()!=null)
+        } catch (Exception e) {
+            if (session.getTransaction() != null)
                 session.getTransaction().rollback();
             return null;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -26,16 +26,16 @@ public class CashFlowDatabase extends Database<Long, CashFlow>{
     @Override
     public List<CashFlow> readAll() {
         var session = HibernateUtil.getOpenSession();
-        try{
+        try {
             session.beginTransaction();
             var cashFlowReports = session.createQuery("from CashFlow", CashFlow.class).list();
             session.getTransaction().commit();
             return cashFlowReports;
-        }catch (Exception e) {
-            if(session.getTransaction()!=null)
+        } catch (Exception e) {
+            if (session.getTransaction() != null)
                 session.getTransaction().rollback();
             return List.of();
-        }finally {
+        } finally {
             session.close();
         }
     }
