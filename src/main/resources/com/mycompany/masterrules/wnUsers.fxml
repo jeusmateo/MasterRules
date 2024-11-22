@@ -430,30 +430,6 @@
                                                                   <Insets />
                                                                </opaqueInsets>
                                                             </CheckBox>
-                                                            <CheckBox fx:id="chkCreateComboEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Crear Combo">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                               <opaqueInsets>
-                                                                  <Insets />
-                                                               </opaqueInsets>
-                                                            </CheckBox>
-                                                            <CheckBox fx:id="chkEditComboEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="59.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Editar Combo">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                               <opaqueInsets>
-                                                                  <Insets />
-                                                               </opaqueInsets>
-                                                            </CheckBox>
-                                                            <CheckBox fx:id="chkDeleteComboEditPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="236.0" layoutY="104.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="131.0" text="Borrar Combo">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                               <opaqueInsets>
-                                                                  <Insets />
-                                                               </opaqueInsets>
-                                                            </CheckBox>
                                                          </children>
                                                       </AnchorPane>
                                                    </content>

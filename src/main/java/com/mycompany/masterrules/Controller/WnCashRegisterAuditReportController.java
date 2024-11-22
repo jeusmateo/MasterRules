@@ -2,32 +2,27 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.finance.CashAuditReport;
 import com.mycompany.masterrules.Model.finance.CashFlow;
+import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
-import com.mycompany.masterrules.Model.finance.CashierSupervisor;
-import com.mycompany.masterrules.Model.retailsystem.POSManager;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-
-public class WnCashRegisterAuditReportController implements Initializable{
+public class WnCashRegisterAuditReportController implements Initializable {
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
-    private  ObservableList<CashFlow> cashInFlowReports= FXCollections.observableArrayList();
-    private  ObservableList<CashFlow> cashOutFlowReports = FXCollections.observableArrayList();
+    private ObservableList<CashFlow> cashInFlowReports = FXCollections.observableArrayList();
+    private ObservableList<CashFlow> cashOutFlowReports = FXCollections.observableArrayList();
 
     private CashAuditReport currentCashAuditReport;
 
@@ -122,29 +117,39 @@ public class WnCashRegisterAuditReportController implements Initializable{
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
-        if(evt.equals(btnConfirmPart1)){
-            currentCashAuditReport = cashRegisterAuditReportManager.generateEndOfDaySalesReport();
-            txtTSCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
-            txtTSCreditCard.setText(String.valueOf("+ $ "+currentCashAuditReport.getCardRevenue()));
-            txtTSStoreCard.setText(String.valueOf("+ $ "+currentCashAuditReport.getStoreCreditRevenue()));
-            txtCashFunds.setText(String.valueOf("+  "+currentCashAuditReport.getCashBalance()));
-            txtCashSales.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
-            txtInFlowCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashFlowInTotalAmount()));
-            txtOutFlowCash.setText(String.valueOf("- $ "+currentCashAuditReport.getCashFlowOutTotalAmount()));
 
-            cashInFlowReports= FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
-            cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
-            tblCashInFlowReport.setItems(cashInFlowReports);
-            tblCashOutFlowReport.setItems(cashOutFlowReports);
-            tblCashInFlowReport.refresh();
-            tblCashOutFlowReport.refresh();
-        }
-        else if(evt.equals(btnRealizarCorteDeVenta)){
-            cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
-        }
+        try {
+            if (evt.equals(btnConfirmPart1)) {
+                currentCashAuditReport = cashRegisterAuditReportManager.generateEndOfDaySalesReport();
+                txtTSCash.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashRevenue()));
+                txtTSCreditCard.setText(String.valueOf("+ $ " + currentCashAuditReport.getCardRevenue()));
+                txtTSStoreCard.setText(String.valueOf("+ $ " + currentCashAuditReport.getStoreCreditRevenue()));
+                txtCashFunds.setText(String.valueOf("+  " + currentCashAuditReport.getCashBalance()));
+                txtCashSales.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashRevenue()));
+                txtInFlowCash.setText(String.valueOf("+ $ " + currentCashAuditReport.getCashFlowInTotalAmount()));
+                txtOutFlowCash.setText(String.valueOf("- $ " + currentCashAuditReport.getCashFlowOutTotalAmount()));
 
+                cashInFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
+                cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
+                tblCashInFlowReport.setItems(cashInFlowReports);
+                tblCashOutFlowReport.setItems(cashOutFlowReports);
+                tblCashInFlowReport.refresh();
+                tblCashOutFlowReport.refresh();
+            } else if (evt.equals(btnRealizarCorteDeVenta)) {
+                cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
+            }
+        } catch (IllegalArgumentException e) {
+            showAlert("Error", e.getMessage());
+        }
+            }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
 
 }
 
