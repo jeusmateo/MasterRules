@@ -6,13 +6,14 @@ import java.math.BigDecimal;
 
 public class PaymentDetails {
 
+    private Customer customer;
     private String paymentDescription;
     private PaymentType paymentMethod;
     private BigDecimal totalAmount;
     private BigDecimal customerCashAmount;
     private String CardTransactionReference;
     private BigDecimal changeAmount;
-    private Customer customer;
+
 
     public PaymentDetails(PaymentType metodoDePago, BigDecimal totalAmount){
         this.paymentMethod = metodoDePago;

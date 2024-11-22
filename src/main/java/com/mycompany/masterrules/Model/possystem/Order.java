@@ -17,8 +17,6 @@ import java.util.Objects;
 public class Order {
     @Column(name = "order_id")
     private long orderId; //Chepo necesidad: Este es el numero de la comanda
-    @ManyToOne
-    private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
 
     public String getCustomerName() {
         return customerName;
@@ -53,7 +51,7 @@ public class Order {
     }
     //public List<Combo> combos;
 
-    public void calculateTotalAmount() {
+    public void calculateTotalAmount(Customer customer) {
         BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
         if(customer!= null && customer.getCustomerAccount().isIsVIP()){
             for (OrderItem currentProduct : orderItemList) {
@@ -96,13 +94,6 @@ public class Order {
         }
     }
 
-//    public String getCustomerName(){
-//        return customerName;
-//    }
-//
-//    public void setCustomerName(String customerName){
-//        this.customerName = customerName;
-//    }
 
     private void updateStockAndMenu(OrderItem newOrderItem) {
         newOrderItem.getProduct().reduceStock();
@@ -147,34 +138,8 @@ public class Order {
         cf.editProduct(product);
     }
 
-
-    public void calculateVipTotalAmount(){
-        if(customer.getCustomerAccount().isIsVIP()){
-                BigDecimal calculatedTotalAmount = BigDecimal.ZERO;
-                for (OrderItem currentProduct : orderItemList) {
-                    calculatedTotalAmount = calculatedTotalAmount.add(currentProduct.getTotalVipPrice());
-                }
-
-            totalAmount= calculatedTotalAmount;
-        }else{
-            calculateTotalAmount();
-        }
-
-    }
-
-
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
-    }
-
-
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public String getComment() {
@@ -213,15 +178,8 @@ public class Order {
         this.orderId = id;
     }
 
-    public BigDecimal getTotalAmount() {
-        if(customer==null){
-            calculateTotalAmount();
-        }else{
-            calculateVipTotalAmount();
-        }
-
-
-
+    public BigDecimal getTotalAmount(Customer customer) {
+        calculateTotalAmount(customer);
         return this.totalAmount;
     }
 
@@ -234,7 +192,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + orderId +
-                ", customer=" + customer +
+             //   ", customer=" + customer +
                 ", employeeName='" + employeeName + '\'' +
                 ", numeroDeMesa='" + tableNumber + '\'' +
                 ", comment='" + additionalComment + '\'' +
@@ -251,7 +209,7 @@ public class Order {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return orderId == order.orderId &&
-                Objects.equals(customer, order.customer) &&
+            //    Objects.equals(customer, order.customer) &&
                 Objects.equals(employeeName, order.employeeName) &&
                 Objects.equals(tableNumber, order.tableNumber) &&
                 Objects.equals(additionalComment, order.additionalComment) &&
@@ -263,7 +221,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customer, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderItemList);
+        return Objects.hash(orderId, employeeName, tableNumber, additionalComment, deliveryMethod, date, totalAmount, orderItemList);
     }
 }
 

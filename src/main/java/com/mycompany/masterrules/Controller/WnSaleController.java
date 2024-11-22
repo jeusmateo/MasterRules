@@ -45,7 +45,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     // ATRIBUTOS
     //-------------------------------------------------------------------------------------------
-
+    private Customer customerSelected;
     private POSManager posManager = POSManager.getInstance();
     private ToggleGroup group;
     private WnSaleController wnSaleSection;
@@ -240,14 +240,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         }
         String comments = txtAdittionalComments.getText();
         //TODO validaciones para null
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
         posManager.configureOrder(deliveryMethod, comments, customerInfo,customerName);
     }
 
 
     @FXML
     private void handlePayAction(MouseEvent event) {
-        if (group.getSelectedToggle() != null && posManager.getCurrentOrder().getTotalAmount().compareTo(BigDecimal.ZERO) != 0) {
+        if (group.getSelectedToggle() != null && posManager.getCurrentOrder().getTotalAmount(customerSelected).compareTo(BigDecimal.ZERO) != 0) {
             try {
                 configOrderInfo();
 
@@ -256,10 +256,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 Parent paymentView = loader.load();
                 WnPaymentController paymentController = loader.getController();
 
-                if (posManager.getCurrentOrder().getCustomer() == null) {
-                    System.out.println(posManager.getCurrentOrder().getCustomer());
-                }
-                paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
+                paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(customerSelected),customerSelected);
 
                 // Crear una nueva escena y un nuevo Stage para la vista de pago
                 Scene paymentScene = new Scene(paymentView);
@@ -338,12 +335,12 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
 
         initializeTableOrder();
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
 
         cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
 
-                posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
+                customerSelected =(cboCustomers.getValue());
                 Customer test = cboCustomers.getValue();
                 System.out.println("Soy " + test.getCustomerName() + "y soy ");
                 if (test.getCustomerAccount().isIsVIP()) {
@@ -351,13 +348,13 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 }
                 updateOrderInfo();
                 //TODO chepo arregla esto
-                if (posManager.getCurrentOrder().getCustomer() != null && posManager.getCurrentOrder().getCustomer().getCustomerAccount().isIsVIP()) {
+                if (customerSelected != null && customerSelected.getCustomerAccount().isIsVIP()) {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
                 } else {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
                     updateOrderInfo();
                 }
-                lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+                lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
             }
         });
 
@@ -398,7 +395,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 }
             }
         });
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
 
     }
 
@@ -419,7 +416,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();
-        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
+        lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
 
     @FXML

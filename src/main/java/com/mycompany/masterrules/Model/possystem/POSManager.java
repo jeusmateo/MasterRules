@@ -78,7 +78,7 @@ public class POSManager {
 //        else{
 //            currentOrder.setCustomerName(customerName);
 //        }
-        currentOrder.setCustomer(customer);
+
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
         currentOrder.setDeliveryMethod(metodoDeEntrega);
@@ -99,9 +99,9 @@ public class POSManager {
     private Bill createBill(PaymentDetails data) {
         Bill newBill;
         if (data.getCustomer() == null) {
-            newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(), data.getPaymentMethod().toString(), currentOrder);
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
         } else {
-            newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(), data.getPaymentMethod().toString(), currentOrder);
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
         }
         setPaymentMethod(data, newBill);
         return newBill;
@@ -114,11 +114,11 @@ public class POSManager {
                 newBill.setPagadoEnEfectivo(data.getCustomerCashAmount());
                 break;
             case PaymentType.CARD:
-                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount());
+                newBill.setPagadoEnTajeta(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setReference(data.getReference());
                 break;
             case PaymentType.STORE_CREDIT:
-                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount());
+                newBill.setPagadoEnCreditoDeTienda(currentOrder.getTotalAmount(data.getCustomer()));
                 break;
             default:
                 break;
