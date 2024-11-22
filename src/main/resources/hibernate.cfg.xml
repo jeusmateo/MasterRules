@@ -24,8 +24,8 @@
         <mapping class="com.mycompany.masterrules.Model.possystem.Debt"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.Bill"/>
         <mapping class="com.mycompany.masterrules.Model.possystem.OrderItem"/>
-        <mapping class="com.mycompany.masterrules.Model.finanzas.CashFlow"/>
+        <mapping class="com.mycompany.masterrules.Model.finance.CashFlow"/>
 
-        <mapping class="com.mycompany.masterrules.Model.finanzas.CashAuditReport"/>
+        <mapping class="com.mycompany.masterrules.Model.finance.CashAuditReport"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,7 +1,6 @@
 package com.mycompany.masterrules.Model;
 
-import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
-import com.mycompany.masterrules.Model.possystem.Bill;
+import com.mycompany.masterrules.Model.finance.ArchiveInvoice;
 import com.mycompany.masterrules.Model.possystem.Order;
 import org.junit.jupiter.api.Test;
 

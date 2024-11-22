@@ -1,13 +1,8 @@
-package com.mycompany.masterrules.Model.finanzas;
+package com.mycompany.masterrules.Model.finance;
 
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CashRegisterAuditReportManagerTest {
 

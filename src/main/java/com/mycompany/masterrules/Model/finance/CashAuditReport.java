@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.finanzas;
+package com.mycompany.masterrules.Model.finance;
 
 import com.mycompany.masterrules.Model.possystem.Bill;
 import jakarta.persistence.*;
