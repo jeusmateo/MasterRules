@@ -34,10 +34,10 @@ public class WnSideNavigationBarController implements Initializable {
     private static final String REPORTS_VIEW = "/com/mycompany/masterrules/wnReports.fxml";
     private static final String SALES_VIEW = "/com/mycompany/masterrules/wnSale.fxml";
     private static final String USERS_VIEW = "/com/mycompany/masterrules/wnUsers.fxml";
+    private static final String LOGIN_VIEW = "/com/mycompany/masterrules/wnLogin.fxml";
 
     // Variables
     private String activeView = null;
-    private UserAccount currentUser = null; //TODO: verificar que esto este bien implementado
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
@@ -60,9 +60,9 @@ public class WnSideNavigationBarController implements Initializable {
     private Button btnUsersSection;
 
     @FXML
-    private Label labelUserName;
+    private Label lblUserName;
     @FXML
-    private Label lbllSignOut;
+    private Label lblSignOut;
 
     @FXML
     private AnchorPane scrPane;
@@ -182,24 +182,19 @@ public class WnSideNavigationBarController implements Initializable {
     private void signOut(ActionEvent event) {
         try {
 
-            //TODO: implementar esto del login pero ya funciona el boton
-            clearUserSession();
-
             // Cargar la vista de Login
-            StackPane loginView = FXMLLoader.load(getClass().getResource("/com/mycompany/masterrules/wnLogin.fxml"));
+            StackPane loginView = FXMLLoader.load(getClass().getResource(LOGIN_VIEW));
 
             // Limpiar el contenedor de la vista actual y mostrar la vista de Login
             scrPane.getChildren().setAll(loginView);
-
-
 
             // Si la ventana wnSideBar es un Stage separado, puedes cerrarla
             Stage currentStage = (Stage) scrPane.getScene().getWindow();
             currentStage.close(); // Cierra la ventana actual
 
-            // Si deseas abrir una nueva ventana con el login, puedes hacerlo así:
+            // Abre una nueva ventana con el login
             Stage loginStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnLogin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(LOGIN_VIEW));
             Scene loginScene = new Scene(loader.load());
             loginStage.setScene(loginScene);
             loginStage.show();
@@ -211,25 +206,12 @@ public class WnSideNavigationBarController implements Initializable {
         }
     }
 
-    private void clearUserSession() {
-        // Aquí limpias los datos de sesión. Ejemplo:
-        // - Eliminar cookies, tokens, objetos de usuario, etc.
-        // Si tienes un sistema de autenticación, como un token o un usuario en memoria, lo borrarías aquí.
-
-        // Ejemplo:
-        // user = null;
-        // authToken = null;
-
-        // O si estás usando un gestor de sesiones:
-        // sessionManager.clear();
-    }
-
 
     public void setCustomerName(UserAccount userAccount) {
         if (userAccount != null) {
-            labelUserName.setText(userAccount.getFullEmployeeName());
+            lblUserName.setText(userAccount.getFullEmployeeName());
         } else {
-            labelUserName.setText("Nombre no disponible");
+            lblUserName.setText("Nombre no disponible");
         }
     }
 
