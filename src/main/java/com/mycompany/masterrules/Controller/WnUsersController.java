@@ -8,7 +8,6 @@ import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.EnumSet;
@@ -35,6 +34,7 @@ public class WnUsersController implements Initializable {
 
     private UserManager userManager = new UserManager();
     private UserAccount userEdit;
+    private static final String ERROR_TITLE = "Error:";
 
     private Map<CheckBox, Permission> checkBoxPermissionMap = new HashMap<>();
     private Map<CheckBox, Permission> checkBoxPermissionMapToEdit = new HashMap<>();
@@ -173,8 +173,7 @@ public class WnUsersController implements Initializable {
                 handleDeleteUserAccount();
             }
         } catch (Exception e) {
-            Logger.getLogger(WnUsersController.class.getName()).log(Level.SEVERE, "Error: " + e.getMessage(), e);
-            showAlert("Error", "Ocurrió un error: " + e.getMessage());
+            showAlert(ERROR_TITLE, "Ocurrió un error: " + e.getMessage());
         }
     }
 
@@ -233,7 +232,7 @@ public class WnUsersController implements Initializable {
 private void handleDeleteUserAccount() {
     if (this.userEdit == null) {
         Logger.getLogger(WnUsersController.class.getName()).log(Level.INFO, "No se seleccionó ningún usuario para eliminar.");
-        showAlert("Error", "No se seleccionó ningún usuario para eliminar.");
+        showAlert(ERROR_TITLE, "No se seleccionó ningún usuario para eliminar.");
         return;
     }
 
@@ -244,9 +243,9 @@ private void handleDeleteUserAccount() {
         clearPasswordFields(new PasswordField[]{pswdFieldEditUserPasswordConfirm});
         showAlert("Éxito", "Usuario eliminado correctamente.");
     } catch (UserNotFoundException e) {
-        showAlert("Error", "Error al eliminar usuario: " + e.getMessage());
+        showAlert(ERROR_TITLE, "Error al eliminar usuario: " + e.getMessage());
     } catch (Exception e) {
-        showAlert("Error", "Error: " + e.getMessage());
+        showAlert(ERROR_TITLE, "Error" + e.getMessage());
     }
 }
 
@@ -313,11 +312,6 @@ private void handleDeleteUserAccount() {
 
     private void displayUserAccountInfoForEdit(UserAccount userAccount) {
         this.userEdit = userAccount;
-
-        if (userAccount == null) {
-            System.out.println("Chepo23");
-            return;
-        }
 
         try {
             txtEditUserCompleteName.setText(userAccount.getFullEmployeeName());
