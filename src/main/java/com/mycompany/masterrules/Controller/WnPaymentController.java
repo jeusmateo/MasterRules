@@ -128,9 +128,6 @@ public class WnPaymentController implements Initializable {
         labelTotalPrice.setText(String.valueOf(totalAmount));
     }
 
-    private void setScrNoStoreCredit() {
-        scrNoStoreCredit.setVisible(true);
-    }
 
     @FXML
     private void handleCancelButton() {

@@ -67,9 +67,6 @@ public class CafeteriaMenu {
         return availableProducts.contains(product);
     }
 
-    private boolean isProductNameTaken(String productName) {
-        return availableProducts.stream().anyMatch(product -> product.getName().equals(productName));
-    }
 
     public void editProduct(Product product) {
         if (!isProductOnMenu(product)) {
