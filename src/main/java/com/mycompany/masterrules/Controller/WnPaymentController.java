@@ -172,7 +172,7 @@ public class WnPaymentController implements Initializable {
     }
 
     private void handleStoreCreditPayment() {
-        if (customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
+        if (customer.getCustomerAccount().getAccessCode().equals(pswrdCreditAccess.getText())) {
             PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
             this.resultPayementDetails = processor.paymentProcess();
             closePaymentWindow(btnPaywSC);
