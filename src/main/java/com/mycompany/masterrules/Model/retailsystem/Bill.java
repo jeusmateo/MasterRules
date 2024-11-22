@@ -24,9 +24,9 @@ public class Bill {
     private BigDecimal paidWithStoreCredit;
     private BigDecimal change;
     private String customerName;
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
-    public Bill(String employeeName, String customer, BigDecimal amount, String paymentMethod, Order order) {
+    public Bill(String employeeName, String customer, BigDecimal amount, PaymentMethod paymentMethod, Order order) {
         this.employeeName = employeeName;
         this.customerName = customer;
         this.amount = amount;
@@ -44,7 +44,7 @@ public class Bill {
 
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -56,7 +56,7 @@ public class Bill {
         this.paymentReferenceNumber = reference;
     }
 
-    public String getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
