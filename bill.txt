@@ -142,3 +142,33 @@ PAGADO CON EFECTIVO: 2
 CAMBIO: $10
 
 =====================================
+=====================================
+Imprimiendo factura :1
+Nombre del empleado: admin
+Nombre del cliente: a
+Productos:
+Nombre: 1   Cantidad: 2  Precio: 2
+PAGADO CON CRÉDITO DE LA TIENDA: 2
+USUARIO: a
+
+=====================================
+=====================================
+Imprimiendo factura :2
+Nombre del empleado: admin
+Nombre del cliente: a
+Productos:
+Nombre: 1   Cantidad: 1  Precio: 1
+PAGADO CON CRÉDITO DE LA TIENDA: 1
+USUARIO: a
+
+=====================================
+=====================================
+Imprimiendo factura :3
+Nombre del empleado: Chepo David
+Nombre del cliente: Publico General
+Productos:
+Nombre: 1   Cantidad: 12  Precio: 12
+PAGADO CON EFECTIVO: 12
+CAMBIO: $0
+
+=====================================

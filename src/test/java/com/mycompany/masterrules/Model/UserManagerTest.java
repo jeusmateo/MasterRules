@@ -1,5 +1,6 @@
 package com.mycompany.masterrules.Model;
 
+import com.mycompany.masterrules.Model.users.Permission;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserManager;
 import com.mycompany.masterrules.Model.users.UserPermissions;
@@ -29,7 +30,7 @@ class UserManagerTest {
         UserAccount newUser = new UserAccount("Chepo", "Chepo", "Josue David Torres Tec");
 //        assertTrue(userManager.registerNewUser(newUser));
         UserPermissions permissions = new UserPermissions();
-        permissions.givePermission(UserPermissions.Permission.CREATE_USER);
+        permissions.givePermission(Permission.CREATE_USER);
         assertDoesNotThrow(() -> userManager.changeUserPermissons("5", permissions));
     }
 
