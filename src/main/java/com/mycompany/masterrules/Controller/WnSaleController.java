@@ -289,6 +289,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     posManager.sell(paymentResult,cboCustomers.getValue());
                     showMenuWindow();
                     updateOrderInfo();
+                    inputClientName.setVisible(true);
+                    cboCustomers.setValue(null);
 
                 } else {
                     System.out.println("Pago cancelado.");
