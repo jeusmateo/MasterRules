@@ -1,0 +1,11 @@
+Fecha: viernes, 22 noviembre 2024, 07:58:59 a. m.=====================================Imprimiendo orden: 0Productos: Nombre : 1   Cantidad: 4Comentarios adicionales: Para: aEntregar en: Mostrador=====================================Fecha: viernes, 22 noviembre 2024, 08:01:00 a. m.
+
+=====================================
+Imprimiendo orden: 0
+Productos: 
+Nombre : 1
+   Cantidad: 3
+Comentarios adicionales: 
+Para: a
+Entregar en: Para Llevar
+=====================================
