@@ -81,12 +81,6 @@ public class WnUsersController implements Initializable {
     @FXML
     private CheckBox chkDeleteProductPerm;
     @FXML
-    private CheckBox chkCreateComboPerm;
-    @FXML
-    private CheckBox chkEditComboPerm;
-    @FXML
-    private CheckBox chkDeleteComboPerm;
-    @FXML
     private CheckBox chkEditStockPerm;
     @FXML
     private CheckBox chkEditStockMinMaxPerm;
