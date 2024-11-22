@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReportController">
+<AnchorPane prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnCashRegisterAuditReportController">
    <children>
       <AnchorPane prefHeight="551.0" prefWidth="837.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="38.0">
          <children>
@@ -25,12 +18,14 @@
                <rowConstraints>
                   <RowConstraints fillHeight="false" maxHeight="61.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints fillHeight="false" maxHeight="61.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints fillHeight="false" maxHeight="61.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints fillHeight="false" maxHeight="61.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
                   <RowConstraints fillHeight="false" maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Salidas de efectivo" GridPane.rowIndex="3">
+                  <Label text="Salidas de efectivo" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -38,7 +33,7 @@
                         <Insets bottom="-5.0" />
                      </padding>
                   </Label>
-                  <TableView fx:id="tblCashInFlowReport" prefHeight="149.0" prefWidth="323.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <TableView fx:id="tblCashInFlowReport" prefHeight="149.0" prefWidth="323.0" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <columns>
                         <TableColumn fx:id="colReasonCashInFlow" prefWidth="88.0" text="Razon" />
                         <TableColumn fx:id="colDateTimeCashInFlow" prefWidth="145.0" text="Fecha" />
@@ -48,7 +43,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label text="Entradas de efectivo" GridPane.rowIndex="1">
+                  <Label text="Entradas de efectivo" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -56,7 +51,7 @@
                         <Insets bottom="-5.0" />
                      </padding>
                   </Label>
-                  <TableView fx:id="tblCashOutFlowReport" prefHeight="165.0" prefWidth="320.0" GridPane.rowIndex="4">
+                  <TableView fx:id="tblCashOutFlowReport" prefHeight="165.0" prefWidth="320.0" GridPane.rowIndex="6">
                      <columns>
                         <TableColumn fx:id="colReasonCashOutFlow" prefWidth="88.0" text="Razon" />
                         <TableColumn fx:id="colDateTimeCashOutFlow" prefWidth="145.0" text="Fecha" />
@@ -78,18 +73,18 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelHourTo" layoutX="194.0" text="Hora">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelHourFrom" layoutX="60.0" text="Hora">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
                      </children>
                   </Group>
+                  <Label fx:id="labelHourFrom" text="Hora" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelHourTo" text="Hora" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <GridPane layoutX="395.0" layoutY="93.0" prefHeight="444.0" prefWidth="414.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="93.0">
