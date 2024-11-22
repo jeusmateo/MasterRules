@@ -12,7 +12,7 @@ public abstract class PaymentProcessor {
         this.totalAmount = totalAmount;
     }
 
-    public abstract PaymentDetails paymentProcess();
+    public abstract PaymentDetails paymentProcess() throws PaymentException;
 
     public abstract String paymentDescription();
 

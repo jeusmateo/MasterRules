@@ -5,32 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MixPaymentProcessor extends PaymentProcessor {
-    private List<PaymentProcessor> paymentProcessors;
-    private BigDecimal recibido;
+    private final List<PaymentProcessor> paymentProcessors;
+    private BigDecimal cashReceived;
     private BigDecimal faltante;
 
-    public MixPaymentProcessor(BigDecimal totalAmount){
+    public MixPaymentProcessor(BigDecimal totalAmount) {
         super(totalAmount);
-        paymentProcessors = new ArrayList();
-        recibido = BigDecimal.ZERO;
+        paymentProcessors = new ArrayList<>();
+        cashReceived = BigDecimal.ZERO;
         faltante = totalAmount;
     }
 
-    public void addPaymentMethod(PaymentProcessor paymentProcessor){
+    public void addPaymentMethod(PaymentProcessor paymentProcessor) {
         paymentProcessors.add(paymentProcessor);
-        this.recibido = (this.getTotalAmount().add(paymentProcessor.getTotalAmount()));
+        this.cashReceived = (this.getTotalAmount().add(paymentProcessor.getTotalAmount()));
         faltante = faltante.subtract(paymentProcessor.getTotalAmount());
     }
 
-    public BigDecimal getFaltante(){
+    public BigDecimal getFaltante() {
         return faltante;
     }
 
     @Override
-    public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails=null;
+    public PaymentDetails paymentProcess() throws PaymentException {
+        PaymentDetails paymentDetails = null;
         for (PaymentProcessor paymentProcessor : paymentProcessors) {
-             paymentDetails = paymentProcessor.paymentProcess();
+            paymentDetails = paymentProcessor.paymentProcess();
         }
         return paymentDetails;
     }

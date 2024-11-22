@@ -13,34 +13,31 @@ public class CashPaymentProcessor extends PaymentProcessor {
     }
 
     @Override
-    public PaymentDetails paymentProcess() {
+    public PaymentDetails paymentProcess() throws PaymentException {
+        if (hasEnoughCash()) {
+            var cashRegister = POSManager.getInstance().getCashRegister();
+            var newCashAmount = cashRegister.getCurrentCashAmount().subtract(this.getTotalAmount());
+            cashRegister.setCurrentCashAmount(newCashAmount);
 
-        if (isPaymentSufficient()) {
             PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH, this.getTotalAmount());
             paymentDetails.setCustomerCashAmount(this.customerCashAmount);
             paymentDetails.setChangeAmount(changeAmount);
             paymentDetails.setPaymentDescription(paymentDescription());
-            var posManager = POSManager.getInstance();
-            var cashRegister = posManager.getCashRegister();
-            cashRegister.setCurrentCashAmount(cashRegister.getCurrentCashAmount().add(this.getTotalAmount()));
             return paymentDetails;
         } else {
-            return null;
+            throw new PaymentException("El pago no es suficiente");
         }
-
     }
 
-    private boolean isPaymentSufficient() {
+    private boolean hasEnoughCash() {
         return getTotalAmount().compareTo(customerCashAmount) <= 0;
     }
 
     @Override
     public String paymentDescription() {
-        String description = "PAGADO CON EN EFECTIVO: $" + this.getTotalAmount() +
+        return "PAGADO CON EN EFECTIVO: $" + this.getTotalAmount() +
                 "\n" +
                 "CAMBIO: $" + changeAmount +
                 "\n";
-
-        return description;
     }
 }
