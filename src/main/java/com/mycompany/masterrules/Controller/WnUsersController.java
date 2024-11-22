@@ -4,11 +4,10 @@ import com.mycompany.masterrules.Model.users.UserAccount;
 import com.mycompany.masterrules.Model.users.UserManager;
 import com.mycompany.masterrules.Model.users.UserNotFoundException;
 import com.mycompany.masterrules.Model.users.UserPermissions;
-import com.mycompany.masterrules.Model.users.UserPermissions.Permission;
+import com.mycompany.masterrules.Model.users.Permission;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.EnumSet;

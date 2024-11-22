@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
+<AnchorPane fx:id="main" prefHeight="600.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.masterrules.Controller.WnSaleController">
    <children>
       <AnchorPane fx:id="scrMainSale" layoutY="15.2" prefHeight="585.0" prefWidth="880.0" styleClass="white-bg" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -140,7 +140,7 @@
                   </TabPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="continueOrderWindow" layoutY="33.0" prefHeight="567.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="33.0">
+            <AnchorPane fx:id="continueOrderWindow" layoutY="33.0" prefHeight="567.0" prefWidth="569.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="33.0">
                <children>
                   <AnchorPane layoutX="12.0" layoutY="8.0" prefHeight="552.0" prefWidth="551.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="8.0">
                      <children>

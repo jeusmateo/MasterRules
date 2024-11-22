@@ -32,7 +32,7 @@ public class UserManager {
 
         // hardcoding the admin user
         if (isAdmin(username, password)) {
-            return Optional.of(new UserAccount("admin", "admin", new UserPermissions(EnumSet.allOf(UserPermissions.Permission.class)), "admin"));
+            return Optional.of(new UserAccount("admin", "admin", new UserPermissions(EnumSet.allOf(Permission.class)), "admin"));
         }
 
         if (!isUserRegistered(username)) {
