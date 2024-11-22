@@ -35,6 +35,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
 /**
  * Controlador de la ventana de Venta
  *
@@ -326,6 +327,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         group = new ToggleGroup();
+        configTextFields();
         deliveryMethodCounter.setToggleGroup(group);
         deliveryMethodTakeAway.setToggleGroup(group);
         paraMesaMetodo.setToggleGroup(group);
@@ -421,6 +423,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         updateOrderInfo();
     }
 
+    private void configTextFields() {
+        txtFieldTableNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
+    }
+
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
@@ -430,8 +436,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
     private void handleTextFieldTableNumber(KeyEvent event) {
-        String character = event.getText();
-        if (!character.matches("\\d")) {
+        if (!event.getCharacter().matches("\\d")) {
             event.consume();
         }
     }
