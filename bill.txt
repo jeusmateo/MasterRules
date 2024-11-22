@@ -102,3 +102,13 @@ PAGADO CON EFECTIVO: 200
 CAMBIO: $0
 
 =====================================
+=====================================
+Imprimiendo factura :15
+Nombre del empleado: admin
+Nombre del cliente: dsd
+Productos:
+Nombre: Hamburguesa   Cantidad: 1  Precio: 200
+PAGADO CON EFECTIVO: 200
+CAMBIO: $0
+
+=====================================
