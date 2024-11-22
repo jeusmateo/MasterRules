@@ -224,8 +224,10 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         Customer customerInfo = cboCustomers.getValue();
 
         String customerName = "";
-        if (customerInfo == null) {
-            customerName = inputClientName.getText();
+        if (customerInfo != null) {
+            customerName = customerInfo.getCustomerName();
+        }else{
+            customerName= inputClientName.getText();
         }
 
         RadioButton selectedDeliveryMethod = (RadioButton) group.getSelectedToggle();
@@ -239,7 +241,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String comments = txtAdditionalComments.getText();
         //TODO validaciones para null
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
-        posManager.configureOrder(deliveryMethod, comments, customerInfo, customerName);
+        posManager.configureOrder(deliveryMethod, comments, customerName);
     }
 
 
