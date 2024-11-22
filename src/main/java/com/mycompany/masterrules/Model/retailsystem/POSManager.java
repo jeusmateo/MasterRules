@@ -110,16 +110,13 @@ public class POSManager {
             case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
                 newBill.setPaidInCash(data.getCustomerCashAmount());
-//                newBill.setPaymentMethod(PaymentMethod.CASH);
                 break;
             case PaymentMethod.CARD:
                 newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setPaymentReferenceNumber(data.getReference());
-//                newBill.setPaymentMethod(PaymentMethod.CARD);
                 break;
             case PaymentMethod.STORE_CREDIT:
                 newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
-//                newBill.setPaymentMethod(PaymentMethod.STORE_CREDIT);
                 break;
             default:
                 break;

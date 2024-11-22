@@ -6,40 +6,41 @@ public class CashPaymentProcessor extends PaymentProcessor {
     private final BigDecimal customerCashAmount;
     private final BigDecimal changeAmount;
 
-    public CashPaymentProcessor(BigDecimal totalAmount, BigDecimal customerCashAmount){
+    public CashPaymentProcessor(BigDecimal totalAmount, BigDecimal customerCashAmount) {
         super(totalAmount);
         this.customerCashAmount = customerCashAmount;
         this.changeAmount = customerCashAmount.subtract(totalAmount);
-
     }
 
     @Override
     public PaymentDetails paymentProcess() {
 
-        if(getTotalAmount().compareTo(customerCashAmount) <= 0){
-            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH,this.getTotalAmount());
-
+        if (isPaymentSufficient()) {
+            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH, this.getTotalAmount());
             paymentDetails.setCustomerCashAmount(this.customerCashAmount);
             paymentDetails.setChangeAmount(changeAmount);
             paymentDetails.setPaymentDescription(paymentDescription());
             var posManager = POSManager.getInstance();
-            posManager.getCashRegister().setCurrentCashAmount(posManager.getCashRegister().getCurrentCashAmount().add(this.getTotalAmount()));
+            var cashRegister = posManager.getCashRegister();
+            cashRegister.setCurrentCashAmount(cashRegister.getCurrentCashAmount().add(this.getTotalAmount()));
             return paymentDetails;
-        }
-        else{
+        } else {
             return null;
         }
 
     }
 
+    private boolean isPaymentSufficient() {
+        return getTotalAmount().compareTo(customerCashAmount) <= 0;
+    }
+
     @Override
     public String paymentDescription() {
-        StringBuilder description = new StringBuilder("PAGADO CON EN EFECTIVO: $");
-        description.append(String.valueOf(this.getTotalAmount()));
-        description.append("\n");
-        description.append("CAMBIO: $"+ changeAmount);
-        description.append("\n");
+        String description = "PAGADO CON EN EFECTIVO: $" + this.getTotalAmount() +
+                "\n" +
+                "CAMBIO: $" + changeAmount +
+                "\n";
 
-        return description.toString();
+        return description;
     }
 }
