@@ -97,16 +97,16 @@ public class WnReportsController implements Initializable {
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
         if (evt.equals(btnDoInFlowReport)) {
-            scrDoInflowCash.setVisible(true); // Muestra la ventana de reportes de entrada de efectivo
-            scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
+            scrDoInflowCash.setVisible(true);
+            scrDoReport.setVisible(false);
         } else if (evt.equals(btnDoOutFlowReport)) {
-            scrDoOutflowReport.setVisible(true); // Muestra la ventana de reportes de salida de efectivo
-            scrDoReport.setVisible(false); // Oculta la ventana principal de reportes
+            scrDoOutflowReport.setVisible(true);
+            scrDoReport.setVisible(false);
         } else if (evt.equals(btnExitDoInflow)) {
-            clearTextFields(txtFieldAmountInflow); // Limpia los campos de texto proporcionados
-            txtReasonInflow.clear(); // Limpia el campo de texto de la razón de la entrada de efectivo
-            scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
-            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+            clearTextFields(txtFieldAmountInflow);
+            txtReasonInflow.clear();
+            scrDoInflowCash.setVisible(false);
+            scrDoReport.setVisible(true);
         } else if (evt.equals(btnAcceptOutflow)) {
             setBtnAcceptOutflow();
         } else if (evt.equals(btnAcceptInflow)) {
@@ -124,8 +124,8 @@ public class WnReportsController implements Initializable {
             cashRegister.depositCash(reason, cashAmount);
 
             initializeCashInFlowTable();
-            scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
-            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+            scrDoInflowCash.setVisible(false);
+            scrDoReport.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
@@ -146,8 +146,8 @@ public class WnReportsController implements Initializable {
 
             initializeCashOutFlowTable();
 
-            scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+            scrDoOutflowReport.setVisible(false);
+            scrDoReport.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
@@ -159,10 +159,10 @@ public class WnReportsController implements Initializable {
      * Sale de la ventana de reportes de salida de efectivo y muestra la ventana principal de reportes.
      */
     public void exitDoOutflow() {
-        clearTextFields(txtFieldAmountOutflow); // Limpia los campos de texto proporcionados
-        txtOutflowReason.clear(); // Limpia el campo de texto de la razón de la salida de efectivo
-        scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        clearTextFields(txtFieldAmountOutflow);
+        txtOutflowReason.clear();
+        scrDoOutflowReport.setVisible(false);
+        scrDoReport.setVisible(true);
     }
 
     /**
@@ -257,6 +257,13 @@ public class WnReportsController implements Initializable {
         }
     }
 
+
+    /**
+     * Muestra una alerta con un mensaje de error.
+     *
+     * @param title El título de la alerta.
+     * @param message El mensaje de la alerta.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -264,5 +271,4 @@ public class WnReportsController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

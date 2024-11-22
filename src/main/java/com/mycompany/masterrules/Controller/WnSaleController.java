@@ -1,6 +1,5 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Database.CustomerDatabase;
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
@@ -35,9 +34,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 /**
- * Controlador de la ventana de Venta
+ * Controlador de la ventana de Venta.
+ * Gestiona la visualización y procesamiento de las ventas.
+ * Implementa la interfaz ProductSelectionListener.
  *
  * @author campv
  */
@@ -45,25 +45,43 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     // Atributos
     //-------------------------------------------------------------------------------------------
+    /**
+     * Cliente seleccionado para la venta.
+     */
     private Customer customerSelected;
+
+    /**
+     * Gestor del punto de venta.
+     */
     private POSManager posManager = POSManager.getInstance();
+
+    /**
+     * Grupo de botones de alternancia para el método de entrega.
+     */
     private ToggleGroup group; // TODO: RENOMBRAR ESTO PERO NO PUDE PQ NO SUPE QUE RAYOS ERA
 
-    //Componentes de la vista
+    // Componentes de la vista
     //-------------------------------------------------------------------------------------------
 
+    // Botones
     @FXML
     private Button btnContinue;
     @FXML
     private Button btnPay;
 
-
+    // Campos de texto
     @FXML
     private TextField txtFieldTableNumber;
+    @FXML
+    private TextArea txtAdditionalComments;
+    @FXML
+    private TextField inputClientName;
 
+    // Etiquetas
     @FXML
     private Label lblTotal;
 
+    // Paneles
     @FXML
     private AnchorPane continueOrderWindow;
     @FXML
@@ -76,46 +94,38 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private AnchorPane scrOrderTable;
     @FXML
     private TabPane menuCategories;
-
-    @FXML
-    private VBox continueOrderOptionsBox;
-    @FXML
-    private VBox menuOrderOptionsBox;
-
-
-    @FXML
-    private HBox tableNumberBox;
-
-    @FXML
-    private ComboBox<Customer> cboCustomers;
-
     @FXML
     private ScrollPane menuCardsScroller;
     @FXML
     private ScrollPane menuCardsScroller1;
-
     @FXML
     private FlowPane productCardsScroller = new FlowPane();
     @FXML
     private FlowPane comboCardsScroller;
 
+    // Contenedores
     @FXML
-    private TextArea txtAdditionalComments;
-
+    private VBox continueOrderOptionsBox;
     @FXML
-    private TextField inputClientName;
+    private VBox menuOrderOptionsBox;
 
+    // Otros
+    @FXML
+    private HBox tableNumberBox;
+    @FXML
+    private ComboBox<Customer> cboCustomers;
 
+    // Opciones de entrega
     @FXML
     private ToggleGroup deliveryMethod;
-
     @FXML
     private RadioButton deliveryMethodCounter;
     @FXML
     private RadioButton deliveryMethodTakeAway;
     @FXML
-    private RadioButton paraMesaMetodo; // TODO RENOMBRAR ESTO
+    private RadioButton deliveryMethodTable;
 
+    // Tabla de orden
     @FXML
     private TableView<OrderItem> tblOrder;
     @FXML
@@ -125,11 +135,12 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     @FXML
     private TableColumn<OrderItem, String> colPrice; // este si es un String?
 
-
-    // Metodos
+    // Métodos
     //-------------------------------------------------------------------------------------------
 
-
+    /**
+     * Muestra las tarjetas de productos en el menú.
+     */
     public void displayProductMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
@@ -153,6 +164,9 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         }
     }
 
+    /**
+     * Muestra las tarjetas de combos en el menú.
+     */
     public void displayComboMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Combo> combosOnMenu = menu.getCombos();
@@ -176,24 +190,29 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         }
     }
 
-
+    /**
+     * Oculta el campo de texto para el nombre del cliente.
+     *
+     * @param event El evento de clic del ratón.
+     */
     @FXML
     public void hideTxtFieldClientName(MouseEvent event) {
         inputClientName.setVisible(false);
     }
 
-
+    /**
+     * Muestra el formulario de la orden.
+     */
     public void showOrderForm() {
         continueOrderWindow.setVisible(true);
         continueOrderOptionsBox.setVisible(true);
 
         menuWindow.setVisible(false);
         menuOrderOptionsBox.setVisible(false);
-
     }
 
     /**
-     * Mostrar cartilla de menu que muestra los porductos
+     * Muestra la ventana del menú que muestra los productos.
      */
     @FXML
     public void showMenuWindow() {
@@ -205,7 +224,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
     /**
-     * Mostrar opcion de número de mesa
+     * Muestra la opción de número de mesa.
      */
     @FXML
     public void showTableNumber() {
@@ -213,14 +232,16 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     }
 
     /**
-     * Ocultar opcion de número de mesa
+     * Oculta la opción de número de mesa.
      */
     @FXML
     public void hideTableNumber() {
         tableNumberBox.setVisible(false);
     }
 
-    //TODO FALTA EL DEL CLIENTRES
+    /**
+     * Configura la información de la orden.
+     */
     private void configOrderInfo() {
         Customer customerInfo = cboCustomers.getValue();
 
@@ -235,7 +256,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String deliveryMethod = "";
         if (selectedDeliveryMethod != null) {
             deliveryMethod = selectedDeliveryMethod.getText();
-            if (selectedDeliveryMethod.equals(paraMesaMetodo)) {
+            if (selectedDeliveryMethod.equals(deliveryMethodTable)) {
                 deliveryMethod += " - Mesa: " + txtFieldTableNumber.getText();
             }
         }
@@ -245,7 +266,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         posManager.configureOrder(deliveryMethod, comments, customerName);
     }
 
-
+    /**
+     * Maneja la acción de pago.
+     *
+     * @param event El evento de clic del ratón.
+     */
     @FXML
     private void handlePayAction(MouseEvent event) {
 
@@ -287,7 +312,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 // Mostrar el modal
                 paymentStage.showAndWait();
 
-
                 PaymentDetails paymentResult = paymentController.getPaymentDetails();
                 if (paymentResult != null) {
 
@@ -303,14 +327,14 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             } catch (IllegalArgumentException e) {
                 showAlert("Error", e.getMessage());
             } catch (Exception e) {
-
                 e.printStackTrace();
             }
         }
     }
 
-
-
+    /**
+     * Inicializa la tabla de orden.
+     */
     private void initializeTableOrder() {
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         colAmount.setReorderable(false);
@@ -331,16 +355,21 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
         });
         tblOrder.getSelectionModel().getSelectedItem();
-
     }
 
+    /**
+     * Inicializa el controlador después de que su raíz haya sido procesada.
+     *
+     * @param url La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param rb Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         group = new ToggleGroup();
         configTextFields();
         deliveryMethodCounter.setToggleGroup(group);
         deliveryMethodTakeAway.setToggleGroup(group);
-        paraMesaMetodo.setToggleGroup(group);
+        deliveryMethodTable.setToggleGroup(group);
 
         posManager = POSManager.getInstance();
 
@@ -397,6 +426,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
 
+    /**
+     * Elimina un producto de la orden.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     void removeProductToOrden(ActionEvent event) {
         try {
@@ -405,9 +439,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             updateOrderInfo();
         } catch (Exception e) {
         }
-
     }
 
+    /**
+     * Actualiza la información de la orden.
+     */
     private void updateOrderInfo() {
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
@@ -415,17 +451,29 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
 
-
+    /**
+     * Maneja la selección de un producto.
+     *
+     * @param product El producto seleccionado.
+     */
     @Override
     public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         updateOrderInfo();
     }
 
+    /**
+     * Configura los campos de texto.
+     */
     private void configTextFields() {
         txtFieldTableNumber.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }
 
+    /**
+     * Maneja los eventos de teclado.
+     *
+     * @param event El evento de teclado.
+     */
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
@@ -434,12 +482,23 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         }
     }
 
+    /**
+     * Maneja la entrada de texto en el campo de número de mesa.
+     *
+     * @param event El evento de teclado.
+     */
     private void handleTextFieldTableNumber(KeyEvent event) {
         if (!event.getCharacter().matches("\\d")) {
             event.consume();
         }
     }
 
+    /**
+     * Muestra una alerta con un mensaje de error.
+     *
+     * @param title El título de la alerta.
+     * @param message El mensaje de la alerta.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

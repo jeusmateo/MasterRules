@@ -140,7 +140,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </RadioButton>
-                              <RadioButton fx:id="paraMesaMetodo" mnemonicParsing="false" onAction="#showTableNumber" prefHeight="27.0" prefWidth="117.0" text="Mesa" toggleGroup="$deliveryMethod">
+                              <RadioButton fx:id="deliveryMethodTable" mnemonicParsing="false" onAction="#showTableNumber" prefHeight="27.0" prefWidth="117.0" text="Mesa" toggleGroup="$deliveryMethod">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
