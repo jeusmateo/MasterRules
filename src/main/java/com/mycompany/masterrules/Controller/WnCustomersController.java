@@ -199,7 +199,6 @@ public class WnCustomersController implements Initializable {
 
     private void handleUpdateCustomerAccount() {
         try {
-
             editCustomerInfo();
             clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
             chkEditCustomerVipStatus.setSelected(false);
@@ -232,7 +231,6 @@ public class WnCustomersController implements Initializable {
     }
 
     private void registerNewCustomer() {
-        String newAccessCode = txtFieldAccesCode.getText();
         String newCustomerName = txtNewCustomerName.getText();
         String newCustomerPhoneNumber = txtNewCustomerPhoneNumber.getText();
         String newCustomerLoyaltyPoints = txtNewCustomerLoyaltyPoints.getText();
