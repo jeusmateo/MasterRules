@@ -11,12 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -357,7 +352,6 @@ public class WnProductsController implements Initializable, ProductSelectionList
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(true);
         tabEditCombo.setDisable(true);
-
     }
 
     //private ObservableList<Product> observableProductList = FXCollections.observableArrayList();
@@ -541,6 +535,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
         selectedImagePath = null;
         imgProduct_tabCreate.setImage(null);
         updateProductTable();
+        showAlert("Producto registrado", "El producto ha sido registrado correctamente.");
     }
 
     private void handleDeleteProduct() {
@@ -548,6 +543,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
         if (selectedProduct != null) {
             cafeteriaMenu.removeProductOnMenu(selectedProduct);
             updateProductTable();
+            showAlert("Producto eliminado", "El producto ha sido eliminado correctamente.");
         }
     }
 
@@ -567,8 +563,8 @@ public class WnProductsController implements Initializable, ProductSelectionList
 
             cafeteriaMenu.editProduct(selectedProduct);
             updateProductTable();
-
             clearTextFields(txtProductName_tabEdit, txtProductType_tabEdit, txtProductPrice_tabEdit, txtProductVipPrice_tabEdit);
+            showAlert("Producto editado", "El producto ha sido editado correctamente.");
         }
     }
 
@@ -588,15 +584,17 @@ public class WnProductsController implements Initializable, ProductSelectionList
         btnBackToCreateCombo();
         updateProductTable();
         updateComboTable();
-        // Asegúrate de actualizar la tabla después de crear un combo
+        showAlert("Combo registrado", "El combo ha sido registrado correctamente.");
     }
 
     private void handleDeleteCombo() {
         Combo selectedCombo = tblCombos.getSelectionModel().getSelectedItem();
         if (selectedCombo != null) {
             cafeteriaMenu.removeComboOnMenu(selectedCombo);
+            showAlert("Combo eliminado", "El combo ha sido eliminado correctamente.");
             updateProductTable();
             updateComboTable(); // Asegúrate de actualizar la tabla después de eliminar un combo
+            showAlert("Combo eliminado", "El combo ha sido eliminado correctamente.");
         }
     }
 
@@ -618,6 +616,7 @@ public class WnProductsController implements Initializable, ProductSelectionList
             updateComboTable(); // Asegúrate de actualizar la tabla después de editar un combo
 
             clearTextFields(txtFieldEditComboName, txtFieldEditComboPrice, txtFieldEditComboVipPrice);
+            showAlert("Combo editado", "El combo ha sido editado correctamente.");
         }
     }
 
@@ -742,5 +741,13 @@ public class WnProductsController implements Initializable, ProductSelectionList
     @Override
     public void onProductSelected(Product product) {
         selectedProductsForCombo.add(product);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
