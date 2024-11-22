@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import com.mycompany.masterrules.Model.users.UserManager;
 import javafx.event.ActionEvent;
 import javafx.event.Event;

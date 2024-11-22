@@ -59,7 +59,7 @@ public class CafeteriaMenu {
      * @throws IllegalArgumentException si el producto ya existe en el menú.
      */
     public void addProductToMenu(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             productDatabase.save(product);
         } else {
             throw new IllegalArgumentException("ERROR: El producto ya existe");
@@ -72,7 +72,7 @@ public class CafeteriaMenu {
      * @throws IllegalArgumentException si el producto no existe en el menú.
      */
     public void removeProductOnMenu(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("El producto con ID " + product + " no existe en el menú.");
         }
         availableProducts.remove(product);
@@ -84,8 +84,8 @@ public class CafeteriaMenu {
      * @param product El producto a verificar.
      * @return true si el producto está en el menú, false en caso contrario.
      */
-    private boolean isProductOnMenu(Product product) {
-        return availableProducts.contains(product);
+    private boolean isProductNotOnMenu(Product product) {
+        return !availableProducts.contains(product);
     }
 
     /**
@@ -94,7 +94,7 @@ public class CafeteriaMenu {
      * @throws IllegalArgumentException si el producto no existe en el menú.
      */
     public void editProduct(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("ERROR: El producto no existe");
         }
 
@@ -126,7 +126,7 @@ public class CafeteriaMenu {
      * @throws IllegalArgumentException si el combo ya existe en el menú.
      */
     public void addComboToMenu(Combo combo) {
-        if (!isComboOnMenu(combo)) {
+        if (isComboNotOnMenu(combo)) {
             comboDatabase.save(combo);
         } else {
             throw new IllegalArgumentException("ERROR: El combo ya existe");
@@ -138,8 +138,8 @@ public class CafeteriaMenu {
      * @param combo El combo a verificar.
      * @return true si el combo está en el menú, false en caso contrario.
      */
-    private boolean isComboOnMenu(Combo combo) {
-        return availableCombos.contains(combo);
+    private boolean isComboNotOnMenu(Combo combo) {
+        return !availableCombos.contains(combo);
     }
 
     /**

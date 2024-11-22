@@ -1,6 +1,6 @@
-package com.mycompany.masterrules.Model.finanzas;
+package com.mycompany.masterrules.Model.finance;
 
-import com.mycompany.masterrules.Model.possystem.Bill;
+import com.mycompany.masterrules.Model.retailsystem.Bill;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -79,7 +79,7 @@ public class CashAuditReport {
 
     public void calculateCashRevenue() {
         for (Bill currentBill : this.bills) {
-            if (currentBill.getPaymentMethod().equals("CASH") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnEfectivo().compareTo(BigDecimal.ZERO) != 0) {
+            if (currentBill.getPaymentMethod().equals("CASH") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPaidInCash().compareTo(BigDecimal.ZERO) != 0) {
                 cashRevenue = cashRevenue.add(currentBill.getAmount());
             }
         }
@@ -87,7 +87,7 @@ public class CashAuditReport {
 
     public void calculateCardhRevenue() {
         for (Bill currentBill : this.bills) {
-            if (currentBill.getPaymentMethod().equals("CARD") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnTajeta().compareTo(BigDecimal.ZERO) != 0) {
+            if (currentBill.getPaymentMethod().equals("CARD") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPaidWithCard().compareTo(BigDecimal.ZERO) != 0) {
                 cardRevenue = cardRevenue.add(currentBill.getAmount());
             }
         }
@@ -95,7 +95,7 @@ public class CashAuditReport {
 
     public void calculateStoreCreditRevenue() {
         for (Bill currentBill : this.bills) {
-            if (currentBill.getPaymentMethod().equals("STORE_CREDIT") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPagadoEnCreditoDeTienda().compareTo(BigDecimal.ZERO) != 0) {
+            if (currentBill.getPaymentMethod().equals("STORE_CREDIT") || currentBill.getPaymentMethod().equals("MIX") && currentBill.getPaidWithStoreCredit().compareTo(BigDecimal.ZERO) != 0) {
                 storeCreditRevenue = storeCreditRevenue.add(currentBill.getAmount());
             }
         }

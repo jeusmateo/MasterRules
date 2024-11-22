@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
 
@@ -20,7 +20,7 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
         }else{
             return null;
         }
-        PaymentDetails paymentDetails= new PaymentDetails(PaymentType.STORE_CREDIT,this.getTotalAmount());
+        PaymentDetails paymentDetails= new PaymentDetails(PaymentMethod.STORE_CREDIT,this.getTotalAmount());
         paymentDetails.setCustomer(customer);
         paymentDetails.setPaymentDescription(paymentDescription());;
         return paymentDetails;

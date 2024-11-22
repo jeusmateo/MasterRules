@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import java.math.BigDecimal;
 
@@ -17,7 +17,7 @@ public class CashPaymentProcessor extends PaymentProcessor {
     public PaymentDetails paymentProcess() {
 
         if(getTotalAmount().compareTo(customerCashAmount) <= 0){
-            PaymentDetails paymentDetails = new PaymentDetails(PaymentType.CASH,this.getTotalAmount());
+            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH,this.getTotalAmount());
 
             paymentDetails.setCustomerCashAmount(this.customerCashAmount);
             paymentDetails.setChangeAmount(changeAmount);

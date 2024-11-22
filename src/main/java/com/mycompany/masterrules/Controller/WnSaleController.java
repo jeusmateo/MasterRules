@@ -2,7 +2,6 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Database.CustomerDatabase;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.possystem.POSManager;
-import com.mycompany.masterrules.Model.possystem.PaymentDetails;
-import com.mycompany.masterrules.Model.possystem.OrderItem;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.PaymentDetails;
+import com.mycompany.masterrules.Model.retailsystem.OrderItem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

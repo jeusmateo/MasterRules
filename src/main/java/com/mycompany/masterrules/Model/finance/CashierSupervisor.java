@@ -1,8 +1,7 @@
-package com.mycompany.masterrules.Model.finanzas;
+package com.mycompany.masterrules.Model.finance;
 
 import com.mycompany.masterrules.Database.CashFlowDatabase;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
