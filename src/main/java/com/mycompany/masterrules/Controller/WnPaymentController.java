@@ -16,7 +16,8 @@ import java.util.ResourceBundle;
 
 
 /**
- * FXML Controller class
+ * Controlador para la ventana de pago.
+ * Gestiona la visualización y procesamiento de los pagos.
  *
  * @author Jimena Garcia
  */
@@ -25,12 +26,25 @@ public class WnPaymentController implements Initializable {
     // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Cliente que realiza el pago.
+     */
     private Customer customer;
+
+    /**
+     * Monto total a pagar.
+     */
     private BigDecimal totalAmount;
+
+    /**
+     * Detalles del pago resultante.
+     */
     private PaymentDetails resultPayementDetails;
 
     // Componentes de la vista
     // --------------------------------------------------------------------------------------------
+
+    // Botones
     @FXML
     private Button btnCancel;
     @FXML
@@ -42,16 +56,9 @@ public class WnPaymentController implements Initializable {
     @FXML
     private Button btnPaywSC;
 
-    @FXML
-    private Label labelCashIncome;
-    @FXML
-    private Label labelChange;
-    @FXML
-    private Label labelReferenceNum;
+    // Etiquetas
     @FXML
     private Label labelTotal;
-    @FXML
-    private Label labelTotal1;
     @FXML
     private Label labelTotalPrice;
     @FXML
@@ -61,17 +68,9 @@ public class WnPaymentController implements Initializable {
     @FXML
     private Label labelTotalPriceSC;
 
+    // Campos de texto
     @FXML
     private PasswordField pswrdCreditAccess;
-
-    @FXML
-    private AnchorPane scrNoStoreCredit;
-
-    @FXML
-    private Tab tabCash;
-    @FXML
-    private Tab tabStoreCredit;
-
     @FXML
     private TextField txtFieldCashIncome;
     @FXML
@@ -87,15 +86,27 @@ public class WnPaymentController implements Initializable {
     @FXML
     private TextField txtFieldStoreCreditIncomeMP;
 
+    // Paneles
+    @FXML
+    private AnchorPane scrNoStoreCredit;
+
+    // Pestañas
+    @FXML
+    private Tab tabCash;
+    @FXML
+    private Tab tabStoreCredit;
+
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
 
     /**
-     * Initializes the controller class.
+     * Inicializa el controlador después de que su raíz haya sido procesada.
+     *
+     * @param url La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param rb Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         configureNumericField(txtFieldCashIncome);
         configureNumericField(txtFieldCashIncomeMP);
         configureNumericField(txtFieldCardIncomeMP);
@@ -109,10 +120,14 @@ public class WnPaymentController implements Initializable {
         txtFieldCashIncomeMP.textProperty().addListener(mixedPaymentListener);
         txtFieldCardIncomeMP.textProperty().addListener(mixedPaymentListener);
         txtFieldStoreCreditIncomeMP.textProperty().addListener(mixedPaymentListener);
-
-
     }
 
+    /**
+     * Establece los datos del pedido.
+     *
+     * @param totalAmount El monto total a pagar.
+     * @param customerInfo La información del cliente.
+     */
     public void setOrderData(BigDecimal totalAmount, Customer customerInfo) {
         if (customerInfo != null) {
             this.customer = customerInfo;
@@ -127,7 +142,9 @@ public class WnPaymentController implements Initializable {
         labelTotalPrice.setText(String.valueOf(totalAmount));
     }
 
-
+    /**
+     * Maneja el evento del botón de cancelar.
+     */
     @FXML
     private void handleCancelButton() {
         // Obtener el Stage (ventana) y cerrarla
@@ -135,8 +152,11 @@ public class WnPaymentController implements Initializable {
         stage.close();
     }
 
-    // metodo que al no reconocer la tarjeta del cliente salta la vista scrNoStoreCredit
-
+    /**
+     * Maneja las acciones de los botones en la interfaz de usuario.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
@@ -157,6 +177,9 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el pago en efectivo.
+     */
     private void handleCashPayment() {
         BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncome.getText());
         PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
@@ -168,6 +191,9 @@ public class WnPaymentController implements Initializable {
         closePaymentWindow(btnPay);
     }
 
+    /**
+     * Maneja el pago con tarjeta de débito.
+     */
     private void handleDebitCardPayment() {
         String transactionReferenceNum = txtFieldReferenceNum.getText();
         PaymentProcessor processor = new DebitCardPaymentProcessor(totalAmount, transactionReferenceNum);
@@ -179,6 +205,9 @@ public class WnPaymentController implements Initializable {
         closePaymentWindow(btnPaywCreditCard);
     }
 
+    /**
+     * Maneja el pago con crédito de la tienda.
+     */
     private void handleStoreCreditPayment() {
         if (customer.getCustomerAccount().getAccessCode().equals(pswrdCreditAccess.getText())) {
             PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
@@ -193,6 +222,9 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el pago mixto.
+     */
     private void handleMixedPayment() {
         BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncomeMP.getText());
         BigDecimal cardIncome = parseBigDecimal(txtFieldCardIncomeMP.getText());
@@ -216,6 +248,12 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Convierte una cadena de texto a BigDecimal.
+     *
+     * @param text El texto a convertir.
+     * @return El valor BigDecimal correspondiente.
+     */
     private BigDecimal parseBigDecimal(String text) {
         try {
             return text == null || text.isEmpty() ? BigDecimal.ZERO : new BigDecimal(text);
@@ -224,6 +262,14 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Agrega métodos de pago al procesador de pagos mixtos.
+     *
+     * @param processor El procesador de pagos mixtos.
+     * @param cashIncome El ingreso en efectivo.
+     * @param cardIncome El ingreso con tarjeta.
+     * @param storeCreditIncome El ingreso con crédito de la tienda.
+     */
     private void addPaymentMethodToProcessor(MixPaymentProcessor processor, BigDecimal cashIncome, BigDecimal cardIncome, BigDecimal storeCreditIncome) {
         if (cardIncome.compareTo(BigDecimal.ZERO) > 0) {
             processor.addPaymentMethod(new DebitCardPaymentProcessor(cardIncome, ""));
@@ -236,11 +282,22 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la ventana de pago.
+     *
+     * @param button El botón que desencadenó el cierre.
+     */
     private void closePaymentWindow(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Muestra una alerta con un mensaje de error.
+     *
+     * @param title El título de la alerta.
+     * @param message El mensaje de la alerta.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -249,10 +306,20 @@ public class WnPaymentController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Obtiene los detalles del pago.
+     *
+     * @return Los detalles del pago.
+     */
     public PaymentDetails getPaymentDetails() {
         return resultPayementDetails;
     }
 
+    /**
+     * Calcula el cambio a devolver.
+     *
+     * @param cashIncome El ingreso en efectivo.
+     */
     private void calcularCambio(String cashIncome) {
         try {
             BigDecimal cash = new BigDecimal(cashIncome); // Convertir el texto a BigDecimal
@@ -263,6 +330,9 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Calcula el monto faltante en un pago mixto.
+     */
     private void calcularFaltanteMixto() {
         try {
             BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncomeMP.getText());
@@ -278,6 +348,11 @@ public class WnPaymentController implements Initializable {
         }
     }
 
+    /**
+     * Configura un campo de texto para aceptar solo entradas numéricas.
+     *
+     * @param textField El campo de texto a configurar.
+     */
     private void configureNumericField(TextField textField) {
         textField.setTextFormatter(new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
@@ -287,6 +362,4 @@ public class WnPaymentController implements Initializable {
             return null; // Rechaza el cambio si no cumple la expresión regular
         }));
     }
-
-
 }
