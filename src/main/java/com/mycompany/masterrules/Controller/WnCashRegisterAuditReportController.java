@@ -4,6 +4,8 @@ import com.mycompany.masterrules.Model.finance.CashAuditReport;
 import com.mycompany.masterrules.Model.finance.CashFlow;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
@@ -132,12 +134,19 @@ public class WnCashRegisterAuditReportController implements Initializable{
             txtInFlowCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashFlowInTotalAmount()));
             txtOutFlowCash.setText(String.valueOf("- $ "+currentCashAuditReport.getCashFlowOutTotalAmount()));
 
+
             cashInFlowReports= FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
             cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
             tblCashInFlowReport.setItems(cashInFlowReports);
             tblCashOutFlowReport.setItems(cashOutFlowReports);
             tblCashInFlowReport.refresh();
             tblCashOutFlowReport.refresh();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ss a");
+            String formattedDate = (currentCashAuditReport.getInitialCutofDate()).format(formatter);
+            labelHourFrom.setText(formattedDate);
+            LocalDateTime local= LocalDateTime.now();
+            String formattedDateFinal = local.format(formatter);
+            labelHourTo.setText(formattedDateFinal);
         }
         else if(evt.equals(btnRealizarCorteDeVenta)){
             cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
