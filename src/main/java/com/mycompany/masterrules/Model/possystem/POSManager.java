@@ -87,10 +87,10 @@ public class POSManager {
 
     public void cancelOrder() {
 
-        while(!currentOrder.getPedidoComandaList().isEmpty())
-        for(OrderItem item:currentOrder.getPedidoComandaList()){
-            currentOrder.removeProductFromOrderItemList(item);
-        }
+        while (!currentOrder.getPedidoComandaList().isEmpty())
+            for (OrderItem item : currentOrder.getPedidoComandaList()) {
+                currentOrder.removeProductFromOrderItemList(item);
+            }
         currentOrder = new Order();
     }
 
@@ -107,15 +107,15 @@ public class POSManager {
 
     private void setPaymentMethod(PaymentDetails data, Bill newBill) {
         switch (data.getPaymentMethod()) {
-            case PaymentType.CASH:
+            case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
                 newBill.setPaidInCash(data.getCustomerCashAmount());
                 break;
-            case PaymentType.CARD:
+            case PaymentMethod.CARD:
                 newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
                 newBill.setPaymentReferenceNumber(data.getReference());
                 break;
-            case PaymentType.STORE_CREDIT:
+            case PaymentMethod.STORE_CREDIT:
                 newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
                 break;
             default:
@@ -128,11 +128,10 @@ public class POSManager {
     }
 
 
-
     public void sell(PaymentDetails paymentMethod, Customer customer) {
-        if(customer!= null){
+        if (customer != null) {
             customer.getCustomerAccount().accumulatePoints();
-            CustomerManager manager =new CustomerManager();
+            CustomerManager manager = new CustomerManager();
             manager.updateCustomerData(customer);
         }
 
