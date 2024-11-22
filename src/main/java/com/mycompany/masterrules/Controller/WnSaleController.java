@@ -68,28 +68,17 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     @FXML
     private Label lblTotal;
-    @FXML
-    private Label lbCategory;
 
     @FXML
     private AnchorPane continueOrderWindow;
     @FXML
     private AnchorPane menuWindow;
     @FXML
-    private AnchorPane AnchorPaneCategoriesProductsCombo;
-    @FXML
     private AnchorPane main;
     @FXML
     private AnchorPane scrMainSale;
     @FXML
     private AnchorPane scrOrderTable;
-    @FXML
-    private AnchorPane scrMainSale1;
-    @FXML
-    private AnchorPane scrCustomCombo1;
-    @FXML
-    private AnchorPane scrCustomCombo11;
-
     @FXML
     private TabPane menuCategories;
 
@@ -140,14 +129,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private TableColumn<OrderItem, String> colProduct;
     @FXML
     private TableColumn<OrderItem, String> colPrice; // este si es un String?
-    @FXML
-    private TableView<?> tblAuxiliarCustomCombo;
-    @FXML
-    private TableColumn<?, ?> colAmount1;
-    @FXML
-    private TableColumn<?, ?> colProduct1;
-    @FXML
-    private TableColumn<?, ?> colPrice1;
+
 
     // MÉTODOS
     //-------------------------------------------------------------------------------------------

@@ -25,9 +25,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" object-ref="schemas/CafeteriaMasterRulesBD/tables/Combo" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="14f871a6-9073-431e-859a-ddbc010d90a3" />
