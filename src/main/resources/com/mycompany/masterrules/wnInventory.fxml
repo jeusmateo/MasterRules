@@ -36,8 +36,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button fx:id="btnScanProduct" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="150.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Escanear producto" />
-                  <Button fx:id="btnEditStockInfo" layoutX="181.0" layoutY="24.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="31.0" prefWidth="145.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar información" />
+                  <Button fx:id="btnEditStockInfo" layoutX="235.0" layoutY="24.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="31.0" prefWidth="145.0" styleClass="btn" stylesheets="@viewTemplate.css" text="Editar información" />
+                  <TextField fx:id="txtFieldSearchProduct" layoutX="62.0" layoutY="27.0" promptText="Buscar por ID o Escanear" />
+                  <Button layoutX="22.0" layoutY="26.0" mnemonicParsing="false" stylesheets="@viewTemplate.css" text="SOI" textFill="#fcfcfc">
+                     <styleClass>
+                        <String fx:value="logout" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="scrEditInfo" layoutX="216.0" layoutY="78.0" prefHeight="445.0" prefWidth="448.0" stylesheets="@viewTemplate.css" visible="false">
