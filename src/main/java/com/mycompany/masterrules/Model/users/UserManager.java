@@ -1,6 +1,7 @@
 package com.mycompany.masterrules.Model.users;
 
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -21,6 +22,11 @@ public class UserManager {
     }
 
     public void registerNewUser(UserAccount newUser) {//cambie el nombre del parametro
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.CREATE_USER)) {
+            throw new IllegalArgumentException("No tienes permisos para crear usuarios");
+        }
+
         if (!isValidForRegister(newUser)) {
             throw new IllegalArgumentException("Usuario no valido");
         }
@@ -32,7 +38,7 @@ public class UserManager {
 
         // hardcoding the admin user
         if (isAdmin(username, password)) {
-            return Optional.of(new UserAccount("admin", "admin", new UserPermissions(EnumSet.allOf(UserPermissions.Permission.class)), "admin"));
+            return Optional.of(new UserAccount("admin", "admin", new UserPermissions(EnumSet.allOf(Permission.class)), "admin"));
         }
 
         if (!isUserRegistered(username)) {
@@ -50,6 +56,12 @@ public class UserManager {
     }
 
     public void updateUserInformation(UserAccount editedUserAccount) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_USER)) {
+            throw new IllegalArgumentException("No tienes permisos para editar usuarios");
+        }
+
         if (isUserRegistered(editedUserAccount.getUserName())) {
             allUsers.set(allUsers.indexOf(editedUserAccount), editedUserAccount);
             userDatabaseManager.update(editedUserAccount);
@@ -63,6 +75,12 @@ public class UserManager {
     }
 
     public void removeUser(String userID) throws UserNotFoundException {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.DELETE_USER)) {
+            throw new IllegalArgumentException("No tienes permisos para eliminar usuarios");
+        }
+
         var findUser = allUsers.stream().findFirst().filter(user -> user.getUserName().equals(userID));
 
         if (findUser.isEmpty()) {

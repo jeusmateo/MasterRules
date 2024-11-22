@@ -113,7 +113,7 @@
                                                 <content>
                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-background" stylesheets="@viewTemplate.css">
                                                          <children>
-                                                            <CheckBox fx:id="chkCreateProductPerrm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
+                                                            <CheckBox fx:id="chkCreateProductPerm" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="139.0" text="Crear Producto">
                                                                <font>
                                                                   <Font size="15.0" />
                                                                </font>

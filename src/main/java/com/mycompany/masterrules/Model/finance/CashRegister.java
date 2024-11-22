@@ -1,5 +1,8 @@
 package com.mycompany.masterrules.Model.finance;
 
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.users.Permission;
+
 import java.math.BigDecimal;
 
 public class CashRegister {
@@ -21,6 +24,11 @@ public class CashRegister {
 
     public void withdrawCash(String reason, String amount) throws Exception {
 
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.RECORD_CASHIN)) {
+            throw new IllegalArgumentException("El usuario no tiene permisos para retirar dinero de caja");
+        }
+
         BigDecimal amountBigDecimal = new BigDecimal(amount);
         if (currentCashAmount.compareTo(amountBigDecimal) >= 0) {
 
@@ -34,6 +42,12 @@ public class CashRegister {
     }
 
     public void depositCash(String reason, String amount) throws Exception {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.RECORD_CASHOUT)) {
+            throw new IllegalArgumentException("El usuario no tiene permisos para depositar dinero en caja");
+        }
+
         if (amount.matches("\\d+")) {
             BigDecimal amountBigDecimal = new BigDecimal(amount);
             if (amountBigDecimal.compareTo(BigDecimal.ZERO) >= 0) {

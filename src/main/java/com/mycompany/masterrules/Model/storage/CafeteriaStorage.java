@@ -3,6 +3,8 @@ package com.mycompany.masterrules.Model.storage;
 import com.mycompany.masterrules.Database.ProductDatabase;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.users.Permission;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,7 @@ import java.util.Map;
 public class CafeteriaStorage {
 
     private Map<Product, StockInfo> productStockTable;
-    private ProductDatabase productDatabase;
+    private final ProductDatabase productDatabase;
 
     public CafeteriaStorage() {
         this.productStockTable = new HashMap<>();
@@ -66,10 +68,17 @@ public class CafeteriaStorage {
     }
 
     private boolean canEditStock(Product product, int newQuantity) {
-        return isProductStored(product) && newQuantity >= 0;
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        return isProductStored(product) && newQuantity >= 0 && currentUser.hasPermission(Permission.EDIT_STOCK);
     }
 
     public boolean editMinStock(Product product, int newQuantity) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_MAX_MIN)) {
+            return false;
+        }
+
         if (!canEditStock(product, newQuantity)) {
             return false;
         }
@@ -80,6 +89,12 @@ public class CafeteriaStorage {
     }
 
     public boolean editMaxStock(Product product, int newQuantity) {
+
+        var currentUser = POSManager.getInstance().getCurrentUser();
+        if (!currentUser.hasPermission(Permission.EDIT_MAX_MIN)) {
+            return false;
+        }
+
         if (!canEditStock(product, newQuantity)) {
             return false;
         }

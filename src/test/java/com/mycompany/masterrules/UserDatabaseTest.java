@@ -1,6 +1,7 @@
 package com.mycompany.masterrules;
 
 import com.mycompany.masterrules.Database.UserDatabase;
+import com.mycompany.masterrules.Model.users.Permission;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import com.mycompany.masterrules.Model.users.UserPermissions;
@@ -18,7 +19,7 @@ public class UserDatabaseTest {
 
         // Asignar permisos
         UserPermissions permissions = new UserPermissions();
-        permissions.givePermission(UserPermissions.Permission.CREATE_USER);
+        permissions.givePermission(Permission.CREATE_USER);
         user.setPermissions(permissions);
 
         // Insertar usuario
