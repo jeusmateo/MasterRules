@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MixPaymentProcessor extends PaymentProcessor {
     private final List<PaymentProcessor> paymentProcessors;
-//    private BigDecimal amountReceived;
+    //    private BigDecimal amountReceived;
     private BigDecimal amountToPay;
 
     public MixPaymentProcessor(BigDecimal totalAmountToPay) {
@@ -28,26 +28,35 @@ public class MixPaymentProcessor extends PaymentProcessor {
 
     @Override
     public PaymentDetails paymentProcess() throws PaymentException {
-        if(paymentProcessors.isEmpty()) {
+        if (paymentProcessors.isEmpty()) {
             throw new PaymentException("No se ha seleccionado ningún método de pago");
-        }else{
-            var finalPaymentDetails = new PaymentDetails(PaymentMethod.MIX, BigDecimal.ZERO);
+        } else {
+            var newPaymentDetails = new PaymentDetails(PaymentMethod.MIX, amountToPay);
+
+            newPaymentDetails.setCustomer(newPaymentDetails.getCustomer());
+
             // process each payment method and append the payment details
+            var totalCustomerCashAmount = BigDecimal.ZERO;
+            var totalChangeAmount = BigDecimal.ZERO;
+            var totalReference = new StringBuilder();
+            var totalPaymentDescription = new StringBuilder();
 
-            for (PaymentProcessor paymentProcessor : paymentProcessors) {
-                var paymentDetails = paymentProcessor.paymentProcess();
+            for (var paymentProcessor : paymentProcessors) {
+                var actualPaymentDetails = paymentProcessor.paymentProcess();
+
+                totalChangeAmount = totalChangeAmount.add(actualPaymentDetails.getChangeAmount());
+                totalCustomerCashAmount = totalCustomerCashAmount.add(actualPaymentDetails.getCustomerCashAmount());
+                totalReference.append(actualPaymentDetails.getReference());
+                totalPaymentDescription.append(paymentProcessor.paymentDescription()).append("\n");
+
             }
 
-            // check if the total amount paid is enough
-            BigDecimal totalAmountPaid = paymentProcessors.stream()
-                    .map(PaymentProcessor::getTotalAmountToPay)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            newPaymentDetails.setCustomerCashAmount(totalCustomerCashAmount);
+            newPaymentDetails.setChangeAmount(totalChangeAmount);
+            newPaymentDetails.setReference(totalReference.toString());
+            newPaymentDetails.setPaymentDescription(totalPaymentDescription.toString());
 
-            if(totalAmountPaid.compareTo(this.getTotalAmountToPay()) < 0) {
-                throw new PaymentException("El monto pagado no es suficiente");
-            }else{
-                return new PaymentDetails(PaymentMethod.MIX, totalAmountPaid);
-            }
+            return newPaymentDetails;
         }
 
     }

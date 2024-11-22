@@ -155,6 +155,7 @@ public class WnPaymentController implements Initializable {
             }
         } catch (Exception e) {
             showAlert("Error de Pago", "Ocurrió un error al procesar el pago.");
+            throw new RuntimeException(e);
         }
     }
 

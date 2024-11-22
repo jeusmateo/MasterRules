@@ -9,15 +9,15 @@ public class PaymentDetails {
     private Customer customer;
     private String paymentDescription;
     private PaymentMethod paymentMethod;
-    private BigDecimal totalAmount;
-    private BigDecimal customerCashAmount;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
+    private BigDecimal customerCashAmount = BigDecimal.ZERO;
     private String CardTransactionReference;
-    private BigDecimal changeAmount;
+    private BigDecimal changeAmount = BigDecimal.ZERO;
 
 
-    public PaymentDetails(PaymentMethod metodoDePago, BigDecimal totalAmount){
+    public PaymentDetails(PaymentMethod metodoDePago, BigDecimal totalAmount) {
         this.paymentMethod = metodoDePago;
-        this.totalAmount = totalAmount;
+        this.totalAmount = this.totalAmount.add(totalAmount);
     }
 
     public String getPaymentDescription() {
@@ -27,6 +27,7 @@ public class PaymentDetails {
     public void setPaymentDescription(String paymentDescription) {
         this.paymentDescription = paymentDescription;
     }
+
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
@@ -35,27 +36,30 @@ public class PaymentDetails {
         this.paymentMethod = metodoDePago;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public BigDecimal getChangeAmount() {
+        return changeAmount;
     }
-
 
     public void setChangeAmount(BigDecimal changeAmount) {
         this.changeAmount = changeAmount;
     }
-    public BigDecimal getChangeAmount() {
-        return changeAmount;
-    }
+
     public String getReference() {
         return CardTransactionReference;
     }
-
 
     public void setReference(String reference) {
         // Noncompliant - method is empty
     }
 
-    public Customer getCustomer(){return this.customer;}
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public BigDecimal getCustomerCashAmount() {
         return customerCashAmount;
     }
