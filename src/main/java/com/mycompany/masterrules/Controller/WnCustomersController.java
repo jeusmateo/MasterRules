@@ -92,6 +92,8 @@ public class WnCustomersController implements Initializable {
     private TextField txtEditCustomerPhoneNumber;
     @FXML
     private TextField txtFieldEditCustomerName;
+    @FXML
+    private TextField txtFieldAccesCode;
 
     @FXML
     private TableView<Customer> tblCustomers;
@@ -122,6 +124,7 @@ public class WnCustomersController implements Initializable {
         scrMainViewCustomerAccount.setVisible(true);
         scrEditCustomerAccount.setVisible(false);
         clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
+        accessCodeRequested =false;
     }
 
 
@@ -133,6 +136,7 @@ public class WnCustomersController implements Initializable {
     private void setScrWarningCredit() {
         if(!accessCodeRequested){
             scrWarningCredit.setVisible(true);
+            pswFieldAccesCode.requestFocus();
         }
 
     }
@@ -195,7 +199,6 @@ public class WnCustomersController implements Initializable {
 
     private void handleUpdateCustomerAccount() {
         try {
-
             editCustomerInfo();
             clearTextFields(txtEditCustomerStoreCredit, txtEditCustomerLoyaltyPoints);
             chkEditCustomerVipStatus.setSelected(false);
