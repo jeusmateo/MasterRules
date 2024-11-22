@@ -120,6 +120,7 @@ public class WnPaymentController implements Initializable {
             this.customer = customerInfo;
         } else {
             tabStoreCredit.setDisable(true);
+            txtFieldStoreCreditIncomeMP.setDisable(true);
         }
         this.totalAmount = totalAmount;
         labelTotalPriceCC.setText(String.valueOf(totalAmount));
@@ -154,27 +155,40 @@ public class WnPaymentController implements Initializable {
             }
         } catch (Exception e) {
             showAlert("Error de Pago", "Ocurrió un error al procesar el pago.");
+            throw new RuntimeException(e);
         }
     }
 
     private void handleCashPayment() {
         BigDecimal cashIncome = parseBigDecimal(txtFieldCashIncome.getText());
         PaymentProcessor processor = new CashPaymentProcessor(totalAmount, cashIncome);
-        this.resultPayementDetails = processor.paymentProcess();
+        try {
+            this.resultPayementDetails = processor.paymentProcess();
+        } catch (PaymentException e) {
+            throw new RuntimeException(e);
+        }
         closePaymentWindow(btnPay);
     }
 
     private void handleDebitCardPayment() {
         String transactionReferenceNum = txtFieldReferenceNum.getText();
-        PaymentProcessor processor = new DebitCardPaymenthProcessor(totalAmount, totalAmount, transactionReferenceNum);
-        this.resultPayementDetails = processor.paymentProcess();
+        PaymentProcessor processor = new DebitCardPaymentProcessor(totalAmount, transactionReferenceNum);
+        try {
+            this.resultPayementDetails = processor.paymentProcess();
+        } catch (PaymentException e) {
+            throw new RuntimeException(e);
+        }
         closePaymentWindow(btnPaywCreditCard);
     }
 
     private void handleStoreCreditPayment() {
-        if (customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(pswrdCreditAccess.getText())) {
+        if (customer.getCustomerAccount().getAccessCode().equals(pswrdCreditAccess.getText())) {
             PaymentProcessor processor = new StoreCreditPayProcessor(totalAmount, customer);
-            this.resultPayementDetails = processor.paymentProcess();
+            try {
+                this.resultPayementDetails = processor.paymentProcess();
+            } catch (PaymentException e) {
+                throw new RuntimeException(e);
+            }
             closePaymentWindow(btnPaywSC);
         } else {
             showAlert("Acceso Denegado", "El código de acceso es incorrecto.");
@@ -195,7 +209,11 @@ public class WnPaymentController implements Initializable {
         } else {
             MixPaymentProcessor processor = new MixPaymentProcessor(totalAmount);
             addPaymentMethodToProcessor(processor, cashIncome, cardIncome, storeCreditIncome);
-            this.resultPayementDetails = processor.paymentProcess();
+            try {
+                this.resultPayementDetails = processor.paymentProcess();
+            } catch (PaymentException e) {
+                throw new RuntimeException(e);
+            }
             closePaymentWindow(btnPayMP);
         }
     }
@@ -210,12 +228,12 @@ public class WnPaymentController implements Initializable {
 
     private void addPaymentMethodToProcessor(MixPaymentProcessor processor, BigDecimal cashIncome, BigDecimal cardIncome, BigDecimal storeCreditIncome) {
         if (cardIncome.compareTo(BigDecimal.ZERO) > 0) {
-            processor.addPaymentMethod(new DebitCardPaymenthProcessor(cardIncome, cardIncome, ""));
+            processor.addPaymentMethod(new DebitCardPaymentProcessor(cardIncome, ""));
         }
         if (cashIncome.compareTo(BigDecimal.ZERO) > 0) {
             processor.addPaymentMethod(new CashPaymentProcessor(cashIncome, cashIncome));
         }
-        if (storeCreditIncome.compareTo(BigDecimal.ZERO) > 0) {
+        if (storeCreditIncome.compareTo(BigDecimal.ZERO) > 0 && customer != null) {
             processor.addPaymentMethod(new StoreCreditPayProcessor(storeCreditIncome, customer));
         }
     }

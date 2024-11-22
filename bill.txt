@@ -132,3 +132,13 @@ PAGADO CON EFECTIVO: 600
 CAMBIO: $0
 
 =====================================
+=====================================
+Imprimiendo factura :1
+Nombre del empleado: admin
+Nombre del cliente: Publico General
+Productos:
+Nombre: 4   Cantidad: 1  Precio: 2
+PAGADO CON EFECTIVO: 2
+CAMBIO: $10
+
+=====================================
