@@ -2,7 +2,6 @@ package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Database.CustomerDatabase;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
 import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.possystem.POSManager;
-import com.mycompany.masterrules.Model.possystem.PaymentDetails;
-import com.mycompany.masterrules.Model.possystem.OrderItem;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.PaymentDetails;
+import com.mycompany.masterrules.Model.retailsystem.OrderItem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -163,7 +162,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         ObservableList<Product> comboDataList = FXCollections.observableArrayList(combosOnMenu);
         for (Product currentProductCombo : comboDataList) {
             try {
-                FXMLLoader load = new FXMLLoader();
+                FXMLLoader load = new FXMLLoader(); //TODO ESTO SI PUEDE SER UNA CONSTANTE.
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
                 AnchorPane pane = load.load();
                 ItemCardProductController cardController = load.getController();
@@ -382,6 +381,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 }
             }
         });
+
 
 // Personaliza la celda visible del ComboBox (cuando no está desplegado)
         cboCustomers.setButtonCell(new ListCell<>() {

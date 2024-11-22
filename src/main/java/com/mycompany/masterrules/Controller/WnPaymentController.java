@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.customers.Customer;
-import com.mycompany.masterrules.Model.possystem.*;
+import com.mycompany.masterrules.Model.retailsystem.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

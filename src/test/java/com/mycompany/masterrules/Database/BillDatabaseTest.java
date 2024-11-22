@@ -1,9 +1,9 @@
 package com.mycompany.masterrules.Database;
 
 import com.mycompany.masterrules.Model.cafeteria.Product;
-import com.mycompany.masterrules.Model.possystem.Bill;
-import com.mycompany.masterrules.Model.possystem.Order;
-import com.mycompany.masterrules.Model.possystem.OrderItem;
+import com.mycompany.masterrules.Model.retailsystem.Bill;
+import com.mycompany.masterrules.Model.retailsystem.Order;
+import com.mycompany.masterrules.Model.retailsystem.OrderItem;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

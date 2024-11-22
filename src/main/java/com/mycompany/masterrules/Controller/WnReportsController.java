@@ -1,13 +1,13 @@
 package com.mycompany.masterrules.Controller;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlow;
-import com.mycompany.masterrules.Model.finanzas.CashierSupervisor;
-import com.mycompany.masterrules.Model.finanzas.CashRegister;
+import com.mycompany.masterrules.Model.finance.CashFlow;
+import com.mycompany.masterrules.Model.finance.CashierSupervisor;
+import com.mycompany.masterrules.Model.finance.CashRegister;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

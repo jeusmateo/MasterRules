@@ -1,7 +1,6 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import com.mycompany.masterrules.Model.cafeteria.CafeteriaMenu;
-import com.mycompany.masterrules.Model.cafeteria.Combo;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import jakarta.persistence.*;

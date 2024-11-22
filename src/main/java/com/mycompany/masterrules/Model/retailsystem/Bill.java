@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import jakarta.persistence.*;
 
@@ -18,10 +18,10 @@ public class Bill {
     private BigDecimal amount;
     @Embedded
     private Order order;
-    private String reference;
-    private BigDecimal pagadoEnEfectivo;
-    private BigDecimal pagadoEnTajeta;
-    private BigDecimal pagadoEnCreditoDeTienda;
+    private String paymentReferenceNumber;
+    private BigDecimal paidInCash;
+    private BigDecimal paidWithCard;
+    private BigDecimal paidWithStoreCredit;
     private BigDecimal change;
     private String customerName;
     private String paymentMethod;
@@ -48,40 +48,40 @@ public class Bill {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getReference() {
-        return reference;
+    public String getPaymentReferenceNumber() {
+        return paymentReferenceNumber;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setPaymentReferenceNumber(String reference) {
+        this.paymentReferenceNumber = reference;
     }
 
     public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public BigDecimal getPagadoEnEfectivo() {
-        return pagadoEnEfectivo;
+    public BigDecimal getPaidInCash() {
+        return paidInCash;
     }
 
-    public void setPagadoEnEfectivo(BigDecimal pagadoEnEfectivo) {
-        this.pagadoEnEfectivo = pagadoEnEfectivo;
+    public void setPaidInCash(BigDecimal pagadoEnEfectivo) {
+        this.paidInCash = pagadoEnEfectivo;
     }
 
-    public BigDecimal getPagadoEnTajeta() {
-        return pagadoEnTajeta;
+    public BigDecimal getPaidWithCard() {
+        return paidWithCard;
     }
 
-    public void setPagadoEnTajeta(BigDecimal pagadoEnTajeta) {
-        this.pagadoEnTajeta = pagadoEnTajeta;
+    public void setPaidWithCard(BigDecimal pagadoEnTajeta) {
+        this.paidWithCard = pagadoEnTajeta;
     }
 
-    public BigDecimal getPagadoEnCreditoDeTienda() {
-        return pagadoEnCreditoDeTienda;
+    public BigDecimal getPaidWithStoreCredit() {
+        return paidWithStoreCredit;
     }
 
-    public void setPagadoEnCreditoDeTienda(BigDecimal pagadoEnCreditoDeTienda) {
-        this.pagadoEnCreditoDeTienda = pagadoEnCreditoDeTienda;
+    public void setPaidWithStoreCredit(BigDecimal pagadoEnCreditoDeTienda) {
+        this.paidWithStoreCredit = pagadoEnCreditoDeTienda;
     }
 
     public BigDecimal getChange() {
@@ -138,10 +138,10 @@ public class Bill {
         if (o == null || getClass() != o.getClass()) return false;
         Bill bill = (Bill) o;
         return id == bill.id &&
-                Objects.equals(reference, bill.reference) &&
-                Objects.equals(pagadoEnEfectivo, bill.pagadoEnEfectivo) &&
-                Objects.equals(pagadoEnTajeta, bill.pagadoEnTajeta) &&
-                Objects.equals(pagadoEnCreditoDeTienda, bill.pagadoEnCreditoDeTienda) &&
+                Objects.equals(paymentReferenceNumber, bill.paymentReferenceNumber) &&
+                Objects.equals(paidInCash, bill.paidInCash) &&
+                Objects.equals(paidWithCard, bill.paidWithCard) &&
+                Objects.equals(paidWithStoreCredit, bill.paidWithStoreCredit) &&
                 Objects.equals(change, bill.change) &&
                 Objects.equals(customerName, bill.customerName) &&
                 Objects.equals(paymentMethod, bill.paymentMethod) &&
@@ -152,16 +152,16 @@ public class Bill {
 
     @Override
     public int hashCode() {
-        return Objects.hash(reference, pagadoEnEfectivo, pagadoEnTajeta, pagadoEnCreditoDeTienda, change, customerName, paymentMethod, id, employeeName, amount, order);
+        return Objects.hash(paymentReferenceNumber, paidInCash, paidWithCard, paidWithStoreCredit, change, customerName, paymentMethod, id, employeeName, amount, order);
     }
 
     @Override
     public String toString() {
         return "Bill{" +
-                "reference='" + reference + '\'' +
-                ", pagadoEnEfectivo=" + pagadoEnEfectivo +
-                ", pagadoEnTajeta=" + pagadoEnTajeta +
-                ", pagadoEnCreditoDeTienda=" + pagadoEnCreditoDeTienda +
+                "reference='" + paymentReferenceNumber + '\'' +
+                ", pagadoEnEfectivo=" + paidInCash +
+                ", pagadoEnTajeta=" + paidWithCard +
+                ", pagadoEnCreditoDeTienda=" + paidWithStoreCredit +
                 ", change=" + change +
                 ", customerName='" + customerName + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +

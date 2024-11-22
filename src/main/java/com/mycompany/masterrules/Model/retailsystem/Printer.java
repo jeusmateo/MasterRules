@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -108,7 +108,7 @@ public class Printer {
                 case "PaymentType.CARD":
                     description.append("PAGADO CON TARJETA: ");
                     description.append(bill.getAmount()).append("\n");
-                    description.append("REFERENCIA: ").append(bill.getReference()).append("\n");
+                    description.append("REFERENCIA: ").append(bill.getPaymentReferenceNumber()).append("\n");
                     break;
 
                 case "PaymentType.STORE_CREDIT":

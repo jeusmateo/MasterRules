@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlow;
+import com.mycompany.masterrules.Model.finance.CashFlow;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

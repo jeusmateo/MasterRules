@@ -1,7 +1,7 @@
 package com.mycompany.masterrules.Controller;
 
 import com.mycompany.masterrules.Model.customers.CustomerManager;
-import com.mycompany.masterrules.Model.possystem.POSManager;
+import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
