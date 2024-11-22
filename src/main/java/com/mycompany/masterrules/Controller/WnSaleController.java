@@ -55,8 +55,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     private Button btnContinue;
     @FXML
     private Button btnPay;
-    @FXML
-    private Button btnCancel;
+
 
     @FXML
     private TextField txtFieldTableNumber;
@@ -294,6 +293,8 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                     posManager.sell(paymentResult, cboCustomers.getValue());
                     showMenuWindow();
                     updateOrderInfo();
+                    inputClientName.setVisible(true);
+                    cboCustomers.setValue(null);
 
                 } else {
                     System.out.println("Pago cancelado.");
@@ -418,11 +419,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
     }
 
-    @FXML
-    void cancelOrder(ActionEvent event) {
-        posManager.cancelOrder();
-        updateOrderInfo();
-    }
+
 
     @Override
     public void onProductSelected(Product product) {

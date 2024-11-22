@@ -16,8 +16,8 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
     public PaymentDetails paymentProcess() throws PaymentException {
         if (hasEnoughCredit()) {
             var customerAccount = customer.getCustomerAccount();
-            var actualStoreCredit = customerAccount.getStoreCredit();
-            var newStoreCredit = actualStoreCredit.subtract(this.getTotalAmountToPay());
+            BigDecimal actualStoreCredit = customerAccount.getStoreCredit();
+            BigDecimal newStoreCredit = actualStoreCredit.subtract(this.getTotalAmountToPay());
             customerAccount.setStoreCredit(newStoreCredit);
 
             PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.STORE_CREDIT, this.getTotalAmountToPay());

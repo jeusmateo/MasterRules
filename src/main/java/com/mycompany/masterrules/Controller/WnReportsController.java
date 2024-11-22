@@ -18,12 +18,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Controlador para la ventana de reportes de caja en la aplicación.
+ */
 public class WnReportsController implements Initializable {
 
-    //Atributos de la clase
+    // Atributos de la clase
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Registro de caja utilizado para las operaciones de flujo de efectivo.
+     */
     private CashRegister cashRegister;
+
+    /**
+     * Supervisor de cajeros que gestiona los flujos de efectivo.
+     */
     CashierSupervisor cashierSupervisor = new CashierSupervisor();
 
     // Componentes de la vista
@@ -40,8 +50,6 @@ public class WnReportsController implements Initializable {
     private Button btnDoOutFlowReport;
     @FXML
     private Button btnExitDoInflow;
-    @FXML
-    private Button btnExitDoOutflow;
 
     // Contenedores (AnchorPanes)
     @FXML
@@ -50,8 +58,6 @@ public class WnReportsController implements Initializable {
     private AnchorPane scrDoOutflowReport;
     @FXML
     private AnchorPane scrDoReport;
-    @FXML
-    private AnchorPane scrReports;
 
     // Campos de texto
     @FXML
@@ -65,7 +71,7 @@ public class WnReportsController implements Initializable {
 
     // Tablas y columnas
     @FXML
-    private TableView<CashFlow> tableViewlOutFlowReport;
+    private TableView<CashFlow> tblViewlOutFlowReport;
     @FXML
     private TableColumn<CashFlow, String> colCashOutReason;
     @FXML
@@ -74,7 +80,7 @@ public class WnReportsController implements Initializable {
     private TableColumn<CashFlow, String> colCashOutQuantity;
 
     @FXML
-    private TableView<CashFlow> tableViewlInFlowReport;
+    private TableView<CashFlow> tblViewlInFlowReport;
     @FXML
     private TableColumn<CashFlow, String> colCashInReason;
     @FXML
@@ -85,7 +91,11 @@ public class WnReportsController implements Initializable {
     // Métodos de la clase
     // --------------------------------------------------------------------------------------------
 
-
+    /**
+     * Maneja las acciones de los botones en la interfaz de usuario.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     private void eventAction(ActionEvent event) {
         Object evt = event.getSource();
@@ -103,21 +113,18 @@ public class WnReportsController implements Initializable {
         } else if (evt.equals(btnAcceptOutflow)) {
             setBtnAcceptOutflow();
         } else if (evt.equals(btnAcceptInflow)) {
-            setBtnAcceptInflow();
+            acceptInflowCash();
         }
-
     }
 
-
     /**
-     * Muestra la ventana principal de reportes. Sale de la ventana DoInflow.
-     * Acepta la entrada de efectivo
+     * Acepta la entrada de efectivo y actualiza la tabla de flujo de entrada de efectivo.
      */
-    public void setBtnAcceptInflow() {
+    public void acceptInflowCash() {
         try {
             String cashAmount = txtFieldAmountInflow.getText();
             String reason = txtReasonInflow.getText();
-           cashRegister.depositCash(reason, cashAmount);
+            cashRegister.depositCash(reason, cashAmount);
 
             initializeCashInFlowTable();
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
@@ -127,35 +134,34 @@ public class WnReportsController implements Initializable {
             showAlert("Error", e.getMessage());
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+          showAlert("Error de entrada de efectivo", "Ocurrió un error al procesar la entrada de efectivo: " + e.getMessage());
         }
     }
 
     /**
-     * Muestra la ventana principal de reportes. Sale de la ventana DoOutflow.
-     * Acepta la salida de efectivo
+     * Acepta la salida de efectivo y actualiza la tabla de flujo de salida de efectivo.
      */
-    public void setBtnAcceptOutflow() {
-        try {
-            String cashAmount = txtFieldAmountOutflow.getText();
-            String reason = txtOutflowReason.getText();
-            cashRegister.withdrawCash(reason, cashAmount);
-            txtFieldAmountOutflow.setText("00.0");
-            txtOutflowReason.setText("");
+public void setBtnAcceptOutflow() {
+    try {
+        String cashAmount = txtFieldAmountOutflow.getText();
+        String reason = txtOutflowReason.getText();
+        cashRegister.withdrawCash(reason, cashAmount);
+        txtFieldAmountOutflow.setText("00.0");
+        txtOutflowReason.setText("");
 
-            initializeCashOutFlowTable();
+        initializeCashOutFlowTable();
 
-            scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-        }catch (IllegalArgumentException e){
+        scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
+        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+  }catch (IllegalArgumentException e){
             showAlert("Error", e.getMessage());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    showAlert("Error de salida de efectivo", "Ocurrió un error al procesar la salida de efectivo: " + e.getMessage());
+}
+}
 
     /**
-     * Muestra la ventana principal de reportes. Sale de la ventana DoOutflow
+     * Sale de la ventana de reportes de salida de efectivo y muestra la ventana principal de reportes.
      */
     public void exitDoOutflow() {
         clearTextFields(txtFieldAmountOutflow); // Limpia los campos de texto proporcionados
@@ -164,14 +170,23 @@ public class WnReportsController implements Initializable {
         scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
     }
 
-
+    /**
+     * Limpia los campos de texto proporcionados.
+     *
+     * @param textFields Los campos de texto a limpiar.
+     */
     private void clearTextFields(TextField... textFields) {
-        // Limpia cada campo de texto proporcionado
         for (TextField textField : textFields) {
             textField.clear();
         }
     }
 
+    /**
+     * Inicializa el controlador después de que su raíz haya sido procesada.
+     *
+     * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si no se conoce la ubicación.
+     * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var posManager = POSManager.getInstance();
@@ -182,9 +197,10 @@ public class WnReportsController implements Initializable {
         configTextFields();
     }
 
-    // Configura la tabla y los datos para Cash Out Flow
+    /**
+     * Configura la tabla y los datos para el flujo de salida de efectivo.
+     */
     private void initializeCashOutFlowTable() {
-
         ObservableList<CashFlow> cashOutReports = FXCollections.observableArrayList(
                 cashierSupervisor.getCashFlows()
         );
@@ -198,11 +214,13 @@ public class WnReportsController implements Initializable {
         colCashOutQuantity.setReorderable(false);
         colCashOutQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
-        tableViewlOutFlowReport.setItems(cashOutReports);
-        tableViewlOutFlowReport.refresh();
+        tblViewlOutFlowReport.setItems(cashOutReports);
+        tblViewlOutFlowReport.refresh();
     }
 
-    // Configura la tabla y los datos para Cash In Flow
+    /**
+     * Configura la tabla y los datos para el flujo de entrada de efectivo.
+     */
     private void initializeCashInFlowTable() {
         ObservableList<CashFlow> cashInReports = FXCollections.observableArrayList(
                 cashierSupervisor.getCashInFlows()
@@ -217,15 +235,23 @@ public class WnReportsController implements Initializable {
         colCashInQuantity.setReorderable(false);
         colCashInQuantity.setCellValueFactory(new PropertyValueFactory<>("cashAmount"));
 
-        tableViewlInFlowReport.setItems(cashInReports);
-        tableViewlInFlowReport.refresh();
+        tblViewlInFlowReport.setItems(cashInReports);
+        tblViewlInFlowReport.refresh();
     }
 
-    private void configTextFields(){
+    /**
+     * Configura los campos de texto para aceptar solo entradas numéricas.
+     */
+    private void configTextFields() {
         txtFieldAmountInflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
         txtFieldAmountOutflow.addEventFilter(KeyEvent.KEY_TYPED, this::eventKey);
     }
 
+    /**
+     * Maneja los eventos de teclado para los campos de texto, permitiendo solo entradas numéricas.
+     *
+     * @param event El evento de teclado.
+     */
     @FXML
     private void eventKey(KeyEvent event) {
         Object evt = event.getSource();
