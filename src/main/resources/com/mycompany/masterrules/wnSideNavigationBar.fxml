@@ -79,7 +79,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                     </Button>
-                                    <Label fx:id="lbllSignOut" layoutX="40.0" layoutY="10.0" text="Cerrar Sesión" textFill="WHITE" />
+                                    <Label fx:id="lblSignOut" layoutX="40.0" layoutY="10.0" text="Cerrar Sesión" textFill="WHITE" />
                                  </children>
                               </Group>
                               <ImageView fitHeight="104.0" fitWidth="148.0" layoutX="45.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
@@ -92,7 +92,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelUserName" layoutX="89.0" layoutY="511.0" prefHeight="17.0" prefWidth="109.0" text="Nombre usuario" textFill="WHITE">
+                              <Label fx:id="lblUserName" layoutX="89.0" layoutY="511.0" prefHeight="17.0" prefWidth="109.0" text="Nombre usuario" textFill="WHITE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

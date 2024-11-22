@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finance.CashierSupervisor;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

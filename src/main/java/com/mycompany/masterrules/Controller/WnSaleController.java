@@ -4,7 +4,6 @@ import com.mycompany.masterrules.Database.CustomerDatabase;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -130,7 +130,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     //-------------------------------------------------------------------------------------------
 
 
-    public void displayMenuCards() {
+    public void displayProductMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
         ObservableList<Product> productDataList = FXCollections.observableArrayList(productsOnMenu);
@@ -150,15 +150,17 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-        List<Combo> combosOnMenu = new ArrayList<>();
-        combosOnMenu = menu.getCombos();
+    }
 
+    public void displayComboMenuCards() {
+        CafeteriaMenu menu = new CafeteriaMenu();
+        List<Combo> combosOnMenu = menu.getCombos();
         ObservableList<Product> comboDataList = FXCollections.observableArrayList(combosOnMenu);
+
         for (Product currentProductCombo : comboDataList) {
             try {
-                FXMLLoader load = new FXMLLoader(); //TODO ESTO SI PUEDE SER UNA CONSTANTE.
+                FXMLLoader load = new FXMLLoader();
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
                 AnchorPane pane = load.load();
                 ItemCardProductController cardController = load.getController();
@@ -171,7 +173,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -324,7 +325,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO este configura
         group = new ToggleGroup();
         deliveryMethodCounter.setToggleGroup(group);
         deliveryMethodTakeAway.setToggleGroup(group);
@@ -333,21 +333,18 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         posManager = POSManager.getInstance();
         System.out.println(posManager.getCurrentUser());
 
-
         initializeTableOrder();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
 
         cboCustomers.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-
-                customerSelected =(cboCustomers.getValue());
+                customerSelected = cboCustomers.getValue();
                 Customer test = cboCustomers.getValue();
-                System.out.println("Soy " + test.getCustomerName() + "y soy ");
+                System.out.println("Soy " + test.getCustomerName() + " y soy ");
                 if (test.getCustomerAccount().isIsVIP()) {
                     System.out.println("vip");
                 }
                 updateOrderInfo();
-                //TODO chepo arregla esto
                 if (customerSelected != null && customerSelected.getCustomerAccount().isIsVIP()) {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
                 } else {
@@ -358,19 +355,15 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
         });
 
-        //
-
-        //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
         comboCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
-        displayMenuCards();
+        displayProductMenuCards();
+        displayComboMenuCards();
         CustomerDatabase cdbm = new CustomerDatabase();
-        //TODO CAMBIAR NOMBRE DE TODOS LOS CHEPOS
-        List<Customer> chepo = cdbm.readAll(); // Lee todos los datos
+        List<Customer> chepo = cdbm.readAll();
         ObservableList<Customer> customersList = FXCollections.observableArrayList(chepo);
         cboCustomers.setItems(customersList);
 
-// Personaliza cómo se muestran las celdas desplegables del ComboBox
         cboCustomers.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Customer customer, boolean empty) {
@@ -378,28 +371,24 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 if (empty || customer == null) {
                     setText(null);
                 } else {
-                    setText(customer.getCustomerName()); // Muestra el nombre del cliente
+                    setText(customer.getCustomerName());
                 }
             }
         });
 
-
-// Personaliza la celda visible del ComboBox (cuando no está desplegado)
         cboCustomers.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Customer customer, boolean empty) {
                 super.updateItem(customer, empty);
                 if (empty || customer == null) {
-                    setText("Seleccione un cliente"); // Texto por defecto cuando no hay selección
+                    setText("Seleccione un cliente");
                 } else {
-                    setText(customer.getCustomerName()); // Muestra el nombre del cliente seleccionado
+                    setText(customer.getCustomerName());
                 }
             }
         });
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
-
     }
-
 
     @FXML
     void removeProductToOrden(ActionEvent event) {
@@ -430,5 +419,20 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void onProductSelected(Product product) {
         posManager.addProductToOrder(product);
         updateOrderInfo();
+    }
+
+    @FXML
+    private void eventKey(KeyEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(txtFieldTableNumber)) {
+            handleTextFieldTableNumber(event);
+        }
+    }
+
+    private void handleTextFieldTableNumber(KeyEvent event) {
+        String character = event.getText();
+        if (!character.matches("\\d")) {
+            event.consume();
+        }
     }
 }
