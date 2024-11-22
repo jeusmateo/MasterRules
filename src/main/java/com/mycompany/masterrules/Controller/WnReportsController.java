@@ -13,11 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -126,7 +122,11 @@ public class WnReportsController implements Initializable {
             initializeCashInFlowTable();
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-        } catch (Exception e) {
+        }
+        catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -147,6 +147,8 @@ public class WnReportsController implements Initializable {
 
             scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+        }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -232,6 +234,14 @@ public class WnReportsController implements Initializable {
                 event.consume();
             }
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

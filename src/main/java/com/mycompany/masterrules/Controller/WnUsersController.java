@@ -397,8 +397,8 @@ private void handleDeleteUserAccount() {
 
     private void configCheckBoxToCreate() {
         checkBoxPermissionMap.put(chkMakeSalePerm, Permission.MAKE_SALE);
-        checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
-        checkBoxPermissionMap.put(chkReviewSaleHistoryPerm, Permission.LOOK_SALES_HISTORY);
+//        checkBoxPermissionMap.put(chkCancelSalePerm, Permission.CANCEL_SALE);
+//        checkBoxPermissionMap.put(chkReviewSaleHistoryPerm, Permission.LOOK_SALES_HISTORY);
         checkBoxPermissionMap.put(chkCreateProductPerm, Permission.CREATE_PRODUCT);
         checkBoxPermissionMap.put(chkEditProductPerm, Permission.EDIT_PRODUCT);
         checkBoxPermissionMap.put(chkDeleteProductPerm, Permission.DELETE_PRODUCT);
@@ -419,8 +419,8 @@ private void handleDeleteUserAccount() {
 
     private void configCheckBoxToEdit() {
         checkBoxPermissionMapToEdit.put(chkMakeSaleEditPerm, Permission.MAKE_SALE);
-        checkBoxPermissionMapToEdit.put(chkCancelSaleEditPerm, Permission.CANCEL_SALE);
-        checkBoxPermissionMapToEdit.put(chkReviewSaleHistoryEditPerm, Permission.LOOK_SALES_HISTORY);
+//        checkBoxPermissionMapToEdit.put(chkCancelSaleEditPerm, Permission.CANCEL_SALE);
+//        checkBoxPermissionMapToEdit.put(chkReviewSaleHistoryEditPerm, Permission.LOOK_SALES_HISTORY);
         checkBoxPermissionMapToEdit.put(chkCreateProductEditPerm, Permission.CREATE_PRODUCT);
         checkBoxPermissionMapToEdit.put(chkEditProductEditPerm, Permission.EDIT_PRODUCT);
         checkBoxPermissionMapToEdit.put(chkDeleteProductEditPerm, Permission.DELETE_PRODUCT);

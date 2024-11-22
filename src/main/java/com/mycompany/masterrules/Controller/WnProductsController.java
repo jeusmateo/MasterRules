@@ -503,7 +503,10 @@ public class WnProductsController implements Initializable, ProductSelectionList
             } else if (source.equals(btnEditCombo)) {
                 handleEditCombo();
             }
-        } catch (Exception e) {
+        }catch (IllegalArgumentException e){
+            showAlert("Error", e.getMessage());
+        }
+        catch (Exception e) {
             System.err.println("Error al registrar el producto: " + e.getMessage());
         }
     }
