@@ -82,3 +82,23 @@ PAGADO CON EFECTIVO: 1
 CAMBIO: $1
 
 =====================================
+=====================================
+Imprimiendo factura :13
+Nombre del empleado: admin
+Nombre del cliente: 3
+Productos:
+Nombre: 1   Cantidad: 3  Precio: 3
+PAGADO CON EFECTIVO: 3
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :14
+Nombre del empleado: Chepo
+Nombre del cliente: wd
+Productos:
+Nombre: Hamburguesa   Cantidad: 1  Precio: 200
+PAGADO CON EFECTIVO: 200
+CAMBIO: $0
+
+=====================================

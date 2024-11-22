@@ -25,6 +25,7 @@ public class Printer {
 
         }
         System.out.println("Comentarios adicionales: "+order.getComment());
+        System.out.println("Para: "+order.getCustomerName());
         System.out.println("Entregar en: "+order.getDeliveryMethod());
         System.out.println("=====================================");
 

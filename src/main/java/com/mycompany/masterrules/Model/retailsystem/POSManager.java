@@ -68,14 +68,13 @@ public class POSManager {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
     }
 
-    public void configureOrder(String metodoDeEntrega, String comentario, Customer customer, String customerName) {
+    public void configureOrder(String metodoDeEntrega, String comentario,  String customerName) {
 
-//        if(customer!= null){
-//            currentOrder.setCustomerName(customer.getCustomerName());
-//        }
-//        else{
-//            currentOrder.setCustomerName(customerName);
-//        }
+        if(!customerName.isEmpty()) {
+            currentOrder.setCustomerName(customerName);
+        }else{
+            currentOrder.setCustomerName("Publico General");
+        }
 
         currentOrder.setEmployeeName(currentUser.getFullEmployeeName());
 
@@ -97,7 +96,7 @@ public class POSManager {
     private Bill createBill(PaymentDetails data) {
         Bill newBill;
         if (data.getCustomer() == null) {
-            newBill = new Bill(this.currentUser.getFullEmployeeName(), "PublicoGeneral", currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), currentOrder.getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
         } else {
             newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
         }

@@ -228,7 +228,9 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         Customer customerInfo = cboCustomers.getValue();
 
         String customerName="";
-        if(customerInfo == null) {
+        if(customerInfo != null) {
+            customerName= customerInfo.getCustomerName();
+        }else{
             customerName= inputClientName.getText();
         }
 
@@ -240,7 +242,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         String comments = txtAdittionalComments.getText();
         //TODO validaciones para null
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount(customerSelected)));
-        posManager.configureOrder(deliveryMethod, comments, customerInfo,customerName);
+        posManager.configureOrder(deliveryMethod, comments,customerName);
     }
 
 
