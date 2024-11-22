@@ -20,10 +20,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
+
 public class WnCustomersController implements Initializable {
 
     private CustomerManager customerManager;
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
+    private boolean accessCodeTalker;
+
+    @FXML
+    private PasswordField psswrdFieldAccesstoStoreCredit;
+
+    private Customer customer;
 
     @FXML
     private Button btnAcceptCredit;
@@ -121,11 +129,20 @@ public class WnCustomersController implements Initializable {
 
     @FXML
     private void setScrWarningCredit() {
-        scrWarningCredit.setVisible(true);
+
+        if(!accessCodeTalker){
+            scrWarningCredit.setVisible(true);
+        }
+
     }
 
     @FXML
     private void setButtonAcceptCredit() {
+        //Si logica de el codgio es verdadero el access se vuelve verdadero;
+       String password = String.valueOf(psswrdFieldAccesstoStoreCredit.getText());
+        if(customer.getCustomerAccount().getLoyaltyCard().getAccessCode().equals(password)){
+            accessCodeTalker = true;
+        }
         scrWarningCredit.setVisible(false);
     }
 
@@ -175,6 +192,7 @@ public class WnCustomersController implements Initializable {
             chkEditCustomerVipStatus.setSelected(false);
             scrEditCustomerAccount.setVisible(false);
             scrMainViewCustomerAccount.setVisible(true);
+            accessCodeTalker=false;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error actualizando la cuenta del cliente", e);
             showAlert("Error", "Ocurrió un problema al actualizar la cuenta del cliente. Por favor, inténtalo de nuevo.");
@@ -328,6 +346,7 @@ public class WnCustomersController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        accessCodeTalker=false;
         configTextFields();
         configTableColumns();
         configTableSelection();
@@ -356,6 +375,7 @@ public class WnCustomersController implements Initializable {
     private void displaySelected(javafx.scene.input.MouseEvent event) {
         Customer selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
         showCustomerDetailsForUpdate(selectedCustomer);
+        customer=tblCustomers.getSelectionModel().getSelectedItem();
     }
 
     public WnCustomersController(CustomerManager cm) {
