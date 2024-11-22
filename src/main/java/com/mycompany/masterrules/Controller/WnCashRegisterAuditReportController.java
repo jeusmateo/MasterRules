@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,8 +25,8 @@ public class WnCashRegisterAuditReportController implements Initializable{
     // --------------------------------------------------------------------------------------------
 
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
-    private final ObservableList<CashFlow> cashInFlowReports=null;
-    private final ObservableList<CashFlow> cashOutFlowReports = null;
+    private  ObservableList<CashFlow> cashInFlowReports= FXCollections.observableArrayList();
+    private  ObservableList<CashFlow> cashOutFlowReports = FXCollections.observableArrayList();
 
     private CashAuditReport currentCashAuditReport;
 
@@ -129,6 +130,13 @@ public class WnCashRegisterAuditReportController implements Initializable{
             txtCashSales.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
             txtInFlowCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashFlowInTotalAmount()));
             txtOutFlowCash.setText(String.valueOf("- $ "+currentCashAuditReport.getCashFlowOutTotalAmount()));
+
+            cashInFlowReports= FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
+            cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
+            tblCashInFlowReport.setItems(cashInFlowReports);
+            tblCashOutFlowReport.setItems(cashOutFlowReports);
+            tblCashInFlowReport.refresh();
+            tblCashOutFlowReport.refresh();
         }
         else if(evt.equals(btnRealizarCorteDeVenta)){
             cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);
