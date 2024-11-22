@@ -143,7 +143,7 @@
                                     </GridPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="scrEditCustomerAccount" prefHeight="180.0" prefWidth="200.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
+                              <AnchorPane fx:id="scrEditCustomerAccount" prefHeight="180.0" prefWidth="200.0" stylesheets="@viewTemplate.css" visible="false" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
                                  <styleClass>
                                     <String fx:value="radius" />
                                     <String fx:value="shadow" />

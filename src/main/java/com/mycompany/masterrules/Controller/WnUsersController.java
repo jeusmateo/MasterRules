@@ -51,6 +51,8 @@ public class WnUsersController implements Initializable {
     private Button btnDeleteUserAccount;
 
     @FXML
+    private TextField txtFieldSearchUser;
+    @FXML
     private TextField textEditUserName;
     @FXML
     private TextField txtEditUserCompleteName;
@@ -338,6 +340,7 @@ private void handleDeleteUserAccount() {
             configCheckBoxToUpdate();
             configColumnsOnUserTable();
             configTextFields();
+            configSearchField();
 
             ObservableList<UserAccount> userAccounts = FXCollections.observableArrayList(userManager.getAllUsers());
             tblUserAccount.setItems(userAccounts);
@@ -376,6 +379,26 @@ private void handleDeleteUserAccount() {
             UserAccount userAccount = tblUserAccount.getSelectionModel().getSelectedItem();
             displayUserAccountInfoForEdit(userAccount);
         }
+
+    private void configSearchField() {
+        txtFieldSearchUser.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterUserTable(newValue);
+        });
+    }
+
+    private void filterUserTable(String searchText) {
+        ObservableList<UserAccount> allUsers = FXCollections.observableArrayList(userManager.getAllUsers());
+        if (searchText == null || searchText.isEmpty()) {
+            tblUserAccount.setItems(allUsers);
+        } else {
+            String lowerCaseSearchText = searchText.toLowerCase();
+            ObservableList<UserAccount> filteredUsers = allUsers.filtered(user ->
+                    user.getUserName().toLowerCase().contains(lowerCaseSearchText) ||
+                            user.getFullEmployeeName().toLowerCase().contains(lowerCaseSearchText)
+            );
+            tblUserAccount.setItems(filteredUsers);
+        }
+    }
 
     private void clearTextFields(TextField[] textFields) {
         if (textFields != null) {

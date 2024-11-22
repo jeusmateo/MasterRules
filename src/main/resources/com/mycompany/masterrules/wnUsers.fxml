@@ -35,13 +35,6 @@
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <TextField fx:id="txtFieldSearchUser" layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar usuario" />
-                                          <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@viewTemplate.css" text="SOI" textFill="#fcfcfc">
-                                             <styleClass>
-                                                <String fx:value="logout" />
-                                                <String fx:value="shadow" />
-                                             </styleClass>
-                                          </Button>
                                           <VBox layoutX="281.0" layoutY="64.0" spacing="5.0" AnchorPane.bottomAnchor="416.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="64.0">
                                              <children>
                                                 <Group>
@@ -329,7 +322,6 @@
                                           <String fx:value="white-bg" />
                                        </styleClass>
                                        <children>
-                                          <TextField fx:id="txtFieldSearchUser" layoutX="48.0" layoutY="14.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar usuario" />
                                           <Button layoutX="11.0" layoutY="13.0" mnemonicParsing="false" stylesheets="@viewTemplate.css" text="SOI" textFill="#fcfcfc">
                                              <styleClass>
                                                 <String fx:value="logout" />
@@ -615,9 +607,9 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="84.0" prefHeight="505.0" prefWidth="256.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="84.0">
+      <AnchorPane layoutX="15.2" layoutY="48.0" prefHeight="541.0" prefWidth="255.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="48.0">
          <children>
-            <TableView fx:id="tblUserAccount" layoutX="10.0" layoutY="6.0" onMouseClicked="#displaySelected" prefHeight="489.0" prefWidth="237.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="6.0">
+            <TableView fx:id="tblUserAccount" layoutX="10.0" layoutY="44.0" onMouseClicked="#displaySelected" prefHeight="486.0" prefWidth="235.0" stylesheets="@viewTemplate.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="44.0">
                <columns>
                   <TableColumn fx:id="colUserID" prefWidth="88.0" text="ID USUARIO" />
                   <TableColumn fx:id="colUserName" prefWidth="145.0" text="USUARIO" />
@@ -626,6 +618,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
+            <TextField fx:id="txtFieldSearchUser" layoutX="74.0" layoutY="9.0" prefHeight="25.0" prefWidth="133.0" promptText="Buscar usuario" />
+            <Button layoutX="37.0" layoutY="8.0" mnemonicParsing="false" stylesheets="@viewTemplate.css" text="SOI" textFill="#fcfcfc">
+               <styleClass>
+                  <String fx:value="logout" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
          </children>
          <styleClass>
             <String fx:value="white-bg" />
