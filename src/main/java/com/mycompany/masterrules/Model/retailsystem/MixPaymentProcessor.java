@@ -5,34 +5,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MixPaymentProcessor extends PaymentProcessor {
-    private List<PaymentProcessor> paymentProcessors;
-    private BigDecimal recibido;
-    private BigDecimal faltante;
+    private final List<PaymentProcessor> paymentProcessors;
+    //    private BigDecimal amountReceived;
+    private BigDecimal amountToPay;
 
-    public MixPaymentProcessor(BigDecimal totalAmount){
-        super(totalAmount);
-        paymentProcessors = new ArrayList();
-        recibido = BigDecimal.ZERO;
-        faltante = totalAmount;
+    public MixPaymentProcessor(BigDecimal totalAmountToPay) {
+        super(totalAmountToPay);
+        paymentProcessors = new ArrayList<>();
+//        amountReceived = BigDecimal.ZERO;
+        amountToPay = totalAmountToPay;
     }
 
-    public void addPaymentMethod(PaymentProcessor paymentProcessor){
+    public void addPaymentMethod(PaymentProcessor paymentProcessor) {
         paymentProcessors.add(paymentProcessor);
-        this.recibido = (this.getTotalAmount().add(paymentProcessor.getTotalAmount()));
-        faltante = faltante.subtract(paymentProcessor.getTotalAmount());
+//        amountReceived = this.getTotalAmountToPay().add(paymentProcessor.getTotalAmountToPay());
+//        amountToPay = amountToPay.subtract(paymentProcessor.getTotalAmountToPay());
     }
 
-    public BigDecimal getFaltante(){
-        return faltante;
+    public BigDecimal getAmountToPay() {
+        return amountToPay;
     }
 
     @Override
-    public PaymentDetails paymentProcess() {
-        PaymentDetails paymentDetails=null;
-        for (PaymentProcessor paymentProcessor : paymentProcessors) {
-             paymentDetails = paymentProcessor.paymentProcess();
+    public PaymentDetails paymentProcess() throws PaymentException {
+        if (paymentProcessors.isEmpty()) {
+            throw new PaymentException("No se ha seleccionado ningún método de pago");
+        } else {
+            var newPaymentDetails = new PaymentDetails(PaymentMethod.MIX, amountToPay);
+
+            newPaymentDetails.setCustomer(newPaymentDetails.getCustomer());
+
+            // process each payment method and append the payment details
+            var totalCustomerCashAmount = BigDecimal.ZERO;
+            var totalChangeAmount = BigDecimal.ZERO;
+            var totalReference = new StringBuilder();
+            var totalPaymentDescription = new StringBuilder();
+
+            for (var paymentProcessor : paymentProcessors) {
+                var actualPaymentDetails = paymentProcessor.paymentProcess();
+
+                totalChangeAmount = totalChangeAmount.add(actualPaymentDetails.getChangeAmount());
+                totalCustomerCashAmount = totalCustomerCashAmount.add(actualPaymentDetails.getCustomerCashAmount());
+                totalReference.append(actualPaymentDetails.getReference());
+                totalPaymentDescription.append(paymentProcessor.paymentDescription()).append("\n");
+
+            }
+
+            newPaymentDetails.setCustomerCashAmount(totalCustomerCashAmount);
+            newPaymentDetails.setChangeAmount(totalChangeAmount);
+            newPaymentDetails.setReference(totalReference.toString());
+            newPaymentDetails.setPaymentDescription(totalPaymentDescription.toString());
+
+            return newPaymentDetails;
         }
-        return paymentDetails;
+
     }
 
     @Override

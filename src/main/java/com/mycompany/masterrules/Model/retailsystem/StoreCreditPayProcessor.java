@@ -2,37 +2,40 @@ package com.mycompany.masterrules.Model.retailsystem;
 
 import com.mycompany.masterrules.Model.customers.Customer;
 
-
 import java.math.BigDecimal;
 
 public class StoreCreditPayProcessor extends PaymentProcessor {
-    private Customer customer;
+    private final Customer customer;
 
-    public StoreCreditPayProcessor(BigDecimal totalAmount, Customer customer){
-        super(totalAmount);
-        this.customer =  customer;
+    public StoreCreditPayProcessor(BigDecimal totalAmountToPay, Customer customer) {
+        super(totalAmountToPay);
+        this.customer = customer;
     }
 
     @Override
-    public PaymentDetails paymentProcess() {
-        if(hasEnoughCredit()){
-            customer.getCustomerAccount().setStoreCredit(customer.getCustomerAccount().getStoreCredit().subtract(this.getTotalAmount()));
-        }else{
-            return null;
+    public PaymentDetails paymentProcess() throws PaymentException {
+        if (hasEnoughCredit()) {
+            var customerAccount = customer.getCustomerAccount();
+            var actualStoreCredit = customerAccount.getStoreCredit();
+            var newStoreCredit = actualStoreCredit.subtract(this.getTotalAmountToPay());
+            customerAccount.setStoreCredit(newStoreCredit);
+
+            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.STORE_CREDIT, this.getTotalAmountToPay());
+            paymentDetails.setCustomer(customer);
+            paymentDetails.setPaymentDescription(paymentDescription());
+            return paymentDetails;
+        } else {
+            throw new PaymentException("No tiene suficiente crédito de tienda para realizar la compra");
         }
-        PaymentDetails paymentDetails= new PaymentDetails(PaymentMethod.STORE_CREDIT,this.getTotalAmount());
-        paymentDetails.setCustomer(customer);
-        paymentDetails.setPaymentDescription(paymentDescription());;
-        return paymentDetails;
     }
 
     private boolean hasEnoughCredit() {
-        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount()) >= 0;
+        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmountToPay()) >= 0;
     }
 
     @Override
     public String paymentDescription() {
 
-        return String.format("PAGADO CON CRÉDITO DE TIENDA :$"+ String.valueOf(getTotalAmount())+"\n");
+        return String.format("PAGADO CON CRÉDITO DE TIENDA :$" + getTotalAmountToPay() + "\n");
     }
 }
