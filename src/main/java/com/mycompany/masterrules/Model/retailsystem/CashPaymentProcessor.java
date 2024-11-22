@@ -6,20 +6,20 @@ public class CashPaymentProcessor extends PaymentProcessor {
     private final BigDecimal customerCashAmount;
     private final BigDecimal changeAmount;
 
-    public CashPaymentProcessor(BigDecimal totalAmount, BigDecimal customerCashAmount) {
-        super(totalAmount);
+    public CashPaymentProcessor(BigDecimal totalAmountToPay, BigDecimal customerCashAmount) {
+        super(totalAmountToPay);
         this.customerCashAmount = customerCashAmount;
-        this.changeAmount = customerCashAmount.subtract(totalAmount);
+        this.changeAmount = customerCashAmount.subtract(totalAmountToPay);
     }
 
     @Override
     public PaymentDetails paymentProcess() throws PaymentException {
         if (hasEnoughCash()) {
             var cashRegister = POSManager.getInstance().getCashRegister();
-            var newCashAmount = cashRegister.getCurrentCashAmount().subtract(this.getTotalAmount());
+            var newCashAmount = cashRegister.getCurrentCashAmount().subtract(this.getTotalAmountToPay());
             cashRegister.setCurrentCashAmount(newCashAmount);
 
-            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH, this.getTotalAmount());
+            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.CASH, this.getTotalAmountToPay());
             paymentDetails.setCustomerCashAmount(this.customerCashAmount);
             paymentDetails.setChangeAmount(changeAmount);
             paymentDetails.setPaymentDescription(paymentDescription());
@@ -30,12 +30,12 @@ public class CashPaymentProcessor extends PaymentProcessor {
     }
 
     private boolean hasEnoughCash() {
-        return getTotalAmount().compareTo(customerCashAmount) <= 0;
+        return getTotalAmountToPay().compareTo(customerCashAmount) <= 0;
     }
 
     @Override
     public String paymentDescription() {
-        return "PAGADO CON EN EFECTIVO: $" + this.getTotalAmount() +
+        return "PAGADO CON EN EFECTIVO: $" + this.getTotalAmountToPay() +
                 "\n" +
                 "CAMBIO: $" + changeAmount +
                 "\n";

@@ -120,6 +120,7 @@ public class WnPaymentController implements Initializable {
             this.customer = customerInfo;
         } else {
             tabStoreCredit.setDisable(true);
+            txtFieldStoreCreditIncomeMP.setDisable(true);
         }
         this.totalAmount = totalAmount;
         labelTotalPriceCC.setText(String.valueOf(totalAmount));
@@ -231,7 +232,7 @@ public class WnPaymentController implements Initializable {
         if (cashIncome.compareTo(BigDecimal.ZERO) > 0) {
             processor.addPaymentMethod(new CashPaymentProcessor(cashIncome, cashIncome));
         }
-        if (storeCreditIncome.compareTo(BigDecimal.ZERO) > 0) {
+        if (storeCreditIncome.compareTo(BigDecimal.ZERO) > 0 && customer != null) {
             processor.addPaymentMethod(new StoreCreditPayProcessor(storeCreditIncome, customer));
         }
     }

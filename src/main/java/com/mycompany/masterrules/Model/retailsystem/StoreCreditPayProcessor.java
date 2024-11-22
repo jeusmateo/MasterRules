@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 public class StoreCreditPayProcessor extends PaymentProcessor {
     private final Customer customer;
 
-    public StoreCreditPayProcessor(BigDecimal totalAmount, Customer customer) {
-        super(totalAmount);
+    public StoreCreditPayProcessor(BigDecimal totalAmountToPay, Customer customer) {
+        super(totalAmountToPay);
         this.customer = customer;
     }
 
@@ -16,10 +16,11 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
     public PaymentDetails paymentProcess() throws PaymentException {
         if (hasEnoughCredit()) {
             var customerAccount = customer.getCustomerAccount();
-            var newStoreCredit = customerAccount.getStoreCredit().subtract(this.getTotalAmount());
+            var actualStoreCredit = customerAccount.getStoreCredit();
+            var newStoreCredit = actualStoreCredit.subtract(this.getTotalAmountToPay());
             customerAccount.setStoreCredit(newStoreCredit);
 
-            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.STORE_CREDIT, this.getTotalAmount());
+            PaymentDetails paymentDetails = new PaymentDetails(PaymentMethod.STORE_CREDIT, this.getTotalAmountToPay());
             paymentDetails.setCustomer(customer);
             paymentDetails.setPaymentDescription(paymentDescription());
             return paymentDetails;
@@ -29,12 +30,12 @@ public class StoreCreditPayProcessor extends PaymentProcessor {
     }
 
     private boolean hasEnoughCredit() {
-        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmount()) >= 0;
+        return customer.getCustomerAccount().getStoreCredit().compareTo(this.getTotalAmountToPay()) >= 0;
     }
 
     @Override
     public String paymentDescription() {
 
-        return String.format("PAGADO CON CRÉDITO DE TIENDA :$" + getTotalAmount() + "\n");
+        return String.format("PAGADO CON CRÉDITO DE TIENDA :$" + getTotalAmountToPay() + "\n");
     }
 }

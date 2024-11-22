@@ -101,11 +101,11 @@ public class POSManager {
         } else {
             newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod(), currentOrder);
         }
-        setPaymentMethod(data, newBill);
+        setBillDetails(data, newBill);
         return newBill;
     }
 
-    private void setPaymentMethod(PaymentDetails data, Bill newBill) {
+    private void setBillDetails(PaymentDetails data, Bill newBill) {
         switch (data.getPaymentMethod()) {
             case PaymentMethod.CASH:
                 newBill.setChange(data.getChangeAmount());
@@ -116,6 +116,13 @@ public class POSManager {
                 newBill.setPaymentReferenceNumber(data.getReference());
                 break;
             case PaymentMethod.STORE_CREDIT:
+                newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
+                break;
+            case PaymentMethod.MIX:
+                newBill.setChange(data.getChangeAmount());
+                newBill.setPaidInCash(data.getCustomerCashAmount());
+                newBill.setPaidWithCard(currentOrder.getTotalAmount(data.getCustomer()));
+                newBill.setPaymentReferenceNumber(data.getReference());
                 newBill.setPaidWithStoreCredit(currentOrder.getTotalAmount(data.getCustomer()));
                 break;
             default:
