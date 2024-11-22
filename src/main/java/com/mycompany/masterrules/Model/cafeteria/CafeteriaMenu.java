@@ -46,7 +46,7 @@ public class CafeteriaMenu {
 
 
     public void addProductToMenu(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             //availableProducts.add(product);
             productDatabase.save(product);
         } else {
@@ -55,7 +55,7 @@ public class CafeteriaMenu {
     }
 
     public void removeProductOnMenu(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("El producto con ID " + product + " no existe en el menú.");
         }
         availableProducts.remove(product);
@@ -63,13 +63,13 @@ public class CafeteriaMenu {
     }
 
 
-    private boolean isProductOnMenu(Product product) {
-        return availableProducts.contains(product);
+    private boolean isProductNotOnMenu(Product product) {
+        return !availableProducts.contains(product);
     }
 
 
     public void editProduct(Product product) {
-        if (!isProductOnMenu(product)) {
+        if (isProductNotOnMenu(product)) {
             throw new IllegalArgumentException("ERROR: El producto no existe");
         }
 
@@ -93,15 +93,15 @@ public class CafeteriaMenu {
 
 
     public void addComboToMenu(Combo combo) {
-        if (!isComboOnMenu(combo)) {
+        if (isComboNotOnMenu(combo)) {
             comboDatabase.save(combo);
         } else {
             throw new IllegalArgumentException("ERROR: El combo ya existe");
         }
     }
 
-    private boolean isComboOnMenu(Combo combo) {
-        return availableCombos.contains(combo);
+    private boolean isComboNotOnMenu(Combo combo) {
+        return !availableCombos.contains(combo);
     }
 
 
@@ -124,7 +124,7 @@ public class CafeteriaMenu {
     }
 
     public void removeComboFromMenu(Combo combo) {
-        if (!isComboOnMenu(combo)) {
+        if (isComboNotOnMenu(combo)) {
             throw new IllegalArgumentException("ERROR: El combo no existe");
         }
 
