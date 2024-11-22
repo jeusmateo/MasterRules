@@ -255,7 +255,7 @@ public class WnCustomersController implements Initializable {
         }
         String newCustomerName = txtFieldEditCustomerName.getText();
         String newCustomerStoreCreditQuantity = String.valueOf(selectedCustomer.getCustomerAccount().getStoreCredit());
-        if (accessCodeRequested = true) {
+        if (accessCodeRequested) {
             newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
         }
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
