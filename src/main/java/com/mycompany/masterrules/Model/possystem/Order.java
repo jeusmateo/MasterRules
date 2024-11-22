@@ -19,6 +19,17 @@ public class Order {
     private long orderId; //Chepo necesidad: Este es el numero de la comanda
     @ManyToOne
     private Customer customer; //Chepo necesidad: el nombre del cliente a quien entregar, Tomando en cuenta, esto deberia ser solo un nombre??? <- Nota muy
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    @Column(name="order_customer_name")
+    private String customerName;
     // @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "order_employee_name")
     private String employeeName;

@@ -6,12 +6,14 @@ import com.mycompany.masterrules.Database.UserDatabase;
 import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
+import com.mycompany.masterrules.Model.customers.CustomerManager;
 import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
 import com.mycompany.masterrules.Model.finanzas.CashRegister;
 import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 
 /**
  * @author David Torres
@@ -36,7 +38,7 @@ public class POSManager {
     private POSManager() {
         UserDatabase bd = new UserDatabase();
         currentOrder = new Order();
-        currentUser = bd.findById("1");
+
     }
 
     public static synchronized POSManager getInstance() {
@@ -66,8 +68,6 @@ public class POSManager {
 
     public void removeProductFromOrder(Product product) {
         currentOrder.removeProductFromOrderItemList(new OrderItem(product));
-
-        System.out.println("holis");
     }
 
     public void configureOrder(String metodoDeEntrega, String comentario, Customer customer) {
@@ -82,12 +82,12 @@ public class POSManager {
     }
 
 
-    public void configureOrder(String eleccion, String comentario) {
-        currentOrder.setDeliveryMethod(eleccion);
-        currentOrder.setComment(comentario);
-    }
-
     public void cancelOrder() {
+
+        while(!currentOrder.getPedidoComandaList().isEmpty())
+        for(OrderItem item:currentOrder.getPedidoComandaList()){
+            currentOrder.removeProductFromOrderItemList(item);
+        }
         currentOrder = new Order();
     }
 
@@ -124,13 +124,13 @@ public class POSManager {
         return cashRegister;
     }
 
-    public void sell(PaymentDetails paymentMethod) {
 
-
-        Customer customer= this.currentOrder.getCustomer();
-        customer.getCustomerAccount().accumulatePoints();
-        CustomerDatabase bd = new CustomerDatabase();
-        bd.update(customer);
+    public void sell(PaymentDetails paymentMethod, Customer customer) {
+        if(customer!= null){
+            customer.getCustomerAccount().accumulatePoints();
+            CustomerManager manager =new CustomerManager();
+            manager.updateCustomerData(customer);
+        }
         Bill bill = createBill(paymentMethod);
 
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
