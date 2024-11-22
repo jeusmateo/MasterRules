@@ -112,3 +112,23 @@ PAGADO CON EFECTIVO: 200
 CAMBIO: $0
 
 =====================================
+=====================================
+Imprimiendo factura :16
+Nombre del empleado: admin
+Nombre del cliente: Publico General
+Productos:
+Nombre: Hamburguesa   Cantidad: 3  Precio: 600
+PAGADO CON EFECTIVO: 600
+CAMBIO: $0
+
+=====================================
+=====================================
+Imprimiendo factura :17
+Nombre del empleado: admin
+Nombre del cliente: wd
+Productos:
+Nombre: Hamburguesa   Cantidad: 3  Precio: 600
+PAGADO CON EFECTIVO: 600
+CAMBIO: $0
+
+=====================================
