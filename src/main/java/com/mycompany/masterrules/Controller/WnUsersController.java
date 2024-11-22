@@ -316,7 +316,7 @@ private void handleDeleteUserAccount() {
 
             checkBoxPermissionMapToEdit.forEach((checkBox, permission) -> checkBox.setSelected(userAccount.getPermissions().isEnabled(permission)));
 
-            checkBoxPermissionMap.forEach((checkBox, permission) -> System.out.println("CheckBox: " + checkBox.getId() + ", Permission: " + permission + ", Selected: " + userAccount.getPermissions().isEnabled(permission)));
+
         }
 
         @FXML
