@@ -1,6 +1,6 @@
-package com.mycompany.masterrules.Model.finanzas;
+package com.mycompany.masterrules.Model.finance;
 
-import com.mycompany.masterrules.Model.possystem.Bill;
+import com.mycompany.masterrules.Model.retailsystem.Bill;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

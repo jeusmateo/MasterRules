@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 
 import com.mycompany.masterrules.Database.UserDatabase;
@@ -6,9 +6,9 @@ import com.mycompany.masterrules.Model.cafeteria.InventoriableProduct;
 import com.mycompany.masterrules.Model.cafeteria.Product;
 import com.mycompany.masterrules.Model.customers.Customer;
 import com.mycompany.masterrules.Model.customers.CustomerManager;
-import com.mycompany.masterrules.Model.finanzas.ArchiveInvoice;
-import com.mycompany.masterrules.Model.finanzas.CashRegister;
-import com.mycompany.masterrules.Model.finanzas.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finance.ArchiveInvoice;
+import com.mycompany.masterrules.Model.finance.CashRegister;
+import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
 import com.mycompany.masterrules.Model.users.UserAccount;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.mycompany.masterrules.Model.possystem;
+package com.mycompany.masterrules.Model.retailsystem;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +61,7 @@ public class Printer {
             case "PaymentType.CARD":
                description.append("PARADO CON TARJETA: ");
                 description.append(String.valueOf(bill.getAmount()));
-                description.append("\n").append("REFERENCIA : "+bill.getReference()).append("\n");
+                description.append("\n").append("REFERENCIA : "+bill.getPaymentReferenceNumber()).append("\n");
                 break;
 
             case "PaymentType.STORE_CREDIT":

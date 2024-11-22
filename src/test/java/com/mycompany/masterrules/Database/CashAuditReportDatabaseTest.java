@@ -1,9 +1,6 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashAuditReport;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
 
 class CashAuditReportDatabaseTest {
 

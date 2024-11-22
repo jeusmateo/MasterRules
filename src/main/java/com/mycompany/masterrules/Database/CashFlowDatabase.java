@@ -1,6 +1,6 @@
 package com.mycompany.masterrules.Database;
 
-import com.mycompany.masterrules.Model.finanzas.CashFlow;
+import com.mycompany.masterrules.Model.finance.CashFlow;
 
 import java.util.List;
 
