@@ -13,11 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -134,29 +130,29 @@ public class WnReportsController implements Initializable {
             scrDoInflowCash.setVisible(false); // Oculta la ventana de reportes de entrada de efectivo
             scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+          showAlert("Error de entrada de efectivo", "Ocurrió un error al procesar la entrada de efectivo: " + e.getMessage());
         }
     }
 
     /**
      * Acepta la salida de efectivo y actualiza la tabla de flujo de salida de efectivo.
      */
-    public void setBtnAcceptOutflow() {
-        try {
-            String cashAmount = txtFieldAmountOutflow.getText();
-            String reason = txtOutflowReason.getText();
-            cashRegister.withdrawCash(reason, cashAmount);
-            txtFieldAmountOutflow.setText("00.0");
-            txtOutflowReason.setText("");
+public void setBtnAcceptOutflow() {
+    try {
+        String cashAmount = txtFieldAmountOutflow.getText();
+        String reason = txtOutflowReason.getText();
+        cashRegister.withdrawCash(reason, cashAmount);
+        txtFieldAmountOutflow.setText("00.0");
+        txtOutflowReason.setText("");
 
-            initializeCashOutFlowTable();
+        initializeCashOutFlowTable();
 
-            scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
-            scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+        scrDoOutflowReport.setVisible(false); // Oculta la ventana de reportes de salida de efectivo
+        scrDoReport.setVisible(true); // Muestra la ventana principal de reportes
+  } catch (Exception e) {
+    showAlert("Error de salida de efectivo", "Ocurrió un error al procesar la salida de efectivo: " + e.getMessage());
+}
+}
 
     /**
      * Sale de la ventana de reportes de salida de efectivo y muestra la ventana principal de reportes.
@@ -258,5 +254,13 @@ public class WnReportsController implements Initializable {
                 event.consume();
             }
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
