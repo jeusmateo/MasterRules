@@ -26,9 +26,8 @@ public class WnCashRegisterAuditReportController implements Initializable{
     // --------------------------------------------------------------------------------------------
 
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
-    private  ObservableList<CashFlow> cashInFlowReports;
-    private  ObservableList<CashFlow> cashOutFlowReports;
-    private CashierSupervisor cashierSupervisor = new CashierSupervisor();
+    private  ObservableList<CashFlow> cashInFlowReports= FXCollections.observableArrayList();
+    private  ObservableList<CashFlow> cashOutFlowReports = FXCollections.observableArrayList();
 
     private CashAuditReport currentCashAuditReport;
 
@@ -94,8 +93,6 @@ public class WnCashRegisterAuditReportController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cashInFlowReports = FXCollections.observableArrayList(cashierSupervisor.getCashInFlows());
-        cashOutFlowReports = FXCollections.observableArrayList(cashierSupervisor.getCashFlows());
         setupCashInFlowTable();
         setupCashOutFlowTable();
         initializeTableData();
@@ -134,6 +131,13 @@ public class WnCashRegisterAuditReportController implements Initializable{
             txtCashSales.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashRevenue()));
             txtInFlowCash.setText(String.valueOf("+ $ "+currentCashAuditReport.getCashFlowInTotalAmount()));
             txtOutFlowCash.setText(String.valueOf("- $ "+currentCashAuditReport.getCashFlowOutTotalAmount()));
+
+            cashInFlowReports= FXCollections.observableArrayList(currentCashAuditReport.getCashFlowInReport());
+            cashOutFlowReports = FXCollections.observableArrayList(currentCashAuditReport.getCashFlowOutReport());
+            tblCashInFlowReport.setItems(cashInFlowReports);
+            tblCashOutFlowReport.setItems(cashOutFlowReports);
+            tblCashInFlowReport.refresh();
+            tblCashOutFlowReport.refresh();
         }
         else if(evt.equals(btnRealizarCorteDeVenta)){
             cashRegisterAuditReportManager.endCashRegisterAuditReport(currentCashAuditReport);

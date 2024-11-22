@@ -26,10 +26,10 @@ public class Customer {
      * @param loyaltyPoints Los puntos de lealtad del cliente.
      * @param vipStatus El estado VIP del cliente.
      */
-    public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus) {
+    public Customer(String customerName, String customerPhoneNumber, int loyaltyPoints, boolean vipStatus, String accessCode) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
-        this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus);
+        this.customerAccount = new CustomerAccount(loyaltyPoints, vipStatus, accessCode);
     }
 
     /**
