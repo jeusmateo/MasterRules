@@ -309,12 +309,13 @@
                                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" />
                                              </columnConstraints>
                                              <rowConstraints>
+                                                <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints fillHeight="false" minHeight="10.0" vgrow="SOMETIMES" />
                                                 <RowConstraints fillHeight="false" minHeight="10.0" vgrow="SOMETIMES" />
                                                 <RowConstraints fillHeight="false" minHeight="10.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Group>
+                                                <Group GridPane.rowIndex="1">
                                                    <children>
                                                       <TextField fx:id="txtNewCustomerName" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                       <Label layoutY="2.0" prefHeight="21.0" prefWidth="138.0" text="Nombre Completo:">
@@ -324,7 +325,7 @@
                                                       </Label>
                                                    </children>
                                                 </Group>
-                                                <Group GridPane.rowIndex="1">
+                                                <Group GridPane.rowIndex="2">
                                                    <children>
                                                       <Label layoutY="2.0" prefHeight="21.0" prefWidth="134.0" text="Número telefónico:">
                                                          <font>
@@ -334,7 +335,7 @@
                                                       <TextField fx:id="txtNewCustomerPhoneNumber" layoutX="143.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                    </children>
                                                 </Group>
-                                                <Group GridPane.rowIndex="2">
+                                                <Group GridPane.rowIndex="3">
                                                    <children>
                                                       <TextField fx:id="txtNewCustomerLoyaltyPoints" layoutX="144.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="133.0" />
                                                       <Label layoutY="2.0" prefHeight="21.0" prefWidth="131.0" text="Puntos de lealtad:">
@@ -342,6 +343,12 @@
                                                             <Font size="15.0" />
                                                          </font>
                                                       </Label>
+                                                   </children>
+                                                </Group>
+                                                <Group>
+                                                   <children>
+                                                      <Label layoutY="3.1999998092651367" prefHeight="20.0" prefWidth="119.0" text="Tarjeta de acceso:" />
+                                                      <TextField fx:id="txtFieldAccessCode" layoutX="140.8000030517578" prefHeight="25.0" prefWidth="135.0" />
                                                    </children>
                                                 </Group>
                                              </children>
