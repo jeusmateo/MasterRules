@@ -163,7 +163,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         ObservableList<Product> comboDataList = FXCollections.observableArrayList(combosOnMenu);
         for (Product currentProductCombo : comboDataList) {
             try {
-                FXMLLoader load = new FXMLLoader();
+                FXMLLoader load = new FXMLLoader(); //TODO ESTO SI PUEDE SER UNA CONSTANTE.
                 load.setLocation(getClass().getResource("/com/mycompany/masterrules/itemCardProduct.fxml"));
                 AnchorPane pane = load.load();
                 ItemCardProductController cardController = load.getController();
@@ -382,6 +382,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 }
             }
         });
+
 
 // Personaliza la celda visible del ComboBox (cuando no está desplegado)
         cboCustomers.setButtonCell(new ListCell<>() {
