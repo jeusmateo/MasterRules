@@ -92,12 +92,11 @@ public class POSManager {
             }
         currentOrder = new Order();
     }
-
     private Bill createBill(PaymentDetails data) {
         Bill newBill;
         if (data.getCustomer() == null) {
 
-            newBill = new Bill(this.currentUser.getFullEmployeeName(), currentOrder.getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod().toString(), currentOrder);
+            newBill = new Bill(this.currentUser.getFullEmployeeName(), currentOrder.getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod(), currentOrder);
 
         } else {
             newBill = new Bill(this.currentUser.getFullEmployeeName(), data.getCustomer().getCustomerName(), currentOrder.getTotalAmount(data.getCustomer()), data.getPaymentMethod(), currentOrder);
