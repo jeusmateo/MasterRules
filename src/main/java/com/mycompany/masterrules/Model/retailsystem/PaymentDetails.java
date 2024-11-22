@@ -50,7 +50,7 @@ public class PaymentDetails {
     }
 
     public void setReference(String reference) {
-        // Noncompliant - method is empty
+        this.CardTransactionReference = reference;
     }
 
     public Customer getCustomer() {
