@@ -141,13 +141,17 @@ public class POSManager {
             manager.updateCustomerData(customer);
         }
         Printer printer = new Printer();
-        printer.imprimirOrder(currentOrder);
+
         Bill bill = createBill(paymentMethod);
 
         ArchiveInvoice archiveInvoice = new ArchiveInvoice();
-        printer.imprimirBill(bill);
+
         archiveInvoice.archiveBill(bill);
+        printer.imprimirOrder(currentOrder);
         currentOrder = new Order();
+
+        printer.imprimirBill(bill);
+
     }
 
     public Order getCurrentOrder() {
