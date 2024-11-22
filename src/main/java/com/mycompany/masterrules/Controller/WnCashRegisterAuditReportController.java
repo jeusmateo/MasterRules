@@ -7,7 +7,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.mycompany.masterrules.Model.finance.CashRegisterAuditReportManager;
+import com.mycompany.masterrules.Model.finance.CashierSupervisor;
 import com.mycompany.masterrules.Model.retailsystem.POSManager;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,8 +26,9 @@ public class WnCashRegisterAuditReportController implements Initializable{
     // --------------------------------------------------------------------------------------------
 
     private final CashRegisterAuditReportManager cashRegisterAuditReportManager = POSManager.getInstance().getCashRegisterAuditReportManager();
-    private final ObservableList<CashFlow> cashInFlowReports=null;
-    private final ObservableList<CashFlow> cashOutFlowReports = null;
+    private  ObservableList<CashFlow> cashInFlowReports;
+    private  ObservableList<CashFlow> cashOutFlowReports;
+    private CashierSupervisor cashierSupervisor = new CashierSupervisor();
 
     private CashAuditReport currentCashAuditReport;
 
@@ -91,6 +94,8 @@ public class WnCashRegisterAuditReportController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cashInFlowReports = FXCollections.observableArrayList(cashierSupervisor.getCashInFlows());
+        cashOutFlowReports = FXCollections.observableArrayList(cashierSupervisor.getCashFlows());
         setupCashInFlowTable();
         setupCashOutFlowTable();
         initializeTableData();
