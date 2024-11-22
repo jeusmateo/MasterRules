@@ -153,9 +153,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     //-------------------------------------------------------------------------------------------
 
 
-
-
-
     public void displayMenuCards() {
         CafeteriaMenu menu = new CafeteriaMenu();
         List<Product> productsOnMenu = menu.getProducts();
@@ -244,9 +241,11 @@ public class WnSaleController implements Initializable, ProductSelectionListener
     public void hideTableNumber() {
         tableNumberBox.setVisible(false);
     }
-//TODO FALTA EL DEL CLIENTRES
+
+    //TODO FALTA EL DEL CLIENTRES
     private void configOrderInfo() {
         Customer customerInfo = cboCustomers.getValue();
+
         String customerName="";
         if(customerInfo == null) {
             customerName= inputClientName.getText();
@@ -274,15 +273,12 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/masterrules/wnPayment.fxml"));
                 Parent paymentView = loader.load();
                 WnPaymentController paymentController = loader.getController();
-                try {
-                    if(posManager.getCurrentOrder().getCustomer()==null){
-                        System.out.println(posManager.getCurrentOrder().getCustomer());
-                    }
-                    paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
-                    System.out.println("Cuesto :"+posManager.getCurrentOrder().getTotalAmount());
-                } catch (Exception e) {
-                    System.out.println("Chepipi " + e.getMessage());
+
+                if (posManager.getCurrentOrder().getCustomer() == null) {
+                    System.out.println(posManager.getCurrentOrder().getCustomer());
                 }
+                paymentController.setOrderData(posManager.getCurrentOrder().getTotalAmount(), posManager.getCurrentOrder().getCustomer());
+
                 // Crear una nueva escena y un nuevo Stage para la vista de pago
                 Scene paymentScene = new Scene(paymentView);
                 Stage paymentStage = new Stage();
@@ -309,7 +305,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
                 PaymentDetails paymentResult = paymentController.getPaymentDetails();
                 if (paymentResult != null) {
                     System.out.println("Pago realizado:");
-                    posManager.sell(paymentResult);
+                    posManager.sell(paymentResult,cboCustomers.getValue());
                     showMenuWindow();
                     updateOrderInfo();
 
@@ -359,7 +355,6 @@ public class WnSaleController implements Initializable, ProductSelectionListener
         System.out.println(posManager.getCurrentUser());
 
 
-
         initializeTableOrder();
         lblTotal.setText(String.valueOf(posManager.getCurrentOrder().getTotalAmount()));
 
@@ -368,15 +363,15 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
                 posManager.getCurrentOrder().setCustomer(cboCustomers.getValue());
                 Customer test = cboCustomers.getValue();
-                System.out.println("Soy "+ test.getCustomerName()+ "y soy ");
-                if(test.getCustomerAccount().isIsVIP()){
+                System.out.println("Soy " + test.getCustomerName() + "y soy ");
+                if (test.getCustomerAccount().isIsVIP()) {
                     System.out.println("vip");
                 }
                 updateOrderInfo();
                 //TODO chepo arregla esto
-                if(posManager.getCurrentOrder().getCustomer()!=null && posManager.getCurrentOrder().getCustomer().getCustomerAccount().isIsVIP()){
+                if (posManager.getCurrentOrder().getCustomer() != null && posManager.getCurrentOrder().getCustomer().getCustomerAccount().isIsVIP()) {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalVipPrice())));
-                }else{
+                } else {
                     colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTotalPrice())));
                     updateOrderInfo();
                 }
@@ -384,7 +379,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
             }
         });
 
-               //
+        //
 
         //Hace que la distribución de las cartas se ajusten al tamaño del cuadro donde estan contenidas
         productCardsScroller.prefWidthProperty().bind(menuCardsScroller.widthProperty());
@@ -438,7 +433,7 @@ public class WnSaleController implements Initializable, ProductSelectionListener
 
     }
 
-    private void updateOrderInfo(){
+    private void updateOrderInfo() {
         ObservableList<OrderItem> productOrderList = FXCollections.observableArrayList(posManager.getCurrentOrder().getPedidoComandaList());
         tblOrder.setItems(productOrderList);
         tblOrder.refresh();

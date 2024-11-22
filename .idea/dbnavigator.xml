@@ -26,13 +26,15 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" object-ref="schemas/CafeteriaMasterRulesBD/tables/Product" />
+      <object connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" object-ref="schemas/CafeteriaMasterRulesBD/tables/Combo" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="14f871a6-9073-431e-859a-ddbc010d90a3" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.Combo" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.CashFlowReport" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.UserAccount" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="14f871a6-9073-431e-859a-ddbc010d90a3" dataset="CafeteriaMasterRulesBD.Product" active-filter-id="EMPTY_FILTER" />
   </component>

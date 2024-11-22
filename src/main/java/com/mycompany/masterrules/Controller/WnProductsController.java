@@ -63,7 +63,7 @@ private String selectedImagePath;
     private Button btnConfirmCombo;
 
     @FXML
-    private Button buttonCreateCombo;
+    private Button btnProcessCreateCombo;
 
     @FXML
     private Button buttonIconSearchFood;
@@ -330,6 +330,7 @@ private String selectedImagePath;
 
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(false);
+        tabEditCombo.setDisable(false);
 
         clearTextFields(txtFieldNameCombo,txtFieldPriceCombo,txtFieldVIPPriceCombo);
     }
@@ -354,6 +355,7 @@ private String selectedImagePath;
         scrCreateComboStart.setVisible(false);
         scrCreateComboStepTwo.setVisible(false);
         scrCreateDefinedCombo.setVisible(true);
+        tabEditCombo.setDisable(true);
 
     }
 
@@ -582,7 +584,9 @@ private String selectedImagePath;
         newCombo.setProductImage(selectedImagePath);
         cafeteriaMenu.addComboToMenu(newCombo);
         btnBackToCreateCombo();
-        updateComboTable(); // Asegúrate de actualizar la tabla después de crear un combo
+        updateProductTable();
+        updateComboTable();
+        // Asegúrate de actualizar la tabla después de crear un combo
     }
 
     private void handleDeleteCombo() {
@@ -605,6 +609,7 @@ private String selectedImagePath;
             selectedCombo.setPrice(newPrice);
             selectedCombo.setVIPPrice(newVipPrice);
             selectedCombo.setProducts(selectedProductsForCombo);
+            selectedCombo.setProductImage(selectedImagePath);
 
             cafeteriaMenu.editCombo(selectedCombo);
             updateProductTable();
