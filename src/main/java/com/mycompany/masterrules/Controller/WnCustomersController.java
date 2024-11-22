@@ -24,7 +24,7 @@ public class WnCustomersController implements Initializable {
 
     private CustomerManager customerManager;
     private static final Logger logger = Logger.getLogger(WnCustomersController.class.getName());
-
+    private boolean accessCodeRequested;
 
     @FXML
     private PasswordField pswFieldAccesCode;
@@ -127,7 +127,7 @@ public class WnCustomersController implements Initializable {
 
     //--------------------------------------------- QUE FUNCIONE LA SOLICITUD DEL CODIGO DE ACCESO SE HAGA A LO LOCO
 
-    private boolean accessCodeRequested;
+
 
     @FXML
     private void setScrWarningCredit() {
@@ -242,7 +242,10 @@ public class WnCustomersController implements Initializable {
             return;
         }
         String newCustomerName = txtFieldEditCustomerName.getText();
-        String newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        String newCustomerStoreCreditQuantity=String.valueOf(selectedCustomer.getCustomerAccount().getStoreCredit());;
+        if(accessCodeRequested=true){
+             newCustomerStoreCreditQuantity = txtEditCustomerStoreCredit.getText();
+        }
         String updateCustomerLoyaltyPoints = txtEditCustomerLoyaltyPoints.getText();
         boolean updateCustomerVipStatus = chkEditCustomerVipStatus.isSelected();
         String newCustomerPhoneNumber = txtEditCustomerPhoneNumber.getText();
