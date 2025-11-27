@@ -64,6 +64,7 @@ public class Printer {
             }
 
             StringBuilder description = new StringBuilder();
+            /*
             switch (bill.getPaymentMethod()) {
                 case PaymentMethod.CASH:
                     description.append("PAGADO CON EFECTIVO: ");
@@ -86,6 +87,7 @@ public class Printer {
                 default:
                     break;
             }
+*/
             writer.write(description.toString());
             writer.write("\n=====================================\n");
             writer.flush();
